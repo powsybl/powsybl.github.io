@@ -1,9 +1,8 @@
-theme: jekyll-theme-cayman
+theme: jekyll-theme-slate
 title: Power System Blocks
-description: A Java framework to build power system oriented software
+show_downloads: false
 
 github:
-  is_project_page: true
   repository_name: Powsybl website
   repository_url: https://github.com/powsybl
   owner_name: RTE France

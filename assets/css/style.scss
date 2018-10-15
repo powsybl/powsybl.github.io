@@ -1,0 +1,52 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+div {
+  text-align: justify;
+}
+
+footer p {
+  color: #C0C0C0;
+  font-size: 12px;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+a.nav-button {
+  background-color: #0090FF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #FFFFFF;
+  display: block;
+  font-weight: 700;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+}
+
+#home {
+  background: url('../images/home.png') #0090FF no-repeat 50% 50%;
+  border-bottom-left-radius: 5px;
+  padding: 10px 40px 34px 10px;
+  right: 279px;
+}
+
+#download {
+  padding: 10px 10px 10px 10px;
+  right: 188px;
+}
+
+#documentation {
+  padding: 10px 10px 10px 10px;
+  right: 61px;
+}
+
+#github {
+  background: url('../images/github.png') #0090FF no-repeat 50% 50%;
+  border-bottom-right-radius: 5px;
+  padding: 10px 40px 34px 10px;
+  right: 10px;
+}

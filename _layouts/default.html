@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+
+    {% seo %}
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="home" class="nav-button" href="{{ '/' }}"></a>
+        <a id="download" class="nav-button" href="#">Download</a>
+        <a id="documentation" class="nav-button" href="{{ '/docs/' }}">Documentation</a>
+        <a id="github" class="nav-button" href="https://github.com/powsybl"></a>
+
+        <h1 id="project_title">{{ site.title }}</h1>
+        <h2 id="project_tagline">{{ page.title }}</h2>
+
+        {% if site.show_downloads %}
+        <section id="downloads">
+            <a class="zip_download_link" href="{{ site.github.zip_url }}">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="{{ site.github.tar_url }}">Download this project as a tar.gz file</a>
+        </section>
+        {% endif %}
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        {{ content }}
+    </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <p>
+            Copyright &copy; 2018 The Linux Foundation&reg;. All rights reserved.<br/>
+            The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux
+            Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage">Trademark Usage</a> page.
+            Linux is a registered trademark of Linus Torvalds.
+            <a href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a> and <a href="https://www.linuxfoundation.org/terms/">Terms of Use</a>.
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>
