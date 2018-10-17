@@ -1,0 +1,87 @@
+---
+title: convert-network
+layout: default
+---
+
+The `convert-network` command is used to import a network from a file and to export it to another file, in the specified
+format. The format of the input file is automatically detected where as the format of the output file must be specified
+in the command line.
+
+After the network is loaded, a modification script can be applied, depending on the configuration file or if the
+`--groovy-script` parameter is set.
+
+# Usage
+```shell
+$> itools convert-network --help
+usage: itools [OPTIONS] convert-network [-E <property=value>]
+       [--export-parameters <EXPORT_PARAMETERS>] [--groovy-script <FILE>]
+       [--help] [-I <property=value>] [--import-parameters <IMPORT_PARAMETERS>]
+       --input-file <INPUT_FILE> --output-file <OUTPUT_FILE> --output-format
+       <OUTPUT_FORMAT>
+
+Available options are:
+    --config-name <CONFIG_NAME>   Override configuration file name
+    --parallel                    Run command in parallel mode
+
+Available arguments are:
+ -E <property=value>                          use value for given exporter
+                                              parameter
+    --export-parameters <EXPORT_PARAMETERS>   the exporter configuration file
+    --groovy-script <FILE>                    Groovy script to change the
+                                              network
+    --help                                    display the help and quit
+ -I <property=value>                          use value for given importer
+                                              parameter
+    --import-parameters <IMPORT_PARAMETERS>   the importer configuation file
+    --input-file <INPUT_FILE>                 the input file
+    --output-file <OUTPUT_FILE>               the output file
+    --output-format <OUTPUT_FORMAT>           the output file format
+
+Where OUTPUT_FORMAT is one of [XIIDM, AMPL]
+```
+
+## Required parameters
+
+### input-file
+Use the `--input-paramter` parameter to specify the path of the input file. 
+
+### output-file
+Use the `output-file` parameter to specify the path of the output file.
+
+### output-format
+Use the `--output-format` parameter to specify the exporter to use for the export 
+
+## Optional parameters
+
+### export-parameters
+Use the `--export-parameters` parameter to specify the path of the configuration file of the exporter. It is possible to
+overload one or many parameters using the `-E property=value` parameter. The properties depend on the output format.
+
+### groovy-script
+Use the `groovy-script` parameter to specify the path of the modification script to use after the loading of the network.
+
+### import-parameters
+Use th `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
+overload one or many parameters using the `-I property=value` parameter. The properties depend on the input format.
+
+# Examples
+
+This example shows how to convert a [UCTE-DEF]() file to a [XIIDM]() file:
+```shell
+$> itools convert-network --input-file $HOME/case-file.uct --output-format XIIDM --output-file $HOME/case-file.xiidm
+```
+
+This example shows how to overload the exporter's configuration:
+```shell
+$> itools convert-network --input-file $HOME/case-file.uct --output-format XIIDM --output-file $HOME/case-file.xiidm --export-parameters $HOME/XIIDMExporter.properties -E iidm.export.xml.indent=false
+```
+
+This example shows how to modify a network with a groovy script:
+```shell
+$> itools convert-network --input-file $HOME/case-file.xiidm --output-format XIIDM --output-file $HOME/case-file.xiidm --groovy-script $HOME/script.groovy
+```
+
+# Learn more
+Read the [importer]() and [exporter]() documentation pages to learn more about supported formats and their configuration.
+
+Read the [groovy post processor]() documentation page to learn how to modify the imported network once it has been loaded.
