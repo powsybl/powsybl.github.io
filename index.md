@@ -1,36 +1,35 @@
 ---
-title: Power System Blocks
+title:
 layout: default
 ---
 
-Powsybl (**Pow**er **Sy**stem **Bl**ocks) is an open-source Java framework hosted on [GitHub](https://github.com/powsybl), distributed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
+Powsybl (**Pow**er **Sy**stem **Bl**ocks) is an open source framework written in Java, that makes it easy to write
+complex software for power systems' simulations and analysis. Its modular approach allows developers to extend or customize
+its features.
 
-# Architecture
-Powsybl is designed in a modular approach, to allow projects using the framework to extend its features or to modify the default behaviours.
+Powsybl is part of the [LF Energy Foundation](http://www.lfenergy.org), a project of The Linux Foundation that supports
+open source innovation projects within the energy and electricity sectors.
+
+# Open source
+Powsybl in an open source framework licensed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
+The source code is hosted on GitHub in two different repositories:
+- [powsybl-core](https://github.com/powsybl/powsybl-core) contains all the core features
+- [powsybl-gse](https://github.com/powsybl/powsybl-gse) contains the JavaFX UI
 
 # Features
+Powsybl provides IIDM (iTesla Internal Data Model), a complete grid model (substations, voltage levels, AC and DC lines,
+two and three windings transformers, generators, loads, shunt and static VAR compensators...). The grid model can be
+extended with extensions to complete the modelling of the equipments. It also provides importers and exporters for several
+common exchange formats ([Entso-E CIM/CGMES](https://www.entsoe.eu/digital/common-information-model/cim-for-grid-models-exchange/),
+[UCTE-DEF](https://cimug.ucaiug.org/Groups/Model%20Exchange/UCTE-format.pdf)...).
 
-## Grid data model
-Powsybl provides a set of Java classes to describe a grid model (substations, voltage levels, lines, two and three windings transformers, generators...) named IIDM (**i**Tesla **I**nternal **D**ata **M**odel). The grid model can be extended with plugins to add additional data to the network equipments.
+Powsybl provides several API for power systems' simulations and analysis (power flow computations, security analysis,
+remedial action simulations, short circuits computations, sensitivity computations, time domain simulations...). These
+simulations can run either on a personal computer or on a server, but they can also run on a supercomputer like in the
+[iTesla](http://www.itesla-project.eu) project with [Curie](http://www-hpc.cea.fr/en/complexe/tgcc-curie.htm) supercomputer.
+The separation of the simulation API and the implementations allows developers to provide their own implementation.
 
-The IIDM data model can be loaded from or exported to an XML file, or loaded from an [UCTE-DEF](http://cimug.ucaiug.org/Groups/Model%20Exchange/UCTE-format.pdf) or an [Entso-E CGMES](https://www.entsoe.eu/digital/common-information-model/cim-for-grid-models-exchange/) file.
-
-## Application File System
-AFS (**A**pplication **F**ile**S**ystem) is a system used to organize your business data and store them, like a file system does for plain files. AFS can be extended with plugins to support additional data types. The framework provides plugins implementation to handle:
-- network models
-- scripts to modify network models
-- contingencies
-- timeseries
-
-Read the [getting started](https://github.com/powsybl/powsybl-core/blob/master/afs/README.md) guide to learn how to use AFS in your application.
-
-## Grid Study Environment
-GSE (**G**rid **S**tudy **E**nvironment) is a JavaFX UI for the Powsybl framework. It relies on AFS and can also be extended with plugins.
-
-## High performance computing
-Powsybl is able to perform computation on a single computer (mono or multi-thread) or to distribute a computation over a huge cluster of computation nodes, by submitting jobs to a SLURM workload manager.
-
-## Scripting
-All powsybl features are available for scripting in groovy without any limitations:
-- use the `run-script` itools command to run a complete script
-- use `powsyblsh` - a groovy shell based tool - to run a script in an interactive console
+Powsybl is available as a command line tool or in a complete desktop application, based on the GSE (Grid Study Environment)
+project. The GSE project is part of the powsybl framework. It provides a JavaFX UI to help developers writing desktop
+applications based on the powsybl framework. The GSE is fully customizable and extendable with plugins. All the features
+of powsybl are also exposed as web services.
