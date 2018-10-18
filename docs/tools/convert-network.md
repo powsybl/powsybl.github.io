@@ -81,7 +81,17 @@ This example shows how to modify a network with a groovy script:
 $> itools convert-network --input-file $HOME/case-file.xiidm --output-format XIIDM --output-file $HOME/case-file.xiidm --groovy-script $HOME/script.groovy
 ```
 
-# Learn more
+# Maven configuration
+To use `convert-network` command, add the following dependencies to the `pom.xml` file:
+```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-converter-api</artifactId>
+    <version>${powsybl.version}</version>
+</dependency>
+```
+
 Read the [importer]() and [exporter]() documentation pages to learn more about supported formats and their configuration.
 
+# Learn more
 Read the [groovy post processor]() documentation page to learn how to modify the imported network once it has been loaded.
