@@ -28,5 +28,5 @@ The logging configuration file is `POWSYBL_HOME/etc/logback-itools.xml`
 ```
 
 ## User-wide configuration
-An user could have its own logging configuration by creating a `logback-itools.xml` file in the [configuration](itools.html)
+An user could have its own logging configuration by creating a `logback-itools.xml` file in the [configuration](itools.md)
 folder. This file is used in priority if it exists and the system-wide configuration is used otherwise.
