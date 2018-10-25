@@ -43,10 +43,10 @@ Where OUTPUT_FORMAT is one of [XIIDM, AMPL]
 ## Required parameters
 
 ### input-file
-Use the `--input-paramter` parameter to specify the path of the input file. 
+Use the `--input-file` parameter to specify the path of the input file. 
 
 ### output-file
-Use the `output-file` parameter to specify the path of the output file.
+Use the `--output-file` parameter to specify the path of the output file.
 
 ### output-format
 Use the `--output-format` parameter to specify the exporter to use for the export 
@@ -58,7 +58,7 @@ Use the `--export-parameters` parameter to specify the path of the configuration
 overload one or many parameters using the `-E property=value` parameter. The properties depend on the output format.
 
 ### groovy-script
-Use the `groovy-script` parameter to specify the path of the modification script to use after the loading of the network.
+Use the `--groovy-script` parameter to specify the path of the modification script to use after the loading of the network.
 
 ### import-parameters
 Use th `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
@@ -82,7 +82,7 @@ $> itools convert-network --input-file $HOME/case-file.xiidm --output-format XII
 ```
 
 # Maven configuration
-To use `convert-network` command, add the following dependencies to the `pom.xml` file:
+To use the `convert-network` command, add the following dependencies to the `pom.xml` file:
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>

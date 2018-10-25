@@ -33,20 +33,20 @@ unavailable. The commands are classified in themes, to help identifying their pu
    
 | Theme | Command | Description |
 | ----- | ------- | ----------- |
-| Application file system | [afs]() | Application File System CLI |
-| Computation | [action-simulator]() | Run a remedial actions simulation |
-| Computation | [loadflow]() | Run a loadflow computation |
-| Computation | [loadflow-validation]() | Validate the load-flow results of a network |
-| Computation | [run-impact-analysis]() | Run an impact analysis |
-| Computation | [security-analysis]() | Run a security analysis |
+| Application file system | [afs](afs.md) | Application File System CLI |
+| Computation | [action-simulator](action-simulator.md) | Run a remedial actions simulation |
+| Computation | [loadflow](loadflow.md) | Run a loadflow computation |
+| Computation | [loadflow-validation](loadflow-validation.md) | Validate the load-flow results of a network |
+| Computation | [run-impact-analysis](run-impact-analysis.md) | Run an impact analysis |
+| Computation | [security-analysis](security-analysis.md) | Run a security analysis |
 | Computation | [sensitivity-computation]() | Run a sensitivity computation |
-| Data conversion | [convert-network](convert-network.html) | Convert a network from one format to another |
+| Data conversion | [convert-network](convert-network.md) | Convert a network from one format to another |
 | MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
-| Script | [run-script]() | Run a script |
-| Misc | [plugins-info]() | Displays the available plugins |
+| Script | [run-script](run-script.md) | Run a script |
+| Misc | [plugins-info](plugins-info.md) | Displays the available plugins |
 
 # Learn more
-Read this [page](../configuration/itools.html) to learn how to configure the framework and this [page](../configuration/logback.md)
+Read this [page](../configuration/itools.md) to learn how to configure the framework and this [page](../configuration/logback.md)
 to learn how to set up the logging system used in powsybl.
 
-Read this [tutorial](../../tutorials/itools/howto-extend-itools.html) to learn how to create a new `iTools` command.
+Read this [tutorial]() to learn how to create a new `iTools` command.
