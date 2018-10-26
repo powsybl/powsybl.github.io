@@ -27,6 +27,10 @@ a.nav-button {
   z-index: 10;
 }
 
+.inner {
+  max-width: 800px;
+}
+
 #home {
   background: url('../images/home.png') #0090FF no-repeat 50% 50%;
   border-bottom-left-radius: 5px;
@@ -49,4 +53,26 @@ a.nav-button {
   border-bottom-right-radius: 5px;
   padding: 10px 40px 34px 10px;
   right: 10px;
+}
+
+// Small devices
+@media screen and (max-width: 480px) {
+
+  .inner {
+    max-width: 480px;
+  }
+
+  #home {
+    right: 257px;
+  }
+
+  #download {
+    padding: 10px 10px 13px 10px;
+    right: 175px;
+  }
+
+  #documentation {
+    padding: 10px 10px 13px 10px;
+  }
+
 }
