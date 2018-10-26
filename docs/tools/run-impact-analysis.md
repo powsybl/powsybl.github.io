@@ -45,7 +45,7 @@ outputs are printed to the console.
 # Configuration
 To run an impact analysis, one have to choose the implementation of the `com.powsybl.contingency.ContingenciesProviderFactory`
 to use, by setting the `ContingenciesProviderFactory` property to the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
-module.
+module. To learn more about contingencies or available `ContingenciesProvider` read this [documentation](../contingencies/index.md) page.
 
 Read the [simulation-parameters](../configuration/modules/simulation-parameters.md) documentation to learn how to
 configure the impact analysis parameters.

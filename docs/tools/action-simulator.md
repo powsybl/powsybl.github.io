@@ -208,6 +208,11 @@ To use the `action-simulator` command, add the following dependencies to the `po
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
+    <artefactId>powsybl-action-dsl</artefactId>
+    <version>${powsybl.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.powsybl</groupId>
     <artifactId>powsybl-action-simulator</artifactId>
     <version>${powsybl.version}</version>
 </dependency>

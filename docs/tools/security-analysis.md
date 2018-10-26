@@ -3,7 +3,6 @@ title: security-analysis
 layout: default
 todo:
     - add link to the SecurityAnalysisParameter page
-    - add link to GroovyDslContingencyProvider + syntax of contingency lists
 ---
 
 The `security-analysis` command is used to detect security violations on pre-contingencies and post-contingencies states.
@@ -104,6 +103,8 @@ componentDefaultConfig:
     </componentDefaultConfig>
 </config>
 ```
+
+To learn more about contingencies or available `ContingenciesProvider` read this [documentation](../contingencies/index.md) page.
 
 To learn how to filter violations, read the [limit-violation-default-filter](../configuration/modules/limit-violation-default-filter.md)
 module documentation page.
