@@ -66,7 +66,7 @@ overload one or many parameters using the `-I property=value` parameter. The pro
 
 # Examples
 
-This example shows how to convert a [UCTE-DEF]() file to a [XIIDM]() file:
+This example shows how to convert a [UCTE-DEF](../iidm/importer/ucte.md) file to a [XIIDM]() file:
 ```shell
 $> itools convert-network --input-file $HOME/case-file.uct --output-format XIIDM --output-file $HOME/case-file.xiidm
 ```
@@ -91,7 +91,9 @@ To use the `convert-network` command, add the following dependencies to the `pom
 </dependency>
 ```
 
-Read the [importer]() and [exporter]() documentation pages to learn more about supported formats and their configuration.
+Read the [importer](../iidm/importer/index.md) and [exporter]() documentation pages to learn more about supported formats
+and their configuration.
 
 # Learn more
-Read the [groovy post processor]() documentation page to learn how to modify the imported network once it has been loaded.
+Read the [groovy](../iidm/importer/post-processor/GroovyScriptPostProcessor.md)  post processor documentation page to 
+learn how to modify the imported network once it has been loaded.

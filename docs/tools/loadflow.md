@@ -60,8 +60,8 @@ Use the `--parameters-file` parameter to specify a JSON configuration file. If t
 configuration is used.
 
 ### skip-postproc
-Use the `--skip-postproc` parameter to skip the importer's post processors. Read the [post processor]() documentation page
-to learn more about importer's post processors.
+Use the `--skip-postproc` parameter to skip the importer's post processors. Read the [post processor](../iidm/importer/post-processor/index.md)
+documentation page to learn more about importer's post processors.
 
 # Configuration
 To run a load flow, one have to choose the implementation of the `com.powsybl.loadflow.LoadFlow` to use, by setting the
