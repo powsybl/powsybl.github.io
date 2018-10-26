@@ -109,7 +109,8 @@ To learn more about contingencies or available `ContingenciesProvider` read this
 To learn how to filter violations, read the [limit-violation-default-filter](../configuration/modules/limit-violation-default-filter.md)
 module documentation page.
 
-To learn more about configuration files, read the [SecurityAnalysisParameters]() documentation page.
+To learn more about configuration files, read the [SecurityAnalysisParameters](../parameters/SecurityAnalysisParameters.md)
+documentation page.
 
 # Examples
 
