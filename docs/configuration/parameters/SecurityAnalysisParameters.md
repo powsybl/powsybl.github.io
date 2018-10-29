@@ -11,7 +11,7 @@ implementations. Specific parameters should be provided as an extension of the `
 ## load-flow-parameters
 Use the `load-flow-parameters` property is an optional property that defines the [LoadFlowParameters](LoadFlowParameters.md)
 to use. If this property is not set, The default values of all the optional properties are read from
-the [load-flow-default-parameter](../configuration/modules/load-flow-default-parameter.md) module, defined in the
+the [load-flow-default-parameter](../modules/load-flow-default-parameter.md) module, defined in the
 configuration file. 
 
 # Examples

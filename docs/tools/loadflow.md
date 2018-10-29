@@ -70,7 +70,7 @@ To run a load flow, one have to choose the implementation of the `com.powsybl.lo
 To set the default configuration of the load flow, one have to configure the
 [load-flow-default-parameter](../configuration/modules/load-flow-default-parameter.md) module.
 
-To learn more about configuration files, read the [LoadFlowParameters](../parameters/LoadFlowParameters.md) documentation
+To learn more about configuration files, read the [LoadFlowParameters](../configuration/parameters/LoadFlowParameters.md) documentation
 page.
 
 # Examples
