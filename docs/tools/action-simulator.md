@@ -66,7 +66,7 @@ rules).
 Use the `--output-case-folder` parameter to set the folder in which the case files are exported.
 
 ### output-case-format
-Use the `--output-case-format` parameter to set the case exporter to use to export case files. Read the [exporter]()
+Use the `--output-case-format` parameter to set the case exporter to use to export case files. Read the [exporter](../iidm/exporter/index.md)
 documentation page to learn more about supported case formats.
 
 ### output-compression-format

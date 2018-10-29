@@ -8,7 +8,7 @@ todo:
 
 The `plugins-info` command prints for each kind of plugin, the currently available implementations Ids. The available
 kind of plugins are:
-- [exporter]()
+- [exporter](../iidm/exporter/index.md)
 - [import-post-processor](../iidm/importer/post-processor/index.md)
 - [importer](../iidm/importer/index.md)
 
