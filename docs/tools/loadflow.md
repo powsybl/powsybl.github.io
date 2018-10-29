@@ -44,8 +44,9 @@ Use the `--case-file` parameter to specify the path of the case file.
 Use the `--output-case-file` parameter to export the modified network to the specified path.
 
 ### output-case-format
-Use the `--output-case-format` parameter to specify the format of the output case file. Read the [exporter]() documentation
-to learn more about supported output formats. This parameter is required if the `output-case-file` parameter is used.
+Use the `--output-case-format` parameter to specify the format of the output case file. Read the [exporter](../iidm/exporter/index.md)
+documentation to learn more about supported output formats. This parameter is required if the `output-case-file` parameter
+is used.
 
 ### output-file
 Use the `--output-file` parameter to export the result of the computation to the specified path. If this parameter is not
@@ -70,7 +71,7 @@ To run a load flow, one have to choose the implementation of the `com.powsybl.lo
 To set the default configuration of the load flow, one have to configure the
 [load-flow-default-parameter](../configuration/modules/load-flow-default-parameter.md) module.
 
-To learn more about configuration files, read the [LoadFlowParameters](../parameters/LoadFlowParameters.md) documentation
+To learn more about configuration files, read the [LoadFlowParameters](../configuration/parameters/LoadFlowParameters.md) documentation
 page.
 
 # Examples

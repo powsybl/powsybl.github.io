@@ -91,8 +91,8 @@ To use the `convert-network` command, add the following dependencies to the `pom
 </dependency>
 ```
 
-Read the [importer](../iidm/importer/index.md) and [exporter]() documentation pages to learn more about supported formats
-and their configuration.
+Read the [importer](../iidm/importer/index.md) and [exporter](../iidm/exporter/index.md) documentation pages to learn
+more about supported formats and their configuration.
 
 # Learn more
 Read the [groovy](../iidm/importer/post-processor/GroovyScriptPostProcessor.md)  post processor documentation page to 
