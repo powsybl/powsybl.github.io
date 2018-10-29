@@ -9,8 +9,13 @@ There are two different ways to package an application based on powsybl framewor
 The first one aims to create a command line bundle, based on `iTools` script, using the [itools-packager-maven-plugin](installation/itools-packager.md).
 
 The second one aims to create a JavaFX desktop application based on the Grid Study Environment, using the
-[javafx-packager](installation/javafx-packager.md) to create an installable bundle for Linux (RPM, DEB), Windows (EXE
-or MSI) or MacOS (PKG).
+[javafx-packager](installation/javafx-packager.md) to create an installable bundle for Linux (rpm or deb), Windows (exe
+or msi) or MacOS (pkg or dmg).
+
+# Configuration
+Most features of powsybl can be configured by editing the relative configuration's module in the configuration files.
+Read this [documentation](configuration/modules/index.md) page to learn more about powsybl's configuration and have an
+overview of all the existing modules.
 
 # Tools
 The `iTools` script provides a common way to run powsybl commands using the command line. It provides several tools,
@@ -31,3 +36,8 @@ sorted by themes:
 | Misc | [plugins-info](tools/plugins-info.md) | Displays the available plugins |
 
 Read this [documentation](tools/index.md) page to learn more about powsybl command line interface.
+
+# Tutorials
+Powsybl is a plugin based Java framework. Most features can be customized by creating a new implementation of a service
+or extended by a new extension. Read this [documentation](tutorials/index.md) page to learn more about how to extend the
+features of the framework.
