@@ -17,6 +17,15 @@ Most features of powsybl can be configured by editing the relative configuration
 Read this [documentation](configuration/modules/index.md) page to learn more about powsybl's configuration and have an
 overview of all the existing modules.
 
+# IIDM
+IIDM (iTesla Internal Data Model) is a set of classes that models a complete grid model. IIDM modules are a part of the
+most important powsybl modules. Read this page to learn more about the [IIDM](iidm/model/index.md). IIDM networks can be
+[loaded](iidm/importer/iidm.md) or [saved]() to XML files without any data loss.
+
+IIDM networks can also be created from various formats such as [UCTE-DEF](iidm/importer/ucte.md), [Entso-E CIMv1](iidm/importer/cim.md)
+or [Entso-E CGMES](iidm/importer/cgmes.md) and be exported to various formats. Read the [importer](iidm/importer/index.md)
+and the [exporter](iidm/exporter/index.md) documentation pages to learn more about import/export features.
+
 # Tools
 The `iTools` script provides a common way to run powsybl commands using the command line. It provides several tools,
 sorted by themes:
