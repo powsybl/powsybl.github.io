@@ -6,6 +6,7 @@ layout: default
 The `com.powsybl.iidm.network.StaticVarCompensator` interface is used to model a static VAR compensator.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Bmin | double | yes | - | The minimum susceptance |

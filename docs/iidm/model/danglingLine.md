@@ -7,6 +7,7 @@ The `com.powsybl.iidm.network.DanglingLine` interface is used to model a danglin
 that aggregates a line chunk and a constant power injection. The active and reactive power setpoints are fixed.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | P0 | double | yes | - | The active power setpoint |

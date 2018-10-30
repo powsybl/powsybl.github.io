@@ -9,6 +9,7 @@ class for [VSC](vsc.md) and [LCC](lcc.md). As such, its sub interfaces are:
 - [VSC Converter Station](vscConverterStation.md)
 
 ## Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | HvdcType | `HvdcType` | yes | - | The HVDC type |

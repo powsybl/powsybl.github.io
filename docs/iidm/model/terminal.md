@@ -7,6 +7,7 @@ The `com.powsybl.iidm.network.Terminal` interface is used to model an equipment 
 topology. A terminal is created when the equipment it is connected to is created: it can not be created independently.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | VoltageLevel | `VoltageLevel` | yes | - | The voltage level to which the terminal belongs |

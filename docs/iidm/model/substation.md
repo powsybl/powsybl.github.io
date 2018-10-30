@@ -10,6 +10,7 @@ located in the same geographical site. It contains several [voltage levels](volt
 A substation is located in a single country and belongs to one TSO.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | id | String | yes | - | The ID of the substation |

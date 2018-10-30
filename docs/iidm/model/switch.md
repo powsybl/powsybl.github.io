@@ -6,6 +6,7 @@ layout: default
 The `com.powsybl.iidm.network.Switch` interface is used to a switch which connects equipments in a [voltage level](voltageLevel.md).
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Kind | `SwitchKind` | yes | - | The kind of switch |

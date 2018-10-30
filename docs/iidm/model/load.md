@@ -7,6 +7,7 @@ The `com.powsybl.iidm.network.Load` interface is used to model a constant power 
 setpoints are fixed.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | LoadType | `LoadType` | no | `UNDEFINED` | The type of the load |

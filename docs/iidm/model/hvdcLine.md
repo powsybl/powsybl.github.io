@@ -7,6 +7,7 @@ The `com.powsybl.iidm.network.HvdcLine` interface is used to model a HVDC Line. 
 converters](hvdcConverterStation.md) on DC side.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | R | double | yes | - | The resistance of the line |

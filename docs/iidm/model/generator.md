@@ -6,6 +6,7 @@ layout: default
 The `com.powsybl.iidm.network.Generator` interface is used to model a generator.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | EnergySource | `EnergySource` | yes | `OTHER` | The energy source |
