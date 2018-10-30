@@ -138,7 +138,7 @@ To use the `GroovyDslContingenciesProvider`, add the following dependencies to t
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
-    <artefactId>powsybl-action-dsl</artefactId>
+    <artifactId>powsybl-action-dsl</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 ```
