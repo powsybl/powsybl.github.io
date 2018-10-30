@@ -39,7 +39,7 @@ unavailable. The commands are classified in themes, to help identifying their pu
 | Computation | [loadflow-validation](loadflow-validation.md) | Validate the load-flow results of a network |
 | Computation | [run-impact-analysis](run-impact-analysis.md) | Run an impact analysis |
 | Computation | [security-analysis](security-analysis.md) | Run a security analysis |
-| Computation | [sensitivity-computation]() | Run a sensitivity computation |
+| Computation | [sensitivity-computation](sensitivity-computation.md) | Run a sensitivity computation |
 | Data conversion | [convert-network](convert-network.md) | Convert a network from one format to another |
 | MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
 | Script | [run-script](run-script.md) | Run a script |

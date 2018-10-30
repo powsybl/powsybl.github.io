@@ -7,3 +7,6 @@ github:
   repository_url: https://github.com/powsybl
   owner_name: RTE France
   owner_url: https://www.rte-france.com
+
+plugins:
+  - jekyll-relative-links
