@@ -124,7 +124,7 @@ supported types are:
 - SHUNTS
 - TWTS
 
-To learn more about the different checks, read the [loadflow-validation]() documentation page.
+To learn more about the different checks, read the [loadflow-validation](../loadflow/validation.md) documentation page.
 
 ## Summary
 The following table summarizes the possible combinations of `compare-results`, `run-computation` and `groovy-script`
