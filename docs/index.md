@@ -29,7 +29,7 @@ sorted by themes:
 | Computation | [loadflow-validation](tools/loadflow-validation.md) | Validate the load-flow results of a network |
 | Computation | [run-impact-analysis](tools/run-impact-analysis.md) | Run an impact analysis |
 | Computation | [security-analysis](tools/security-analysis.md) | Run a security analysis |
-| Computation | [sensitivity-computation]() | Run a sensitivity computation |
+| Computation | [sensitivity-computation](tools/sensitivity-computation.md) | Run a sensitivity computation |
 | Data conversion | [convert-network](tools/convert-network.md) | Convert a network from one format to another |
 | MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
 | Script | [run-script](tools/run-script.md) | Run a script |
