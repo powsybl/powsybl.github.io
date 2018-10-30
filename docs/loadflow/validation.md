@@ -12,8 +12,9 @@ Overall, tests should never be too tight and leniency is preferred to tightness 
 case expectations are unclear (typically when the input data is inconsistent). For example, there is a switch to test
 only the main component because it is not clear what to expect from load flow results on small connected components.
 
-Another important global setting is the `ok-missing-values` parameter, which determines which is OK to have missing
-values or `NaN`. Normally, it should be set to false but it may be useful in cases the power flow results are incomplete.
+Another important global setting is the `ok-missing-values` parameter, which determines if is OK to have missing
+values or `NaN`. Normally, it should be set to false but it may be useful in the cases where the power flow results are
+incomplete.
 
 This documentation explains the tests done. The documentation of the load-flow validation command, including all its
 parameters can be found [here](../tools/loadflow-validation.md).
