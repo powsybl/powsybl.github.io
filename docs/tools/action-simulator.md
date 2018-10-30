@@ -3,8 +3,6 @@ title: action-simulator
 layout: default
 todo:
     - add description of --apply-if-solved-violations optional parameter
-    - write missing pages
-    - add link to Hades2
 ---
 
 The `action-simulator` command is used to test remedial actions to solve security violations.
@@ -222,3 +220,7 @@ To use the `action-simulator` command, add the following dependencies to the `po
     <version>${powsybl.version}</version>
 </dependency>
 ```
+
+# Load-flow implementations
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Hades2, a RTE load-flow tool, for remedial action simulations.
