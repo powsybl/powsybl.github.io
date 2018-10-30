@@ -7,6 +7,7 @@ The `com.powsybl.iidm.network.BusbarSection` interface is used to model a busbar
 element used in a node/breaker substation topology to connect equipments. In IIDM, it is a sub interface of [Injection](injection.md).
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | V | double | no | - | The voltage magnitude of the busbar section |

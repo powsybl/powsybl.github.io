@@ -8,6 +8,7 @@ A two windings power transformer is connected to two voltage levels (side 1 and 
 A [ratio tap changer]() or a [phase tap changer]() can be associated to a two windings power transformer.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | R | double | yes | - | The nominal series resistance |

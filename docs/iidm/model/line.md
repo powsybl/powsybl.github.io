@@ -6,6 +6,7 @@ layout: default
 The `com.powsybl.iidm.network.Line` interface is used to model an AC line. A line can also be a [TieLine](tieLine.md).
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | R | double | yes | - | The series resistance |

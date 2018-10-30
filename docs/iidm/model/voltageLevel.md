@@ -11,6 +11,7 @@ equipments located in the same substation and at the same base voltage. It can c
 A voltage level is located in a [substation](substation.md).
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | id | String | yes | - | The ID of the voltage level |

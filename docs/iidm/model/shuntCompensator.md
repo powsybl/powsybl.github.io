@@ -6,6 +6,7 @@ layout: default
 The `com.powsybl.iidm.network.ShuntCompensator` interface is used to model a shunt compensator.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | bPerSection | double | yes | - | Positive sequence shunt (charging) susceptance per section |

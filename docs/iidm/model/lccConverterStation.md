@@ -7,6 +7,7 @@ The `com.powsybl.iidm.network.LccConverterStation` interface is used to model a 
 a sub interface of [HvdcConverterStation](hvdcConverterStation.md).
 
 ## Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | PowerFactor | float | yes | - | The power factor |

@@ -7,6 +7,7 @@ The `com.powsybl.iidm.network.TieLine` interface is used to model a Tie Line. In
 [Line](line.md). A Tie Line is an AC line sharing power between two neighbouring regional grids.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | HalfLine1 | `TieLine.HalfLine` | yes | - | The first half of the line characteristics |
@@ -15,6 +16,7 @@ The `com.powsybl.iidm.network.TieLine` interface is used to model a Tie Line. In
 
 ## Half Line
 An Half Line has the following characteristics:
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | ID | String | yes | - | The ID of the Half Line |

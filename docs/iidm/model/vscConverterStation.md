@@ -7,6 +7,7 @@ The `com.powsybl.iidm.network.VscConverterStation` interface is used to model a 
 a sub interface of [HVDC Converter Station](hvdcConverterStation.md).
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | VoltageRegulatorOn | boolean | yes | - | The voltage regulator status |

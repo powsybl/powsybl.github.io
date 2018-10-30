@@ -11,6 +11,7 @@ same substation:
 A [Ratio Tap Changer]() can be associated to the side 2 or the side 3 of a three windings power transformer.
 
 # Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Leg1 | `ThreeWindingsTransformer.Leg1` | yes | - | The leg at the primary side |
@@ -21,6 +22,7 @@ A [Ratio Tap Changer]() can be associated to the side 2 or the side 3 of a three
 `ThreeWindingsTransformer.Leg1` is a nested interface used to model the primary side of a three windings power transformer.
 
 ### Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Terminal | `Terminal` | yes | - | The terminal the leg is connected to |
@@ -35,6 +37,7 @@ A [Ratio Tap Changer]() can be associated to the side 2 or the side 3 of a three
 power transformer.
 
 ### Characteristics
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Terminal | `Terminal` | yes | - | The terminal the leg is connected to |
