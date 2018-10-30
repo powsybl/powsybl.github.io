@@ -7,20 +7,55 @@ The `com.powsybl.iidm.network.Line` interface is used to model an AC line. A lin
 
 # Characteristics
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| R | double | yes | - | The series resistance |
-| X | double | yes | - | The series reactance |
-| G1 | double | yes | - | The first side shunt conductance |
-| B1 | double | yes | - | The first side shunt susceptance |
-| G2 | double | yes | - | The second side shunt conductance |
-| B2 | double | yes | - | The second side shunt susceptance |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| id | string | n/a | yes | - | Unique identifier of the line|
+| name | string | n/a | no | - | Humanly readable name of the line|
+| R | double | yes | $$\Omega\$$ | - | The series resistance |
+| X | double | yes | $$\Omega\$$ | - | The series reactance |
+| $$g_1$$ | double | yes | S | - | The first side shunt conductance |
+| $$b_1$$ | double | yes | S | - | The first side shunt susceptance |
+| $$g_2$$ | double | yes | S | - | The second side shunt conductance |
+| $$b_2$$ | double | yes | S | - | The second side shunt susceptance |
+
+# Model
+Power lines are modelled using a standard $$\pi$$ model with distributed parameters.
+
+![Power line model](./images/line-model.svg){: width="50%" .center-image}
+
+With series impedance $$z$$ and the shunt admittance on each side $$y_1$$ and $$y_2$$:
+
+$$
+\begin{align*}
+    & z=r+j.x\\
+    & y_1 = g_1 +j. b_1\\
+    & y_2 = g_2 +j. b_2
+\end{align*}
+$$
+
+the equations of the power line, in complex notations, are as follow:
+
+$$
+\begin{align*}
+    & \left(\begin{array}{c}
+    I_{1}\\
+    I_{2}
+    \end{array}\right)=\left(\begin{array}{cc}
+    y_{1}+\frac{1}{z} & -\frac{1}{z}\\
+    -\frac{1}{z} & y_{2}+\frac{1}{z}
+    \end{array}\right)\left(\begin{array}{c}
+    V_{1}\\
+    V_{2}
+    \end{array}\right)
+\end{align*}
+$$
 
 # Examples
 This example shows how to create a new Line in the network:
 ```java
 Line line = network.newLine()
     .setId('L')
+    .setName('My line')
     .setVoltageLevel1('VL1')
     .setVoltageLevel2('VL2')
     .setNode1(1)

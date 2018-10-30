@@ -1,6 +1,7 @@
 theme: jekyll-theme-slate
 title: Power System Blocks
 show_downloads: false
+markdown: kramdown
 
 github:
   repository_name: Powsybl website
