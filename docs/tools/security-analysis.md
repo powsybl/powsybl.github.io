@@ -172,3 +172,13 @@ To use the `security-analysis` command, add the following dependencies to the `p
     <version>${powsybl.version}</version>
 </dependency>
 ```
+
+# Security-analysis implementations
+
+## Slow implementation
+Read this [documentation](../loadflow/security-analysis.md) page to learn how to configure powsybl to use the
+`SecurityAnalysisImpl` implementation, a load-flow based implementation for security limits detection.
+
+## Hades2
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Hades2, a RTE load-flow tool, for security analysis.

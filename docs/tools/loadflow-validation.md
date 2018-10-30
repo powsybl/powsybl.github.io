@@ -226,3 +226,7 @@ To use the `loadflow-validation` command, add the following dependencies to the 
     <version>${powsybl.version}</version>
 </dependency>
 ```
+
+# Load-flow implementations
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Hades2, a RTE load-flow tool.

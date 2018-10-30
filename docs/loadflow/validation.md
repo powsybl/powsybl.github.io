@@ -65,7 +65,7 @@ The test of the branch is OK if:
 
 In the case of branches that are disconnected on one end (for example end 2), then `P2 = Q2 = 0`. As a result, it is
 possible to recompute (V2, theta2) which are usually not returned by power-flows and which are not stored in node-breaker
-[IIDM]() format. Then, the same tests are done.
+[IIDM](../iidm/model/index.md) format. Then, the same tests are done.
 
 In case of missing results (usually the powers P1, Q1, P2, Q2 which are not mandatory), the test is always OK if
 `ok-missing-values = true` and NOK if false. In case the voltages are available but not the powers, the

@@ -1,9 +1,6 @@
 ---
 title: loadflow
 layout: default
-todo:
-    - add links to missing pages
-    - add link to H2 implementation
 ---
 
 The `loadflow` command is used to run a power flow simulation.
@@ -107,3 +104,7 @@ To use the `loadflow` command, add the following dependencies to the `pom.xml` f
     <version>${powsybl.version}</version>
 </dependency>
 ```
+
+# Load-flow implementations
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Hades2, a RTE load-flow tool.
