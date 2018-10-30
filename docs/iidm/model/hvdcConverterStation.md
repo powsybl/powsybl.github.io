@@ -4,7 +4,7 @@ layout: default
 ---
 
 The `com.powsybl.iidm.network.HvdcConverterStation` interface is used to model a HVDC Converter Station. This is the base
-class for [VSC](vsc.md) and [LCC](lcc.md). As such, its sub interfaces are:
+class for [VSC]() and [LCC](). As such, its sub interfaces are:
 - [LCC Converter Station](lccConverterStation.md)
 - [VSC Converter Station](vscConverterStation.md)
 
