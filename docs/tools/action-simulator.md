@@ -222,5 +222,5 @@ To use the `action-simulator` command, add the following dependencies to the `po
 ```
 
 # Load-flow implementations
-Reaad this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
 Hades2, a RTE load-flow tool, for remedial action simulations.
