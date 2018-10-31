@@ -9,14 +9,14 @@ The `com.powsybl.iidm.network.Line` interface is used to model an AC line. A lin
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
-| id | string | n/a | yes | - | Unique identifier of the line|
-| name | string | n/a | no | - | Humanly readable name of the line|
-| R | double | yes | $$\Omega\$$ | - | The series resistance |
-| X | double | yes | $$\Omega\$$ | - | The series reactance |
-| $$g_1$$ | double | yes | S | - | The first side shunt conductance |
-| $$b_1$$ | double | yes | S | - | The first side shunt susceptance |
-| $$g_2$$ | double | yes | S | - | The second side shunt conductance |
-| $$b_2$$ | double | yes | S | - | The second side shunt susceptance |
+| id | string | - | yes | - | Unique identifier of the line|
+| name | string | - | no | "" | Humanly readable name of the line|
+| $$r$$ | double | $$\Omega\$$ | yes | - | The series resistance |
+| $$x$$ | double | $$\Omega\$$ | yes | - | The series reactance |
+| $$g_1$$ | double | S | yes | - | The first side shunt conductance |
+| $$b_1$$ | double | S | yes | - | The first side shunt susceptance |
+| $$g_2$$ | double | S | yes | - | The second side shunt conductance |
+| $$b_2$$ | double | S | yes | - | The second side shunt susceptance |
 
 # Model
 Power lines are modelled using a standard $$\pi$$ model with distributed parameters.
@@ -51,13 +51,13 @@ $$
 $$
 
 # Examples
-This example shows how to create a new Line in the network:
+This example shows how to create a new line in the network:
 ```java
 Line line = network.newLine()
-    .setId('L')
-    .setName('My line')
-    .setVoltageLevel1('VL1')
-    .setVoltageLevel2('VL2')
+    .setId("L")
+    .setName("My line")
+    .setVoltageLevel1("VL1")
+    .setVoltageLevel2("VL2")
     .setNode1(1)
     .setNode2(2)
     .setR(4.0)
