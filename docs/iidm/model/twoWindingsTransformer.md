@@ -25,7 +25,7 @@ Two windings transformer are modelled with the following equivalent $$\pi$$ mode
 
 ![Power line model](./images/two-windings-transformer-model.svg){: width="50%" .center-image}
 
-With series impedance $$z$$ and the shunt admittance $$y$$, at secondary side of the transformer, and $$\rho$$ the voltage ratio and $$\alpha$$ the angle difference:
+With series impedance $$z$$ and the shunt admittance $$y$$, at secondary side of the transformer, and $$\rho$$ the voltage ratio and $$\alpha$$ the angle difference, and parameters from current step of potential [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phaseTapChanger.md):
 
 $$
 r=r_{nom}.\left(1+\frac{r_{r, tap} + r_{\phi, tap}}{100}\right)\\

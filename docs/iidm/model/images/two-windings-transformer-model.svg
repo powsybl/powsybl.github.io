@@ -177,5 +177,7 @@
 <g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
   <use xlink:href="#glyph1-3" x="221.237" y="53.626"/>
 </g>
+<path style="fill:none;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -17.739719 -47.506438 L 15.205594 -14.561125 " transform="matrix(1,0,0,-1,73.853,19.392)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 91.59375 31.414062 C 90.703125 32.027344 89.058594 32.824219 87.71875 33.175781 L 89.832031 35.289062 C 90.183594 33.953125 90.984375 32.308594 91.59375 31.414062 "/>
 </g>
 </svg>

@@ -12,12 +12,12 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | Low tap position | int | - | no | 0 | Position index of the tap changer's low tap |
 | Tap position | int | - | yes | - | Position index of current tap |
-| Regulating | boolean | - | no | false | True if ratio tap changer is regulating, false otherwise. State variable |
+| Regulating | boolean | - | no | false | **true** if ratio tap changer is regulating, **false** otherwise. State variable |
 | Regulation mode | enum | - | no | FIXED_TAP | Regulation mode of the phase tap changer. May be CURRENT_LIMITER, ACTIVE_POWER_CONTROL or FIXED_TAP |
-| Regulation value | double | kV | yes | - | The target voltage |
+| Regulation value | double | MW or A | yes | - | The target value, depending on the regulation mode |
 | Regulation terminal | Terminal | - | no | - | The terminal where regulation is done |
 
-Each step of a phase tap changer have the following attributes:
+Each step of a phase tap changer has the following attributes:
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
