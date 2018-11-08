@@ -13,7 +13,7 @@ The security analysis results comparison process compares, for the pre-contingen
   
 Two security analysis results are considered equivalent IFF all the following conditions are satisfied:
 - for all the pre-contingency and post-contingency states, the corresponding (i.e. related to the same state) outcome of the loadflow computation is the same
-- for all the constraints violations, the difference of value of a corresponding (i.e. related to the same contingency and equipment) violation ìs less than a predefined threshold
+- for all the constraints violations, the difference of value of a corresponding (i.e. related to the same contingency and equipment) violation is less than a predefined threshold
 - if a constraints violation is contained in just one result, the violation is less than a predefined threshold
 - if a contingency is contained in just one result, all the post-contingency violations are less than a predefined threshold
   
