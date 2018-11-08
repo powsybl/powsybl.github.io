@@ -4,7 +4,7 @@ layout: default
 ---
 
 The `compare-security-analysis-results` command is used to compare [security-analysis](security-analysis.md) results.  
-The security analysis results to be compared are read from JSON files, containing a JSON serialization of the results themselves.  
+The security analysis results to be compared are read from JSON files, containing a JSON serialization of the results themselves (`com.powsybl.security.SecurityAnalysisResult` class).  
 The outcome of the comparison is `success` if the results are equivalent, `fail` otherwise.  
   
 The security analysis results comparison process compares, for the pre-contingency state and for all the post-contingency states of the two results:
