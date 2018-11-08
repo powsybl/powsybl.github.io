@@ -13,7 +13,7 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 | Low tap position | int | - | no | 0 | Position index of the tap changer's low tap |
 | Tap position | int | - | yes | - | Position index of current tap |
 | Regulating | boolean | - | no | false | ```true``` if ratio tap changer is regulating, ```false``` otherwise. State variable |
-| Regulation mode | enum | - | no | FIXED_TAP | Regulation mode of the phase tap changer. May be CURRENT_LIMITER, ACTIVE_POWER_CONTROL or FIXED_TAP |
+| Regulation mode | enum | - | no | FIXED_TAP | Regulation mode of the phase tap changer. May be ```CURRENT_LIMITER```, ```ACTIVE_POWER_CONTROL``` or ```FIXED_TAP``` |
 | Regulation value | double | MW or A | yes | - | The target value, depending on the regulation mode |
 | Regulation terminal | Terminal | - | no | - | The terminal where regulation is done |
 
@@ -34,9 +34,9 @@ A phase tap changer is regulating if **Regulating** is set to ```true```.
 Remote control can be modelled by putting a distant terminal as regulation terminal.
 
 Three regulation modes are available:
-- Current limiter: tap changer adapts step position to limit current on regulation terminal
-- Active power control: tap changer adapts step position to regulate active power on regulation terminal
-- Fixed tap: no tap changer step modification allowed
+- ```CURRENT_LIMITER```: tap changer adapts step position to limit current on regulation terminal
+- ```ACTIVE_POWER_CONTROL```: tap changer adapts step position to regulate active power on regulation terminal
+- ```FIXED_TAP```: no tap changer step modification allowed
 
 For more information about how phase tap changers are taken into account in transformers model, please refer to [two windings transformers documentation](./twoWindingsTransformer.md) and [three windings transformers one](./threeWindingsTransformer.md).
 
