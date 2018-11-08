@@ -39,6 +39,7 @@ sorted by themes:
 | Computation | [run-impact-analysis](tools/run-impact-analysis.md) | Run an impact analysis |
 | Computation | [security-analysis](tools/security-analysis.md) | Run a security analysis |
 | Computation | [sensitivity-computation](tools/sensitivity-computation.md) | Run a sensitivity computation |
+| Computation | [compare-security-analysis-results](tools/compare-security-analysis-results.md) | Compare security analysis results |
 | Data conversion | [convert-network](tools/convert-network.md) | Convert a network from one format to another |
 | MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
 | Script | [run-script](tools/run-script.md) | Run a script |
