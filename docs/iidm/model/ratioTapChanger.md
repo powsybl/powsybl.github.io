@@ -12,8 +12,8 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | Low tap position | int | - | no | 0 | Position index of the tap changer's low tap |
 | Tap position | int | - | yes | - | Position index of current tap |
-| Load tap changing capabilities | boolean | - | no | false | **true** if ratio tap changer has load tap changing capabilities, **false** otherwise |
-| Regulating | boolean | - | no | false | **true** if ratio tap changer is regulating, **false** otherwise. State variable |
+| Load tap changing capabilities | boolean | - | no | false | ```true``` if ratio tap changer has load tap changing capabilities, ```false``` otherwise |
+| Regulating | boolean | - | no | false | ```true``` if ratio tap changer is regulating, ```false``` otherwise. State variable |
 | Target V | double | kV | yes | - | The target voltage |
 | Regulation terminal | Terminal | - | no | - | The terminal which voltage is regulated |
 
