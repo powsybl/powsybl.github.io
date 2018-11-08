@@ -11,13 +11,13 @@ The security analysis results comparison process compares, for the pre-contingen
 - the outcome (convergence/divergence) of the loadflow computations
 - the values of the constraints violations
   
-Two security analysis results are considered equivalent iff all the following conditions are satisfied:
+Two security analysis results are considered equivalent IFF all the following conditions are satisfied:
 - for all the pre-contingency and post-contingency states, the corresponding (i.e. related to the same state) outcome of the loadflow computation is the same
 - for all the constraints violations, the difference of value of a corresponding (i.e. related to the same contingency and equipment) violation ìs less than a predefined threshold
 - if a constraints violation is contained in just one result, the violation is less than a predefined threshold
 - if a contingency is contained in just one result, all the post-contingency violations are less than a predefined threshold
   
-the comparison process, optionally, can output, in a CSV file, all the compared values (pre and post-contingency loadflow computation outcomes, and related constraints violations), with a corresponding comparison result (`equivalent`,`different`). See example below.
+The comparison process, optionally, can output, in a CSV file, all the compared values (pre and post-contingency loadflow computation outcomes, and related constraints violations), with a corresponding comparison result (`equivalent`,`different`). See example below.
 
 ```csv
 Contingency;StatusResult1;StatusResult2;Equipment;End;ViolationType;ViolationNameResult1;ValueResult1;LimitResult1;ViolationNameResult2;ValueResult2;LimitResult2;ActionsResult1;ActionsResult2;Comparison
@@ -69,7 +69,7 @@ Use the `--threshold` parameter to specify the threshold used for comparing valu
 
 # Examples
 
-This example shows how to compare tow securityt analysis results:
+This example shows how to compare two security analysis results:
 
 ```shell
 $> itools compare-security-analysis-results --result1-file $HOME/result1.json --result2-file $HOME/result2.json --output-file $HOME/comparison_results.csv
