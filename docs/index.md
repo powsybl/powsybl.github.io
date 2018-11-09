@@ -34,6 +34,7 @@ sorted by themes:
 | ----- | ------- | ----------- |
 | Application file system | [afs](tools/afs.md) | Application File System CLI |
 | Computation | [action-simulator](tools/action-simulator.md) | Run a remedial actions simulation |
+| Computation | [compare-security-analysis-results](tools/compare-security-analysis-results.md) | Compare security analysis results |
 | Computation | [loadflow](tools/loadflow.md) | Run a loadflow computation |
 | Computation | [loadflow-validation](tools/loadflow-validation.md) | Validate the load-flow results of a network |
 | Computation | [run-impact-analysis](tools/run-impact-analysis.md) | Run an impact analysis |
