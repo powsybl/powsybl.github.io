@@ -16,43 +16,48 @@ footer a {
   text-decoration: none;
 }
 
+.inner {
+  max-width: 800px;
+}
+
+nav {
+  margin: 0 0 10px auto;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: fit-content;
+}
+
+nav ul li {
+  display: inline;
+  float: left;
+  margin-right: 1px;
+}
+
+nav ul {
+  padding: 0;
+}
+
 a.nav-button {
   background-color: #0090FF;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   color: #FFFFFF;
-  display: block;
   font-weight: 700;
-  position: absolute;
+  padding: 20px 10px 15px 10px;
   top: 0;
   z-index: 10;
-}
-
-.inner {
-  max-width: 800px;
 }
 
 #home {
   background: url('../images/home.png') #0090FF no-repeat 50% 50%;
   border-bottom-left-radius: 5px;
-  padding: 10px 40px 34px 10px;
-  right: 279px;
-}
-
-#download {
-  padding: 10px 10px 10px 10px;
-  right: 188px;
-}
-
-#documentation {
-  padding: 10px 10px 10px 10px;
-  right: 61px;
+  padding: 20px 25px 15px 25px;
 }
 
 #github {
   background: url('../images/github.png') #0090FF no-repeat 50% 50%;
   border-bottom-right-radius: 5px;
-  padding: 10px 40px 34px 10px;
-  right: 10px;
+  padding: 20px 25px 15px 25px;
 }
 
 // Custom CSS
@@ -67,18 +72,5 @@ a.nav-button {
 
   .inner {
     max-width: 480px;
-  }
-
-  #home {
-    right: 257px;
-  }
-
-  #download {
-    padding: 10px 10px 13px 10px;
-    right: 175px;
-  }
-
-  #documentation {
-    padding: 10px 10px 13px 10px;
   }
 }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <!-- Mathjax Support -->
     <script type="text/javascript" async
-            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
     {% seo %}
 </head>
@@ -18,10 +18,14 @@
 <!-- HEADER -->
 <div id="header_wrap" class="outer">
     <header class="inner">
-        <a id="home" class="nav-button" href="{{ '/' }}"></a>
-        <a id="download" class="nav-button" href="#">Download</a>
-        <a id="documentation" class="nav-button" href="{{ '/docs/' }}">Documentation</a>
-        <a id="github" class="nav-button" href="https://github.com/powsybl"></a>
+        <nav>
+            <ul>
+                <li><a id="home" class="nav-button" href="{{ '/' }}"></a></li>
+                <li><a id="download" class="nav-button" href="#">Download</a></li>
+                <li><a id="documentation" class="nav-button" href="{{ '/docs/' }}">Documentation</a></li>
+                <li><a id="github" class="nav-button" href="https://github.com/powsybl"></a></li>
+            </ul>
+        </nav>
 
         <h1 id="project_title">{{ site.title }}</h1>
         <h2 id="project_tagline">{{ page.title }}</h2>
