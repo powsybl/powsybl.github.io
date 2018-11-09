@@ -22,9 +22,9 @@ The reactive power setpoint is required if the voltage regulator is off.
 This example shows how to create a new VSC Converter Station in a network:
 ```java
 VscConverterStation vcs = voltageLevel.newVscConverterStation()
-    .setId('VCS')
-    .setConnectableBus('B1')
-    .setBus('B1')
+    .setId("VSC")
+    .setConnectableBus("B1")
+    .setBus("B1")
     .setLossFactor(0.011f)
     .setVoltageRegulatorOn(true)
     .setVoltageSetpoint(405.0)

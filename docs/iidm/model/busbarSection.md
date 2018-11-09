@@ -17,7 +17,7 @@ element used in a node/breaker substation topology to connect equipments. In IID
 This example shows how to create a new Busbar Section in a network:
 ```java
 BusbarSection bbs = voltageLevel.getNodeBreakerView().newBusbarSection()
-    .setId('BBS')
+    .setId("BBS")
     .setNode(1)
     .add();
 ```

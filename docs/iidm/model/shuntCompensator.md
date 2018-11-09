@@ -22,10 +22,10 @@ It is expected to be greater than one and lesser or equal to the Maximum Section
 # Examples
 This example shows how to create a new `ShuntCompensator` in the network:
 ```java
-ShuntCompensator shunt = network.getVoltageLevel('VL').newShunt()
-    .setId('SHUNT')
-    .setBus('BUS1')
-    .setConnectableBus('BUS1')
+ShuntCompensator shunt = network.getVoltageLevel("VL").newShunt()
+    .setId("SHUNT")
+    .setBus("BUS1")
+    .setConnectableBus("BUS1")
     .setbPerSection(5.0)
     .setCurrentSectionCount(6)
     .setMaximumSectionCount(10)

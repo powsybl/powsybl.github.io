@@ -38,8 +38,8 @@ breakers. A bus is the aggregation of busbar sections and closed switches.
 This example shows how to create a new `VoltageLevel` object:
 ```java
 VoltageLevel voltageLevel = substation.newVoltageLevel()
-    .setId('VL')
-    .setName('VL') // optional
+    .setId("VL")
+    .setName("VL") // optional
     .setNominalV(20)
     .setTopologyKind(TopologyKind.NODE_BREAKER)
     .setLowVoltageLimit(15)

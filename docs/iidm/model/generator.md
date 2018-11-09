@@ -17,7 +17,7 @@ The `com.powsybl.iidm.network.Generator` interface is used to model a generator.
 | TargetP | double | MW | yes | - | The active power target |
 | TargetQ | double | MVAr | no | - | The reactive power target |
 | TargetV | double | kV | no | - | The voltage target |
-| RatedS | double | MVa | yes | - | The rated nominal power |
+| RatedS | double | MVA | yes | - | The rated nominal power |
 
 ## EnergySource
 The `com.powsybl.iidm.network.EnergySource` enum contains these six values:
@@ -38,8 +38,8 @@ The reactive power target is required if the voltage regulator is off.
 # Examples
 This example shows how to create a new `Generator` in the network:
 ```java
-Generator generator = network.getVoltageLevel('VL').newGenerator()
-    .setId('GEN')
+Generator generator = network.getVoltageLevel("VL").newGenerator()
+    .setId("GEN")
     .setNode(1)
     .setEnergySource(EnergySource.HYDRO)
     .setMinP(0.0)

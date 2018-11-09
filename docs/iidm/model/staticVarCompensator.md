@@ -28,11 +28,11 @@ The reactive power setpoint is required when the regulation mode is set to REACT
 # Examples
 This example shows how to create a new `StaticVarCompensator` in the network:
 ```java
-StaticVarCompensator staticVarCompensator = network.getVoltageLevel('VL')
+StaticVarCompensator staticVarCompensator = network.getVoltageLevel("VL")
     .newStaticVarCompensator()
-        .setId('SVC')
-        .setBus('BUS1')
-        .setConnectableBus('BUS1')
+        .setId("SVC")
+        .setBus("BUS1")
+        .setConnectableBus("BUS1")
         .setBmin(0.0002)
         .setBmax(0.0008)
         .setRegulationMode(StaticVarCompensator.RegulationMode.VOLTAGE)

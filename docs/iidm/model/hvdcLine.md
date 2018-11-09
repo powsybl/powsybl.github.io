@@ -27,7 +27,7 @@ The `com.powsybl.iidm.network.HvdcLine.ConvertersMode` enum contains these two v
 This example shows how to create a new `HvdcLine` in the network:
 ```java
 HvdcLine hvdcLine = network.newHvdcLine()
-    .setId('HL')
+    .setId("HL")
     .setR(5.0)
     .setConvertersMode(HvdcLine.ConvertersMode.SIDE_1_INVERTER_SIDE_2_RECTIFIER)
     .setNominalV(440.0)

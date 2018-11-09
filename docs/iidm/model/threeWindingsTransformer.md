@@ -23,14 +23,14 @@ A [Ratio Tap Changer]() can be associated to the side 2 or the side 3 of a three
 
 ### Characteristics
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| Terminal | `Terminal` | yes | - | The terminal the leg is connected to |
-| R | double | yes | - | The nominal series resistance specified at the voltage of the leg |
-| X | double | yes | - | The nominal series reactance specified at the voltage of the leg |
-| G | double | yes | - | The nominal magnetizing conductance specified at the voltage of the leg |
-| B | double | yes | - | The nominal magnetizing susceptance specified at the voltage of the leg |
-| RatedU | double | yes | - | The rated voltage |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- |-------- | ------------- | ----------- |
+| Terminal | `Terminal` | - | yes | - | The terminal the leg is connected to |
+| R | double | $$\Omega\$$ | yes | - | The nominal series resistance specified at the voltage of the leg |
+| X | double | $$\Omega\$$ | yes | - | The nominal series reactance specified at the voltage of the leg |
+| G | double | S | yes | - | The nominal magnetizing conductance specified at the voltage of the leg |
+| B | double | S | yes | - | The nominal magnetizing susceptance specified at the voltage of the leg |
+| RatedU | double | kV | yes | - | The rated voltage |
 
 ## Leg2or3
 `ThreeWindingsTransformer.Leg2or3` is a nested interface used to model the secondary or the tertiary side of a three windings
@@ -38,20 +38,20 @@ power transformer.
 
 ### Characteristics
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| Terminal | `Terminal` | yes | - | The terminal the leg is connected to |
-| R | double | yes | - | The nominal series resistance specified at the voltage of the leg |
-| X | double | yes | - | The nominal series reactance specified at the voltage of the leg |
-| RatedU | double | yes | - | The rated voltage |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| Terminal | `Terminal` | - | yes | - | The terminal the leg is connected to |
+| R | double | $$\Omega\$$ | yes | - | The nominal series resistance specified at the voltage of the leg |
+| X | double | $$\Omega\$$ | yes | - | The nominal series reactance specified at the voltage of the leg |
+| RatedU | double | kV | yes | - | The rated voltage |
 
 # Examples
 This is an example of how to create a new ThreeWindingsTransformer in the network:
 ```java
 ThreeWindingsTransformer threeWindingsTransformer = substation.newThreeWindingsTransformer()
-    .setId('TWT3')
+    .setId("TWT3")
     .newLeg1()
-        .setVoltageLevel('VL1')
+        .setVoltageLevel("VL1")
         .setNode(11)
         .setR(17.424)
         .setX(1.7424)
@@ -60,14 +60,14 @@ ThreeWindingsTransformer threeWindingsTransformer = substation.newThreeWindingsT
         .setRatedU(132.0)
         .add()
     .newLeg2()
-        .setVoltageLevel('VL2')
+        .setVoltageLevel("VL2")
         .setNode(22)
         .setR(1.089)
         .setX(0.1089)
         .setRatedU(33.0)
         .add()
     .newLeg3()
-        .setVoltageLevel('VL3')
+        .setVoltageLevel("VL3")
         .setNode(33)
         .setR(0.121)
         .setX(0.0121)

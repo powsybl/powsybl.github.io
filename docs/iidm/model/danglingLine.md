@@ -29,16 +29,16 @@ page to learn more about this format.
 # Examples
 This example shows how to create a new `DanglingLine` in the network:
 ```java
-DanglingLine danglingLine = network.getVoltageLevel('VL').newDanglingLine()
-    .setId('DL')
-    .setBus('BUS1')
-    .setConnectableBus('BUS1')
+DanglingLine danglingLine = network.getVoltageLevel("VL").newDanglingLine()
+    .setId("DL")
+    .setBus("BUS1")
+    .setConnectableBus("BUS1")
     .setP0(50.0)
     .setQ0(60.0)
     .setR(10.0)
     .setX(20.0)
     .setG(30.0)
     .setB(40.0)
-    .setUcteXnodeCode('CODE')
+    .setUcteXnodeCode("CODE")
     .add();
 ```
