@@ -34,12 +34,12 @@ sorted by themes:
 | ----- | ------- | ----------- |
 | Application file system | [afs](tools/afs.md) | Application File System CLI |
 | Computation | [action-simulator](tools/action-simulator.md) | Run a remedial actions simulation |
+| Computation | [compare-security-analysis-results](tools/compare-security-analysis-results.md) | Compare security analysis results |
 | Computation | [loadflow](tools/loadflow.md) | Run a loadflow computation |
 | Computation | [loadflow-validation](tools/loadflow-validation.md) | Validate the load-flow results of a network |
 | Computation | [run-impact-analysis](tools/run-impact-analysis.md) | Run an impact analysis |
 | Computation | [security-analysis](tools/security-analysis.md) | Run a security analysis |
 | Computation | [sensitivity-computation](tools/sensitivity-computation.md) | Run a sensitivity computation |
-| Computation | [compare-security-analysis-results](tools/compare-security-analysis-results.md) | Compare security analysis results |
 | Data conversion | [convert-network](tools/convert-network.md) | Convert a network from one format to another |
 | MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
 | Script | [run-script](tools/run-script.md) | Run a script |
