@@ -8,15 +8,15 @@ that aggregates a line chunk and a constant power injection. The active and reac
 
 # Characteristics
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| P0 | double | yes | - | The active power setpoint |
-| Q0 | double | yes | - | The reactive power setpoint |
-| R | double | yes | - | The series resistance |
-| X | double | yes | - | The series reactance |
-| G | double | yes | - | The series conductance |
-| B | double | yes | - | The shunt susceptance |
-| UcteXnodeCode | String | no | - | The dangling line's UCTE Xnode code |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| P0 | double | MW | yes | - | The active power setpoint |
+| Q0 | double | MVar | yes | - | The reactive power setpoint |
+| R | double | $$\Omega\$$ | yes | - | The series resistance |
+| X | double | $$\Omega\$$ | yes | - | The series reactance |
+| G | double | S | yes | - | The shunt conductance |
+| B | double | S | yes | - | The shunt susceptance |
+| UcteXnodeCode | String | - | no | - | The dangling line's UCTE Xnode code |
 
 ## Electrical characteristics
 R, X, G and B correspond to a percent of the original line and have to be consistent with the declared length of the

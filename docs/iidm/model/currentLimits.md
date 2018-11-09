@@ -15,7 +15,7 @@ A permanent limit is modeled by a double.
 # Temporary Limits
 A temporary limit has an **acceptable duration**. The component on which the current limits are applied to can safely stayed
 between the previous limit (could be another temporary limit or a permanent limit) and this limit during the acceptable duration.
-A Nan value for a temporary limit means infinite.
+A `NaN` value for a temporary limit means infinite.
 
 # Examples
 This example shows how to create a new `CurrentLimits` instance:

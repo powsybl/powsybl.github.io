@@ -7,13 +7,13 @@ The `com.powsybl.iidm.network.StaticVarCompensator` interface is used to model a
 
 # Characteristics
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| Bmin | double | yes | - | The minimum susceptance |
-| Bmax | double | yes | - | The maximum susceptance |
-| VoltageSetpoint | double | no | - | The voltage setpoint |
-| ReactivePowerSetpoint | double | no | - | The reactive power setpoint |
-| RegulationMode | `RegulationMode` | yes | - | The regulation mode |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- |-------- | ------------- | ----------- |
+| Bmin | double | S | yes | - | The minimum susceptance |
+| Bmax | double | S | yes | - | The maximum susceptance |
+| VoltageSetpoint | double | kV | no | - | The voltage setpoint |
+| ReactivePowerSetpoint | double | MVar | no | - | The reactive power setpoint |
+| RegulationMode | `RegulationMode` | - | yes | - | The regulation mode |
 
 ## RegulationMode
 The `com.powsybl.iidm.network.StaticVarCompensator.RegulationMode` enum contains these three values:

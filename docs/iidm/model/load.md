@@ -8,11 +8,11 @@ setpoints are fixed.
 
 # Characteristics
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| LoadType | `LoadType` | no | `UNDEFINED` | The type of the load |
-| P0 | double | yes | - | The active power setpoint |
-| Q0 | double | yes | - | The reactive power setpoint |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- |-------- | ------------- | ----------- |
+| LoadType | `LoadType` | - | no | `UNDEFINED` | The type of the load |
+| P0 | double | MW | yes | - | The active power setpoint |
+| Q0 | double | MVar | yes | - | The reactive power setpoint |
 
 ## LoadType
 The `com.powsybl.iidm.network.LoadType` enum contains these three values:

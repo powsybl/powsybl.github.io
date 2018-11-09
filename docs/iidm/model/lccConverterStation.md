@@ -8,9 +8,9 @@ a sub interface of [HvdcConverterStation](hvdcConverterStation.md).
 
 ## Characteristics
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| PowerFactor | float | yes | - | The power factor |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| PowerFactor | float | % | yes | - | The power factor |
 
 ## Examples
 This example shows how to create a new `LccConverterStation` in a network:
