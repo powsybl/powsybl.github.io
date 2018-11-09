@@ -4,7 +4,8 @@ layout: default
 ---
 
 The `loadflow-results-completion-parameters` module is used by the [loadflow-validation](../../tools/loadflow-validation.md)
-command and the [LoadFlowResultsCompletion]() post processor.
+command and the [LoadFlowResultsCompletion](../../iidm/importer/post-processor/LoadFlowResultsCompletionPostProcessor.md)
+post processor.
 
 # Optional properties
 
