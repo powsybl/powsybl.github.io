@@ -10,10 +10,10 @@ element used in a node/breaker substation topology to connect equipments. In IID
 
 <div class="table-wrapper" markdown="block">
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| V | double | no | - | The voltage magnitude of the busbar section |
-| Angle | double | no | - | The voltage angle of the busbar section |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| V | double | kV | no | - | The voltage magnitude of the busbar section |
+| Angle | double | ° |  no | - | The voltage angle of the busbar section |
 
 </div>
 
@@ -21,7 +21,7 @@ element used in a node/breaker substation topology to connect equipments. In IID
 This example shows how to create a new Busbar Section in a network:
 ```java
 BusbarSection bbs = voltageLevel.getNodeBreakerView().newBusbarSection()
-    .setId('BBS')
+    .setId("BBS")
     .setNode(1)
     .add();
 ```

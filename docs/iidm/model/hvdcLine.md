@@ -10,15 +10,15 @@ converters](hvdcConverterStation.md) on DC side.
 
 <div class="table-wrapper" markdown="block">
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| R | double | yes | - | The resistance of the line |
-| ConvertersMode | `ConvertersMode`| yes | - | The converter's mode |
-| NominalV | double | yes | - | The nominal voltage |
-| ActivePowerSetpoint | double | yes | - | The active power setpoint |
-| MaxP | double | yes | - | The maximum active power |
-| ConverterStationId1 | String | yes | - | The ID of the HVDC converter station connected on side 1 |
-| ConverterStationId2 | String | yes | - | The ID of the HVDC converter station connected on side 2 |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| R | double | $$\Omega\$$ | yes | - | The resistance of the line |
+| ConvertersMode | `ConvertersMode`| - | yes | - | The converter's mode |
+| NominalV | double | kV | yes | - | The nominal voltage |
+| ActivePowerSetpoint | MW | double | yes | - | The active power setpoint |
+| MaxP | double | MW | yes | - | The maximum active power |
+| ConverterStationId1 | String | - | yes | - | The ID of the HVDC converter station connected on side 1 |
+| ConverterStationId2 | String | - | yes | - | The ID of the HVDC converter station connected on side 2 |
 
 </div>
 
@@ -31,11 +31,11 @@ The `com.powsybl.iidm.network.HvdcLine.ConvertersMode` enum contains these two v
 This example shows how to create a new `HvdcLine` in the network:
 ```java
 HvdcLine hvdcLine = network.newHvdcLine()
-    .setId('HL')
+    .setId("HL")
     .setR(5.0)
     .setConvertersMode(HvdcLine.ConvertersMode.SIDE_1_INVERTER_SIDE_2_RECTIFIER)
     .setNominalV(440.0)
-    .setMaxP(-50.0)
+    .setMaxP(50.0)
     .setActivePowerSetpoint(20.0)
     .setConverterStationId1("C1")
     .setConverterStationId2("C2")

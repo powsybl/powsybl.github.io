@@ -10,11 +10,11 @@ a sub interface of [HVDC Converter Station](hvdcConverterStation.md).
 
 <div class="table-wrapper" markdown="block">
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| VoltageRegulatorOn | boolean | yes | - | The voltage regulator status |
-| VoltageSetpoint | double | no | - | The voltage setpoint |
-| ReactivePowerSetpoint | double | no | - | The reactive power setpoint |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| VoltageRegulatorOn | boolean | - | yes | - | The voltage regulator status |
+| VoltageSetpoint | double | kV | no | - | The voltage setpoint |
+| ReactivePowerSetpoint | double | MVar | no | - | The reactive power setpoint |
 
 </div>
 
@@ -23,12 +23,12 @@ The voltage setpoint is required if the voltage regulator is on.
 The reactive power setpoint is required if the voltage regulator is off.
 
 # Examples
-This example shows how to create a new LCC Converter Station in a network:
+This example shows how to create a new VSC Converter Station in a network:
 ```java
 VscConverterStation vcs = voltageLevel.newVscConverterStation()
-    .setId('VCS')
-    .setConnectableBus('B1')
-    .setBus('B1')
+    .setId("VSC")
+    .setConnectableBus("B1")
+    .setBus("B1")
     .setLossFactor(0.011f)
     .setVoltageRegulatorOn(true)
     .setVoltageSetpoint(405.0)

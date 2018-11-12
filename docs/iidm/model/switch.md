@@ -37,7 +37,7 @@ In a bus/breaker topology, `SwitchKind` can only be set to BREAKER.
 This example shows how to create a new Switch in a network with a node/breaker topology:
 ```java
 Switch s = voltageLevel.getNodeBreakerView().newSwitch()
-    .setId('S')
+    .setId("S")
     .setNode1(1)
     .setNode2(2)
     .setKind(SwitchKind.DISCONNECTOR)
@@ -50,7 +50,7 @@ In a node/breaker topology, a switch can also be created with the function `newD
 respectively a disconnector or a breaker:
 ```java
 Switch s = voltageLevel.getNodeBreakerView().newDisconnector()
-    .setId('SD')
+    .setId("SD")
     .setNode1(3)
     .setNode2(4)
     .setOpen(false)
@@ -58,9 +58,9 @@ Switch s = voltageLevel.getNodeBreakerView().newDisconnector()
     .add();
 ```
 
-```
+```java
 Switch s = voltageLevel.getNodeBreakerView().newBreaker()
-    .setId('SB')
+    .setId("SB")
     .setNode1(5)
     .setNode2(6)
     .setOpen(false)
@@ -70,9 +70,9 @@ Switch s = voltageLevel.getNodeBreakerView().newBreaker()
 This example shows how to create a new Switch in a network with a bus/breaker topology:
 ```java
 Switch s = voltageLevel.getBusBreakerView().newSwitch()
-    .setId('S')
-    .setBus1('B1')
-    .setBus2('B2')
+    .setId("S")
+    .setBus1("B1")
+    .setBus2("B2")
     .setOpen(false)
     .add();
 ```

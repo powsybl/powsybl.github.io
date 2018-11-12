@@ -12,10 +12,10 @@ class for [VSC]() and [LCC](). As such, its sub interfaces are:
 
 <div class="table-wrapper" markdown="block">
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| HvdcType | `HvdcType` | yes | - | The HVDC type |
-| LossFactor | float | yes | - | The loss factor |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| HvdcType | `HvdcType` | - | yes | - | The HVDC type |
+| LossFactor | float | % | yes | - | The loss factor |
 
 </div>
 

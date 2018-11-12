@@ -9,13 +9,13 @@ The `com.powsybl.iidm.network.StaticVarCompensator` interface is used to model a
 
 <div class="table-wrapper" markdown="block">
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| Bmin | double | yes | - | The minimum susceptance |
-| Bmax | double | yes | - | The maximum susceptance |
-| VoltageSetpoint | double | no | - | The voltage setpoint |
-| ReactivePowerSetpoint | double | no | - | The reactive power setpoint |
-| RegulationMode | `RegulationMode` | yes | - | The regulation mode |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- |-------- | ------------- | ----------- |
+| Bmin | double | S | yes | - | The minimum susceptance |
+| Bmax | double | S | yes | - | The maximum susceptance |
+| VoltageSetpoint | double | kV | no | - | The voltage setpoint |
+| ReactivePowerSetpoint | double | MVar | no | - | The reactive power setpoint |
+| RegulationMode | `RegulationMode` | - | yes | - | The regulation mode |
 
 </div>
 
@@ -32,11 +32,11 @@ The reactive power setpoint is required when the regulation mode is set to REACT
 # Examples
 This example shows how to create a new `StaticVarCompensator` in the network:
 ```java
-StaticVarCompensator staticVarCompensator = network.getVoltageLevel('VL')
+StaticVarCompensator staticVarCompensator = network.getVoltageLevel("VL")
     .newStaticVarCompensator()
-        .setId('SVC')
-        .setBus('BUS1')
-        .setConnectableBus('BUS1')
+        .setId("SVC")
+        .setBus("BUS1")
+        .setConnectableBus("BUS1")
         .setBmin(0.0002)
         .setBmax(0.0008)
         .setRegulationMode(StaticVarCompensator.RegulationMode.VOLTAGE)

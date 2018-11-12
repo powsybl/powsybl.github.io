@@ -10,15 +10,15 @@ that aggregates a line chunk and a constant power injection. The active and reac
 
 <div class="table-wrapper" markdown="block">
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| P0 | double | yes | - | The active power setpoint |
-| Q0 | double | yes | - | The reactive power setpoint |
-| R | double | yes | - | The series resistance |
-| X | double | yes | - | The series reactance |
-| G | double | yes | - | The series conductance |
-| B | double | yes | - | The shunt susceptance |
-| UcteXnodeCode | String | no | - | The dangling line's UCTE Xnode code |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| P0 | double | MW | yes | - | The active power setpoint |
+| Q0 | double | MVar | yes | - | The reactive power setpoint |
+| R | double | $$\Omega\$$ | yes | - | The series resistance |
+| X | double | $$\Omega\$$ | yes | - | The series reactance |
+| G | double | S | yes | - | The shunt conductance |
+| B | double | S | yes | - | The shunt susceptance |
+| UcteXnodeCode | String | - | no | - | The dangling line's UCTE Xnode code |
 
 </div>
 
@@ -33,16 +33,16 @@ page to learn more about this format.
 # Examples
 This example shows how to create a new `DanglingLine` in the network:
 ```java
-DanglingLine danglingLine = network.getVoltageLevel('VL').newDanglingLine()
-    .setId('DL')
-    .setBus('BUS1')
-    .setConnectableBus('BUS1')
+DanglingLine danglingLine = network.getVoltageLevel("VL").newDanglingLine()
+    .setId("DL")
+    .setBus("BUS1")
+    .setConnectableBus("BUS1")
     .setP0(50.0)
     .setQ0(60.0)
     .setR(10.0)
     .setX(20.0)
     .setG(30.0)
     .setB(40.0)
-    .setUcteXnodeCode('CODE')
+    .setUcteXnodeCode("CODE")
     .add();
 ```
