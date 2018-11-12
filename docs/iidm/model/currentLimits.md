@@ -15,20 +15,20 @@ A permanent limit is modeled by a double.
 # Temporary Limits
 A temporary limit has an **acceptable duration**. The component on which the current limits are applied to can safely stayed
 between the previous limit (could be another temporary limit or a permanent limit) and this limit during the acceptable duration.
-A Nan value for a temporary limit means infinite.
+A `NaN` value for a temporary limit means infinite.
 
 # Examples
 This example shows how to create a new `CurrentLimits` instance:
 ```java
-CurrentLimits currentLimits = network.getDanglingLine('DL').newCurrentLimits()
+CurrentLimits currentLimits = network.getDanglingLine("DL").newCurrentLimits()
     .setPermanentLimit(100.0)
     .beginTemporaryLimit()
-        .setName('TL1')
+        .setName("TL1")
         .setValue(120.0)
         .setAcceptableDuration(20 * 60)
     .endTemporaryLimit()
     .beginTemporaryLimit()
-        .setName('TL2')
+        .setName("TL2")
         .setValue(140.0)
         .setAcceptableDuration(10 * 60)
     .endTemporaryLimit()

@@ -59,7 +59,7 @@ the topology made of buses.
 # Examples
 This example shows how to use the terminal of an [injection](injection.md):
 ```java
-Terminal terminal = network.getLoad('LOAD').getTerminal();
+Terminal terminal = network.getLoad("LOAD").getTerminal();
 if (Double.isNan(terminal.getP()) {
     terminal.setP(400);
 }
@@ -67,10 +67,10 @@ if (Double.isNan(terminal.getP()) {
 
 This example shows how to use a terminal of a [branch](branch.md):
 ```java
-Terminal terminal = network.getLine('LINE').getTerminal1().setP(300).setQ(100);
+Terminal terminal = network.getLine("LINE").getTerminal1().setP(300).setQ(100);
 ```
 
 This example shows how to use a terminal of a [three windings power transformer](threeWindingsTransformer.md):
 ```java
-Terminal terminal = network.getThreeWindingsTransformer('TWT3').getLeg1().getTerminal().setP(0.0);
+Terminal terminal = network.getThreeWindingsTransformer("TWT3").getLeg1().getTerminal().setP(0.0);
 ```

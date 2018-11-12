@@ -12,14 +12,14 @@ A voltage level is located in a [substation](substation.md).
 
 # Characteristics
 
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| id | String | yes | - | The ID of the voltage level |
-| name | String | no | - | The name of the voltage level |
-| NominalV | double | yes | - | The nominal voltage |
-| LowVoltageLimit | double | no | - | The low voltage limit |
-| HighVoltageLimit | double | no | - | The high voltage limit |
-| TopologyKind | `TopologyKind` | yes | - | The kind of topology |
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| id | String | - | yes | - | The ID of the voltage level |
+| name | String | - | no | - | The name of the voltage level |
+| NominalV | double | kV | yes | - | The nominal voltage |
+| LowVoltageLimit | double | kV | no | - | The low voltage limit |
+| HighVoltageLimit | double | kV | no | - | The high voltage limit |
+| TopologyKind | `TopologyKind` | - | yes | - | The kind of topology |
 
 ## TopologyKind
 `TopologyKind` describes the topology model of the voltage level i.e. how equipments are connected together. The
@@ -38,8 +38,8 @@ breakers. A bus is the aggregation of busbar sections and closed switches.
 This example shows how to create a new `VoltageLevel` object:
 ```java
 VoltageLevel voltageLevel = substation.newVoltageLevel()
-    .setId('VL')
-    .setName('VL') // optional
+    .setId("VL")
+    .setName("VL") // optional
     .setNominalV(20)
     .setTopologyKind(TopologyKind.NODE_BREAKER)
     .setLowVoltageLimit(15)
