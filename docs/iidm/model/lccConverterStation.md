@@ -8,9 +8,13 @@ a sub interface of [HvdcConverterStation](hvdcConverterStation.md).
 
 ## Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | PowerFactor | float | yes | - | The power factor |
+
+</div>
 
 ## Examples
 This example shows how to create a new `LccConverterStation` in a network:

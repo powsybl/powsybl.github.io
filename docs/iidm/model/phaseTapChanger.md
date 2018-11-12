@@ -8,6 +8,8 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | Low tap position | int | - | no | 0 | Position index of the tap changer's low tap |
@@ -17,7 +19,11 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 | Regulation value | double | MW or A | yes | - | The target value, depending on the regulation mode |
 | Regulation terminal | Terminal | - | no | - | The terminal where regulation is done |
 
+</div>
+
 Each step of a phase tap changer has the following attributes:
+
+<div class="table-wrapper" markdown="block">
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
@@ -27,6 +33,8 @@ Each step of a phase tap changer has the following attributes:
 | $$b_{\phi, tap}$$ | double | % | yes | - | Susceptance deviation in percent of nominal value |
 | $$\rho_{\phi, tap}$$ | double | p.u. | yes | - | Voltage ratio in per unit of the rated voltages |
 | $$\alpha_{\phi, tap}$$ | double | $$^{\circ}$$ | yes | - | Angle difference |
+
+</div>
 
 # Model
 A phase tap changer is regulating if **Regulating** is set to ```true```.

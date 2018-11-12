@@ -8,11 +8,15 @@ setpoints are fixed.
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | LoadType | `LoadType` | no | `UNDEFINED` | The type of the load |
 | P0 | double | yes | - | The active power setpoint |
 | Q0 | double | yes | - | The reactive power setpoint |
+
+</div>
 
 ## LoadType
 The `com.powsybl.iidm.network.LoadType` enum contains these three values:

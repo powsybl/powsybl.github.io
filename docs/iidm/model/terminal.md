@@ -8,6 +8,8 @@ topology. A terminal is created when the equipment it is connected to is created
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | VoltageLevel | `VoltageLevel` | yes | - | The voltage level to which the terminal belongs |
@@ -20,6 +22,8 @@ topology. A terminal is created when the equipment it is connected to is created
 | I | double | no | - | The current at the terminal |
 | Connected | boolean | yes | - | The connection status of the terminal (true if the terminal is connected, else false) |
 
+</div>
+
 ## View
 The available views for the terminal depends of the topology level (node/breaker or bus/breaker) of the voltage level it
 belongs to. More information about topology levels can be found on the [voltage level](voltageLevel.md) page.
@@ -30,9 +34,13 @@ breakers and disconnectors.
 
 **Characteristics**
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Node | int | yes | - | The connection node of the viewed terminal in a node/breaker topology |
+
+</div>
 
 ### BusBreakerView
 `BusBreakerView` is a view available in a node/breaker or a bus/breaker topology. It presents an aggregated view of the
@@ -40,10 +48,14 @@ topology made of buses and switches.
 
 **Characteristics**
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Bus | `Bus` | yes | - | The connection bus of the viewed terminal in a bus/breaker topology |
 | ConnectableBus | `Bus` | yes | - | A bus that can be used to connect the viewed terminal in a bus/breaker topology |
+
+</div>
 
 ### BusView
 `BusView` is a view available in a node/breaker, a bus/breaker or a bus only topology. It presents an aggregated view of
@@ -51,10 +63,14 @@ the topology made of buses.
 
 **Characteristics**
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Bus | `Bus` | yes | - | The connection bus of the viewed terminal in a bus only topology |
 | ConnectableBus | `Bus` | yes | - | A bus that can be used to connect the viewed terminal in a bus only topology |
+
+</div>
 
 # Examples
 This example shows how to use the terminal of an [injection](injection.md):

@@ -12,6 +12,8 @@ A voltage level is located in a [substation](substation.md).
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | id | String | yes | - | The ID of the voltage level |
@@ -20,6 +22,8 @@ A voltage level is located in a [substation](substation.md).
 | LowVoltageLimit | double | no | - | The low voltage limit |
 | HighVoltageLimit | double | no | - | The high voltage limit |
 | TopologyKind | `TopologyKind` | yes | - | The kind of topology |
+
+</div>
 
 ## TopologyKind
 `TopologyKind` describes the topology model of the voltage level i.e. how equipments are connected together. The

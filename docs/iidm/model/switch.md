@@ -7,6 +7,8 @@ The `com.powsybl.iidm.network.Switch` interface is used to a switch which connec
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Kind | `SwitchKind` | yes | - | The kind of switch |
@@ -17,6 +19,8 @@ The `com.powsybl.iidm.network.Switch` interface is used to a switch which connec
 | Node2 | int | no | - | The second node the switch is connected to |
 | Bus1 | String | no | - | The first bus the switch is connected to |
 | Bus2 | String | no | - | The second bus the switch is connected to |
+
+</div>
 
 Node1 and Node2 are required in a node/breaker topology.
 Bus1 and Bus2 are required in a bus/breaker topology.

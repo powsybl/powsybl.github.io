@@ -9,6 +9,8 @@ A [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phase
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | id | string | - | yes | - | Unique identifier of the transformer |
@@ -19,6 +21,8 @@ A [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phase
 | $$b_{nom}$$ | double | S | yes | - | The nominal magnetizing susceptance at the secondary side of the transformer |
 | $$V_{1\ nom}$$ | double | kV | yes | - | The primary winding rated voltage |
 | $$V_{2\ nom}$$ | double | kV | yes | - | The secondary winding rated voltage |
+
+</div>
 
 # Model
 Two windings transformer are modelled with the following equivalent $$\pi$$ model:

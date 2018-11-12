@@ -11,6 +11,8 @@ A substation is located in a single country and belongs to one TSO.
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | id | String | yes | - | The ID of the substation |
@@ -18,6 +20,8 @@ A substation is located in a single country and belongs to one TSO.
 | country | `Country` | yes | - | The country where this substation is located |
 | tso | String | no | - | The TSO this substations belongs to |
 | geographicalTags | List of String | no | - | A list of geographical tags |
+
+</div>
 
 # Example
 This example shows how to create a new `Substation` object:

@@ -8,6 +8,8 @@ converters](hvdcConverterStation.md) on DC side.
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | R | double | yes | - | The resistance of the line |
@@ -17,6 +19,8 @@ converters](hvdcConverterStation.md) on DC side.
 | MaxP | double | yes | - | The maximum active power |
 | ConverterStationId1 | String | yes | - | The ID of the HVDC converter station connected on side 1 |
 | ConverterStationId2 | String | yes | - | The ID of the HVDC converter station connected on side 2 |
+
+</div>
 
 ## ConvertersMode
 The `com.powsybl.iidm.network.HvdcLine.ConvertersMode` enum contains these two values:

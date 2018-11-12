@@ -7,11 +7,15 @@ The `com.powsybl.iidm.network.ShuntCompensator` interface is used to model a shu
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | bPerSection | double | yes | - | Positive sequence shunt (charging) susceptance per section |
 | MaximumSectionCount| int | yes | - | The maximum number of sections that may be switched on |
 | CurrentSectionCount | int | yes | - | The current number of section that may be switched on |
+
+</div>
 
 ## Section
 A section of a shunt compensator is an individual capacitor or reactor.

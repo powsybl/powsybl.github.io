@@ -67,6 +67,17 @@ a.nav-button {
     display: block;
 }
 
+.table-wrapper {
+  overflow-x: auto;
+}
+
+code {
+  overflow-x: auto;
+}
+
+p code {
+}
+
 // Small devices
 @media screen and (max-width: 480px) {
 

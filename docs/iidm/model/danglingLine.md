@@ -8,6 +8,8 @@ that aggregates a line chunk and a constant power injection. The active and reac
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | P0 | double | yes | - | The active power setpoint |
@@ -17,6 +19,8 @@ that aggregates a line chunk and a constant power injection. The active and reac
 | G | double | yes | - | The series conductance |
 | B | double | yes | - | The shunt susceptance |
 | UcteXnodeCode | String | no | - | The dangling line's UCTE Xnode code |
+
+</div>
 
 ## Electrical characteristics
 R, X, G and B correspond to a percent of the original line and have to be consistent with the declared length of the

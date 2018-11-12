@@ -30,6 +30,8 @@ and the [exporter](iidm/exporter/index.md) documentation pages to learn more abo
 The `iTools` script provides a common way to run powsybl commands using the command line. It provides several tools,
 sorted by themes:
 
+<div class="table-wrapper" markdown="block">
+
 | Theme | Command | Description |
 | ----- | ------- | ----------- |
 | Application file system | [afs](tools/afs.md) | Application File System CLI |
@@ -44,6 +46,8 @@ sorted by themes:
 | MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
 | Script | [run-script](tools/run-script.md) | Run a script |
 | Misc | [plugins-info](tools/plugins-info.md) | Displays the available plugins |
+
+</div>
 
 Read this [documentation](tools/index.md) page to learn more about powsybl command line interface.
 

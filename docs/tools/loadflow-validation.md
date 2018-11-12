@@ -136,6 +136,8 @@ parameters, and the corresponding case states validated and written in the outpu
 - some combinations are not available, e.g. if you use the `compare-results` parameter, with the `COMPUTATION` value,
 you have to use the `run-computation` (or `load-flow`) parameter.
 
+<div class="table-wrapper" markdown="block">
+
 | Number  | compare-results | run-computation | groovy-script | State 1 | State 2 (_postComp) |
 | ------- | ------- | ------- | ------- | ------- | ------- |
 | 1 | absent | absent | absent | Case 1 after import | None |
@@ -149,7 +151,11 @@ you have to use the `run-computation` (or `load-flow`) parameter.
 | 9 | `COMPUTATION` | `loadflow`/`loadflowResultsCompletion` | absent | Case 1 after import | Case 1 after import and computation |
 | 10 | `COMPUTATION` | `loadflow`/`loadflowResultsCompletion` | script | Case 1 after import and Groovy script | Case 1 after import, Groovy script and computation |
 
+</div>
+
 The following table depicts, in another way, the states that can be validated by the itools command, referring to the combinations of parameters listed in the table above.  
+
+<div class="table-wrapper" markdown="block">
 
 | **State 1 / State 2** | **None** | **Case 2 after import** | **Case 1 after import and computation** | **Case 1 after import, Groovy script and computation** |
 | ------- | ------- | ------- | ------- | ------- |
@@ -157,6 +163,8 @@ The following table depicts, in another way, the states that can be validated by
 | **Case 1 after import and computation** | 2 | 6 | N.A. | N.A. |
 | **Case 1 after import and Groovy script** | 3 | 7 | N.A. | 10 |
 | **Case 1 after import, Groovy script and computation** | 4 | 8 | N.A. | N.A. |
+
+</div>
 
 # Configuration
 To learn how to configure the `loadflow-validation` command, read the documentation of the

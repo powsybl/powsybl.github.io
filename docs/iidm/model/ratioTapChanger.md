@@ -8,6 +8,8 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | Low tap position | int | - | no | 0 | Position index of the tap changer's low tap |
@@ -17,7 +19,11 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 | Target V | double | kV | yes | - | The target voltage |
 | Regulation terminal | Terminal | - | no | - | The terminal which voltage is regulated |
 
+</div>
+
 Each step of a ratio tap changer has the following attributes:
+
+<div class="table-wrapper" markdown="block">
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
@@ -26,6 +32,8 @@ Each step of a ratio tap changer has the following attributes:
 | $$g_{r, tap}$$ | double | % | yes | - | Conductance deviation in percent of nominal value |
 | $$b_{r, tap}$$ | double | % | yes | - | Susceptance deviation in percent of nominal value |
 | $$\rho_{r, tap}$$ | double | p.u. | yes | - | Voltage ratio in per unit of the rated voltages |
+
+</div>
 
 # Model
 A ratio tap changer is regulating if both **Load tap changing capabilities** and **Regulating** are set to ```true```.

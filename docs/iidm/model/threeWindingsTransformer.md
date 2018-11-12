@@ -12,16 +12,22 @@ A [Ratio Tap Changer]() can be associated to the side 2 or the side 3 of a three
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | Leg1 | `ThreeWindingsTransformer.Leg1` | yes | - | The leg at the primary side |
 | Leg2 | `ThreeWindingsTransformer.Leg2or3` | yes | - | The leg at the secondary side |
 | Leg3 | `ThreeWindingsTransformer.Leg2or3` | yes | - | The leg at the tertiary side |
 
+</div>
+
 ## Leg1
 `ThreeWindingsTransformer.Leg1` is a nested interface used to model the primary side of a three windings power transformer.
 
 ### Characteristics
+
+<div class="table-wrapper" markdown="block">
 
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
@@ -32,11 +38,15 @@ A [Ratio Tap Changer]() can be associated to the side 2 or the side 3 of a three
 | B | double | yes | - | The nominal magnetizing susceptance specified at the voltage of the leg |
 | RatedU | double | yes | - | The rated voltage |
 
+</div>
+
 ## Leg2or3
 `ThreeWindingsTransformer.Leg2or3` is a nested interface used to model the secondary or the tertiary side of a three windings
 power transformer.
 
 ### Characteristics
+
+<div class="table-wrapper" markdown="block">
 
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
@@ -44,6 +54,8 @@ power transformer.
 | R | double | yes | - | The nominal series resistance specified at the voltage of the leg |
 | X | double | yes | - | The nominal series reactance specified at the voltage of the leg |
 | RatedU | double | yes | - | The rated voltage |
+
+</div>
 
 # Examples
 This is an example of how to create a new ThreeWindingsTransformer in the network:

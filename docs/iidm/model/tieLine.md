@@ -8,6 +8,8 @@ The `com.powsybl.iidm.network.TieLine` interface is used to model a Tie Line. In
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | HalfLine1 | `TieLine.HalfLine` | yes | - | The first half of the line characteristics |
@@ -16,6 +18,8 @@ The `com.powsybl.iidm.network.TieLine` interface is used to model a Tie Line. In
 
 ## Half Line
 An Half Line has the following characteristics:
+
+<div class="table-wrapper" markdown="block">
 
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
@@ -29,6 +33,8 @@ An Half Line has the following characteristics:
 | B2 | double | yes | - | The second side shunt susceptance |
 | XnodeP | double | yes | - | The active power consumption |
 | XnodeQ | double | yes | - | The reactive power consumption |
+
+</div>
 
 A Tie Line is composed of two Half Lines.
 

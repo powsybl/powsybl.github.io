@@ -7,6 +7,8 @@ The `com.powsybl.iidm.network.Line` interface is used to model an AC line. A lin
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | id | string | - | yes | - | Unique identifier of the line|
@@ -17,6 +19,8 @@ The `com.powsybl.iidm.network.Line` interface is used to model an AC line. A lin
 | $$b_1$$ | double | S | yes | - | The first side shunt susceptance |
 | $$g_2$$ | double | S | yes | - | The second side shunt conductance |
 | $$b_2$$ | double | S | yes | - | The second side shunt susceptance |
+
+</div>
 
 # Model
 Power lines are modelled using a standard $$\pi$$ model with distributed parameters.

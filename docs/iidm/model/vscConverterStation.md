@@ -8,11 +8,15 @@ a sub interface of [HVDC Converter Station](hvdcConverterStation.md).
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | VoltageRegulatorOn | boolean | yes | - | The voltage regulator status |
 | VoltageSetpoint | double | no | - | The voltage setpoint |
 | ReactivePowerSetpoint | double | no | - | The reactive power setpoint |
+
+</div>
 
 ## Setpoints
 The voltage setpoint is required if the voltage regulator is on.

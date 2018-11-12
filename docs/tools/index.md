@@ -31,6 +31,8 @@ Use the `--parallel` parameter to run the command in parallel. This option is su
 The `iTools` commands are discovered at runtime: depending of the jars present in the classpath, some commands could be
 unavailable. The commands are classified in themes, to help identifying their purpose.
    
+<div class="table-wrapper" markdown="block">
+
 | Theme | Command | Description |
 | ----- | ------- | ----------- |
 | Application file system | [afs](afs.md) | Application File System CLI |
@@ -45,6 +47,8 @@ unavailable. The commands are classified in themes, to help identifying their pu
 | MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
 | Script | [run-script](run-script.md) | Run a script |
 | Misc | [plugins-info](plugins-info.md) | Displays the available plugins |
+
+</div>
 
 # Learn more
 Read this [page](../configuration/itools.md) to learn how to configure the framework and this [page](../configuration/logback.md)

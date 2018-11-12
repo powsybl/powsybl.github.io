@@ -7,6 +7,8 @@ The `com.powsybl.iidm.network.Generator` interface is used to model a generator.
 
 # Characteristics
 
+<div class="table-wrapper" markdown="block">
+
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
 | EnergySource | `EnergySource` | yes | `OTHER` | The energy source |
@@ -18,6 +20,8 @@ The `com.powsybl.iidm.network.Generator` interface is used to model a generator.
 | TargetQ | double | no | - | The reactive power target |
 | TargetV | double | no | - | The voltage target |
 | RatedS | double | yes | - | The rated nominal power |
+
+</div>
 
 ## EnergySource
 The `com.powsybl.iidm.network.EnergySource` enum contains these six values:
