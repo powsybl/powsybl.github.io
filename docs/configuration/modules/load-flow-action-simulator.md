@@ -22,6 +22,13 @@ simulation.
 ## max-iterations
 Use the `max-iterations` parameter to limit the number of iteration needed to solve the violations.
 
+## copy-strategy
+Use the `copy-strategy` to define how the action-simulator will store and restore network state internally. This choice can greatly impact performances.
+Possible values are:
+ * STATE : will only save and restore state data. Optimizes performances, but will not behave correctly if some actions modify the structure of the network.
+ * DEEP : will save and restore all network data. Decreases performances, but allows to use any type of action.
+
+
 # Examples
 
 ## YAML
@@ -31,6 +38,7 @@ load-flow-action-simulator:
     ignore-pre-contingency-violations: false
     load-flow-factory: com.powsybl.loadflow.mock.LoadFlowFactoryMock
     max-iterations: 10
+    copy-strategy: STATE
 ```
 
 ## XML
@@ -40,5 +48,6 @@ load-flow-action-simulator:
     <ignore-pre-contingency-violations>false</ignore-pre-contingency-violations>
     <load-flow-factory>com.powsybl.loadflow.mock.LoadFlowFactoryMock</load-flow-factory>
     <max-iterations>10</max-iterations>
+    <copy-strategy>STATE</copy-strategy>
 </load-flow-action-simulator>
 ```
