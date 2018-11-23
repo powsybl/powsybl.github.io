@@ -26,6 +26,10 @@ IIDM networks can also be created from various formats such as [UCTE-DEF](iidm/i
 or [Entso-E CGMES](iidm/importer/cgmes.md) and be exported to various formats. Read the [importer](iidm/importer/index.md)
 and the [exporter](iidm/exporter/index.md) documentation pages to learn more about import/export features.
 
+# Time series
+
+Read this page to learn more about the [time series](timeseries/index.md) modeling in powsybl.
+
 # Tools
 The `iTools` script provides a common way to run powsybl commands using the command line. It provides several tools,
 sorted by themes:
