@@ -3,50 +3,48 @@ title: Time series
 layout: default
 ---
 
-# Getting started with time series
-
+To use time-series, add the following dependency to the `pom.xml` file:
 ```xml
 <dependency>
   <groupId>com.powsybl</groupId>
   <artifactId>powsybl-time-series-api</artifactId>
-  <version>#VERSION#</version>
+  <version>${powsybl.version}</version>
 </dependency>
 ```
 
-## Time series modeling
+# Time series modeling
 
-In PowSyBl time series are modelled by 
-
- - A name to uniquely identify the time series inside a store.
- - A type: double or string.
- - A time index to define an instant list to which data exists for this time series. Three differents implementation of time index are available in the framework depending of the need:
+In PowSyBl, time series are modelled by:
+- A name to uniquely identify the time series inside a store.
+- A data type which is `double` or `String`.
+- A time index to define an instants list to which data exists. Three different implementation of time index are available
+in the framework depending of the need:
     - Regular index
     - Irregular index
     - Infinite index
- - Metadata: a list of key/value string data
- - Data chunks: an ordered list of data that will be associated to instant of the time index.
+- Metadata: a list of key/value string data
+- Data chunks: an ordered list of data that will be associated to instants of the time index.
 
-## Time index
+# Time index
 
-### 1.  Irregular
+## Irregular
 
-To create [an irregular](https://en.wikipedia.org/wiki/Unevenly_spaced_time_series) time series index with 3 instants:
-
-```javascript
+The following example shows how to create an [irregular](https://en.wikipedia.org/wiki/Unevenly_spaced_time_series) time
+series index with 3 instants, and how to iterate over all instants of the time index.
+```java
 Instant t1 = Instant.parse("2018-01-01T00:00:00Z");
 Instant t2 = t1.plusSeconds(1);
 Instant t3 = t2.plusSeconds(2);
 Instant t4 = t3.plusSeconds(3);
 TimeSeriesIndex irregularIndex = IrregularTimeSeriesIndex.create(t1, t2, t3, t4);
 ```
-To iterate over all instants of the time index:
 
+To iterate over all instants of the time index:
 ```java
 irregularIndex.stream().forEach(System.out::println);
 ```
 
 Output:
-
 ```
 2018-01-01T00:00:00Z
 2018-01-01T00:00:01Z
@@ -54,25 +52,23 @@ Output:
 2018-01-01T00:00:06Z
 ```
 
-### 2.  Regular
+## Regular
 
-To create a regular time series with 3 instants equally spaced of 1 second:
-
-```javascript
+The following example shows how to create a regular time series with 3 instants in steps of 1 second, and how to iterate
+over all instants:
+```java
 Instant start = Instant.parse("2018-01-01T00:00:00Z");
 Instant end = start.plusSeconds(3);
 Duration spacing = Duration.ofSeconds(1);
 TimeSeriesIndex regularIndex = RegularTimeSeriesIndex.create(start, end, spacing);
 ```
 
-As for irregular time index we can iterate over all instants:
-
+As for irregular time indexes, we can iterate over all instants:
 ```java
 regularIndex.stream().forEach(System.out::println);
 ```
 
 Output:
-
 ```
 2018-01-01T00:00:00Z
 2018-01-01T00:00:01Z
@@ -80,68 +76,61 @@ Output:
 2018-01-01T00:00:03Z
 ```
 
-### 3.  Infinite
+## Infinite
 
-Un infinite time series is a time series with only to point at instant 0 and Long.MAX_VALUE. To get an infinite tim series:
-
-```javascript
-InfiniteTimeSeriesIndex.INSTANCE;
+An infinite time series is a time series with only two points: one at instant 0 and another at instant `Long.MAX_VALUE`.
+To get an infinite time series:
+```java
+TimeSeriesIndex infiniteIndex = InfiniteTimeSeriesIndex.INSTANCE;
 ```
 
-## Time series
+# Time series
 
-### 1. Double data
+## Double data
 
 To create a double data time series based on time index `regularIndex`:
-
-```javascript
+```java
 StoredDoubleTimeSeries dts = TimeSeries.createDouble("dts", regularIndex);
 ```
 
-We now have a time series with 3 instants but without any data.  By default the time series is filled with NaN values which means absent value.
-
+We now have a time series with 3 instants but without any data. By default the time series is filled with `NaN` values
+which means absent values.
 ```java
 double[] values = dts.toArray();
 System.out.println(Arrays.toString(values));
 ```
 
 Output:
-
 ```
 [NaN, NaN, NaN, NaN]
 ```
 
-### 2. String data
+## String data
 
 Similarly to double time series, to create a string data time series based on time index `regularIndex`:
-
 ```java
 StringTimeSeries sts = TimeSeries.createString("sts", regularIndex);
 ```
 
-For string time series null or empty string is used to model an absent value.
-
+For string time series `null` values or empty strings are used to model absent values.
 ```java
 String[] values = sts.toArray();
 System.out.println(Arrays.toString(values));
 ```
 
 Output:
-
 ```
 [null, null, null, null]
 ```
 
+# Data chunks
 
+In order to add data to a time series, we need to create data chunks: `DoubleDataChunk` for double time series and
+`StringDataChunk` for string time series.
 
-## Data chunks
+## Double data chunk
 
-In order to add data to the time series, we need to create data chunks: double data chunks for double time series and string data chunks for string time series.
-
-### 1. Double data chunk
-
-To create an uncompress data chunk and print its json representation:
-
+The following example shows how to create an uncompress data chunk and print its JSON representation:
 ```java
 DoubleDataChunk chunk = DataChunk.create(1d, 1d, 1d, 3d);
 System.out.println(chunk.toJson());
@@ -155,10 +144,11 @@ Output:
 }
 ```
 
-We can see that an uncompress data chunk is juste a double array and an offset. It defines values associated to instant of the time index from offset to offset + values.length.
+We can see that an uncompress data chunk is modelled with a double array and an offset. It defines values associated to
+instants of the time index from `offset` to `offset + values.length`.
 
-To compress the chunk using [RLE](https://fr.wikipedia.org/wiki/Run-length_encoding) compression:
-
+The folowing example shows how to compress the chunk using [RLE](https://fr.wikipedia.org/wiki/Run-length_encoding)
+compression algorithm:
 ```java
 DoubleDataChunk compressedChunk = chunk.tryToCompress();
 System.out.println(compressedChunk.toJson());
@@ -174,42 +164,41 @@ Output:
 }
 ```
 
-`chunk.tryToCompress()`compute a compression factor by estimating the uncompressed and compressed data size of the data chunk. If compression factor is greater or equals to one, it returns itselfs otherwise it returns the compressed data chunk.
+The `chunk.tryToCompress()` method computes a compression factor by estimating the uncompressed and compressed data sizes
+of the data chunk. If the compression factor is greater or equals to one, it returns the chunk itself otherwise it returns
+a compressed data chunk.
 
-Compression factor could be accessed like this:
-
+The compression factor can be accessed using the `getCompressionFactor()` method:
 ```java
 System.out.println(compressedChunk.getCompressionFactor());
 ```
 
 Output:
-
 ```
 0.75
 ```
 
-So here size of compressed data chunk is 0.75 smaller than uncompressed one.
+In this example, the compressed data chunk's size is 25% smaller than the uncompressed one.
 
-To add a data chunk compressed or uncompressed to the time series:
-
+To add a compressed or uncompressed data chunk to a time series, use the `addChunk` method:
 ```java
 dts.addChunk(chunk); 
 ```
 
-The time series now contains data. To print values:
-
+The time series now contains data. The following example shows how to print contained values:
 ```java
 System.out.println(Arrays.toString(dts.toArray()));
 ```
 
 Output:
-
 ```
 [1.0, 1.0, 1.0, 3.0]
 ```
 
-### 2. String data chunk
+## String data chunk
 
+The following example shows how to create a `StringDataChunk` instance, and the JSON representation of both compress and
+uncompress version of this data chunk:
 ```java
 StringDataChunk chunk2 = DataChunk.create("hello", "bye", "bye", "bye");
 System.out.println(chunk2.toJson());
@@ -217,7 +206,6 @@ System.out.println(chunk2.tryToCompress().toJson());
 ```
 
 Output:
-
 ```
 {
   "offset" : 0,
@@ -231,16 +219,14 @@ Output:
 }
 ```
 
-As for double time series, string data chunk can be added to string time series:
-
+As for double time series, string data chunk can be added to a string time series:
 ```java
 sts.addChunk(chunk2); 
 ```
 
 # CSV
 
-Time series can be imported from CSV.
-
+Time series can be imported from CSV:
 ```java
 String csv = String.join(System.lineSeparator(),
         "Time;Version;ts1;ts2",
@@ -250,10 +236,8 @@ String csv = String.join(System.lineSeparator(),
 Map<Integer, List<TimeSeries>> timeSeriesPerVersion = TimeSeries.parseCsv(csv, ';');
 ```
 
-This CSV contains 2 time series, one double ts1 and one string ts2.
-
-To print instants and values of these 2 time series:
-
+This CSV contains 2 time series, a double time series `ts1` and a string time series `ts2`. The following example shows
+how to print instants and values of these 2 time series:
 ```java
 DoubleTimeSeries ts1 = (DoubleTimeSeries) timeSeriesPerVersion.get(1).get(0);
 StringTimeSeries ts2 = (StringTimeSeries) timeSeriesPerVersion.get(1).get(1);
@@ -264,13 +248,9 @@ System.out.println("ts2 values: " + Arrays.toString(ts2.toArray()));
 ```
 
 Output:
-
 ```
 ts1 instants: [1970-01-01T00:00:00Z, 1970-01-01T01:00:00Z, 1970-01-01T02:00:00Z]
 ts1 values: [1.0, NaN, 3.0]
 ts2 instants: [1970-01-01T00:00:00Z, 1970-01-01T01:00:00Z, 1970-01-01T02:00:00Z]
 ts2 values: [null, a, b]
 ```
-
-
-
