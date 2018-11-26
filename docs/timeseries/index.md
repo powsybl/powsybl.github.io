@@ -297,6 +297,14 @@ Here is the list of supported vector operations:
 | min      | min value | ts['a'].min(10)    |
 | max      | max value | ts['a'].max(10)    |
 
+About Groovy DSL syntax, both `timeSeries['a']` and `ts['a']` are supported and are equivalent.
+
+To compare a time index vector to a literal date, `time('2018-01-01T00:00:01Z')` function is available. For instance, the following code create a time series of 0 and 1 values:
+
+```groovy
+a = ts['dts'].time() < time('2018-01-01T00:00:01Z')
+```
+
 # CSV
 
 Time series can be imported from CSV:
