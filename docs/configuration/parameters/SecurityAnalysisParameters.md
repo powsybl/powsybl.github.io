@@ -3,15 +3,15 @@ title: SecurityAnalysisParameters
 layout: default
 ---
 
-The `com.powsybl.security.SecurityAnalysisParameters` class provides the generic parameter for all `com.powsybl.security.SecurityAnalysis`
+The `com.powsybl.security.SecurityAnalysisParameters` class provides the generic parameters for all `com.powsybl.security.SecurityAnalysis`
 implementations. Specific parameters should be provided as an extension of the `SecurityAnalysisParameters` class.
 
 # Properties
 
 ## load-flow-parameters
-Use the `load-flow-parameters` property is an optional property that defines the [LoadFlowParameters](LoadFlowParameters.md)
+The `load-flow-parameters` property is an optional property that defines the [LoadFlowParameters](LoadFlowParameters.md)
 to use. If this property is not set, The default values of all the optional properties are read from
-the [load-flow-default-parameter](../modules/load-flow-default-parameter.md) module, defined in the
+the [load-flow-default-parameters](../modules/load-flow-default-parameters.md) module, defined in the
 configuration file. 
 
 # Examples
