@@ -224,6 +224,94 @@ As for double time series, string data chunk can be added to a string time serie
 sts.addChunk(chunk2); 
 ```
 
+## Calculated time series
+
+Starting from double time series, it is possible to create calculated time series using [Groovy](http://groovy-lang.org/)
+script.
+
+For instance, the following example creates a calculated time series from an existing time ser
+
+```java
+TimeSeriesIndex index = RegularTimeSeriesIndex.create(Interval.parse("2015-01-01T00:00:00Z/2015-07-20T00:00:00Z"), Duration.ofDays(200));
+DoubleTimeSeries dts = TimeSeries.createDouble("dts", index, 1d, 2d);
+
+List<DoubleTimeSeries> result = DoubleTimeSeries.fromTimeSeries(dts)
+                                                .build("ts['a'] = ts['dts'] + 1",
+                                                       "ts['b'] = ts['a'] * 2");
+System.out.println(TimeSeries.toJson(result));
+```
+
+Output:
+
+```json
+[ {
+  "name" : "a",
+  "expr" : {
+    "binaryOp" : {
+      "op" : "PLUS",
+      "timeSeriesName" : "dts",
+      "integer" : 1
+    }
+  }
+}, {
+  "name" : "b",
+  "expr" : {
+    "binaryOp" : {
+      "op" : "MULTIPLY",
+      "binaryOp" : {
+        "op" : "PLUS",
+        "timeSeriesName" : "dts",
+        "integer" : 1
+      },
+      "integer" : 2
+    }
+  }
+} ]
+```
+
+Calculated time series are evaluated on the fly during array conversion or iteration (through iterators or streams). Only
+the arithmetic expression is stored.
+```
+System.out.println(Arrays.toString(result.get(0).toArray()));
+System.out.println(Arrays.toString(result.get(1).toArray()));
+```
+
+Output:
+
+```json
+[2.0, 2.0, 2.0, 4.0]
+[4.0, 4.0, 4.0, 8.0]
+```
+
+Here is the list of supported vector operations:
+
+| Operator | Purpose | Example |
+| -------- | ------- | ------- |
+| + | addition | ts['a'] + ts['b'] |
+| - | substraction | ts['a'] - ts['b'] |
+| * | multiplication | ts['a'] * ts['b'] |
+| / | division | ts['a'] / ts['b'] |
+| == | 1 if equals, 0 otherwise | ts['a'] == ts['b'] |
+| != | 1 if not equals, 0 otherwise | ts['a'] != ts['b'] |
+| < | 1 if less than, 0 otherwise | ts['a'] < ts['b'] |
+| <= | 1 if less than or equals to, 0 otherwise | ts['a'] <= ts['b'] |
+| > | 1 if greater, 0 otherwise | ts['a'] > ts['b'] |
+| >= | 1 if greater than or equals to, 0 otherwise | ts['a'] >= ts['b'] |
+| - | negation | -ts['a'] |
+| abs | absolute value | ts['a'].abs() |
+| time | convert to time index vector ([epoch](https://en.wikipedia.org/wiki/Unix_time)) | ts['a'].time() |
+| min | min value | ts['a'].min(10) |
+| max | max value | ts['a'].max(10) |
+
+About Groovy DSL syntax, both `timeSeries['a']` and `ts['a']` are supported and are equivalent.
+
+### Functions
+To compare a time index vector to a literal date, `time('2018-01-01T00:00:01Z')` function is available. For instance, the
+following code create a time series of 0 and 1 values:
+```groovy
+a = ts['dts'].time() < time('2018-01-01T00:00:01Z')
+```
+
 # CSV
 
 Time series can be imported from CSV:
