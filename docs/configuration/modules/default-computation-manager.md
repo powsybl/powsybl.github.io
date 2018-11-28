@@ -20,8 +20,9 @@ The `short-time-execution-computation-manager-factory` property is a required pr
 # Optional properties
 
 ## long-time-execution-computation-manager-factory
-The `long-time-execution-computation-manager-factory` property is a required property that defines the name of the
-`com.powsybl.computation.ComputationManagerFactory` implementation to use for long-time computations.
+The `long-time-execution-computation-manager-factory` property is an optional property that defines the name of the
+`com.powsybl.computation.ComputationManagerFactory` implementation to use for long-time computations. If not defined,
+this property returns the same value as the `short-time-execution-manager-factory`.
 
 # Examples
 
