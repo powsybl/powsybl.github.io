@@ -17,6 +17,6 @@ layout: default
 ## Extending PowSyBl APIs
 
 - [How to extend AFS]()
-- [How to write an IIDM exporter](exporter.md)
+- [How to write an IIDM exporter](iidm/exporter.md)
 - [How to write an IIDM importer]()
 - [How to extend iTools]()
