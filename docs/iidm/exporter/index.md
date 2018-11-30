@@ -8,4 +8,4 @@ several implementations:
 - [IIDM](iidm.md)
 - [AMPL](cgmes.md)
 
-Read the [tutorial]() to learn how to write an IIDM exporter.
+Read the [tutorial](../../tutorials/iidm/exporter.md) to learn how to write an IIDM exporter.
