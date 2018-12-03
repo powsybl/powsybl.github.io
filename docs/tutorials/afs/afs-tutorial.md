@@ -5,7 +5,7 @@ layout: default
 
 ## Tutorial - Using AFS
 
-Howto use [AFS](../../architecture/afs/README.md) APIs, in a java application and in a groovy script. Howto use a remote AFS server.
+Howto use [AFS](https://github.com/powsybl/powsybl-core/tree/master/afs) APIs, in a java application and in a groovy script. Howto use a remote AFS server.
 
 ### Using AFS in your java application
 
