@@ -6,7 +6,7 @@ todo:
     - add link to MapDB AFS implementation
 ---
 
-The `mapdb-app-file-system` module is used by [AFS]() to define one or several drives mapped to a
+The `mapdb-app-file-system` module is used by [AFS](../../tutorials/afs/afs-tutorial.md) to define one or several drives mapped to a
 [MapDB](http://www.mapdb.org) file.
 
 Read the [documentation]() page to learn more about the MapDB AFS implementation.
