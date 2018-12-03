@@ -176,7 +176,7 @@ To delete importCase file from the project  you have to just call the delete met
 importCase.delete();
 ```
 
-### Using a remote file system
+# Using a remote file system
 
  provides a special implementation of application file system storage which forwards calls, through a REST API, to a remote AFS server. The server may use any storage implementation itself, for example the mapdb implementation.
 
