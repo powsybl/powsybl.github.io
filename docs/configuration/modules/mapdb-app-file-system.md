@@ -47,7 +47,7 @@ accessible. The default value of this property is `false`.
 
 ## YAML
 ```yaml
-local-app-file-system:
+mapdb-app-file-system:
     max-additional-drive-count: 2
     drive-name: drive1
     db-file: /home/user/drive1.db
@@ -61,7 +61,7 @@ local-app-file-system:
 
 ## XML
 ```xml
-<local-app-file-system>
+<mapdb-app-file-system>
     <max-additional-drive-count>2</max-additional-drive-count>
     <drive-name>drive1</drive-name>
     <db-file>/home/user/drive1.db</db-file>
@@ -75,5 +75,5 @@ local-app-file-system:
     <drive-name-1>drive3</drive-name-1>
     <db-file-1>/home/user/drive3.db</db-file-1>
     <remotely-accessible-1>true</remotely-accessible-1>
-</local-app-file-system>
+</mapdb-app-file-system>
 ```
