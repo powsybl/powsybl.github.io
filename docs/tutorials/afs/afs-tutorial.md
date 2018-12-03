@@ -3,50 +3,49 @@ title: Tutorials
 layout: default
 ---
 
-## Tutorial - Using AFS
 
-Howto use [AFS](https://github.com/powsybl/powsybl-core/tree/master/afs) APIs, in a java application and in a groovy script. Howto use a remote AFS server.
+How to use [AFS](https://github.com/powsybl/powsybl-core/tree/master/afs) APIs, in a java application and in a groovy script. Howto use a remote AFS server.
 
-### Using AFS in your java application
+# Using AFS in your java application
 
 In order to use AFS in your application, you will first need to add some dependencies to your project:
- - `PowSyBl-afs-core` to use the core API in your code
+ - `powsybl-afs-core` to use the core API in your code
  - an actual implementation available at runtime: PowSyBl comes with `powsyl-afs-mapdb` for prototyping
- - basic file types defined as extensions of the core: `PowSyBl-afs-ext-base`.
+ - basic file types defined as extensions of the core: `powsybl-afs-ext-base`.
  
 For instance, if you use maven, in the dependencies section:
 ```xml
 <dependency>
-    <groupId>com.PowSyBl</groupId>
-    <artifactId>PowSyBl-afs-core</artifactId>
-    <version>${PowSyBl.version}</version>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-afs-core</artifactId>
+    <version>${powsybl.version}</version>
 </dependency>
 <dependency>
-    <groupId>com.PowSyBl</groupId>
-    <artifactId>PowSyBl-afs-ext-base</artifactId>
-    <version>${PowSyBl.version}</version>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-afs-ext-base</artifactId>
+    <version>${powsybl.version}</version>
 </dependency>
 <dependency>
-    <groupId>com.PowSyBl</groupId>
-    <artifactId>PowSyBl-afs-mapdb</artifactId>
-    <version>${PowSyBl.version}</version>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-afs-mapdb</artifactId>
+    <version>${powsybl.version}</version>
     <scope>runtime</scope>
 </dependency>
 ```
 
-Note: to get the desired version  you can find all PowSyBl Core releases [Here]("https://github.com/PowSyBl/PowSyBl-core/releases").
+Note: to get the desired version  you can find all PowSyBl Core releases [Here](https://github.com/powsybl/powsybl-core/releases).
 
 Beside your previous maven dependencies you have to add an iidm implementation, if not, you'll
 get the following exception : 
 ```
-com.PowSyBl.commons.PowSyBlException: No IIDM implementation found
+com.powsybl.commons.powsyblException: No IIDM implementation found
 ```
-To resolve the problem you can add for exemple the PowSyBl-iidm-impl dependency :
+To resolve the problem you can add for exemple the powsybl-iidm-impl dependency :
 ```xml
 <dependency>
-    <groupId>com.PowSyBl</groupId>
-    <artifactId>PowSyBl-iidm-impl</artifactId>
-    <version>${PowSyBl.version}</version>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-iidm-impl</artifactId>
+    <version>${powsybl.version}</version>
 </dependency>
 ```
 Note: 
@@ -63,6 +62,7 @@ or in XML:
   <db-file>/path/to/my/mapdb/file</db-file>
 </mapdb-app-file-system>
 ```
+For more informations click [here](../../configuration/modules/mapdb-app-file-system.md)
 
 Here, we have defined a mapdb based file system, which will be named *my-first-fs* in your application, and stored in the file */path/to/my/mapdb/file*.
 
@@ -87,14 +87,14 @@ my-first-fs
     +--my-first-project
 ```
 
-### Using AFS from groovy scripts
+# Using AFS from groovy scripts
 
-Your configured AFS is also accessible from groovy. This comes in 2 flavours, either with an interactive console using the PowSyBl shell `PowSyBlsh`:
+Your configured AFS is also accessible from groovy. This comes in 2 flavours, either with an interactive console using the powsybl shell `powsyblsh`:
 ```bash
-PowSyBlsh
-groovy:000> :register com.PowSyBl.scripting.groovy.InitPowSyBl
-groovy:000> :init_PowSyBl
-groovy:000> import com.PowSyBl.contingency.*
+powsyblsh
+groovy:000> :register com.powsybl.scripting.groovy.Initpowsybl
+groovy:000> :init_powsybl
+groovy:000> import com.powsybl.contingency.*
 groovy:000>
 ```
 
@@ -112,7 +112,7 @@ myFirstProject = afs.getRootFolder("my-first-fs")
 ```
 
 
-### Using actual business objects
+# Using actual business objects
 
 All this is fine, but the primary goal of AFS is to manage your **business objects**, which we have not seen so far.
 
@@ -183,7 +183,7 @@ importCase.delete();
 That feature makes it easy to store data on a remote server.
 
 In order to use it you will need to:
- - package in a war and deploy `PowSyBl-afs-ws-server` in a JEE server, like Wildfly
+ - package in a war and deploy `powsybl-afs-ws-server` in a JEE server, like Wildfly
  - configure app file systems in the server PowSyBl configuration file, for instance defining a mapdb file system as above. You will need to add support for remote acces by setting the additional `remotely-accessible` parameter to true:
  ```yml
   mapdb-app-file-system:
@@ -191,7 +191,7 @@ In order to use it you will need to:
     db-file : /path/to/my/mapdb/file
     remotely-accessible: true
  ```
- - add `PowSyBl-afs-ws-client` to the runtime dependencies of your client application
+ - add `powsybl-afs-ws-client` to the runtime dependencies of your client application
  - configure in the PowSyBl configuration of your application the following rest file system:
 ```yml
   remote-service:
@@ -200,6 +200,7 @@ In order to use it you will need to:
     port: 8080
     secure: false
 ```
+For more information see the [documentation]("").
 
 Now all file systems defined in the server configurations will be transparently accessible from your client application, without changing any of your code!
 
