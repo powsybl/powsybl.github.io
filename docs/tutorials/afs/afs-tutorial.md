@@ -205,8 +205,7 @@ Now all file systems defined in the server configurations will be transparently 
 
 This allows for great flexibility in the deployment of your application, for instance to run the same application as standalone or client/server.
 
-**Note:**
-The underlying REST API is documented at http://my-afs-server:8080/my-server-app/rest/swagger
+
 
 
 
