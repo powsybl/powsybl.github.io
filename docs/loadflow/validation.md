@@ -81,9 +81,18 @@ To be implemented, based on a conversion into 3 two-windings transformers.
 # Generators
 
 ## Active power
-As there is no standard way to balance generation and consumption in power flow, the validation assumes that the power-flow 
-results are balanced, meaning that, for all generators including those of the slack node:
-$$ | targetP \text{ (Active Power Set Point)} - P \text{(Active power)}| < \text{threshold}$$
+
+In case of an imbalance between the sum of generator active power set points $\text{targetP}$ on one side and consumption and losses on the other side, generation $P$ of some units has to be adjusted. Note that, if it is allowed to modify the set points (for example if the results were computed by an Optimal Power Flow and not a Power Flow), there should be no imbalance left. Therfore, the adjustment should be done with a rather simple method (typically, simpler than a merit order based on marginal costs). Basically, the adjustment is therefore done on the generators connected to the slack node because this is the simplest solution from a mathematical point of view. However, this has many drawbacks, in particular in case of large imbalance. This is why other schemes have been developped, called "distributed slack nodes". Loads could be adjusted, but this is generally not the case as load is usually considered as inflexible. Generators are usually adjusted proportionnally to a shift key to be defined. Three keys have been retained for the validation ($g$ is a generator):
+- mode $Pmax$: Proportional to $F(g)=f(g)\text{Pmax}(g)$
+- mode $targetP$: Proportional to $F(g)=f(g)\text{targetP}(g)$
+- mode $Pdiff$: Proportional to $F(g)=f(g)(\text{Pmax(g)}-\text{targetP(g)})$
+
+$f(g)$ is a participation factor. In the current validation scheme, $f(g)\in\{0,1\}$. It is binary: either the unit participate or not.
+
+As the load-flow results do not include the key used nor the participation factor, they have to be inferred. To do so, a first iteration is done on units that deviate significantly. For each of these units, assuming one mode, the proportion factor can be estimated. If deviations are perfect, the proportion factor $\hat{K}$ estimated for the right mode will be the same for all the deviating units for which $P$ is strictly $Pmin$ and $Pmax$. Therefore, the inferred deviation is the one for which the standard deviation of the estimated proportion factor is the lowest.
+
+Once the mode is determined, the new target can be computed for each unit. The following check is done:
+$$ | \max(\text{Pmin},\min(\text{Pmax},(1+\hat{K} F(g))))targetP - P| < \text{threshold}$$
 
 ## Voltage and reactive power
 
