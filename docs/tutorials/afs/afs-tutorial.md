@@ -1,5 +1,5 @@
 ---
-title: Tutorials
+title: How to use AFS
 layout: default
 ---
 
@@ -10,7 +10,7 @@ How to use AFS APIs, in a java application and in a groovy script. Howto use a r
 
 In order to use AFS in your application, you will first need to add some dependencies to your project:
  - `powsybl-afs-core` to use the core API in your code
- - an actual implementation available at runtime: PowSyBl comes with `powsyl-afs-mapdb` for prototyping
+ - an actual implementation available at runtime: PowSyBl comes with `powsybl-afs-mapdb` for prototyping
  - basic file types defined as extensions of the core: `powsybl-afs-ext-base`.
  
 For instance, if you use maven, in the dependencies section:
@@ -38,7 +38,7 @@ Note: to get the desired version  you can find all PowSyBl Core releases [Here](
 Beside your previous maven dependencies you have to add an iidm implementation, if not, you'll
 get the following exception : 
 ```
-com.powsybl.commons.powsyblException: No IIDM implementation found
+com.powsybl.commons.PowsyblException: No IIDM implementation found
 ```
 To resolve the problem you can add for exemple the powsybl-iidm-impl dependency :
 ```xml
@@ -200,7 +200,7 @@ In order to use it you will need to:
     port: 8080
     secure: false
 ```
-For more information see the [documentation]("").
+For more information see the [documentation]().
 
 Now all file systems defined in the server configurations will be transparently accessible from your client application, without changing any of your code!
 
