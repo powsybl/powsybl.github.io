@@ -22,6 +22,14 @@ parameters can be found [here](../tools/loadflow-validation.md).
 # Buses
 The first law of Kirchhoff must be satisfied for every bus for active and reactive power:
 
+
+$$
+\begin{align*}
+    & \| sum_{\text{branches}} P + sum \text{active power injection} \| < \text{threshold} \\
+    & \| sum_{\text{branches}} Q + sum \text{reactive power injection} \| < \text{threshold} \\
+\end{align*}
+$$
+
     | sum of P over branches + sum  active  injections | < threshold
     | sum of Q over branches + sum reactive injections | < threshold
 
