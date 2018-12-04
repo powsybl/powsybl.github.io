@@ -4,7 +4,7 @@ layout: default
 ---
 
 
-How to use AFS APIs, in a java application and in a groovy script. Howto use a remote AFS server.
+In this tutorial you'll learn how to use AFS APIs, in a java application and in a groovy script then you'll learn How to use a remote AFS server.
 
 # Using AFS in your java application
 
