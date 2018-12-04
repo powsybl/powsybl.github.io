@@ -1,5 +1,5 @@
 ---
-title: How to write an implementation of load-flow.
+title: How to write an implementation of load-flow
 layout: default
 ---
 This tutorial  aims to give developers some information about how to add to the PowSyBl platform a new tool to perform load-flow computation, either by implementing a new tool or by integrating an existing one,
@@ -45,7 +45,7 @@ If you use maven, update your pom.xml file:
 
 In your project you might also need to add other dependencies required by your load-flow business logic implementation.  
 
-# Write an implementation of com.powsybl.loadflow.LoadFlow interface 
+# Write an implementation of the LoadFlow interface 
 
 Here is a class *template*  that implements `com.powsybl.loadflow.LoadFlow` interface, where you will put your load-flow implementation.  
 
@@ -77,7 +77,7 @@ The input parameter `workingStateId` identifies the working state of the network
 The input parameter `parameters` are the properties for the load-flow, standard plus specific ones.  
 
 		
-# Write an implementation of com.powsybl.loadflow.LoadFlowFactory interface.
+# Write an implementation of the LoadFlowFactory interface.
 
 Here is an empty class *template*  that implements `com.powsybl.loadflow.LoadFlowFactory` interface. 
     
@@ -97,11 +97,11 @@ The `computationManager` parameter provides you access to the computation platfo
 
 The `priority` parameter is used to set the computation's priority.
   
-# (OPTIONAL) Extend a com.powsybl.loadflow.LoadFlowParameters class withand implement LoadFlowParameters.ConfigLoader interface, only if extra paramters are needed.
+# (OPTIONAL) Extend a LoadFlowParameters class and  implement LoadFlowParameters.ConfigLoader interface, only if extra parameters are needed.
 
-Powsybl platform comes with a set of standard [load-flow parameters](../../configuration/modules/load-flow-default-parameters.md).  If you need extra parameters, you have to create a custom extension of `LoadFlowParameters`.
+PowSyBl platform comes with a set of standard [load-flow parameters](../../configuration/modules/load-flow-default-parameters.md).  If you need extra parameters, you have to create a custom extension of `LoadFlowParameters`.
 
-For the sake of example, we define here a class with a custom boolean parameter: `debugActivated` 
+For example, we define here a class with a custom boolean parameter: `debugActivated` 
 
 ```java
 import java.util.Objects;
@@ -247,9 +247,9 @@ Copy the generated jar from your project's target folder to [\<POWSYBL_HOME\>](.
 
 
    
-# Declare the new load-flow implementation in the configuration file. 
+# Declare the new load-flow implementation in the configuration file 
 
-In order to configure powsybl to use the new load-flow implementation, you must declare it in the [configuration file](../../configuration/configuration.md): in the specifics,
+In order to configure PowSyBl to use the new load-flow implementation, you have to declare it in the [configuration file](../../configuration/configuration.md): in the specifics,
 add the loadflow factory implementation in the `LoadFlowFactory` tag of the [`componentDefaultConfig` section](../../configuration/modules/componentDefaultConfig.md). 
 
 ## YAML
@@ -265,7 +265,7 @@ componentDefaultConfig:
 </componentDefaultConfig>
 ```
 
-To configure the new parameter `debugActivated` in the [configuration file](../../configuration/configuration.md), you must declare it in a new `sample-loadflow-parameter` section:
+To configure the new parameter `debugActivated` in the [configuration file](../../configuration/configuration.md), you have to declare it in a new `sample-loadflow-parameter` section:
 
 ## YAML
 ```yaml

@@ -15,7 +15,7 @@ layout: default
 - [How to use AFS](afs/afs-tutorial.md)
 
 ## Extending PowSyBl APIs
-- [How to write a loadflow implementation]()
+- [How to write a loadflow implementation](loadflow/loadflow.md)
 - [How to extend AFS]()
 - [How to write an IIDM exporter](iidm/exporter.md)
 - [How to write an IIDM importer]()
