@@ -62,6 +62,7 @@ module2:
 - [loadflow-validation](loadflow-validation.md)
 - [local-app-file-system](local-app-file-system.md)
 - [mapdb-app-file-system](mapdb-app-file-system.md)
+- [remote-service](remote-service.md)
 - [security](security.md)
 - [simulation-parameters](simulation-parameters.md)
 - [table-formatter](table-formatter.md)
