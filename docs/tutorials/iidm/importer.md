@@ -1,8 +1,6 @@
 ---
 title: How to write an IIDM importer
 layout: default
-todo:
-    - add an example in powsybl-tutorials and put the link on this page
 ---
 
 From PowSyBl's [Importer](../../iidm/importer/index.md) interface, it is possible to add a new file format from which
@@ -15,11 +13,9 @@ In order to do so, you will need to:
 
 # Configuring your module
 
-In order to implement a new `Importer`, add the following dependencies
+In order to implement a new `Importer`, add the following dependencies in your `pom.xml` file:
 - `auto-service (com.google.auto.service)`: Configuration/metadata generator for `ServiceLoader`-style providers
 - `powsybl-iidm-converter-api`:  IIDM network import/export API
-
-in your `pom.xml` file:
 
 ```xml
 <dependencies>
@@ -43,68 +39,76 @@ implementation. Here is an empty class template of an `Importer` implementation:
 
 ```java
 import com.powsybl.commons.datasource.DataSource;
-import com.powsybl.iidm.export.Exporter;
+import com.powsybl.commons.datasource.ReadOnlyDataSource;
+import com.powsybl.iidm.import_.Importer
 import com.powsybl.iidm.network.Network;
+import com.powsybl.iidm.parameters.Parameter;
 
+import java.util.List;
 import java.util.Properties;
 
 @AutoService(Importer.class)
-public class MyExporter implements Exporter {
-    
+public class MyImporter implements Importer {
+
     /**
+     * Get a unique identifier of the format.
+     *
      * @return the unique ID for the given format
      */
     @Override
-    public String getFormat() { 
-        return null; 
+    public String getFormat() {
+        return null;
     }
-    
+
     /**
      * This override is optional. By default, it returns Collections.emptyList()
      * 
      * @return description of import parameters
      */
-     @Override
-     public String getParameters() { 
-        return Collections.emptyList(); 
-     }
-    
+    @Override
+    public List<Parameter> getParameters() {
+        return Collections.emptyList();
+    }
+
     /**
-     * @return information about the exporter
+     * Get some information about this importer.
+     *
+     * @return information about the importer
      */
     @Override
-    public String getComment() { 
-        return null; 
+    public String getComment() {
+        return null;
     }
-    
+
     /**
-     * Checks if the data source is importable (i.e. if it describes a network)
-     * 
-     * @param dataSource the dataSource one wants to import
-     * @return  true if the data source is importable, false otherwise
+     * Check if the data source is importable
+     *
+     * @param dataSource the data source
+     * @return true if the data source is importable, false otherwise
      */
     @Override
     public boolean exists(ReadOnlyDataSource dataSource) {
         return false;
     }
-    
+
     /**
-     * Load IIDM model from data source
-     * 
-     * @param dataSource the data source from which the IIDM model will be loaded
-     * @param parameters properties specific to this importer
+     * Create a model.
+     *
+     * @param dataSource data source
+     * @param parameters some properties to configure the import
+     * @return the model
      */
     @Override
-    public void importData(ReadOnlyDataSource dataSource, Properties parameters) {
+    public Network importData(ReadOnlyDataSource dataSource, Properties parameters) {
         // business logic to import a network from a data source in a given format
+        return null;
     }
-    
+
     /**
-     * This override is optional. By default, it returns an UnsupportedOperationException.
      * Copy data from one data source to another.
-     * 
-     * @param fromDataSource origin data source
-     * @param toDataSource destination data source
+     *
+     * @param fromDataSource from data source
+     * @param toDataSource   destination data source
      */
     @Override
     public void copy(ReadOnlyDataSource fromDataSource, DataSource toDataSource) {
@@ -130,8 +134,8 @@ The jar file will be generated in `<PROJECT_HOME>/target`.
 [iTools](../../tools/index.md) allows the user to convert a network from one format to another via the
 [convert-network](../../tools/convert-network.md) command line.
 
-You can add your custom import format, allowing files in this format to be converted using the command,
-by copying the generated jar in your powsybl distribution:
+You can add your custom import format, allowing files in this format to be converted using the command, by copying the
+generated jar in your powsybl distribution:
 ```
 $> cp target/my-exporter.jar <POWYSBL_HOME>/share/java
 ``` 
