@@ -13,7 +13,8 @@ which is a implementation of the `com.powsybl.contingency.ContingenciesProviderF
 
 ## dsl-file
 The `dsl-file` property is a required property that defines the path of the groovy script defining the list of
-contingencies to simulate. Read the [documentation]() page to learn more about the syntax of the `GroovyDslContingenciesProvider`.
+contingencies to simulate. Read the [documentation](../../contingencies/GroovyDslContingenciesProvider.md) page to
+learn more about the syntax of the `GroovyDslContingenciesProvider`.
 
 # Examples
 
