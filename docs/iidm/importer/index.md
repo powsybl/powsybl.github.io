@@ -13,4 +13,4 @@ natively several implementations:
 After a network is imported, the [post processors](post-processor/index.md) provides a mechanism that allows to
 perform operation on it.
 
-Read the [tutorial]() to learn how to write an IIDM importer.
+Read the [tutorial](../../tutorials/iidm/importer.md) to learn how to write an IIDM importer.
