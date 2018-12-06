@@ -41,7 +41,7 @@ contingency('contingency2-id') {
 
 The DSL part only covers the code described above (the "contingency" part). In the examples below, the DSL part is
 wrapped in Groovy code in order to perform more complex tasks.  In order to adapt these examples, it may be necessary to
-read the JavaDoc or the Java code for the [IIDM]() itself. 
+read the JavaDoc or the Java code for the [IIDM](../iidm/model/index.md) itself. 
 
 The following example create a list of contingencies with only tie lines:
 ```groovy
