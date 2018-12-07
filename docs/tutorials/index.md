@@ -12,7 +12,7 @@ layout: default
 
 ## Using PowSyBl APIs
 
-- [How to use AFS](afs/afs-tutorial.md)
+- [How to use AFS](afs/afs.md)
 
 ## Extending PowSyBl APIs
 

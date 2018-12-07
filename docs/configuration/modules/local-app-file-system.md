@@ -5,9 +5,10 @@ todo:
     - add links to missing pages
 ---
 
-The `local-app-file-system` module is used by [AFS](../../tutorials/afs/afs-tutorial.md) to define one or several drives mapped to a local hard-drive.
+The `local-app-file-system` module is used by [AFS](../../afs/index.md) to define one or several drives
+mapped to a local hard-drive.
 
-Read the [documentation]() page to learn more about the local AFS implementation.
+Read the [documentation](../../afs/afs-local.md) page to learn more about the local AFS implementation.
 
 # Properties
 
