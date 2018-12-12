@@ -8,12 +8,14 @@ to the [powsybl_config_dirs](../itools.md#powsybl_config_dirs) property in the [
 configuration files. The framework use the [powsybl_config_name](../itools.md#powsybl_config_name) property as the
 basename of the configuration files. It looks for a YAML file first, then for a XML file. The XML file will be used only
 if the YAML configuration file has not been found.
+Configuration could also be set in the system's environment variable with format as MODULE_NAME__PROPERTY_NAME, and it will overload the XML/YAML configs.
+
 
 The default configuration folder and the configuration file name can be configured in the `POWSYBL_HOME/etc/itools.conf`.
 
 # Modules and properties
 The configuration file contains a list of modules, that can be required or optional. Each module contains one or
-several properties. These properties can also be required or optional.
+several properties. These properties can also be required or optional. Names in configuration file are case-sensitive.
 
 ## Example
 
@@ -22,7 +24,7 @@ several properties. These properties can also be required or optional.
 module1:
     property1a: value1
     property1b: value2
-    
+
 module2:
     property2a: value3
     property2b: value4
@@ -43,6 +45,15 @@ module2:
     </module1>
 </config>
 ```
+
+### System environment variable
+
+|environment variable|module name|property|
+| --- | --- | --- |
+|MODULE1__PROPERTY1=1|module1|property1|
+|LOWER_HYPHEN__PROPERTY2=2|lower-hyphen|property2|
+|CAMEL_CASE__PROPERTY3=3|camelCase|property3|
+|SNAKE_CASE__PROPERTY4=4|snake_case|property4|
 
 # Modules list
 - [componentDefaultConfig](componentDefaultConfig.md)
