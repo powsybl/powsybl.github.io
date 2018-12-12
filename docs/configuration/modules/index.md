@@ -52,8 +52,9 @@ module2:
 | --- | --- | --- |
 |MODULE1__PROPERTY1=1|module1|property1|
 |LOWER_HYPHEN__PROPERTY2=2|lower-hyphen|property2|
-|CAMEL_CASE__PROPERTY3=3|camelCase|property3|
-|SNAKE_CASE__PROPERTY4=4|snake_case|property4|
+|LOWER_CAMEL__PROPERTY3=3|camelCamel|property3|
+|UPPER_CAMEL__PROPERTY4=4|UpperCamel|property4|
+|SNAKE_CASE__PROPERTY5=5|snake_case|property5|
 
 # Modules list
 - [componentDefaultConfig](componentDefaultConfig.md)
