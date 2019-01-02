@@ -8,8 +8,9 @@ to the [powsybl_config_dirs](../itools.md#powsybl_config_dirs) property in the [
 configuration files. The framework use the [powsybl_config_name](../itools.md#powsybl_config_name) property as the
 basename of the configuration files. It looks for a YAML file first, then for a XML file. The XML file will be used only
 if the YAML configuration file has not been found.
-Configuration could also be set in the system's environment variable with format as MODULE_NAME__PROPERTY_NAME, and it will overload the XML/YAML configs.
 
+The configuration can also be configured using the system's environment variables. These variables should respect the
+following format: `MODULE_NAME__PROPERTY_NAME`. Note that these variables will overload the XML/YAML configuration files.
 
 The default configuration folder and the configuration file name can be configured in the `POWSYBL_HOME/etc/itools.conf`.
 
@@ -46,15 +47,15 @@ module2:
 </config>
 ```
 
-### System environment variable
+### System's environment variables
 
-|environment variable|module name|property|
-| --- | --- | --- |
-|MODULE1__PROPERTY1=1|module1|property1|
-|LOWER_HYPHEN__PROPERTY2=2|lower-hyphen|property2|
-|LOWER_CAMEL__PROPERTY3=3|camelCamel|property3|
-|UPPER_CAMEL__PROPERTY4=4|UpperCamel|property4|
-|SNAKE_CASE__PROPERTY5=5|snake_case|property5|
+| Environment variable | Module name | Property name |
+| -------------------- | ----------- | ------------- |
+| MODULE1__PROPERTY1=1 | module1 | property1 |
+| LOWER_HYPHEN__PROPERTY2=2 | lower-hyphen | property2 |
+| LOWER_CAMEL__PROPERTY3=3 | lowerCamel | property3 |
+| UPPER_CAMEL__PROPERTY4=4 | UpperCamel | property4 |
+| SNAKE_CASE__PROPERTY5=5 | snake_case | property5 |
 
 # Modules list
 - [componentDefaultConfig](componentDefaultConfig.md)
