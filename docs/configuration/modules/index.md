@@ -16,7 +16,7 @@ The default configuration folder and the configuration file name can be configur
 
 # Modules and properties
 The configuration file contains a list of modules, that can be required or optional. Each module contains one or
-several properties. These properties can also be required or optional. Names in configuration file are case-sensitive.
+several properties. These properties can also be required or optional. Names in configuration files are case-sensitive.
 
 ## Example
 
