@@ -50,4 +50,4 @@ unavailable. The commands are classified in themes, to help identifying their pu
 Read this [page](../configuration/itools.md) to learn how to configure the framework and this [page](../configuration/logback.md)
 to learn how to set up the logging system used in powsybl.
 
-Read this [tutorial]() to learn how to create a new `iTools` command.
+Read this [tutorial](../tutorials/tool/extend-tools.md) to learn how to create a new `iTools` command.
