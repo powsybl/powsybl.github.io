@@ -3,7 +3,7 @@ title: How to extend iTools
 layout: default
 ---
 
-itools script mechanism is designed to be easily extended with new commands, that would be added to the set of available commands, providing users with new command line functionalities.
+[itools](../../tools/index.md) script mechanism is designed to be easily extended with new commands, that would be added to the set of available commands, providing users with new command line functionalities.
 
 In order to create a new itools command:
 
@@ -18,7 +18,7 @@ A sample maven project implementing this command can be found [here](https://git
 # Maven dependencies
 
 After creating the Maven project, you need to add the necessary dependencies to your pom.xml file.
-Maven dependencies required for implementing a new itools command are the following:
+Maven dependencies required to implement a new itools command are the following:
 
 ```xml
 <dependency>
@@ -33,7 +33,7 @@ Maven dependencies required for implementing a new itools command are the follow
 </dependency>
 ```
 
-In your project you also need to add the other dependencies required by your command business logic implementation, e.g. for implementing the itools command displaying the number of lines of a network, you would have to add the following dependency to IIDM converter API, needed to import IIDM networks:
+In your project you also need to add the other dependencies required by your command business logic implementation, e.g. to implement the itools command displaying the number of lines of a network, you would have to add the following dependency to IIDM converter API, needed to import IIDM networks:
 
 ```xml
 <dependency>
@@ -45,8 +45,8 @@ In your project you also need to add the other dependencies required by your com
 
 # Implement the Tools interface
 
-For creating a new itool command, you need to implement the `com.powsybl.tools.Tools` interface.
-Following is a sample class, where you will put the code for displaying the number of lines of a IIDM network.
+To create a new itool command, you need to implement the `com.powsybl.tools.Tools` interface.
+Following is a sample class, where you will put the code to display the number of lines of a IIDM network.
 
 ```java
 @AutoService(Tool.class)
