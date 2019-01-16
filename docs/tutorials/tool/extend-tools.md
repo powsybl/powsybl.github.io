@@ -13,7 +13,7 @@ In order to create a new itools command:
 3. Compile your project and add the jar to your powsybl installation.
 
 In the following sections we will see how, following these steps, you can implement a new itools command to display how many lines are there in a network.
-A sample maven project implementing this command can be found [here](https://github.com/powsybl/powsybl-core/tree/docs/docs/samples/count-lines-tool).
+A sample maven project implementing this command can be found [here](https://github.com/powsybl/powsybl-tutorials/tree/master/count-network-lines-tool).
 
 # Maven dependencies
 
