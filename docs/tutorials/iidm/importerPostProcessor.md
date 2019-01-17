@@ -57,7 +57,7 @@ def defaultConfig = ComponentDefaultConfig.load()
 loadFlowFactory = defaultConfig.newFactoryImpl(LoadFlowFactory.class)
 loadFlowParameters = new LoadFlowParameters(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES)
 loadFlow = loadFlowFactory.create(network, computationManager, 0)
-result = loadFlow.run(network.getStateManager().getWorkingStateId(),loadFlowParameters).join()
+result = loadFlow.run(network.getVariantManager().getWorkingVariantId(),loadFlowParameters).join()
 
 println " LF results - converge:" + result.ok + " ; metrics: " +result.getMetrics()
 
@@ -65,7 +65,7 @@ println " LF results - converge:" + result.ok + " ; metrics: " +result.getMetric
 
 This script uses the `network` variable, that is binded by the [groovyScript](../../iidm/importer/post-processor/GroovyScriptPostProcessor.md) post processor.
 
-ComponenteDefaultConfig loads configuration from [powsybl configuration file](../../configuration/modules/componentDefaultConfig.md). It provide access to loadFlow implemantation.
+ComponenteDefaultConfig provides configuration from [powsybl configuration file](../../configuration/modules/componentDefaultConfig.md). It provides access to loadFlow implemantation.
 
 2. Declare the `groovyScript` post processor (for more details refer to [import](../../configuration/modules/index.md)) in the configuration file:
 
@@ -257,7 +257,7 @@ public class IncreaseActivePowerPostProcessor implements ImportPostProcessor {
         ComponentDefaultConfig defaultConfig = ComponentDefaultConfig.load();
         LoadFlowParameters loadFlowParameters = new LoadFlowParameters(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
         LoadFlow loadFlow = defaultConfig.newFactoryImpl(LoadFlowFactory.class).create(network, computationManager, 0);
-        LoadFlowResult results = loadFlow.run(network.getStateManager().getWorkingStateId(), loadFlowParameters).join();        
+        LoadFlowResult results = loadFlow.run(network.getVariantManager().getWorkingVariantId(), loadFlowParameters).join();
         LOGGER.info("LoadFlow results {}, Metrics {} ", results.isOk(), results.getMetrics().toString());
         
     }
