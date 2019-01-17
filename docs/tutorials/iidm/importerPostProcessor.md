@@ -17,13 +17,13 @@ Groovy script and java module post processor, will execute also a loadflow.
 
 # Groovy script (for the groovy script post processor)
 
-The Groovy script can be found [here](https://github.com/powsybl/powsybl-core/blob/docs/docs/samples/groovyScriptPostProcessor/increase-active-power-postprocessor.groovy).
+The Groovy script can be found [here](https://github.com/powsybl/powsybl-tutorials).
 
 You have to:
 
 1. Write a `Groovy` script that implements the processor's business logic.
 
-```xml
+```groovy
 
 package com.powsybl.samples.groovyScriptPostProcessor
 
@@ -65,7 +65,7 @@ println " LF results - converge:" + result.ok + " ; metrics: " +result.getMetric
 
 This script uses the `network` variable, that is binded by the [groovyScript](../../iidm/importer/post-processor/GroovyScriptPostProcessor.md) post processor.
 
-ComponenteDefaultConfig load configuration from [powsybl configuration file](../../configuration/modules/componentDefaultConfig.md). It provide access to loadFlow implemantation.
+ComponenteDefaultConfig loads configuration from [powsybl configuration file](../../configuration/modules/componentDefaultConfig.md). It provide access to loadFlow implemantation.
 
 2. Declare the `groovyScript` post processor (for more details refer to [import](../../configuration/modules/index.md)) in the configuration file:
 
@@ -128,11 +128,11 @@ componentDefaultConfig:
 
 # Java script (for the JavaScript post processor)
 
-The 'JavaScript' code can be found [here](https://github.com/powsybl/powsybl-core/blob/docs/docs/samples/javaScriptPostProcessor/increaseActivePowerPostProcessor.js).
+The 'JavaScript' code can be found [here](https://github.com/powsybl/powsybl-tutorials).
 
 1 Write a `JavaScript` code that implements the processor's business logic.
 
-```java
+```javascript
 var debug = true; 
 
 function increaseLoadActivePower( load, percent) {
@@ -178,6 +178,14 @@ import:
 ```
 
 and configure the javaScript code's path to use in the [javascript-post-processor](../../configuration/modules/javaScriptPostProcessor.md) module section, also in the configuration file:
+
+### YAML version
+```yaml
+javaScriptPostProcessor:
+       script: <POWSYBL_SAMPLES>/javaScriptPostProcessor/increase-active-power-postprocessor.js
+```
+
+### XML version
 
 ```xml
 <javaScriptPostProcessor>
@@ -294,8 +302,8 @@ In your project you also need to add the other dependencies required by your pos
 
 In the following sections we refer to installation and sample directories as:
 
-- <[POWSYBL_HOME](https://github.com/powsybl/powsybl-core/blob/docs/docs/configuration/directoryList.md)>
-- <[POWSYBL_SAMPLES](https://github.com/powsybl/powsybl-core/blob/docs/docs/configuration/directoryList.md)>
+- <[POWSYBL_HOME](https://github.com/powsybl/powsybl-tutorials)>
+- <[POWSYBL_SAMPLES](https://github.com/powsybl/powsybl-tutorials)>
 
 Run the following command to create your project jar:
 
@@ -329,6 +337,7 @@ where `NetworkfileName` is a the path of the input network file.
 
 The log file will show:
 
+```markdown
 - Imported newtwork file: networkfileName imported
 
 - Network Id: (networkId) Generators: (numGenerators) Lines: (numLines) Loads: (numLoads)
@@ -338,6 +347,7 @@ The log file will show:
 list of id | p | p+1%
 
 - LF results - converge:true ; metrics: [:]
+```
 
 The converted network, will have the active power of all loads increased by 1%.
 
