@@ -16,7 +16,7 @@ default value of this property is `true`.
 ## script
 The `script` property is an optional property that defines the absolute path of the javascript script to apply to use.
 The default value of this property is `import-post-processors.js`. This file is read from the
-[powsybl configuration folder](../../iidm/importer/post-processor/JavaScriptPostProcessor.html).
+[powsybl configuration folder](../itools.md#powsybl_config_dirs).
 
 # Examples
 
