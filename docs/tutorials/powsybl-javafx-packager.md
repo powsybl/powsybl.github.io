@@ -4,13 +4,20 @@ layout: default
 ---
 
 It is possible to use PowSyBl as a complete desktop application based on the [GSE](https://github.com/powsybl/powsybl-gse)
-(Grid Study  Environment) project]. In order to write their own native application using PowSyBl, developers can based
+(Grid Study  Environment) project]. In the following tutorial, you will learn how to
+implement such an application in different ways.
+
+# Setting up your project
+
+In order to write their own native application using PowSyBl, developers can based
 their maven project on it using the adequate maven project template available on
-[powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials).
+[powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials) or creating their
+application from scratch with maven by adding the GSE in their dependencies.
 
-# Setting up your project from template
+## From template
 
-Start by cloning the `powsybl-tutorials` github project:
+If you want to use the maven project template on [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials),
+start by cloning the `powsybl-tutorials` github project:
 ```
 $ git clone https://github.com/powsybl/powsybl-tutorials.git
 ```
@@ -18,7 +25,7 @@ $ git clone https://github.com/powsybl/powsybl-tutorials.git
 You will then be able to base your project on the `javafx-packager` maven module and extend it to your
 needs.
 
-# Setting up your project from scratch
+## From scratch
 
 If you want to start your maven project from scratch, you will have to use the `javafx-maven-plugin` to base your native
 application on the PowSyBl GSE.
@@ -84,6 +91,9 @@ Also add the `powsybl-gse`, `powsybl-afs-local` and `powsybl-afs-mapdb` in your 
 ```
 
 # Configuration
+
+This installation requires modules configuration. Before continuing this tutorial,
+please read more about modules configuration [here](../configuration/modules/index.md).
 
 To use this application, you will need to configure the `mapdb-app-file-system` module as explained 
 [here](../configuration/modules/mapdb-app-file-system.md) since it uses a MapDB based file system. A default configuration
