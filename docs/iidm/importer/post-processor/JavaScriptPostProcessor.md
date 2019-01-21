@@ -23,7 +23,7 @@ set the path of the JS script.
 import:
     postProcessors: javaScript
     
-groovy-post-processor:
+javaScriptPostProcessor:
     script: /tmp/script.js
 ```
 
@@ -32,9 +32,9 @@ groovy-post-processor:
     <postProcessors>javaScript</postProcessors>
 </import>
 
-<groovy-post-processor>
+<javaScriptPostProcessor>
     <script>/tmp/script.js</script>
-</groovy-post-processor>
+</javaScriptPostProcessor>
 ```
 
 # Examples

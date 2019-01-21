@@ -19,4 +19,5 @@ layout: default
 - [How to extend AFS]()
 - [How to write an IIDM exporter](iidm/exporter.md)
 - [How to write an IIDM importer](iidm/importer.md)
+- [How to write an IIDM importer post processor](iidm/importerPostProcessor.md)
 - [How to extend iTools]()
