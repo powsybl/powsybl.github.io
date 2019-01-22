@@ -18,7 +18,7 @@ how many lines are there in a network.
 The complete example described in this tutorial is available on GitHub:
 ```shell
 $> git clone https://github.com/powsybl/powsybl-tutorials.git
-$> cd count-network-lines
+$> cd powsybl-tutorials/count-network-lines
 $> mvn package
 ``` 
 
