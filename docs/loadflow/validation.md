@@ -54,7 +54,7 @@ Lines and two windings transformers are converted into an universal branch:
 buses 1 and 2 respectively.
     - $$(P_1, Q_1)$$ and $$(P_2, Q_2)$$: Active power (MW) and reactive power (MVAr) injected in the branch on each side.
 - Characteristics:
-    - $$(\rho_1, \alpha_1)$$ and $$(\rho_2, \theta_2)$$: Magnitude (no unit) and angle ($$°$$) of the ideal transformers
+    - $$(\rho_1, \alpha_1)$$ and $$(\rho_2, \alpha_2)$$: Magnitude (no unit) and angle ($$°$$) of the ideal transformers
 ratios on each side.
     - $$(g_1, b_1)$$ and $$(g_2, b_2)$$: Complex shunt impedance on each side (S).
     - $$(r, x)$$: Complex series impedance $$(\Omega)$$.
@@ -65,7 +65,7 @@ $$(P_1^{calc}, Q_1^{calc}, P_2^{calc}, Q_2^{calc}) = f(\text{Voltages}, \text{Ch
 
 The test of the branch is OK if:
 
-$$\max( \left| P_1^{calc} - P1 \right|, \left| Q_1^{calc} - Q1 \right|, \left| P_2^{calc} - P2 \right|, \left| Q_2^{calc} - Q2 \right| ) \leq \epsilon$$
+$$\max( \left| P_1^{calc} - P_1 \right|, \left| Q_1^{calc} - Q_1 \right|, \left| P_2^{calc} - P_2 \right|, \left| Q_2^{calc} - Q_2 \right| ) \leq \epsilon$$
 
 
 For a branch that is disconnected on one end (for example end 2), then $$P_2 = Q_2 = 0$$. As a result, it is
