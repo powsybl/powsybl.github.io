@@ -4,7 +4,7 @@ layout: default
 ---
 
 `iTools` script mechanism is designed to be easily extended with new commands, that would be added to the set of
-available commands, providing users with new command line functionalities. Read this documentation [page](../../tools)
+available commands, providing users with new command line functionalities. Read this documentation [page](../../tools/index.md)
 to learn more...
 
 In order to create a new `iTools` command:
@@ -93,8 +93,8 @@ The methods of the `Tool` interface to override in your class are:
 ## Implementing the `getCommand` method
 The `getCommand` method returns an instance of the `com.powsybl.tools.Command` interface. This interface declares your
 command, defining its name, its description and a theme. The theme is used to group the commands by category. Please read
-this documentation [page](https://powsybl.github.io/docs/tools/index.html#available-commands) to discover the existing
-theme. In our tutorial, we chose to create a new theme, called `Network`.
+this documentation [page](../../tools/index.md#available-commands) to discover the existing
+themes. In our tutorial, we chose to create a new theme, called `Network`.
                       
 ```java
     private static final String CASE_FILE = "case-file";
