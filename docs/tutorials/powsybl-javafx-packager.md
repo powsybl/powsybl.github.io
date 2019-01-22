@@ -20,6 +20,7 @@ If you want to use the maven project template on [powsybl-tutorials](https://git
 start by cloning the `powsybl-tutorials` github project:
 ```
 $ git clone https://github.com/powsybl/powsybl-tutorials.git
+$ cd powsybl-tutorials/javafx-packager
 ```
 
 You will then be able to base your project on the `javafx-packager` maven module and extend it to your
@@ -106,7 +107,6 @@ in the `componentDefaultConfig` module as explained [here](../configuration/modu
 
 The maven project can now be deployed:
 ``` 
-$ cd javafx-packager/
 $ mvn clean package
 ```
 Please note that you will need a Java distribution supporting JavaFX in order to deploy the project.
