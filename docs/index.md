@@ -26,6 +26,9 @@ IIDM networks can also be created from various formats such as [UCTE-DEF](iidm/i
 or [Entso-E CGMES](iidm/importer/cgmes.md) and be exported to various formats. Read the [importer](iidm/importer/index.md)
 and the [exporter](iidm/exporter/index.md) documentation pages to learn more about import/export features.
 
+Powsybl also provides business features to work with networks:
+- [network reduction](iidm/reducer/index.md) to extract a sub part of a network
+
 # Time series
 
 Read this page to learn more about the [time series](timeseries/index.md) modeling in powsybl.
