@@ -6,18 +6,14 @@ layout: default
 The network reduction module is used to extract a sub part of a network, replacing the border lines, transformers, HVDC
 lines by injections. **It is required to run a load-flow computation before trying to reduce it.**
 
-The equipments of the network are divided in three groups: _inside_ group, _outside_ group and _border_ group.
-- the _inside_ group contains all the equipments connected only to voltage levels that are inside the area
-- the _outside_ group contains all the equiments connected only to voltage levels that are outside the area
-- the _border_ group contains all the equiments connected on one side to a voltage level that is inside the area and on
-the other side to a voltage level that is outside the area.
-
-During the reduction, the equipments of the _border_ group will be replaced by injections whereas the equipments of the
-_outside_ group will be removed.
+The network reduction is relying on a `NetworkPredicate` instance, to define an _area of interest_ (e.g. a list
+of equipments to keep in the network after the reduction). The equipments outside this area will be removed and the
+lines, transformers and HVDC lines connecting voltage levels inside and outside this area will be replaced by injections
+(loads or dangling lines, depending on the implementation).
 
 # Define an area of interest
 
-Before doing the reduction, one have to define an area of interest, thanks to the `com.powsybl.iidm.reducer.NetworkPredicate`
+Before doing the reduction, one have to define the area of interest, thanks to the `com.powsybl.iidm.reducer.NetworkPredicate`
 interface. This interface declare two methods:
 ```java
 public interface NetworkPredicate {
@@ -31,17 +27,20 @@ public interface NetworkPredicate {
 These two methods return `true` if the given parameter (a [substation](../model/substation.md) or a [voltage level](../model/voltageLevel.md))
 is in the area of interest and should still be in the network after the reduction.
 
-Powsybl provides two implementations of this interface, but you can provide your own.
+Powsybl provides two implementations of this interface:
+- the `IdentifierNetworkPredicate` implementation defines an area of interest using a list of voltage levels or
+substation IDs
+- the `NominalVoltageNetworkPredicate` implementation defines an area of interest using a range of nominal voltages 
 
 ## By IDs
 
 The `com.powsybl.iidm.reducer.IdentifierNetworkPredicate` class is an implementation of the `NetworkPredicate` interface
 that contains a set of substations' or voltage levels' IDs.
 
-The `boolean test(Substation substation)` method return true if the ID of the given substation is contained in the set of
+The `boolean test(Substation substation)` method returns true if the ID of the given substation is contained in the set of
 IDs, or at least one of the voltage levels IDs of the given substation is found in the set of IDs.
 
-The `boolean test(VoltageLevel voltageLevel)` method return true if the ID of the given voltage level or the ID of its
+The `boolean test(VoltageLevel voltageLevel)` method returns true if the ID of the given voltage level or the ID of its
 substation is found in the set of IDs.
 
 ### Examples
@@ -74,12 +73,12 @@ NetworkPredicate p3 = new IdentifierNetworkPredicate(
 ## By nominal voltages
 
 The `com.powsybl.iidm.reducer.NominalVoltageNetworkPredicate` class is an implementation of the `NetworkPredicate`
-interface the contains two double values that define a range of nominal voltages.
+interface that contains two double values that define a range of nominal voltages.
 
-The `boolean test(Substation substation)` method return true if at least one of the voltage levels of the given substation
+The `boolean test(Substation substation)` method returns true if at least one of the voltage levels of the given substation
 has its nominal voltage inside the range.
 
-The `boolean test(Voltage substation)` method return true if the given voltage level has its nominal voltage inside the
+The `boolean test(Voltage substation)` method returns true if the given voltage level has its nominal voltage inside the
 range.
 
 ### Examples
@@ -128,7 +127,7 @@ depending on the side kept in the network.
 
 The $$P_0$$ and $$Q_0$$ are set to the $$P$$ and $$Q$$ of the relevant terminal, depending on the side kept in the network.
 If the line is disconnected, $$P_0$$ and $$Q_0$$ are set to `NaN`. The connectivity information (node or bus depending
-on the voltage level topology) are kept.
+on the voltage level topology) is kept.
 
 ### Options
 
@@ -137,7 +136,7 @@ The network reduction can be configured passing a `com.powsybl.iidm.reducer.Redu
 
 #### withDanglingLines
 This option defines if the equipments in the _border_ group are replaced by a dangling line. If this option is set to `false`,
-which is the default value, the equipments are replaced by loads.
+which is the default value, the equipments are exclusively replaced by loads.
 
 #### Examples
 The following example shows how to create a new `ReductionOptions` instance to do replacements by dangling lines.
@@ -204,7 +203,7 @@ reducer.reduce(network);
 ```
 
 ## Network conversion
-This example show how to do a network reduction, using the `groovy-script` option of the [convert-network](../../tools/convert-network.md)
+This example shows how to do a network reduction, using the `groovy-script` option of the [convert-network](../../tools/convert-network.md)
 command.
 
 First, we need a groovy script to do the reduction:
@@ -245,4 +244,40 @@ Then, we run the [convert-network](../../tools/convert-network.md) command:
 ```shell
 $> ./itools convert-network --input-file /home/user/input.xiidm
 --output-file /home/user/output.xiidm --output-format XIIDM
+```
+
+## Observers
+This example shows how to implement the `NetworkReducerObserver` and log information each time an equipment is replaced.
+```java
+NetworkReducerObserver observer = new DefaultNetworkReducerObserver() {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(NetworkReducerObserver.class);
+
+    @Override
+    public void lineReplaced(Line line, Injection injection) {
+        LOGGER.info("Line " + line.getId() + " has be replaced by a " + injection.getType());
+    }
+
+    @Override
+    public void transformerReplaced(TwoWindingsTransformer transformer, Injection injection) {
+        LOGGER.info("Transformer " + transformer.getId() + " has be replaced by a " + injection.getType());
+    }
+
+    @Override
+    public void transformerReplaced(ThreeWindingsTransformer transformer, Injection injection) {
+        LOGGER.info("Transformer " + transformer.getId() + " has be replaced by a " + injection.getType());
+    }
+
+    @Override
+    public void hvdcLineReplaced(HvdcLine hvdcLine, Injection injection) {
+        LOGGER.info("HVDC line " + hvdcLine.getId() + " has be replaced by a " + injection.getType());
+    }
+};
+
+NetworkReducer reducer = NetworkReducer.builder()
+        .withNetworkPredicate(new NominalVoltageNetworkPredicate(225.0, 400.0))
+        .withDanglingLines(true)
+        .withObservers(observer)
+        .build();
+reducer.reduce(network);
 ```
