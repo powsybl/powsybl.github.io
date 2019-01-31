@@ -6,7 +6,7 @@ layout: default
 The network reduction module is used to extract a sub part of a network, replacing the border lines, transformers, HVDC
 lines by injections. **It is required to run a load-flow computation before trying to reduce it.**
 
-The network reduction is relying on a `NetworkPredicate` instance, to define an _area of interest_ (e.g. a list
+The network reduction is relying on a `NetworkPredicate` instance, to define an _area of interest_ (i.e. a list
 of equipments to keep in the network after the reduction). The equipments outside this area will be removed and the
 lines, transformers and HVDC lines connecting voltage levels inside and outside this area will be replaced by injections
 (loads or dangling lines, depending on the implementation).
@@ -31,6 +31,8 @@ Powsybl provides two implementations of this interface:
 - the `IdentifierNetworkPredicate` implementation defines an area of interest using a list of voltage levels or
 substation IDs
 - the `NominalVoltageNetworkPredicate` implementation defines an area of interest using a range of nominal voltages 
+
+You can also provide your own implementation.
 
 ## By IDs
 
