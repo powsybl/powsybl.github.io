@@ -86,7 +86,7 @@ To use the `convert-network` command, add the following dependencies to the `pom
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-converter-api</artifactId>
+    <artifactId>powsybl-iidm-converter-api</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 ```
