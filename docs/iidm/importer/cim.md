@@ -17,6 +17,39 @@ the specification.
 Please refers to the official [ENTSO-E COM Profile 1](https://www.entsoe.eu/digital/common-information-model/#entso-e-cim-profile-1)
 website.
 
+# Configuration properties for CIM1 importer
+
+These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
+module.
+
+## iidm.import.cim1.invert-voltage-step-increment-out-of-phase
+The `iidm.import.cim1.invert-voltage-step-increment-out-of-phase` property is an optional property that defines if the CIM1 Importer
+inverts the `voltageStepIncrementOutOfPhase` attribute. Its default value is `false`.
+
+## iidm.import.cim1.default-country
+The `iidm.import.cim1.default-country` property is an optional property that defines the country the substation belongs to
+by default if it is not indicated in the file. Its default value is `AFGHANISTAN`.
+
+## iidm.import.cim1.use-psse-naming-strategy
+The `iidm.import.cim1.use-psse-naming-strategy` property is an optional property that defines if the CIM1 Importer uses
+the PSS/E naming strategy or not. Its default value is `true`.
+
+## iidm.import.cim1.substation-id-excluded-from-mapping
+The `iidm.import.cim1.substation-id-excluded-from-mapping` property is an optional property that defines the IDs of the
+substations excluded from the network during the import of the CIM1 file. Its default value
+is an empty list.
+
+## invertVoltageStepIncrementOutOfPhase (deprecated)
+The `invertVoltageStepIncrementOutOfPhase` is deprecated for the current snapshot version. Use `iidm.import.cim1.invert-voltage-step-increment-out-of-phase` instead.
+
+## defaultCountry (deprecated)
+The `defaultCountry` is deprecated for the current snapshot version. Use `iidm.import.cim1.default-country` instead.
+
+## usePsseNamingStrategy (deprecated)
+The `usePsseNamingStrategy` is deprecated for the current snapshot version. Use `iidm.import.cim1.use-psse-naming-strategy` instead.
+
+## substationIdExcludedFromMapping (deprecated)
+The `substationIdExcludedFromMapping` is deprecated for the current snapshot version. Use `iidm.import.cim1.substation-id-excluded-from-mapping` instead.
 
 # Maven configuration
 To support CIM files, add the following dependencies to the `pom.xml` file:
