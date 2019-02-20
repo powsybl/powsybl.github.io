@@ -19,7 +19,8 @@ The `iidm.export.ampl.export-ratio-tap-changer-voltage-target` property is an op
 if the AMPL exporter exports the ratio tap changer voltage target. Its default value is `false`.
 
 ## iidm.export.ampl.specific-compatibility
-The `iidm.export.xml.specific-compatibility` property is an optional property that defines 
+The `iidm.export.xml.specific-compatibility` property is an optional property that defines if the AMPL exporter
+is using specific compatibility or not. Its default value is `false`.
 
 ## iidm.export.ampl.exportRatioTapChangerVoltageTarget (deprecated)
 The `iidm.export.ampl.exportRatioTapChangerVoltageTarget` property is deprecated for the current snapshot version. Use the
