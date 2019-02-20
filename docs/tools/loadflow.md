@@ -8,26 +8,35 @@ The `loadflow` command is used to run a power flow simulation.
 # Usage
 ```shell
 $> itools loadflow --help
-usage: itools [OPTIONS] loadflow --case-file <FILE> [--help] [--output-case-file
-       <FILE>] [--output-case-format <CASEFORMAT>] [--output-file <FILE>]
-       [--output-format <FORMAT>] [--parameters-file <FILE>] [--skip-postproc]
+usage: itools [OPTIONS] loadflow --case-file <FILE> [-E <property=value>]
+              [--export-parameters <EXPORT_PARAMETERS>] [--help] [-I <property=value>]
+              [--import-parameters <IMPORT_PARAMETERS>] [--output-case-file <FILE>]
+              [--output-case-format <CASEFORMAT>] [--output-file <FILE>]
+              [--output-format <FORMAT>] [--parameters-file <FILE>] [--skip-postproc]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
     --parallel                    Run command in parallel mode
 
 Available arguments are:
-    --case-file <FILE>                  the case path
-    --help                              display the help and quit
-    --output-case-file <FILE>           modified network base name
-    --output-case-format <CASEFORMAT>   modified network output format [AMPL,
-                                        XIIDM]
-    --output-file <FILE>                loadflow results output path
-    --output-format <FORMAT>            loadflow results output format [CSV,
-                                        JSON]
-    --parameters-file <FILE>            loadflow parameters as JSON file
-    --skip-postproc                     skip network importer post processors
-                                        (when configured)
+    --case-file <FILE>                        the case path
+-E <property=value>                          use value for given exporter
+                                                  parameter
+     --export-parameters <EXPORT_PARAMETERS>   the exporter configuration file
+     --help                                    display the help and quit
+-I <property=value>                          use value for given importer
+                                                  parameter
+     --import-parameters <IMPORT_PARAMETERS>   the importer configuation file
+     --output-case-file <FILE>                 modified network base name
+     --output-case-format <CASEFORMAT>         modified network output format
+                                                  [CGMES, AMPL, XIIDM]
+     --output-file <FILE>                      loadflow results output path
+     --output-format <FORMAT>                  loadflow results output format
+                                                  [CSV, JSON]
+     --parameters-file <FILE>                  loadflow parameters as JSON file
+     --skip-postproc                           skip network importer post
+                                                  processors (when configured)
+
 ```
 
 ## Required parameters
@@ -36,6 +45,14 @@ Available arguments are:
 Use the `--case-file` parameter to specify the path of the case file.
 
 ## Optional parameters
+
+### export-parameters
+Use the `--export-parameters` parameter to specify the path of the configuration file of the exporter. It is possible to
+overload one or many parameters using the `-E property=value` parameter. The properties depend on the output format.
+
+### import-parameters
+Use th `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
+overload one or many parameters using the `-I property=value` parameter. The properties depend on the input format.
 
 ### output-case-file
 Use the `--output-case-file` parameter to export the modified network to the specified path.
