@@ -39,17 +39,19 @@ The `iidm.import.cim1.substation-id-excluded-from-mapping` property is an option
 substations excluded from the network during the import of the CIM1 file. Its default value
 is an empty list.
 
-## invertVoltageStepIncrementOutOfPhase (deprecated)
-The `invertVoltageStepIncrementOutOfPhase` is deprecated for the current snapshot version. Use `iidm.import.cim1.invert-voltage-step-increment-out-of-phase` instead.
+# Deprecated configuration properties for CIM1 importer
 
-## defaultCountry (deprecated)
-The `defaultCountry` is deprecated for the current snapshot version. Use `iidm.import.cim1.default-country` instead.
+## invertVoltageStepIncrementOutOfPhase
+The `invertVoltageStepIncrementOutOfPhase` is deprecated since V2.4.0. Use `iidm.import.cim1.invert-voltage-step-increment-out-of-phase` instead.
 
-## usePsseNamingStrategy (deprecated)
-The `usePsseNamingStrategy` is deprecated for the current snapshot version. Use `iidm.import.cim1.use-psse-naming-strategy` instead.
+## defaultCountry
+The `defaultCountry` is deprecated since V2.4.0. Use `iidm.import.cim1.default-country` instead.
 
-## substationIdExcludedFromMapping (deprecated)
-The `substationIdExcludedFromMapping` is deprecated for the current snapshot version. Use `iidm.import.cim1.substation-id-excluded-from-mapping` instead.
+## usePsseNamingStrategy
+The `usePsseNamingStrategy` is deprecated since V2.4.0. Use `iidm.import.cim1.use-psse-naming-strategy` instead.
+
+## substationIdExcludedFromMapping
+The `substationIdExcludedFromMapping` is deprecated since V2.4.0. Use `iidm.import.cim1.substation-id-excluded-from-mapping` instead.
 
 # Maven configuration
 To support CIM files, add the following dependencies to the `pom.xml` file:
@@ -62,6 +64,15 @@ To support CIM files, add the following dependencies to the `pom.xml` file:
 <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-cim1-model</artifactId>
+    <version>${powsybl.version}</version>
+</dependency>
+```
+**NB**: In order to work, the CIM1 importer also need an IIDM implementation in the `pom.xml`. Powsybl
+provides one so you can simply add it:
+```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-iidm-impl</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 ```

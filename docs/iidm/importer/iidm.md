@@ -12,19 +12,6 @@ For more information about the IIDM model, see [here](../model/index.md).
 IIDM networks can be serialized in XML files. The IIDM importer supports files with the following extensions: `*.xml`,
 `*.xiidm` and `*.iidm`.
 
-# Configuration properties for XIIDM importer
-
-These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
-module.
-
-## iidm.import.xml.throw-exception-if-extension-not-found
-The `iidm.import.xml.throw-exception-if-extension-not-found` property is an optional property
-that defines if the XIIDM importer throws an exception while trying to import an unknown or undeserializable extension or if
-it just ignores it. Its default value is `false`.
-
-## throwExceptionIfExtensionNotFound (deprecated)
-The `throwExceptionIfExtensionNotFound` property is deprecated since v2.0.0. Use the `iidm.import.xml.throw-exception-if-extension-not-found` property instead.
-
 # Example
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -71,12 +58,37 @@ The `throwExceptionIfExtensionNotFound` property is deprecated since v2.0.0. Use
 </iidm:network>
 ```
 
+# Configuration properties for IIDM-XML importer
+
+These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
+module.
+
+## iidm.import.xml.throw-exception-if-extension-not-found
+The `iidm.import.xml.throw-exception-if-extension-not-found` property is an optional property
+that defines if the XIIDM importer throws an exception while trying to import an unknown or undeserializable extension or if
+it just ignores it. Its default value is `false`.
+
+# Deprecated configuration properties for IIDM-XML importer
+
+## throwExceptionIfExtensionNotFound
+The `throwExceptionIfExtensionNotFound` property is deprecated since v2.0.0. Use the `iidm.import.xml.throw-exception-if-extension-not-found` property instead.
+
+
 # Maven configuration
-To support IIDM-XML files, add the following dependency to the `pom.xml` file.
+To support IIDM-XML files, add the following dependencies to the `pom.xml` file.
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-xml-converter</artifactId>
+    <version>${powsybl.version}</version>
+</dependency>
+```
+**NB**: In order to work, the IIDM-XML importer also need an IIDM implementation in the `pom.xml`. Powsybl
+provides one so you can simply add it:
+```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-iidm-impl</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 ```
