@@ -50,3 +50,12 @@ To support UCTE-DEF files, add the following dependencies to the `pom.xml` file:
     <version>${powsybl.version}</version>
 </dependency>
 ```
+**NB**: In order to work, the UCTE importer also need an IIDM implementation in the `pom.xml`. Powsybl
+provides one so you can simply add it:
+```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-iidm-impl</artifactId>
+    <version>${powsybl.version}</version>
+</dependency>
+```

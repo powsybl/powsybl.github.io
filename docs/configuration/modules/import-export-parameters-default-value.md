@@ -18,12 +18,12 @@ configuration.
 ## YAML
 ```yaml
 import-export-parameters-default-value:
-    throwExceptionIfExtensionNotFound: true
+    iidm.import.xml.throw-exception-if-extension-not-found: true
 ```
 
 ## XML
 ```xml
 <import-export-parameters-default-value>
-    <throwExceptionIfExtensionNotFound>true</throwExceptionIfExtensionNotFound>
+    <iidm.import.xml.throw-exception-if-extension-not-found>true</iidm.import.xml.throw-exception-if-extension-not-found>
 </import-export-parameters-default-value>
 ```

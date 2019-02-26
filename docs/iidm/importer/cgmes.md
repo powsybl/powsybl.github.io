@@ -1,6 +1,8 @@
 ---
 title: CGMES Importer
 layout: default
+todo:
+    - add configuration properties (when the PR is done)
 ---
 
 The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS) based
@@ -26,6 +28,15 @@ To support CGMES files, add the following dependencies to the `pom.xml` file:
 <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-cgmes-model</artifactId>
+    <version>${powsybl.version}</version>
+</dependency>
+```
+**NB**: In order to work, the CGMES importer also need an IIDM implementation in the `pom.xml`. Powsybl
+provides one so you can simply add it:
+```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-iidm-impl</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 ```
