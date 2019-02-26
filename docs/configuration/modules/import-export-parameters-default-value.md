@@ -10,7 +10,7 @@ class to initialize the parameters passed to configure the importer. This module
 - List of String
 
 As the parameters are different from an importer to another, it is impossible to give an exhaustive list of supported
-properties. Please refers to the documentation of each [importer](../../iidm/importer/index.md) to know their specific
+properties. Please refers to the documentation of each [importer](../../iidm/importer/index.md) and of each [exporter](../../iidm/exporter/index.md) to know their specific
 configuration.
 
 # Examples
