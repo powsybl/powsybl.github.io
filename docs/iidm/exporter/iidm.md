@@ -11,6 +11,14 @@ For more information about the IIDM model, see [here](../model/index.md).
 
 IIDM networks can be serialized in XML files. The IIDM exporter generates files with a `*.xiidm` extension.
 
+The IIDM exporter has three exporting modes:
+
+   - **First mode**: Exports the network and its extensions in a unique file.
+    
+   - **Second mode**: Exports the network in a file and the extensions in another file.
+    
+   - **Third mode**: Exports the network in a file and each extension type in a separate file. 
+
 # Example
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -78,10 +86,6 @@ of the network or not. Its default value is `false`.
 The `iidm.export.xml.anonymised` property is an optional property that defines if the XIIDM exporter anonymises
 all equipments in the generated file or not. Its default value is `false`.
 
-## iidm.export.xml.skip-extensions
-The `iidm.export.xml.skip-extensions` property is an optional property that defines if the XIIDM exporter skips exporting the 
-network extensions or not. Its default value is `false`.
-
 ## iidm.export.xml.topology-level
 The `iidm.export.xml.topology-level` property is an optional property that defines if the most detailed topology in which the XIIDM exporter can export the
 network. Its default value is `NODE_BREAKER`.
@@ -89,6 +93,28 @@ network. Its default value is `NODE_BREAKER`.
 ## iidm.export.xml.throw-exception-if-extension-not-found
 The `iidm.export.xml.throw-exception-if-extension-not-found` property is an optional property that defines if the XIIDM exporter throws
 an exception if the network contains an unknown or unserializable extension or if it just ignores it. Its default value is `false`.
+
+## iidm.export.xml.export-mode
+The `iidm.export.xml.export-mode` property is an optional property that defines the export mode of the XIIDM exporter.
+the export mode can be:
+
+   - `IidmImportExportMode.UNIQUE_FILE`: if we want to export the network and its extensions in a unique file, 
+
+   - `IidmImportExportMode.EXTENSIONS_IN_ONE_SEPARATED_FILE`: if we want to export the network in a file and  the extensions in a separate file.
+
+   - `IidmImportExportMode.ONE_SEPARATED_FILE_PER_EXTENSION_TYPE`: if we want to export network in a file and each extension type in a separate file. 
+
+The default value for this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
+
+## iidm.export.xml.extensions
+The `iidm.export.xml.extensions` property is an optional property that defines the list of extensions that we want to export by the XIIDM exporter. 
+by default all extensions will be exported.
+
+# Deprecated configuration properties for IIDM-XML exporter
+
+## iidm.export.xml.skip-extensions
+The `iidm.export.xml.skip-extensions` property is an optional property that defines if the XIIDM exporter skips exporting the 
+network extensions or not. Its default value is `false`.
 
 # Maven configuration
 To support IIDM-XML files, add the following dependencies to the `pom.xml` file.
