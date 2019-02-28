@@ -12,21 +12,28 @@ The `sensitivity-computation` command is used to run a sensitivity computation o
 ```shell
 $> itools sensitivity-computation --help
 usage: itools [OPTIONS] sensitivity-computation --case-file <FILE>
-       --factors-file <FILE> [--help] [--output-file <FILE>] [--output-format
-       <FORMAT>] [--skip-postproc]
+       --factors-file <FILE> [--help] [-I <property=value>] [--import-parameters
+       <IMPORT_PARAMETERS>] [--output-file <FILE>] [--output-format <FORMAT>]
+       [--skip-postproc]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
     --parallel                    Run command in parallel mode
 
 Available arguments are:
-    --case-file <FILE>         the case path
-    --factors-file <FILE>      sensitivity factors input file path
-    --help                     display the help and quit
-    --output-file <FILE>       sensitivity computation results output path
-    --output-format <FORMAT>   the output format [JSON]
-    --skip-postproc            skip network importer post processors (when
-                               configured)
+    --case-file <FILE>                                 the case path
+    --factors-file <FILE>                              sensitivity factors input file
+                                                       path
+    --help                                             display the help and quit
+-I <property=value>                                    use value for given
+                                                       importer parameter
+    --import-parameters <IMPORT_PARAMETERS>            the importer configuation
+                                                       file
+    --output-file <FILE>                               sensitivity computation results
+                                                       output path
+    --output-format <FORMAT>                           the output format [JSON]
+    --skip-postproc                                    skip network importer post
+                                                       processors (when configured)
 ```
 
 ## Required parameters
@@ -38,6 +45,11 @@ Use the `--case-file` parameter to specify the path of the case file.
 Use the `--factors-file` parameter to specify the path of the sensitivity factors file.
 
 ## Optional parameters
+
+### import-parameters
+Use the `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
+overload one or many parameters using the `-I property=value` parameter. The properties depend on the input format.
+Refer to the documentation page of each [importer](../iidm/importer/index.md) to know their specific configuration.
 
 ### output-file
 Use the `--output-file` parameter to export the result of the computation to the specified path. If this parameter is not

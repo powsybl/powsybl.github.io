@@ -16,9 +16,12 @@ the results, also print the data of the validated equipments in output files.
 $> itools loadflow-validation --help
 usage: itools [OPTIONS] loadflow-validation --case-file <FILE>
        [--compare-case-file <FILE>] [--compare-results <COMPARISON_TYPE>]
-       [--groovy-script <FILE>] [--help] [--load-flow] --output-folder <FOLDER>
-       [--output-format <VALIDATION_WRITER>] [--run-computation <COMPUTATION>]
-       [--types <VALIDATION_TYPE,VALIDATION_TYPE,...>] [--verbose]
+       [--groovy-script <FILE>] [--help] [-I <property=value>]
+       [--import-parameters <IMPORT_PARAMETERS>] [--load-flow] --output-folder
+       <FOLDER> [--output-format <VALIDATION_WRITER>] [--run-computation
+       <COMPUTATION>] [--types <VALIDATION_TYPE,VALIDATION_TYPE,...>]
+       [--verbose]
+
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
@@ -26,7 +29,8 @@ Available options are:
 
 Available arguments are:
     --case-file <FILE>                              case file path
-    --compare-case-file <FILE>                      path to the case file to compare
+    --compare-case-file <FILE>                      path to the case file to
+                                                    compare
     --compare-results <COMPARISON_TYPE>             compare results of two
                                                     validations, printing output
                                                     files with results of both
@@ -40,6 +44,10 @@ Available arguments are:
     --groovy-script <FILE>                          groovy script to run before
                                                     validation
     --help                                          display the help and quit
+ -I <property=value>                                use value for given importer
+                                                    parameter
+    --import-parameters <IMPORT_PARAMETERS>         the importer configuation
+                                                    file
     --load-flow                                     run loadflow
     --output-folder <FOLDER>                        output folder path
     --output-format <VALIDATION_WRITER>             output format [CSV,
@@ -47,13 +55,13 @@ Available arguments are:
     --run-computation <COMPUTATION>                 run a computation on the
                                                     network before validation,
                                                     available computations are
-                                                    [loadflowResultsCompletion,
-                                                    loadflow]
+                                                    [loadflow,
+                                                    loadflowResultsCompletion]
     --types <VALIDATION_TYPE,VALIDATION_TYPE,...>   validation types [FLOWS,
                                                     GENERATORS, BUSES, SVCS,
-                                                    SHUNTS, TWTS] to run, all of
-                                                    them if the option if not
-                                                    specified
+                                                    SHUNTS, TWTS, TWTS3W] to
+                                                    run, all of them if the
+                                                    option if not specified
     --verbose                                       verbose output
 ```
 
@@ -78,6 +86,11 @@ Use the `--compare-results` parameter to define the type of results to compare. 
 
 ### groovy-script
 Use the `--groovy-script` parameter to apply a modification script on the network, before the validation.
+
+### import-parameters
+Use the `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
+overload one or many parameters using the `-I property=value` parameter. The properties depend on the input format.
+Refer to the documentation page of each [importer](../iidm/importer/index.md) to know their specific configuration.
 
 ### load-flow
 Use the `--load-flow` parameter to run a load-flow before the validation. This option is equivalent to
