@@ -89,8 +89,8 @@ Its possible values are :
       In this case if the network file name is network.xiidm, the extensions file name must be network-ext.xiidm.
     
    - `IidmImportExportMode.ONE_SEPARATED_FILE_PER_EXTENSION_TYPE`: Imports the network from a file and each extension type from a separate file.
-      In this case each extension file name must be extensionName.xiidm.
-      Example : if we have an extension file for the loadFoo extension type, the file name must be loadFoo.xiidm.
+      In this mode each extension file name must be networkName-extensionName.xiidm.
+      Example : if we have an extension file for the loadFoo extension type and our network name is test, the file name must be test-loadFoo.xiidm.
       
 The default value of this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
 

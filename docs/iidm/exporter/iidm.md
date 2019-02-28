@@ -98,11 +98,11 @@ an exception if the network contains an unknown or unserializable extension or i
 The `iidm.export.xml.export-mode` property is an optional property that defines the export mode of the XIIDM exporter.
 the export mode can be:
 
-   - `IidmImportExportMode.UNIQUE_FILE`: if we want to export the network and its extensions in a unique file, 
+   - `IidmImportExportMode.UNIQUE_FILE`: in case we want to export the network and its extensions in a unique file, 
 
-   - `IidmImportExportMode.EXTENSIONS_IN_ONE_SEPARATED_FILE`: if we want to export the network in a file and  the extensions in a separate file.
+   - `IidmImportExportMode.EXTENSIONS_IN_ONE_SEPARATED_FILE`: in case we want to export the network in a file and  the extensions in a separate file.
 
-   - `IidmImportExportMode.ONE_SEPARATED_FILE_PER_EXTENSION_TYPE`: if we want to export network in a file and each extension type in a separate file. 
+   - `IidmImportExportMode.ONE_SEPARATED_FILE_PER_EXTENSION_TYPE`: in case we want to export network in a file and each extension type in a separate file. 
 
 The default value for this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
 
