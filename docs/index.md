@@ -33,6 +33,10 @@ Powsybl also provides business features to work with networks:
 
 Read this page to learn more about the [time series](timeseries/index.md) modeling in powsybl.
 
+# Micro-services
+
+Read this page to learn more about the [micro-services](micro-services/index.md) available in powsybl.
+
 # Tools
 The `iTools` script provides a common way to run powsybl commands using the command line. It provides several tools,
 sorted by themes:
