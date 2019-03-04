@@ -90,19 +90,18 @@ Its possible values are :
     
    - `IidmImportExportMode.ONE_SEPARATED_FILE_PER_EXTENSION_TYPE`: Imports the network from a file and each extension type from a separate file.
       In this mode each extension file name must be networkName-extensionName.xiidm.
-      Example : if we have an extension file for the loadFoo extension type and our network name is test, the file name must be test-loadFoo.xiidm.
+      Example : if we have an extension file for the `loadFoo` extension type and our network name is `test`, the file name must be `test-loadFoo.xiidm`.
       
 The default value of this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
 
 ## iidm.import.xml.extensions
 The `iidm.import.xml.extensions` property is an optional property that defines the list of extensions that we want to import by the XIIDM importer. 
-by default all extensions will be imported.
-
+By default all extensions will be imported.
 
 # Deprecated configuration properties for IIDM-XML importer
 
 ## throwExceptionIfExtensionNotFound
-The `throwExceptionIfExtensionNotFound` property is deprecated since v2.0.0. Use the `iidm.import.xml.throw-exception-if-extension-not-found` property instead.
+The `throwExceptionIfExtensionNotFound` property is deprecated since v2..0. Use the `iidm.import.xml.throw-exception-if-extension-not-found` property instead.
 
 
 # Maven configuration
