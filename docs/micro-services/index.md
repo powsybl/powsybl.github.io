@@ -5,11 +5,11 @@ layout: default
 
 # Getting started  with micro-services
 
-Micro-services are implemented using [Spring Boot](https://spring.io/projects/spring-boot) and  [Spring Cloud](https://spring.io/projects/spring-cloud), packaged as [Docker](https://www.docker.com/) images using [JIB Maven plugin](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin).
+Micro-services are implemented using [Spring Boot](https://spring.io/projects/spring-boot) and [Spring Cloud](https://spring.io/projects/spring-cloud), packaged as [Docker](https://www.docker.com/) images using [JIB Maven plugin](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin).
 
 ## Building docker images
 
-Clone  git repository.
+Clone git repository.
 
 ```bash
 git clone https://github.com/powsybl/powsybl-spring.git
@@ -43,7 +43,29 @@ Four services have been built:
 
 ## Services configuration
 
-TODO
+### AFS configuration
+
+Create `$HOME/.itools/config.yml` and add following configuration to add MapDB storage named 'test':
+
+```yaml
+mapdb-app-file-system:
+        drive-name: test
+        db-file: /storage/db
+        remotely-accessible: true
+```
+
+This file is be shared with server storage container.
+
+Create `$HOME/storage` directory. This directory is also be shared with server storage container and contains MapDB data.
+
+### Spring config service configuration
+
+Create `$HOME/config` directory and copy all Spring Boot service configuration files.
+
+```bash
+mkdir $HOME/config
+cp powsybl-spring/config/* $HOME/config/
+```
 
 ## Starting containers
 
@@ -53,9 +75,8 @@ To start docker containers using docker compose:
 docker-compose up
 ```
 
-## Getting Swagger documentation 
+## Getting Swagger documentation
 
 Storage and Network services are documented using [Swagger](https://swagger.io/) and are available once container have been started. 
  - [Storage service documentation](http://192.168.0.12:8090/swagger-ui.html)
  - [Network service documentation](http://192.168.0.13:8091/swagger-ui.html)
-
