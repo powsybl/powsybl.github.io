@@ -42,7 +42,7 @@ unavailable. The commands are classified in themes, to help identifying their pu
 | Computation | [security-analysis](security-analysis.md) | Run a security analysis |
 | Computation | [sensitivity-computation](sensitivity-computation.md) | Run a sensitivity computation |
 | Data conversion | [convert-network](convert-network.md) | Convert a network from one format to another |
-| MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
+| MPI statistics | [export-tasks-statistics](../todo.md) | Export the tasks statistics to CSV file |
 | Script | [run-script](run-script.md) | Run a script |
 | Misc | [plugins-info](plugins-info.md) | Displays the available plugins |
 

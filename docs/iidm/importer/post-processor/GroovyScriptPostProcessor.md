@@ -42,7 +42,7 @@ The following example prints meta-information from the network:
 println "Network " + network.getId() + " (" + network.getSourceFormat()+ ") is imported"
 ```
 
-Read this [tutorial]() to learn how to write more complex groovy script.
+Read this [tutorial](../../../todo.md) to learn how to write more complex groovy script.
 
 # Maven configuration
 To use the Groovy post processor, add the following dependencies to the `pom.xml` file:

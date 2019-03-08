@@ -8,7 +8,7 @@ layout: default
 ## Deployment
 
 - [How to use PowSyBl as a custom desktop application](powsybl-javafx-packager.md)
-- [How to use PowsyBl as a command line]()
+- [How to use PowsyBl as a command line](../todo.md)
 
 ## Using PowSyBl APIs
 
@@ -16,7 +16,7 @@ layout: default
 
 ## Extending PowSyBl APIs
 
-- [How to extend AFS]()
+- [How to extend AFS](../todo.md)
 - [How to write an IIDM exporter](iidm/exporter.md)
 - [How to write an IIDM importer](iidm/importer.md)
 - [How to extend iTools](itools/extend-itools.md)

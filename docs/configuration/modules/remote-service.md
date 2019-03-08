@@ -3,9 +3,9 @@ title: remote-service
 layout: default
 ---
 
-The `remote-service` module is used by [AFS]() to define a remote AFS server.
+The `remote-service` module is used by [AFS](../../todo.md) to define a remote AFS server.
 
-Read the [documentation]() page to learn more about the remote AFS server implementation.
+Read the [documentation](../../todo.md) page to learn more about the remote AFS server implementation.
 
 # Properties
 

@@ -53,7 +53,7 @@ Available arguments are:
 Use the `--case-file` parameter to specify the path of the case file.
 
 ### dsl-file
-Use the `--dsl-file` parameter to specify the path of the [action DSL]() script that defines the strategy to simulate.
+Use the `--dsl-file` parameter to specify the path of the [action DSL](../todo.md) script that defines the strategy to simulate.
 
 ## Optional parameters
 
@@ -96,7 +96,7 @@ Read the [configuration](../configuration/modules/load-flow-action-simulator.md)
 `load-flow-action-simulator` module.
 
 # Examples
-This example shows a small [action DSL]() script:
+This example shows a small [action DSL](../todo.md) script:
 ```groovy
 contingency('HV_line_1') {
     equipments 'NHV1_NHV2_1'

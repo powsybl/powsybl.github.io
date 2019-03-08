@@ -8,7 +8,7 @@ A three windings power transformer is connected to three voltage levels (side 1,
 same substation:
 - Side 1 is the primary side (high voltage)
 - Side 2 and Side 3 can indifferently be the secondary side (medium voltage) or the tertiary side (low voltage)
-A [Ratio Tap Changer]() can be associated to the side 2 or the side 3 of a three windings power transformer.
+A [Ratio Tap Changer](ratioTapChanger.md) can be associated to the side 2 or the side 3 of a three windings power transformer.
 
 # Characteristics
 
@@ -17,6 +17,8 @@ A [Ratio Tap Changer]() can be associated to the side 2 or the side 3 of a three
 | Leg1 | `ThreeWindingsTransformer.Leg1` | yes | - | The leg at the primary side |
 | Leg2 | `ThreeWindingsTransformer.Leg2or3` | yes | - | The leg at the secondary side |
 | Leg3 | `ThreeWindingsTransformer.Leg2or3` | yes | - | The leg at the tertiary side |
+
+Three windings transformers can also have [current limits](currentLimits.md) defined for each leg.
 
 ## Leg1
 `ThreeWindingsTransformer.Leg1` is a nested interface used to model the primary side of a three windings power transformer.

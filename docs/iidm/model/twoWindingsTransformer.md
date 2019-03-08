@@ -20,6 +20,8 @@ A [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phase
 | $$V_{1\ nom}$$ | double | kV | yes | - | The primary winding rated voltage |
 | $$V_{2\ nom}$$ | double | kV | yes | - | The secondary winding rated voltage |
 
+Two windings transformers can also have [current limits](currentLimits.md) defined for each end.
+
 # Model
 Two windings transformer are modelled with the following equivalent $$\pi$$ model:
 
