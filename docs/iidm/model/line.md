@@ -18,6 +18,8 @@ The `com.powsybl.iidm.network.Line` interface is used to model an AC line. A lin
 | $$g_2$$ | double | S | yes | - | The second side shunt conductance |
 | $$b_2$$ | double | S | yes | - | The second side shunt susceptance |
 
+Lines can also have [current limits](currentLimits.md) defined for each end.
+
 # Model
 Power lines are modelled using a standard $$\pi$$ model with distributed parameters.
 

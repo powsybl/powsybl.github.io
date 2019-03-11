@@ -11,7 +11,7 @@ kind of plugins are:
 - [exporter](../iidm/exporter/index.md)
 - [import-post-processor](../iidm/importer/post-processor/index.md)
 - [importer](../iidm/importer/index.md)
-- [loadflow-validation computation]()
+- [loadflow-validation computation](../loadflow/validation.md)
 
 # Usage
 ```shell
