@@ -18,7 +18,6 @@ The IIDM exporter has three exporting modes:
    - **Second mode**: Exports the network in a file and the extensions in another file.
     
    - **Third mode**: Exports the network in a file and each extension type in a separate file. 
-  
 
 # Example
 ```xml
@@ -120,7 +119,6 @@ By default all extensions will be exported.
 The `iidm.export.xml.skip-extensions` property is an optional property that defines if the XIIDM exporter skips exporting the 
 network extensions or not. Its default value is `false`.
 This property is deprecated since v2.4.0. Use the `iidm.export.xml.export-mode` property instead.
-
 
 # Maven configuration
 To support IIDM-XML files, add the following dependencies to the `pom.xml` file.

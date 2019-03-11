@@ -101,7 +101,7 @@ By default all extensions will be imported.
 # Deprecated configuration properties for IIDM-XML importer
 
 ## throwExceptionIfExtensionNotFound
-The `throwExceptionIfExtensionNotFound` property is deprecated since v2..0. Use the `iidm.import.xml.throw-exception-if-extension-not-found` property instead.
+The `throwExceptionIfExtensionNotFound` property is deprecated since v2.0.0. Use the `iidm.import.xml.throw-exception-if-extension-not-found` property instead.
 
 
 # Maven configuration
