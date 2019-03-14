@@ -19,6 +19,10 @@ from ENTSO-E Test Configurations for Conformity Assessment Scheme v2.0.
 
 # Configuration properties for CGMES importer
 
+## iidm.import.cgmes.boundary-location
+The `iidm.import.cgmes.boundary-location` property is an optional property that defines the directory path where the CGMES importer
+can find the boundary files if they are not present in the imported zip file. By default, its value is `<ITOOLS_CONFIG_DIR>/CGMES/boundary`.
+
 ## iidm.import.cgmes.change-sign-for-shunt-reactive-power-flow-initial-state
 The `iidm.import.cgmes.change-sign-for-shunt-reactive-power-flow-initial-state` property is an optional property
 that defines if the CGMES importer inverts the sign of reactive power flows for shunt compensators.
