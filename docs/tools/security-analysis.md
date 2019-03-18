@@ -12,24 +12,29 @@ The `security-analysis` command is used to detect security violations on pre-con
 $>cd  <POWSYBL_HOME>/bin
 $> ./itools security-analysis --help
 usage: itools [OPTIONS] security-analysis --case-file <FILE>
-       [--contingencies-file <FILE>] [--help] [--limit-types <LIMIT-TYPES>]
+       [--contingencies-file <FILE>] [--external] [--help] [-I <property=value>]
+       [--import-parameters <IMPORT_PARAMETERS>] [--limit-types <LIMIT-TYPES>]
        [--output-file <FILE>] [--output-format <FORMAT>] [--parameters-file
        <FILE>] [--with-extensions <EXTENSIONS>]
-
+       
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
     --parallel                    Run command in parallel mode
 
 Available arguments are:
-    --case-file <FILE>               the case path
-    --contingencies-file <FILE>      the contingencies path
-    --external                       external execution
-    --help                           display the help and quit
-    --limit-types <LIMIT-TYPES>      limit type filter (all if not set)
-    --output-file <FILE>             the output path
-    --output-format <FORMAT>         the output format [JSON]
-    --parameters-file <FILE>         loadflow parameters as JSON file
-    --with-extensions <EXTENSIONS>   the extension list to enable
+    --case-file <FILE>                                 the case path
+    --contingencies-file <FILE>                        the contingencies path
+    --external                                         external execution
+    --help                                             display the help and quit
+-I <property=value>                                    use value for given
+                                                       importer parameter
+    --import-parameters <IMPORT_PARAMETERS>            the importer configuation
+                                                       file
+    --limit-types <LIMIT-TYPES>                        limit type filter (all if not set)
+    --output-file <FILE>                               the output path
+    --output-format <FORMAT>                           the output format [JSON]
+    --parameters-file <FILE>                           loadflow parameters as JSON file
+    --with-extensions <EXTENSIONS>                     the extension list to enable
 
 Allowed LIMIT-TYPES values are [CURRENT, LOW_VOLTAGE, HIGH_VOLTAGE,
 LOW_SHORT_CIRCUIT_CURRENT, HIGH_SHORT_CIRCUIT_CURRENT, OTHER]
@@ -51,6 +56,11 @@ security violations are checked on the N-state only.
 Use the `--external` parameter to run the security analysis in an external process. Read the
 [external-security-analysis-config](../configuration/modules/external-security-analysis-config.md) documentation page
 to learn how to configure the external mode.
+
+### import-parameters
+Use the `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
+overload one or many parameters using the `-I property=value` parameter. The properties depend on the input format.
+Refer to the documentation page of each [importer](../iidm/importer/index.md) to know their specific configuration.
 
 ### limit-types
 Use the `--limit-types` parameter to filter certain types of violations. This parameter overrides the default

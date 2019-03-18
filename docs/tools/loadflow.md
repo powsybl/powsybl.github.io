@@ -19,22 +19,22 @@ Available options are:
     --parallel                    Run command in parallel mode
 
 Available arguments are:
-    --case-file <FILE>                        the case path
--E <property=value>                          use value for given exporter
+    --case-file <FILE>                            the case path
+-E <property=value>                               use value for given exporter
                                                   parameter
-     --export-parameters <EXPORT_PARAMETERS>   the exporter configuration file
-     --help                                    display the help and quit
--I <property=value>                          use value for given importer
+     --export-parameters <EXPORT_PARAMETERS>      the exporter configuration file
+     --help                                       display the help and quit
+-I <property=value>                               use value for given importer
                                                   parameter
-     --import-parameters <IMPORT_PARAMETERS>   the importer configuation file
-     --output-case-file <FILE>                 modified network base name
-     --output-case-format <CASEFORMAT>         modified network output format
+     --import-parameters <IMPORT_PARAMETERS>      the importer configuation file
+     --output-case-file <FILE>                    modified network base name
+     --output-case-format <CASEFORMAT>            modified network output format
                                                   [CGMES, AMPL, XIIDM]
-     --output-file <FILE>                      loadflow results output path
-     --output-format <FORMAT>                  loadflow results output format
+     --output-file <FILE>                         loadflow results output path
+     --output-format <FORMAT>                     loadflow results output format
                                                   [CSV, JSON]
-     --parameters-file <FILE>                  loadflow parameters as JSON file
-     --skip-postproc                           skip network importer post
+     --parameters-file <FILE>                     loadflow parameters as JSON file
+     --skip-postproc                              skip network importer post
                                                   processors (when configured)
 
 ```
@@ -49,10 +49,12 @@ Use the `--case-file` parameter to specify the path of the case file.
 ### export-parameters
 Use the `--export-parameters` parameter to specify the path of the configuration file of the exporter. It is possible to
 overload one or many parameters using the `-E property=value` parameter. The properties depend on the output format.
+Refer to the documentation page of each [exporter](../iidm/exporter/index.md) to know their specific configuration.
 
 ### import-parameters
 Use th `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
 overload one or many parameters using the `-I property=value` parameter. The properties depend on the input format.
+Refer to the documentation page of each [importer](../iidm/importer/index.md) to know their specific configuration.
 
 ### output-case-file
 Use the `--output-case-file` parameter to export the modified network to the specified path.

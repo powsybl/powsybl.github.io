@@ -56,17 +56,19 @@ Use the `--output-format` parameter to specify the exporter to use for the expor
 ### export-parameters
 Use the `--export-parameters` parameter to specify the path of the configuration file of the exporter. It is possible to
 overload one or many parameters using the `-E property=value` parameter. The properties depend on the output format.
+Refer to the documentation page of each [exporter](../iidm/exporter/index.md) to know their specific configuration.
 
 ### groovy-script
 Use the `--groovy-script` parameter to specify the path of the modification script to use after the loading of the network.
 
 ### import-parameters
-Use th `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
+Use the `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
 overload one or many parameters using the `-I property=value` parameter. The properties depend on the input format.
+Refer to the documentation page of each [importer](../iidm/importer/index.md) to know their specific configuration.
 
 # Examples
 
-This example shows how to convert a [UCTE-DEF](../iidm/importer/ucte.md) file to a [XIIDM]() file:
+This example shows how to convert a [UCTE-DEF](../iidm/importer/ucte.md) file to a [XIIDM](../iidm/exporter/iidm.md) file:
 ```shell
 $> itools convert-network --input-file $HOME/case-file.uct --output-format XIIDM --output-file $HOME/case-file.xiidm
 ```

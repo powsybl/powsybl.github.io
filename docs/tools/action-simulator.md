@@ -12,10 +12,11 @@ The `action-simulator` command is used to test remedial actions to solve securit
 $> itools action-simulator --help
 usage: itools [OPTIONS] action-simulator [--apply-if-solved-violations]
        --case-file <FILE> [--contingencies <CONTINGENCY1,CONTINGENCY2,...>]
-       --dsl-file <FILE> [--help] [--output-case-folder <CASEFOLDER>]
-       [--output-case-format <CASEFORMAT>] [--output-compression-format
-       <COMPRESSION_FORMAT>] [--output-file <FILE>] [--output-format <FORMAT>]
-       [--verbose]
+       --dsl-file <FILE> [--export-after-each-round] [--help] [-I
+       <property=value>] [--import-parameters <IMPORT_PARAMETERS>]
+       [--output-case-folder <CASEFOLDER>] [--output-case-format <CASEFORMAT>]
+       [--output-compression-format <COMPRESSION_FORMAT>] [--output-file <FILE>]
+       [--output-format <FORMAT>] [--verbose]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
@@ -31,6 +32,10 @@ Available arguments are:
     --export-after-each-round                          export case after each
                                                        round
     --help                                             display the help and quit
+-I <property=value>                                    use value for given
+                                                       importer parameter
+    --import-parameters <IMPORT_PARAMETERS>            the importer configuation
+                                                       file
     --output-case-folder <CASEFOLDER>                  output case folder path
     --output-case-format <CASEFORMAT>                  output case format [CSV,
                                                        AMPL, XIIDM]
@@ -48,7 +53,7 @@ Available arguments are:
 Use the `--case-file` parameter to specify the path of the case file.
 
 ### dsl-file
-Use the `--dsl-file` parameter to specify the path of the [action DSL]() script that defines the strategy to simulate.
+Use the `--dsl-file` parameter to specify the path of the [action DSL](../todo.md) script that defines the strategy to simulate.
 
 ## Optional parameters
 
@@ -59,6 +64,11 @@ Use the `--contingencies` parameter to specify the list of contingencies to simu
 Use the `--export-after-each-round` parameter to export a case file after each round of the simulation. If this option
 is not set, a single case file is exported at the end of simulation (e.g. once there is no more violations or matching
 rules).
+
+### import-parameters
+Use the `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
+overload one or many parameters using the `-I property=value` parameter. The properties depend on the input format.
+Refer to the documentation page of each [importer](../iidm/importer/index.md) to know their specific configuration.
 
 ### output-case-folder
 Use the `--output-case-folder` parameter to set the folder in which the case files are exported.
@@ -86,7 +96,7 @@ Read the [configuration](../configuration/modules/load-flow-action-simulator.md)
 `load-flow-action-simulator` module.
 
 # Examples
-This example shows a small [action DSL]() script:
+This example shows a small [action DSL](../todo.md) script:
 ```groovy
 contingency('HV_line_1') {
     equipments 'NHV1_NHV2_1'

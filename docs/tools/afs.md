@@ -5,11 +5,11 @@ todo:
     - add links to missing pages
 ---
 
-The `afs` command performs some basic actions on a [AFS]() drive:
+The `afs` command performs some basic actions on a [AFS](../afs/index.md) drive:
 - list the content of an AFS folder
 - archive/restore an AFS content from/to a directory for backup purposes
 
-Read this [tutorial]() to learn how to configure an AFS drive. 
+Read this [tutorial](../tutorials/afs/afs.md) to learn how to configure an AFS drive. 
 
 # Usage
 ```shell
@@ -78,4 +78,4 @@ To use the `afs` command, add the following dependencies to the `pom.xml` file:
 </dependency>
 ```
 
-Read the [documentation]() page to learn more about the AFS implementations.
+Read the [documentation](../afs/index.md) page to learn more about the AFS implementations.
