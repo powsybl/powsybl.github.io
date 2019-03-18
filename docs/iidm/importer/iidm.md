@@ -12,6 +12,14 @@ For more information about the IIDM model, see [here](../model/index.md).
 IIDM networks can be serialized in XML files. The IIDM importer supports files with the following extensions: `*.xml`,
 `*.xiidm` and `*.iidm`.
 
+The IIDM importer has three importing modes:
+
+- **First mode** : Imports the network and its extensions from a unique file.
+    
+- **Second mode** : Imports the network from a file and the extensions from another file. 
+    
+- **Third mode** : Imports the network from a file and each extension type from a separate file.
+
 # Example
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -67,6 +75,28 @@ module.
 The `iidm.import.xml.throw-exception-if-extension-not-found` property is an optional property
 that defines if the XIIDM importer throws an exception while trying to import an unknown or undeserializable extension or if
 it just ignores it. Its default value is `false`.
+
+
+## iidm.import.xml.import-mode
+The `iidm.import.xml.import-mode` property is an optional property
+that defines the import mode of the XIIDM importer. 
+
+Its possible values are :
+
+   - `IidmImportExportMode.UNIQUE_FILE`: Imports the network and its extensions from a unique file.
+    
+   - `IidmImportExportMode.EXTENSIONS_IN_ONE_SEPARATED_FILE`: Imports the network from a file and the extensions from another file. 
+      In this case if the network file name is network.xiidm, the extensions file name must be network-ext.xiidm.
+    
+   - `IidmImportExportMode.ONE_SEPARATED_FILE_PER_EXTENSION_TYPE`: Imports the network from a file and each extension type from a separate file.
+      In this mode each extension file name must be networkName-extensionName.xiidm.
+      Example : if we have an extension file for the `loadFoo` extension type and our network name is `test`, the file name must be `test-loadFoo.xiidm`.
+      
+The default value of this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
+
+## iidm.import.xml.extensions
+The `iidm.import.xml.extensions` property is an optional property that defines the list of extensions that we want to import by the XIIDM importer. 
+By default all extensions will be imported.
 
 # Deprecated configuration properties for IIDM-XML importer
 
