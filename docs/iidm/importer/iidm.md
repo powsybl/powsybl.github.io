@@ -109,6 +109,11 @@ To support IIDM-XML files, add the following dependencies to the `pom.xml` file.
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-iidm-api</artifactId>
+    <version>${powsybl.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-xml-converter</artifactId>
     <version>${powsybl.version}</version>
 </dependency>

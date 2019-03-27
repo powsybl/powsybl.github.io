@@ -15,7 +15,7 @@ In order to do so, you will need to:
 
 In order to implement a new `Exporter`, add the following dependencies
 - `auto-service (com.google.auto.service)`: Configuration/metadata generator for `ServiceLoader`-style providers
-- `powsybl-iidm-converter-api`:  IIDM network import/export API
+- `powsybl-iidm-api`:  IIDM network API
 
 in your `pom.xml` file:
 
@@ -28,7 +28,7 @@ in your `pom.xml` file:
     </dependency>
     <dependency>
         <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-iidm-converter-api</artifactId>
+        <artifactId>powsybl-iidm-api</artifactId>
         <version>${powsybl.core.version}</version>
     </dependency>
 </dependencies>
@@ -41,7 +41,7 @@ implementation. Here is an empty class template of an `Exporter` implementation:
 
 ```java
 import com.powsybl.commons.datasource.DataSource;
-import com.powsybl.iidm.export.Exporter;
+import com.powsybl.iidm.converter.Exporter;
 import com.powsybl.iidm.network.Network;
 
 import java.util.Properties;

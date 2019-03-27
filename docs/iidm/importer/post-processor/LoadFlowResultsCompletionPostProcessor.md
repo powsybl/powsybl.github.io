@@ -3,7 +3,7 @@ title: LoadFlowResultsCompletionPostProcessor
 layout: default
 ---
 
-The `com.powsybl.loadflow.LoadFlowResultsCompletionPostProcessor` class is an implementation of the `com.powsybl.iidm.import_.ImportPostProcessor`
+The `com.powsybl.loadflow.LoadFlowResultsCompletionPostProcessor` class is an implementation of the `com.powsybl.iidm.converter.ImportPostProcessor`
 interface that aims at completing the loadflow results of a network, computing and assigning, if not already set, the flows
 at the end of branches.
 

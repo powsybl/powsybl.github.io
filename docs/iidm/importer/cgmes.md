@@ -66,7 +66,7 @@ To support CGMES files, add the following dependencies to the `pom.xml` file:
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-cgmes-conversion</artifactId>
+    <artifactId>powsybl-cgmes-converter</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 <dependency>

@@ -44,12 +44,12 @@ dependencies to implement a new `iTools` command are the following:
 
 In your project you also need to add the other dependencies required by your command business logic implementation, e.g.
 to implement the `iTools` command displaying the number of lines of a network, you would have to add the following
-dependency to get the IIDM converter API, needed to import IIDM networks:
+dependency to get the IIDM API, needed to import IIDM networks:
 
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-iidm-converter-api</artifactId>
+    <artifactId>powsybl-iidm-api</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 ```
