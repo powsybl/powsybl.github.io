@@ -3,7 +3,7 @@ title: import-export-parameters-default-value
 layout: default
 ---
 
-The `import-export-parameters-default-value` module is an optional module used by the `com.powsybl.iidm.import_.Importers`
+The `import-export-parameters-default-value` module is an optional module used by the `com.powsybl.iidm.converter.Importers`
 class to initialize the parameters passed to configure the importer. This module support 3 different types of properties:
 - Boolean
 - String

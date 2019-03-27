@@ -15,7 +15,7 @@ In order to do so, you will need to:
 
 In order to implement a new `Importer`, add the following dependencies in your `pom.xml` file:
 - `auto-service (com.google.auto.service)`: Configuration/metadata generator for `ServiceLoader`-style providers
-- `powsybl-iidm-converter-api`:  IIDM network import/export API
+- `powsybl-iidm-api`:  IIDM network API
 
 ```xml
 <dependencies>
@@ -26,7 +26,7 @@ In order to implement a new `Importer`, add the following dependencies in your `
     </dependency>
     <dependency>
         <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-iidm-converter-api</artifactId>
+        <artifactId>powsybl-iidm-api</artifactId>
         <version>${powsybl.core.version}</version>
     </dependency>
 </dependencies>
@@ -40,7 +40,7 @@ implementation. Here is an empty class template of an `Importer` implementation:
 ```java
 import com.powsybl.commons.datasource.DataSource;
 import com.powsybl.commons.datasource.ReadOnlyDataSource;
-import com.powsybl.iidm.import_.Importer;
+import com.powsybl.iidm.converter.Importer;
 import com.powsybl.iidm.network.Network;
 import com.powsybl.iidm.parameters.Parameter;
 

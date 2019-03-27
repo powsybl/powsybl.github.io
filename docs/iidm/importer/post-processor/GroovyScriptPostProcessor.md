@@ -3,7 +3,7 @@ title: GroovyScriptPostProcessor
 layout: default
 ---
 
-The `com.powsybl.iidm.import_.GroovyScriptPostProcessor` class is an implementation of the `com.powsybl.iidm.import_.ImportPostProcessor`
+The `com.powsybl.iidm.converter.GroovyScriptPostProcessor` class is an implementation of the `com.powsybl.iidm.converter.ImportPostProcessor`
 interface that runs a Groovy script after a IIDM network is loaded.
 
 The groovy script has access to two variables:
@@ -49,7 +49,7 @@ To use the Groovy post processor, add the following dependencies to the `pom.xml
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-iidm-converter-api</artifactId>
+    <artifactId>powsybl-iidm-api</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 ```

@@ -3,7 +3,7 @@ title: Importers
 layout: default
 ---
 
-The `com.powsybl.iidm.import_.Importer` class is used to create a IIDM network instance from a case. Powsybl supports
+The `com.powsybl.iidm.converter.Importer` class is used to create a IIDM network instance from a case. Powsybl supports
 natively several implementations:
 - [IIDM](iidm.md)
 - [CGMES](cgmes.md)

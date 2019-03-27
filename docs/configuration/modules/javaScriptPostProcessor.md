@@ -3,8 +3,8 @@ title: javaScriptPostProcessor
 layout: default
 ---
 
-The `javaScriptPostProcessor` module is used by the `com.powsybl.iidm.import_.JavaScriptPostProcessor` class, which is
-an implementation of the `com.powsybl.iidm.import_.ImportPostProcessor` that runs a javascript script after a case is
+The `javaScriptPostProcessor` module is used by the `com.powsybl.iidm.converter.JavaScriptPostProcessor` class, which is
+an implementation of the `com.powsybl.iidm.converter.ImportPostProcessor` that runs a javascript script after a case is
 converted to an IIDM network.
 
 # Optional properties

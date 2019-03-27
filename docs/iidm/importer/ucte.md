@@ -46,7 +46,7 @@ To support UCTE-DEF files, add the following dependencies to the `pom.xml` file:
 </dependency>
 <dependency>
     <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-ucte-network</artifactId>
+    <artifactId>powsybl-ucte-api</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 ```
