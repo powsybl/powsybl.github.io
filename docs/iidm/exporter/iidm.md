@@ -11,8 +11,16 @@ For more information about the IIDM model, see [here](../model/index.md).
 
 IIDM networks can be serialized in XML files. The IIDM exporter generates files with a `*.xiidm` extension.
 
-The IIDM exporter has three exporting modes:
+The IIDM exporter has two exporting types:
+   - **Full export**: Exports the whole network with all elements attributes. 
+   
+   - **Incremental export**: Exports the network to three (by default) files:
+        - the `base-STATE.xiidm` file : contains only the network elements having state attributes.
+        - the `base-TOPO.xiidm` file : contains only the network elements having topology attributes.
+        - the `base-CONTROL.xiidm` file : contains only the network elements having control attributes.
 
+
+The first type `FULL_IIDM` has three exporting modes:
    - **First mode**: Exports the network and its extensions in a unique file.
     
    - **Second mode**: Exports the network in a file and the extensions in another file.
@@ -106,9 +114,35 @@ The export mode can be:
    - `IidmImportExportMode.ONE_SEPARATED_FILE_PER_EXTENSION_TYPE`: in case we want to export network in a file and each extension type in a separate file.
    Example: if our network `test` has two extensions `loadFoo` and `loadBar` then the network will be exported 
     in the `test.xiidm` file when `loadFoo` and `loadBar` will be exported respectively in `test-loadFoo.xiidm` and `test-loadBar.xiidm`.
-
 The default value for this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
 
+## iidm.export.xml.export-type
+The `iidm.export.xml.export-type` property is an optional property that defines the export type of the XIIDM exporter.
+The export type can be:
+
+   - `IidmImportExportType.FULL_IIDM`: in case we want to export the whole network : all network elements and their state, contol and topology attributes.
+
+   - `IidmImportExportType.INCREMENTAL_IIDM`: that type let us export only the elements having control, state or topology attributes.
+    we export those elements to three separated files `base-TOPO.xiidm`, `base-STATE.xiidm` and `base-CONTROL.xiidm`.
+    Example: if we export a `test` network using that type we obtain three files (by default) : `test-TOPO.xiidm`, `test-STATE.xiidm` and `test-CONTROL.xiidm`. 
+
+The default value for this parameter is `IidmImportExportType.FULL_IIDM`.
+
+##iidm.export.incremental.xml.topo
+The `iidm.export.incremental.xml.topo` property is an optional property that defines whether the XIIDM exporter has to
+export elements having topology attributes in a TOPO file or not. 
+
+That property is taken into account only when the export type is set to `IidmImportExportType.INCREMENTAL_IIDM`, its default value is `true`.
+##iidm.export.incremental.xml.state
+The `iidm.export.incremental.xml.state` property is an optional property that defines whether the XIIDM exporter has to
+export elements having state attributes in a STATE file or not. 
+
+That property is taken into account only when the export type is set to `IidmImportExportType.INCREMENTAL_IIDM`, its default value is `true`.
+##iidm.export.incremental.xml.control
+The `iidm.export.incremental.xml.control` property is an optional property that defines whether the XIIDM exporter has to
+export elements having control attributes in a CONTROL file or not. 
+
+That property is taken into account only when the export type is set to `IidmImportExportType.INCREMENTAL_IIDM`, its default value is `true`.
 ## iidm.export.xml.extensions
 The `iidm.export.xml.extensions` property is an optional property that defines the list of extensions that we want to export by the XIIDM exporter. 
 By default all extensions will be exported.
