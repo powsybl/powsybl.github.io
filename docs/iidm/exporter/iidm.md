@@ -128,17 +128,17 @@ The export type can be:
 
 The default value for this parameter is `IidmImportExportType.FULL_IIDM`.
 
-##iidm.export.incremental.xml.topo
+## iidm.export.incremental.xml.topo
 The `iidm.export.incremental.xml.topo` property is an optional property that defines whether the XIIDM exporter has to
 export elements having topology attributes in a TOPO file or not. 
 
 That property is taken into account only when the export type is set to `IidmImportExportType.INCREMENTAL_IIDM`, its default value is `true`.
-##iidm.export.incremental.xml.state
+## iidm.export.incremental.xml.state
 The `iidm.export.incremental.xml.state` property is an optional property that defines whether the XIIDM exporter has to
 export elements having state attributes in a STATE file or not. 
 
 That property is taken into account only when the export type is set to `IidmImportExportType.INCREMENTAL_IIDM`, its default value is `true`.
-##iidm.export.incremental.xml.control
+## iidm.export.incremental.xml.control
 The `iidm.export.incremental.xml.control` property is an optional property that defines whether the XIIDM exporter has to
 export elements having control attributes in a CONTROL file or not. 
 
