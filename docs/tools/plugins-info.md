@@ -22,7 +22,7 @@ Plugins:
 +---------------------------------+-----------------------------------------------------+
 | exporter                        | AMPL, XIIDM                                         |
 | import-post-processor           | groovyScript, javaScript, loadflowResultsCompletion |
-| importer                        | CIM1, UCTE, XIIDM                                   |
+| importer                        | CGMES, UCTE, XIIDM                                   |
 | loadflow-validation computation | loadflow, loadflowResultsCompletion                 |
 +---------------------------------+-----------------------------------------------------+
 ```

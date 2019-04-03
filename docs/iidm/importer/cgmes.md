@@ -9,7 +9,7 @@ The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an I
 on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards.​ It was developed to meet necessary requirements
 for TSO data exchanges in the areas of system development and system operation.
 
-Current supported version of CGMES is 2.4.15, that is based on CIM 16.
+Current supported version of CGMES is 2.4.15, that is based on CIM 16. We can note that this importer is also compatible with CIM 14.
 
 To learn more about CGMES files, read the complete [CMGES format specification](https://www.entsoe.eu/digital/common-information-model/#common-grid-model-exchange-specification-cgmes).
 
