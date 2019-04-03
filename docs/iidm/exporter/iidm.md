@@ -12,15 +12,15 @@ For more information about the IIDM model, see [here](../model/index.md).
 IIDM networks can be serialized in XML files. The IIDM exporter generates files with a `*.xiidm` extension.
 
 The IIDM exporter has two exporting types:
-   - **Full export**: Exports the whole network with all elements attributes. 
+   - **Full export**: Exports the whole network with all its elements. 
    
-   - **Incremental export**: Exports the network to three (by default) files:
-        - the `base-STATE.xiidm` file : contains only the network elements having state attributes.
-        - the `base-TOPO.xiidm` file : contains only the network elements having topology attributes.
-        - the `base-CONTROL.xiidm` file : contains only the network elements having control attributes.
+   - **Incremental export**: Generates three (by default) files:
+        - `base-STATE.xiidm` file : contains only network elements having state attributes.
+        - `base-TOPO.xiidm` file : contains only network elements having topology attributes.
+        - `base-CONTROL.xiidm` file : contains only network elements having control attributes.
 
 
-The first type `FULL_IIDM` has three exporting modes:
+The first type ,full export, has three exporting modes:
    - **First mode**: Exports the network and its extensions in a unique file.
     
    - **Second mode**: Exports the network in a file and the extensions in another file.
