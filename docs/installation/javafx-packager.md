@@ -49,7 +49,7 @@ The `mainClass` property defines the entry point of the application. To use the 
 Use the `<jvmProperties>` section to pass system properties to the JVM.
 
 ### javafx.preloader
-Set the `javafx.preloader` property to `cim.powsybl.gse.app.GsePreloader` to display powsybl splash screen at startup.
+Set the `javafx.preloader` property to `com.powsybl.gse.app.GsePreloader` to display powsybl splash screen at startup.
 
 ### powsybl.config.dirs
 The `powsybl.config.dirs` property defines the configuration folder. 

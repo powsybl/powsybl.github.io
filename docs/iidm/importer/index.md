@@ -7,7 +7,6 @@ The `com.powsybl.iidm.import_.Importer` class is used to create a IIDM network i
 natively several implementations:
 - [IIDM](iidm.md)
 - [CGMES](cgmes.md)
-- [CIM](cim.md)
 - [UCTE-DEF](ucte.md)
 
 After a network is imported, the [post processors](post-processor/index.md) provides a mechanism that allows to
