@@ -77,6 +77,6 @@ docker-compose up
 
 ## Getting Swagger documentation
 
-Storage and Network services are documented using [Swagger](https://swagger.io/) and are available once container have been started. 
- - [Storage service documentation](http://192.168.0.12:8090/swagger-ui.html)
- - [Network service documentation](http://192.168.0.13:8091/swagger-ui.html)
+Storage and Network services are documented using [Swagger](https://swagger.io/) and are available once container have been started (replace localhost with the docker host IP if you are using a remote docker host)
+ - [Storage service documentation](http://localhost:8090/swagger-ui.html)
+ - [Network service documentation](http://localhost:8091/swagger-ui.html)
