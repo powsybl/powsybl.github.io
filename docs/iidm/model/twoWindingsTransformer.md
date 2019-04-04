@@ -39,7 +39,7 @@ b=b_{nom}.\left(1+\frac{b_{r, tap} + b_{\phi, tap}}{100}\right)\\
 z=r+j.x\\
 y=g+j.b\\
 V_{0}=V_{1}.\rho e^{j\alpha}\\
-I_{0}=\frac{I_{1}}{\rho e^{j\alpha}}\\
+I_{0}=\frac{-I_{1}}{\rho e^{j\alpha}}\\
 $$
 
 the equations of the two windings transformer, in complex notations, are as follow:
@@ -49,7 +49,7 @@ $$
 I_{1}\\
 I_{2}
 \end{array}\right)=\left(\begin{array}{cc}
-\rho\text{²}e^{2j\alpha}(y+\frac{1}{z}) & -\rho e^{j\alpha}\frac{1}{z}\\
+\rho\text{²}e^{2j\alpha}(y+\frac{1}{z}) & -\rho e^{-j\alpha}\frac{1}{z}\\
 -\rho e^{j\alpha}\frac{1}{z} & \frac{1}{z}
 \end{array}\right)\left(\begin{array}{c}
 V_{1}\\
