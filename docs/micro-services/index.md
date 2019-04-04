@@ -9,6 +9,13 @@ Micro-services are implemented using [Spring Boot](https://spring.io/projects/sp
 
 ## Building docker images
 
+Clone and install powsybl-core snapshots:
+```bash
+git clone https://github.com/powsybl/powsybl-core.git
+cd powsybl-core
+mvn install
+```
+
 Clone the git repository.
 
 ```bash
@@ -36,16 +43,16 @@ powsybl/powsybl-server-network                   latest                         
 ```
 
 Four services have been built:
- - The Config service. It centralizes configuration of all others services. It is implemented using [Spring Cloud Config](https://spring.io/projects/spring-cloud-config).
+ - The Config service. It centralizes configuration of all other services. It is implemented using [Spring Cloud Config](https://spring.io/projects/spring-cloud-config).
  - The Discovery service. It is a service registry. It is implemented using [Netflix Eureka](https://github.com/Netflix/eureka).
- - The Storage service. It is a low level web service responsible for file system like data storage.
+ - The Storage service. It is a low-level web service responsible for file system like data storage.
  - The Network service. It holds the main API that allows querying network data and relies on the Storage service.
 
 ## Services configuration
 
 ### AFS configuration
 
-Create `$HOME/.itools/config.yml` and add the following configuration to add a MapDB storage drive named 'test':
+Create `$HOME/.itools/config.yml` and add the following configuration to add a MapDB storage drive named 'test' (for more documentation on this configuration, please visit the [MapDB storage](../afs/afs-mapdb.md) page):
 
 ```yaml
 mapdb-app-file-system:
