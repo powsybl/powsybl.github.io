@@ -3,25 +3,25 @@ title: Micro-services
 layout: default
 ---
 
-# Getting started  with micro-services
+# Getting started with micro-services
 
 Micro-services are implemented using [Spring Boot](https://spring.io/projects/spring-boot) and [Spring Cloud](https://spring.io/projects/spring-cloud), packaged as [Docker](https://www.docker.com/) images using [JIB Maven plugin](https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin).
 
 ## Building docker images
 
-Clone git repository.
+Clone the git repository.
 
 ```bash
 git clone https://github.com/powsybl/powsybl-spring.git
 ```
 
-Compile and build docker images.
+Compile and build the docker images.
 
 ```bash
 mvn -Pdocker install
 ```
 
-Docker images should be available in your local registry.
+The Docker images should be available in your local registry.
 
 ```bash
 $ docker images
@@ -36,16 +36,16 @@ powsybl/powsybl-server-network                   latest                         
 ```
 
 Four services have been built:
- - Config service which is responsible for centralizing configuration of all others services. It is implemented using [Spring Cloud Config](https://spring.io/projects/spring-cloud-config).
- - Discovery service which is responsible for service registry. It is implemented using [Netflix Eureka](https://github.com/Netflix/eureka).
- - Storage service, is a low level web service responsible for file system like data storage.
- - Network service rely on Storage service and allow network data query.
+ - The Config service. It centralizes configuration of all others services. It is implemented using [Spring Cloud Config](https://spring.io/projects/spring-cloud-config).
+ - The Discovery service. It is a service registry. It is implemented using [Netflix Eureka](https://github.com/Netflix/eureka).
+ - The Storage service. It is a low level web service responsible for file system like data storage.
+ - The Network service. It holds the main API that allows querying network data and relies on the Storage service.
 
 ## Services configuration
 
 ### AFS configuration
 
-Create `$HOME/.itools/config.yml` and add following configuration to add MapDB storage named 'test':
+Create `$HOME/.itools/config.yml` and add the following configuration to add a MapDB storage drive named 'test':
 
 ```yaml
 mapdb-app-file-system:
@@ -54,13 +54,13 @@ mapdb-app-file-system:
         remotely-accessible: true
 ```
 
-This file is be shared with server storage container.
+This file will be shared with the Storage service container.
 
-Create `$HOME/storage` directory. This directory is also be shared with server storage container and contains MapDB data.
+Create the `$HOME/storage` directory. This directory will also be shared with the Storage service container and contains the MapDB data.
 
 ### Spring config service configuration
 
-Create `$HOME/config` directory and copy all Spring Boot service configuration files.
+Create the `$HOME/config` directory and copy all the Spring Boot service configuration files.
 
 ```bash
 mkdir $HOME/config
@@ -77,6 +77,6 @@ docker-compose up
 
 ## Getting Swagger documentation
 
-Storage and Network services are documented using [Swagger](https://swagger.io/) and are available once container have been started (replace localhost with the docker host IP if you are using a remote docker host)
+Storage and Network services are documented using [Swagger](https://swagger.io/) and are available once the containers have started (replace localhost with the docker host IP if you are using a remote docker host)
  - [Storage service documentation](http://localhost:8090/swagger-ui.html)
  - [Network service documentation](http://localhost:8091/swagger-ui.html)
