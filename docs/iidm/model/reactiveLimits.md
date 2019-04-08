@@ -4,7 +4,7 @@ layout: default
 ---
 
 The `com.powsybl.iidm.network.ReactiveLimits` interface is used to model limitations of the reactive power of
-[generators](generator.md) and [VSC converter stations](vscConverterStation.md).
+[generators](generator.md), [VSC converter stations](vscConverterStation.md) and [batteries](battery.md).
 
 # MinMaxReactiveLimits
 The `com.powsybl.iidm.network.MinMaxReactiveLimits` class is a `ReactiveLimits` implementation where the reactive power

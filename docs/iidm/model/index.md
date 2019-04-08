@@ -8,6 +8,7 @@ layout: default
     - [VoltageLevel](voltageLevel.md)
         - [Node/Breaker topology](../../todo.md)
         - [Bus/Breaker topology](../../todo.md)
+        - [Battery](battery.md)
         - [Generator](generator.md)
         - [Load](load.md)
         - [Shunt compensator](shuntCompensator.md)
