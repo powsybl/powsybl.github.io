@@ -4,7 +4,7 @@ layout: default
 ---
 
 The `com.powsybl.iidm.network.VoltageLevel` is used to model a voltage level. A voltage level is is a collection of
-equipments located in the same substation and at the same base voltage. It can contain [generators](generator.md),
+equipments located in the same substation and at the same base voltage. It can contain [batteries](battery.md), [generators](generator.md),
 [loads](load.md), [shunt compensators](shuntCompensator.md), [dangling lines](danglingLine.md),
 [static VAR compensators](staticVarCompensator.md) and [HVDC converter stations](hvdcConverterStation.md).
 

@@ -18,7 +18,7 @@ The source code is hosted on GitHub in two different repositories:
 
 # Features
 Powsybl provides IIDM (iTesla Internal Data Model), a complete grid model (substations, voltage levels, AC and DC lines,
-two and three windings transformers, generators, loads, shunt and static VAR compensators...). The grid model can be
+two and three windings transformers, batteries, generators, loads, shunt and static VAR compensators...). The grid model can be
 extended with extensions to complete the modelling of the equipments. It also provides importers and exporters for several
 common exchange formats ([Entso-E CIM/CGMES](https://www.entsoe.eu/digital/common-information-model/cim-for-grid-models-exchange/),
 [UCTE-DEF](https://cimug.ucaiug.org/Groups/Model%20Exchange/UCTE-format.pdf)...).
