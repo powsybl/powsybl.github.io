@@ -34,6 +34,8 @@ Available arguments are:
     --output-file <FILE>                               the output path
     --output-format <FORMAT>                           the output format [JSON]
     --parameters-file <FILE>                           loadflow parameters as JSON file
+    --skip-postproc                                    skip network importer post
+                                                       processors (when configured)
     --with-extensions <EXTENSIONS>                     the extension list to enable
 
 Allowed LIMIT-TYPES values are [CURRENT, LOW_VOLTAGE, HIGH_VOLTAGE,
@@ -84,6 +86,10 @@ Use the `--output-format` parameter to specify the format of the output file. Th
 
 ### parameters-file
 Use the `--parameters-file` parameter to specify the path of the configuration file.
+
+### skip-postproc
+Use the `--skip-postproc` parameter to skip the importer's post processors. Read the [post processor](../iidm/importer/post-processor/index.md)
+documentation page to learn more about importer's post processors.
 
 ### with-extensions
 Use the `--with-extensions` parameter to activate a list of `com.powsybl.security.interceptors.SecurityAnalysisInterceptor`
