@@ -20,9 +20,9 @@ overview of all the existing modules.
 # IIDM
 IIDM (iTesla Internal Data Model) is a set of classes that models a complete grid model. IIDM modules are a part of the
 most important powsybl modules. Read this page to learn more about the [IIDM](iidm/model/index.md). IIDM networks can be
-[loaded](iidm/importer/iidm.md) or [saved]() to XML files without any data loss.
+[loaded](iidm/importer/iidm.md) or [saved](iidm/exporter/iidm.md) to XML files without any data loss.
 
-IIDM networks can also be created from various formats such as [UCTE-DEF](iidm/importer/ucte.md), [Entso-E CIMv1](iidm/importer/cim.md)
+IIDM networks can also be created from various formats such as [UCTE-DEF](iidm/importer/ucte.md)
 or [Entso-E CGMES](iidm/importer/cgmes.md) and be exported to various formats. Read the [importer](iidm/importer/index.md)
 and the [exporter](iidm/exporter/index.md) documentation pages to learn more about import/export features.
 
@@ -52,7 +52,7 @@ sorted by themes:
 | Computation | [security-analysis](tools/security-analysis.md) | Run a security analysis |
 | Computation | [sensitivity-computation](tools/sensitivity-computation.md) | Run a sensitivity computation |
 | Data conversion | [convert-network](tools/convert-network.md) | Convert a network from one format to another |
-| MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
+| MPI statistics | [export-tasks-statistics](todo.md) | Export the tasks statistics to CSV file |
 | Script | [run-script](tools/run-script.md) | Run a script |
 | Misc | [plugins-info](tools/plugins-info.md) | Displays the available plugins |
 

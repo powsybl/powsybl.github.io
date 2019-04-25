@@ -5,6 +5,7 @@ layout: default
 
 The `com.powsybl.iidm.network.Injection` class is used to model an equipment with a single [terminal](terminal.md).
 In IIDM, the `Injection` interface has seven sub interfaces:
+- [Battery](battery.md)
 - [BusbarSection](busbarSection.md)
 - [DanglingLine](danglingLine.md)
 - [Generator](generator.md)

@@ -35,14 +35,14 @@ unavailable. The commands are classified in themes, to help identifying their pu
 | ----- | ------- | ----------- |
 | Application file system | [afs](afs.md) | Application File System CLI |
 | Computation | [action-simulator](action-simulator.md) | Run a remedial actions simulation |
-| Computation | [compare-security-analysis-results](tools/compare-security-analysis-results.md) | Compare security analysis results |
+| Computation | [compare-security-analysis-results](compare-security-analysis-results.md) | Compare security analysis results |
 | Computation | [loadflow](loadflow.md) | Run a loadflow computation |
 | Computation | [loadflow-validation](loadflow-validation.md) | Validate the load-flow results of a network |
 | Computation | [run-impact-analysis](run-impact-analysis.md) | Run an impact analysis |
 | Computation | [security-analysis](security-analysis.md) | Run a security analysis |
 | Computation | [sensitivity-computation](sensitivity-computation.md) | Run a sensitivity computation |
 | Data conversion | [convert-network](convert-network.md) | Convert a network from one format to another |
-| MPI statistics | [export-tasks-statistics]() | Export the tasks statistics to CSV file |
+| MPI statistics | [export-tasks-statistics](../todo.md) | Export the tasks statistics to CSV file |
 | Script | [run-script](run-script.md) | Run a script |
 | Misc | [plugins-info](plugins-info.md) | Displays the available plugins |
 

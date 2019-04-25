@@ -7,7 +7,7 @@ The [AMPL](https://ampl.com/) (**A** **M**athematical **P**rogramming **L**angua
 large-scale mathematical computing (i.e. large-scale optimization and scheduling-type problems).
 
 IIDM networks can be converted in flat text files easy to read in AMPL, each of which describing one type of the network equipments
-(generators, loads, branches, buses, etc.).
+(batteries, generators, loads, branches, buses, etc.).
 
 # Example
 ```text

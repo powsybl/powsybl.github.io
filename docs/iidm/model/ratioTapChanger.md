@@ -4,7 +4,7 @@ layout: default
 ---
 
 The `com.powsybl.iidm.network.RatioTapChanger` interface is used to model ratio tap changer devices on transformers.
-It can be added to both [two windings transformers](./twoWindingsTransformer.md) and [three windings transformers](./threeWindingsTransformer.md).
+It can be added to both [two windings transformers](twoWindingsTransformer.md) and [three windings transformers](threeWindingsTransformer.md).
 
 # Characteristics
 
@@ -13,7 +13,7 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 | Low tap position | int | - | no | 0 | Position index of the tap changer's low tap |
 | Tap position | int | - | yes | - | Position index of current tap |
 | Load tap changing capabilities | boolean | - | no | false | ```true``` if ratio tap changer has load tap changing capabilities, ```false``` otherwise |
-| Regulating | boolean | - | no | false | ```true``` if ratio tap changer is regulating, ```false``` otherwise. [State variable]() |
+| Regulating | boolean | - | no | false | ```true``` if ratio tap changer is regulating, ```false``` otherwise. [State variable](../../todo.md) |
 | Target V | double | kV | yes | - | The target voltage |
 | Regulation terminal | Terminal | - | no | - | The terminal which voltage is regulated |
 
@@ -31,7 +31,7 @@ Each step of a ratio tap changer has the following attributes:
 A ratio tap changer is regulating if both **Load tap changing capabilities** and **Regulating** are set to ```true```.
 Remote control can be modelled by putting a distant terminal as regulation terminal.
 
-For more information about how ratio tap changers are taken into account in transformers model, please refer to [two windings transformers documentation](./twoWindingsTransformer.md) and [three windings transformers one](./threeWindingsTransformer.md).
+For more information about how ratio tap changers are taken into account in transformers model, please refer to [two windings transformers documentation](twoWindingsTransformer.md) and [three windings transformers one](threeWindingsTransformer.md).
 
 
 # Examples

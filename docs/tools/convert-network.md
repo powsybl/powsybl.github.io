@@ -68,7 +68,7 @@ Refer to the documentation page of each [importer](../iidm/importer/index.md) to
 
 # Examples
 
-This example shows how to convert a [UCTE-DEF](../iidm/importer/ucte.md) file to a [XIIDM]() file:
+This example shows how to convert a [UCTE-DEF](../iidm/importer/ucte.md) file to a [XIIDM](../iidm/exporter/iidm.md) file:
 ```shell
 $> itools convert-network --input-file $HOME/case-file.uct --output-format XIIDM --output-file $HOME/case-file.xiidm
 ```

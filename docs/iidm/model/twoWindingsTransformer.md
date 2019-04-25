@@ -13,19 +13,21 @@ A [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phase
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | id | string | - | yes | - | Unique identifier of the transformer |
 | name | string | - | yes | - | Humanly readable name of the transformer |
-| $$r_{nom}$$ | double | $$\Omega$$  | yes | - | The nominal series resistance at the secondary side of the transformer |
-| $$x_{nom}$$ | double | $$\Omega$$ | yes | - | The nominal series reactance at the secondary side of the transformer |
-| $$g_{nom}$$ | double | S | yes | - | The nominal magnetizing conductance at the secondary side of the transformer |
-| $$b_{nom}$$ | double | S | yes | - | The nominal magnetizing susceptance at the secondary side of the transformer |
-| $$V_{1\ nom}$$ | double | kV | yes | - | The primary winding rated voltage |
-| $$V_{2\ nom}$$ | double | kV | yes | - | The secondary winding rated voltage |
+| $$r_{nom}$$ | double | $$\Omega$$  | yes | - | The nominal series resistance at the side 2 of the transformer |
+| $$x_{nom}$$ | double | $$\Omega$$ | yes | - | The nominal series reactance at the side 2 of the transformer |
+| $$g_{nom}$$ | double | S | yes | - | The nominal magnetizing conductance at the side 2 of the transformer |
+| $$b_{nom}$$ | double | S | yes | - | The nominal magnetizing susceptance at the side 2 of the transformer |
+| $$V_{1\ nom}$$ | double | kV | yes | - | The rated voltage at side 1 |
+| $$V_{2\ nom}$$ | double | kV | yes | - | The rated voltage at side 2 |
+
+Two windings transformers can also have [current limits](currentLimits.md) defined for each end.
 
 # Model
 Two windings transformer are modelled with the following equivalent $$\pi$$ model:
 
 ![Power line model](./images/two-windings-transformer-model.svg){: width="50%" .center-image}
 
-With series impedance $$z$$ and the shunt admittance $$y$$, at secondary side of the transformer, and $$\rho$$ the voltage ratio and $$\alpha$$ the angle difference, and parameters from current step of potential [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phaseTapChanger.md):
+With series impedance $$z$$ and the shunt admittance $$y$$ and $$\rho$$ the voltage ratio and $$\alpha$$ the angle difference, and parameters from current step of potential [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phaseTapChanger.md):
 
 $$
 r=r_{nom}.\left(1+\frac{r_{r, tap} + r_{\phi, tap}}{100}\right)\\
@@ -37,7 +39,7 @@ b=b_{nom}.\left(1+\frac{b_{r, tap} + b_{\phi, tap}}{100}\right)\\
 z=r+j.x\\
 y=g+j.b\\
 V_{0}=V_{1}.\rho e^{j\alpha}\\
-I_{0}=\frac{I_{1}}{\rho e^{j\alpha}}\\
+I_{0}=\frac{I_{1}}{\rho e^{-j\alpha}}\\
 $$
 
 the equations of the two windings transformer, in complex notations, are as follow:
@@ -47,7 +49,7 @@ $$
 I_{1}\\
 I_{2}
 \end{array}\right)=\left(\begin{array}{cc}
-\rho\text{²}e^{2j\alpha}(y+\frac{1}{z}) & -\rho e^{j\alpha}\frac{1}{z}\\
+\rho\text{²}(y+\frac{1}{z}) & -\rho e^{-j\alpha}\frac{1}{z}\\
 -\rho e^{j\alpha}\frac{1}{z} & \frac{1}{z}
 \end{array}\right)\left(\begin{array}{c}
 V_{1}\\
