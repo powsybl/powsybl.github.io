@@ -18,21 +18,11 @@ The IIDM exporter has three exporting modes:
     
    - **Third mode**: Exports the network in a file and each extension type in a separate file. 
  
-There is another way to export a network, it's a light export method called incremental export.  
-
-That export method, when applied on a network, generates (by default) three files:   
-
-   - `base-STATE.xiidm` file: contains only network elements having state attributes.
-    
-   - `base-TOPO.xiidm` file: contains only network elements having topology attributes.
-   
-   - `base-CONTROL.xiidm` file: contains only network elements having control attributes.
-
-In case you want to update a network, you don't need a whole network, you just need network elements containing useful attributes, that's why that export method exist.
-The exported files, in a later stage,  allow you to update a network control, state or topology elements's attributes separately.
-
-
-
+The IIDM exporter has also a lighter export mode that allows to export only fields that describe the network variables. 
+This mode is more commonly called incremental mode. It exports the network in three files, 
+the first is dedicated to the state variables, the second to the topology and the last one to control variables. 
+This export is light because its design allows to update control, state or topology elements's attributes of a network in a separate way. 
+ 
 # Example
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -123,27 +113,31 @@ The export mode can be:
 The default value for this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
 
 ## iidm.export.xml.incremental-conversion
-The `iidm.export.xml.incremental-conversion` property is an optional property that defines whether the export type is 
-incremental or not.
+The `iidm.export.xml.incremental-conversion` property is an optional property that defines whether the export type is incremental or not. 
+Incremental means here that only network variables will be exported. Note that this export is not a full export, contrary to the three previous modes, described above. Setting that attribute to true lets us export only the elements having control, state or topology attributes.
+These elements are exported into three separated files (by default):
 
-Setting that attribute to true lets us export only the elements having control, state or topology attributes.
-we export those elements to three separated files `base-TOPO.xiidm`, `base-STATE.xiidm` and `base-CONTROL.xiidm`.
+   - `base-STATE.xiidm` file: contains only network elements having state attributes.
 
-The default value for this parameter is `false`.
+   - `base-TOPO.xiidm` file: contains only network elements having topology attributes.
+
+   - `base-CONTROL.xiidm` file: contains only network elements having control attributes.
+
+The default value of this parameter is `false`.
 
 ## iidm.export.incremental.xml.topo
 The `iidm.export.incremental.xml.topo` property is an optional property that defines whether the XIIDM exporter has to
-export elements having topology attributes in a TOPO file or not. 
+export elements having topology attributes in a `base-TOPO.xiidm` file or not. 
 
 That property is taken into account only when the export type is incremental, its default value is `true`.
 ## iidm.export.incremental.xml.state
 The `iidm.export.incremental.xml.state` property is an optional property that defines whether the XIIDM exporter has to
-export elements having state attributes in a STATE file or not. 
+export elements having state attributes in a `base-STATE.xiidm` file or not. 
 
 That property is taken into account only when the export type is incremental, its default value is `true`.
 ## iidm.export.incremental.xml.control
 The `iidm.export.incremental.xml.control` property is an optional property that defines whether the XIIDM exporter has to
-export elements having control attributes in a CONTROL file or not. 
+export elements having control attributes in a `base-CONTROL.xiidm` file or not. 
 
 That property is taken into account only when the export type is incremental, its default value is `true`.
 ## iidm.export.xml.extensions
