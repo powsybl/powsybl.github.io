@@ -20,7 +20,7 @@ The IIDM exporter has three exporting modes:
  
 The IIDM exporter has also a lighter export mode that allows to export only fields that describe the network variables. 
 This mode is more commonly called incremental mode. It exports the network in three files, 
-the first is dedicated to the state variables, the second to the topology and the last one to control variables. 
+the first is dedicated to the state variables, the second to the topology variables and the last one to control variables. 
 This export is light because its design allows to update control, state or topology elements's attributes of a network in a separate way. 
  
 # Example
@@ -125,6 +125,7 @@ These elements are exported into three separated files (by default):
 
 The default value of this parameter is `false`.
 
+You can find [here](../model/incremental-iidm.md) more information about the content of thees files.
 ## iidm.export.incremental.xml.topo
 The `iidm.export.incremental.xml.topo` property is an optional property that defines whether the XIIDM exporter has to
 export elements having topology attributes in a `base-TOPO.xiidm` file or not. 
