@@ -19,6 +19,13 @@ from ENTSO-E Test Configurations for Conformity Assessment Scheme v2.0.
 
 # Configuration properties for CGMES importer
 
+These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
+module.
+
+## iidm.import.cgmes.allow-unsupported-tap-changers
+The `iidm.import.cgmes.allow-unsupported-tap-changers` property is an optional property that determines if every tap changer is read in order to be converted in best effort
+or if only supported tap changers are read and converted. By default, its value is `true`.
+
 ## iidm.import.cgmes.boundary-location
 The `iidm.import.cgmes.boundary-location` property is an optional property that defines the directory path where the CGMES importer
 can find the boundary files if they are not present in the imported zip file. By default, its value is `<ITOOLS_CONFIG_DIR>/CGMES/boundary`.
