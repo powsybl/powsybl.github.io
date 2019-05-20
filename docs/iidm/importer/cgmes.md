@@ -23,7 +23,7 @@ These properties can be defined in the configuration file in the [import-export-
 module.
 
 ## iidm.import.cgmes.allow-unsupported-tap-changers
-The `iidm.import.cgmes.allow-unsupported-tap-changers` property is an optional property that determines if every tap changers are read in order to be converted in best effort
+The `iidm.import.cgmes.allow-unsupported-tap-changers` property is an optional property that determines if every tap changer is read in order to be converted in best effort
 or if only supported tap changers are read and converted. By default, its value is `true`.
 
 ## iidm.import.cgmes.boundary-location
