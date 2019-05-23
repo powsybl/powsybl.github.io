@@ -24,7 +24,8 @@ The layout of such distribution is the following:
 
 # Goals overview
 The `itools-packager` only has one goal.
-- The `package-zip` goal creates a zip package based on `iTools`
+- The `package` goal creates a compressed package based on `iTools` with three types of output compression format:
+zip, tar.gz, tar.bz2.
 
 # Configuration
 
@@ -32,7 +33,7 @@ The `itools-packager` only has one goal.
 
 ### archiveName
 The `archiveName` property defines the basename of the archive. If this property is not set, `itools-packager` uses the
-packageName.
+packageName. The iTools-packager supports three types of output compression format: zip, tar.gz, tar.bz2.
 
 ### packageName
 The `packageName` property defines the name of the root folder of the distribution. If this property is not set,
@@ -74,7 +75,7 @@ The `copyToEtc` property defines the list of files to copy in the `etc` director
                 <execution>
                     <phase>package</phase>
                     <goals>
-                        <goal>package-zip</goal>
+                        <goal>package</goal>
                     </goals>
                 </execution>
             </executions>
