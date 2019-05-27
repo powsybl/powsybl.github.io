@@ -8,6 +8,7 @@ todo:
 The `afs` command performs some basic actions on a [AFS](../afs/index.md) drive:
 - list the content of an AFS folder
 - archive/restore an AFS content from/to a directory for backup purposes
+- handle (remove/list ...) an AFS inconsistent nodes for cleaning purposes.
 
 Read this [tutorial](../tutorials/afs/afs.md) to learn how to configure an AFS drive. 
 
@@ -15,18 +16,22 @@ Read this [tutorial](../tutorials/afs/afs.md) to learn how to configure an AFS d
 ```shell
 $> itools afs --help
 usage: itools [OPTIONS] afs [--archive <FILE_SYSTEM_NAME>] [--dir <DIR>]
-       [--help] [--ls <PATH>] [--unarchive <FILE_SYSTEM_NAME>]
+       [--help] [--ls <PATH>] [--unarchive <FILE_SYSTEM_NAME>] [--rm-inconsistent-nodes  <FILE_SYSTEM_NAME>  <NODE_ID>]
+       [--set-inconsistent-nodes  <FILE_SYSTEM_NAME> <NODE_ID>] [--ls-inconsistent-nodes  <FILE_SYSTEM_NAME>]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
     --parallel                    Run command in parallel mode
 
 Available arguments are:
-    --archive <FILE_SYSTEM_NAME>     archive file system
-    --dir <DIR>                      directory
-    --help                           display the help and quit
-    --ls <PATH>                      list files
-    --unarchive <FILE_SYSTEM_NAME>   unarchive file system
+    --archive <FILE_SYSTEM_NAME>                           archive file system
+    --dir <DIR>                                            directory
+    --help                                                 display the help and quit
+    --ls <PATH>                                            list files
+    --unarchive <FILE_SYSTEM_NAME>                         unarchive file system
+    --rm-inconsistent-nodes  <FILE_SYSTEM_NAME>  <NODE_ID> remove inconsistent nodes
+    --set-inconsistent-nodes  <FILE_SYSTEM_NAME> <NODE_ID> make inconsistent nodes consistent
+    --ls-inconsistent-nodes  <FILE_SYSTEM_NAME>            list the inconsistent nodes
 ```
 
 ## Commands
@@ -39,6 +44,15 @@ Use the `--ls` command to list the content of the specified AFS node.
 
 ### unarchive
 Use the `--unarchive` command to restore an AFS root node from a backup directory.
+
+### ls-inconsistent-nodes
+Use the `--ls-inconsistent-nodes` to list all inconsistent nodes in a specified file system.
+
+### rm-inconsistent-nodes
+Use the `--rm-inconsistent-nodes` to remove all inconsistent nodes in a specified file system.
+
+### set-inconsistent-nodes
+Use the `--set-inconsistent-nodes` to mark all inconsistent nodes (or a specified node) as consistent.
 
 ## Required parameters
 
