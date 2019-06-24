@@ -77,5 +77,6 @@ module2:
 - [mapdb-app-file-system](mapdb-app-file-system.md)
 - [remote-service](remote-service.md)
 - [security](security.md)
+- [security-analysis](security-analysis.md)
 - [simulation-parameters](simulation-parameters.md)
 - [table-formatter](table-formatter.md)
