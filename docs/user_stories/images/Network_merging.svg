@@ -9,15 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="11.906mm"
-   height="11.906mm"
-   viewBox="0 0 11.906 11.906"
+   width="11.906251mm"
+   height="11.906251mm"
+   viewBox="0 0 11.906251 11.906251"
    version="1.1"
-   id="svg1137"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   id="svg966"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="Network_merging.svg">
   <defs
-     id="defs1131" />
+     id="defs960" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,19 +25,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6"
-     inkscape:cx="19.562801"
-     inkscape:cy="27.757315"
+     inkscape:zoom="0.35"
+     inkscape:cx="888.21428"
+     inkscape:cy="-537.5"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="891"
-     inkscape:window-height="1048"
-     inkscape:window-x="958"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="-8"
+     inkscape:window-y="20"
+     inkscape:window-maximized="1" />
   <metadata
-     id="metadata1134">
+     id="metadata963">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -49,15 +49,15 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Calque 1"
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-285.094)">
+     transform="translate(129.17336,5.2864584)">
     <g
-       transform="translate(-91.071899,220.92709)"
-       id="g2359">
+       transform="translate(-220.24526,-69.453122)"
+       id="g1518">
       <circle
-         style="opacity:1;vector-effect:none;fill:#008080;fill-opacity:1;stroke:none;stroke-width:0.34017861;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.68035727, 1.36071455;stroke-dashoffset:0;stroke-opacity:1"
+         style="opacity:1;vector-effect:none;fill:#0099dd;fill-opacity:1;stroke:none;stroke-width:0.34017861;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.68035727, 1.36071455;stroke-dashoffset:0;stroke-opacity:1"
          id="circle4878"
          cx="97.025024"
          cy="70.119789"

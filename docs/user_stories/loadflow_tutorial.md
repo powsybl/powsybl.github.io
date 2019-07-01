@@ -25,7 +25,7 @@ The tutorial can be translated in a short and easy workflow. All the input data 
 <img src="./images/File.svg" alt="" style="vertical-align: bottom"/>
 The network is modeled in [IIDM](../iidm/model/index.md), which is the internal model of PowSyBl. This model can be serialized in a XML format for experimental purposes.
 ```java
-File file = new File(LoadflowTutorial.class.getResource("/eurostag-tutorial1-lf.xml").getPath());
+File file = new File(<path_to_file_"eurostag-tutorial1-lf.xml">);
 ```
 <br />
 <img src="./images/Import.svg" alt="" style="vertical-align: bottom"/>
@@ -42,11 +42,11 @@ ComputationManager computationManager = LocalComputationManager.getDefault();
 LoadFlow loadflow = new Hades2Factory().create(network, computationManager, 0);
 ```
 
-A loadflow is run on the working variant of the network with a set of parameters. The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here angles are set to zero and tensions are set to one per unit. We also create a new variant to store the resulted flows. Note that a network variant is close to a state vector and gathers variables such as injections, productions, tap positions, states of buses, etc.
+A loadflow is run on a variant of the network with a set of parameters. The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here angles are set to zero and tensions are set to one per unit. The computed flows are stored in the variant given in input. Note that a network variant is close to a state vector and gathers variables such as injections, productions, tap positions, states of buses, etc.
 
 ```java
-LoadFlowParameters loadflowParameters = new LoadFlowParameters()
-        .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
+LoadFlowParameters loadflowParameters = new LoadFlowParameters().setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
+network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID, "loadflowVariant");
 LoadFlowResult result = loadflow.run("loadflowVariant", loadflowParameters).join();
 ```
 <br />
@@ -59,4 +59,7 @@ network.getLine("NHV1_NHV2_1").getTerminal2().disconnect();
 ```
 <br />
 <img src="./images/Compute_LF.svg" alt="" style="vertical-align: bottom"/>
-Once the continency is applied on the network, the post-contingency state of the network is computed through a loadflow the way we see above.  
+Once the continency is applied on the network, the post-contingency state of the network is computed through a loadflow the way we see above.
+
+# Going further
+The whole tutorial is available in [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/loadflow).
