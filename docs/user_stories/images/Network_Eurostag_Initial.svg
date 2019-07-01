@@ -10,90 +10,14 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="70.228271mm"
-   height="8.2310333mm"
-   viewBox="0 0 70.228271 8.2310332"
+   height="8.23104mm"
+   viewBox="0 0 70.228271 8.23104"
    version="1.1"
-   id="svg8"
+   id="svg611"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="Network_Eurostag_Initial.svg">
   <defs
-     id="defs2">
-    <marker
-       inkscape:isstock="true"
-       style="overflow:visible"
-       id="marker1701"
-       refX="0"
-       refY="0"
-       orient="auto"
-       inkscape:stockid="Arrow1Send">
-      <path
-         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
-         style="fill:#008080;fill-opacity:1;fill-rule:evenodd;stroke:#008080;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         id="path1699"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       inkscape:stockid="TriangleOutL"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="TriangleOutL"
-       style="overflow:visible"
-       inkscape:isstock="true">
-      <path
-         id="path1232"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#008080;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="scale(0.8)"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       inkscape:stockid="Arrow2Mend"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow2Mend"
-       style="overflow:visible"
-       inkscape:isstock="true">
-      <path
-         id="path1117"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#008080;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
-         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
-         transform="scale(-0.6)"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       inkscape:stockid="Arrow1Lend"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="marker1353"
-       style="overflow:visible"
-       inkscape:isstock="true">
-      <path
-         id="path1093"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#008080;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       inkscape:stockid="Arrow1Lend"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="Arrow1Lend"
-       style="overflow:visible"
-       inkscape:isstock="true">
-      <path
-         id="path5229"
-         d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="matrix(-0.8,0,0,-0.8,-10,0)"
-         inkscape:connector-curvature="0" />
-    </marker>
-  </defs>
+     id="defs605" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -101,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="167.50432"
-     inkscape:cy="-76.547696"
+     inkscape:zoom="0.35"
+     inkscape:cx="-27.28516"
+     inkscape:cy="41.269019"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -111,268 +35,205 @@
      inkscape:window-height="987"
      inkscape:window-x="-8"
      inkscape:window-y="20"
-     inkscape:window-maximized="1"
-     inkscape:snap-bbox="true"
-     inkscape:snap-others="false"
-     inkscape:object-nodes="true"
-     inkscape:bbox-nodes="true"
-     inkscape:snap-global="true"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0">
-    <inkscape:grid
-       type="xygrid"
-       id="grid3713"
-       originx="-8.2020717"
-       originy="-281.46446" />
-  </sodipodi:namedview>
+     inkscape:window-maximized="1" />
   <metadata
-     id="metadata5">
+     id="metadata608">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Calque 1"
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-8.2020722,-7.3045056)">
+     transform="translate(-113.05253,-151.52139)">
     <g
-       transform="translate(4.3986893,-100.28726)"
-       id="g1523"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999">
-      <circle
-         transform="rotate(-90)"
-         id="circle1517"
-         cx="-111.44271"
-         cy="23.151041"
-         r="3.3072917"
-         style="fill:#008080;fill-opacity:1;stroke-width:0.34159866" />
+       transform="translate(82.625448,122.2942)"
+       id="g562">
+      <g
+         style="fill:#0099dd;fill-opacity:1"
+         transform="translate(26.623699,-78.364586)"
+         id="g1005">
+        <circle
+           transform="rotate(-90)"
+           id="circle42"
+           cx="-111.44271"
+           cy="23.151041"
+           r="3.3072917"
+           style="fill:#0099dd;fill-opacity:1;stroke-width:0.34159866" />
+        <path
+           inkscape:connector-curvature="0"
+           style="fill:#0099dd;fill-opacity:1;stroke-width:0.34159866"
+           d="m 21.49901,108.58274 a 3.3072917,3.3072917 0 0 0 -1.65526,2.85997 3.3072917,3.3072917 0 0 0 1.652031,2.85997 3.3072917,3.3072917 0 0 0 1.65526,-2.85997 3.3072917,3.3072917 0 0 0 -1.652031,-2.85997 z"
+           id="circle44" />
+        <circle
+           style="fill:#0099dd;fill-opacity:1;stroke-width:0.34159866"
+           r="3.3072917"
+           cy="19.016926"
+           cx="-111.44271"
+           id="circle33"
+           transform="rotate(-90)" />
+      </g>
+      <g
+         style="fill:#0099dd;fill-opacity:1"
+         transform="translate(62.342449,-78.364586)"
+         id="g1005-9">
+        <circle
+           transform="rotate(-90)"
+           id="circle42-3"
+           cx="-111.44271"
+           cy="23.151041"
+           r="3.3072917"
+           style="fill:#0099dd;fill-opacity:1;stroke-width:0.34159866" />
+        <path
+           inkscape:connector-curvature="0"
+           style="fill:#0099dd;fill-opacity:1;stroke-width:0.34159866"
+           d="m 21.49901,108.58274 a 3.3072917,3.3072917 0 0 0 -1.65526,2.85997 3.3072917,3.3072917 0 0 0 1.652031,2.85997 3.3072917,3.3072917 0 0 0 1.65526,-2.85997 3.3072917,3.3072917 0 0 0 -1.652031,-2.85997 z"
+           id="circle44-1" />
+        <circle
+           style="fill:#0099dd;fill-opacity:1;stroke-width:0.34159866"
+           r="3.3072917"
+           cy="19.016926"
+           cx="-111.44271"
+           id="circle33-9"
+           transform="rotate(-90)" />
+      </g>
+      <path
+         id="circle5335"
+         d="m 33.734375,29.770834 a 3.3072917,3.3072917 0 0 0 -3.307291,3.307292 3.3072917,3.3072917 0 0 0 3.307291,3.307291 3.3072917,3.3072917 0 0 0 3.307292,-3.307291 3.3072917,3.3072917 0 0 0 -3.307292,-3.307292 z m -0.714168,2.315104 c 0.952498,0 0.903345,0.793776 1.375627,0.791166 0.472281,-0.0026 0.488391,-0.473666 0.480074,-0.791166 0.172594,0 0.525342,1.7e-5 0.842842,0 0,0.793751 -0.317706,1.984375 -1.270206,1.984375 -0.952498,0 -0.753649,-0.79375 -1.2299,-0.79375 -0.476243,0 -0.476456,0.476257 -0.476456,0.79375 H 31.75 c -0.0013,-0.793744 0.317713,-1.984375 1.270207,-1.984375 z"
+         style="fill:#0099dd;fill-opacity:1;stroke-width:0.34159863"
+         inkscape:connector-curvature="0" />
+      <g
+         style="fill:#0099dd;fill-opacity:1"
+         id="g5048">
+        <circle
+           style="fill:#0099dd;fill-opacity:1;stroke-width:0.34159863"
+           r="3.3072917"
+           cy="33.078125"
+           cx="97.348061"
+           id="circle5346" />
+        <path
+           inkscape:connector-curvature="0"
+           style="opacity:1;vector-effect:none;fill:#0099dd;fill-opacity:1;stroke:none;stroke-width:0.15874979;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m 96.412719,31.207437 -0.935346,0.935346 0.935346,0.935342 -0.935346,0.935343 0.935346,0.935346 0.935342,-0.935346 0.935343,0.935346 0.935346,-0.935346 -0.935346,-0.935343 0.935346,-0.935342 -0.935346,-0.935346 -0.935343,0.935346 z"
+           id="rect5350" />
+      </g>
+      <path
+         style="fill:#000000;fill-opacity:0;stroke:#0099dd;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 37.041667,33.078125 h 5.291668"
+         id="path3759"
+         inkscape:connector-curvature="0" />
       <path
          inkscape:connector-curvature="0"
-         style="fill:#ffffff;fill-opacity:1;stroke-width:0.34159866"
-         d="m 21.49901,108.58274 a 3.3072917,3.3072917 0 0 0 -1.65526,2.85997 3.3072917,3.3072917 0 0 0 1.652031,2.85997 3.3072917,3.3072917 0 0 0 1.65526,-2.85997 3.3072917,3.3072917 0 0 0 -1.652031,-2.85997 z"
-         id="path1519" />
-      <circle
-         style="fill:#008080;fill-opacity:1;stroke-width:0.34159866"
-         r="3.3072917"
-         cy="19.016926"
-         cx="-111.44271"
-         id="circle1521"
-         transform="rotate(-90)" />
-    </g>
-    <g
-       transform="translate(40.117436,-100.28726)"
-       id="g1531"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999">
-      <circle
-         transform="rotate(-90)"
-         id="circle1525"
-         cx="-111.44271"
-         cy="23.151041"
-         r="3.3072917"
-         style="fill:#008080;fill-opacity:1;stroke-width:0.34159866" />
+         id="path3761"
+         d="M 88.749101,33.078125 H 94.04077"
+         style="fill:#0099dd;fill-opacity:1;stroke:#0099dd;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
-         style="fill:#ffffff;fill-opacity:1;stroke-width:0.34159866"
-         d="m 21.49901,108.58274 a 3.3072917,3.3072917 0 0 0 -1.65526,2.85997 3.3072917,3.3072917 0 0 0 1.652031,2.85997 3.3072917,3.3072917 0 0 0 1.65526,-2.85997 3.3072917,3.3072917 0 0 0 -1.652031,-2.85997 z"
-         id="path1527" />
-      <circle
-         style="fill:#008080;fill-opacity:1;stroke-width:0.34159866"
-         r="3.3072917"
-         cy="19.016926"
-         cx="-111.44271"
-         id="circle1529"
-         transform="rotate(-90)" />
-    </g>
-    <path
-       id="path1533"
-       d="m 11.509362,7.8481565 a 3.3072917,3.3072917 0 0 0 -3.3072898,3.3072885 3.3072917,3.3072917 0 0 0 3.3072898,3.307272 3.3072917,3.3072917 0 0 0 3.307292,-3.307272 3.3072917,3.3072917 0 0 0 -3.307292,-3.3072885 z m -0.714168,2.3151045 c 0.952498,0 0.903345,0.793767 1.375627,0.791157 0.472281,-0.003 0.488391,-0.473657 0.480074,-0.791157 0.172594,0 0.525342,2e-5 0.842842,0 0,0.793747 -0.317706,1.984361 -1.270206,1.984361 -0.952498,0 -0.753649,-0.793747 -1.2299,-0.793747 -0.476243,0 -0.476456,0.476257 -0.476456,0.793747 H 9.5249873 c -0.0013,-0.793737 0.317713,-1.984361 1.2702067,-1.984361 z"
-       style="fill:#008080;stroke-width:0.34159863"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999" />
-    <g
-       id="g1539"
-       transform="translate(-22.225008,-21.922663)"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999">
-      <circle
-         style="fill:#008080;fill-opacity:1;stroke-width:0.34159863"
-         r="3.3072917"
-         cy="33.078125"
-         cx="97.348061"
-         id="circle1535" />
+         id="path3775"
+         d="m 52.916667,33.078125 h 5.291668"
+         style="fill:#000000;fill-opacity:0;stroke:#0099dd;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
+         style="fill:#0099dd;fill-opacity:1;stroke:#0099dd;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 58.208332,36.385417 V 29.770833"
+         id="path3777"
          inkscape:connector-curvature="0"
-         style="opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.15874979;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         d="m 96.412719,31.207437 -0.935346,0.935346 0.935346,0.935342 -0.935346,0.935343 0.935346,0.935346 0.935342,-0.935346 0.935343,0.935346 0.935346,-0.935346 -0.935346,-0.935343 0.935346,-0.935342 -0.935346,-0.935346 -0.935343,0.935346 z"
-         id="path1537" />
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:#0099dd;fill-opacity:1;stroke:#0099dd;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 78.052085,33.078125 H 72.760417"
+         id="path3785"
+         inkscape:connector-curvature="0" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path3787"
+         d="M 72.628125,36.385417 V 29.770833"
+         style="fill:#0099dd;fill-opacity:1;stroke:#0099dd;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         style="fill:#0099dd;fill-opacity:1;stroke:#0099dd;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 58.208332,31.09375 H 72.495833"
+         id="path4594"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4596"
+         d="M 58.208332,35.194792 H 72.495833"
+         style="fill:#0099dd;fill-opacity:1;stroke:#0099dd;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         id="text4653"
+         y="32.462849"
+         x="37.503796"
+         style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0099dd;fill-opacity:1;stroke:none;stroke-width:0.04807815"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#0099dd;fill-opacity:1;stroke-width:0.04807815"
+           y="32.462849"
+           x="37.503796"
+           id="tspan4651"
+           sodipodi:role="line">606,5</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0099dd;fill-opacity:1;stroke:none;stroke-width:0.04807815"
+         x="59.415749"
+         y="30.596289"
+         id="text4673"><tspan
+           sodipodi:role="line"
+           id="tspan4671"
+           x="59.415749"
+           y="30.596289"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#0099dd;fill-opacity:1;stroke-width:0.04807815">302,4</tspan></text>
+      <text
+         id="text4677"
+         y="37.225349"
+         x="59.415749"
+         style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0099dd;fill-opacity:1;stroke:none;stroke-width:0.04807815"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#0099dd;fill-opacity:1;stroke-width:0.04807815"
+           y="37.225349"
+           x="59.415749"
+           id="tspan4675"
+           sodipodi:role="line">302,4</tspan></text>
+      <text
+         id="text4681"
+         y="30.596289"
+         x="67.048492"
+         style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0099dd;fill-opacity:1;stroke:none;stroke-width:0.04807815"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#0099dd;fill-opacity:1;stroke-width:0.04807815"
+           y="30.596289"
+           x="67.048492"
+           id="tspan4679"
+           sodipodi:role="line">300,4</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0099dd;fill-opacity:1;stroke:none;stroke-width:0.04807815"
+         x="67.048492"
+         y="37.225349"
+         id="text4685"><tspan
+           sodipodi:role="line"
+           id="tspan4683"
+           x="67.048492"
+           y="37.225349"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#0099dd;fill-opacity:1;stroke-width:0.04807815">300,4</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0099dd;fill-opacity:1;stroke:none;stroke-width:0.04807815"
+         x="89.894371"
+         y="32.462849"
+         id="text4689"><tspan
+           sodipodi:role="line"
+           id="tspan4687"
+           x="89.894371"
+           y="32.462849"
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#0099dd;fill-opacity:1;stroke-width:0.04807815">600</tspan></text>
     </g>
-    <path
-       style="fill:none;stroke:#008080;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 14.816654,11.155445 h 5.291668"
-       id="path1541"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path1543"
-       d="m 66.524088,11.155445 h 5.291669"
-       style="fill:none;stroke:#008080;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path1545"
-       d="m 30.691654,11.155445 h 5.291668"
-       style="fill:none;stroke:#008080;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999" />
-    <path
-       style="fill:none;stroke:#008080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 35.983319,14.462717 V 7.8481565"
-       id="path1547"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999" />
-    <path
-       style="fill:none;stroke:#008080;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 55.827072,11.155445 H 50.535404"
-       id="path1549"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999" />
-    <path
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0"
-       id="path1551"
-       d="M 50.403112,14.462717 V 7.8481565"
-       style="fill:none;stroke:#008080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999" />
-    <path
-       style="fill:none;stroke:#008080;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 35.983319,9.1710756 H 50.27082"
-       id="path1553"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999" />
-    <path
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0"
-       id="path1555"
-       d="M 35.983319,13.272093 H 50.27082"
-       style="fill:none;stroke:#008080;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999" />
-    <text
-       id="text1559"
-       y="10.54015"
-       x="15.278778"
-       style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008080;fill-opacity:1;stroke:none;stroke-width:0.04807815"
-       xml:space="preserve"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#008080;fill-opacity:1;stroke-width:0.04807815"
-         y="10.54015"
-         x="15.278778"
-         id="tspan1557"
-         sodipodi:role="line">606,5</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008080;fill-opacity:1;stroke:none;stroke-width:0.04807815"
-       x="37.190727"
-       y="8.6736059"
-       id="text1563"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999"><tspan
-         sodipodi:role="line"
-         id="tspan1561"
-         x="37.190727"
-         y="8.6736059"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#008080;fill-opacity:1;stroke-width:0.04807815">302,4</tspan></text>
-    <text
-       id="text1567"
-       y="15.30266"
-       x="37.190727"
-       style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008080;fill-opacity:1;stroke:none;stroke-width:0.04807815"
-       xml:space="preserve"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#008080;fill-opacity:1;stroke-width:0.04807815"
-         y="15.30266"
-         x="37.190727"
-         id="tspan1565"
-         sodipodi:role="line">302,4</tspan></text>
-    <text
-       id="text1571"
-       y="8.6736059"
-       x="44.823471"
-       style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008080;fill-opacity:1;stroke:none;stroke-width:0.04807815"
-       xml:space="preserve"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#008080;fill-opacity:1;stroke-width:0.04807815"
-         y="8.6736059"
-         x="44.823471"
-         id="tspan1569"
-         sodipodi:role="line">300,4</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008080;fill-opacity:1;stroke:none;stroke-width:0.04807815"
-       x="44.823471"
-       y="15.30266"
-       id="text1575"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999"><tspan
-         sodipodi:role="line"
-         id="tspan1573"
-         x="44.823471"
-         y="15.30266"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#008080;fill-opacity:1;stroke-width:0.04807815">300,4</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:1.92312586px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008080;fill-opacity:1;stroke:none;stroke-width:0.04807815"
-       x="67.66935"
-       y="10.54015"
-       id="text1579"
-       inkscape:export-filename="D:\Users\dussartremat\Desktop\[Workflow]N-1.png"
-       inkscape:export-xdpi="265.23999"
-       inkscape:export-ydpi="265.23999"><tspan
-         sodipodi:role="line"
-         id="tspan1577"
-         x="67.66935"
-         y="10.54015"
-         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';fill:#008080;fill-opacity:1;stroke-width:0.04807815">600</tspan></text>
   </g>
 </svg>
