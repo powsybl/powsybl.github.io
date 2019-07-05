@@ -18,7 +18,6 @@ usage: itools [OPTIONS] run-impact-analysis --case-file <FILE> [--contingencies
 
 Available options are:
     --config-name <CONFIG_NAME>                       Override configuration file name
-    --parallel                                        Run command in parallel mode
 
 Available arguments are:
     --case-file <FILE>                                the case path

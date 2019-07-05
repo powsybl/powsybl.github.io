@@ -12,14 +12,6 @@ maven plugin.
 ## java_xmx
 The `java_xmx` property is an optional property that defines the amout of the Java Heap memory. The default value is 8 Gb.
 
-## mpi_hosts
-The `mpi_hosts` property is a required property to run parallel command with MPI that defines the list of hosts of the MPI
-cluster. The hosts are separated by a comma.
-
-## mpi_tasks
-The `mpi_tasks` property is a required property to run parallel command wih MPI that defines the maximum number of parallel
-tasks.
-
 ## powsybl_config_dirs
 The `itools_config_dir` property is an optional property that defines the configuration folders. The default
 value is `$HOME/.itools`. The folders are separated by a colon.
@@ -47,6 +39,12 @@ The `itools_config_dir` property is deprecated since V2.2.0. Use the `powsybl_co
 ## itools_config_name
 The `itools_config_name` property is deprecated since V2.2.0. Use the `powsybl_config_name` property instead. 
 
+## mpi_hosts
+The `mpi_hosts` property is deprecated since V3.0.0. This parameter is configured in [itools-mpi.conf](itools-mpi.md).
+
+## mpi_tasks
+The `mpi_tasks` property is deprecated since V3.0.0. This parameter is configured in [itools-mpi.conf](itools-mpi.md).
+
 # Example
 ```properties
 # Configuration's directories
@@ -57,10 +55,4 @@ powsybl_config_name=config
 
 # Java maximum heap memory
 java_xmx=8G
-
-# MPI maximum parallel tasks count
-mpi_tasks=2
-
-# MPI comma sperated hosts list
-mpi_hosts=localhost
 ```
