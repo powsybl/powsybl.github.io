@@ -36,30 +36,37 @@ This user story involves several features from P framework and some other featur
 
 <img src="./images/File.svg" alt="" style="vertical-align: bottom"/>
 The studied network comes from a set of TSOs' networks. The TSOs' networks can be provided in a common TSO format exchange such as UCTE or CIM-CGMES formats. The following lines of code come from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrated this functionality.
+
 ```java
 File fileBe = new File(<path_to_file_"MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip">);
 File fileNl = new File(<path_to_file_"MicroGridTestConfiguration_T4_NL_BB_Complete_v2.zip">);
 ```
+
 <br />
 
 <img src="./images/Import.svg" style="vertical-align: bottom"/>
 Each input file is imported with a gateway that transforms the input file in an in-memory object representing the network. The studied network results from the merge of all TSOs' networks.
+
 ```java
 Network networkBe = Importers.loadNetwork(fileBe.toString());
 Network networkNl = Importers.loadNetwork(fileNl.toString());
 networkBe.merge(networkNl);
 ```
+
 <br />
 
 <img src="./images/Network_merging.svg" style="vertical-align: bottom"/>
 A topological merge of the TSOs' networks is done. The following lines of code come from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrated this functionality.
+
 ```java
 networkBe.merge(networkNl);
 ```
+
 <br />
 
 <img src="./images/Compute_LF.svg" style="vertical-align: bottom"/>
 Then, flows are computed with a load flow simulator. In this tutorial, we use Hades2, which is a non open source software, but available in a freeware mode for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2. A `LoadFlow` object is created through a factory, here a `Hades2Factory`, which needs as input arguments a on-memory network and a computation manager `computationManager` (here defined locally by default).
+
 ```java
 ComputationManager computationManager = LocalComputationManager.getDefault();
 LoadFlow loadFlow = new Hades2Factory().create(networkBe, computationManager, 0);
@@ -75,10 +82,12 @@ LoadFlowResult result = loadFlow.run(VariantManagerConstants.INITIAL_VARIANT_ID,
 
 <img src="./images/Compute_Sensitivity.svg" style="vertical-align: bottom"/>
 The sensitivity computation module is dedicated to compute linearized impact of network small variations on some elements state variables. The sensivity computation is fully described [here](../sensitivity/index.md). In this user story, we use this module to compute all coefficients of the cost function. The model behind is Hades2, which is a non open source software, but available in a freeware mode for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
+
 <br />
 
 <img src="./images/Modify_iAL.svg" style="vertical-align: bottom"/>
 Remedial actions are read from the CRAC file and given to the optimizer which is a specific module. The best set of remedial actions is converted in actions understandable by PowSyBl framework. The CRAC file provides also the contingency list, which is also converted in an understandable object for PowSyBl framework called [Contingency](../contingencies/index.md).
+
 ```java
 ContingenciesProvider contingenciesProvider = new ContingenciesProvider() {
             @Override
@@ -87,16 +96,19 @@ ContingenciesProvider contingenciesProvider = new ContingenciesProvider() {
             }
         };
 ```
+
 <br />
 
 <img src="./images/Compute_SA.svg" style="vertical-align: bottom"/>
 The final set of remedial actions is validated through a security analysis. A security analysis is run needs an input variant, a set of parameters as a `securityAnalysisParameters` object and a set of contingencies as a `contingenciesProvider` object.
+
 ```java
 SecurityAnalysis securityAnalysis = new Hades2SecurityAnalysisFactory().create(networkBe, computationManager, 0);
 SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters(); // Default parameters.
 network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID, "saVariant");
 SecurityAnalysisResult securityAnalysisResult = securityAnalysis.run("saVariant", securityAnalysisParameters, contingenciesProvider).join();
 ```
+
 <br />
 
 Note that the data management is handled by the PowSyBl feature called Application File System (AFS).
