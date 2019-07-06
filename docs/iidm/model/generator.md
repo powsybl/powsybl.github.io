@@ -50,3 +50,19 @@ Generator generator = network.getVoltageLevel("VL").newGenerator()
     .setTargetQ(0.0)
     .add();
 ```
+
+# Extensions
+
+## Active power control
+
+This extension is used to configure participation factor of the generator typically in case of a loaflow with distributed slack.
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| participate | boolean | - | yes | - | participation status|
+| droop | double | None (repartition key) | yes | - | participation factor |
+
+Here is how to add an active power control extension to a generator:
+```java
+generator.addExtension(ActivePowerControl.class, new ActivePowerControl(generator, true, 4));
+```
