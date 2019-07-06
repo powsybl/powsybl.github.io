@@ -31,3 +31,8 @@ Battery battery = network.getVoltageLevel("VL").newBattery()
     .setMaxP(12.0)
     .add();
 ```
+# Extensions
+
+## Active power control
+
+This extension is used for both batteries and generators, see [generators](generator.md).
