@@ -14,10 +14,12 @@ open source innovation projects within the energy and electricity sectors.
 Powsybl in an open source framework licensed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
 The source code is hosted on GitHub in several repositories:
 - [powsybl-core](https://github.com/powsybl/powsybl-core) contains all the core features
-- [powsybl-math-native](https://github.com/powsybl/powsybl-math-native) are natives modules (JNI) used by powsybl-math modules (LU factorization)
+- [powsybl-math-native](https://github.com/powsybl/powsybl-math-native) are natives modules (C++ wrapped with JNI compiled
+for multiple platforms and and delivered in jars)"JNI) used by powsybl-math modules (LU factorization)
 - [powsybl-hpc](https://github.com/powsybl/powsybl-hpc) contains all modules relatives to high performance computing
+in particular computations distribution on a cluster of machines
 - [powsybl-gse](https://github.com/powsybl/powsybl-gse) contains the JavaFX UI
-- [powsybl-incubator](https://github.com/powsybl/powsybl-incubator) contains incubating modules that will be move once mature
+- [powsybl-incubator](https://github.com/powsybl/powsybl-incubator) contains incubating modules that will be moved once mature
 
 # Features
 Powsybl provides IIDM (iTesla Internal Data Model), a complete grid model (substations, voltage levels, AC and DC lines,
