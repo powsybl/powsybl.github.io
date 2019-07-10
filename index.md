@@ -15,7 +15,7 @@ Powsybl in an open source framework licensed under the [Mozilla Public License 2
 The source code is hosted on GitHub in several repositories:
 - [powsybl-core](https://github.com/powsybl/powsybl-core) contains all the core features
 - [powsybl-math-native](https://github.com/powsybl/powsybl-math-native) are natives modules (C++ wrapped with JNI compiled
-for multiple platforms and and delivered in jars)"JNI) used by powsybl-math modules (LU factorization)
+for multiple platforms and and delivered in jars) used by powsybl-math modules (LU factorization)
 - [powsybl-hpc](https://github.com/powsybl/powsybl-hpc) contains all modules relatives to high performance computing
 in particular computations distribution on a cluster of machines
 - [powsybl-gse](https://github.com/powsybl/powsybl-gse) contains the JavaFX UI
