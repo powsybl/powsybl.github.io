@@ -8,7 +8,7 @@ todo:
 The `afs` command performs some basic actions on a [AFS](../afs/index.md) drive:
 - list the content of an AFS folder
 - archive/restore an AFS content from/to a directory for backup purposes
-- handle (remove/list ...) an AFS inconsistent nodes for cleaning purposes.
+- allow taking corrective actions on inconsistent nodes (remove/list inconsistent nodes ...).
 
 Read this [tutorial](../tutorials/afs/afs.md) to learn how to configure an AFS drive. 
 
