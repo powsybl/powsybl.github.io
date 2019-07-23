@@ -1,9 +1,9 @@
 ---
-title: User story Remedial Action Optimiser
+title: User story Remedial Action Optimizer
 layout: default
 ---
 
-This user story speaks to Regional Security Coordinators (RSCs). A efficient and safe management of the European electricity system requires coordination at regional level. This is the role of RSCs, which objectives are the coordinated security of the electricity system, the integration of large-scale renewable energy generation and the development of the European electricity market. They perform five core services for TSOs :
+This user story concerns Regional Security Coordinators (RSCs). An efficient and safe management of the European electricity system requires coordination at regional level. This is the role of RSCs, whose objectives are the coordinated security of the electricity system, the integration of large-scale renewable energy generation and the development of the European electricity market. They perform five core services for TSOs:
 
 - Coordinated security analysis,
 - Outage planning coordination,
@@ -12,19 +12,19 @@ This user story speaks to Regional Security Coordinators (RSCs). A efficient and
 - Individual and common grid modelling and data set delivery
 
 
- We are here going to explain how to perform a coordinated capacity computation using PowSyBl and some specific developments. We want to ensure that flows across borders respect given maximum admissible values, while ensuring electricity security of supply. If some overloads are reported, a remedial actions optimisation is called to find the cheaper solution for solving the constraints. Remedial actions can be either changing the tap of a PST (it modifies the impedance of the network and so the load flows) or generator redispatching.
+ We are going to explain how to perform a coordinated capacity computation using PowSyBl and some specific developments. We want to ensure that flows across borders respect given maximum admissible values, while ensuring electricity security of supply. If some overloads are reported, a remedial actions optimisation is called to find the cheaper solution to solve the constraints. Remedial actions can be either changing the tap of a PST (it modifies the impedance of the network and so the load flows) or generator redispatching.
 
 # Workflow
 
-The first input data of this process is the network model, coming from UCTE or CIM-CGMES European exchange formats. We also need an object to define the security domain of the network, build from a CRAC file (for "Contingency list, Remedial Actions and additional Constraints") : it contains a contingencies list, the constraints to monitor and the available remedial actions to get rid of the constraints.   
+The first input data of this process is the network model, coming from UCTE or CIM-CGMES European exchange formats. We also need an object to define the security domain of the network, build from a CRAC file (for "Contingency list, Remedial Actions and additional Constraints"): it contains a contingencies list, the constraints to monitor and the available remedial actions to get rid of the constraints.   
 
-In this process, we also need two computation engines :
+In this process, we also need two computation engines:
 - A loadflow calculation is launched before and after contingency to identify overloads.
 - A sensitivity calculation : for each border, a sensitivity analysis determines the impact on the flow of a small variation of the PST angle, and that for all PSTs, and determines the impact on the flow of a small variation of the generation, and that for all generators.
 
-A cost function is build from the previous results of the sensitivity computation. It is then sent to a solver to find the remedial actions avoiding constraints at a minimal cost.
+A cost function is built from the previous results of the sensitivity computation. It is then sent to a solver to find the remedial actions avoiding constraints at a minimal cost.
 
-A secruity analysis is performend at the end of the process to validate the set of remedial actions, found by the optimisation.
+A secruity analysis is performed at the end of the process to validate the set of remedial actions, found by the optimisation.
 
 All PowSybl features used in this workflow are described below with some implementation examples.
 
@@ -32,7 +32,7 @@ All PowSybl features used in this workflow are described below with some impleme
 
 # Identification of the power system blocks
 
-This user story involves several features from P framework and some other features that are specific:
+This user story involves several features from PowSyBl framework and some other features that are specific:
 
 <img src="./images/File.svg" alt="" style="vertical-align: bottom"/>
 The studied network comes from a set of TSOs' networks. The TSOs' networks can be provided in a common TSO format exchange such as UCTE or CIM-CGMES formats. The following lines of code come from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrated this functionality.
@@ -65,7 +65,7 @@ networkBe.merge(networkNl);
 <br />
 
 <img src="./images/Compute_LF.svg" style="vertical-align: bottom"/>
-Then, flows are computed with a load flow simulator. In this tutorial, we use Hades2, which is a non open source software, but available in a freeware mode for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2. A `LoadFlow` object is created through a factory, here a `Hades2Factory`, which needs as input arguments a on-memory network and a computation manager `computationManager` (here defined locally by default).
+Then, flows are computed with a load flow simulator. In this tutorial, we use Hades2, which is a non open source software, but available in a freeware mode for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2. A `LoadFlow` object is created by an implementation of a `LoadFlowFactory` (here a `Hades2Factory` in fact), which needs as input arguments an on-memory network and a computation manager `computationManager` (here defined locally by default).
 
 ```java
 ComputationManager computationManager = LocalComputationManager.getDefault();
