@@ -14,7 +14,6 @@ usage: itools [OPTIONS] run-script --file <FILE> [--help]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --file <FILE>   the script file

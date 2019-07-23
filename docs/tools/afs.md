@@ -19,7 +19,6 @@ usage: itools [OPTIONS] afs [--archive <FILE_SYSTEM_NAME>] [--dir <DIR>]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --archive <FILE_SYSTEM_NAME>     archive file system

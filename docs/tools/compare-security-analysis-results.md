@@ -47,7 +47,6 @@ usage: itools [OPTIONS] compare-security-analysis-results [--help] --output-file
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --help                    display the help and quit

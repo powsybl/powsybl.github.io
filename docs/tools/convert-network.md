@@ -21,7 +21,6 @@ usage: itools [OPTIONS] convert-network [-E <property=value>]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
  -E <property=value>                          use value for given exporter

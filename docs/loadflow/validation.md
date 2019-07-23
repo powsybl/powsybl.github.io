@@ -59,7 +59,8 @@ ratios on each side.
     - $$(g_1, b_1)$$ and $$(g_2, b_2)$$: Complex shunt impedance on each side (S).
     - $$(r, x)$$: Complex series impedance $$(\Omega)$$.
 
-Thanks to Kirchhoff laws (see [line](./docs/iidm/model/line.html) and [2-winding transformer](./docs/iidm/model/twoWindingsTransformer.html) documentation), estimations of powers are computed according to the voltages and the characteristics of the branch:
+Thanks to Kirchhoff laws (see [line](../iidm/model/line.md) and [2-winding transformer](../iidm/model/twoWindingsTransformer.md)
+documentation), estimations of powers are computed according to the voltages and the characteristics of the branch:
 
 $$(P_1^{calc}, Q_1^{calc}, P_2^{calc}, Q_2^{calc}) = f(\text{Voltages}, \text{Characteristics})$$
 
