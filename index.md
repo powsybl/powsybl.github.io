@@ -34,7 +34,7 @@ project. The GSE project is part of the powsybl framework. It provides a JavaFX 
 applications based on the powsybl framework. The GSE is fully customizable and extendable with plugins. All the features
 of powsybl are also exposed as web services.
 
-# User stories
+# Tutorials and user stories
 
 - [Load flow tutorial](docs/user_stories/loadflow_tutorial.md)
 - [Network security for TSOs](docs/user_stories/security_tso.md)

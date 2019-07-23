@@ -1,5 +1,5 @@
 ---
-title: User story Remedial Action Optimizer
+title: User story Capacity calculation for RSC
 layout: default
 ---
 
@@ -35,7 +35,7 @@ All PowSybl features used in this workflow are described below with some impleme
 This user story involves several features from PowSyBl framework and some other features that are specific:
 
 <img src="./images/File.svg" alt="" style="vertical-align: bottom"/>
-The studied network comes from a set of TSOs' networks. The TSOs' networks can be provided in a common TSO format exchange such as UCTE or CIM-CGMES formats. The following lines of code come from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrated this functionality.
+The studied network comes from a set of TSOs' networks. The TSOs' networks can be provided in a common TSO exchange such as UCTE or CIM-CGMES formats. The following lines of code come format from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrated this functionality.
 
 ```java
 File fileBe = new File(<path_to_file_"MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip">);
@@ -65,7 +65,7 @@ networkBe.merge(networkNl);
 <br />
 
 <img src="./images/Compute_LF.svg" style="vertical-align: bottom"/>
-Then, flows are computed with a load flow simulator. In this tutorial, we use Hades2, which is a non open source software, but available in a freeware mode for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2. A `LoadFlow` object is created by an implementation of a `LoadFlowFactory` (here a `Hades2Factory` in fact), which needs as input arguments an on-memory network and a computation manager `computationManager` (here defined locally by default).
+Then, flows are computed with a load flow simulator. Since there is no fully functional open source load flow simulator integrated to powsybl for the time being, we use Hades2 for the purpose of the tutorial, which is a non open source software, but available in a freeware mode for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2. A `LoadFlow` object is created by an implementation of a `LoadFlowFactory` (here a `Hades2Factory` in fact), which needs as input arguments an on-memory network and a computation manager `computationManager` (here defined locally by default).
 
 ```java
 ComputationManager computationManager = LocalComputationManager.getDefault();
@@ -81,7 +81,7 @@ LoadFlowResult result = loadFlow.run(VariantManagerConstants.INITIAL_VARIANT_ID,
 <br />
 
 <img src="./images/Compute_Sensitivity.svg" style="vertical-align: bottom"/>
-The sensitivity computation module is dedicated to compute linearized impact of network small variations on some elements state variables. The sensivity computation is fully described [here](../sensitivity/index.md). In this user story, we use this module to compute all coefficients of the cost function. The model behind is Hades2, which is a non open source software, but available in a freeware mode for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
+The sensitivity computation module is dedicated to compute linearized impact of network small variations on some elements state variables. The sensivity computation is fully described [here](../sensitivity/index.md). In this user story, we use this module to compute all coefficients of the cost function. Since there is no fully functional open source sensitivity computation module integrated to powsybl for the time being, we use Hades2 for the purpose of the tutorial, which is a non open source software, but available in a freeware mode for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
 
 <br />
 
@@ -116,4 +116,4 @@ Note that the data management is handled by the PowSyBl feature called Applicati
 # External features are:
 
 <img src="./images/Compute_Optimizer.svg" style="vertical-align: bottom"/>
-The cost function builder is in fact a big toolbox using some power system blocks from PowSyBl framework. For more details about this builder, please refer to [FARAO website](https://farao-community.github.io/). The optimization is based on a OR-Tools solution.
+The cost function builder is in fact a big toolbox using some power system blocks from PowSyBl framework. For more details about this builder, please refer to [FARAO website](https://farao-community.github.io/). Google OR-Tools open source library is used to perform the optimization : please visit this [page for more details](https://developers.google.com/optimization/).

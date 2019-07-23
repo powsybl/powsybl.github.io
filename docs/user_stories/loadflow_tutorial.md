@@ -5,20 +5,20 @@ layout: default
 
 # Easy network to start with PowSyBl
 
-In this user story, the network is quite simple and made of two lines in parallel, with on the left side a generator and on the right side a load. The load consumes 600 MW and the generator produces 606.5 MW. A load flow computes the flows through the two lines. The flow through the upper line is of 302.4 MW at its entrance and of 300.4 MW at its exit. The flow through the lower line is the same. The power losses are of 2 MW on each line.   
+In this tutorial, the network is quite simple and made of two lines in parallel, with on the left side a generator and on the right side a load. The load consumes 600 MW and the generator produces 606.5 MW. A load flow computes the flows through the two lines. The flow through the upper line is of 302.4 MW at its entrance and of 300.4 MW at its exit. The flow through the lower line is the same. The power losses are of 2 MW on each line.   
 
-![Eurostag network initial](./images/Network_Eurostag_Initial.svg){: width="50%" .center-image}
+![Initial simple network](./images/Network_Simple_Initial.svg){: width="50%" .center-image}
 
 
-In this tutorial, we apply a contingency: the upper line is disconnected. A new load flow computes the flow on the lower line: it is now of 610.6 MW at its entrance and of 601 MW at its exit. The rest of the difference between load and generation represents the losses during the voltage transformation process.
+We apply a contingency: the upper line is disconnected. A new load flow computes the flow on the lower line: it is now of 610.6 MW at its entrance and of 601 MW at its exit. The rest of the difference between load and generation represents the losses during the voltage transformation process.
 
-![Workflow](./images/Network_Eurostag_Final.svg){: width="50%" .center-image}
+![Final simple network](./images/Network_Simple_Final.svg){: width="50%" .center-image}
 
 # Workflow
 
 The tutorial can be expressed in a short and easy workflow. All the input data are stored in a XIIDM file. This file is imported with the IIDM gateway. Then, a load flow simulator is launched to get flows on all nodes. In this tutorial, the simulator is Hades2 but could be an other load flow simulator, as the API interface contract is respected. A contingency is created and finally, the flows are computed again in order to get the final state.  
 
-![Eurostag network final](./images/Workflow.svg){: width="75%" .center-image}
+![Workflow](./images/Workflow.svg){: width="75%" .center-image}
 
 # Identification of the power system blocks
 
