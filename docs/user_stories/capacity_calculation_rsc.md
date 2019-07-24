@@ -12,14 +12,14 @@ This user story concerns Regional Security Coordinators (RSCs). An efficient and
 - Individual and common grid modelling and data set delivery
 
 
- We are going to explain how to perform a coordinated capacity computation using PowSyBl and some specific developments. We want to ensure that flows across borders respect given maximum admissible values, while ensuring electricity security of supply. If some overloads are reported, a remedial actions optimisation is called to find the cheaper solution to solve the constraints. Remedial actions can be either changing the tap of a PST (it modifies the impedance of the network and so the load flows) or generator redispatching.
+ We are going to explain how to perform a coordinated capacity computation using PowSyBl and some specific developments. We want to ensure that flows across borders respect given maximum admissible values, while ensuring electricity security of supply. If some overloads are reported, a remedial actions optimization is called to find the cheaper solution to solve the constraints. Remedial actions can be either changing the tap of a PST (it modifies the impedance of the network and so the load flows) or generator redispatching.
 
 # Workflow
 
-The first input data of this process is the network model, coming from UCTE or CIM-CGMES European exchange formats. We also need an object to define the security domain of the network, build from a CRAC file (for "Contingency list, Remedial Actions and additional Constraints"): it contains a contingencies list, the constraints to monitor and the available remedial actions to get rid of the constraints.   
+The first input data of this process is the network model, coming from UCTE or CIM-CGMES European exchange formats. We also need an object to define the security domain of the network, built from a CRAC file (for "Contingency list, Remedial Actions and additional Constraints"): it contains a contingencies list, the constraints to monitor and the available remedial actions to get rid of the constraints.   
 
 In this process, we also need two computation engines:
-- A loadflow calculation is launched before and after contingency to identify overloads.
+- A loadflow calculation is launched before and after each contingency to identify overloads.
 - A sensitivity calculation : for each border, a sensitivity analysis determines the impact on the flow of a small variation of the PST angle, and that for all PSTs, and determines the impact on the flow of a small variation of the generation, and that for all generators.
 
 A cost function is built from the previous results of the sensitivity computation. It is then sent to a solver to find the remedial actions avoiding constraints at a minimal cost.
