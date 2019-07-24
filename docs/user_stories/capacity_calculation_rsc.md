@@ -12,7 +12,7 @@ This user story concerns Regional Security Coordinators (RSCs). An efficient and
 - Individual and common grid modelling and data set delivery
 
 
- We are going to explain how to perform a coordinated capacity computation using PowSyBl and some specific developments. We want to ensure that flows across borders respect given maximum admissible values, while ensuring electricity security of supply. If some overloads are reported, a remedial actions optimization is called to find the cheaper solution to solve the constraints. Remedial actions can be either changing the tap of a PST (it modifies the impedance of the network and so the load flows) or generator redispatching.
+We are going to explain how to perform a coordinated capacity computation using PowSyBl and some specific developments. We want to ensure that flows across borders respect given maximum admissible values, while ensuring electricity security of supply. If some overloads are reported, a remedial actions optimization is called to find the cheaper solution to solve the constraints. Remedial actions can be either changing the tap of a PST (it modifies the impedance of the network and so the load flows) or generator redispatching.
 
 # Workflow
 
@@ -20,11 +20,11 @@ The first input data of this process is the network model, coming from UCTE or C
 
 In this process, we also need two computation engines:
 - A loadflow calculation is launched before and after each contingency to identify overloads.
-- A sensitivity calculation : for each border, a sensitivity analysis determines the impact on the flow of a small variation of the PST angle, and that for all PSTs, and determines the impact on the flow of a small variation of the generation, and that for all generators.
+- A sensitivity calculation: for each border, a sensitivity analysis determines the impact on the flow of a small variation of the PST angle, and that for all PSTs, and determines the impact on the flow of a small variation of the generation, and that for all generators.
 
 A cost function is built from the previous results of the sensitivity computation. It is then sent to a solver to find the remedial actions avoiding constraints at a minimal cost.
 
-A secruity analysis is performed at the end of the process to validate the set of remedial actions, found by the optimisation.
+A secruity analysis is performed at the end of the process to validate the set of remedial actions, found by the optimization.
 
 All PowSybl features used in this workflow are described below with some implementation examples.
 
@@ -35,11 +35,11 @@ All PowSybl features used in this workflow are described below with some impleme
 This user story involves several features from PowSyBl framework and some other features that are specific:
 
 <img src="./images/File.svg" alt="" style="vertical-align: bottom"/>
-The studied network comes from a set of TSOs' networks. The TSOs' networks can be provided in a common TSO exchange such as UCTE or CIM-CGMES formats. The following lines of code come format from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrated this functionality.
+The studied network comes from a set of TSOs' networks. The TSOs' networks can be provided in a common TSO exchange format such as UCTE or CIM-CGMES formats. The following lines of code come format from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrated this functionality.
 
 ```java
-File fileBe = new File(<path_to_file_"MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip">);
-File fileNl = new File(<path_to_file_"MicroGridTestConfiguration_T4_NL_BB_Complete_v2.zip">);
+File fileBe = new File("/path/to/file/MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip");
+File fileNl = new File("/path/to/file/MicroGridTestConfiguration_T4_NL_BB_Complete_v2.zip");
 ```
 
 <br />
@@ -72,7 +72,7 @@ ComputationManager computationManager = LocalComputationManager.getDefault();
 LoadFlow loadFlow = new Hades2Factory().create(networkBe, computationManager, 0);
 ```
 
-A loadflow is run on the working variant of the network with a set of parameters. The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here angles are set to zero and tensions are set to one per unit. We also create a new variant to store the resulted flows. Note that a network variant is close to a state vector and gathers variables such as injections, productions, tap positions, states of buses, etc.
+A loadflow is run on the working variant of the network with a set of parameters. The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here angles are set to zero and voltages are set to one per unit. We also create a new variant to store the calculated flows. Note that a network variant is close to a state vector and gathers variables such as injections, productions, tap positions, states of buses, etc.
 
 ```java
 LoadFlowParameters loadFlowParameters = new LoadFlowParameters().setVoltageInitMode(LoadFlowParameters.VoltageInitMode.DC_VALUES);
@@ -100,7 +100,7 @@ ContingenciesProvider contingenciesProvider = new ContingenciesProvider() {
 <br />
 
 <img src="./images/Compute_SA.svg" style="vertical-align: bottom"/>
-The final set of remedial actions is validated through a security analysis. A security analysis is run needs an input variant, a set of parameters as a `securityAnalysisParameters` object and a set of contingencies as a `contingenciesProvider` object.
+The final set of remedial actions is validated through a security analysis. A security analysis needs an input variant, a set of parameters as a `securityAnalysisParameters` object and a set of contingencies as a `contingenciesProvider` object.
 
 ```java
 SecurityAnalysis securityAnalysis = new Hades2SecurityAnalysisFactory().create(networkBe, computationManager, 0);
@@ -109,11 +109,8 @@ network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT
 SecurityAnalysisResult securityAnalysisResult = securityAnalysis.run("saVariant", securityAnalysisParameters, contingenciesProvider).join();
 ```
 
-<br />
-
-Note that the data management is handled by the PowSyBl feature called Application File System (AFS).
-
 # External features are:
 
 <img src="./images/Compute_Optimizer.svg" style="vertical-align: bottom"/>
-The cost function builder is in fact a big toolbox using some power system blocks from PowSyBl framework. For more details about this builder, please refer to [FARAO website](https://farao-community.github.io/). Google OR-Tools open source library is used to perform the optimization : please visit this [page for more details](https://developers.google.com/optimization/).
+The cost function builder is in fact a big toolbox using some power system blocks from PowSyBl framework. For more details about this builder, please refer to [FARAO website](https://farao-community.github.io/). Google OR-Tools open source library is used to perform the optimization: please visit this [page for more details](https://developers.google.com/optimization/).
+

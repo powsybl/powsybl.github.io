@@ -1,5 +1,5 @@
 ---
-title: User story number 1
+title: First basic tutorial: a load-flow computation
 layout: default
 ---
 
@@ -25,11 +25,11 @@ The tutorial can be expressed in a short and easy workflow. All the input data a
 <img src="./images/File.svg" alt="" style="vertical-align: bottom"/>
 The network is modeled in [IIDM](../iidm/model/index.md), which is the internal model of PowSyBl. This model can be serialized in a XML format for experimental purposes.
 ```java
-File file = new File(<path_to_file_"eurostag-tutorial1-lf.xml">);
+File file = new File(/path/to/file/eurostag-tutorial1-lf.xml");
 ```
 <br />
 <img src="./images/Import.svg" alt="" style="vertical-align: bottom"/>
-The file is imported through a gateway that converts the file in a on-memory model.
+The file is imported through a gateway that converts the file in a in-memory model.
 ```java
 Network network = Importers.loadNetwork(file.toString());
 ```
@@ -42,7 +42,7 @@ ComputationManager computationManager = LocalComputationManager.getDefault();
 LoadFlow loadflow = new Hades2Factory().create(network, computationManager, 0);
 ```
 
-A loadflow is run on a variant of the network with a set of parameters. The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here angles are set to zero and tensions are set to one per unit. The computed flows are stored in the variant given in input. Note that a network variant is close to a state vector and gathers variables such as injections, productions, tap positions, states of buses, etc.
+A loadflow is run on a variant of the network with a set of parameters. The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here angles are set to zero and voltages are set to one per unit. The computed flows are stored in the variant given in input. Note that a network variant is close to a state vector and gathers variables such as injections, productions, tap positions, states of buses, etc.
 
 ```java
 LoadFlowParameters loadflowParameters = new LoadFlowParameters().setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
@@ -51,7 +51,7 @@ LoadFlowResult result = loadflow.run("loadflowVariant", loadflowParameters).join
 ```
 <br />
 <img src="./images/Modify_N-1.svg" alt="" style="vertical-align: bottom"/>
-A contingency is simply simulated in disconnecting both terminals of the NHV1_NHV2_1 line.
+A contingency is simply simulated in disconnecting both terminals of the `NHV1_NHV2_1` line.
 
 ```java
 network.getLine("NHV1_NHV2_1").getTerminal1().disconnect();

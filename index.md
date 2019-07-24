@@ -42,6 +42,7 @@ of powsybl are also exposed as web services.
 # Tutorials and user stories
 
 - [Load flow tutorial](docs/user_stories/loadflow_tutorial.md)
-- [Network security for TSOs](docs/user_stories/security_tso.md)
+- [Network security for TSOs]()
 - [Capacity calculation for RSCs](docs/user_stories/capacity_calculation_rsc.md)
-- [Network development for TSOs](docs/user_stories/network_development_tso.md)
+- [Network development for TSOs]()
+
