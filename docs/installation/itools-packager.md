@@ -11,8 +11,7 @@ The layout of such distribution is the following:
 ├── bin
 │   ├── itools
 │   ├── itools.bat
-│   ├── powsyblsh
-│   └── tools-mpi-task.sh
+│   └── powsyblsh
 ├── etc
 │   ├── itools.conf
 │   └── logback-itools.xml
@@ -44,14 +43,6 @@ The `configName` property defines the the basename of the configuration file. Th
 ### javaXmx
 The `javaXmx` property defines the amout of the Java Heap memory. The default value is 8 Gb. This property is used to
 initialize the `java_xmx` property of the `itools.conf` file.
-
-### mpiHosts
-The `mpiHosts` property defines the list of hosts of the MPI cluster. The default value is `localhost`. This property is used to
-initialize the `mpi_hosts` property of the `itools.conf` file.
-
-### mpiTasks
-The `mpiTasks` property defines the maximum number of parallel tasks. The default value is 2. This property is used to
-initialize the `mpi_tasks` property of the `itools.conf` file.
 
 ### copyToBin
 The `copyToBin` property defines the list of files to copy in the `bin` directory of the distribution.
@@ -104,7 +95,6 @@ usage: itools [OPTIONS] COMMAND [ARGS]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available commands are:
 
