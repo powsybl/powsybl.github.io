@@ -38,3 +38,11 @@ Powsybl is available as a command line tool or in a complete desktop application
 project. The GSE project is part of the powsybl framework. It provides a JavaFX UI to help developers writing desktop
 applications based on the powsybl framework. The GSE is fully customizable and extendable with plugins. All the features
 of powsybl are also exposed as web services.
+
+# Tutorials and user stories
+
+- [Load flow tutorial](docs/user_stories/loadflow_tutorial.md)
+- [Network security for TSOs]()
+- [Capacity calculation for RSCs](docs/user_stories/capacity_calculation_rsc.md)
+- [Network development for TSOs]()
+
