@@ -109,8 +109,7 @@ network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT
 SecurityAnalysisResult securityAnalysisResult = securityAnalysis.run("saVariant", securityAnalysisParameters, contingenciesProvider).join();
 ```
 
-# External features are:
+# External features
 
 <img src="./images/Compute_Optimizer.svg" style="vertical-align: bottom"/>
 The cost function builder is in fact a big toolbox using some power system blocks from PowSyBl framework. For more details about this builder, please refer to [FARAO website](https://farao-community.github.io/). Google OR-Tools open source library is used to perform the optimization: please visit this [page for more details](https://developers.google.com/optimization/).
-

@@ -25,7 +25,7 @@ The tutorial can be expressed in a short and easy workflow. All the input data a
 <img src="./images/File.svg" alt="" style="vertical-align: bottom"/>
 The network is modeled in [IIDM](../iidm/model/index.md), which is the internal model of PowSyBl. This model can be serialized in a XML format for experimental purposes.
 ```java
-File file = new File(/path/to/file/eurostag-tutorial1-lf.xml");
+File file = new File("/path/to/file/eurostag-tutorial1-lf.xml");
 ```
 <br />
 <img src="./images/Import.svg" alt="" style="vertical-align: bottom"/>
