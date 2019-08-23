@@ -1,5 +1,5 @@
 ---
-title: First basic tutorial: a load-flow computation
+title: First basic tutorial - a load-flow computation
 layout: default
 ---
 

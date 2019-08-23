@@ -1,13 +1,67 @@
-theme: jekyll-theme-slate
+# theme: jekyll-theme-slate
 title: Power System Blocks
-show_downloads: false
+# show_downloads: false
 markdown: kramdown
 
-github:
-  repository_name: Powsybl website
-  repository_url: https://github.com/powsybl
-  owner_name: RTE France
-  owner_url: https://www.rte-france.com
+sass:
+  sass_dir: assets/css
+
+# github:
+#  repository_name: Powsybl website
+#  repository_url: https://github.com/powsybl
+#  owner_name: RTE France
+#  owner_url: https://www.rte-france.com
 
 plugins:
   - jekyll-relative-links
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+      sidebar: "true"
+  - scope:
+      path: "docs/afs"
+    values:
+      category: "Functional documentation"
+  - scope:
+      path: "docs/configuration"
+    values:
+      category: "Getting started"
+  - scope:
+      path: "docs/contingencies"
+    values:
+      category: "Functional documentation"
+  - scope:
+      path: "docs/iidm"
+    values:
+      category: "Functional documentation"
+  - scope:
+      path: "docs/installation"
+    values:
+      category: "Getting started"
+  - scope:
+      path: "docs/loadflow"
+    values:
+      category: "Functional documentation"
+  - scope:
+      path: "docs/sensitivity"
+    values:
+      category: "Functional documentation"
+  - scope:
+      path: "docs/timeseries"
+    values:
+      category: "Functional documentation"
+  - scope:
+      path: "docs/tools"
+    values:
+      category: "User documentation"
+  - scope:
+      path: "docs/tutorials"
+    values:
+      category: "User stories"
+  - scope:
+      path: "docs/user_stories"
+    values:
+      category: "User stories"

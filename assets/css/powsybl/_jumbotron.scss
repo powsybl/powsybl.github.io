@@ -1,0 +1,16 @@
+.jumbotron-fluid {
+  background: linear-gradient(to bottom, $black 0%, $dark-blue 70%);
+
+  margin-top: $navbar-height;
+  padding: $jumbotron-padding ($jumbotron-padding / 2);
+  // font-family: "Segoe UI", sans-serif;
+
+  h1 {
+    font-size: $font-size-base * 5;
+    font-weight: lighter;
+  }
+
+  h2 {
+    font-weight: lighter;
+  }
+}
