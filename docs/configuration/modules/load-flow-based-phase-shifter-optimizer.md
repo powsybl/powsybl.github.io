@@ -9,21 +9,21 @@ class, which is an implementation of the `com.powsybl.action.util.PhaseShifterOp
 
 # Required properties
 
-## load-flow-factory
-The `load-flow-factory` property is a required property that defined the `com.powsybl.loadflow.LoadFlowFactory` implementation
-to use for the optimization.
+## load-flow-name
+The `load-flow-name` property is an optional property that defines the implementation name to use for running the loadflow. 
+If this property is not set, the default loadflow implementation is used.
 
 # Examples
 
 ## YAML
 ```yaml
 load-flow-based-phase-shifter-optimizer:
-    load-flow-factory: com.powsybl.loadflow.mock.LoadFlowFactoryMock
+    load-flow-name: Mock
 ```
 
 ## XML
 ```xml
 <load-flow-based-phase-shifter-optimizer>
-    <load-flow-factory>com.powsybl.loadflow.mock.LoadFlowFactoryMock</load-flow-factory>
+    <load-flow-name>Mock</load-flow-name>
 </load-flow-based-phase-shifter-optimizer>
 ```
