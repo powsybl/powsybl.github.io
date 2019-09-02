@@ -68,6 +68,7 @@ module2:
 - [import-export-parameters-default-value](import-export-parameters-default-value.md)
 - [javaScriptPostProcessor](javaScriptPostProcessor.md)
 - [limit-violation-default-filter](limit-violation-default-filter.md)
+- [load-flow](load-flow.md)
 - [load-flow-action-simulator](load-flow-action-simulator.md)
 - [load-flow-based-phase-shifter-optimizer](load-flow-based-phase-shifter-optimizer.md)
 - [load-flow-default-parameters](load-flow-default-parameters.md)
