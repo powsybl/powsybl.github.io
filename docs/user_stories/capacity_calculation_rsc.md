@@ -1,5 +1,5 @@
 ---
-title: User story Capacity calculation for RSC
+title: Capacity calculation for RSC
 layout: default
 ---
 
@@ -28,7 +28,7 @@ A secruity analysis is performed at the end of the process to validate the set o
 
 All PowSybl features used in this workflow are described below with some implementation examples.
 
-![Workflow](./images/Workflow_Capacity_Calculation_RSC.svg){: width="100%" .center-image}
+![Workflow](./images/Workflow_Capacity_Calculation_RSC.svg){: width="70%" .center-image}
 
 # Identification of the power system blocks
 
@@ -113,4 +113,3 @@ SecurityAnalysisResult securityAnalysisResult = securityAnalysis.run("saVariant"
 
 <img src="./images/Compute_Optimizer.svg" style="vertical-align: bottom"/>
 The cost function builder is in fact a big toolbox using some power system blocks from PowSyBl framework. For more details about this builder, please refer to [FARAO website](https://farao-community.github.io/). Google OR-Tools open source library is used to perform the optimization: please visit this [page for more details](https://developers.google.com/optimization/).
-

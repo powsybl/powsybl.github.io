@@ -39,7 +39,7 @@ can be used to compute the flows from the voltages in order to validate the rule
 # Branches
 Lines and two windings transformers are converted into an universal branch:
 ```
-    V1*exp(j*theta1)     rho1*exp(j*alpha1)             r+j*x              rho1*exp(j*alpha1)   V2*exp(j*theta2)
+    V1*exp(j*theta1)     rho1*exp(j*alpha1)             r+j*x              rho2*exp(j*alpha2)   V2*exp(j*theta2)
         (P1,Q1)->      ____O/O__________________________-----__________________________O/O_____     <-(P2,Q2)
                                             |           -----           |
                                   g1+j*b1  |_|                         |_| g2+j*b2

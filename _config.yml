@@ -24,7 +24,7 @@ defaults:
   - scope:
       path: "docs/afs"
     values:
-      category: "Functional documentation"
+      category: "Going further"
   - scope:
       path: "docs/configuration"
     values:
