@@ -25,9 +25,9 @@ It determines if the Converter Station is a LCC Converter Station or a VSC Conve
 The positive loss factor `LossFactor` is used to model the losses during the conversion. In case of:
 - A rectifier operation (conversion from AC to DC), we have
 $$
-frac{P_{DC}}{P_{AC}} = 1 - frac{LossFactor}{100}
+\frac{P_{DC}}{P_{AC}} = 1 - \frac{LossFactor}{100}
 $$
 - An inverter operation (conversion from DC to AC), we have
 $$
-frac{P_{AC}}{P_{DC}} = 1 - frac{LossFactor}{100}
+\frac{P_{AC}}{P_{DC}} = 1 - \frac{LossFactor}{100}
 $$
