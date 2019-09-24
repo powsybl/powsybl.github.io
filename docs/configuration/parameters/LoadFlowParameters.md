@@ -9,20 +9,20 @@ implementations. Specific parameters should be provided as an extension of the `
 # Properties
 
 ## noGeneratorReactiveLimits
-The `noGeneratorReactiveLimits` property is an optional property that defines if the load-flow is allowed to find a
-setpoint value outside the reactive limits of a generator.
+The `noGeneratorReactiveLimits` property is an optional property that defines whether the load-flow is allowed to find a
+setpoint value outside the reactive limits of a generator or not.
 
 ## phaseShifterRegulationOn
-The `phaseShifterRegulationOn` property is an optional property that defined if the load-flow is allowed to change taps
-of a phase tap changer.
+The `phaseShifterRegulationOn` property is an optional property that defines whether the load-flow is allowed to change taps
+of a phase tap changer or not.
 
 ## specificCompatibility
-The `specificCompatibility` property is an optional property that defines if the load-flow run in a legacy mode
-(implementation specific).
+The `specificCompatibility` property is an optional property that defines whether the load-flow runs in legacy mode
+(implementation specific) or not.
 
 ## transformerVoltageControlOn
-The `transformerVoltageControlOn` property is an optional property that defines if the load-flow is allowed to change
-taps of a ratio tap changer.
+The `transformerVoltageControlOn` property is an optional property that defines whether the load-flow is allowed to change
+taps of a ratio tap changer or not.
 
 ## voltageInitMode
 The `voltageInitMode` property is an optional property that defines the policy used by the load-flow to initialize the

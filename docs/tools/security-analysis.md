@@ -200,16 +200,16 @@ The behaviour of the security analysis may be further customized by using a `Sec
 
 It enables, for example, to customize what should be considered a limit violation and what should not.
 
-This preprocessing may us as an input the contingencies file provided to the command line tool.
+This preprocessing may use the contingencies file provided to the command line tool as an input.
 
 In order to use a preprocessor, you will need to configure it in the [security-analysis](../configuration/security-analysis-config.md) configuration module.
 
 # Security-analysis implementations
 
 ## Slow implementation
-Read this [documentation](../loadflow/security-analysis.md) page to learn how to configure powsybl to use the
+Read this [documentation](../loadflow/security-analysis.md) page to learn how to configure Powsybl to use the
 `SecurityAnalysisImpl` implementation, a load-flow based implementation for security limits detection.
 
 ## Hades2
-Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure Powsybl to use
 Hades2, a RTE load-flow tool, for security analysis.

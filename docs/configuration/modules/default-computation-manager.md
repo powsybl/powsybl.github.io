@@ -6,7 +6,7 @@ layout: default
 The `default-computation-manager` module is an optional module loaded when an `iTools` command starts, to determine which
 `com.powsybl.computation.ComputationManager` implementations should be used for short-time and long-time computations.
 The choice of using the short-time or the long-time computation manager factory is done by the implementation of each
-type of computations (load-flow, security-analysis...).
+type of computations (e.g. load-flow, security-analysis...).
 
 If this module is not set, the `com.powsybl.computation.local.LocalComputationManager` implementation is used. Read the
 [computation-local](computation-local.md) page to learn how to configure the `LocalComputationManager`.

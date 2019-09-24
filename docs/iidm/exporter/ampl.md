@@ -17,14 +17,14 @@ IIDM networks can be converted in flat text files easy to read in AMPL, each of 
 1 4 -1 -1 -100.000 -200.000 -110.000 -120.000
 ```
 
-# Configuration properties for AMPL exporter
+# Configuration properties for the AMPL exporter
 
 These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
 module.
 
 ## iidm.export.ampl.export-ratio-tap-changer-voltage-target
 The `iidm.export.ampl.export-ratio-tap-changer-voltage-target` property is an optional property that defines
-if the AMPL exporter exports the ratio tap changer voltage setpoint. Its default value is `false`.
+whether the AMPL exporter exports the ratio tap changer voltage setpoint or not. Its default value is `false`.
 
 # Deprecated configuration properties for AMPL exporter
 

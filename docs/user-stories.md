@@ -3,7 +3,7 @@ title: User stories
 category: User stories
 ---
 
-We advice you to start with our user stories in order to well understand the possibilities of the framework:
+We advise you to start with our user stories in order to better understand the possibilities of the framework:
 
 - [How to run a load flow with Powsybl ?](/user_stories/loadflow_tutorial.md)
 - [How to calcultate capacity for a Regional Security Center ?](/user_stories/capacity_calculation_rsc.md)

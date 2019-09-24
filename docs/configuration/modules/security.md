@@ -8,7 +8,7 @@ The `security` module is used by the AFS web-server to define the authentication
 # Optional properties
 
 ## skip-token-validity-check
-The `skip-token-validity-check` property defines if the check of the token validity is skipped. The default value of this
+The `skip-token-validity-check` property defines whether the check of the token validity is skipped or not. The default value of this
 property is `true`.
 
 ## token-validity

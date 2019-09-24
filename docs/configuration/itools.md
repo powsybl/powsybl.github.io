@@ -20,7 +20,7 @@ value is `$HOME/.itools`. The folders are separated by a colon.
 The `powsybl_config_name` property is an optional property that defines the basename of the configuration file. The default
 value is `config`.
 
-At startup, powsybl looks in the configuration directories defined in the `powsybl_config_dirs` for a YAML configuration
+At startup, Powsybl looks in the configuration directories defined in the `powsybl_config_dirs` for a YAML configuration
 file first, for a XML configuration file then and finally for properties files.
 
 All the configuration files are stacked to allow an user to partially or totally overload the system configuration of a

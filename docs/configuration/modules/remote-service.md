@@ -23,8 +23,8 @@ The `app-name` property is a required property that defines the name of the remo
 
 ## secure
 
-The `secure` property is an optional property that defines if SSL/TLS protocol should be used
-to connect to the remote server. The default value of this property is `true`.
+The `secure` property is an optional property that defines whether SSL/TLS protocol should be used
+to connect to the remote server or not. The default value of this property is `true`.
 
 ## port
 

@@ -10,7 +10,7 @@ converted to an IIDM network.
 # Optional properties
 
 ## printToStdOut
-The `printToStdOut` is an optional property that defines if the output of the script ot the standard output stream. The
+The `printToStdOut` is an optional property that defines whether the output of the script is printed to the standard output stream or not. The
 default value of this property is `true`.
 
 ## script

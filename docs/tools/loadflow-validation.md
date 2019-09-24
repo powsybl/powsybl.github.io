@@ -9,7 +9,7 @@ todo:
 ---
 
 The `loadflow-validation` command is used to validate load-flow results of a network. The command, besides validating
-the results, also print the data of the validated equipments in output files.
+the results, also prints the data of the validated equipments in output files.
 
 # Usage
 ```shell

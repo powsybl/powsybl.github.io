@@ -16,4 +16,4 @@ In IIDM, the `Injection` interface has seven sub interfaces:
 
 # Creation
 Before creating an instance of a sub interface of Injection, its terminal must be set with the method `setNode(int)` in
-a Node/Breaker Topology or `setConnectableBus(String)` and eventually `setBus(String)` in a Bus/Breaker Topology.
+a Node/Breaker topology or `setConnectableBus(String)` and eventually `setBus(String)` in a Bus/Breaker topology.

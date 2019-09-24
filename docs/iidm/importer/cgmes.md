@@ -6,7 +6,7 @@ todo:
 ---
 
 The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS) based
-on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards.​ It was developed to meet necessary requirements
+on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards. It was developed to meet necessary requirements
 for TSO data exchanges in the areas of system development and system operation.
 
 Current supported version of CGMES is 2.4.15, that is based on CIM 16. We can note that this importer is also compatible with CIM 14.
@@ -44,8 +44,8 @@ The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` proper
 an [IIDM Busbar Section](../model/busbarSection.md) for each CGMES connectivity node. Its default value is `false`.
 
 ## iidm.import.cgmes.powsybl-triplestore
-The `iidm.import.cgmes.powsybl-triplestore` property is an optional property that defines which triplestore implementation is used. PowSyBl supports
-RDF4J, Jena and Blazegraph triplestore implementations. This property has `rdf4j` as default value.
+The `iidm.import.cgmes.powsybl-triplestore` property is an optional property that defines which triplestore implementation is used. Powsybl supports
+the RDF4J, Jena and Blazegraph triplestore implementations. This property has `rdf4j` as default value.
 
 ## iidm.import.cgmes.store-cgmes-model-as-network-extension
 The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an optional property that defines if the CGMES model is stored in the imported IIDM network as
