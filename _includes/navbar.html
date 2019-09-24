@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand navbar-light bg-light fixed-top">
+    {% if page.sidebar %}
+        <button id="sidebarToggler" class="navbar-toggler d-block d-lg-none border-0 mr-3" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    {% endif %}
+
+    <a class="navbar-brand" href="/">
+        <img src="/assets/images/logo_lfe_powsybl.svg" height="30" alt="">
+    </a>
+    <ul class="navbar-nav ml-auto">
+        <a class="nav-link mx-1" href="https://github.com/powsybl" target="_blank" rel="noopener" aria-label="GitHub" data-toggle="tooltip" data-placement="bottom" title="GitHub"><i class="fab fa-github"></i></a>
+        <a class="nav-link mx-1" href="https://spectrum.chat/powsybl" target="_blank" rel="noopener" aria-label="Spectrum" data-toggle="tooltip" data-placement="bottom" title="Spectrum"><i class="fas fa-comment"></i></a>
+        <a class="nav-link mx-1" href="https://lists.lfenergy.org/g/powsybl" target="_blank" rel="noopener" aria-label="Mailing Lists" data-toggle="tooltip" data-placement="bottom" title="Mailing Lists"><i class="fas fa-envelope"></i></a>
+        <a class="nav-link mx-1 d-block d-md-none" href="/search"><i class="fas fa-search"></i></a>
+    </ul>
+    <form class="form-inline" action="/search" method="get">
+        <input id="search-box" name="query" class="form-control d-none d-md-block ml-3" type="text" placeholder="Search" aria-label="Search" />
+    </form>
+</nav>

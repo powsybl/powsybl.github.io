@@ -1,5 +1,5 @@
 ---
-title: CGMES Importer
+title: CIM-CGMES Importer
 layout: default
 todo:
     - add configuration properties (when the PR is done)
@@ -40,7 +40,7 @@ The `iidm.import.cgmes.convert-boundary` property is an optional property that d
 boundaries or not. Its default value is `false`.
 
 ## iidm.import.cgmes.create-busbar-section-for-every-connectivity-node
-The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates 
+The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates
 an [IIDM Busbar Section](../model/busbarSection.md) for each CGMES connectivity node. Its default value is `false`.
 
 ## iidm.import.cgmes.powsybl-triplestore

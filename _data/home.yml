@@ -1,0 +1,37 @@
+cards:
+  - title: "Grid modeling"
+    icon: "fas fa-project-diagram"
+    description: "Powsybl provides a complete grid components modeling, which is fully editable and extendable."
+    link:
+      name: "Learn more"
+      url: "/docs/iidm/model"
+  - title: "Grid simulation"
+    icon: "fas fa-chart-line"
+    description: "Run power flow simulations such as <a href='/docs/loadflow/loadflow'>load flows</a>, <a href='/docs/loadflow/security-analysis'>security analysis</a> with or without remedial actions, <a href='/docs/sensitivity'>sensitivity analysis</a>..."
+    link:
+      name: "Learn more"
+      url: "/docs/functional-documentation#Simulators"
+  - title: "Grid exchange formats"
+    icon: "fas fa-exchange-alt fa-rotate-90"
+    description: "Powsybl supports imports and exports in several standard formats such as <a href='/docs/iidm/importer/cgmes'>CIM-CGMES</a>, <a href='/docs/iidm/importer/ucte'>UCTE-DEF</a>..."
+    link:
+      name: "Learn more"
+      url: "/docs/functional-documentation#Internal-data-model"
+  - title: "Advanced features"
+    icon: "fas fa-cogs"
+    description: "Powsybl also provides a <a href='/docs/todo'>python binding</a>, <a href='/docs/todo'>HPC support</a>, <a href='/docs/timeseries/index'>time-series</a>, <a href='/docs/afs/index'>scalable data management</a>..."
+    link:
+      name: "Learn more"
+      url: "/docs/todo"
+  - title: "User stories"
+    icon: "fas fa-book-reader"
+    description: "Powsybl aims to be used in various power system tools, for TSOs, RSCs or academics."
+    link:
+      name: "Learn more"
+      url: "/docs/user-stories"
+  - title: "Contribute"
+    icon: "fas fa-hands-helping"
+    description: "Powsybl is open source and part of the <a href='https://www.lfenergy.org/'>Linux Fundation Energy</a>. Help us to build the next generation power system tool!"
+    link:
+      name: "What's next"
+      url: "https://github.com/powsybl/.github/blob/master/CONTRIBUTING.md"

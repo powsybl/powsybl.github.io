@@ -1,9 +1,7 @@
 ---
-title: First basic tutorial: a load-flow computation
+title: First basic tutorial - a load-flow computation
 layout: default
 ---
-
-# Easy network to start with PowSyBl
 
 In this tutorial, the network is quite simple and made of two lines in parallel, with on the left side a generator and on the right side a load. The load consumes 600 MW and the generator produces 606.5 MW. A load flow computes the flows through the two lines. The flow through the upper line is of 302.4 MW at its entrance and of 300.4 MW at its exit. The flow through the lower line is the same. The power losses are of 2 MW on each line.   
 

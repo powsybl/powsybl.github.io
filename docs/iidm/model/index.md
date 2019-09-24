@@ -1,10 +1,23 @@
 ---
-title: IIDM
+title: Internal data model
 layout: default
 ---
 
-[Network](network.md)
-- [Substation](substation.md)
+
+The [Network](network.md) modeling is made of two main objects: substations and lines. A substation can have several voltage levels and line can be of several types (AC lines, DC lines and AC lines shared between two countries).
+
+- [Line](line.md)
+
+- [Tie line](tieLine.md)
+
+- [HVDC line](hvdcLine.md)
+
+- A [Substation](substation.md) can be made of several voltage levels, which are connected through transformers:
+
+    - [Two windings transformer](twoWindingsTransformer.md)
+
+    - [Three windings transformer](threeWindingsTransformer.md)
+
     - [VoltageLevel](voltageLevel.md)
         - [Node/Breaker topology](../../todo.md)
         - [Bus/Breaker topology](../../todo.md)
@@ -15,9 +28,4 @@ layout: default
         - [Dangling line](danglingLine.md)
         - [Static VAR compensator](staticVarCompensator.md)
         - [VSC converter station](vscConverterStation.md)
-        - [LCC converter station](lccConverterStation.md)
-    - [Two windings transformer](twoWindingsTransformer.md)
-    - [Three windings transformer](threeWindingsTransformer.md)
-- [Line](line.md)
-- [Tie line](tieLine.md)
-- [HVDC line](hvdcLine.md)
+        - [LCC converter station](lccConverterStation.md) 

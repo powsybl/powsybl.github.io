@@ -1,0 +1,13 @@
+.navbar-light {
+  height: $navbar-height;
+
+  .navbar-toggler-icon {
+    &:hover {
+      background-image: $navbar-light-toggler-hover-icon-bg;
+    }
+  }
+}
+
+.content {
+  margin-top: $navbar-height;
+}

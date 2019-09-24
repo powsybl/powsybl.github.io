@@ -1,0 +1,39 @@
+@import "../bootstrap/functions";
+
+// Color system
+$black: #000000 !default;
+$primary: #004680 !default;
+$secondary: #009ade !default;
+$dark-blue: #0d3a63 !default;
+
+// Spacing
+$spacer: 1rem !default;
+
+// Fonts
+$font-size-base: 0.875rem !default;
+
+// Headings
+$headings-margin-top: 1rem * 3;
+$title-margin-bottom: 1rem * 1.5;
+
+// Links
+$link-hover-color: $secondary !default;
+$link-hover-decoration: none !default;
+
+// List group
+$list-group-action-hover-color: $secondary;
+$list-group-active-bg: lighten($secondary, 50%) !default;
+$list-group-active-border-color: rgba($black, .125) !default;
+
+// Navs
+$navbar-height: 60px;
+$navbar-light-color: $primary !default;
+$navbar-light-hover-color: $secondary !default;
+$navbar-light-toggler-hover-icon-bg: str-replace(url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='#{$secondary}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"), "#", "%23") !default;
+
+// Shadow
+$box-shadow: 5px 5px 5px #808080 !default;
+
+// Sidebar
+$sidebar-width: 350px;
+$sidebar-padding-y: 1rem * 1.5;
