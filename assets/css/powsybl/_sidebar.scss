@@ -1,9 +1,10 @@
 .sidebar {
   background-color: white;
-  flex: 0 0 $sidebar-width;
+  float: left;
+  width: $sidebar-width;
 
-  padding-top: $sidebar-padding;
-  padding-bottom: $sidebar-padding;
+  padding-top: $sidebar-padding-y;
+  padding-bottom: $sidebar-padding-y;
 
   li.list-group-item {
     padding: 0;
@@ -17,7 +18,6 @@
 .sidebar.dropdown {
   position: fixed;
   z-index: 9999;
-  width: $sidebar-width;
   padding-top: 0;
   padding-bottom: 0;
 }

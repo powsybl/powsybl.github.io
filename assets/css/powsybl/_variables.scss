@@ -6,8 +6,15 @@ $primary: #004680 !default;
 $secondary: #009ade !default;
 $dark-blue: #0d3a63 !default;
 
+// Spacing
+$spacer: 1rem !default;
+
 // Fonts
 $font-size-base: 0.875rem !default;
+
+// Headings
+$headings-margin-top: 1rem * 3;
+$title-margin-bottom: 1rem * 1.5;
 
 // Links
 $link-hover-color: $secondary !default;
@@ -29,4 +36,4 @@ $box-shadow: 5px 5px 5px #808080 !default;
 
 // Sidebar
 $sidebar-width: 350px;
-$sidebar-padding: 20px;
+$sidebar-padding-y: 1rem * 1.5;

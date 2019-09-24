@@ -1,0 +1,29 @@
+.content {
+  .title {
+    color: $primary;
+    font-size: 3 * $font-size-base;
+    margin-bottom: $title-margin-bottom;
+  }
+
+  h1 {
+    color: $primary;
+    border-bottom: 1px solid $gray-600;
+  }
+
+  h2 {
+    color: $black;
+    border-bottom: 1px solid $gray-200;
+  }
+
+  h1, h2 {
+    margin-top: $headings-margin-top;
+  }
+
+  .title, h1, h2, h3 {
+    font-weight: bold;
+  }
+
+  h3, h4, h5, h6 {
+    color: $gray-600;
+  }
+}
