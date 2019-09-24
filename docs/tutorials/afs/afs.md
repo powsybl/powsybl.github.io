@@ -4,7 +4,7 @@ layout: default
 ---
 
 
-In this tutorial you'll learn how to use AFS APIs, in a java application and in a groovy script then you'll learn how to
+In this tutorial you'll learn how to use the AFS APIs, in a java application and in a groovy script. Then, you'll learn how to
 use a remote AFS server.
 
 # Using AFS in your java application
@@ -34,7 +34,7 @@ For instance, if you use maven, in the dependencies section:
 </dependency>
 ```
 
-Beside your previous maven dependencies you have to add an IIDM implementation, if not, you'll get the following exception: 
+Beside your previous maven dependencies you have to add an IIDM implementation, or else you'll get the following exception: 
 ```
 com.powsybl.commons.PowsyblException: No IIDM implementation found
 ```
@@ -50,7 +50,7 @@ To resolve this problem, add the following dependency to your `pom.xml` file:
 ```
 
 Note: 
-By default, PowSyBl will load the drives defined in your [configuration](../../configuration/modules/index.md) file. To
+By default, Powsybl will load the drives defined in your [configuration](../../configuration/modules/index.md) file. To
 configure an new MapDB drive, add the following lines in your configuration file:
 
 **YAML**
@@ -108,12 +108,12 @@ groovy:000> import com.powsybl.contingency.*
 groovy:000>
 ```
 
-or using the `itools` command to execute a groovy script:
+Or using the `itools` command to execute a groovy script:
 ```bash
 $> itools run-script --file my_script.groovy
 ```
 
-From groovy code, PowSyBl provides a variable called `afs` which exposes base methods to access configured file systems.
+From groovy code, Powsybl provides a variable called `afs` which exposes base methods to access configured file systems.
 You can then simply perform the same thing as in the java section this way:
 ```groovy
 // Create a new folder at the root of you file system, and a new project in that folder.
@@ -131,7 +131,7 @@ AFS is fully extendable with your own type of files, but it already comes with a
 most basic one may be the `ImportedCase` type, which expose a `Network` object to the API.
 
 Such files may only be created inside a project. Projects may be seen as a kind of workspace for a particular study or
-computation. Inside of a project, we can import a case from a file representing a network, for example a
+computation. Inside of a project, we can import a case from a file representing a network, for example an
 [XIIDM](../../iidm/importer/iidm.md) file or a [UCTE](../../iidm/importer/ucte.md) file.
 
 **Java**
@@ -188,15 +188,15 @@ Network network = myImportedCase.getNetwork();
 ...
 ```
 
-To delete importCase file from the project  you have to just call the delete method:
+To delete the importCase file from the project you have to just call the delete method:
 ```java
 importCase.delete();
 ```
 
 # Using a remote file system
 
-Powsybl provides a special implementation of application file system storage which forwards calls, through a REST API,
-to a remote AFS server. The server may use any storage implementation itself, for example the MapDB implementation. That
+Powsybl provides a special implementation of an application file system storage which forwards calls, through a REST API,
+to a remote AFS server. The server may use any storage implementation itself, for example the MapDB implementation. This
 feature makes it easy to store data on a remote server.
 
 Read this documentation [page](../../afs/afs-remote.md) to learn more about remote implementation.

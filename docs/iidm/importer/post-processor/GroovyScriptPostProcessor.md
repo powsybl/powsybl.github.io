@@ -4,11 +4,11 @@ layout: default
 ---
 
 The `com.powsybl.iidm.import_.GroovyScriptPostProcessor` class is an implementation of the `com.powsybl.iidm.import_.ImportPostProcessor`
-interface that runs a Groovy script after a IIDM network is loaded.
+interface that runs a Groovy script after an IIDM network is loaded.
 
 The groovy script has access to two variables:
 - `network` : the IIDM network instance
-- `computationManager` : a computation manager instance to use to run simulation
+- `computationManager` : a computation manager instance to use to run simulations
 
 # Configuration
 To activate the `GroovyScriptPostProcessor`, add `groovyScript` to the `postProcessors` property of the [import](../../../configuration/modules/import.md)
@@ -42,7 +42,7 @@ The following example prints meta-information from the network:
 println "Network " + network.getId() + " (" + network.getSourceFormat()+ ") is imported"
 ```
 
-Read this [tutorial](../../../todo.md) to learn how to write more complex groovy script.
+Read this [tutorial](../../../todo.md) to learn how to write more complex groovy scripts.
 
 # Maven configuration
 To use the Groovy post processor, add the following dependencies to the `pom.xml` file:

@@ -33,7 +33,7 @@ menu:
         items:
           - name: "Grid modeling"
             url: "/docs/iidm/model/"
-          - name: "Network extraction"
+          - name: "Network reduction"
             url: "/docs/iidm/reducer/"
       - name: "Data exchanges"
         url: "/docs/functional-documentation.html#Data exchanges"

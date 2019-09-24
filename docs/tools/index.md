@@ -3,7 +3,7 @@ title: iTools
 layout: default
 ---
 
-The `iTools` script provides a common way to interact with powsybl, using the command line.
+The `iTools` script provides a common way to interact with Powsybl, using the command line.
 
 # Usage
 ```shell
@@ -44,6 +44,6 @@ unavailable. The commands are classified in themes, to help identifying their pu
 
 # Learn more
 Read this [page](../configuration/itools.md) to learn how to configure the framework and this [page](../configuration/logback.md)
-to learn how to set up the logging system used in powsybl.
+to learn how to set up the logging system used in Powsybl.
 
 Read this [tutorial](../tutorials/itools/extend-itools.md) to learn how to create a new `iTools` command.

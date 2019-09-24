@@ -3,7 +3,7 @@ title: How to write an IIDM exporter
 layout: default
 ---
 
-From PowSyBl's [Exporter](../../iidm/exporter/index.md) interface, it is possible to add a new data serialization format
+From Powsybl's [Exporter](../../iidm/exporter/index.md) interface, it is possible to add a new data serialization format
 for a [IIDM](../../iidm/model/index.md) network.
 
 In order to do so, you will need to:
@@ -13,11 +13,9 @@ In order to do so, you will need to:
 
 # Configuring your module
 
-In order to implement a new `Exporter`, add the following dependencies
+In order to implement a new `Exporter`, add the following dependencies in your `pom.xml` file:
 - `auto-service (com.google.auto.service)`: Configuration/metadata generator for `ServiceLoader`-style providers
 - `powsybl-iidm-converter-api`:  IIDM network import/export API
-
-in your `pom.xml` file:
 
 ```xml
 <dependencies>

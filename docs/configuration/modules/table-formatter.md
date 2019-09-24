@@ -17,11 +17,11 @@ The `language` property is an optional property that defines the language code o
 of this property is the language code (2-characters code) of the system default locale.
 
 ## printHeader
-The `printHeader` property is an optional property that defines if the headers of the columns are displayed. The default
+The `printHeader` property is an optional property that defines whether the headers of the columns are displayed or not. The default
 value of this property is `true`.
 
 ## printTitle
-The `printTitle` property is an optional property that defines if the title of the table is displayed. The default value
+The `printTitle` property is an optional property that defines whether the title of the table is displayed or not. The default value
 of this property is `true`.
 
 ## separator

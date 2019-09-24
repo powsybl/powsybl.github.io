@@ -3,8 +3,8 @@ title: HVDC line
 layout: default
 ---
 
-The `com.powsybl.iidm.network.HvdcLine` interface is used to model a HVDC Line. A HVDC line is connected to two [HVDC
-converters](hvdcConverterStation.md) on DC side.
+The `com.powsybl.iidm.network.HvdcLine` interface is used to model an HVDC Line. An HVDC line is connected to the DC side of two [HVDC
+converters stations](hvdcConverterStation.md).
 
 # Characteristics
 

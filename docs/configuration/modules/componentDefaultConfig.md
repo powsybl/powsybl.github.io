@@ -3,8 +3,8 @@ title: componentDefaultConfig
 layout: default
 ---
 
-The `componentDefaultConfig` module is used to configure the implementation of plugins the framework has to use for a
-specific feature (computation...). Contrary to the other modules, it is impossible to give an exhaustive list of the
+The `componentDefaultConfig` module is used to configure the implementation of plugins the framework has to use for
+specific features (e.g. computation...). Contrary to the other modules, it is impossible to give an exhaustive list of the
 existing properties.
 
 The name of the properties are the name of Java interfaces of the powsybl framework. The values must be the complete name

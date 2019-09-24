@@ -3,8 +3,8 @@ title: Network reduction
 layout: default
 ---
 
-The network reduction module is used to extract a sub part of a network, replacing the border lines, transformers, HVDC
-lines by injections. **It is required to run a load-flow computation before trying to reduce it.**
+The network reduction module is used to extract a sub part of a network, replacing the border lines, transformers and HVDC
+lines by injections. **It is required to run a load-flow computation before trying to reduce the network.**
 
 The network reduction is relying on a `NetworkPredicate` instance, to define an _area of interest_ (i.e. a list
 of equipments to keep in the network after the reduction). The equipments outside this area will be removed and the
@@ -13,8 +13,8 @@ lines, transformers and HVDC lines connecting voltage levels inside and outside 
 
 # Define an area of interest
 
-Before doing the reduction, one have to define the area of interest, thanks to the `com.powsybl.iidm.reducer.NetworkPredicate`
-interface. This interface declare two methods:
+Before doing the reduction, one has to define the area of interest, using the `com.powsybl.iidm.reducer.NetworkPredicate`
+interface. This interface declares two methods:
 ```java
 public interface NetworkPredicate {
 
@@ -24,7 +24,7 @@ public interface NetworkPredicate {
 }
 ```
 
-These two methods return `true` if the given parameter (a [substation](../model/substation.md) or a [voltage level](../model/voltageLevel.md))
+These two methods must return `true` when the given parameter (a [substation](../model/substation.md) or a [voltage level](../model/voltageLevel.md))
 is in the area of interest and should still be in the network after the reduction.
 
 Powsybl provides two implementations of this interface:
@@ -106,38 +106,38 @@ Powsybl provides a default implementation of this interface, but you can provide
 
 ## Default implementation
 
-The `com.powsybl.iidm.reducer.DefaultNetworkReducer` class is the common implementation of the `NetworkReducer` interface
-that replaces the lines in the _border_ group by [loads](../model/load.md) or [dangling lines](../model/danglingLine.md),
-depending of the [options](index.md#options), and the two windings transformers by [loads](../model/load.md).
+The `com.powsybl.iidm.reducer.DefaultNetworkReducer` class is the Powsybl implementation of the `NetworkReducer` interface
+that replaces the lines in the _border_ group by [loads](../model/load.md) or [dangling lines](../model/danglingLine.md)
+depending on the [options](index.md#options), and the two windings transformers by [loads](../model/load.md).
 
 NB: The HVDC lines and the three windings transformers replacement is not supported yet. If the `DefaultNetworkReducer`
-encountered a HVDC line or a three windings transformer, an `UnsupportedOperationException` is thrown.
+encountered an HVDC line or a three windings transformer, an `UnsupportedOperationException` is thrown.
 
 ### Replacements by loads
 
-The load created in place of a branch has the same ID and name than the replaced branch. The type of the load is set as
-`FICTITIOUS` and the $$P_0$$ and $$Q_0$$ are set to the $$P$$ and $$Q$$ of the relevant terminal, depending on the side
+The load created in place of a branch has the same ID and name as the replaced branch. The type of the load is set as
+`FICTITIOUS` and its $$P_0$$ and $$Q_0$$ are set to the $$P$$ and $$Q$$ of the relevant terminal, depending on which side is
 kept in the network. If the branch is disconnected, $$P_0$$ and $$Q_0$$ are set to `NaN`. The connectivity information
-(node or bus depending on the voltage level topology) are kept.
+(node or bus depending on the voltage level topology) is conserved.
 
 ### Replacements by dangling lines
 
-The dangling line created in place of a line has the same ID and name than the replaced line. The resistance and reactance
-of the dangling line are equals to the half of the resistance and reactance of the replaced line (we consider that the line
+The dangling line created in place of a line has the same ID and name as the replaced line. The resistance and reactance
+of the dangling line are equals to half of the resistance and reactance of the replaced line (we consider that the line
 is cut in the middle). The conductance and susceptance are set to the $$G_1$$ and $$B_1$$ or to $$G_2$$ and $$B_2$$
-depending on the side kept in the network. 
+depending on which side is kept in the network. 
 
-The $$P_0$$ and $$Q_0$$ are set to the $$P$$ and $$Q$$ of the relevant terminal, depending on the side kept in the network.
+The $$P_0$$ and $$Q_0$$ are set to the $$P$$ and $$Q$$ of the corresponding terminal, depending on which side is kept in the network.
 If the line is disconnected, $$P_0$$ and $$Q_0$$ are set to `NaN`. The connectivity information (node or bus depending
-on the voltage level topology) is kept.
+on the voltage level topology) is conserved.
 
 ### Options
 
-The network reduction can be configured passing a `com.powsybl.iidm.reducer.ReductionOptions` instance to the
+The network reduction can be configured by passing a `com.powsybl.iidm.reducer.ReductionOptions` instance to the
 `DefaultNetworkReducer` constructor.
 
 #### withDanglingLines
-This option defines if the equipments in the _border_ group are replaced by a dangling line. If this option is set to `false`,
+This option defines whether the equipments in the _border_ group are replaced by dangling lines or by loads. If this option is set to `false`,
 which is the default value, the equipments are exclusively replaced by loads.
 
 #### Examples
@@ -147,7 +147,7 @@ ReductionOptions options = new ReductionOptions();
 options.withDanglingLines(true);
 ```
 
-Note that the `ReductionOptions` class offers a fluent API that allow you writing code like this:
+Note that the `ReductionOptions` class offers a fluent API that allows you to write code like this:
 ```java
 ReductionOptions options = new ReductionOptions()
         .withDanglingLines(true);
@@ -155,11 +155,11 @@ ReductionOptions options = new ReductionOptions()
 
 ### Observers
 
-The `com.powsybl.iidm.reducer.NetworkReducerObserver` is an interface that allow to be notified each time an identifiable
-is removed or replaced. This interface provides several methods, one by `Identifiable` sub class that is managed by the
+The `com.powsybl.iidm.reducer.NetworkReducerObserver` is an interface that allows to be notified each time an `Identifiable`
+is removed or replaced. This interface provides several methods, one per `Identifiable` sub class managed by the
 `DefaultNetworkReducer` implementation. There are 2 types of events:
 - a _replace_ event, when a line or a two windings transformer is replaced by a load or a danging line
-- a _remove_ event, when a substation, a voltage level, a line, a two or three windings transformer or a HVDC line is
+- a _remove_ event, when a substation, a voltage level, a line, a two or three windings transformer or an HVDC line is
 removed.
 
 ```java
@@ -229,7 +229,7 @@ $> ./itools convert-network --input-file /home/user/input.xiidm
 
 ## Import post-processor
 This example shows how to automatically reduce networks when they are loaded, using the
-[groovy post-processors](../importer/post-processor/GroovyScriptPostProcessor.md), using the same script as before.
+[groovy post-processors](../importer/post-processor/GroovyScriptPostProcessor.md) with the same script as above.
 
 First, we have to configure the groovy post-processor in your configuration file:
 ```yaml

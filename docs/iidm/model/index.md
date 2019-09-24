@@ -4,7 +4,7 @@ layout: default
 ---
 
 
-The [Network](network.md) modeling is made of two main objects: substations and lines. A substation can have several voltage levels and line can be of several types (AC lines, DC lines and AC lines shared between two countries).
+The [Network](network.md) modeling is made of two main objects: substations and lines. A substation can have several voltage levels and a line can be of several types (AC lines, DC lines and AC lines shared between two countries).
 
 - [Line](line.md)
 

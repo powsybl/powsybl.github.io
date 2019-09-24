@@ -21,7 +21,7 @@ and the [exporter](iidm/exporter/index.md) documentation pages to learn more abo
 
 
 # Simulators
-Using powsybl, we would be able to run different kind of simulations:
+Using powsybl, we can run different kind of simulations:
 - [loadflows](todo.md)
 - [security analysis](loadflow/security-analysis.md)
 - [sensitivity calculation](sensitivity/index.md)

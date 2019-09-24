@@ -20,7 +20,7 @@ modify the structure of the network.
 - DEEP: will save and restore all network data. Decreases performances, but allows to use any type of action.
 
 ## ignore-pre-contingency-violations
-Set the `ignore-pre-contingency-violations` to `true` to ignore the the pre-contingency violations and continue the
+Set the `ignore-pre-contingency-violations` to `true` to ignore the pre-contingency violations and continue the
 simulation even if there are still violations after the pre-contingency simulation.
 
 ## load-flow-factory

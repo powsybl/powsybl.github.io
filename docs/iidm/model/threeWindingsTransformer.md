@@ -76,5 +76,4 @@ ThreeWindingsTransformer threeWindingsTransformer = substation.newThreeWindingsT
         .setRatedU(11.0)
         .add()
     .add();
-
 ```

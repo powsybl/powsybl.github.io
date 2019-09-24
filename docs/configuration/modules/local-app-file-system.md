@@ -31,12 +31,12 @@ if the `root-dir-X` property is set.
 The `max-additional-drive-count` property is an optional property that defines the maximal number of secondary drives.
 
 ## remotely-accessible
-The `remotely-accessible` property is an optional property that defines if the primary drive is remotely accessible. The
+The `remotely-accessible` property is an optional property that defines whether the primary drive is remotely accessible or not. The
 default value of this property is `false`.
 
 ## remotely-accessible-X
-The `remotely-accessible-X` property is an optional property that defines if the Xth secondary drive is remotely
-accessible. The default value of this property is `false`.
+The `remotely-accessible-X` property is an optional property that defines whether the Xth secondary drive is remotely
+accessible or not. The default value of this property is `false`.
 
 ## root-dir-X
 The `root-dir-X` property is an optional property that defines the root directory mapped to the Xth secondary MapDB drive.
