@@ -12,7 +12,7 @@ title: Search
     "{{ page.url | slugify }}": {
         "url": "{{ page.url }}",
         "title": "{{ page.title | xml_escape }}",
-        "content": {{ page.content | strip_html | strip_newlines | jsonify }}
+        "content": {{ page.content | strip_html | jsonify }}
     },
     {% endif %}
     {% endfor %}
