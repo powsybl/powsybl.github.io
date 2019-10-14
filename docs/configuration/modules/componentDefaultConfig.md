@@ -4,10 +4,10 @@ layout: default
 ---
 
 The `componentDefaultConfig` module is used to configure the implementation of plugins the framework has to use for
-specific features (e.g. computation...). Contrary to the other modules, it is impossible to give an exhaustive list of the
+specific features (e.g. computation, etc.). Contrary to the other modules, it is impossible to give an exhaustive list of the
 existing properties.
 
-The name of the properties are the name of Java interfaces of the powsybl framework. The values must be the complete name
+The names of the properties are the names of Java interfaces of the powsybl framework. Each value must be the complete name
 of a class which implements this interface.
 - ContingenciesProviderFactory
 - LoadFlowFactory
@@ -22,7 +22,7 @@ In the configuration below, we define these functionalities:
  - A security analysis
  - A description of contingencies
  - A loadflow
-         
+
 The chosen implementations are:
  - "slow" security analysis (for a few contingencies), post-contingency LF based implementation
  - the contingencies expressed in Groovy DSL language

@@ -34,7 +34,7 @@ values are:
 
 # Configuration
 The default values of all the optional properties are read from the [load-flow-default-parameter](../modules/load-flow-default-parameters.md)
-module, defined in the configuration file. 
+module, defined in the configuration file.
 
 ## Examples
 ```json
