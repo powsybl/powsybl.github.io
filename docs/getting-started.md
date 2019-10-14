@@ -11,7 +11,7 @@ Powsybl is part of the [LF Energy Foundation](http://www.lfenergy.org), a projec
 
 Powsybl provides an internal complete grid model with substations, voltage levels, AC and DC lines,
 two and three windings transformers, batteries, generators, loads, shunt and static VAR compensators, etc. The grid model can be
-extended with extensions to complete the modelling of the equipments (dynamic profile, short-circuit profile, monitoring, etc.). It also provides importers and exporters for several common pan-european exchange formats ([Entso-E CIM/CGMES](https://www.entsoe.eu/digital/common-information-model/cim-for-grid-models-exchange/), [UCTE-DEF](https://cimug.ucaiug.org/Groups/Model%20Exchange/UCTE-format.pdf), etc.).
+enhanced with extensions that complete the equipments modelling (dynamic profile, short-circuit profile, monitoring, etc.). It also provides importers and exporters for several common pan-european exchange formats ([Entso-E CIM/CGMES](https://www.entsoe.eu/digital/common-information-model/cim-for-grid-models-exchange/), [UCTE-DEF](https://cimug.ucaiug.org/Groups/Model%20Exchange/UCTE-format.pdf), etc.).
 
 Powsybl as a library provides several APIs for power systems' simulations and analyses (power flow computations, security analyses,
 remedial action simulations, short circuits computations, sensitivity computations, time domain simulations...). These

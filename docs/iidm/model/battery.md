@@ -4,7 +4,7 @@ layout: default
 ---
 
 The `com.powsybl.iidm.network.Battery` interface is used to model a battery.
-A battery on the electric grid is an energy storage device that is either capable of capturing energy from the grid or of injecting it into the grid. The electric energy on the grid side is thus transformed in chemical energy on the battery side and vice versa. The power flow is bidirectional and it is controlled via a power electronic converter.
+A battery on the electric grid is an energy storage device that is either capable of capturing energy from the grid or of injecting it into the grid. The electric energy on the grid side is thus transformed into chemical energy on the battery side and vice versa. The power flow is bidirectional and it is controlled via a power electronic converter.
 
 # Characteristics
 

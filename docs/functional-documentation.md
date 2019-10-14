@@ -11,8 +11,8 @@ most important powsybl modules. Read this page to learn more about the [IIDM](ii
 
 Powsybl also provides business features around the network:
 - [network reduction](iidm/reducer/index.md) to extract a sub part of a network,
-- [network merging](todo.md): ths functionnality is illustrated in a [tutorial](user_story/loadflow_tutorial.md),
-- [network topological views](todo.md).  
+- [network merging](todo.md): this functionnality is illustrated in a [tutorial](user_story/loadflow_tutorial.md),
+- [network topological views](todo.md).
 
 # Data exchanges
 IIDM networks can also be created from various formats such as [UCTE-DEF](iidm/importer/ucte.md)
