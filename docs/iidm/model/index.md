@@ -28,4 +28,8 @@ The [Network](network.md) modeling is made of two main objects: substations and 
         - [Dangling line](danglingLine.md)
         - [Static VAR compensator](staticVarCompensator.md)
         - [VSC converter station](vscConverterStation.md)
-        - [LCC converter station](lccConverterStation.md) 
+        - [LCC converter station](lccConverterStation.md)
+
+
+
+![IIDM model](./images/schema-iidm.png){: width="50%" .center-image}
