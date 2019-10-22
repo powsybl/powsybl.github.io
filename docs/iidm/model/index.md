@@ -30,6 +30,6 @@ The [Network](network.md) modeling is made of two main objects: substations and 
         - [VSC converter station](vscConverterStation.md)
         - [LCC converter station](lccConverterStation.md)
 
-
+The following image shows some elements of the internal data model:
 
 ![IIDM model](./images/schema-iidm.png){: width="50%" .center-image}
