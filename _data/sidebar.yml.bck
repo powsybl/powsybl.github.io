@@ -14,8 +14,8 @@ toc:
   - name: "Functional documentation"
     icon: "fas fa-square"
     items:
-      - id: "grid-modelling"
-        name: "Grid modelling"
+      - id: "grid-modeling"
+        name: "Grid modeling"
         items:
           - name: "Substation"
             url: "/docs/iidm/model/substation"

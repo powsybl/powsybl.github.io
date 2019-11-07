@@ -23,7 +23,7 @@ A [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phase
 Two windings transformers can also have [current limits](currentLimits.md) defined for each end.
 
 # Model
-Two windings transformer are modelled with the following equivalent $$\pi$$ model:
+Two windings transformer are modeled with the following equivalent $$\pi$$ model:
 
 ![Power line model](./images/two-windings-transformer-model.svg){: width="50%" .center-image}
 

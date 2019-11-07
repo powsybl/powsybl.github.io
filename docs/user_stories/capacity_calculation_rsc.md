@@ -9,7 +9,7 @@ This user story concerns Regional Security Coordinators (RSCs). An efficient and
 - Outage planning coordination
 - Coordinated capacity allocation
 - Short-term and very short-term adequacy forecast
-- Individual and common grid modelling and data set delivery
+- Individual and common grid modeling and data set delivery
 
 
 We are going to explain how to perform a coordinated capacity computation using Powsybl and some specific developments. We want to ensure that flows across borders respect given maximum admissible values, while ensuring electricity security of supply. If some overloads are reported, a remedial actions optimization is called to find the cheapest solution to solve the constraints. Remedial actions can be either changing the tap of a PST (it modifies the impedance of the network and so the load-flows) or doing generator redispatching.
