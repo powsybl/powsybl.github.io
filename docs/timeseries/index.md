@@ -14,7 +14,7 @@ To use time-series, add the following dependency to the `pom.xml` file:
 
 # Time series modeling
 
-In Powsybl, time series are modelled by:
+In Powsybl, time series are modeled by:
 - A name to uniquely identify a time series inside a store.
 - A data type which is `double` or `String`.
 - A time index to define an instants list for which data exists. Three different implementation of time index are available
@@ -144,7 +144,7 @@ Output:
 }
 ```
 
-We can see that an uncompress data chunk is modelled with a double array and an offset. It defines values associated to
+We can see that an uncompress data chunk is modeled with a double array and an offset. It defines values associated to
 instants of the time index from `offset` to `offset + values.length`.
 
 The folowing example shows how to compress the chunk using the [RLE](https://fr.wikipedia.org/wiki/Run-length_encoding)
