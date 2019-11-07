@@ -31,7 +31,7 @@ cards:
       url: "/docs/user-stories"
   - title: "Contribute"
     icon: "fas fa-hands-helping"
-    description: "Powsybl is open source and part of the <a href='https://www.lfenergy.org/'>Linux Fundation Energy</a>. Help us build the next generation power system tool!"
+    description: "Powsybl is open source and part of the <a href='https://www.lfenergy.org/'>Linux Foundation Energy</a>. Help us build the next generation power system tool!"
     link:
       name: "What's next"
       url: "https://github.com/powsybl/.github/blob/master/CONTRIBUTING.md"
