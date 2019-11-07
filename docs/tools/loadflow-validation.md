@@ -177,7 +177,7 @@ To learn how to configure the `loadflow-validation` command, read the documentat
 # Examples
 
 ## Example 1
-The following example shows how to run a loadflow validation on an UCTE network model: 
+The following example shows how to run a loadflow validation on a UCTE network model: 
 ```shell
 $> itools loadflow-validation --case-file 20170322_1844_SN3_FR2.uct --output-folder /tmp/results
 ```
