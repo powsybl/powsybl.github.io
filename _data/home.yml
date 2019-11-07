@@ -1,13 +1,13 @@
 cards:
   - title: "Grid modeling"
     icon: "fas fa-project-diagram"
-    description: "Powsybl provides a thourough framework for grid components modeling, which is fully editable and extendable."
+    description: "Powsybl provides a thourough library for grid components modelling, fully editable and extendable."
     link:
       name: "Learn more"
       url: "/docs/iidm/model"
   - title: "Grid simulation"
     icon: "fas fa-chart-line"
-    description: "Run power flow simulations such as <a href='/docs/loadflow/loadflow'>load flows</a>, <a href='/docs/loadflow/security-analysis'>security analysis</a> with or without remedial actions, <a href='/docs/sensitivity'>sensitivity analysis</a>, etc."
+    description: "Run power flow simulations such as <a href='/docs/loadflow/loadflow'>load flows</a>, <a href='/docs/loadflow/security-analysis'>security analyses</a> with or without remedial actions, <a href='/docs/sensitivity'>sensitivity analyses</a>, etc."
     link:
       name: "Learn more"
       url: "/docs/functional-documentation#Simulators"
