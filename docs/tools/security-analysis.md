@@ -189,8 +189,8 @@ To use the `security-analysis` command, add the following dependencies to the `p
 </dependency>
 ```
 
-# Further behaviour customization
-The behaviour of the security analysis may be further customized by using a `SecurityAnalysisPreprocessor`. Such a preprocessor will have the possibility to programmatically transform the following objects before the security analysis is actually executed :
+# Further behavior customization
+The behavior of the security analysis may be further customized by using a `SecurityAnalysisPreprocessor`. Such a preprocessor will have the possibility to programmatically transform the following objects before the security analysis is actually executed :
  - The `Network`
  - The `ContingenciesProvider`
  - The `LimitViolationDetector`

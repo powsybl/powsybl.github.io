@@ -1,7 +1,7 @@
 cards:
   - title: "Grid modeling"
     icon: "fas fa-project-diagram"
-    description: "Powsybl provides a thourough library for grid components modelling, fully editable and extendable."
+    description: "Powsybl provides a thourough library for grid components modeling, fully editable and extendable."
     link:
       name: "Learn more"
       url: "/docs/iidm/model"
