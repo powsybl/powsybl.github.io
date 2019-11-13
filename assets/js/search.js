@@ -17,6 +17,17 @@
         }
     }
 
+    function displaySearchException(searchException) {
+        var searchResults = document.getElementById('search-results');
+        var displayString = "<h2>ERROR</h2>";
+        if (searchException.name == "QueryParseError") {
+            displayString += "Your query contains an error.<br>" + searchException + "<br>For a description of the query syntax and query special characters ('*', ':', '^', '~', '+', '-'), please visit <a href='https://lunrjs.com/guides/searching.html'>https://lunrjs.com/guides/searching.html</a>";
+        } else {
+            displayString += searchException;
+        }
+        searchResults.innerHTML = displayString;
+    }
+
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split('&');
@@ -51,7 +62,11 @@
             }
         });
 
-        var results = idx.search(searchTerm); // Get lunr to perform a search
-        displaySearchResults(results, window.store); // We'll write this in the next section
+        try {
+            var results = idx.search(searchTerm); // Get lunr to perform a search
+            displaySearchResults(results, window.store); // We'll write this in the next section
+        } catch (searchException) {
+            displaySearchException(searchException);
+        }
     }
 })();
