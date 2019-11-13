@@ -134,4 +134,4 @@ toc:
       - name: "API Reference"
         url: "#"
       - name: "Tutorials"
-        url: "/docs/tutorials"
+        url: "/docs/tutorials/index"
