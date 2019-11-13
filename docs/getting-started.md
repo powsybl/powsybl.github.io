@@ -28,7 +28,7 @@ of Powsybl are also exposed as web services.
 
 Thus, there are three different ways to package an application based on the Powsybl framework:
 
-- The first one is to use Powsybl as a Java library with a plain Maven dependency.
+- The first one is to use Powsybl as a plain Java library to develop your own application. The Powsybl artifacts are available in Maven Central under the `com.powsybl` groupId: [Powsybl Artifacts](http://central.maven.org/maven2/com/powsybl/). Browse this site to discover which artifacts contain the functionalities you want to include in your application. The [Tutorials](tutorials/index.md) are a good start to see Powsybl used as a library.
 
 - The second one aims to create a command line bundle, based on the `iTools` script, using the [itools-packager-maven-plugin](installation/itools-packager.md).
 
