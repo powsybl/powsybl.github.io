@@ -22,7 +22,7 @@ menu:
       - name: "Capacity calculation for RSC"
         url: "/docs/user_stories/capacity_calculation_rsc.html"
       - name: "Tutorials"
-        url: "/docs/tutorials.html"
+        url: "/docs/tutorials/index.html"
 
   - name: "Functional documentation"
     icon: "fas fa-square"

@@ -10,7 +10,7 @@ maven plugin.
 # Properties
 
 ## java_xmx
-The `java_xmx` property is an optional property that defines the amout of the Java Heap memory. The default value is 8 Gb.
+The `java_xmx` property is an optional property that defines the amount of the Java Heap memory. The default value is 8 Gb.
 
 ## powsybl_config_dirs
 The `itools_config_dir` property is an optional property that defines the configuration folders. The default
@@ -23,7 +23,7 @@ value is `config`.
 At startup, Powsybl looks in the configuration directories defined in the `powsybl_config_dirs` for a YAML configuration
 file first, for a XML configuration file then and finally for properties files.
 
-All the configuration files are stacked to allow an user to partially or totally overload the system configuration of a
+All the configuration files are stacked to allow a user to partially or totally overload the system configuration of a
 module.
 
 # Deprecated properties
@@ -37,7 +37,7 @@ defined the path to the cache folder used by modules that required cache functio
 The `itools_config_dir` property is deprecated since V2.2.0. Use the `powsybl_config_dirs` property instead.
 
 ## itools_config_name
-The `itools_config_name` property is deprecated since V2.2.0. Use the `powsybl_config_name` property instead. 
+The `itools_config_name` property is deprecated since V2.2.0. Use the `powsybl_config_name` property instead.
 
 ## mpi_hosts
 The `mpi_hosts` property is deprecated since V3.0.0. This parameter is configured in [itools-mpi.conf](itools-mpi.md).

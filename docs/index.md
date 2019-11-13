@@ -6,7 +6,7 @@ layout: default
 # Getting started
 The Powsybl framework offers two different ways to package an application.
 
-The first one aims to create a command line bundle, based on `iTools` script, using the [itools-packager-maven-plugin](installation/itools-packager.md).
+The first one aims to create a command line bundle, based on the `iTools` script, using the [itools-packager-maven-plugin](installation/itools-packager.md).
 
 The second one aims to create a JavaFX desktop application based on the Grid Study Environment, using the
 [javafx-packager](installation/javafx-packager.md) to create an installable bundle for Linux (rpm or deb), Windows (exe

@@ -6,7 +6,7 @@ layout: default
 The `iTools` script uses [logback](https://logback.qos.ch/) for logging. There are two different ways to configure the
 logging levels:
 - a system-wide configuration
-- an user-wide configuration
+- a user-wide configuration
 
 Please refer to the [logback manual](https://logback.qos.ch/manual/index.html) for the available logging options.
 
@@ -28,5 +28,5 @@ The logging configuration file is `POWSYBL_HOME/etc/logback-itools.xml`
 ```
 
 ## User-wide configuration
-An user could have its own logging configuration by creating a `logback-itools.xml` file in the [configuration](itools.md)
+A user could have its own logging configuration by creating a `logback-itools.xml` file in the [configuration](itools.md)
 folder. This file is used in priority if it exists and the system-wide configuration is used otherwise.
