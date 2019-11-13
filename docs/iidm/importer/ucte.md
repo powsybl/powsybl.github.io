@@ -4,7 +4,7 @@ layout: default
 ---
 
 The UCTE-DEF (UCTE **D**ata **F**ormat **E**xchange) format is the format used by UCTE TSOs to exchange grid models for
-load flow and three phase short circuit studies. The data are contained in an unformatted standard US ASCII, organized in
+load-flow and three-phase short-circuit studies. The data is contained in an unformatted standard US ASCII file, organized in
 several sections:
 - C : comments
 - N : nodes
@@ -16,7 +16,7 @@ several sections:
 
 To learn more about UCTE-DEF files, read the complete [UCTE-DEF format specification](https://cimug.ucaiug.org/Groups/Model%20Exchange/UCTE-format.pdf).
 
-The UCTE importer support files with the following extensions: `*.uct` and `*.UCT`
+The UCTE importer support files with the following extensions: `.uct` and `.UCT`
 
 # Example
 ```

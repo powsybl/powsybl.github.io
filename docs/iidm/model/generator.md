@@ -10,8 +10,8 @@ The `com.powsybl.iidm.network.Generator` interface is used to model a generator.
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | EnergySource | `EnergySource` | - | yes | `OTHER` | The energy source |
-| MinP | double | MW | yes | - | Minimal active power |
-| MaxP | double | MW | yes | - | Maximum active power |
+| MinP | double | MW | yes | - | The minimal active power |
+| MaxP | double | MW | yes | - | The maximum active power |
 | RegulatingTerminal | `TerminalExt` | - | no | - | The terminal used for regulation |
 | VoltageRegulatorOn | boolean | - | yes | - | The voltage regulator status |
 | TargetP | double | MW | yes | - | The active power target |
@@ -49,4 +49,20 @@ Generator generator = network.getVoltageLevel("VL").newGenerator()
     .setTargetV(0.0)
     .setTargetQ(0.0)
     .add();
+```
+
+# Extensions
+
+## Active power control
+
+This extension is used to configure the participation factor of the generator, typically in the case of a loaflow computation with distributed slack.
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| participate | boolean | - | yes | - | The participation status|
+| droop | double | None (repartition key) | yes | - | The participation factor |
+
+Here is how to add an active power control extension to a generator:
+```java
+generator.addExtension(ActivePowerControl.class, new ActivePowerControl(generator, true, 4));
 ```

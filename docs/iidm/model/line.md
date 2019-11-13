@@ -10,7 +10,7 @@ The `com.powsybl.iidm.network.Line` interface is used to model an AC line. A lin
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | id | string | - | yes | - | Unique identifier of the line|
-| name | string | - | no | "" | Humanly readable name of the line|
+| name | string | - | no | "" | Human-readable name of the line|
 | $$r$$ | double | $$\Omega\$$ | yes | - | The series resistance |
 | $$x$$ | double | $$\Omega\$$ | yes | - | The series reactance |
 | $$g_1$$ | double | S | yes | - | The first side shunt conductance |
@@ -35,7 +35,7 @@ $$
 \end{align*}
 $$
 
-the equations of the power line, in complex notations, are as follow:
+The equations of the power line, in complex notations, are as follow:
 
 $$
 \begin{align*}

@@ -3,7 +3,7 @@ title: iTools
 layout: default
 ---
 
-The `iTools` script provides a common way to interact with powsybl, using the command line.
+The `iTools` script provides a common way to interact with Powsybl, using the command line.
 
 # Usage
 ```shell
@@ -12,7 +12,6 @@ usage: itools [OPTIONS] COMMAND [ARGS]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available commands are:
 ...
@@ -23,9 +22,6 @@ Available commands are:
 ### config-name
 Use the `--config-name` parameter to set the configuration file's basename. This basename is used to find the configuration
 file in the specified `iTools` configuration directory.
-
-### parallel
-Use the `--parallel` parameter to run the command in parallel. This option is supported by only few commands.
 
 # Available commands
 The `iTools` commands are discovered at runtime: depending of the jars present in the classpath, some commands could be
@@ -48,6 +44,6 @@ unavailable. The commands are classified in themes, to help identifying their pu
 
 # Learn more
 Read this [page](../configuration/itools.md) to learn how to configure the framework and this [page](../configuration/logback.md)
-to learn how to set up the logging system used in powsybl.
+to learn how to set up the logging system used in Powsybl.
 
 Read this [tutorial](../tutorials/itools/extend-itools.md) to learn how to create a new `iTools` command.

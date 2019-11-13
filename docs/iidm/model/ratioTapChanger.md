@@ -3,17 +3,18 @@ title: Ratio tap changer
 layout: default
 ---
 
-The `com.powsybl.iidm.network.RatioTapChanger` interface is used to model ratio tap changer devices on transformers.
+The `com.powsybl.iidm.network.RatioTapChanger` interface is used to model a ratio tap changer device on a transformer.
 It can be added to both [two windings transformers](twoWindingsTransformer.md) and [three windings transformers](threeWindingsTransformer.md).
 
 # Characteristics
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Low tap position | int | - | no | 0 | Position index of the tap changer's low tap |
-| Tap position | int | - | yes | - | Position index of current tap |
-| Load tap changing capabilities | boolean | - | no | false | ```true``` if ratio tap changer has load tap changing capabilities, ```false``` otherwise |
-| Regulating | boolean | - | no | false | ```true``` if ratio tap changer is regulating, ```false``` otherwise. [State variable](../../todo.md) |
+| Low tap position | int | - | no | 0 | The position index of the tap changer's low tap |
+| Tap position | int | - | yes | - | The position index of current tap |
+| Load tap changing capabilities | boolean | - | no | false | ```true``` if the ratio tap changer has load tap changing capabilities, ```false``` otherwise |
+| Regulating | boolean | - | no | false | ```true``` if the ratio tap changer is regulating, ```false``` otherwise. [State variable](../../todo.md) |
+| Target Deadband | double | - | no | `Double.NaN` | The deadband used to avoid excessive update of controls |
 | Target V | double | kV | yes | - | The target voltage |
 | Regulation terminal | Terminal | - | no | - | The terminal which voltage is regulated |
 
@@ -21,17 +22,17 @@ Each step of a ratio tap changer has the following attributes:
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
-| $$r_{r, tap}$$ | double | % | yes | - | Resistance deviation in percent of nominal value |
-| $$x_{r, tap}$$ | double | % | yes | - | Reactance deviation in percent of nominal value |
-| $$g_{r, tap}$$ | double | % | yes | - | Conductance deviation in percent of nominal value |
-| $$b_{r, tap}$$ | double | % | yes | - | Susceptance deviation in percent of nominal value |
-| $$\rho_{r, tap}$$ | double | p.u. | yes | - | Voltage ratio in per unit of the rated voltages |
+| $$r_{r, tap}$$ | double | % | yes | - | The resistance deviation in percent of nominal value |
+| $$x_{r, tap}$$ | double | % | yes | - | The reactance deviation in percent of nominal value |
+| $$g_{r, tap}$$ | double | % | yes | - | The conductance deviation in percent of nominal value |
+| $$b_{r, tap}$$ | double | % | yes | - | The susceptance deviation in percent of nominal value |
+| $$\rho_{r, tap}$$ | double | p.u. | yes | - | The voltage ratio in per unit of the rated voltages |
 
 # Model
 A ratio tap changer is regulating if both **Load tap changing capabilities** and **Regulating** are set to ```true```.
-Remote control can be modelled by putting a distant terminal as regulation terminal.
+Remote control can be modelled by setting a distant terminal as the regulation terminal.
 
-For more information about how ratio tap changers are taken into account in transformers model, please refer to [two windings transformers documentation](twoWindingsTransformer.md) and [three windings transformers one](threeWindingsTransformer.md).
+For more information on how ratio tap changers are taken into account in the transformers model, please refer to the [two windings transformers documentation](twoWindingsTransformer.md) and the [three windings transformers one](threeWindingsTransformer.md).
 
 
 # Examples

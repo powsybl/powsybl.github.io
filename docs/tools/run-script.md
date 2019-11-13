@@ -5,7 +5,7 @@ todo:
     - create a tutorial to show a groovy script example
 ---
 
-The `run-script` command is used to run scripts based on powsybl. So far, only Groovy is supported.
+The `run-script` command is used to run scripts based on Powsybl. So far, only Groovy is supported.
  
 # Usage
 ```shell
@@ -14,7 +14,6 @@ usage: itools [OPTIONS] run-script --file <FILE> [--help]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --file <FILE>   the script file

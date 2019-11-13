@@ -1,18 +1,18 @@
 ---
-title: How to use PowSyBl as a custom desktop application
+title: How to use Powsybl as a custom desktop application
 layout: default
 ---
 
-It is possible to use PowSyBl as a complete desktop application based on the [GSE](https://github.com/powsybl/powsybl-gse)
-(Grid Study  Environment) project]. In the following tutorial, you will learn how to
+It is possible to use Powsybl as a complete desktop application based on the [GSE](https://github.com/powsybl/powsybl-gse)
+(Grid Study  Environment) project. In the following tutorial, you will learn how to
 implement such an application in different ways.
 
 # Setting up your project
 
-In order to write their own native application using PowSyBl, developers can based
-their maven project on it using the adequate maven project template available on
+In order to write their own native application using Powsybl, developers can base
+their maven project on it by using the adequate maven project template available on
 [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials) or creating their
-application from scratch with maven by adding the GSE in their dependencies.
+application from scratch with maven and adding the GSE in their dependencies.
 
 ## From template
 
@@ -29,7 +29,7 @@ needs.
 ## From scratch
 
 If you want to start your maven project from scratch, you will have to use the `javafx-maven-plugin` to base your native
-application on the PowSyBl GSE.
+application on the Powsybl GSE.
 
 In order to do this, add this in your `pom.xml` within your build-plugin:
 ```xml

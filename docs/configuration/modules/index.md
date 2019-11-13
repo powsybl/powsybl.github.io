@@ -5,7 +5,7 @@ layout: default
 
 The configuration mechanism supports YAML and XML file formats. The framework looks inside all the folders specified
 to the [powsybl_config_dirs](../itools.md#powsybl_config_dirs) property in the [itools.conf](../itools.md) file for
-configuration files. The framework use the [powsybl_config_name](../itools.md#powsybl_config_name) property as the
+configuration files. The framework uses the [powsybl_config_name](../itools.md#powsybl_config_name) property as the
 basename of the configuration files. It looks for a YAML file first, then for a XML file. The XML file will be used only
 if the YAML configuration file has not been found.
 
@@ -77,5 +77,6 @@ module2:
 - [mapdb-app-file-system](mapdb-app-file-system.md)
 - [remote-service](remote-service.md)
 - [security](security.md)
+- [security-analysis](security-analysis.md)
 - [simulation-parameters](simulation-parameters.md)
 - [table-formatter](table-formatter.md)

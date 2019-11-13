@@ -22,7 +22,7 @@ and equipment) violation is less than a predefined threshold
 - if a constraints violation is contained in just one result, the violation is less than a predefined threshold
 - if a contingency is contained in just one result, all the post-contingency violations are less than a predefined threshold
   
-The comparison process, optionally, can output, in a CSV file, all the compared values (pre and post-contingency loadflow
+The comparison process can optionally output in a CSV file all the compared values (pre and post-contingency loadflow
 computation outcomes, and related constraints violations), with a corresponding comparison result (`equivalent`,`different`).
 See example below.
 
@@ -47,7 +47,6 @@ usage: itools [OPTIONS] compare-security-analysis-results [--help] --output-file
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --help                    display the help and quit

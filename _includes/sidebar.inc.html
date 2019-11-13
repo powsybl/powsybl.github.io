@@ -1,0 +1,23 @@
+{% for item in items %}
+<li class="list-group-item">
+    {% if item.url == page.url %}
+    <a class="list-group-item active">
+    {% else %}
+    <a class="list-group-item list-group-item-action" href="{{ item.url }}">
+    {% endif %}
+
+    {% if subitem %}
+    <i class="fas fa-reply fa-rotate-180 ml-4 mr-2"></i>
+    {% endif %}
+    {{ item.name }}
+
+    </a>
+
+    {% if item.items %}
+        {% assign items = item.items %}
+        {% assign subitem = true %}
+        {% include sidebar.inc.html %}
+        {% assign subitem = false %}
+    {% endif %}
+</li>
+{% endfor %}

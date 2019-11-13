@@ -17,7 +17,7 @@ if this property is not set.
 # Optional property
 
 ## debug
-The `debug` property is an optional property that defines if the `security-analysis` should run in debug mode of not. The
+The `debug` property is an optional property that defines whether the `security-analysis` should run in debug mode or not. The
 default value of this property is `false`.
 
 # Examples

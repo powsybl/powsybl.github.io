@@ -3,7 +3,7 @@ title: Exporters
 layout: default
 ---
 
-The `com.powsybl.iidm.export.Exporter` class is used to serialize a IIDM network to files. Powsybl supports natively
+The `com.powsybl.iidm.export.Exporter` class is used to serialize an IIDM network to files. Powsybl supports natively
 several implementations:
 - [IIDM](iidm.md)
 - [AMPL](ampl.md)

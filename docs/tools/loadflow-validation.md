@@ -9,7 +9,7 @@ todo:
 ---
 
 The `loadflow-validation` command is used to validate load-flow results of a network. The command, besides validating
-the results, also print the data of the validated equipments in output files.
+the results, also prints the data of the validated equipments in output files.
 
 # Usage
 ```shell
@@ -25,7 +25,6 @@ usage: itools [OPTIONS] loadflow-validation --case-file <FILE>
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --case-file <FILE>                              case file path
@@ -178,7 +177,7 @@ To learn how to configure the `loadflow-validation` command, read the documentat
 # Examples
 
 ## Example 1
-The following example shows how to run a loadflow validation on an UCTE network model: 
+The following example shows how to run a loadflow validation on a UCTE network model: 
 ```shell
 $> itools loadflow-validation --case-file 20170322_1844_SN3_FR2.uct --output-folder /tmp/results
 ```

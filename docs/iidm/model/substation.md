@@ -15,7 +15,7 @@ A substation is located in a single country and belongs to one TSO.
 | --------- | ---- | -------- | ------------- | ----------- |
 | id | String | yes | - | The ID of the substation |
 | name | String | no | - | The name of the substation |
-| country | `Country` | yes | - | The country where this substation is located |
+| country | `Country` | no | - | The country where this substation is located |
 | tso | String | no | - | The TSO this substations belongs to |
 | geographicalTags | List of String | no | - | A list of geographical tags |
 
@@ -25,6 +25,6 @@ This example shows how to create a new `Substation` object:
 Substation substation = network.newSubstation()
     .setId("id")
     .setName("name") // optional
-    .setCountry(Country.US)
+    .setCountry(Country.US) // optional
     .add();
 ```

@@ -4,8 +4,8 @@ layout: default
 ---
 
 The `com.powsybl.security.SecurityAnalysisImpl` class is an implementation of the `com.powsybl.security.SecurityAnalysis`
-interface that detects security violations by running load-flows after each contingency. This implementation can be very
-slow if the contingency list contains a lot of load-flow, but it requires only a `com.powsybl.loadflow.LoadFlow`
+interface that detects security violations by running load-flows after applying each contingency. This implementation can be very
+slow if the contingency list contains a lot of contingencies, thus triggering a lot of load-flow computations, but it has the advantages of only requiring a `com.powsybl.loadflow.LoadFlow`
 implementation.
 
 # Configuration

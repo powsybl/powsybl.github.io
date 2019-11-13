@@ -4,22 +4,22 @@ layout: default
 ---
 
 # Getting started
-There are two different ways to package an application based on powsybl framework.
+The Powsybl framework offers two different ways to package an application.
 
-The first one aims to create a command line bundle, based on `iTools` script, using the [itools-packager-maven-plugin](installation/itools-packager.md).
+The first one aims to create a command line bundle, based on the `iTools` script, using the [itools-packager-maven-plugin](installation/itools-packager.md).
 
 The second one aims to create a JavaFX desktop application based on the Grid Study Environment, using the
 [javafx-packager](installation/javafx-packager.md) to create an installable bundle for Linux (rpm or deb), Windows (exe
 or msi) or MacOS (pkg or dmg).
 
 # Configuration
-Most features of powsybl can be configured by editing the relative configuration's module in the configuration files.
-Read this [documentation](configuration/modules/index.md) page to learn more about powsybl's configuration and have an
+Most features of Powsybl can be configured by editing the relative configuration's module in the configuration files.
+Read this [documentation](configuration/modules/index.md) page to learn more about Powsybl's configuration and have an
 overview of all the existing modules.
 
 # IIDM
-IIDM (iTesla Internal Data Model) is a set of classes that models a complete grid model. IIDM modules are a part of the
-most important powsybl modules. Read this page to learn more about the [IIDM](iidm/model/index.md). IIDM networks can be
+IIDM (iTesla Internal Data Model) is a set of classes that provides a complete grid model. IIDM modules are a part of the
+most important Powsybl modules. Read this page to learn more about the [IIDM](iidm/model/index.md). IIDM networks can be
 [loaded](iidm/importer/iidm.md) or [saved](iidm/exporter/iidm.md) to XML files without any data loss.
 
 IIDM networks can also be created from various formats such as [UCTE-DEF](iidm/importer/ucte.md)
@@ -31,14 +31,10 @@ Powsybl also provides business features to work with networks:
 
 # Time series
 
-Read this page to learn more about the [time series](timeseries/index.md) modeling in powsybl.
-
-# Micro-services
-
-Read this page to learn more about the [micro-services](micro-services/index.md) available in powsybl.
+Read this page to learn more about the [time series](timeseries/index.md) modeling in Powsybl.
 
 # Tools
-The `iTools` script provides a common way to run powsybl commands using the command line. It provides several tools,
+The `iTools` script provides a common way to run Powsybl commands using the command line. It provides several tools,
 sorted by themes:
 
 | Theme | Command | Description |
@@ -56,7 +52,7 @@ sorted by themes:
 | Script | [run-script](tools/run-script.md) | Run a script |
 | Misc | [plugins-info](tools/plugins-info.md) | Displays the available plugins |
 
-Read this [documentation](tools/index.md) page to learn more about powsybl command line interface.
+Read this [documentation](tools/index.md) page to learn more about Powsybl command line interface.
 
 # Tutorials
 Powsybl is a plugin based Java framework. Most features can be customized by creating a new implementation of a service

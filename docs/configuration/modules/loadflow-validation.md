@@ -11,13 +11,13 @@ defines the parameters used during the validation of loadflow results.
 # Optional properties
 
 ## apply-reactance-correction
-The `apply-reactance-correction` property is an optional property that defines if the too small reactance values have
-to be fixed to `epsilon-x` value. To solve numeric issues with very small reactance values, it's necessary to set the too
+The `apply-reactance-correction` property is an optional property that defines whether the too small reactance values have
+to be fixed to `epsilon-x` value or not. To solve numeric issues with very small reactance values, it's necessary to set the too
 small values to a minimal value. The default value of this property is `false`.
 
 ## check-main-component-only
-The `check-main-component-only` property is an optional property that defines if the validation checks is done only on the
-equiments in the main connected component. The default value of this property is `true`.
+The `check-main-component-only` property is an optional property that defines whether the validation checks are done only on the
+equiments in the main connected component or in all components. The default value of this property is `true`.
 
 ## compare-results
 Set the `compare-results` property to true to compare the results of 2 validations, i.e. print output files with data of
@@ -33,17 +33,17 @@ to use for running the loadflow. If this property is not set, the value of the `
 [componentDefaultConfig](componentDefaultConfig.md) module is used.
 
 ## no-requirement-if-reactive-bound-inversion
-The `no-requirement-if-reactive-bound-inversion` property is an optional property that defines if the validation
-check fails if there is a reactive bounds inversion (maxQ < minQ). The default value of this property is `false`.
+The `no-requirement-if-reactive-bound-inversion` property is an optional property that defines whether the validation
+checks fail if there is a reactive bounds inversion (maxQ < minQ) or not. The default value of this property is `false`.
 
 ## no-requirement-if-setpoint-outside-power-bounds
-The `no-requirement-if-setpoint-outside-power-bounds` property is an optional property that defines if the validation
-status depends on the setpoint is inside the active power bounds (targetP < minP or targetP > maxP). The default value
+The `no-requirement-if-setpoint-outside-power-bounds` property is an optional property that defines whether the validation
+checks fail if there is a setpoint outside the active power bounds (targetP < minP or targetP > maxP) or not. The default value
 of this property is `false`.
 
 ## ok-missing-values
-The `ok-missing-values` property is an optional property that defines if the validation check success or fails if some
-parameters of connected components have `NaN` values. The default value of this property is `false`.
+The `ok-missing-values` property is an optional property that defines whether the validation checks fail if some
+parameters of connected components have `NaN` values or not. The default value of this property is `false`.
 
 ## output-writer
 The `output-writer` property is an optional property that defines the output format. The default value of this property
@@ -89,7 +89,7 @@ The `threshold` property is an optional property that defines the margin used fo
 of this property is 0.
 
 ## verbose
-The `verbose` property is an optional property that defines if the [loadflow-validation](../../tools/loadflow-validation.md)
+The `verbose` property is an optional property that defines whether the [loadflow-validation](../../tools/loadflow-validation.md)
 command runs in verbose or quiet mode.
 
 If this property is set to `true`, the output files contain all the data of the validated equipments, otherwise they

@@ -10,8 +10,8 @@ post processor.
 # Optional properties
 
 ## apply-reactance-correction
-The `apply-reactance-correction` property is an optional property that defines if the too small reactance values have
-to be fixed to `epsilon-x` value. To solve numeric issues with very small reactance values, it's necessary to set the too
+The `apply-reactance-correction` property is an optional property that defines whether the too small reactance values have
+to be fixed to `epsilon-x` value or not. To solve numeric issues with very small reactance values, it's necessary to set the too
 small values to a minimal value. The default value of this property is `false`.
 
 ## epsilon-x

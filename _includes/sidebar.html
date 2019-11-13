@@ -1,0 +1,16 @@
+<div class="shadow border-0 menu">
+    {% for category in site.data.sidebar.menu %}
+    <div class="card-header text-primary">
+        <a class="nav-link" href="{{ category.url }}"><i class="{{ category.icon }} mr-3"></i>{{ category.name }}</a>
+    </div>
+
+    {% if category.items and category.name == page.category %}
+    <ul class="list-group list-group-flush">
+        {% assign items = category.items %}
+        {% include sidebar.inc.html %}
+    </ul>
+    {%endif %}
+
+    {% endfor %}
+
+</div>

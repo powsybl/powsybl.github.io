@@ -13,8 +13,8 @@ The `Network` class contains [substations](substation.md), [AC lines](line.md), 
 | --------- | ---- | -------- | ------------- | ----------- |
 | id | String | yes | - | The ID of the network |
 | name | String | no | - | The name of the network |
-| caseDate | `DateTime` | no | Now | The date of the the case |
-| ForecastDistance | Integer | no | 0 | The number of minutes between the date of the case generation and the case date |
+| caseDate | `DateTime` | no | Now | The date of the case |
+| ForecastDistance | Integer | no | 0 | The number of minutes between the date of the case generation and the date of the case |
 
 # Example
 This example shows how to create a new `Network` object:

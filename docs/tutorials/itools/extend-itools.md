@@ -3,7 +3,7 @@ title: How to extend iTools
 layout: default
 ---
 
-`iTools` script mechanism is designed to be easily extended with new commands, that would be added to the set of
+The `iTools` script is designed to be easily extended with new commands that would be added to the set of
 available commands, providing users with new command line functionalities. Read this documentation [page](../../tools/index.md)
 to learn more...
 
@@ -13,7 +13,7 @@ In order to create a new `iTools` command:
 3. Compile your project and add the jar to your powsybl installation.
 
 In the following sections we will see how, following these steps, you can implement a new `iTools` command to display
-how many lines are there in a network.
+how many lines there are in a network.
 
 The complete example described in this tutorial is available on GitHub:
 ```shell
@@ -27,7 +27,7 @@ $> mvn package
 After creating a new Maven project, you need to add the necessary dependencies to your `pom.xml` file. The required
 dependencies to implement a new `iTools` command are the following:
 - Google Auto Service to declare your new tool as a plugin
-- Powsybl tools module which contains the base interfaces for all `iTools` commands
+- The Powsybl tools module which contains the base interfaces for all `iTools` commands
 
 ```xml
 <dependency>
@@ -57,7 +57,7 @@ dependency to get the IIDM converter API, needed to import IIDM networks:
 # Implement the Tool interface
 
 To create a new `iTools` command, you need to implement the `com.powsybl.tools.Tool` interface. Following is a sample
-class, where you will put the code to display the number of lines of a IIDM network.
+class, where you will put the code to display the number of lines of an IIDM network.
 
 ```java
 import com.google.auto.service.AutoService;
@@ -140,7 +140,7 @@ themes. In our tutorial, we chose to create a new theme, called `Network`.
 
 The `Command` class also defines your command options (input parameters), if they are required or optional and if they
 need an argument or not. The only option defined in our sample class, `case-file`, allows the user to specify the network
-file to analyze. This option is required and has an argument, named `FILE` to get the input case file:
+file to analyze. This option is required and has an argument named `FILE` to get the input case file:
 ```java
     options.addOption(Option.builder().longOpt(CASE_FILE)
             .desc("the case path")
@@ -165,7 +165,7 @@ The `run` method is in charge of running your command, implementing your busines
 The `line` parameter gives you access to the input options provided by the user through the command line. In our example,
 we use it to read the path to the input network file.
 
-The `context` parameter provides you some context objects, such as an `OutputStream` object allowing you to print some
+The `context` parameter provides you with some context objects, such as an `OutputStream` object allowing you to print some
 information in the console, a `ComputationManager` object sometimes required to run computations or a `FileSystem`
 object for accessing the local file system (see [ToolRunningContext](https://www.javadoc.io/doc/powsybl-core/powsybl-core/)
 for more information).
@@ -195,7 +195,7 @@ $> mvn package
 ```
 
 The generated jar will be located under the target folder of your project. Copy the generated jar to the `share/java`
-folder of your powsybl distribution (you might need to copy in this directory other dependencies jars, specific to your
+folder of your Powsybl distribution (you might need to copy in this directory other dependencies jars, specific to your
 new command).
 
 Then run `iTools` to check if your command is available:
@@ -206,7 +206,6 @@ usage: itools [OPTIONS] count-network-lines --case-file <FILE> [--help]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --case-file <FILE>   the case path

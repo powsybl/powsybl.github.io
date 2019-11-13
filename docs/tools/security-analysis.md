@@ -16,10 +16,9 @@ usage: itools [OPTIONS] security-analysis --case-file <FILE>
        [--import-parameters <IMPORT_PARAMETERS>] [--limit-types <LIMIT-TYPES>]
        [--output-file <FILE>] [--output-format <FORMAT>] [--parameters-file
        <FILE>] [--with-extensions <EXTENSIONS>]
-       
+
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --case-file <FILE>                                 the case path
@@ -34,6 +33,8 @@ Available arguments are:
     --output-file <FILE>                               the output path
     --output-format <FORMAT>                           the output format [JSON]
     --parameters-file <FILE>                           loadflow parameters as JSON file
+    --skip-postproc                                    skip network importer post
+                                                       processors (when configured)
     --with-extensions <EXTENSIONS>                     the extension list to enable
 
 Allowed LIMIT-TYPES values are [CURRENT, LOW_VOLTAGE, HIGH_VOLTAGE,
@@ -71,7 +72,7 @@ are:
 - HIGH_VOLTAGE
 - LOW_SHORT_CIRCUIT_CURRENT
 - HIGH_SHORT_CIRCUIT_CURRENT
-- OTHER 
+- OTHER
 
 ### output-file
 Use the `--output-file` parameter to specify the path of the output file. If this parameter is not set, the results are
@@ -85,12 +86,16 @@ Use the `--output-format` parameter to specify the format of the output file. Th
 ### parameters-file
 Use the `--parameters-file` parameter to specify the path of the configuration file.
 
+### skip-postproc
+Use the `--skip-postproc` parameter to skip the importer's post processors. Read the [post processor](../iidm/importer/post-processor/index.md)
+documentation page to learn more about importer's post processors.
+
 ### with-extensions
 Use the `--with-extensions` parameter to activate a list of `com.powsybl.security.interceptors.SecurityAnalysisInterceptor`
 implementations.
 
 # Configuration
-To run a security analysis, one have to configure the the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
+To run a security analysis, one has to configure the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
 module to indicate the implementations to use for:
 - the `com.powsybl.security.SecurityAnalysis` to use, by setting the `SecurityAnalysisFactory` property
 - the `com.powsybl.contingency.ContingenciesProvider` to use, by setting the `ContingenciesProviderFactory` property
@@ -122,6 +127,7 @@ module documentation page.
 To learn more about configuration files, read the [SecurityAnalysisParameters](../configuration/parameters/SecurityAnalysisParameters.md)
 documentation page.
 
+
 # Examples
 
 ## Example 1
@@ -130,7 +136,7 @@ The following example shows how to run security analysis to detect only pre-cont
 $> itools security-analysis --case-file 20170322_1844_SN3_FR2.uct
 ```
 
-The analysis results will be printed to the standard output: 
+The analysis results will be printed to the standard output:
 ```shell
 Loading network '20170322_1844_SN3_FR2.uct'
 Pre-contingency violations:
@@ -183,12 +189,27 @@ To use the `security-analysis` command, add the following dependencies to the `p
 </dependency>
 ```
 
+# Further behaviour customization
+The behaviour of the security analysis may be further customized by using a `SecurityAnalysisPreprocessor`. Such a preprocessor will have the possibility to programmatically transform the following objects before the security analysis is actually executed :
+ - The `Network`
+ - The `ContingenciesProvider`
+ - The `LimitViolationDetector`
+ - The `LimitViolationFilter`
+ - The `SecurityAnalysisParameters`
+ - The `SecurityAnalysisInterceptor`s
+
+It enables, for example, to customize what should be considered a limit violation and what should not.
+
+This preprocessing may use the contingencies file provided to the command line tool as an input.
+
+In order to use a preprocessor, you will need to configure it in the [security-analysis](../configuration/security-analysis-config.md) configuration module.
+
 # Security-analysis implementations
 
 ## Slow implementation
-Read this [documentation](../loadflow/security-analysis.md) page to learn how to configure powsybl to use the
+Read this [documentation](../loadflow/security-analysis.md) page to learn how to configure Powsybl to use the
 `SecurityAnalysisImpl` implementation, a load-flow based implementation for security limits detection.
 
 ## Hades2
-Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure Powsybl to use
 Hades2, a RTE load-flow tool, for security analysis.

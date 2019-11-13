@@ -3,7 +3,7 @@ title: How to write an IIDM importer
 layout: default
 ---
 
-From PowSyBl's [Importer](../../iidm/importer/index.md) interface, it is possible to add a new file format from which
+From Powsybl's [Importer](../../iidm/importer/index.md) interface, it is possible to add a new file format from which
 an [IIDM](../../iidm/model/index.md) data model can be loaded.
 
 In order to do so, you will need to:

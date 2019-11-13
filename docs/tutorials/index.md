@@ -3,8 +3,6 @@ title: Tutorials
 layout: default
 ---
 
-# Tutorials
-
 ## Deployment
 
 - [How to use PowSyBl as a custom desktop application](powsybl-javafx-packager.md)

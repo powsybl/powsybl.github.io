@@ -16,7 +16,6 @@ usage: itools [OPTIONS] loadflow --case-file <FILE> [-E <property=value>]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --case-file <FILE>                            the case path
@@ -125,5 +124,5 @@ To use the `loadflow` command, add the following dependencies to the `pom.xml` f
 ```
 
 # Load-flow implementations
-Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure Powsybl to use
 Hades2, a RTE load-flow tool.

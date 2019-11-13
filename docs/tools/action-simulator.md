@@ -20,7 +20,6 @@ usage: itools [OPTIONS] action-simulator [--apply-if-solved-violations]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
-    --parallel                    Run command in parallel mode
 
 Available arguments are:
     --apply-if-solved-violations                       apply the first tested
