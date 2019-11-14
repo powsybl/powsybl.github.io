@@ -100,7 +100,8 @@ To use this application, you will need to configure the `mapdb-app-file-system` 
 [here](../configuration/modules/mapdb-app-file-system.md) since it uses a MapDB based file system. A default configuration
 `config.yml` is available in the resources of the maven project template.
 
-If you wish to run loadflow or security-analysis on your networks, you will also need to configure the used implementations
+If you wish to run loadflow or security-analysis on your networks, you will also need to configure the used implementations.
+The loadflow configuration is described in [LoadFlow](../configuration/modules/load-flow.md). The security analysis is described
 in the `componentDefaultConfig` module as explained [here](../configuration/modules/componentDefaultConfig.md).
 
 # Deploying your project

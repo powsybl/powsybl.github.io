@@ -105,7 +105,8 @@ module to indicate the implementations to use for:
 componentDefaultConfig:
     ContingenciesProviderFactory: com.powsybl.action.dsl.GroovyDslContingenciesProviderFactory
     SecurityAnalysisFactory: com.powsybl.security.SecurityAnalysisFactoryImpl
-    LoadFlowFactory: com.powsybl.loadflow.mock.LoadFlowFactoryMock
+load-flow
+  default: Mock
 ```
 
 ## XML version
@@ -114,8 +115,10 @@ componentDefaultConfig:
     <componentDefaultConfig>
         <ContingenciesProviderFactory>com.powsybl.action.dsl.GroovyDslContingenciesProviderFactory</ContingenciesProviderFactory>
         <SecurityAnalysisFactory>com.powsybl.security.SecurityAnalysisFactoryImpl</SecurityAnalysisFactory>
-        <LoadFlowFactory>com.powsybl.loadflow.mock.LoadFlowFactoryMock</LoadFlowFactory>
     </componentDefaultConfig>
+    <load-flow>
+        <default>Mock</default>
+    </load-flow>
 </config>
 ```
 

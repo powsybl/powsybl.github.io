@@ -64,18 +64,14 @@ networkBe.merge(networkNl);
 <br />
 
 <img src="./images/Compute_LF.svg" style="vertical-align: bottom"/>
-Then, flows are computed with a load flow simulator. Since there is no fully functional open source load flow simulator integrated to Powsybl for the time being, we use Hades2 for the purpose of the tutorial, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2. A `LoadFlow` object is created by an implementation of a `LoadFlowFactory` (here a `Hades2Factory` in fact), which needs as input arguments an in-memory network and a computation manager `computationManager` (here defined locally by default).
+Then, flows are computed with a load flow simulator. Since there is no fully functional open source load flow simulator integrated to powsybl for the time being, we use Hades2 for the purpose of the tutorial, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
+
+A loadflow is run on the working variant of the in-memory network with a set of parameters. A computation manager `computationManager` (here defined locally) is used. The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here angles are set to zero and voltages are set to one per unit. We also create a new variant to store the calculated flows. Note that a network variant is close to a state vector and gathers variables such as injections, productions, tap positions, states of buses, etc.
 
 ```java
 ComputationManager computationManager = LocalComputationManager.getDefault();
-LoadFlow loadFlow = new Hades2Factory().create(networkBe, computationManager, 0);
-```
-
-A loadflow is run on the working variant of the network with a set of parameters. The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here, angles are set to zero and voltages are set to one per unit. We also create a new variant to store the calculated flows. Note that a network variant is close to a state vector and gathers variables such as injections, productions, tap positions, states of buses, etc.
-
-```java
 LoadFlowParameters loadFlowParameters = new LoadFlowParameters().setVoltageInitMode(LoadFlowParameters.VoltageInitMode.DC_VALUES);
-LoadFlowResult result = loadFlow.run(VariantManagerConstants.INITIAL_VARIANT_ID, loadFlowParameters).join();
+LoadFlowResult result = LoadFlow.run(network, VariantManagerConstants.INITIAL_VARIANT_ID, computationManager, loadFlowParameters);
 ```
 <br />
 
