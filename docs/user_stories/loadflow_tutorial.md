@@ -33,19 +33,15 @@ Network network = Importers.loadNetwork(file.toString());
 ```
 <br />
 <img src="./images/Compute_LF.svg" alt="" style="vertical-align: bottom"/>
-Then, flows are computed with a load flow simulator. In this tutorial, we use Hades2, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2. A `LoadFlow` object is created through a factory, here a `Hades2Factory`, which needs as input arguments an in-memory network and a computation manager `computationManager` (here defined locally by default).
-
-```java
-ComputationManager computationManager = LocalComputationManager.getDefault();
-LoadFlow loadflow = new Hades2Factory().create(network, computationManager, 0);
-```
+Then, flows are computed with a load flow simulator. In this tutorial, we use Hades2, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
 
 A loadflow is run on a variant of the network with a set of parameters. The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here, angles are set to zero and voltages are set to one per unit. The computed flows are stored in the variant given in input. Note that a network variant is close to a state vector and gathers variables such as injections, productions, tap positions, states of buses, etc.
 
 ```java
+ComputationManager computationManager = LocalComputationManager.getDefault();
 LoadFlowParameters loadflowParameters = new LoadFlowParameters().setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
 network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID, "loadflowVariant");
-LoadFlowResult result = loadflow.run("loadflowVariant", loadflowParameters).join();
+LoadFlowResult result = LoadFlow.run(network, "loadflowVariant", computationManager, loadflowParameters);
 ```
 <br />
 <img src="./images/Modify_N-1.svg" alt="" style="vertical-align: bottom"/>
