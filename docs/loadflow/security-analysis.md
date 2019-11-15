@@ -13,6 +13,8 @@ module:
 - `SecurityAnalysisFactory` to `com.powsybl.security.SecurityAnalysisImpl`
 - `ContingenciesProviderFactory` to `com.powsybl.action.dsl.GroovyDslContingenciesProviderFactory`
 
+Also, configure the default loadflow implementation: [Loadflow Configuration](../configuration/modules/load-flow.md).
+
 **Note**: Powsybl provides no implementation of the LoadFlow API except the `com.powsybl.loadflow.mock.LoadFlowMock` that
 does nothing.
 
