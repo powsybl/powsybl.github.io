@@ -63,7 +63,7 @@ Use the `--skip-postproc` parameter to skip the importer's post processors. Read
 documentation page to learn more about importer's post processors.
 
 # Configuration
-To run a sensitivity computation, one have to configure the the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
+To run a sensitivity computation, one has to configure the the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
 module to indicate the implementations to use for:
 - the `com.powsybl.sensitivity.SensitivityComputation` to use, by setting the `SensitivityComputationFactory` property
 - the `com.powsybl.sensitivity.SensitivityFactorsProvider` to use, by setting the `SensitivityFactorsProviderFactory` property
