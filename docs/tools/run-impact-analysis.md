@@ -53,7 +53,7 @@ Use the `--output-csv-file` parameter to export the output to the specified CSV 
 outputs are printed to the console.
 
 # Configuration
-To run an impact analysis, one have to choose the implementation of the `com.powsybl.contingency.ContingenciesProviderFactory`
+To run an impact analysis, one has to choose the implementation of the `com.powsybl.contingency.ContingenciesProviderFactory`
 to use, by setting the `ContingenciesProviderFactory` property to the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
 module. To learn more about contingencies or available `ContingenciesProvider` read this [documentation](../contingencies/index.md) page.
 
