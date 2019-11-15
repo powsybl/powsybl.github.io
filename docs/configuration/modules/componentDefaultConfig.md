@@ -40,3 +40,6 @@ componentDefaultConfig:
 </componentDefaultConfig>
 
 ```
+
+# Removed properties
+- `load-flow-factory`: removed in Powsybl 3.0.0. Replaced with the `default` property of the `load-flow` configuration module.
