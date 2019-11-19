@@ -21,11 +21,11 @@ topology. A terminal is created when the equipment it is connected to is created
 | Connected | boolean | yes | - | The connection status of the terminal (true if the terminal is connected, else false) |
 
 ## View
-The available views for the terminal depends of the topology level (node/breaker or bus/breaker) of the voltage level it
-belongs to. More information about topology levels can be found on the [voltage level](voltageLevel.md) page.
+The available views for the terminal depends on the topology (node/breaker or bus/breaker) of the voltage level it
+belongs to. More information about voltage level topologies can be found on the [voltage level](voltageLevel.md) page.
 
 ### NodeBreakerView
-`NodeBreakerView` is a view available in a node/breaker topology. All elements are viewed as physical ones: busbar sections,
+`NodeBreakerView` is available for node/breaker topologies. All elements are viewed as physical ones: busbar sections,
 breakers and disconnectors.
 
 **Characteristics**
@@ -35,7 +35,7 @@ breakers and disconnectors.
 | Node | int | yes | - | The connection node of the viewed terminal in a node/breaker topology |
 
 ### BusBreakerView
-`BusBreakerView` is a view available in a node/breaker or a bus/breaker topology. It presents an aggregated view of the
+`BusBreakerView` is available for node/breaker and bus/breaker topologies. It presents an aggregated view of the
 topology made of buses and switches.
 
 **Characteristics**
@@ -46,15 +46,15 @@ topology made of buses and switches.
 | ConnectableBus | `Bus` | yes | - | A bus that can be used to connect the viewed terminal in a bus/breaker topology |
 
 ### BusView
-`BusView` is a view available in a node/breaker, a bus/breaker or a bus only topology. It presents an aggregated view of
+`BusView` is available for node/breaker, bus/breaker and bus-only topologies. It presents an aggregated view of
 the topology made of buses.
 
 **Characteristics**
 
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
-| Bus | `Bus` | yes | - | The connection bus of the viewed terminal in a bus only topology |
-| ConnectableBus | `Bus` | yes | - | A bus that can be used to connect the viewed terminal in a bus only topology |
+| Bus | `Bus` | yes | - | The connection bus of the viewed terminal in a bus-only topology |
+| ConnectableBus | `Bus` | yes | - | A bus that can be used to connect the viewed terminal in a bus-only topology |
 
 # Examples
 This example shows how to use the terminal of an [injection](injection.md):

@@ -14,10 +14,10 @@ To use time-series, add the following dependency to the `pom.xml` file:
 
 # Time series modeling
 
-In PowSyBl, time series are modelled by:
-- A name to uniquely identify the time series inside a store.
+In Powsybl, time series are modeled by:
+- A name to uniquely identify a time series inside a store.
 - A data type which is `double` or `String`.
-- A time index to define an instants list to which data exists. Three different implementation of time index are available
+- A time index to define an instants list for which data exists. Three different implementation of time index are available
 in the framework depending of the need:
     - Regular index
     - Irregular index
@@ -125,8 +125,8 @@ Output:
 
 # Data chunks
 
-In order to add data to a time series, we need to create data chunks: `DoubleDataChunk` for double time series and
-`StringDataChunk` for string time series.
+In order to add data to a time series, we need to create data chunks: `DoubleDataChunk`s for double time series and
+`StringDataChunk`s for string time series.
 
 ## Double data chunk
 
@@ -144,10 +144,10 @@ Output:
 }
 ```
 
-We can see that an uncompress data chunk is modelled with a double array and an offset. It defines values associated to
+We can see that an uncompress data chunk is modeled with a double array and an offset. It defines values associated to
 instants of the time index from `offset` to `offset + values.length`.
 
-The folowing example shows how to compress the chunk using [RLE](https://fr.wikipedia.org/wiki/Run-length_encoding)
+The folowing example shows how to compress the chunk using the [RLE](https://fr.wikipedia.org/wiki/Run-length_encoding)
 compression algorithm:
 ```java
 DoubleDataChunk compressedChunk = chunk.tryToCompress();
@@ -197,8 +197,8 @@ Output:
 
 ## String data chunk
 
-The following example shows how to create a `StringDataChunk` instance, and the JSON representation of both compress and
-uncompress version of this data chunk:
+The following example shows how to create a `StringDataChunk` instance, and the JSON representation of both the compressed and
+uncompressed version of this data chunk:
 ```java
 StringDataChunk chunk2 = DataChunk.create("hello", "bye", "bye", "bye");
 System.out.println(chunk2.toJson());
@@ -219,17 +219,17 @@ Output:
 }
 ```
 
-As for double time series, string data chunk can be added to a string time series:
+As for double time series, string data chunks can be added to a string time series:
 ```java
 sts.addChunk(chunk2); 
 ```
 
 ## Calculated time series
 
-Starting from double time series, it is possible to create calculated time series using [Groovy](http://groovy-lang.org/)
+Starting from a double time series, it is possible to create calculated time series using a [Groovy](http://groovy-lang.org/)
 script.
 
-For instance, the following example creates a calculated time series from an existing time ser
+For instance, the following example creates a calculated time series from an existing time series.
 
 ```java
 TimeSeriesIndex index = RegularTimeSeriesIndex.create(Interval.parse("2015-01-01T00:00:00Z/2015-07-20T00:00:00Z"), Duration.ofDays(200));
@@ -303,10 +303,10 @@ Here is the list of supported vector operations:
 | min | min value | ts['a'].min(10) |
 | max | max value | ts['a'].max(10) |
 
-About Groovy DSL syntax, both `timeSeries['a']` and `ts['a']` are supported and are equivalent.
+About the Groovy DSL syntax, both `timeSeries['a']` and `ts['a']` are supported and are equivalent.
 
 ### Functions
-To compare a time index vector to a literal date, `time('2018-01-01T00:00:01Z')` function is available. For instance, the
+To compare a time index vector to a literal date, the `time('2018-01-01T00:00:01Z')` function is available. For instance, the
 following code create a time series of 0 and 1 values:
 ```groovy
 a = ts['dts'].time() < time('2018-01-01T00:00:01Z')

@@ -5,14 +5,14 @@ layout: default
 
 The `com.powsybl.iidm.network.TwoWindingsTransformer` interface is used to model a two windings power transformer.
 A two windings power transformer is connected to two voltage levels (side 1 and side 2) that belong to a same substation.
-A [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phaseTapChanger.md) can be associated to a two windings power transformer.
+A [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phaseTapChanger.md) can be associated with a two windings power transformer.
 
 # Characteristics
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | id | string | - | yes | - | Unique identifier of the transformer |
-| name | string | - | yes | - | Humanly readable name of the transformer |
+| name | string | - | yes | - | Human-readable name of the transformer |
 | $$r_{nom}$$ | double | $$\Omega$$  | yes | - | The nominal series resistance at the side 2 of the transformer |
 | $$x_{nom}$$ | double | $$\Omega$$ | yes | - | The nominal series reactance at the side 2 of the transformer |
 | $$g_{nom}$$ | double | S | yes | - | The nominal magnetizing conductance at the side 2 of the transformer |
@@ -23,11 +23,11 @@ A [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phase
 Two windings transformers can also have [current limits](currentLimits.md) defined for each end.
 
 # Model
-Two windings transformer are modelled with the following equivalent $$\pi$$ model:
+Two windings transformer are modeled with the following equivalent $$\pi$$ model:
 
 ![Power line model](./images/two-windings-transformer-model.svg){: width="50%" .center-image}
 
-With series impedance $$z$$ and the shunt admittance $$y$$ and $$\rho$$ the voltage ratio and $$\alpha$$ the angle difference, and parameters from current step of potential [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phaseTapChanger.md):
+With the series impedance $$z$$ and the shunt admittance $$y$$ and the voltage ratio $$\rho$$ and the angle difference $$\alpha$$ and potentially parameters from the current step of a [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phaseTapChanger.md), we have:
 
 $$
 r=r_{nom}.\left(1+\frac{r_{r, tap} + r_{\phi, tap}}{100}\right)\\
@@ -42,7 +42,7 @@ V_{0}=V_{1}.\rho e^{j\alpha}\\
 I_{0}=\frac{I_{1}}{\rho e^{-j\alpha}}\\
 $$
 
-the equations of the two windings transformer, in complex notations, are as follow:
+Using the above notation, the equations of the two windings transformer, in complex notations, are as follow:
 
 $$
 \left(\begin{array}{c}

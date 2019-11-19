@@ -5,7 +5,7 @@ todo:
     - create a tutorial to show a groovy script example
 ---
 
-The `run-script` command is used to run scripts based on powsybl. So far, only Groovy is supported.
+The `run-script` command is used to run scripts based on Powsybl. So far, only Groovy is supported.
  
 # Usage
 ```shell

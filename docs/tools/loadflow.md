@@ -80,10 +80,9 @@ Use the `--skip-postproc` parameter to skip the importer's post processors. Read
 documentation page to learn more about importer's post processors.
 
 # Configuration
-To run a load flow, one have to choose the implementation of the `com.powsybl.loadflow.LoadFlow` to use, by setting the
-`LoadFlowFactory` property to the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md) module.
+To run a load flow, one has to choose the implementation, follow the instructions at [LoadFlow Configuration](../configuration/modules/load-flow.md).
 
-To set the default configuration of the load flow, one have to configure the
+To set the default configuration of the load flow, one has to configure the
 [load-flow-default-parameters](../configuration/modules/load-flow-default-parameters.md) module.
 
 To learn more about configuration files, read the [LoadFlowParameters](../configuration/parameters/LoadFlowParameters.md) documentation
@@ -124,5 +123,5 @@ To use the `loadflow` command, add the following dependencies to the `pom.xml` f
 ```
 
 # Load-flow implementations
-Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure Powsybl to use
 Hades2, a RTE load-flow tool.

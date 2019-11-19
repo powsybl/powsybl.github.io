@@ -9,7 +9,7 @@ The `com.powsybl.iidm.network.ShuntCompensator` interface is used to model a shu
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- |-------- | ------------- | ----------- |
-| bPerSection | double | S | yes | - | Positive sequence shunt (charging) susceptance per section |
+| bPerSection | double | S | yes | - | The Positive sequence shunt (charging) susceptance per section |
 | MaximumSectionCount| integer | int | yes | - | The maximum number of sections that may be switched on |
 | CurrentSectionCount | integer | int | yes | - | The current number of section that may be switched on |
 
@@ -17,7 +17,7 @@ The `com.powsybl.iidm.network.ShuntCompensator` interface is used to model a shu
 A section of a shunt compensator is an individual capacitor or reactor.
 
 ## Current Section Count
-It is expected to be greater than one and lesser or equal to the Maximum Section Count.
+The current section count is expected to be greater than one and lesser or equal to the maximum section count.
 
 # Examples
 This example shows how to create a new `ShuntCompensator` in the network:

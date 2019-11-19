@@ -105,7 +105,8 @@ module to indicate the implementations to use for:
 componentDefaultConfig:
     ContingenciesProviderFactory: com.powsybl.action.dsl.GroovyDslContingenciesProviderFactory
     SecurityAnalysisFactory: com.powsybl.security.SecurityAnalysisFactoryImpl
-    LoadFlowFactory: com.powsybl.loadflow.mock.LoadFlowFactoryMock
+load-flow
+  default: Mock
 ```
 
 ## XML version
@@ -114,8 +115,10 @@ componentDefaultConfig:
     <componentDefaultConfig>
         <ContingenciesProviderFactory>com.powsybl.action.dsl.GroovyDslContingenciesProviderFactory</ContingenciesProviderFactory>
         <SecurityAnalysisFactory>com.powsybl.security.SecurityAnalysisFactoryImpl</SecurityAnalysisFactory>
-        <LoadFlowFactory>com.powsybl.loadflow.mock.LoadFlowFactoryMock</LoadFlowFactory>
     </componentDefaultConfig>
+    <load-flow>
+        <default>Mock</default>
+    </load-flow>
 </config>
 ```
 
@@ -189,8 +192,8 @@ To use the `security-analysis` command, add the following dependencies to the `p
 </dependency>
 ```
 
-# Further behaviour customization
-The behaviour of the security analysis may be further customized by using a `SecurityAnalysisPreprocessor`. Such a preprocessor will have the possibility to programmatically transform the following objects before the security analysis is actually executed :
+# Further behavior customization
+The behavior of the security analysis may be further customized by using a `SecurityAnalysisPreprocessor`. Such a preprocessor will have the possibility to programmatically transform the following objects before the security analysis is actually executed :
  - The `Network`
  - The `ContingenciesProvider`
  - The `LimitViolationDetector`
@@ -200,16 +203,16 @@ The behaviour of the security analysis may be further customized by using a `Sec
 
 It enables, for example, to customize what should be considered a limit violation and what should not.
 
-This preprocessing may us as an input the contingencies file provided to the command line tool.
+This preprocessing may use the contingencies file provided to the command line tool as an input.
 
 In order to use a preprocessor, you will need to configure it in the [security-analysis](../configuration/security-analysis-config.md) configuration module.
 
 # Security-analysis implementations
 
 ## Slow implementation
-Read this [documentation](../loadflow/security-analysis.md) page to learn how to configure powsybl to use the
+Read this [documentation](../loadflow/security-analysis.md) page to learn how to configure Powsybl to use the
 `SecurityAnalysisImpl` implementation, a load-flow based implementation for security limits detection.
 
 ## Hades2
-Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
+Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure Powsybl to use
 Hades2, a RTE load-flow tool, for security analysis.

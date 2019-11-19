@@ -6,7 +6,7 @@ todo:
 ---
 
 The IIDM (**i**Tesla **I**nternal **D**ata **M**odel) format was designed during the [iTesla project](http://www.itesla-project.eu).
-IIDM is not only an exchange format, but also the internal format used in powsybl as it is designed for simulation purpose.
+IIDM is not only an exchange format, but also the internal format used in Powsybl because it is designed for running simulations.
 For more information about the IIDM model, see [here](../model/index.md).
 
 IIDM networks can be serialized in XML files. The IIDM importer supports files with the following extensions: `*.xml`,
@@ -66,7 +66,7 @@ The IIDM importer has three importing modes:
 </iidm:network>
 ```
 
-# Configuration properties for IIDM-XML importer
+# Configuration properties for the IIDM-XML importer
 
 These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
 module.
@@ -86,16 +86,17 @@ Its possible values are :
    - `IidmImportExportMode.UNIQUE_FILE`: Imports the network and its extensions from a unique file.
     
    - `IidmImportExportMode.EXTENSIONS_IN_ONE_SEPARATED_FILE`: Imports the network from a file and the extensions from another file. 
-      In this case if the network file name is network.xiidm, the extensions file name must be network-ext.xiidm.
+      In this mode, if the network file name is network.xiidm, the extensions file name must be network-ext.xiidm.
     
    - `IidmImportExportMode.ONE_SEPARATED_FILE_PER_EXTENSION_TYPE`: Imports the network from a file and each extension type from a separate file.
-      In this mode each extension file name must be networkName-extensionName.xiidm.
-      Example : if we have an extension file for the `loadFoo` extension type and our network name is `test`, the file name must be `test-loadFoo.xiidm`.
+      In this mode, if the network file name is network.xiidm, each extension file name must be network-extensionName.xiidm.
+      Example: if our network has two extensions `loadFoo` and `loadBar`, then the network will be imported 
+      from the `network.xiidm` file and `loadFoo` and `loadBar` will be imported respectively from `network-loadFoo.xiidm` and `network-loadBar.xiidm`.
       
 The default value of this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
 
 ## iidm.import.xml.extensions
-The `iidm.import.xml.extensions` property is an optional property that defines the list of extensions that we want to import by the XIIDM importer. 
+The `iidm.import.xml.extensions` property is an optional property that defines the list of extensions that will be imported by the XIIDM importer. 
 By default all extensions will be imported.
 
 # Deprecated configuration properties for IIDM-XML importer

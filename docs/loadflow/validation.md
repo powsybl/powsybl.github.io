@@ -4,7 +4,7 @@ layout: default
 ---
 
 The load-flow validation aims at ensuring the consistency of load-flow results, and, more generally of any steady state
-(that may be found with an OPF or as the final state of a long dynamic simulation), with respect to a set of rules that
+(that may be found with an optimal power flow or as the final state of a long dynamic simulation), with respect to a set of rules that
 describes what is an *acceptable* load-flow result. On the most abstract level, a load-flow result is *acceptable* if it
 describes a feasible steady-state of a power system given its physics and its logics. More practically, generations of
 practitioners have set quasi-standard ways to describe them that allows to define precise rules.
@@ -37,7 +37,7 @@ can be used to compute the flows from the voltages in order to validate the rule
 [run-computation](../tools/loadflow-validation.md#run-computation) option.
 
 # Branches
-Lines and two windings transformers are converted into an universal branch:
+Lines and two windings transformers are converted into a universal branch:
 ```
     V1*exp(j*theta1)     rho1*exp(j*alpha1)             r+j*x              rho2*exp(j*alpha2)   V2*exp(j*theta2)
         (P1,Q1)->      ____O/O__________________________-----__________________________O/O_____     <-(P2,Q2)
@@ -86,20 +86,20 @@ To be implemented, based on a conversion into 3 two-windings transformers.
 ## Active power
 
 In case of an imbalance between the sum of generator active power setpoints $$\text{targetP}$$ on one side and consumption
-and losses on the other side, generation $$P$$ of some units has to be adjusted. Note that, if it is allowed to modify the
+and losses on the other side, the generation $$P$$ of some units has to be adjusted. Note that, if it is allowed to modify the
 setpoints (for example if the results were computed by an Optimal Power Flow and not a Power Flow), there should be no
 imbalance left. Therefore, the adjustment should be done with a rather simple method (typically, simpler than a merit
 order based on marginal costs). Basically, the adjustment is therefore done on the generators connected to the slack node
 because this is the simplest solution from a mathematical point of view. However, this has many drawbacks, in particular
-in case of large imbalance. This is why other schemes have been developped, called "distributed slack nodes". Loads could
+in case of a large imbalance. This is why other schemes have been developed, called "distributed slack nodes". Loads could
 be adjusted, but this is generally not the case as load is usually considered as inflexible. Generators are usually adjusted
-proportionnally to a shift key to be defined. Three keys have been retained for the validation ($$g$$ is a generator):
+proportionally to a shift key to be defined. Three keys have been retained for the validation ($$g$$ is a generator):
 - mode $$P_{max}$$: Proportional to $$F(g) = f(g) P_{max}(g)$$
 - mode $${targetP}$$: Proportional to $$F(g) = f(g) targetP(g)$$
 - mode $$P_{diff}$$: Proportional to $$F(g) = f(g) (P_{max}(g) - targetP(g))$$
 
 $$f(g)$$ is a participation factor. In the current validation scheme, $$f(g)\in\{0,1\}$$. It is binary: either the unit
-participate or not.
+participates or not.
 
 As the load-flow results do not include the key used nor the participation factor, they have to be inferred. To do so, a
 first iteration is done on units that deviate significantly. For each of these units, assuming one mode, the proportion
@@ -119,7 +119,7 @@ If the voltage regulation is deactivated, it is expected that:
 $$\left| targetQ - Q \right| < \epsilon$$
 
 ### Voltage regulation activated
-If the voltage regulation is activated, the generator is modelled as a $$PV/PQ$$ node: the voltage target should be reached
+If the voltage regulation is activated, the generator is modeled as a $$PV/PQ$$ node: the voltage target should be reached
 except if reactive bounds are hit (PV mode). If the reactive bounds are hit, the reactive power should be equal to a limit.
 Mathematically speaking, one of the following 3 conditions should be met:
 
@@ -170,12 +170,12 @@ To be done.
 
 # Ratio tap transformers
 Ratio tap transformers have a tap with a finite discrete number of position that allows to change its characteristics,
-especially the transformer ratio. Let assume that the logic is based on dead band: if the deviation between the measurement
-and the setpoint is higher than the dead band width, the tap position is increased or decreased of one unit.
+especially the transformer ratio. Let's assume that the logic is based on deadband: if the deviation between the measurement
+and the setpoint is higher than the deadband width, the tap position is increased or decreased by one unit.
 
-As a result, a state is a steady state only if the regulated value is within the dead band or if the tap position is at
-minimum or maximum. To check this assertion, an upper bound of the dead-band value is needed. Generally, the value of the
-dead-band is not know available in data models. Usual load flow solvers simply consider a continuous tap that is rounded
+As a result, a state is a steady state only if the regulated value is within the deadband or if the tap position is at
+minimum or maximum. To check this assertion, an upper bound of the deadband value is needed. Generally, the value of the
+deadband is not know available in data models. Usual load flow solvers simply consider a continuous tap that is rounded
 afterwards. As a result, one should compute an upper bound of the effect of the rounding. Under the usual situation where
 the low voltage (side one) is controlled, the maximum effect is expected if the high voltage is fixed (usually it decreases)
 and if the network connected to the low voltage is an antenna. If the transformer is perfect, the equations are:

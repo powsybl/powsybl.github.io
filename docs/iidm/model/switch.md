@@ -3,7 +3,7 @@ title: Switch
 layout: default
 ---
 
-The `com.powsybl.iidm.network.Switch` interface is used to a switch which connects equipments in a [voltage level](voltageLevel.md).
+The `com.powsybl.iidm.network.Switch` interface is used to model a switch which connects equipments in a [voltage level](voltageLevel.md).
 
 # Characteristics
 

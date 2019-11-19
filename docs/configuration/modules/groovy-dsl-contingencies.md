@@ -6,7 +6,7 @@ todo:
 ---
 
 The `groovy-dsl-contingencies` module is used by the `com.powsybl.action.dsl.GroovyDslContingenciesProviderFactory`,
-which is a implementation of the `com.powsybl.contingency.ContingenciesProviderFactory` used by the
+which is an implementation of the `com.powsybl.contingency.ContingenciesProviderFactory` used by the
 [security-analysis](../../tools/security-analysis.md) command.
 
 # Required properties

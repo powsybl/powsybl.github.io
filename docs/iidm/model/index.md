@@ -4,7 +4,7 @@ layout: default
 ---
 
 
-The [Network](network.md) modeling is made of two main objects: substations and lines. A substation can have several voltage levels and line can be of several types (AC lines, DC lines and AC lines shared between two countries).
+The [Network](network.md) modeling is made of two main objects: substations and lines. A substation can have several voltage levels and a line can be of several types (AC lines, DC lines and AC lines shared between two countries).
 
 - [Line](line.md)
 
@@ -28,4 +28,8 @@ The [Network](network.md) modeling is made of two main objects: substations and 
         - [Dangling line](danglingLine.md)
         - [Static VAR compensator](staticVarCompensator.md)
         - [VSC converter station](vscConverterStation.md)
-        - [LCC converter station](lccConverterStation.md) 
+        - [LCC converter station](lccConverterStation.md)
+
+The following image shows some elements of the internal data model:
+
+![IIDM model](./images/schema-iidm.png){: width="50%" .center-image}
