@@ -27,10 +27,11 @@ both ones. The default value of this property is `false`.
 The `epsilon-x` property is an optional property that defines the value used to correct the reactance in flows validation.
 The default value of this property is `0.1`.
 
-## load-flow-factory
-The `load-flow-factory` property is an optional property that defines the `com.powsybl.loadflow.LoadFlowFactory` implementation
-to use for running the loadflow. If this property is not set, the value of the `LoadFlowFactory` property of the
-[componentDefaultConfig](componentDefaultConfig.md) module is used.
+## load-flow-name
+The `load-flow-name` property is an optional property that defines the implementation name to use for running the loadflow. 
+If this property is not set, the default loadflow implementation is used. See [Loadflow Configuration](load-flow.md) to configure the default loadflow.
+
+**Note**: In previous Powsybl releases (before 3.0.0), this was configured in the `load-flow-factory` property with the full classname of the implementation.
 
 ## no-requirement-if-reactive-bound-inversion
 The `no-requirement-if-reactive-bound-inversion` property is an optional property that defines whether the validation
@@ -102,7 +103,7 @@ contain only the main data of the validated equipments.
 loadflow-validation:
     threshold: 0.1
     verbose: false
-    load-flow-factory: com.powsybl.loadflow.mock.LoadFlowFactoryMock
+    load-flow-name: Mock
     table-formatter-factory: com.powsybl.commons.io.table.CsvTableFormatterFactory
     epsilon-x: 0.1
     apply-reactance-correction: false
@@ -119,7 +120,7 @@ loadflow-validation:
 <loadflow-validation>
     <threshold>0.1</threshold>
     <verbose>false</verbose>
-    <load-flow-factory>com.powsybl.loadflow.mock.LoadFlowFactoryMock</load-flow-factory>
+    <load-flow-name>Mock</load-flow-name>
     <table-formatter-factory>com.powsybl.commons.io.table.CsvTableFormatterFactory</table-formatter-factory>
     <epsilon-x>0.1</epsilon-x>
     <apply-reactance-correction>false</apply-reactance-correction>

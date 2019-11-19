@@ -23,9 +23,10 @@ modify the structure of the network.
 Set the `ignore-pre-contingency-violations` to `true` to ignore the pre-contingency violations and continue the
 simulation even if there are still violations after the pre-contingency simulation.
 
-## load-flow-factory
-Use the `load-flow-factory` property to define the `com.powsybl.loadflow.LoadFlowFactory` implementation to use for the
-simulation.
+## load-flow-name
+The `load-flow-name` property is an optional property that defines the implementation name to use for running the loadflow. 
+If this property is not set, the default loadflow implementation is used. See [Loadflow Configuration](load-flow.md) to configure the default loadflow.
+**Note**: In previous Powsybl releases (before 3.0.0), this was configured in the `load-flow-factory` property with the full classname of the implementation.
 
 ## max-iterations
 Use the `max-iterations` parameter to limit the number of iteration needed to solve the violations.
@@ -38,7 +39,7 @@ load-flow-action-simulator:
     copy-strategy: STATE
     debug: false
     ignore-pre-contingency-violations: false
-    load-flow-factory: com.powsybl.loadflow.mock.LoadFlowFactoryMock
+    load-flow-name: Mock
     max-iterations: 10
 ```
 
@@ -48,7 +49,7 @@ load-flow-action-simulator:
     <copy-strategy>STATE</copy-strategy>
     <debug>false</debug>
     <ignore-pre-contingency-violations>false</ignore-pre-contingency-violations>
-    <load-flow-factory>com.powsybl.loadflow.mock.LoadFlowFactoryMock</load-flow-factory>
+    <load-flow-name>Mock</load-flow-name>
     <max-iterations>10</max-iterations>
 </load-flow-action-simulator>
 ```
