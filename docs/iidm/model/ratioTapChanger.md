@@ -30,7 +30,7 @@ Each step of a ratio tap changer has the following attributes:
 
 # Model
 A ratio tap changer is regulating if both **Load tap changing capabilities** and **Regulating** are set to ```true```.
-Remote control can be modelled by setting a distant terminal as the regulation terminal.
+Remote control can be modeled by setting a distant terminal as the regulation terminal.
 
 For more information on how ratio tap changers are taken into account in the transformers model, please refer to the [two windings transformers documentation](twoWindingsTransformer.md) and the [three windings transformers one](threeWindingsTransformer.md).
 

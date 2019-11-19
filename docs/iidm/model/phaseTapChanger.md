@@ -32,7 +32,7 @@ Each step of a phase tap changer has the following attributes:
 # Model
 A phase tap changer is regulating if **Regulating** is set to ```true```.
 
-Remote control can be modelled by setting a distant terminal as the regulation terminal.
+Remote control can be modeled by setting a distant terminal as the regulation terminal.
 
 Three regulation modes are available:
 - ```CURRENT_LIMITER```: the tap changer adapts the step position to limit the current on the regulation terminal

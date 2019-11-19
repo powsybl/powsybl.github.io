@@ -119,7 +119,7 @@ If the voltage regulation is deactivated, it is expected that:
 $$\left| targetQ - Q \right| < \epsilon$$
 
 ### Voltage regulation activated
-If the voltage regulation is activated, the generator is modelled as a $$PV/PQ$$ node: the voltage target should be reached
+If the voltage regulation is activated, the generator is modeled as a $$PV/PQ$$ node: the voltage target should be reached
 except if reactive bounds are hit (PV mode). If the reactive bounds are hit, the reactive power should be equal to a limit.
 Mathematically speaking, one of the following 3 conditions should be met:
 

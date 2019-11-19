@@ -21,7 +21,7 @@ The `com.powsybl.iidm.network.Line` interface is used to model an AC line. A lin
 Lines can also have [current limits](currentLimits.md) defined for each end.
 
 # Model
-Power lines are modelled using a standard $$\pi$$ model with distributed parameters.
+Power lines are modeled using a standard $$\pi$$ model with distributed parameters.
 
 ![Power line model](./images/line-model.svg){: width="50%" .center-image}
 
