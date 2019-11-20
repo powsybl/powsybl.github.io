@@ -11,3 +11,9 @@
 .content {
   margin-top: $navbar-height;
 }
+
+@media screen and (max-width: 575.98px) {
+    #search-box {
+      height: 22px;
+    }
+}
