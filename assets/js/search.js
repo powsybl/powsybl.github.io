@@ -43,6 +43,21 @@
 
     var searchTerm = getQueryVariable('query');
 
+    // Initalize lunr with the fields it will be searching on. I've given title
+    // a boost of 10 to indicate matches on this field are more important.
+    var idx = lunr(function () {
+        this.field('id');
+        this.field('title', { boost: 10 });
+        this.field('content');
+
+        for (var key in window.store) { // Add the data to lunr
+            this.add({
+                'id': key,
+                'title': window.store[key].title,
+                'content': window.store[key].content
+            });
+        }
+    });
     if (searchTerm) {
         document.getElementById('search-box').setAttribute("value", searchTerm);
 
@@ -69,4 +84,81 @@
             displaySearchException(searchException);
         }
     }
+
+    $(document).ready(function() {
+    const storeUnstemmed = function(builder) {
+
+       // Define a pipeline function that keeps the unstemmed word
+       const pipelineFunction = function(token) {
+          token.metadata['unstemmed'] = token.toString();
+          return token;
+       };
+
+       // Register the pipeline function so the index can be serialised
+       lunr.Pipeline.registerFunction(pipelineFunction, 'storeUnstemmed');
+
+       // Add the pipeline function to both the indexing pipeline and the searching pipeline
+       builder.pipeline.before(lunr.stemmer, pipelineFunction);
+
+       // Whitelist the unstemmed metadata key
+       builder.metadataWhitelist.push('unstemmed');
+    };
+
+    lunr.tokenizer.separator =  /\W+/
+    const index = lunr(function() {
+       this.use(storeUnstemmed);
+       this.field('id');
+       this.field('title', { boost: 10 });
+       this.field('content');
+
+       for (var key in window.store) { // Add the data to lunr
+           this.add({
+               'id': key,
+               'title': window.store[key].title,
+               'content': window.store[key].content
+           });
+       }
+    });
+    const autoComplete = function (searchTerm) {
+       const results = index.query(function(q) {
+          // exact matches should have the highest boost
+          q.term(searchTerm, { boost : 100 })
+          // wildcard matches should be boosted slightly
+          q.term(searchTerm, {
+             boost : 10,
+             usePipeline : true,
+             wildcard : lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING
+          })
+          // finally, try a fuzzy search, without any boost
+          q.term(searchTerm, { boost : 1, usePipeline : false, editDistance : 1 })
+       });
+       if (!results.length) {
+          return "";
+       }
+       return results.map(function(v, i, a) { // extract unstemmed terms
+          const unstemmedTerms = {};
+          Object.keys(v.matchData.metadata).forEach(function(term) {
+             Object.keys(v.matchData.metadata[term]).forEach(function(field) {
+                v.matchData.metadata[term][field].unstemmed.forEach(function(word) {
+                   unstemmedTerms[word] = true;
+                });
+             });
+          });
+          return Object.keys(unstemmedTerms);
+       }).reduce(function(a, b) { // flatten
+          return a.concat(b);
+       }).filter(function(v, i, a) { // uniq
+          return a.indexOf(v) === i;
+       }).slice(0, 10);
+    }
+
+    $( "#search-box" ).autocomplete({
+      source: function(request, response) {
+        var results = autoComplete(request.term);
+        response(results);
+      },
+      select: function(event, ui) { $("#search-box").val(ui.item.value); $("#search-form").submit(); }
+    });
+    });
+
 })();

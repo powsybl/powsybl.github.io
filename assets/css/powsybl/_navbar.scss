@@ -11,3 +11,8 @@
 .content {
   margin-top: $navbar-height;
 }
+
+/* navbar has z-index: 1030 */
+ul.ui-autocomplete {
+  z-index: 1040;
+}
