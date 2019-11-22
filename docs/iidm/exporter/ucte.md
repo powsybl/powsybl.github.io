@@ -36,7 +36,7 @@ ESNODE11 XXNODE21 1 0      2     10       65    200 DANGLING XNODE
 ESNODE11 XXNODE11 1 0      2     10       65    200 INTERCO ES
 ```
 
-# Configuration properties for the IIDM-XML exporter
+# Configuration properties for the UCTE-DEF exporter
 
 These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
 module.
