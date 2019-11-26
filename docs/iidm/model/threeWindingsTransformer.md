@@ -5,23 +5,34 @@ layout: default
 
 The `com.powsybl.iidm.network.ThreeWindingsTransformer` interface is used to model a three windings power transformer.
 A three windings power transformer is connected to three voltage levels (side 1, side 2 and side 3) that belong to the
-same substation:
+same substation, usually:
 - Side 1 is the primary side (high voltage)
-- Side 2 and Side 3 can indifferently be the secondary side (medium voltage) or the tertiary side (low voltage)
-A [Ratio Tap Changer](ratioTapChanger.md) can be associated to the side 2 or the side 3 of a three windings power transformer.
+- Side 2 is the secondary side (medium voltage)
+- Side 3 is the tertiary side (low voltage)
+
+A [Ratio Tap Changer](ratioTapChanger.md) and/or a [Phase Tap Changer](phaseTapChanger.md) can be associated to all three sides of a three windings power transformer. Only one Tap Changer is allowed to be regulating on the equipment.
 
 # Characteristics
 
 | Attribute | Type | Required | Default value | Description |
 | --------- | ---- | -------- | ------------- | ----------- |
-| Leg1 | `ThreeWindingsTransformer.Leg1` | yes | - | The leg at the primary side |
-| Leg2 | `ThreeWindingsTransformer.Leg2or3` | yes | - | The leg at the secondary side |
-| Leg3 | `ThreeWindingsTransformer.Leg2or3` | yes | - | The leg at the tertiary side |
+| Leg1 | `ThreeWindingsTransformer.Leg` | yes | - | The leg at the primary side |
+| Leg2 | `ThreeWindingsTransformer.Leg` | yes | - | The leg at the secondary side |
+| Leg3 | `ThreeWindingsTransformer.Leg` | yes | - | The leg at the tertiary side |
 
+<br/>
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- |-------- | ------------- | ----------- |
+| id | string | - | yes | - | Unique identifier of the transformer |
+| name | string | - | yes | - | Human-readable name of the transformer |
+| RatedU0 | double | kV | yes | - | The rated voltage at the star bus |
+
+<br/>
 Three windings transformers can also have [current limits](currentLimits.md) defined for each leg.
 
-## Leg1
-`ThreeWindingsTransformer.Leg1` is a nested interface used to model the primary side of a three windings power transformer.
+## Leg
+`ThreeWindingsTransformer.Leg` is a nested interface used to model a leg of a three windings power transformer.
 
 ### Characteristics
 
@@ -34,24 +45,19 @@ Three windings transformers can also have [current limits](currentLimits.md) def
 | B | double | S | yes | - | The nominal magnetizing susceptance specified at the voltage of the leg |
 | RatedU | double | kV | yes | - | The rated voltage |
 
-## Leg2or3
-`ThreeWindingsTransformer.Leg2or3` is a nested interface used to model the secondary or the tertiary side of a three windings
-power transformer.
+# Model
+Three windings transformer are modeled as three two windings transformers with the network bus at the end 1 
+and the star bus at end 2.
 
-### Characteristics
-
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Terminal | `Terminal` | - | yes | - | The terminal the leg is connected to |
-| R | double | $$\Omega\$$ | yes | - | The nominal series resistance specified at the voltage of the leg |
-| X | double | $$\Omega\$$ | yes | - | The nominal series reactance specified at the voltage of the leg |
-| RatedU | double | kV | yes | - | The rated voltage |
+![Power line model](./images/three-windings-transformer-model.svg){: width="50%" .center-image}
 
 # Examples
 This is an example of how to create a new ThreeWindingsTransformer in the network:
 ```java
 ThreeWindingsTransformer threeWindingsTransformer = substation.newThreeWindingsTransformer()
     .setId("TWT3")
+    .setName("TWT3Name")
+    .setRatedU0(132)
     .newLeg1()
         .setVoltageLevel("VL1")
         .setNode(11)
@@ -66,6 +72,8 @@ ThreeWindingsTransformer threeWindingsTransformer = substation.newThreeWindingsT
         .setNode(22)
         .setR(1.089)
         .setX(0.1089)
+        .setG(0.0)
+        .setB(0.0)
         .setRatedU(33.0)
         .add()
     .newLeg3()
@@ -73,6 +81,8 @@ ThreeWindingsTransformer threeWindingsTransformer = substation.newThreeWindingsT
         .setNode(33)
         .setR(0.121)
         .setX(0.0121)
+        .setG(0.0)
+        .setB(0.0)
         .setRatedU(11.0)
         .add()
     .add();
