@@ -4,7 +4,7 @@ layout: default
 ---
 
 
-In this tutorial you'll learn how to use the AFS APIs, in a java application and in a groovy script. Then, you'll learn how to
+In this tutorial you'll learn how to use the AFS APIs (AFS = Application FileSystem), in a java application and in a groovy script. Then, you'll learn how to
 use a remote AFS server.
 
 # Using AFS in your java application
