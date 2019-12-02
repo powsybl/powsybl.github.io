@@ -4,3 +4,10 @@ $(function () {
         $('.overlay').toggleClass('active');
     });
 });
+
+$(function () {
+    $('#search-icon').click(function(e) {
+        e.preventDefault();
+        $('#search-box').toggleClass("d-none");
+    });
+});
