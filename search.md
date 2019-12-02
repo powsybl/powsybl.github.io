@@ -3,6 +3,7 @@ layout: default
 title: Search
 ---
 
+<noscript><h2>ERROR</h2>You need JavaScript to search.</noscript>
 <div id="search-results"></div>
 
 <script>
