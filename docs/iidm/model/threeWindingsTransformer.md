@@ -10,7 +10,8 @@ same substation, usually:
 - Side 2 is the secondary side (medium voltage)
 - Side 3 is the tertiary side (low voltage)
 
-A [Ratio Tap Changer](ratioTapChanger.md) and/or a [Phase Tap Changer](phaseTapChanger.md) can be associated to all three sides of a three windings power transformer. Only one Tap Changer is allowed to be regulating on the equipment.
+A [Ratio Tap Changer](ratioTapChanger.md) and/or a [Phase Tap Changer](phaseTapChanger.md) can be associated to all three sides of a three windings power transformer. 
+Only one Tap Changer (either ratio or phase tap changer) is allowed to be regulating on the equipment at a given time.
 
 # Characteristics
 
@@ -46,8 +47,8 @@ Three windings transformers can also have [current limits](currentLimits.md) def
 | RatedU | double | kV | yes | - | The rated voltage |
 
 # Model
-Three windings transformer are modeled as three two windings transformers with the network bus at the end 1 
-and the star bus at end 2.
+Three windings transformers are modeled with three legs, where every leg model is electrically equivalent to a two windings transformer. 
+For each leg, the network bus is at side 1 and the star bus is at side 2.
 
 ![Power line model](./images/three-windings-transformer-model.svg){: width="50%" .center-image}
 
