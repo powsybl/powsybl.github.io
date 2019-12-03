@@ -5,10 +5,10 @@ layout: default
 
 The `com.powsybl.iidm.network.ThreeWindingsTransformer` interface is used to model a three windings power transformer.
 A three windings power transformer is connected to three voltage levels (side 1, side 2 and side 3) that belong to the
-same substation, usually:
-- Side 1 is the primary side (high voltage)
-- Side 2 is the secondary side (medium voltage)
-- Side 3 is the tertiary side (low voltage)
+same substation. We usually have:
+- Side 1 as the primary side (side with highest rated voltage)
+- Side 2 as the secondary side (side with the medium rated voltage)
+- Side 3 as the tertiary side (side with the lowest rated voltage)
 
 A [Ratio Tap Changer](ratioTapChanger.md) and/or a [Phase Tap Changer](phaseTapChanger.md) can be associated to all three sides of a three windings power transformer. 
 Only one Tap Changer (either ratio or phase tap changer) is allowed to be regulating on the equipment at a given time.
