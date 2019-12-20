@@ -54,5 +54,5 @@ This is the unique entry point for the front end. This Web service is responsibl
 
 ### Study front-end
 
-Study tool front-end developped in React.js.
+Study tool front end developped in React.js.
 
