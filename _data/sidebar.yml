@@ -56,6 +56,13 @@ menu:
       - name: "Time series"
         url: "/docs/timeseries/"
 
+  - name: "Technical documentation"
+    icon: "fas fa-square"
+    url: "/docs/technical-documentation.html"
+    items:
+      - name: "Architecture"
+        url: "/docs/technical-documentation.html#Architecture"
+
   - name: "User documentation"
     icon: "fas fa-square"
     url: "/docs/tools/"
