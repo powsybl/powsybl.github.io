@@ -57,7 +57,7 @@ the topology made of buses.
 | ConnectableBus | `Bus` | yes | - | A bus that can be used to connect the viewed terminal in a bus-only topology |
 
 # Flow sign convention
-Flows at terminals (Terminal.P and Terminal.Q) follow the load sign convention.
+Flows at terminals (P and Q) follow the load sign convention.
 - Flow out from a bus (bus and bus/breaker views) or a node (node breaker view) has positive sign.
 - Consumptions from the grid are positive.
 
