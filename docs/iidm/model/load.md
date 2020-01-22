@@ -21,7 +21,7 @@ The `com.powsybl.iidm.network.LoadType` enum contains these three values:
 - FICTITIOUS
 
 # Flow sign convention
-Initial values for loads (Load.P0 and Load.Q0) follow the load sign convention:
+Initial values for loads P0 and Q0 follow the load sign convention:
 - Flow out from bus has positive sign.
 - Consumptions are positive.
 

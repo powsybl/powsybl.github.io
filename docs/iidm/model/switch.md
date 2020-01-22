@@ -29,10 +29,6 @@ The `com.powsybl.iidm.network.SwitchKind` enum contains three values:
 
 In a bus/breaker topology, `SwitchKind` can only be set to BREAKER.
 
-# How to access to the switch terminals ?
-In the internal network model, switches do not have any terminal. This modeling
-choice was driven by performance issues.
-
 # Examples
 This example shows how to create a new Switch in a network with a node/breaker topology:
 ```java
