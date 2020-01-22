@@ -18,6 +18,9 @@ a sub interface of [HVDC Converter Station](hvdcConverterStation.md).
 The voltage setpoint is required if the voltage regulator is on.
 The reactive power setpoint is required if the voltage regulator is off.
 
+## Reactive Limits
+A set of reactive limits can be associated to a VSC converter station. All the reactive limits modelings available in the library are described [here](reactiveLimits.md).
+
 # Examples
 This example shows how to create a new VSC Converter Station in a network:
 ```java

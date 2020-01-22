@@ -56,6 +56,11 @@ the topology made of buses.
 | Bus | `Bus` | yes | - | The connection bus of the viewed terminal in a bus-only topology |
 | ConnectableBus | `Bus` | yes | - | A bus that can be used to connect the viewed terminal in a bus-only topology |
 
+# Flow sign convention
+Flows at terminals (Terminal.P and Terminal.Q) follow the load sign convention.
+- Flow out from a bus (bus and bus/breaker views) or a node (node breaker view) has positive sign.
+- Consumptions from the grid are positive.
+
 # Examples
 This example shows how to use the terminal of an [injection](injection.md):
 ```java

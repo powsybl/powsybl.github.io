@@ -75,3 +75,17 @@ TwoWindingsTransformer twoWindingsTransformer = substation.newTwoWindingsTransfo
     .setRatedU2(385)
     .add();
 ```
+
+# Extensions
+
+## Phase angle clock
+
+This extension is used to model the Vector Group of a two windings transformer. The phase angle clock is modeled at side 2 of a two windings transformer. The voltage phase angle displacement is represented with clock hours. The valid values are 0 to 11.
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| PhaseAngleClock | int [0-11] | hours | yes | - | The voltage phase angle displacement |
+
+```java
+transformer.addExtension(TwoWindingsTransformerPhaseAngleClock.class, new TwoWindingsTransformerPhaseAngleClock(transformer, 3));
+```
