@@ -44,7 +44,7 @@ As explained above, network extensions can describe electrical equipments' attri
 specific use cases (e.g. dynamic simulation, UCTE networks merging, etc.). The following extensions are provided by
 Powsybl framework:
 
-- [ActivePowerControl](../../todo.md)
+- ActivePowerControl for [generators](generator.md#active-power-control) and [batteries](battery.md#active-power-control)
 - [CgmesConversionContextExtension](../../todo.md)
 - [CgmesModelExtension](../../todo.md)
 - [CoordinatedReactiveControl](../../todo.md)
