@@ -36,7 +36,7 @@ The [Network](network.md) core modeling is made of two main objects: substations
 
 The following image shows some elements of the internal data model:
 
-![IIDM model](./images/schema-iidm.PNG){: width="70%" .center-image}
+![IIDM model](./images/schema-iidm.png){: width="70%" .center-image}
 
 # Network extensions
 
