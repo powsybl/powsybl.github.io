@@ -55,7 +55,8 @@ Powsybl can be used as a plain Java library to develop your own application. The
 ### CIM-CGMES conversion
 
 #### powsybl-cgmes-conversion
-**Beginner** CIM-CGMES conversion to the network core model. As the conversion uses a triple store database, you also have to choose one of the three following in-memory triple store implementations:
+**Beginner** CIM-CGMES conversion to the network core model.
+As the conversion uses a triple store database, you also have to choose one of the three following in-memory triple store implementations:
 #### powsybl-triple-store-impl-rdf4j
 **Beginner** Triple store in-memory implementation based on RDF4J.
 #### powsybl-triple-store-impl-blazegraph
@@ -98,9 +99,31 @@ Powsybl can be used as a plain Java library to develop your own application. The
 **Intermediate** Sensitivity analysis common API.
 
 <!-- ### powsybl-simulation-api/
-powsybl-dynamic-simulation/                                      -         -      	
-powsybl-dynamic-simulation-api/                                  -         -      	
 
 ### Computation
-powsybl-computation/                                             -         -      	
-powsybl-computation-local/ -->
+powsybl-computation/
+powsybl-computation-local/
+
+powsybl-dsl/
+
+### Action
+powsybl-action-dsl/
+powsybl-action-dsl-spi/
+powsybl-action-simulator/
+powsybl-action-util/
+
+### contingency
+powsybl-contingency/
+powsybl-contingency-api/
+powsybl-contingency-dsl/
+
+### Times series
+powsybl-time-series-api/
+
+### Other
+powsybl-commons/
+powsybl-tools/
+powsybl-distribution-core/
+
+powsybl-cim-anonymiser/                                          -         -      
+powsybl-entsoe-util/-->                                             -         -      
