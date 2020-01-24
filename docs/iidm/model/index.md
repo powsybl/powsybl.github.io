@@ -3,12 +3,12 @@ title: Internal data model
 layout: default
 ---
 
-Powsybl's internal data model describes electrical networks via [a network core model](#network-core-mode) which models the network equipments
-and its main attributes and [network extensions](#network-extensions) which can describe equipments' specific attributes for custom use cases.
+Powsybl's internal data model describes electrical networks via [a network core model](#network-core-model) which represents the network equipments
+and its main attributes and [network extensions](#network-extensions) which can specify equipments' particular attributes for custom use cases.
 
 # Network core model
 
-The [Network](network.md) core modeling is made of two main objects: substations and lines. A substation can have several voltage levels and a line can be of several types (AC lines, DC lines and AC lines shared between two countries).
+The [Network](network.md) core modeling is made of two main objects: substations and branches. A substation can have several voltage levels and a branch can be of several types (AC lines, DC lines and AC lines shared between two countries).
 
 - [Line](line.md)
 
