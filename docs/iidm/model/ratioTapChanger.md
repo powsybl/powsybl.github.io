@@ -14,7 +14,7 @@ It can be added to both [two windings transformers](twoWindingsTransformer.md) a
 | TapPosition | int | - | yes | - | The position index of current tap |
 | LoadTapChangingCapabilities | boolean | - | no | false | ```true``` if the ratio tap changer has load tap changing capabilities, ```false``` otherwise |
 | Regulating | boolean | - | no | false | ```true``` if the ratio tap changer is regulating, ```false``` otherwise. [State variable](../../todo.md) |
-| TargetDeadband | double | - | no | `Double.NaN` | The deadband used to avoid excessive update of controls |
+| TargetDeadband | double | - | no | - | The deadband used to avoid excessive update of controls |
 | TargetV | double | kV | yes | - | The target voltage |
 | RegulationTerminal | Terminal | - | no | - | The terminal which voltage is regulated |
 
