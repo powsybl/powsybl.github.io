@@ -6,6 +6,8 @@ menu:
       - name: "Installation"
         url: "/docs/getting-started.html#Installation"
         items:
+          - name: "Java library"
+            url: "/docs/installation/java-library.html"
           - name: "iTools packager"
             url: "/docs/installation/itools-packager.html"
           - name: "JavaFX packager"
