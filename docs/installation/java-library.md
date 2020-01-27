@@ -63,7 +63,7 @@ To help you navigate in the list below, we used labels to tag the artifacts:
 
 #### powsybl-cgmes-conversion
 **User** CIM-CGMES conversion to the network core model.
-As the conversion uses a triple store database, you also have to choose one of the three following in-memory triple store implementations:
+The conversion uses a triple store database, so it has to be used together with one of the three available in-memory triple store implementations below.
 #### powsybl-triple-store-impl-rdf4j
 **User** Triple store in-memory implementation based on RDF4J.
 #### powsybl-triple-store-impl-blazegraph
