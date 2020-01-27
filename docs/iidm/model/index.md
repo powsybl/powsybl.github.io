@@ -8,7 +8,7 @@ and its main attributes and [network extensions](#network-extensions) which can 
 
 # Network core model
 
-The [Network](network.md) core modeling is made of two main objects: substations and branches. A substation can have several voltage levels and a branch can be of several types (AC lines, DC lines and AC lines shared between two countries).
+The [Network](network.md) core modeling is made of two main objects: substations and lines. A substation can have several voltage levels and a line can be of several types (AC lines, DC lines and AC lines shared between two countries).
 
 - [Line](line.md)
 
