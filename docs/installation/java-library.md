@@ -3,10 +3,10 @@ title: Java library
 layout: default
 ---
 
-Powsybl can be used as a plain Java library to develop your own application. 
+Powsybl can be used as a plain Java library to develop your own application.
 Depending on the features you wish to pick, you will select different Powsybl artifacts.
 This page aims at listing them, summarizing their purpose and helping you figure out what you need in your 'pom.xml' file.
-The Powsybl artifacts are available at Maven Central under the `com.powsybl` groupId: [Powsybl Artifacts](https://repo.maven.apache.org/maven2/com/powsybl/). 
+The Powsybl artifacts are available at Maven Central under the `com.powsybl` groupId: [Powsybl Artifacts](https://repo.maven.apache.org/maven2/com/powsybl/).
 
 To help you navigate in the list below, we used labels to tag the artifacts:
 
@@ -86,6 +86,13 @@ The conversion uses a triple store database, so it has to be used together with 
 #### powsybl-ieee-cdf-model
 **Powsybl-developer** IEEE netwok model.
 
+### Conversion tools
+
+#### powsybl-cim-anonymiser
+**User** Used to anonymise CIM CGMES files to ease data exchanges.
+#### powsybl-entsoe-util
+**User** It provides tools for boundary management through the ENTSOE concept of boundaries called Xnode.
+
 ## Simulators
 
 ### Load flow
@@ -97,40 +104,47 @@ The conversion uses a triple store database, so it has to be used together with 
 #### powsybl-loadflow-validation
 **Advanced-user** To use the load flow validation feature.
 
-### Sensitivity analysis
+### Security analysis
 
 #### powsybl-security-analysis-api
-**Advanced-user**
+**Advanced-user** Security analysis common API.
 
-#### powsybl-sensitivity-api/
+#### powsybl-contingency-api
+
+#### powsybl-contingency-dsl
+
+### Action simulation
+
+#### powsybl-action-simulator
+
+#### powsybl-action-util
+
+#### powsybl-action-dsl
+
+#### powsybl-action-dsl-spi
+
+### Sensitivity analysis
+
+#### powsybl-sensitivity-api
 **Advanced-user** Sensitivity analysis common API.
 
-<!-- ### powsybl-simulation-api/
+### Time-domain simulation
+
+### powsybl-simulation-api
+**Advanced-user** Time-domain simulation common API.
 
 ### Computation
-powsybl-computation/
-powsybl-computation-local/
 
-powsybl-dsl/
-
-### Action
-powsybl-action-dsl/
-powsybl-action-dsl-spi/
-powsybl-action-simulator/
-powsybl-action-util/
-
-### contingency
-powsybl-contingency/
-powsybl-contingency-api/
-powsybl-contingency-dsl/
-
-### Times series
-powsybl-time-series-api/
+#### powsybl-computation
+**User** Common API for computations
+#### powsybl-computation-local
+**User** Implementation for local computations.
 
 ### Other
-powsybl-commons/
-powsybl-tools/
-powsybl-distribution-core/
 
-powsybl-cim-anonymiser/                                          -         -      
-powsybl-entsoe-util/-->                                             -         -      
+#### powsybl-dsl
+**Powsybl-developer**
+
+### Times series management
+
+#### powsybl-time-series-api
