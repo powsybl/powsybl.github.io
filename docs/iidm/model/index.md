@@ -3,8 +3,12 @@ title: Internal data model
 layout: default
 ---
 
+Powsybl's internal data model describes electrical networks via [a network core model](#network-core-model) which represents the network equipments
+and its main attributes and [network extensions](#network-extensions) which can specify equipments' particular attributes for custom use cases.
 
-The [Network](network.md) modeling is made of two main objects: substations and lines. A substation can have several voltage levels and a line can be of several types (AC lines, DC lines and AC lines shared between two countries).
+# Network core model
+
+The [Network](network.md) core modeling is made of two main objects: substations and lines. A substation can have several voltage levels and a line can be of several types (AC lines, DC lines and AC lines shared between two countries).
 
 - [Line](line.md)
 
@@ -32,4 +36,22 @@ The [Network](network.md) modeling is made of two main objects: substations and 
 
 The following image shows some elements of the internal data model:
 
-![IIDM model](./images/schema-iidm.png){: width="50%" .center-image}
+![IIDM model](./images/schema-iidm.png){: width="70%" .center-image}
+
+# Network extensions
+
+As explained above, network extensions can describe electrical equipments' attributes which are only useful for some
+specific use cases (e.g. dynamic simulation, UCTE networks merging, etc.). The following extensions are provided by
+Powsybl framework:
+
+- ActivePowerControl for [generators](generator.md#active-power-control) and [batteries](battery.md#active-power-control)
+- [CgmesConversionContextExtension](../../todo.md)
+- [CgmesModelExtension](../../todo.md)
+- [CoordinatedReactiveControl](../../todo.md)
+- [Entsoe Area](../../todo.md)
+- [MergedXnode](../../todo.md)
+- [ThreeWindingsTransformerPhaseAngleClock](../../todo.md)
+- [TwoWindingsTransformerPhaseAngleClock](../../todo.md)
+- [Xnode](../../todo.md)
+
+However, it is also possible to [create you own custom network extension for your need](../../todo.md).
