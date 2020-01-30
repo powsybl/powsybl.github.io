@@ -17,9 +17,8 @@ To help you navigate in the list below, we used labels to tag the artifacts:
 **Powsybl developer** corresponds to an artifact aimed at developers who contribute to the Powsybl framework more deeply
 
 # Network modeling
-The artifacts described below provides the grid modeling on which Powsybl relies on. This grid model can be extended using a
-plugin mechanism, if you need to add additional data to an equipment. To know more about the grid model, we suggest you to
-read this [page](../iidm/model/index.md).
+The artifacts described below provide the [grid modeling](../iidm/model/index.md) on which Powsybl relies on. This grid model can be extended using a
+plugin mechanism, if you need to add additional data to an equipment.
 
 **powsybl-iidm-api** *(Powsybl developer)*  
 This module provides the API of the network model.
@@ -46,18 +45,16 @@ This module provides a common API that is implemented each time a new format has
 This module provides an implementation of the converter API to allow a user to load/save a network from/to an XML file.
 
 ### UCTE
-The artifacts described below provides the support of the UCTE-DEF format.
+The artifacts described below provide the support of the [UCTE-DEF format](../iidm/importer/ucte.md).
 
 **powsybl-ucte-network** *(Advanced user)*  
-This module provides classes to model the network regarding the UCTE-DEF format. To know more about this format, you can
-read this [page](../iidm/importer/ucte.md).
+This module provides classes to model the network regarding the UCTE-DEF format.
 
 **powsybl-ucte-converter** *(User)*  
 This module provides an implementation of the converter API to allow a user to load/save a network from/to a UCTE file.
 
 ### CMGES
-The artifacts described below provides the support of the CIM-CGMES format. To know more about this format, you can read
-this [page](../iidm/importer/cgmes.md).
+The artifacts described below provide the support of the [CIM-CGMES format](../iidm/importer/cgmes.md).
 
 **powsybl-cgmes-model** *(Advanced user)*  
 This module provides classes to model the network regarding the CIM-CGMES format.
@@ -66,8 +63,8 @@ This module provides classes to model the network regarding the CIM-CGMES format
 This module provides an implementation of the converter API to allow a user to load/save a network from/to a CIM-CGMES file.
  
 **powsybl-triple-store-api** *(Powsybl developer)*  
-This module provides an common API to access to the CIM-CGMES from a triple store. Powsybl provides several in-memory
-implementation of this API. We suggest to use Eclipse RDF4J implementation that offers the best global performance.
+This module provides a common API to access to the CIM-CGMES from a triple store. Powsybl provides several in-memory
+implementations of this API. We suggest to use Eclipse RDF4J implementation that offers the best global performance.
 
 **powsybl-triple-store-impl-rdf4j** *(User)*  
 This module provides SPARQL queries to access to a triple store based on [Eclipse RDF4J](https://rdf4j.org/).
@@ -86,7 +83,7 @@ This module provides a tool to anonymize identifier of a CIM-CGMES file.
 
 ### IEEE-CDF
 
-The artifacts described below provides the support of the IEEE-CDF format.
+The artifacts described below provide the support of the IEEE-CDF format.
 
 **powsybl-ieee-cdf-model** *(Advanced user)*  
 This module provides classes to model the network regarding the IEEE-CDF format.
@@ -98,14 +95,14 @@ This module provides an implementation of the converter API to allow a user to l
 
 **powsybl-ampl-converter** *(Advanced user)*  
 This module provides an implementation of the converter API to allow a user to export a network to a set of tabular text
-files. As the format is really simple to parse, it's commonly used to integrate powsybl with an optimal power flow or
-with Matlab. 
+files. As the format is really simple to parse, it's commonly used to integrate powsybl with an optimal power flow using
+an [AMPL](../iidm/exporter/ampl.md) model or with Matlab. 
 
 ## Network additional features
 
-The artifacts described below provides additional features around the network.
+The artifacts described below provide additional features around the network.
 
-**powsybl-iidm-comparator** *(Advanced user)*  
+**powsybl-iidm-comparator** *(User)*  
 This module provides functions to help to compare IIDM networks.
 
 **powsybl-iidm-mergingview** *(Advanced user)*  
@@ -137,7 +134,7 @@ equipments. This module can be used as a [post processor](../iidm/importer/post-
 of the import or with the [load flow validation](../loadflow/validation.md). 
 
 **powsybl-loadflow-validation** *(Advanced user)*  
-This module provides function to check the consistency of a power flow result. It can be use as a java library, but the
+This module provides functions to check the consistency of a power flow result. It can be use as a java library, but the
 easiest way to use it, it's through the [iTools CLI](../tools/loadflow-validation.md).
 
 ## Contingencies
@@ -149,8 +146,8 @@ or without remedial actions.
 This module provides an API to model and create contingencies.
 
 **powsybl-contingency-dsl** *(User)*  
-This module provides classes to load a contingency list from a groovy script. This is a powerful way to create contingencies
-iterating over the equipments of network. To learn more about contingency script, you should read this [page](../contingencies/GroovyDslContingenciesProvider.md).
+This module provides classes to load [a contingency list from a groovy script](../contingencies/GroovyDslContingenciesProvider.md). This is a powerful way to create contingencies
+iterating over the equipments of network.
 
 ## Security analyses
 
@@ -163,7 +160,7 @@ This module provides classes to load a groovy file, called an action script, tha
 and business rules to run a security analysis with remedial actions. 
 
 **powsybl-action-dsl-spi** *(Powsybl developer)*  
-This module provides a SPI to extend the action a user can use in an action script.
+This module provides an SPI to extend the action a user can use in an action script.
 
 **powsybl-action-simulator** *(Advanced user)*  
 This module provides an API to run security analyses with remedial actions. It also provides an implementation based on
@@ -189,8 +186,7 @@ This module provides a legacy API for time domain simulation. This module is not
 by the **powsybl-dynamic-simulation-api**.
 
 # Configuration management
-The artifacts described below defines how Powsybl features access to the user configuration. To know more about Powsybl configuration,
-you can read this [page](../configuration/modules/index.md).
+The artifacts described below define how Powsybl features access to the [user configuration](../configuration/modules/index.md).
 
 **powsybl-config-classic** *(User)*  
 This module allows you to access to the configuration defined in a configuration file stored in the home directory of the user.
@@ -205,20 +201,20 @@ The artifacts described below are used by powsybl to know where the computation 
 for high performance computing.
 
 **powsybl-computation-local** *(User)*  
-This module is an implementation of the computation API that allow a user to run computation locally. This is the simplest
+This module is an implementation of the computation API that allows a user to run computation locally. This is the simplest
 way to do calculation using powsybl.
 
 **powsybl-computation-mpi** *(Advanced user)*  
-This module is an implementation of the computation API that allow a user to run computation on a computation grid using
+This module is an implementation of the computation API that allows a user to run computation on a computation grid using
 [MPI](https://en.wikipedia.org/wiki/Message_Passing_Interface).
 
 **powsybl-computation-slurm** *(Advanced user)*  
-This module is an implementation of the computation API that allow a user to run computation using on servers manage by
+This module is an implementation of the computation API that allows a user to run computation using on servers manage by
 [Slurm](https://slurm.schedmd.com), a workload manager.
 
 # Data management
 
-The artifacts described below provides classes to model data in our data management system called AFS (Application
+The artifacts described below provide classes to model data in our data management system called AFS (Application
 File System).
 
 **powsybl-afs-core** *(Advanced user)*  
@@ -264,7 +260,7 @@ This module provides an implementation of the storage API based on [Apache Cassa
 This module provides an implementation of the storage API to expose a remote AFS.
 
 **powsybl-afs-ws-utils** *(Advanced user)*  
-This module provides utility classes shared between the client part and the server part (JSon serialization...).
+This module provides utility classes shared between the client part and the server part (JSON serialization...).
 
 **powsybl-afs-ws-server** *(Advanced user)*  
 This module provides a facade to expose a remote AFS through a Rest API.
@@ -287,11 +283,11 @@ This module provides the client code of the network query Rest API.
 # Scripting
 
 **powsybl-scripting** *(Advanced user)*  
-This module provides a [CLI tool](../tools/run-script.md) to create groovy script based on powsybl. It's designed to be
+This module provides a [CLI tool](../tools/run-script.md) to create groovy script based on powsybl. It is designed to be
 fully extendable and offers a complete access to the powsybl framework, without limitation. 
 
 **powsybl-iidm-scripting** *(Advanced user)*  
-This modules provides extensions to access to the Network. It's mainly used to maintain the compatibility with existing
+This modules provides extensions to access to the Network. It is mainly used to maintain the compatibility with existing
 scripts.
 
 **powsybl-loadflow-scripting** *(Advanced user)*  
@@ -315,7 +311,7 @@ This module provides a model of time series and a DSL to perform basic operation
 # Miscellaneous
 
 **powsybl-commons**  
-This module provides a lot of really basic and technical utilities used everywhere in powsybl such as XML or JSon
+This module provides a lot of really basic and technical utilities used everywhere in powsybl such as XML or JSON
 helpers, configuration, exceptions... 
 
 **powsybl-dsl** *(Powsybl developer)*  
@@ -325,11 +321,10 @@ support and a facade to access and manipulate a network.
 # iTools
 
 **powsybl-tools** *(User)*  
-This module provides a CLI tool based on powsybl. To learn how to use this CLI, read this [page](../tools/index.md).
+This module provides a [CLI tool](../tools/index.md) based on powsybl.
 
 **powsybl-itools-packager-maven-plugin** *(Powsybl developer)*  
-This module provides a maven plugin to create a standalone distribution based on iTools. You should read this
-[page](../installation/itools-packager.md) if you want to learn how to use it. 
+This module provides a maven plugin to [create a standalone distribution based on iTools](../installation/itools-packager.md).
 
 # Grid Study Environment
 
@@ -358,4 +353,4 @@ This module provides a plugin to display a network on a map.
 This module provides a GUI to manage objects related to the security analyses.
 
 **powsybl-gse-spi** *(Powsybl developer)*
-This module provides a SPI to extend and customize the GSE, creating your own plugins.
+This module provides an SPI to extend and customize the GSE, creating your own plugins.
