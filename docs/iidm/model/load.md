@@ -20,6 +20,11 @@ The `com.powsybl.iidm.network.LoadType` enum contains these three values:
 - AUXILIARY
 - FICTITIOUS
 
+# Flow sign convention
+Initial values for loads P0 and Q0 follow the load sign convention:
+- Flow out from bus has positive sign.
+- Consumptions are positive.
+
 # Examples
 This example shows how to create a new `Load` in the network:
 ```java
