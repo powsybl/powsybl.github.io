@@ -16,28 +16,29 @@ To help you navigate in the list below, we used labels to tag the artifacts:
 
 **Powsybl developer** corresponds to an artifact aimed at developers who contribute to the Powsybl framework more deeply
 
-# Network modeling
-The artifacts described below provide the [grid modeling](../iidm/model/index.md) on which Powsybl relies on. This grid model can be extended using a
+# Network
+## Network modeling
+The artifacts described below provide the [grid modeling](../iidm/model/index.md) on which Powsybl relies. This grid model can be extended using a
 plugin mechanism, if you need to add additional data to an equipment.
 
 **powsybl-iidm-api** *(Powsybl developer)*  
 This module provides the API of the network model.
 
 **powsybl-iidm-impl** *(User)*  
-This module provides a in-memory implementation of the IIDM API.
+This module provides an in-memory implementation of the IIDM API.
 
 **powsybl-iidm-extensions** *(User)*  
 This module provides common extensions for the network.
 
 **powsybl-entsoe-util** *(Advanced user)*  
-This module provides extensions used in ENTSO-E business process.
+This module provides extensions used in ENTSO-E business processes.
 
 ## Network conversion
-The artifacts described below provides a common API to convert case files from one format to another. Powsybl provides
+The artifacts described below provide a common API to convert network files from one format to another. Powsybl provides
 several implementations of this API to support common formats.
 
 **powsybl-iidm-converter-api** *(Powsybl developer)*  
-This module provides a common API that is implemented each time a new format has to be supported by Powsybl. 
+This module provides a common API that is implemented for each new format supported by Powsybl. 
 
 ### IIDM-XML
 
@@ -95,7 +96,7 @@ This module provides an implementation of the converter API to allow a user to l
 
 **powsybl-ampl-converter** *(Advanced user)*  
 This module provides an implementation of the converter API to allow a user to export a network to a set of tabular text
-files. As the format is really simple to parse, it's commonly used to integrate powsybl with an optimal power flow using
+files. As the format is really simple to parse, it's commonly used to integrate Powsybl with an optimal power flow using
 an [AMPL](../iidm/exporter/ampl.md) model or with Matlab. 
 
 ## Network additional features
@@ -315,7 +316,7 @@ This module provides a lot of really basic and technical utilities used everywhe
 helpers, configuration, exceptions... 
 
 **powsybl-dsl** *(Powsybl developer)*  
-This module provides classes to define a new domain specific language (DSL) for powsybl. It provides logical expression
+This module provides classes to define a new domain specific language (DSL) for Powsybl. It provides logical expression
 support and a facade to access and manipulate a network.
 
 # iTools
