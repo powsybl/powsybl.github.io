@@ -15,9 +15,21 @@ The `com.powsybl.iidm.network.ShuntCompensator` interface is used to model a shu
 
 ## Section
 A section of a shunt compensator is an individual capacitor or reactor.
+A value of bPerSection positive means it is modeling a capacitor, an equipment that injects reactive
+power into the bus.
+A value of bPerSection negative means a reactor, an equipment that can absorb excess reactive power
+from the network.
 
 ## Current Section Count
 The current section count is expected to be greater than one and lesser or equal to the maximum section count.
+
+# Flow sign convention
+Shunt compensator follow a load sign convention:
+- Flow out from bus has positive sign.
+- Consumptions are positive.
+
+In case of a capacitor, the value for its Q will be negative.
+In case of a reactor, the value for its Q will be positive.
 
 # Examples
 This example shows how to create a new `ShuntCompensator` in the network:

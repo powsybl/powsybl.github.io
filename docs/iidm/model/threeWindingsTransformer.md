@@ -10,7 +10,7 @@ same substation. We usually have:
 - Side 2 as the secondary side (side with the medium rated voltage)
 - Side 3 as the tertiary side (side with the lowest rated voltage)
 
-A [Ratio Tap Changer](ratioTapChanger.md) and/or a [Phase Tap Changer](phaseTapChanger.md) can be associated to all three sides of a three windings power transformer. 
+A [Ratio Tap Changer](ratioTapChanger.md) and/or a [Phase Tap Changer](phaseTapChanger.md) can be associated to all three sides of a three windings power transformer.
 Only one Tap Changer (either ratio or phase tap changer) is allowed to be regulating on the equipment at a given time.
 
 # Characteristics
@@ -47,7 +47,7 @@ Three windings transformers can also have [current limits](currentLimits.md) def
 | RatedU | double | kV | yes | - | The rated voltage |
 
 # Model
-Three windings transformers are modeled with three legs, where every leg model is electrically equivalent to a two windings transformer. 
+Three windings transformers are modeled with three legs, where every leg model is electrically equivalent to a two windings transformer.
 For each leg, the network bus is at side 1 and the star bus is at side 2.
 
 ![Power line model](./images/three-windings-transformer-model.svg){: width="50%" .center-image}
@@ -87,4 +87,19 @@ ThreeWindingsTransformer threeWindingsTransformer = substation.newThreeWindingsT
         .setRatedU(11.0)
         .add()
     .add();
+```
+
+# Extensions
+
+## Phase angle clock
+
+This extension is used to model the Vector Group of a three windings transformer. The phase angle clock could be modeled at leg 2, leg 3 or both legs 2 and 3 and of a three windings transformer (network side). The voltage phase angle displacement is represented with clock hours. The valid values are 0 to 11.
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| PhaseAngleClockLeg2 | int [0-11] | hours | yes | - | The voltage phase angle displacement at leg 2 |
+| PhaseAngleClockLeg3 | int [0-11] | hours | yes | - | The voltage phase angle displacement at leg 3 |
+
+```java
+transformer.addExtension(ThreeWindingsTransformerPhaseAngleClock.class, new ThreeWindingsTransformerPhaseAngleClock(transformer, 10, 1));
 ```
