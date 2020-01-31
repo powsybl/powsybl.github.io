@@ -10,13 +10,13 @@ It can be added to both [two windings transformers](twoWindingsTransformer.md) a
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Low tap position | int | - | no | 0 | The position index of the tap changer's low tap |
-| Tap position | int | - | yes | - | The position index of current tap |
-| Load tap changing capabilities | boolean | - | no | false | ```true``` if the ratio tap changer has load tap changing capabilities, ```false``` otherwise |
+| LowTapPosition | int | - | no | 0 | The position index of the tap changer's low tap |
+| TapPosition | int | - | yes | - | The position index of current tap |
+| LoadTapChangingCapabilities | boolean | - | no | false | ```true``` if the ratio tap changer has load tap changing capabilities, ```false``` otherwise |
 | Regulating | boolean | - | no | false | ```true``` if the ratio tap changer is regulating, ```false``` otherwise. [State variable](../../todo.md) |
-| Target Deadband | double | - | no | `Double.NaN` | The deadband used to avoid excessive update of controls |
-| Target V | double | kV | yes | - | The target voltage |
-| Regulation terminal | Terminal | - | no | - | The terminal which voltage is regulated |
+| TargetDeadband | double | - | no | `Double.NaN` | The deadband used to avoid excessive update of controls |
+| TargetV | double | kV | yes | - | The target voltage |
+| RegulationTerminal | Terminal | - | no | - | The terminal which voltage is regulated |
 
 Each step of a ratio tap changer has the following attributes:
 
@@ -68,4 +68,3 @@ twoWindingsTransformer.newRatioTapChanger()
         .endStep()
     .add()
 ```
- 
