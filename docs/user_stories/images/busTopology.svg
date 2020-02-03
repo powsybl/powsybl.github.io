@@ -22,8 +22,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
    height="300"
    id="svg11758"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
-   sodipodi:docname="bus.svg">
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="busTopology.svg">
   <defs
      id="defs11760" />
   <sodipodi:namedview
@@ -34,16 +34,16 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="265.3579"
+     inkscape:cx="149.28647"
      inkscape:cy="138.70202"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:snap-bbox="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="944"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="-8"
+     inkscape:window-y="20"
      inkscape:window-maximized="1"
      inkscape:snap-bbox-edge-midpoints="false"
      inkscape:snap-bbox-midpoints="true"
@@ -68,7 +68,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -156,11 +156,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
          d="M 99.642857,55 C 109.82143,45 109.64286,45.178571 109.64286,45.178571"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.92141771;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 418.86215,836.98196 c 0,64.25052 0,64.25052 0,64.25052"
-       id="path12304-8"
-       inkscape:connector-curvature="0" />
     <g
        transform="matrix(0.29853199,0,0,0.29853199,307.89979,817.68889)"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
