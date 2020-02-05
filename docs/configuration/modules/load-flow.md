@@ -7,20 +7,21 @@ The `load-flow` module is used to configure the loadflow default implementation 
 
 # Properties
 
-## default
-Use the `default` property to specify the name of the default loadflow implementation.
+## default-impl-name
+Use the `default-impl-name` property to specify the name of the default loadflow implementation.
+**Note**: In Powsybl releases 3.0.0 and 3.0.1 this property was named `default`. Newer Powsybl versions read the deprecated for backwards compatibility but support will be removed eventually.
 
 # Examples
 
 ## YAML
 ```yaml
 load-flow:
-    default: Mock
+    default-impl-name: Mock
 ```
 
 ## XML
 ```xml
 <load-flow>
-    <default>Mock</default>
+    <default-impl-name>Mock</default-impl-name>
 </load-flow>
 ```
