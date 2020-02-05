@@ -16,7 +16,7 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 | TargetDeadband | double | - | no | - | The deadband used to avoid excessive update of controls |
 | RegulationMode | enum | - | no | FIXED_TAP | The regulation mode of the phase tap changer. May be ```CURRENT_LIMITER```, ```ACTIVE_POWER_CONTROL``` or ```FIXED_TAP``` |
 | RegulationValue | double | MW or A | yes | - | The target value, depending on the regulation mode |
-| RegulationTerminal | Terminal | - | no | - | The terminal where regulation is done |
+| RegulationTerminal | [`Terminal`](terminal.md) | - | no | - | The terminal where regulation is done |
 
 
 Each step of a phase tap changer has the following attributes:

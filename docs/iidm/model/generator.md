@@ -12,7 +12,7 @@ The `com.powsybl.iidm.network.Generator` interface is used to model a generator.
 | EnergySource | [`EnergySource`](#energysource) | - | yes | `OTHER` | The energy source |
 | MinP | double | MW | yes | - | The minimal active power |
 | MaxP | double | MW | yes | - | The maximum active power |
-| RegulatingTerminal | [`Terminal`](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Terminal.html) | - | no | The generator's terminal | The terminal used for regulation |
+| RegulatingTerminal | [`Terminal`](terminal.md) | - | no | The generator's terminal | The terminal used for regulation |
 | VoltageRegulatorOn | boolean | - | yes | - | The voltage regulator status |
 | TargetP | double | MW | yes | - | The active power target |
 | TargetQ | double | MVAr | no | - | The reactive power target |

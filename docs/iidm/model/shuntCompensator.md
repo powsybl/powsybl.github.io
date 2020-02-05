@@ -13,7 +13,7 @@ The `com.powsybl.iidm.network.ShuntCompensator` interface is used to model a shu
 | MaximumSectionCount| integer | int | yes | - | The maximum number of sections that may be switched on |
 | CurrentSectionCount | integer | int | yes | - | The current number of section that may be switched on |
 | Regulating | boolean | - | no | false | The voltage regulating status |
-| RegulatingTerminal | [`Terminal`](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Terminal.html) | - | no | The shunt compensator's terminal | The terminal used for regulation |
+| RegulatingTerminal | [`Terminal`](terminal.md) | - | no | The shunt compensator's terminal | The terminal used for regulation |
 | TargetV | double | kV | no | - |  The voltage target |
 | TargetDeadband | double | kV | no | 0 | The deadband used to avoid excessive update of controls |
 

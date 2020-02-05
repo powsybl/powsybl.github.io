@@ -16,7 +16,7 @@ It can be added to both [two windings transformers](twoWindingsTransformer.md) a
 | Regulating | boolean | - | no | false | ```true``` if the ratio tap changer is regulating, ```false``` otherwise. [State variable](../../todo.md) |
 | TargetDeadband | double | - | no | - | The deadband used to avoid excessive update of controls |
 | TargetV | double | kV | yes | - | The target voltage |
-| RegulationTerminal | Terminal | - | no | - | The terminal which voltage is regulated |
+| RegulationTerminal | [`Terminal`](terminal.md) | - | no | - | The terminal which voltage is regulated |
 
 Each step of a ratio tap changer has the following attributes:
 

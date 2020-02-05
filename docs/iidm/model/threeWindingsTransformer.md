@@ -39,7 +39,7 @@ Three windings transformers can also have [current limits](currentLimits.md) def
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- |-------- | ------------- | ----------- |
-| Terminal | `Terminal` | - | yes | - | The terminal the leg is connected to |
+| Terminal | [`Terminal`](terminal.md) | - | yes | - | The terminal the leg is connected to |
 | R | double | $$\Omega\$$ | yes | - | The nominal series resistance specified at the voltage of the leg |
 | X | double | $$\Omega\$$ | yes | - | The nominal series reactance specified at the voltage of the leg |
 | G | double | S | yes | - | The nominal magnetizing conductance specified at the voltage of the leg |
