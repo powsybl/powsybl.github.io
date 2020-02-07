@@ -13,6 +13,7 @@ The `com.powsybl.iidm.network.StaticVarCompensator` interface is used to model a
 | Bmax | double | S | yes | - | The maximum susceptance |
 | VoltageSetpoint | double | kV | no | - | The voltage setpoint |
 | ReactivePowerSetpoint | double | MVar | no | - | The reactive power setpoint |
+| RegulatingTerminal | [`Terminal`](terminal.md) | - | no | The static var compensator's terminal | The terminal used for regulation |
 | RegulationMode | `RegulationMode` | - | yes | - | The regulation mode |
 
 ## RegulationMode
