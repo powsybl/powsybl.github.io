@@ -4,8 +4,3 @@
 @import "powsybl/variables";
 @import "bootstrap/bootstrap";
 @import "powsybl/powsybl";
-
-table {
-    @extend .table;
-    @extend .table-responsive;
-}
