@@ -33,9 +33,9 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="101.38737"
-     inkscape:cy="208.6488"
+     inkscape:zoom="2.8"
+     inkscape:cx="337.56315"
+     inkscape:cy="192.86001"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -76,6 +76,12 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-752.36217)">
+    <path
+       style="fill:none;stroke:#008000;stroke-width:1.77749145;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:7.10996575, 3.55498288;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 387.02375,804.11524 v 60.86119"
+       id="path4192-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
     <path
        style="opacity:0.2;fill:none;stroke:#000000;stroke-width:4.3673749;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 219.095,874.4823 c 229.29193,0 229.29193,0 229.29193,0 l 0,0 0,0"
@@ -1031,11 +1037,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
        style="fill:none;stroke:#008000;stroke-width:1.78715563;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:7.14862246, 3.57431122;stroke-dashoffset:0"
        d="m 281.06362,867.70501 c 26.97025,58.06302 26.97025,58.06302 26.97025,58.06302"
        id="path4186"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;stroke:#008000;stroke-width:1.768;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1.768,1.768;stroke-dashoffset:0"
-       d="m 387.11681,806.45699 c 0,56.50362 -0.31566,56.50362 -0.31566,56.50362"
-       id="path4188"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#008000;stroke-width:1.76771069px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
