@@ -87,7 +87,7 @@ Some generators can be coordinated to control reactive power in a point of the n
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | QPercent | percent [0-100] | - | yes | - | The reactive control percent of participation |
 
-Here is how to add an coordinated reactive control extension to a generator:
+Here is how to add a coordinated reactive control extension to a generator:
 ```java
 generator.addExtension(CoordinatedReactiveControl.class, new CoordinatedReactiveControl(generator, 40));
 ```
