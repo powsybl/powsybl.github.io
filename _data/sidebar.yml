@@ -14,6 +14,9 @@ menu:
             url: "/docs/installation/javafx-packager.html"
       - name: "Configuration"
         url: "/docs/configuration/modules/"
+        items:
+          - name: "Configuration Providers"
+            url: "/docs/configuration/providers/"
 
   - name: "User stories"
     icon: "fas fa-book-reader"
