@@ -58,7 +58,7 @@ the topology made of buses.
 
 # Flow sign convention
 Flows at terminals (P and Q) follow the load sign convention.
-- Flow out from a bus (bus and bus/breaker views) or a node (node breaker view) has positive sign.
+- Flow out from a bus (bus and bus/breaker views) or a node (node breaker view) has a positive sign.
 - Consumptions from the grid are positive.
 
 # Examples

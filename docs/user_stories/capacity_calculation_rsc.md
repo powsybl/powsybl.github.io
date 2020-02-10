@@ -85,11 +85,11 @@ Remedial actions are read from the CRAC file and given to the optimizer which is
 
 ```java
 ContingenciesProvider contingenciesProvider = new ContingenciesProvider() {
-            @Override
-            public List<Contingency> getContingencies(Network network) {
-                  // Code here how you want to fill/map the list of contingencies.
-            }
-        };
+    @Override
+    public List<Contingency> getContingencies(Network network) {
+          // Code here how you want to fill/map the list of contingencies.
+    }
+};
 ```
 
 <br />

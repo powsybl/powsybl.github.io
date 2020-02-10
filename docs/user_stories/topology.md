@@ -4,15 +4,23 @@ layout: default
 ---
 
 
-This example aims to create a substation with a node/breaker topology model and to visit it through the bus/breaker and the bus views. In a second time, we create the same substation with a bus/breaker topology model and we visit it through the bus/breaker and the bus views.
+This example aims to create a substation with a node/breaker topology model and to visit it through the bus/breaker and the bus views. 
+In a second time, we create the same substation with a bus/breaker topology model and we visit it through the bus/breaker and the bus views.
+The corresponding code is fully available in the [topology](https://github.com/powsybl/powsybl-tutorials) tutorial.
+
+
 
 # Building a network in node/breaker topology model
 
-The substation of this tutorial has two voltage levels VL1 and VL2 described with a node/breaker topology model. The first voltage level VL1 has 2 busbar sections BBS1 and BBS2, a generator GN, a load LD and a coupler BR3 between busbar section BBS1 and BBS2. The second voltage level VL2 has a single busbar section BBS3, a line LN and is connected to voltage level VL1 through transformer TR. Here is a diagram of the substation:
+The substation of this tutorial has two voltage levels VL1 and VL2 described with a node/breaker topology model. 
+The first voltage level VL1 has 2 busbar sections BBS1 and BBS2, a generator GN, a load LD and a coupler BR3 between busbar sections BBS1 and BBS2. 
+The second voltage level VL2 has a single busbar section BBS3, a line LN and is connected to voltage level VL1 through transformer TR. 
+Below is a diagram of the substation:
 
 ![Node breaker topology](./images/nodeBreakerTopology.svg){: width="50%" .center-image}
 
-The node/breaker topology model is stored inside the voltage level as a graph where connection nodes are the vertices and switches are the edges. The next diagram shows how to map the substation topology to a graph.
+The node/breaker topology model is stored inside the voltage level as a graph, in which the vertices correspond to connection nodes and the edges correspond to switches. 
+The next diagram shows how to map the substation topology to a graph.
 
 ![Node breaker graph](./images/nodeBreakerTopologyGraph.svg){: width="50%" .center-image}
 
@@ -20,18 +28,23 @@ The node/breaker topology model is stored inside the voltage level as a graph wh
 - Voltage level VL2 has 3 nodes, line LN is connected to node 1, busbar section BBS3 to node 2.
 - Transformer TR is connected to node 8 of voltage level 400 KV and node 3 of voltage level 225 KV.
 - Plain edges represent closed switches.
-- Dashed edges represent opened switches.
-- Green edges will disappear during the bus/breaker topology computation whereas pink edges (like in this case 3<->4) will be retained whatever their position are (see [switches](switch.md)).
-
-The code shows how to create the substation with a node/breaker topology model is fully implemented in the tutorial [topology](https://github.com/powsybl/powsybl-tutorials).
+- Dashed edges represent open switches.
+- Green edges will disappear during the bus/breaker topology computation whereas pink edges (like 3<->4 in this case) will be retained, whatever their state (see [switches](switch.md)).
 
 ## Bus/breaker view
 
-The following diagram shows computed bus/breaker topology. Compared to node/breaker topology, only remains equipements (GN, LD, TR, LN) and switches flagged as retained (BR3). Equipments are now connected through buses (B1 and B2).
+The following diagram shows the computed bus/breaker topology. 
+Compared to the node/breaker topology, only the equipements (GN, LD, TR, LN) and the switches flagged as retained (BR3) remain in the network description.
+The equipments are now connected through buses (B1, B2 and B3).
 
 ![Bus breaker graph](./images/busBreakerTopology.svg){: width="50%" .center-image}
 
-We can switch to a bus/breaker view on the substation voltage level VL1. VL1 contains 2 buses in the bus/breaker view. The first bus connects nodes 1, 2, 3, 5 and 6, and consequently generator GN and load LD. Note that load LD does not belong to the connected component. The second bus connects nodes 4, 7 and 8. Note that VL1 contains only 1 switch in the bus/breaker view (BR3). Here are the corresponding prints in the tutorial:
+We can switch to a bus/breaker view on the substation voltage level VL1. 
+VL1 contains 2 buses in the bus/breaker view. 
+The first bus connects the nodes 1, 2, 3, 5 and 6, and consequently the generator GN and the load LD. 
+Note that the load LD does not belong to the connected component. 
+The second bus connects nodes 4, 7 and 8. Note that VL1 contains only one switch in the bus/breaker view (BR3). 
+Here are the corresponding prints in the tutorial:
 
 ````
 Bus: VL1_1
@@ -63,7 +76,11 @@ Bus:VL2_1
 
 # Building a network in bus/breaker topology model
 
-Note that creating a substation with a bus/breaker topology model is easier. Instead of creating VL1 and VL3 with a node/breaker topology model, we can directly create them in a simpler bus/breaker topology model. It can be very useful when data source only contains bus/branch data link in UCTE-DEF or in CIM-CGMES format sometimes. Warning: in that case the node/breaker view status on voltage level VL1 and VL2 is N/A. Here are the corresponding prints in the tutorial. Note that the load LD is not printed in that case:
+Note that creating a substation with a bus/breaker topology model is easier. 
+Instead of creating VL1 and VL3 with a node/breaker topology model, we can directly create them in a simpler bus/breaker topology model. 
+It can be very useful when data source only contains bus/branch data link in UCTE-DEF or in CIM-CGMES format sometimes. 
+Warning: in that case the node/breaker view status on voltage level VL1 and VL2 is N/A. 
+Here are the corresponding prints in the tutorial. Note that the load LD is not printed in that case:
 
 ````
 bus/breaker network in bus/breaker view:

@@ -24,7 +24,7 @@ from the network.
 The current section count is expected to be greater than one and lesser or equal to the maximum section count.
 
 # Flow sign convention
-Shunt compensator follow a load sign convention:
+Shunt compensators follow a load sign convention:
 - Flow out from bus has positive sign.
 - Consumptions are positive.
 

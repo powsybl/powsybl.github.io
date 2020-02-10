@@ -1,6 +1,5 @@
-# theme: jekyll-theme-slate
 title: Power System Blocks
-# show_downloads: false
+theme: jekyll-theme-primer
 markdown: kramdown
 
 sass:
