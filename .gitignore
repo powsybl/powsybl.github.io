@@ -8,3 +8,6 @@ _site
 Gemfile.lock
 .jekyll-metadata
 
+# Bundle
+.bundle
+vendor

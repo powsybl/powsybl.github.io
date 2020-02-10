@@ -76,6 +76,7 @@ module2:
 - [loadflow-validation](loadflow-validation.md)
 - [local-app-file-system](local-app-file-system.md)
 - [mapdb-app-file-system](mapdb-app-file-system.md)
+- [network](network.md)
 - [remote-service](remote-service.md)
 - [security](security.md)
 - [security-analysis](security-analysis.md)
