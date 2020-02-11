@@ -24,7 +24,7 @@ menu:
       - name: "Topology"
         url: "/docs/user_stories/topology.html"
       - name: "Capacity calculation for RSC"
-        url: "/docs/user_stories/capacity_calculation_r.html"
+        url: "/docs/user_stories/capacity_calculation_rsc.html"
       - name: "Advanced tutorials"
         url: "/docs/tutorials/index.html"
 
