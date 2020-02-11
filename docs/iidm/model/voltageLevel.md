@@ -10,7 +10,7 @@ A voltage level contains a topology model, i.e. an object that describes how equ
 - node/breaker model: this is the most detailed way to describe a topology.
 - bus/breaker model: this is an aggregated form of the topology made of buses and breakers.
 
-A topology model can be managed through the 3 following views ordered from the most detailed to the less detailed:
+A topology model can be accessed through the 3 following views ordered from the most detailed to the less detailed:
 - node/breaker view
 - bus/breaker view
 - bus only view
