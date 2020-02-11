@@ -21,8 +21,10 @@ menu:
     items:
       - name: "Loadflow"
         url: "/docs/user_stories/loadflow_tutorial.html"
+      - name: "Topology"
+        url: "/docs/user_stories/topology.html"
       - name: "Capacity calculation for RSC"
-        url: "/docs/user_stories/capacity_calculation_rsc.html"
+        url: "/docs/user_stories/capacity_calculation_r.html"
       - name: "Tutorials"
         url: "/docs/tutorials/index.html"
 
