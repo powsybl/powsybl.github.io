@@ -1,5 +1,5 @@
 ---
-title: Tutorials
+title: Advanced tutorials
 layout: default
 ---
 

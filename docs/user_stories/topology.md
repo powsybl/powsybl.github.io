@@ -79,7 +79,7 @@ Bus:VL2_1
 Note that creating a substation with a bus/breaker topology model is easier.
 Instead of creating VL1 and VL3 with a node/breaker topology model, we can directly create them in a simpler bus/breaker topology model.
 It can be very useful when data source only contains bus/branch data link in UCTE-DEF or in CIM-CGMES format sometimes.
-Warning: in that case the node/breaker view status on voltage level VL1 and VL2 is N/A.
+Warning: in that case the node/breaker view status on voltage level VL1 and VL2 is N/A (not available).
 Here are the corresponding prints in the tutorial. Note that the load LD is not printed in that case:
 
 ````

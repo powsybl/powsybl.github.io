@@ -16,7 +16,7 @@ A topology model can be accessed through the 3 following views ordered from the 
 - bus only view
 
 Depending on the topology model kind of the voltage level a view can have the status:
-- N/A means that it doesn't make sense to take view that is more detailed than the model. An exception is thrown when a method is called on an N/A view.
+- N/A (not available) means that it doesn't make sense to take view that is more detailed than the model. An exception is thrown when a method is called on an N/A view.
 - modifiable, when the view has the same level of details than the model.
 - readable only, because the view is a result of a computation on the topology model.
 
