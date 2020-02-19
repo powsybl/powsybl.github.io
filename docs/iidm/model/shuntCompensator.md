@@ -12,10 +12,10 @@ The `com.powsybl.iidm.network.ShuntCompensator` interface is used to model a shu
 | bPerSection | double | S | yes | - | The Positive sequence shunt (charging) susceptance per section |
 | MaximumSectionCount| integer | int | yes | - | The maximum number of sections that may be switched on |
 | CurrentSectionCount | integer | int | yes | - | The current number of section that may be switched on |
-| Regulating | boolean | - | no | false | The voltage regulating status |
 | RegulatingTerminal | [`Terminal`](terminal.md) | - | no | The shunt compensator's terminal | The terminal used for regulation |
-| TargetV | double | kV | no | - |  The voltage target |
-| TargetDeadband | double | kV | no | - | The deadband used to avoid excessive update of controls |
+| TargetV | double | kV | only if `VoltageRegulatorOn` is set to `true` | - |  The voltage target |
+| TargetDeadband | double | kV | only if `VoltageRegulatorOn` is set to `true` | - | The deadband used to avoid excessive update of controls |
+| VoltageRegulatorOn | boolean | - | no | false | The voltage regulating status |
 
 ## Section
 A section of a shunt compensator is an individual capacitor or reactor.

@@ -15,8 +15,8 @@ The `com.powsybl.iidm.network.Generator` interface is used to model a generator.
 | RegulatingTerminal | [`Terminal`](terminal.md) | - | no | The generator's terminal | The terminal used for regulation |
 | VoltageRegulatorOn | boolean | - | yes | - | The voltage regulator status |
 | TargetP | double | MW | yes | - | The active power target |
-| TargetQ | double | MVAr | no | - | The reactive power target |
-| TargetV | double | kV | no | - | The voltage target |
+| TargetQ | double | MVAr | only if `VoltageRegulatorOn` is set to `false` | - | The reactive power target |
+| TargetV | double | kV | only if `VoltageRegulatorOn` is set to `true` | - | The voltage target |
 | RatedS | double | MVA | yes | - | The rated nominal power |
 
 ## EnergySource
