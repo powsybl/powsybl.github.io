@@ -15,7 +15,7 @@ The `com.powsybl.iidm.network.ShuntCompensator` interface is used to model a shu
 | Regulating | boolean | - | no | false | The voltage regulating status |
 | RegulatingTerminal | [`Terminal`](terminal.md) | - | no | The shunt compensator's terminal | The terminal used for regulation |
 | TargetV | double | kV | no | - |  The voltage target |
-| TargetDeadband | double | kV | no | 0 | The deadband used to avoid excessive update of controls |
+| TargetDeadband | double | kV | no | - | The deadband used to avoid excessive update of controls |
 
 ## Section
 A section of a shunt compensator is an individual capacitor or reactor.
