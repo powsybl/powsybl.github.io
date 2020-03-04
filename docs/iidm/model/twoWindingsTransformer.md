@@ -19,6 +19,7 @@ A [ratio tap changer](./ratioTapChanger.md) and/or a [phase tap changer](./phase
 | $$b_{nom}$$ | double | S | yes | - | The nominal magnetizing susceptance at the side 2 of the transformer |
 | $$V_{1\ nom}$$ | double | kV | yes | - | The rated voltage at side 1 |
 | $$V_{2\ nom}$$ | double | kV | yes | - | The rated voltage at side 2 |
+| ratedS | double | kVA | no | - | The apparent power |
 
 Two windings transformers can also have [current limits](currentLimits.md) defined for each end.
 
