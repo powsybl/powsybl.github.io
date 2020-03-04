@@ -11,8 +11,8 @@ a sub interface of [HVDC Converter Station](hvdcConverterStation.md).
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | VoltageRegulatorOn | boolean | - | yes | - | The voltage regulator status |
-| VoltageSetpoint | double | kV | no | - | The voltage setpoint |
-| ReactivePowerSetpoint | double | MVar | no | - | The reactive power setpoint |
+| VoltageSetpoint | double | kV | only if `VoltageRegulatorOn` is set to `true` | - | The voltage setpoint |
+| ReactivePowerSetpoint | double | MVar | only if `VoltageRegulatorOn` is set to `false` | - | The reactive power setpoint |
 
 ## Setpoints
 The voltage setpoint is required if the voltage regulator is on.

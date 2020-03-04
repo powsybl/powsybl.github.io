@@ -13,10 +13,10 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 | LowTapPosition | int | - | no | 0 | The position index of the tap changer's low tap |
 | TapPosition | int | - | yes | - | The position index of current tap |
 | Regulating | boolean | - | no | false | ```true``` if the ratio tap changer is regulating, ```false``` otherwise. This is a State variable. |
-| TargetDeadband | double | - | no | `Double.NaN` | The deadband used to avoid excessive update of controls |
-| RegulationMode | enum | - | no | FIXED_TAP | The regulation mode of the phase tap changer. May be ```CURRENT_LIMITER```, ```ACTIVE_POWER_CONTROL``` or ```FIXED_TAP``` |
-| RegulationValue | double | MW or A | yes | - | The target value, depending on the regulation mode |
-| RegulationTerminal | Terminal | - | no | - | The terminal where regulation is done |
+| TargetDeadband | double | - | only if `RegulationMode` is not set to `FIXED_TAP` | - | The deadband used to avoid excessive update of controls |
+| RegulationMode | enum | - | no | `FIXED_TAP` | The regulation mode of the phase tap changer. May be ```CURRENT_LIMITER```, ```ACTIVE_POWER_CONTROL``` or ```FIXED_TAP``` |
+| RegulationValue | double | MW or A | only if `RegulationMode` is not set to `FIXED_TAP` | - | The target value, depending on the regulation mode |
+| RegulationTerminal | [`Terminal`](terminal.md) | - | only if `RegulationMode` is not set to `FIXED_TAP` | - | The terminal where regulation is done |
 
 
 Each step of a phase tap changer has the following attributes:
