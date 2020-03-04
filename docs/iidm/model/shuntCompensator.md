@@ -27,6 +27,11 @@ from the network.
 ## Current Section Count
 The current section count is expected to be greater than one and lesser or equal to the maximum section count.
 
+## Regulation
+Regulation for shunt compensators does not necessarily model automation, it can represent human actions on the network
+e.g. an operator activating or deactivating a shunt compensator). However, it can of course be integrated on a power flow
+calculation or not, depending of what is wanted to be shown.
+
 # Flow sign convention
 Shunt compensators follow a load sign convention:
 - Flow out from bus has positive sign.
