@@ -119,7 +119,8 @@ By default all extensions will be exported.
 ## iidm.export.xml.skip-extensions
 The `iidm.export.xml.skip-extensions` property is an optional property that defines whether the XIIDM exporter skips exporting the 
 network extensions or not. Its default value is `false`.
-This property is deprecated since v2.4.0. Use the `iidm.export.xml.export-mode` property instead.
+This property is deprecated since v2.4.0. Set the `iidm.export.xml.extensions` to an empty string instead.
+This property have been removed in v3.3.0.
 
 # Maven configuration
 To support IIDM-XML files, add the following dependencies to the `pom.xml` file.
