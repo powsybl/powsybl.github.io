@@ -5,9 +5,8 @@ todo:
     - add support to JSON files
 ---
 
-The IIDM (**i**Tesla **I**nternal **D**ata **M**odel) format was designed during the [iTesla project](http://www.itesla-project.eu).
+The [IIDM (**i**Tesla **I**nternal **D**ata **M**odel)](../model/index.md) format was designed during the [iTesla project](http://www.itesla-project.eu).
 IIDM is not only an exchange format, but also the internal format used in Powsybl because it is designed for running simulations.
-For more information about the IIDM model, see [here](../model/index.md).
 
 IIDM networks can be serialized in XML files. The IIDM exporter generates files with a `*.xiidm` extension.
 
