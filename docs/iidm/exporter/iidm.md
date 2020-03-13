@@ -5,9 +5,8 @@ todo:
     - add support to JSON files
 ---
 
-The IIDM (**i**Tesla **I**nternal **D**ata **M**odel) format was designed during the [iTesla project](http://www.itesla-project.eu).
+The [IIDM (**i**Tesla **I**nternal **D**ata **M**odel)](../model/index.md) format was designed during the [iTesla project](http://www.itesla-project.eu).
 IIDM is not only an exchange format, but also the internal format used in Powsybl because it is designed for running simulations.
-For more information about the IIDM model, see [here](../model/index.md).
 
 IIDM networks can be serialized in XML files. The IIDM exporter generates files with a `*.xiidm` extension.
 
@@ -114,12 +113,12 @@ The default value for this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_
 The `iidm.export.xml.extensions` property is an optional property that defines the list of extensions that we will be exported by the XIIDM exporter. 
 By default all extensions will be exported.
 
-# Deprecated configuration properties for IIDM-XML exporter
+# Removed configuration properties for IIDM-XML exporter
 
 ## iidm.export.xml.skip-extensions
 The `iidm.export.xml.skip-extensions` property is an optional property that defines whether the XIIDM exporter skips exporting the 
 network extensions or not. Its default value is `false`.
-This property is deprecated since v2.4.0. Use the `iidm.export.xml.export-mode` property instead.
+This property has been deprecated since v2.4.0 before being removed in v3.3.0. Set the `iidm.export.xml.extensions` to an empty string instead.
 
 # Maven configuration
 To support IIDM-XML files, add the following dependencies to the `pom.xml` file.

@@ -31,6 +31,9 @@ Available arguments are:
     --rm-inconsistent-nodes  <FILE_SYSTEM_NAME>  <NODE_ID> remove inconsistent nodes
     --set-inconsistent-nodes  <FILE_SYSTEM_NAME> <NODE_ID> mark inconsistent nodes as consistent
     --ls-inconsistent-nodes  <FILE_SYSTEM_NAME>            list the inconsistent nodes
+    --zip                                                  zip archive file
+    --dependencies                                         archive dependencies
+    --deleteResults                                        delete results
 ```
 
 ## Commands
@@ -52,6 +55,15 @@ Use the `--rm-inconsistent-nodes` to remove all inconsistent nodes in a specifie
 
 ### set-inconsistent-nodes
 Use the `--set-inconsistent-nodes` to mark all inconsistent nodes (or a specified node) as consistent in a specified AFS.
+
+### zip
+Use the `--zip` command to create a zipped archive file.
+
+### dependencies
+Use the `--dependencies` command to archive the dependencies of the selected file or folder.
+
+### deleteResults
+Use the `--deleteResults` command to not archive the results.
 
 ## Required parameters
 
