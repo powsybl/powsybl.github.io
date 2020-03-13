@@ -47,7 +47,7 @@ Three windings transformers can also have [current limits](currentLimits.md) def
 | RatedU | double | kV | yes | - | The rated voltage |
 | RatedS | double | MVA | no | - | The normal apparent power |
 
-For the leg of a three widnings transformer, the normal apparent power shall be identical at both sides (network side and star bus side).
+For the leg of a three windings transformer, the normal apparent power shall be identical at both sides (network side and star bus side).
 
 # Model
 Three windings transformers are modeled with three legs, where every leg model is electrically equivalent to a two windings transformer.
