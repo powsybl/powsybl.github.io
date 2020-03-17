@@ -3,20 +3,20 @@ title: Sensitivity computation
 layout: default
 ---
 
-The sensitivity computation module is dedicated to compute the linearized impact of small network variations on the state variables of some elements.
+The sensitivity analysis module is dedicated to compute the linearized impact of small network variations on the state variables of some elements.
 
 A sensitivity value is the numerical estimation of the partial derivative of the observed function with respect to the variable of impact.
-The sensitivity computation can also be seen as the computation of partial derivatives on the network model.  
+The sensitivity analysis can also be seen as the computation of partial derivatives on the network model.  
 
 # Sensitivity computation inputs
 
 ## Network
-The main input for the sensitivity computation module is an IIDM network.
+The main input for the sensitivity analysis module is an IIDM network.
 
 ## Sensitivity factors
 Sensitivity factors are the expected partial derivatives to be extracted from the input network.
 
-A standard sensitivity computation input is composed of a list of sensitivity factors, each one composed of a sensitivity variable (the variable of impact) and a sensitivity function (the observed function).
+A standard sensitivity analysis input is composed of a list of sensitivity factors, each one composed of a sensitivity variable (the variable of impact) and a sensitivity function (the observed function).
 
 Currently available sensitivity factors are:
 - *BranchFlowPerInjectionIncrease* : calculates the linear impact of a specific injection increase on a specific branch's active flow (in MW/MW) 
@@ -24,9 +24,13 @@ Currently available sensitivity factors are:
 - *BranchFlowPerPSTAngle* : calculates the linear impact of a PST angle increase on a specific branch's active flow (in MW/°)
 - *BranchIntensityPerPSTAngle* : calculates the linear impact of a PST angle increase on a specific branch's current (in A/°)
 
+## Contingencies
+The sensitivity analysis may also take, optionnally, a list of contingencies as an input. When contingencies are provided, the sensitivity values
+shall be calculated on the network at state N, but also after the application of each contingency.
+
 **JSON format**
 
-The sensitivity computation module provides a JSON mapping to sensitivity factors that can be used as a sensitivity factors provider.
+The sensitivity analysis module provides a JSON mapping to sensitivity factors that can be used as a sensitivity factors provider.
 The file is a list of JSON objects each one representing a sensitivity factor:
 ```json
 [ {
@@ -62,14 +66,15 @@ The file is a list of JSON objects each one representing a sensitivity factor:
 # Sensisitivity computation outputs
 
 ## Sensitivity values
-The outputs of the sensitivity computation are sensitivity values. It is a list of objects associated to each sensitivity factors:
+The outputs of the sensitivity analysis are sensitivity values. It is a list of objects associated to each sensitivity factor for each state of the network:
 - The actual value of the partial derivative
 - The reference value of the variable at linearization point
 - The reference value of the function at linearization point 
+The results may be serialized in JSON or in CSV format.
 
 ## Example of interpretation
 Let's imagine that one wants to get the impact of an increase of active power generation of the generator *G* on the branch *B*.
-The sensitivity computation input will contain one sensitivity factor.
+The sensitivity analysis input will contain one sensitivity factor.
 
 After the computation, imagine that the values of the three elements of the resulting sensitivity object are:
 - a value of -0.05 for the partial derivative
