@@ -10,14 +10,6 @@ IIDM is not only an exchange format, but also the internal format used in Powsyb
 
 IIDM networks can be serialized in XML files. The IIDM exporter generates files with a `*.xiidm` extension.
 
-The IIDM exporter has three exporting modes:
-
-   - **First mode**: Exports the network and its extensions in a unique file.
-    
-   - **Second mode**: Exports the network in a file and the extensions in another file.
-    
-   - **Third mode**: Exports the network in a file and each extension type in a separate file. 
-
 # Example
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -93,6 +85,12 @@ network. Its default value is `NODE_BREAKER`.
 The `iidm.export.xml.throw-exception-if-extension-not-found` property is an optional property that defines whether the XIIDM exporter throws
 an exception if the network contains an unknown or unserializable extension or if it just ignores it. Its default value is `false`.
 
+## iidm.export.xml.extensions
+The `iidm.export.xml.extensions` property is an optional property that defines the list of extensions that we will be exported by the XIIDM exporter. 
+By default all extensions will be exported.
+
+# Removed configuration properties for IIDM-XML exporter
+
 ## iidm.export.xml.export-mode
 The `iidm.export.xml.export-mode` property is an optional property that defines the export mode of the XIIDM exporter.
 The export mode can be:
@@ -108,12 +106,7 @@ The export mode can be:
      to the `network.xiidm` file and `loadFoo` and `loadBar` will be exported respectively to `network-loadFoo.xiidm` and `network-loadBar.xiidm`.
 
 The default value for this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
-
-## iidm.export.xml.extensions
-The `iidm.export.xml.extensions` property is an optional property that defines the list of extensions that we will be exported by the XIIDM exporter. 
-By default all extensions will be exported.
-
-# Removed configuration properties for IIDM-XML exporter
+This property has been removed in v3.3.0.
 
 ## iidm.export.xml.skip-extensions
 The `iidm.export.xml.skip-extensions` property is an optional property that defines whether the XIIDM exporter skips exporting the 
