@@ -23,7 +23,8 @@ A specified susceptance and conductance are linked to each section of the shunt 
 
 ## Model
 There are two possible shunt compensator's models: linear and non linear. The attribute `model` describes the characteristics of the shunt compensator's distribution of susceptance
-and conductance amongst its sections. To know more about these characteristics, go to the documentation page of the [Shunt compensator's models](shuntCompensatorModel.md).
+and conductance amongst its sections. Depending on these characteristics, the shunt compensator could be a capacitor or a reactor.
+To know more, go to the documentation page of the [Shunt compensator's models](shuntCompensatorModel.md).
 
 ## Current Section Count
 The current section count is the index of the section to which the shunt compensator is currently pointing.
