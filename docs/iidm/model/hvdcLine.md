@@ -23,6 +23,8 @@ The `com.powsybl.iidm.network.HvdcLine.ConvertersMode` enum contains these two v
 - SIDE_1_RECTIFIER_SIDE_2_INVERTER,
 - SIDE_1_INVERTER_SIDE_2_RECTIFIER
 
+The active power setpoint and the maximum active power should always be positive values. The flow sign is given by the type of the converter station. Power always flows from rectifier converter station to inverter converter station.
+
 # Examples
 This example shows how to create a new `HvdcLine` in the network:
 ```java
