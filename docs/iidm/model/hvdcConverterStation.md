@@ -14,6 +14,8 @@ The `com.powsybl.iidm.network.HvdcConverterStation` interface is used to model a
 | HvdcType | `HvdcType` | - | yes | - | The HVDC type |
 | LossFactor | float | - | yes | - | The loss factor |
 
+The LossFactor should be between 0 and 1.
+
 ## HVDC Type
 The `com.powsybl.iidm.network.HvdcConverterStation.HvdcType` enum contains these two values:
 - LCC
