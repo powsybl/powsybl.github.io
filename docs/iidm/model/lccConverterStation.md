@@ -16,7 +16,7 @@ The PowerFactor is equal to
 $$
 \frac{P}{\sqrt{P^{2} + Q^{2}}}
 $$
-and should be between -1 and 1.
+and should be between -1 and 1. Note that at terminal on AC side, Q is always positive: the converter station always consumes reactive power.
 
 ## Examples
 This example shows how to create a new `LccConverterStation` in a network:
