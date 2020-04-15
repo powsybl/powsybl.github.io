@@ -14,7 +14,7 @@ The `com.powsybl.iidm.network.HvdcConverterStation` interface is used to model a
 | HvdcType | `HvdcType` | - | yes | - | The HVDC type |
 | LossFactor | float | % | yes | - | The loss factor |
 
-The LossFactor should greater than 0.
+The LossFactor should be greater than 0.
 
 ## HVDC Type
 The `com.powsybl.iidm.network.HvdcConverterStation.HvdcType` enum contains these two values:
@@ -31,5 +31,5 @@ $$
 $$
 - An inverter operation (conversion from DC to AC), we have
 $$
-\frac{P_{AC}}{P_{DC}} = \frac{LossFactor}{100}
+\frac{P_{AC}}{P_{DC}} = 1 - \frac{LossFactor}{100}
 $$
