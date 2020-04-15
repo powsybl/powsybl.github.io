@@ -10,9 +10,9 @@ and its main attributes and [network extensions](#network-extensions) which can 
 
 The [Network](network.md) core modeling is made of two main objects: substations and lines. A substation can have several voltage levels and a line can be of several types:
 
-- [Line](line.md) to model AC lines ;
-- [HVDC line](hvdcLine.md) to model DC lines ;
-- [Tie line](tieLine.md) to model a AC line segment shared between two countries ;
+- [Line](line.md) to model AC lines;
+- [HVDC line](hvdcLine.md) to model DC lines;
+- [Tie line](tieLine.md) to model a AC line segment shared between two countries;
 
 - A [Substation](substation.md) can be made of several voltage levels, which are connected through transformers:
 
