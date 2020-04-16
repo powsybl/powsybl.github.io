@@ -49,6 +49,10 @@ defaults:
     values:
       category: "Functional documentation"
   - scope:
+      path: "docs/dynamicsimulation"
+    values:
+      category: "Functional documentation"
+  - scope:
       path: "docs/timeseries"
     values:
       category: "Functional documentation"
