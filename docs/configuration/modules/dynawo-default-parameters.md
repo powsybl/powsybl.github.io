@@ -12,6 +12,9 @@ The `dynawo-default-parameters` module defines the default values for all specif
 ## parametersFile
 The `parametersFile` property is a required property that defines the path of the main parameters file.
 
+## network.parametersFile
+The `network.parametersFile` property is a required property that defines the path of the network parameters file
+
 ## solver.parametersFile
 The `solver.parametersFile` property is a required property that defines the path of the solver parameters file
 
@@ -35,6 +38,7 @@ The `solver.parametersId` property is an optional property that defines the set 
 ```yaml
 dynawo-default-parameters:
   parametersFile: /home/user/parametersFile
+  network.parametersFile: /home/user/networkParametersFile
   network.parametersId: NETWORK
   solver.type: SIM
   solver.parametersFile: /home/user/solverParametersFile
@@ -45,6 +49,7 @@ dynawo-default-parameters:
 ```xml
 <dynawo-default-parameters>
   <parametersFile>/home/user/parametersFile</parametersFile>
+  <network.parametersFile>/home/user/networkParametersFile</network.parametersFile>
   <network.parametersId>NETWORK</network.parametersId>
   <solver.type>SIM</solver.type>
   <solver.parametersFile>/home/user/solverParametersFile</solver.parametersFile>

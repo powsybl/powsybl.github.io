@@ -10,6 +10,9 @@ The `com.powsybl.dynawo.simulator.DynawoSimulationParameters` class provides the
 ## parametersFile
 The `parametersFile` property is a required property that defines the path of the main parameters file.
 
+## network.parametersFile
+The `network.parametersFile` property is a required property that defines the path of the network parameters file
+
 ## network.parametersId
 The `network.parametersId` property is an optional property that defines the set of network parameters. The default value for this property is `NETWORK`.
 
