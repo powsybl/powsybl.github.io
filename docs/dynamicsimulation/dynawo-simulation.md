@@ -3,7 +3,7 @@ title: Dynawo Simulation implementation
 layout: default
 ---
 
-Powsybl provides an implementation to run dynamic simulations with Dynawo.
+Powsybl provides an implementation to run dynamic simulations with [Dynawo](https://dynawo.github.io/).
 
 # Configuration
 See [Dynawo Configuration](../configuration/modules/dynawo.md) to configure the default dynawo.
