@@ -5,7 +5,6 @@ todo:
     - add link to load-flow validation results archi page
     - add link to the loadflow-validation page
     - add link to the result completion page
-    - add link to the groovy modification script (network, computationManager binded variable)
 ---
 
 The `loadflow-validation` command is used to validate load-flow results of a network. The command, besides validating
@@ -16,12 +15,10 @@ the results, also prints the data of the validated equipments in output files.
 $> itools loadflow-validation --help
 usage: itools [OPTIONS] loadflow-validation --case-file <FILE>
        [--compare-case-file <FILE>] [--compare-results <COMPARISON_TYPE>]
-       [--groovy-script <FILE>] [--help] [-I <property=value>]
-       [--import-parameters <IMPORT_PARAMETERS>] [--load-flow] --output-folder
-       <FOLDER> [--output-format <VALIDATION_WRITER>] [--run-computation
-       <COMPUTATION>] [--types <VALIDATION_TYPE,VALIDATION_TYPE,...>]
-       [--verbose]
-
+       [--help] [-I <property=value>] [--import-parameters <IMPORT_PARAMETERS>]
+       [--load-flow] --output-folder <FOLDER> [--output-format
+       <VALIDATION_WRITER>] [--run-computation <COMPUTATION>] [--types
+       <VALIDATION_TYPE,VALIDATION_TYPE,...>] [--verbose]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
@@ -40,8 +37,6 @@ Available arguments are:
                                                     computation), BASECASE
                                                     (compare the validation of
                                                     two basecases)]
-    --groovy-script <FILE>                          groovy script to run before
-                                                    validation
     --help                                          display the help and quit
  -I <property=value>                                use value for given importer
                                                     parameter
@@ -82,9 +77,6 @@ results of two case files.
 Use the `--compare-results` parameter to define the type of results to compare. The available types are:
 - BASECASE: compare results of the two basecases
 - COMPUTATION: run a computation on the two basecases and compare results of the resulting states.
-
-### groovy-script
-Use the `--groovy-script` parameter to apply a modification script on the network, before the validation.
 
 ### import-parameters
 Use the `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
@@ -139,8 +131,8 @@ supported types are:
 To learn more about the different checks, read the [loadflow-validation](../loadflow/validation.md) documentation page.
 
 ## Summary
-The following table summarizes the possible combinations of `compare-results`, `run-computation` and `groovy-script`
-parameters, and the corresponding case states validated and written in the output files. Some remarks:
+The following table summarizes the possible combinations of `compare-results`, `run-computation` parameters, and the
+corresponding case states validated and written in the output files. Some remarks:
 - State 1 is the state analyzed in the first validation
 - State 2 is the state analyzed in the second validation (columns with the suffix `_postComp` in the output files)
 - Case 1 is the value of `case-file` parameter
@@ -148,27 +140,12 @@ parameters, and the corresponding case states validated and written in the outpu
 - some combinations are not available, e.g. if you use the `compare-results` parameter, with the `COMPUTATION` value,
 you have to use the `run-computation` (or `load-flow`) parameter.
 
-| Number  | compare-results | run-computation | groovy-script | State 1 | State 2 (_postComp) |
-| ------- | ------- | ------- | ------- | ------- | ------- |
-| 1 | absent | absent | absent | Case 1 after import | None |
-| 2 | absent | `loadflow`/`loadflowResultsCompletion` | absent | Case 1 after import and computation | None |
-| 3 | absent | absent | script | Case 1 after import and Groovy script | None |
-| 4 | absent | `loadflow`/`loadflowResultsCompletion` | script | Case 1 after import, Groovy script and computation | None |
-| 5 | `BASECASE` | absent | absent | Case 1 after import | Case 2 after import |
-| 6 | `BASECASE` | `loadflow`/`loadflowResultsCompletion` | absent | Case 1 after import and computation | Case 2 after import |
-| 7 | `BASECASE` | absent | script | Case 1 after import and Groovy script | Case 2 after import |
-| 8 | `BASECASE` | `loadflow`/`loadflowResultsCompletion` | script | Case 1 after import, Groovy script and computation | Case 2 after import |
-| 9 | `COMPUTATION` | `loadflow`/`loadflowResultsCompletion` | absent | Case 1 after import | Case 1 after import and computation |
-| 10 | `COMPUTATION` | `loadflow`/`loadflowResultsCompletion` | script | Case 1 after import and Groovy script | Case 1 after import, Groovy script and computation |
-
-The following table depicts, in another way, the states that can be validated by the itools command, referring to the combinations of parameters listed in the table above.  
-
-| **State 1 / State 2** | **None** | **Case 2 after import** | **Case 1 after import and computation** | **Case 1 after import, Groovy script and computation** |
+| Number  | compare-results | run-computation | State 1 | State 2 (_postComp) |
 | ------- | ------- | ------- | ------- | ------- |
-| **Case 1 after import** | 1 | 5 | 9 | N.A. |
-| **Case 1 after import and computation** | 2 | 6 | N.A. | N.A. |
-| **Case 1 after import and Groovy script** | 3 | 7 | N.A. | 10 |
-| **Case 1 after import, Groovy script and computation** | 4 | 8 | N.A. | N.A. |
+| 1 | absent | absent | Case 1 after import | None |
+| 2 | absent | `loadflow`/`loadflowResultsCompletion` | Case 1 after import and computation | None |
+| 4 | `BASECASE` | `loadflow`/`loadflowResultsCompletion` | Case 1 after import and computation | Case 2 after import |
+| 5 | `COMPUTATION` | `loadflow`/`loadflowResultsCompletion` | Case 1 after import | Case 1 after import and computation |
 
 # Configuration
 To learn how to configure the `loadflow-validation` command, read the documentation of the
