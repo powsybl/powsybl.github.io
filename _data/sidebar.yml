@@ -57,6 +57,8 @@ menu:
             url: "/docs/sensitivity/"
           - name: "Load flow validation"
             url: "/docs/loadflow/validation.html"
+          - name: "Dynamic simulation"
+            url: "/docs/dynamicsimulation/"
       - name: "Time series"
         url: "/docs/timeseries/"
 
