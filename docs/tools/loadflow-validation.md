@@ -131,7 +131,7 @@ supported types are:
 To learn more about the different checks, read the [loadflow-validation](../loadflow/validation.md) documentation page.
 
 ## Summary
-The following table summarizes the possible combinations of `compare-results`, `run-computation` parameters, and the
+The following table summarizes the possible combinations of `compare-results` and `run-computation` parameters, and the
 corresponding case states validated and written in the output files. Some remarks:
 - State 1 is the state analyzed in the first validation
 - State 2 is the state analyzed in the second validation (columns with the suffix `_postComp` in the output files)
@@ -144,6 +144,7 @@ you have to use the `run-computation` (or `load-flow`) parameter.
 | ------- | ------- | ------- | ------- | ------- |
 | 1 | absent | absent | Case 1 after import | None |
 | 2 | absent | `loadflow`/`loadflowResultsCompletion` | Case 1 after import and computation | None |
+| 3 | `BASECASE` | absent | Case 1 after import | Case 2 after import |
 | 4 | `BASECASE` | `loadflow`/`loadflowResultsCompletion` | Case 1 after import and computation | Case 2 after import |
 | 5 | `COMPUTATION` | `loadflow`/`loadflowResultsCompletion` | Case 1 after import | Case 1 after import and computation |
 
