@@ -76,7 +76,7 @@ This extension is used to configure the participation factor of the generator, t
 
 Here is how to add an active power control extension to a generator:
 ```java
-generator.addExtension(ActivePowerControl.class, new ActivePowerControl(generator, true, 4));
+generator.newExtension(ActivePowerControlBuilder.class).withParticipate(true).withDroop(4).add();
 ```
 
 ## Coordinated reactive control
