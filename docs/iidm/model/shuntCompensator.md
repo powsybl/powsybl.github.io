@@ -32,6 +32,10 @@ Regulation for shunt compensators does not necessarily model automation, it can 
 e.g. an operator activating or deactivating a shunt compensator). However, it can of course be integrated on a power flow
 calculation or not, depending of what is wanted to be shown.
 
+The **Target Deadband** defines the margin withing which the target voltage is considered as respected for discrete regulation i.e. the target voltage is considered as respected
+if the read voltage equals `targetV±(targetDeadband/2)`.
+
+
 # Flow sign convention
 Shunt compensators follow a load sign convention:
 - Flow out from bus has positive sign.
@@ -50,5 +54,9 @@ ShuntCompensator shunt = network.getVoltageLevel("VL").newShunt()
     .setbPerSection(5.0)
     .setCurrentSectionCount(6)
     .setMaximumSectionCount(10)
+    .setTargetV(200)
+    .setTargetDeadband(10)
+    .setRegulatingTerminal(terminal)
+    .setVoltageRegulatorOn(true)
     .add();
 ```

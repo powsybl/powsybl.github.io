@@ -33,6 +33,9 @@ Each step of a phase tap changer has the following attributes:
 # Model
 A phase tap changer is regulating if **Regulating** is set to ```true```.
 
+The **Target Deadband** defines the margin withing which the target voltage is considered as respected for discrete regulation i.e. the target voltage is considered as respected
+if the read voltage equals `targetV±(targetDeadband/2)`.
+
 Remote control can be modeled by setting a distant terminal as the regulation terminal.
 
 Three regulation modes are available:
@@ -51,6 +54,7 @@ twoWindingsTransformer.newPhaseTapChanger()
     .setRegulating(true)
     .setRegulationMode(PhaseTapChanger.RegulationMode.CURRENT_LIMITER)
     .setRegulationValue(25)
+    .setTargetDeadband(10)
     .setRegulationTerminal(twoWindingsTransformer.getTerminal2())
     .beginStep()
         .setAlpha(-10)
