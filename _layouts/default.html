@@ -2,16 +2,15 @@
 layout: base
 ---
 
-<div class="container-fluid content overflow-auto">
-    <div class="d-none d-lg-block mr-3 sidebar">
-        {% include sidebar.html %}
-    </div>
-    <div class="row pt-2">
-        <div class="col text-justify">
-            <p class="title">{{ page.title }}</p>
-            {{ content }}
+<main id="main">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col text-justify">
+                    {{ content }}
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
+</main>
 
-<div class="overlay"></div>
