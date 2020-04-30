@@ -1,16 +1,14 @@
 ---
-layout: project
-title: PowSyBl Core
-repository: powsybl-core
-version: 3.2.0
+layout: default
 ---
 
+# powsybl-core
 PowSyBl Core provides the core features of the framework and a large set of APIs to import/export grid data or run various type of simulations (power flow, security analysis, sensitivity calculation, time domain simulation).
 
 **Reviewers:** [annetill](https://github.com/annetill), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia), [zamarrenolm](https://github.com/zamarrenolm)  
 **Committers:** [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia) 
 
-# Features
+## Features
 
 - A complete and extendable grid data model
 - Support of common exchange format (CGMES, UCTE, IEEE-CDF, PSS/E, Matpower...)
@@ -18,12 +16,12 @@ PowSyBl Core provides the core features of the framework and a large set of APIs
 - A command-line interface to run simulations
 - Some core features (configuration, calculation distribution)
 
-# Getting started
+## Getting started
 
 - [Guide 1](TOTO) - Import and export a case file
 - [Guide 2](TOTO) - Run a load flow computation
 
-# Releases
+## Releases
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |

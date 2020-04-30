@@ -15,15 +15,12 @@
 
 ## Template / Layout 
 
-- _includes/footer.html
-    - Modifier les liens **Home** et **About** pour qu'ils pointent vers des pages utiles
 - _includes/head.html
     - Ajouter les meta informations **keywords** et **description**
 - _includes/navbar.html
-    - Organisation de la barre de menu
     - Améliorer le rendu du menu hamburger
 
-## Index
+## Page d'accueil
 - Remplir la section **Hero**
     - trouver 2 punchlines
     - trouver une image
@@ -42,7 +39,7 @@
     - Recollement / Extraction de réseaux
 - Décrire certains concepts clés
     - Mécanisme d'extension / plugins
-    - Découverte au runtime des providers pour les simulations
+    - Découverte au runtime des providers pour les simulations + tuto
 - Référence exhausive de la configuration
 
 ## Documentation
@@ -65,12 +62,15 @@
 - Ajouter un lien vers GitHub pour télécharger à partir des sources
 
 ## Overview
-- Est-ce ne bon nom de section? Que mettre dans cette section?
-- Architecture
+- Est-ce le bon nom de section? Que mettre dans cette section?
+- Repositories
     - Decrire la liste des repositories + page dédiée par repository
     - Décrire la liste des artefacts
+        - mode catalogue
+        - mode "feature" pour regrouper les artifacts
 - Code of Conduct --> à déplacer dans une section contributing?
 - Contributing --> à déplacer dans une section contributing?
+    - Supprimer l'email de Anne et remplacer par Jane Doe 
 - License --> Ecrire un paragraphe dans une page about?
 - Maintainers --> Indiquer la liste des commiters/reviewers de chaque repository (cd. repositories.md)
 - Roadmap

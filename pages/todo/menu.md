@@ -13,11 +13,11 @@ layout: default
 - Overview (Présentation du projet powsybl, qu'est-ce que c'est ? A quoi ca sert ? A qui est-ce destiné ?)
 - Architecture
     - Présentation des différents repository sous forme de cartes
-        - [powsybl-core](powsybl-core.md)
+        - [powsybl-core](../documentation/developer/repositories/powsybl-core.md)
     - Présentation des différents artifacts ?
 - [Governance](../overview/governance.md)
 - License
-- [Contributing](../overview/contributing.md)
+- [Contributing](../contributing/index.md)
 - Roadmap
 
 # Getting started
