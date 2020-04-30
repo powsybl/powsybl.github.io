@@ -37,4 +37,4 @@ Battery battery = network.getVoltageLevel("VL").newBattery()
 
 ## Active power control
 
-This extension is used for both batteries and generators, see [generators](generator.md).
+This extension is used for both batteries and generators, see [more on generators' documentation page](generator.md#active-power-control).

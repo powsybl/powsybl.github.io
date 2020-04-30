@@ -76,7 +76,7 @@ This extension is used to configure the participation factor of the generator, t
 
 Here is how to add an active power control extension to a generator:
 ```java
-generator.addExtension(ActivePowerControl.class, new ActivePowerControl(generator, true, 4));
+generator.newExtension(ActivePowerControlAdder.class).withParticipate(true).withDroop(4).add();
 ```
 
 ## Coordinated reactive control
@@ -89,5 +89,7 @@ Some generators can be coordinated to control reactive power in a point of the n
 
 Here is how to add a coordinated reactive control extension to a generator:
 ```java
-generator.addExtension(CoordinatedReactiveControl.class, new CoordinatedReactiveControl(generator, 40));
+generator.newExtension(CoordinatedReactiveControlAdder.class).withQPercent(40).add();
 ```
+
+Please note that the sum of the `qPercent` values of the generators coordinating a same point of the network must be 100.
