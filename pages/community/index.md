@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Community
+# Contact
 
 ## Getting and keeping in touch
 
