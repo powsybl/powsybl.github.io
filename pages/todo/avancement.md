@@ -10,7 +10,7 @@ layout: default
     - [ ] Projects
 - [ ] community
     - [ ] events.md
-    - [ ] index.md
+    - [X] index.md
 - [X] contributing
     - [X] code-of-conduct.md
     - [X] index.md
