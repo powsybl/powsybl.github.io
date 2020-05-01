@@ -11,9 +11,9 @@ layout: default
 - [ ] community
     - [ ] events.md
     - [ ] index.md
-- [ ] contributing
-    - [ ] code-of-conduct.md
-    - [ ] index.md
+- [X] contributing
+    - [X] code-of-conduct.md
+    - [X] index.md
 - [ ] documentation
     - [ ] data
         - [ ] afs.md
