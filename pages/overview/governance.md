@@ -34,7 +34,7 @@ The Powsybl project is split into several repositories. There is at least one co
 - Building and publishing the releases, including writing the release notes and informing the community,
 - In case of impossibility, the committer in charge has to ask the TSC through the list <powsybl-tsc@lists.lfenergy.org> to find another committer to review the pull request, resolve the issue or build and publish the release.
 
-Please refer to our [maintainers list](maintainers.md) for more details about our work division.
+Please refer to our [maintainers list](../documentation/developer/repositories/index.md) for more details about our work division.
 
 #### Contributors
 Contributors include anyone in the technical community that contributes code, documentation, or other technical artifacts to the Project.

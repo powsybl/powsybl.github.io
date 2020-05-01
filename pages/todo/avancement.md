@@ -66,7 +66,7 @@ layout: default
 - [ ] download
     - [ ] index.md
 - [ ] overview
-    - [ ] governance.md
+    - [X] governance.md
     - [ ] index.md
     - [ ] license.md
     - [ ] roadmap.md
