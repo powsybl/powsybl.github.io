@@ -6,7 +6,7 @@
 #
 
 title: Power System Blocks
-theme: jekyll-theme-primer
+theme: null
 markdown: kramdown
 
 plugins:
