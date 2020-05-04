@@ -40,19 +40,6 @@ This service can generate a voltage level single line diagram (in SVG) for a giv
 
 This service is used to extract network data from a network store server and reshape the data to feed a UI network map component.
 
-### Network modification server
-
-This is a high level network modification service. It can apply a list of predefined network modifications (switch position, setpoint, tap position, etc) or execute a Groovy script when a more generic and powerful way to modify the network is needed.
-
 ### Loadflow server
 
 The load flow server is able to run a load flow on a network from a network store server and update the state variables.
-
-### Study server
-
-This is the unique entry point for the front end. This service is responsible for study management (creation, opening, removal) and also exposes all operations from other services needed for the front end.
-
-### Study front-end
-
-Study tool front end developped in React.js.
-
