@@ -39,3 +39,39 @@ code.highlighter-rouge {
     background-color: #f8f8f8;
     padding: 3px 5px 3px 5px;
 }
+
+mjx-container {
+    color: #3465a4;
+    background-color: #f8f8f8;
+    padding: 3px 5px 3px 5px;
+}
+
+mjx-container[display="true"] {
+    border: 1px solid #808080;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+/* Tables */
+table {
+    overflow: auto;
+    margin-bottom: 1em;
+}
+
+table th {
+    background-color: #edf0f4;
+}
+
+table th, table td {
+    padding:6px 13px;
+    border:1px solid #dfe2e5
+}
+
+table tr {
+    border-top:1px solid #c6cbd1
+}
+
+table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
