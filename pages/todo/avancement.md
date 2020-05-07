@@ -70,6 +70,6 @@ layout: default
 - [ ] overview
     - [X] governance.md
     - [ ] index.md
-    - [ ] license.md
+    - [X] license.md
     - [ ] roadmap.md
 
