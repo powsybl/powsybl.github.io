@@ -20,13 +20,15 @@ layout: default
         - [ ] timeseries.md
     - [ ] developer
         - [ ] artifacts.md
+        - [ ] itools-packager.md
         - [ ] repositories
             - [ ] index.md
             - [ ] powsybl-core.md
         - [ ] tutorials
             - [ ] index.md
+            - [ ] intellij.md
             - [ ] itools-command.md
-            - [ ] itools-packager.md
+            - [X] itools-packager.md
     - [ ] grid
         - [ ] features
             - [ ] extraction.md
