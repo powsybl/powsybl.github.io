@@ -25,6 +25,8 @@ layout: default
             - [ ] powsybl-core.md
         - [ ] tutorials
             - [ ] index.md
+            - [ ] itools-command.md
+            - [ ] itools-packager.md
     - [ ] grid
         - [ ] features
             - [ ] extraction.md
@@ -60,7 +62,7 @@ layout: default
             - [ ] index.md
         - [ ] index.md
         - [ ] itools
-            - [ ] index.md
+            - [X] index.md
         - [ ] user-stories
             - [ ] index.md
 - [ ] download
