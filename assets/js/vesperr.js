@@ -16,16 +16,6 @@
       if (target.length) {
 
         var scrollto = target.offset().top;
-        var scrolled = 20;
-
-        if ($('#header').length) {
-          scrollto -= $('#header').outerHeight()
-
-          if (!$('#header').hasClass('header-scrolled')) {
-            scrollto += scrolled;
-          }
-        }
-
         if ($(this).attr("href") == '#header') {
           scrollto = 0;
         }
