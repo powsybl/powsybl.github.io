@@ -56,9 +56,8 @@ means an individual or a legal entity exercising rights under this License. For 
 
 ### 2.1. Grants
 Each Contributor hereby grants You a world-wide, royalty-free, non-exclusive license:
-<div id="21a"></div>
-- under intellectual property rights (other than patent or trademark) Licensable by such Contributor to use, reproduce, make available, modify, display, perform, distribute, and otherwise exploit its Contributions, either on an unmodified basis, with Modifications, or as part of a Larger Work; and
-- <span id="21b"></span>under Patent Claims of such Contributor to make, use, sell, offer for sale, have made, import, and otherwise transfer either its Contributions or its Contributor Version.
+- <span class="heading" id="21a"></span>under intellectual property rights (other than patent or trademark) Licensable by such Contributor to use, reproduce, make available, modify, display, perform, distribute, and otherwise exploit its Contributions, either on an unmodified basis, with Modifications, or as part of a Larger Work; and
+- <span class="heading" id="21b"></span>under Patent Claims of such Contributor to make, use, sell, offer for sale, have made, import, and otherwise transfer either its Contributions or its Contributor Version.
 
 ### 2.2. Effective Date
 The licenses granted in Section [2.1](#21-grants) with respect to any Contribution become effective for each Contribution on the date the Contributor first distributes such Contribution.
@@ -150,7 +149,7 @@ If it is not possible or desirable to put the notice in a particular file, then 
 
 You may add additional accurate notices of copyright ownership.
 
-# Exhibit B - “Incompatible With Secondary Licenses” Notice
+## Exhibit B - “Incompatible With Secondary Licenses” Notice
 ```
 This Source Code Form is “Incompatible With Secondary Licenses”,
 as defined by the Mozilla Public License, v. 2.0.
