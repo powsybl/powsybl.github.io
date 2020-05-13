@@ -30,6 +30,10 @@ Each step of a ratio tap changer has the following attributes:
 
 # Model
 A ratio tap changer is regulating if both **Load tap changing capabilities** and **Regulating** are set to ```true```.
+
+The **Target Deadband** defines the margin withing which the target voltage is considered as respected for discrete regulation i.e. the target voltage is considered as respected
+if the read voltage equals `targetV±(targetDeadband/2)`.
+
 Remote control can be modeled by setting a distant terminal as the regulation terminal.
 
 For more information on how ratio tap changers are taken into account in the transformers model, please refer to the [two windings transformers documentation](twoWindingsTransformer.md) and the [three windings transformers one](threeWindingsTransformer.md).
@@ -44,6 +48,7 @@ twoWindingsTransformer.newRatioTapChanger()
     .setLoadTapChangingCapabilities(true)
     .setRegulating(true)
     .setTargetV(25)
+    .setTargetDeaband(5)
     .setRegulationTerminal(twoWindingsTransformer.getTerminal1())
     .beginStep()
         .setRho(0.95)
