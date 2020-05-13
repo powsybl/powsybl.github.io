@@ -228,6 +228,7 @@ Available commands are:
 
 Misc:
     plugins-info                             List the available plugins
+
 ``` 
 
 ## Summary

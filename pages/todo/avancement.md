@@ -3,9 +3,9 @@ layout: default
 ---
 
 - [ ] home
-    - [ ] Hero
+    - [X] Hero
     - [ ] Contributeurs
-    - [ ] About
+    - [X] About
     - [ ] Features
     - [ ] Projects
 - [ ] community
@@ -16,22 +16,29 @@ layout: default
     - [X] index.md
 - [ ] documentation
     - [ ] data
-        - [ ] afs.md
-        - [ ] timeseries.md
+        - [ ] afs.md (**)
+        - [ ] timeseries.md (**)
     - [ ] developer
-        - [ ] artifacts.md
+        - [ ] artifacts.md (**)
         - [ ] itools-packager.md
-        - [ ] repositories
+        - [ ] repositories (*)
             - [ ] index.md
             - [ ] powsybl-core.md
         - [ ] tutorials
+            - [ ] afs.md
+            - [ ] exporter.md
+            - [ ] importer.md
             - [ ] index.md
             - [ ] intellij.md
             - [ ] itools-command.md
             - [X] itools-packager.md
+            - [ ] loadflow
+            - [ ] security-analysis.md
+            - [ ] sensitivity-computation.md
+            - [ ] topology
     - [ ] grid
         - [ ] features
-            - [ ] extraction.md
+            - [ ] extraction.md (*)
             - [ ] merging.md
         - [ ] formats
             - [ ] ampl.md
@@ -40,20 +47,21 @@ layout: default
             - [ ] matpower.md
             - [ ] psse.md
             - [ ] ucte-def.md
-            - [ ] xiidm.md
-        - [ ] model
+            - [ ] xiidm.md (*)
+        - [ ] model (**)
             - [ ] index.md
     - [ ] hpc
         - [ ] index.md
     - [ ] index.html
-    - [ ] microservices
+    - [ ] microservices (*)
         - [ ] index.md
     - [ ] simulation
         - [ ] powerflow
             - [ ] index.md
             - [ ] openlf.md
         - [ ] securityanalysis
-            - [ ] index.md
+            - [ ] index.md  (**)
+            - [ ] actionDSL (**)
         - [ ] sensitivity
             - [ ] index.md
         - [ ] timedomain
@@ -61,17 +69,22 @@ layout: default
             - [ ] index.md
     - [ ] user
         - [ ] configuration
-            - [ ] index.md
+            - [ ] index.md (**)
         - [ ] index.md
         - [ ] itools
+            - [ ] action-simulator.md (*)
             - [X] index.md
+            - [ ] loadflow.md (**)
+            - [ ] security-analysis.md (**)
+            - [ ] convert-network.md (**)
+            - [ ] sensitivity-computation (*)
         - [ ] user-stories
             - [ ] index.md
 - [ ] download
-    - [ ] index.md
+    - [ ] index.md (**)
 - [ ] overview
     - [X] governance.md
-    - [ ] index.md
+    - [ ] index.md (***)
     - [X] license.md
-    - [ ] roadmap.md
+    - [ ] roadmap.md ==> à transférer depuis .github
 
