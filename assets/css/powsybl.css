@@ -100,3 +100,11 @@ table tr:nth-child(2n) {
     margin-top: 0;
     padding-top: 0;
 }
+
+.portfolio .portfolio-wrap {
+    background: rgba(34, 34, 34, 0.8);
+}
+
+.portfolio .portfolio-wrap::before {
+    background: rgba(34, 34, 34, 0.8);
+}
