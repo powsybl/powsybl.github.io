@@ -73,6 +73,7 @@ The `iTools` script relies on a [plugin mechanism](): the commands are discovere
 | Command | Theme | Description |
 | ------- | ----- | ----------- |
 | [loadflow](loadflow.md) | Computation | Run a power flow simulation |
+| [security-analysis](security-analysis.md) | Computation | Run a security analysis simulation |
 
 ## See also
 The following links could also be useful:
