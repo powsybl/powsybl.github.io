@@ -72,7 +72,7 @@ The `iTools` script relies on a [plugin mechanism](): the commands are discovere
 
 | Command | Theme | Description |
 | ------- | ----- | ----------- |
-| a | b | c |  
+| [loadflow](loadflow.md) | Computation | Run a power flow simulation |
 
 ## See also
 The following links could also be useful:
