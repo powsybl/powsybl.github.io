@@ -72,6 +72,7 @@ The `iTools` script relies on a [plugin mechanism](): the commands are discovere
 
 | Command | Theme | Description |
 | ------- | ----- | ----------- |
+| [convert-network](convert-network.md) | Data conversion | Convert a grid file from a format to another |
 | [loadflow](loadflow.md) | Computation | Run a power flow simulation |
 
 ## See also
