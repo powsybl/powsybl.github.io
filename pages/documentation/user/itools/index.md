@@ -77,7 +77,8 @@ The `iTools` script relies on a [plugin mechanism](): the commands are discovere
 | ------- | ----- | ----------- |
 | [convert-network](convert-network.md) | Data conversion | Convert a grid file from a format to another |
 | [loadflow](loadflow.md) | Computation | Run a power flow simulation |
-| [security-analysis](security-analysis.md) | Computation | Run a security analysis simulation |
+| [security-analysis](security-analysis.md) | Computation | Run a security analysis |
+| [sensitivity-computation](sensitivity-computation.md) | Computation | Run a sensitivity analysis |
 
 ## See also
 The following links could also be useful:
