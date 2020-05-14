@@ -10,38 +10,37 @@ The `loadflow` command loads a grid file and run a [power flow](../../simulation
 ```
 $> itools loadflow --help
 usage: itools [OPTIONS] loadflow --case-file <FILE> [-E <property=value>]
-       [--export-parameters <EXPORT_PARAMETERS>] [--help] [-I <property=value>]
-       [--import-parameters <IMPORT_PARAMETERS>] [--output-case-file <FILE>]
-       [--output-case-format <CASEFORMAT>] [--output-file <FILE>]
-       [--output-format <FORMAT>] [--parameters-file <FILE>]
+              [--export-parameters <EXPORT_PARAMETERS>] [--help] [-I <property=value>]
+              [--import-parameters <IMPORT_PARAMETERS>] [--output-case-file <FILE>]
+              [--output-case-format <CASEFORMAT>] [--output-file <FILE>]
+              [--output-format <FORMAT>] [--parameters-file <FILE>]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
 
 Available arguments are:
-    --case-file <FILE>                        the case path
- -E <property=value>                          use value for given exporter
-                                              parameter
-    --export-parameters <EXPORT_PARAMETERS>   the exporter configuration file
-    --help                                    display the help and quit
- -I <property=value>                          use value for given importer
-                                              parameter
-    --import-parameters <IMPORT_PARAMETERS>   the importer configuation file
-    --output-case-file <FILE>                 modified network base name
-    --output-case-format <CASEFORMAT>         modified network output format
-                                              [CGMES, AMPL, UCTE, XIIDM]
-    --output-file <FILE>                      loadflow results output path
-    --output-format <FORMAT>                  loadflow results output format
-                                              [CSV, JSON]
-    --parameters-file <FILE>                  loadflow parameters as JSON file
+    --case-file <FILE>                            the case path
+-E <property=value>                               use value for given exporter
+                                                  parameter
+     --export-parameters <EXPORT_PARAMETERS>      the exporter configuration file
+     --help                                       display the help and quit
+-I <property=value>                               use value for given importer
+                                                  parameter
+     --import-parameters <IMPORT_PARAMETERS>      the importer configuation file
+     --output-case-file <FILE>                    modified network base name
+     --output-case-format <CASEFORMAT>            modified network output format
+                                                  [CGMES, AMPL, XIIDM]
+     --output-file <FILE>                         loadflow results output path
+     --output-format <FORMAT>                     loadflow results output format
+                                                  [CSV, JSON]
+     --parameters-file <FILE>                     loadflow parameters as JSON file
 ```
 
-### Required arguments
+### Required options
 
-**\-\-case-file**  
-This option defines the path of the case file on which the power flow simulation is run. The [supported formats](../../index.html#grid-formats) depend on the execution class path. 
+**\-\-case-file**: This option defines the path of the case file on which the power flow simulation is run. The [supported formats](../../index.html#grid-formats) depend on the execution class path. 
 
-### Optional arguments
+### Optional options
 
 **\-\-export-parameters**  
 This option defines the path of the [exporter](../../glossary.md#exporter)'s configuration file. It's possible to overload one or many parameters using the `-E property=value` syntax. The list of supported properties depends on the [output format](../../index.html#grid-formats).
@@ -96,3 +95,6 @@ loadflow results:
 | true   | {nbIter=4, dureeCalcul=0.001569, cause=0, contraintes=0, statut=OK, csprMarcheForcee=0} |
 +--------+-----------------------------------------------------------------------------------------+
 ```
+
+## See also
+<span style="color: red">TODO</span> 
