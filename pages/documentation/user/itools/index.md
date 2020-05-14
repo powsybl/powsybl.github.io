@@ -24,6 +24,9 @@ Available commands are:
 ...
 ```
 
+**\-\-config-name**  
+Use this option to overload the default base name for the configuration file. It overrides the [powsybl_config_name](#powsybl_config_name) property defined in the `itools.conf` file.
+
 ### Configuration
 The `iTools` script reads its configuration from the `<ITOOLS_PREFIX>/etc/itools.conf` [property file](https://en.wikipedia.org/wiki/.properties). The properties defined in this file are used to configure the Java Virtual Machine.
 
@@ -41,7 +44,7 @@ java_xmx=8G
 
 **powsybl_config_dirs:** This is an optional property that defines the list of the folders where the configuration files are located. If this property is not set, the configuration files are read from `<USER_HOME>/.itools` and `<ITOOLS_PREFIX>/etc` folders. Note that the order of the folder is really import as the PowSyBl configuration is [stackable]().
 
-**powsybl_config_name:** This is an optional property that defines the base name of the configuration files. The default value for this property is `config`.
+<span class="heading" id="powsybl_config_name">**powsybl_config_name:**</span> This is an optional property that defines the base name of the configuration files. The default value for this property is `config`.
 
 **java_xmx:** This is an optional property that defines the maximum size of the memory allocation pool of the JVM. The default value for this property is 8 gigabytes.
 
