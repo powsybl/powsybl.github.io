@@ -42,5 +42,5 @@ $> itools run-script hello.groovy John
 Hello John
 ```
 
-# See also
+## See also
 - [Create a Groovy extension](): Learn how to create a groovy extension to use it with the `run-script` command
