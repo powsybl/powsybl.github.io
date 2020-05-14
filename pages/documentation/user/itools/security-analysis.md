@@ -12,26 +12,29 @@ $> itools security-analysis --help
 usage: itools [OPTIONS] security-analysis --case-file <FILE>
        [--contingencies-file <FILE>] [--external] [--help] [-I <property=value>]
        [--import-parameters <IMPORT_PARAMETERS>] [--limit-types <LIMIT-TYPES>]
-       [--output-file <FILE>] [--output-format <FORMAT>] [--parameters-file
-       <FILE>] [--with-extensions <EXTENSIONS>]
+       [--log-file <FILE>] [--output-file <FILE>] [--output-format <FORMAT>]
+       [--parameters-file <FILE>] [--skip-postproc] [--with-extensions
+       <EXTENSIONS>]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
 
 Available arguments are:
-    --case-file <FILE>                                 the case path
-    --contingencies-file <FILE>                        the contingencies path
-    --external                                         external execution
-    --help                                             display the help and quit
--I <property=value>                                    use value for given
-                                                       importer parameter
-    --import-parameters <IMPORT_PARAMETERS>            the importer configuation
-                                                       file
-    --limit-types <LIMIT-TYPES>                        limit type filter (all if not set)
-    --output-file <FILE>                               the output path
-    --output-format <FORMAT>                           the output format [JSON]
-    --parameters-file <FILE>                           loadflow parameters as JSON file
-    --with-extensions <EXTENSIONS>                     the extension list to enable
+    --case-file <FILE>                        the case path
+    --contingencies-file <FILE>               the contingencies path
+    --external                                external execution
+    --help                                    display the help and quit
+ -I <property=value>                          use value for given importer
+                                              parameter
+    --import-parameters <IMPORT_PARAMETERS>   the importer configuation file
+    --limit-types <LIMIT-TYPES>               limit type filter (all if not set)
+    --log-file <FILE>                         log output path (.zip)
+    --output-file <FILE>                      the output path
+    --output-format <FORMAT>                  the output format [JSON]
+    --parameters-file <FILE>                  loadflow parameters as JSON file
+    --skip-postproc                           skip network importer post
+                                              processors (when configured)
+    --with-extensions <EXTENSIONS>            the extension list to enable
 
 Allowed LIMIT-TYPES values are [CURRENT, LOW_VOLTAGE, HIGH_VOLTAGE,
 LOW_SHORT_CIRCUIT_CURRENT, HIGH_SHORT_CIRCUIT_CURRENT, OTHER]
