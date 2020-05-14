@@ -110,7 +110,8 @@ Pre-contingency violations:
 
 ### Example 2
 The following example shows how to run a security analysis simulation to detect the post-contingency violations status of given network and a set of contingencies.  
-In this example, the contingencies are provided in a groovy script.
+
+**Content of the contingencies.groovy file:**``
 ```
 $> cat contingencies.groovy
 contingency('HV_line_1') {
