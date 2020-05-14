@@ -76,6 +76,7 @@ The `iTools` script relies on a [plugin mechanism](): the commands are discovere
 | Command | Theme | Description |
 | ------- | ----- | ----------- |
 | [loadflow](loadflow.md) | Computation | Run a power flow simulation |
+| [run-script](run-script.md) | Script | Run a script on top of PowSyBl | 
 | [security-analysis](security-analysis.md) | Computation | Run a security analysis |
 | [sensitivity-computation](sensitivity-computation.md) | Computation | Run a sensitivity analysis |
 
