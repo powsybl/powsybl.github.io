@@ -49,7 +49,7 @@ PowSyBl scripts may be written and executed thanks to the dedicated Domain Speci
 code included in the project.
 
 All the features of PowSyBl are exposed as web services, so as to make it easy to build web-based 
-applications on top of the framework. Mored details about the services are given below in the [Microservices](#microservices) section.
+applications on top of the framework. More details about the services are given below in the [Microservices](#microservices) section.
 
 # Projects
 
@@ -58,81 +58,57 @@ applications on top of the framework. Mored details about the services are given
 ## Java libraries
 The PowSyBl project contains of a set of Java libraries that cover all the abovementioned features:
 
-- [PowSyBl core](https://github.com/powsybl/powsybl-core): contains all the grid modelling features, 
-covering all the publicly supported formats
+- [Core](../documentation/developer/repositories/powsybl-core): provides the core features of the PowSyBl framework such as the grid modelling, 
+the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity computation, dynamic simulation, etc.).
 
-- [Open loadflow](https://github.com/powsybl/powsybl-open-loadflow): an open source library for power
+- [Open loadflow](../documentation/developer/repositories/open-loadflow): an open source library for power
 flow simulation
 
-- [PowSyBl Dynawo](https://github.com/powsybl/powsybl-dynawo): an API to run time domain simulations
+- [Dynawo](../documentation/developer/repositories/dynawo): an API to run time domain simulations
 with the open source [Dynawo](https://github.com/dynawo/) software
 
-- [AFS](https://github.com/powsybl/powsybl-afs): a library to handle study files
+- [Application File System](../documentation/developer/repositories/afs): a library to handle study files
 
-- [PowSyBl HPC](https://github.com/powsybl/powsybl-hpc): a library to facilitate high performance computing
+- [High Performance Computing](../documentation/developer/repositories/hpc): a library to facilitate high performance computing
 with PowSyBl
 
-- [Balances adjustments](https://github.com/powsybl/powsybl-balances-adjustment): 
+- [Balances adjustments](../documentation/developer/repositories/balances-adjustment): 
 balances adjustment is a process that consists in acting on 
 specified injections to ensure given balance on specific network areas.
 
-- [PowSyBl IIDM for C++](https://github.com/powsybl/powsybl-iidm4cpp): 
-a C++ implementation of IIDM, to enable C++ developers to use PowSyBl. 
-[PowSyBl math native](https://github.com/powsybl/powsybl-math-native) may be used 
-together with it for C++ matrix inversion.
-
-- [PowSyBl GSE](https://github.com/powsybl/powsybl-gse) ([archived]()): a library to make it easier to 
+- [PowSyBl GSE]() (archived): a library to make it easier to 
 write desktop applications based on PowSyBl. This repository is archived. The Grid Study Environment (GSE) project
 aimed at helping developers to write desktop applications based on PowSyBl, through a JavaFX user interface.
 
 All these repositories also contain the associated DSL when necessary, for a very simple use of PowSyBl through the command line.
 
 ## Microservices
+
 The project also contains a set of microservices that expose PowSyBl's features:
 
-- [Case server](https://github.com/powsybl/powsybl-case): handles raw network data storage.
-It relies on a file system to store the data and makes it possible to upload 
-and fetch networks in any format supported by PowSyBl (CGMES, UCTE, XIIDM, etc).
+- [Case server](../documentation/developer/repositories/case): handles raw network data storage.
 
-- [Network store server](https://github.com/powsybl/powsybl-network-store): provides a persistent IIDM implementation.
-Almost all the features developed in PowSyBl rely on the IIDM API for accessing network data. 
-The idea of this service is to re-implement the IIDM API for a better integration in a 
-typical microservice architecture. Instead of an in-memory implementation like in the 
-PowSyBl core repository, this implementation is backed by a Cassandra database. 
-The network model is stored in the database in a structured way 
-(one table per equipment type and with indexes), so that we can query only the needed 
-data and ensure good performance for common operations. Examples of common operations 
-are a simple switch position change (only a few values), 
-a single line diagram rendering (substation wide data) or a loadflow run (network wide data). 
-The REST interface exposed by this service is very low-level for performance reasons. 
-In particular, the write operations do not prevent inconsistent modifications. 
-Therefore, network data should usually be accessed from this service using the provided 
-Java client (the one which implements the IIDM API) and not directly from the REST 
-interface because the Java client is safe and prevents inconsistent modifications.
+- [Network store server](../documentation/developer/repositories/network-store): provides a persistent IIDM implementation, exposed as a web service.
 
-- [Geographical data server](https://github.com/powsybl/powsybl-geo-data): handles equipments locations.
-Substations and line paths positions can be stored and queried using this geographical data server. 
-A Cassandra database is used to store the data. 
-Data can be indexed by countries and nominal voltages. 
-This service is typically used to display a network on a map. 
-This service abstracts away the different sources of geographical data.
+- [Geographical data server](../documentation/developer/repositories/geo-data): handles equipments locations.
 
-- [Network conversion server](https://github.com/powsybl/powsybl-network-conversion-server): 
+- [Network conversion server](../documentation/developer/repositories/network-conversion-server): 
 this service can convert a network stored in a case server to an IIDM network 
 stored in the network store server.
 
-- [CGMES geographical data import server](https://github.com/powsybl/powsybl-cgmes-gl): CGMES geographical data import server.
-The CGMES-GL profile contains substations and lines geographical positions. 
-This service can take a CGMES network containing a Geographical Layout profile from a case server 
+- [CGMES geographical data import server](../documentation/developer/repositories/cgmes-gl): 
+this service can take a CGMES network containing a Geographical Layout profile from a case server 
 and upload its content to the geographical data server.
 
-- [Single line diagram server](https://github.com/powsybl/powsybl-single-line-diagram-server): 
+- [Single line diagram server](../documentation/developer/repositories/single-line-diagram-server): 
 this service can generate a voltage level single line diagram (in SVG format) for a 
 given voltage level in an IIDM network, from a network store server.
 
-- [Network map server](https://github.com/powsybl/powsybl-network-map-server):
+- [Network map server](../documentation/developer/repositories/network-map-server):
 this service is used to extract network data from a network store server 
 and reshape it to feed a UI network map component.
+
+![GridSuite screenshot](./img/gridsuite.png){: width="50%" .center-image}
 
 <!--
 Loadflow Server
@@ -153,6 +129,12 @@ This is the unique entry point for the front end. This service is responsible fo
 Study tool front end developped in React.js.
 
 </li-->
+
+## C++ libraries
+
+- [IIDM for C++](): a C++ implementation of IIDM, to enable C++ developers to use PowSyBl. 
+
+- [Math native](): a C++ library for sparse matrices. Used in open loadflow for example.
 
 ## Tutorials
 PowSyBl provides a repository containing all the necessary code to go through its tutorials: 
