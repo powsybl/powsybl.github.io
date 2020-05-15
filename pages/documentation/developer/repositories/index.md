@@ -13,13 +13,13 @@ This [repository](https://github.com/powsybl/powsybl.github.io) contains the sou
 **Committers:** all the [committers](../../../overview/governance.md#members)
 
 ## powsybl-afs [![v3.2.0](https://img.shields.io/badge/-v3.2.0-blue.svg)](https://github.com/powsybl/powsybl-afs/releases/tag/v3.2.0)
-This [repository](https://github.com/powsybl/powsybl-afs) provides a standardize way to organize the data for a power system study, called AFS (**A**pplication **F**ile **S**ystem). It supports several storage system such as [MapDB](http://www.mapdb.org) or [Apache Cassandra](https://cassandra.apache.org). It is designed to be extensible using custom plugins to manage new types of data.
+This [repository](https://github.com/powsybl/powsybl-afs) provides a standardized way to organize the data for a power system study, called AFS (**A**pplication **F**ile **S**ystem). It supports several storage system such as [MapDB](http://www.mapdb.org) or [Apache Cassandra](https://cassandra.apache.org). It is designed to be extensible using custom plugins to manage new types of data.
 
 **Reviewers:** [pl-buiquang](https://github.com/pl-buiquang), [geofjamg](https://github.com/geofjamg)
 **Committers:** [pl-buiquang](https://github.com/pl-buiquang), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
 
 ## powsybl-balances-adjustment [![v1.0.0](https://img.shields.io/badge/-v1.0.0-blue.svg)](https://github.com/powsybl/powsybl-balances-adjustment/releases/tag/v1.0.0)
-This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provides a functional module to reach target net positions, through an iterative process based on power flow computations and injections scaling.
+This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provides a functional module to reach target net positions across networks, through an iterative process based on power flow computations and injections scaling.
 
 **Reviewers:** [murgeyseb](https://github.com/murgeyseb)
 **Committers:** [murgeyseb](https://github.com/murgeyseb)
@@ -36,7 +36,7 @@ This [repository](https://github.com/powsybl/powsybl-cgmes-gl) provides modules 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
-## powsybl-core [![v3.2.0](https://img.shields.io/badge/-v3.2.0-blue.svg)](https://github.com/powsybl/powsybl-core/releases/tag/v3.2.0)
+## [powsybl-core](./powsybl-core) [![v3.2.0](https://img.shields.io/badge/-v3.2.0-blue.svg)](https://github.com/powsybl/powsybl-core/releases/tag/v3.2.0)
 This [repository](https://github.com/powsybl/powsybl-core) provides the core feature of the PowSyBl framework such as the grid modelling, the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity computation, dynamic simulation...).
 
 **Reviewers:** [annetill](https://github.com/annetill), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia), [zamarrenolm](https://github.com/zamarrenolm)

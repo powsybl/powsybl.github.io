@@ -1,7 +1,3 @@
----
-layout: default
----
-
 # powsybl-core
 PowSyBl Core provides the core features of the framework and a large set of APIs to import/export grid data or run various type of simulations (power flow, security analysis, sensitivity calculation, time domain simulation).
 
