@@ -23,17 +23,10 @@ It enables developers to extend or customize its features by providing their own
 Check the [Getting started](../documentation/user) and [Configuration](../documentation/user/configuration) pages to learn how to install and configure PowSyBl.
 
 # Features
-PowSyBl provides a complete internal grid model with:
+PowSyBl provides a complete internal grid model with substations, voltage levels, AC and DC lines, two and three windings transformers, batteries,
+generators, loads, shunt and static VAR compensators, etc. 
 
-- substations
-- voltage levels
-- AC and DC lines
-- two and three windings transformers
-- batteries
-- generators
-- loads
-- shunt and static VAR compensators
-- etc. 
+![Node breaker topology](./img/nodeBreakerTopology.svg){: width="50%" .center-image}
 
 For security analyses, it offers the possibility to define contingencies on the network.
 The grid model can also be enhanced with extensions that complete the equipments modeling 
@@ -59,6 +52,9 @@ All the features of PowSyBl are exposed as web services, so as to make it easy t
 applications on top of the framework. Mored details about the services are given below in the [Microservices](#microservices) section.
 
 # Projects
+
+![GitHub logo](./img/github-logo.png){: width="30%" .center-image}
+
 ## Java libraries
 The PowSyBl project contains of a set of Java libraries that cover all the abovementioned features:
 

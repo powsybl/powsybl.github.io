@@ -108,3 +108,8 @@ table tr:nth-child(2n) {
 .portfolio .portfolio-wrap::before {
     background: rgba(34, 34, 34, 0.8);
 }
+
+.center-image {
+    margin: 0 auto;
+    display: block;
+}
