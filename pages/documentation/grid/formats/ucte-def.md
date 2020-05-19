@@ -47,7 +47,72 @@ The import of a UCTE file into an IIDM grid model is done in three steps. First,
 The UCTE parser provided by PowSyBl does not support the blocks `##TT` and `##E` providing respectively a special description of the two windings transformers and the scheduled active power exchange between countries. Those blocks are ignored during the parsing step.
 
 ### Inconsistency checks
-**TODO:** détailler les checks réaliser et les corrections automatiques.
+
+Once the UCTE grid model is created in memory, a consistency check is performed on the different elements (nodes, lines, two windings transformers and regulations).
+
+In the tables below, we summarize the inconsistency checks performed on the network for each type of equipment.
+For the sake of clarity we use notations that are made explicit before each table.
+
+#### Nodes with active or reactive power generation
+
+Notations:
+- \\(P\\): active power generation, in MW
+- \\(Q\\): reactive power generation, in MVar
+- \\(minP\\): minimum permissible active power generation, in MW
+- \\(maxP\\): maximum permissible active power generation, in MW
+- \\(minQ\\): minimum permissible reactive power generation, in MVar
+- \\(maxQ\\): maximum permissible reactive power generation, in MVar
+- \\(Vreg\\): voltage regulation, which can be enabled or disabled
+- \\(Vref\\): voltage reference, in V
+
+| Check | Consequence |
+| :-------------------: | :----------------: |
+| \\(Vreg\\) enabled and \\(Q\\) undefined | \\(Q = 0\\) |
+| \\(P\\) undefined | \\(P = 0\\) |
+| \\(Q\\) undefined | \\(Q = 0\\)|
+| \\(Vreg\\) enabled and \\(Vref\\) undefined or \\(\in [0, 0.0001[\\) | Node type = PQ |
+| \\(minP\\) undefined | \\(minP = -9999\\) |
+| \\(maxP\\) undefined | \\(maxP = 9999\\) |
+| \\(minQ\\) undefined | \\(minQ = -9999\\) |
+| \\(maxQ\\) undefined | \\(maxQ = 9999\\) |
+| \\(minP > maxP\\) | \\(minP\\) switched with \\(maxP\\) |
+| \\(minQ > maxQ\\) | \\(minQ\\) switched with \\(maxQ\\) |
+| \\(P > maxP\\) | \\(maxP = P\\) |
+| \\(P < minP\\) | \\(minP = P\\) |
+| \\(Q > maxQ\\) | \\(maxQ = Q\\) |
+| \\(Q < minQ\\) | \\(minQ = Q\\) |
+| \\(minP = maxP\\) | \\(maxP = 9999\\) and \\(minP = -9999\\) |
+| \\(minQ = maxQ\\) | \\(maxQ = 9999\\) and \\(minQ = -9999\\) |
+| \\(maxP > 9999\\) | \\(maxP = 9999\\) |
+| \\(minP < -9999\\) | \\(minP = -9999\\) |
+| \\(maxQ > 9999\\) | \\(maxQ = 9999\\) |
+| \\(minQ < -9999\\) | \\(minQ = -9999\\) |
+
+#### Lines or two-windings transformers:
+
+Notations:
+- \\(X\\): reactance in \\(\Omega\\)
+
+| Check | Consequence |
+| :-------------------: | :----------------: |
+| \\(X \in [-0.05, 0.05]\\) | \\(X = \pm 0.05\\) | 
+| Current limit \\(<0\\) | Current limit value ignored |
+
+#### Regulations
+
+##### Phase regulation
+
+| Check | Consequence |
+| :-------------------: | :----------------: |
+| Voltage value \\(<=0\\) | Voltage value set to NaN |
+| Invalid (\\(n = 0\\) or undefined (\\(n\\), \\(n'\\) or \\(\delta U\\)) data provided | Regulation ignored |
+
+##### Angle regulation
+
+| Check | Consequence |
+| :-------------------: | :----------------: |
+| Invalid (\\(n = 0\\) or undefined (\\(n\\), \\(n'\\) or \\(\delta U\\)) data provided | Regulation ignored |
+| Undefined type | type set to 'ASYM' |
 
 ### From UCTE to IIDM
 The UCTE file name is parsed to extract metadata required to initialize the IIDM network, such as its ID, the case date and the forecast distance.  
@@ -136,66 +201,4 @@ $$
 - post-processor?
 
 ## Export
-
-
-## Import
-The conversion of a UCTE file into an IIDM grid model is done in two steps. The first step consist to parse the file to create a UCTE grid model and to fix the inconsistencies. Then, the UCTE grid model is converted to an IIDM grid model. 
-
-
-
-### Inconsistency 
-
-
-### Parsing
-
-The UCTE reader provided by PowSyBl supports all the blocks except the `##TT` and the `##E` blocks that are optional blocks providing respectively 
-
-#### Consistency checks
-Once the UCTE grid model is created in memory, a consistency check is performed on the different elements (nodes, lines, two windings transformers and regulations).
-
-##### Nodes
-The following inconsistency checks are done for nodes with active or reactive power generation:
-- if the voltage regulation is enabled and the reactive power generation is undefined, the reactive power generation is set to `0`.
-- if the active power generation (resp. reactive) is undefined, it's set to `0`.
-- if the voltage regulation is enabled and the voltage reference is undefined or closed to zero (e.g. lesser than `0.0001`), the node's type is set to `PQ`
-- if the minimum active power generation (resp. reactive) is undefined, it's set to `9999`
-- if the maximum active power generation (resp. reactive) is undefined, it's set to `-9999`
-- if the minimum and maximum permissible active power generation (resp. reactive) are inverted, the values are swapped
-- if the active power generation is lesser than the maximum permissible active power generation , the maximum permissible active power generation is set to the active power generation.
-- if the active power generation is greater than the minimum permissible active power generation, the minimum permissible active power generation is set to the active power generation.
-- if the minimum permissible active power generation, the maximum permissible active power generation and the active power generation are equal to `0`, the maximum permissible active power generation is set to `-9999` and the minimum permissible active power generation is set to `9999`
-- if the minimum permissible reactive power generation is greater that `9999`, it's capped at `9999`
-- if the maximum permissible reactive power generation is lesser that `-9999`, it's capped at `-9999`
-- if the reactive power generation is lesser than the maximum permissible reactive power generation , the maximum permissible reactive power generation is set to the reactive power generation.
-- if the reactive power generation is greater than the minimum permissible reactive power generation, the minimum permissible reactive power generation is set to the reactive power generation.
-- if the minimum permissible reactive power generation is equal to the maximum permissible reactive power generation, the maximum permissible reactive power generation is set to `-9999` and the minimum permissible reactive power generation is set to `9999`
-
-##### Lines and Two windings transformers
-The following inconsistency checks are done for lines and two windings transformers:
-- if the reactance is too small (e.g. in `[-0.05, 0.05]`), the reactance is capped at `0.05` or `-0.05`
-- if the current limit is negative, the value is ignored
-
-##### Regulations
-The following inconsistency checks are done for a phase regulation:
-- if the voltage value of a phase regulation is negative or equal to `0`, it's set to `NaN`.
-- if the some information of a phase regulation is invalid (`n` is equal to `0`) or undefined (`n`, `n'` or `δU`), the phase regulation is ignored.
-
-The following inconsistency checks are done for an angle regulation:
-- if the some information of an angle regulation is invalid (`n` is equal to `0`) or undefined (`n`, `n'` or `δU`), the angle regulation is ignored.
-- if the type of an angle regulation is undefined, it's set to `ASYM`
-
-### Grid model conversion
-The converter uses the filename to retrieve the metadata of the IIDM network (ID, type, case date and forecast distance).
-
-#### Node conversion
-The UCTE grid is described in a Bus/Branch topology. The concept of substations doesn't exist, so we regroup the nodes:
-- with the same geographical spot
-- connected by a two windings transformer
-- connected by a coupler or a low impedance line
-
-in the same substation. The name of the substation will be set to six first characters of the main node. The main node of a substation is the node with the higher voltage level that is not an X-node.
-
-
-
-The nodes of a substation with the same voltage level are also regroup into a unique `VoltageLevel` object. All the `VoltageLevel` objects are created using a Bus/Breaker topology. 
 
