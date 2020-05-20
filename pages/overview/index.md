@@ -23,33 +23,38 @@ It enables developers to extend or customize its features by providing their own
 Check the [Getting started](../documentation/user) and [Configuration](../documentation/user/configuration) pages to learn how to install and configure PowSyBl.
 
 # Features
-PowSyBl provides a complete internal grid model with substations, voltage levels, AC and DC lines, two and three windings transformers, batteries,
+PowSyBl provides a complete [internal grid model](../documentation/grid/formats/xiidm.md) 
+with substations, voltage levels, AC and DC lines, two and three windings transformers, batteries,
 generators, loads, shunt and static VAR compensators, etc. 
 
 ![Node breaker topology](./img/nodeBreakerTopology.svg){: width="50%" .center-image}
 
-For security analyses, it offers the possibility to define contingencies on the network.
-The grid model can also be enhanced with extensions that complete the equipments modeling 
+For [security analyses](../documentation/simulation/securityanalysis/index.md), it offers the possibility to define contingencies on the network.
+The grid model can also be enhanced with [extensions]() that complete the equipments modeling 
 (dynamic profile, short-circuit profile, monitoring, etc.). 
 
-PowSyBl also provides importers and exporters for several common pan-european exchange 
-formats (Entso-E CIM/CGMES, UCTE-DEF, etc.).
+PowSyBl also provides [importers and exporters](../documentation/index.html#grid-formats) 
+for several common pan-european exchange formats (Entso-E CIM/CGMES, UCTE-DEF, etc.).
 
 
 PowSyBl as a library provides several APIs for power systems’ simulation and analysis 
-(power flow computation, security analysis, remedial action simulation, 
-short circuit computation, sensitivity analysis, time domain simulation, etc.). 
+([power flow computation](../documentation/simulation/powerflow/index.md), 
+[security analysis](../documentation/simulation/securityanalysis/index.md), 
+[remedial action simulation](), 
+[short circuit computation](), [sensitivity analysis](../documentation/simulation/sensitivity/index.md),
+[time domain simulation](../documentation/simulation/timedomain/index.md), etc.). 
 These simulations can run either on a personal computer or on a server, but they can 
 also run on a supercomputer like in the iTesla project with the Curie supercomputer. 
 The separation of the simulation API and the implementations allows developers to 
 provide their own implementations if necessary, which makes the framework very flexible.
 
-PowSyBl is also available as a command line tool, for quick shot modelling and/or simulation.
-PowSyBl scripts may be written and executed thanks to the dedicated Domain Specific Language
+PowSyBl is also available as a [command line tool](../documentation/user/itools/index.md), 
+for quick shot modelling and/or simulation.
+PowSyBl scripts may be written and executed thanks to the [dedicated Domain Specific Language]()
 code included in the project.
 
-All the features of PowSyBl are exposed as web services, so as to make it easy to build web-based 
-applications on top of the framework. More details about the services are given below in the [Microservices](#microservices) section.
+All the features of PowSyBl are exposed as [web services](../documentation/index.html#microservices), so as to make it easy to build web-based 
+applications on top of the framework.
 
 # Projects
 
@@ -58,21 +63,21 @@ applications on top of the framework. More details about the services are given 
 ## Java libraries
 The PowSyBl project contains of a set of Java libraries that cover all the abovementioned features:
 
-- [Core](../documentation/developer/repositories/powsybl-core): provides the core features of the PowSyBl framework such as the grid modelling, 
+- [Core](../documentation/developer/repositories/powsybl-core.md): provides the core features of the PowSyBl framework such as the grid modelling, 
 the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity computation, dynamic simulation, etc.).
 
-- [Open loadflow](../documentation/developer/repositories/open-loadflow): an open source library for power
+- [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power
 flow simulation
 
-- [Dynawo](../documentation/developer/repositories/dynawo): an API to run time domain simulations
+- [Dynawo](../documentation/developer/repositories/powsybl-dynawo.md): an API to run time domain simulations
 with the open source [Dynawo](https://github.com/dynawo/) software
 
-- [Application File System](../documentation/developer/repositories/afs): a library to handle study files
+- [Application File System](../documentation/developer/repositories/powsybl-afs.md): a library to handle study files
 
-- [High Performance Computing](../documentation/developer/repositories/hpc): a library to facilitate high performance computing
+- [High Performance Computing](../documentation/developer/repositories/powsybl-hpc.md): a library to facilitate high performance computing
 with PowSyBl
 
-- [Balances adjustments](../documentation/developer/repositories/balances-adjustment): 
+- [Balances adjustments](../documentation/developer/repositories/powsybl-balances-adjustment.md): 
 balances adjustment is a process that consists in acting on 
 specified injections to ensure given balance on specific network areas.
 
@@ -86,25 +91,25 @@ All these repositories also contain the associated DSL when necessary, for a ver
 
 The project also contains a set of microservices that expose PowSyBl's features:
 
-- [Case server](../documentation/developer/repositories/case): handles raw network data storage.
+- [Case server](../documentation/developer/repositories/powsybl-case.md): handles raw network data storage.
 
-- [Network store server](../documentation/developer/repositories/network-store): provides a persistent IIDM implementation, exposed as a web service.
+- [Network store server](../documentation/developer/repositories/powsybl-network-store.md): provides a persistent IIDM implementation, exposed as a web service.
 
-- [Geographical data server](../documentation/developer/repositories/geo-data): handles equipments locations.
+- [Geographical data server](../documentation/developer/repositories/powsybl-geo-data.md): handles equipments locations.
 
-- [Network conversion server](../documentation/developer/repositories/network-conversion-server): 
+- [Network conversion server](../documentation/developer/repositories/powsybl-network-conversion-server.md): 
 this service can convert a network stored in a case server to an IIDM network 
 stored in the network store server.
 
-- [CGMES geographical data import server](../documentation/developer/repositories/cgmes-gl): 
+- [CGMES geographical data import server](../documentation/developer/repositories/powsybl-cgmes-gl.md): 
 this service can take a CGMES network containing a Geographical Layout profile from a case server 
 and upload its content to the geographical data server.
 
-- [Single line diagram server](../documentation/developer/repositories/single-line-diagram-server): 
+- [Single line diagram server](../documentation/developer/repositories/powsybl-single-line-diagram-server.md): 
 this service can generate a voltage level single line diagram (in SVG format) for a 
 given voltage level in an IIDM network, from a network store server.
 
-- [Network map server](../documentation/developer/repositories/network-map-server):
+- [Network map server](../documentation/developer/repositories/powsybl-network-map-server.md):
 this service is used to extract network data from a network store server 
 and reshape it to feed a UI network map component.
 
@@ -132,9 +137,9 @@ Study tool front end developped in React.js.
 
 ## C++ libraries
 
-- [IIDM for C++](../documentation/developer/repositories/iidm4cpp): a C++ implementation of IIDM, to enable C++ developers to use PowSyBl. 
+- [IIDM for C++](../documentation/developer/repositories/powsybl-iidm4cpp.md): a C++ implementation of IIDM, to enable C++ developers to use PowSyBl. 
 
-- [Math native](../documentation/developer/repositories/math-native): a C++ library for sparse matrices. Used in open loadflow for example.
+- [Math native](../documentation/developer/repositories/powsybl-math-native.md): a C++ library for sparse matrices. Used in open loadflow for example.
 
 ## Tutorials
 PowSyBl provides a repository containing all the necessary code to go through its tutorials: 
