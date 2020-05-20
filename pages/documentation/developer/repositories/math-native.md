@@ -3,7 +3,7 @@ This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++
 [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) project. 
 These 64-bits libraries for Linux, Windows and MacOS are packaged as a Jar file and published on maven central.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)<br/>
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)  
 **Committers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)
 
 ## Features
@@ -12,7 +12,7 @@ These 64-bits libraries for Linux, Windows and MacOS are packaged as a Jar file 
 
 ## Getting started
 
-- [Guide 1](TOTO) - [TODO]()
+- [Guide 1]() - [TODO]()
 
 ## Releases
 

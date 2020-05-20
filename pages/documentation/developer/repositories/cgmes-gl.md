@@ -4,7 +4,7 @@ The CGMES-GL profile contains substations and lines geographical positions.
 This service can take a CGMES network containing a Geographical Layout profile from a case server 
 and upload its content to the geographical data server.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)<br/>
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ## Features
@@ -13,7 +13,7 @@ and upload its content to the geographical data server.
 
 ## Getting started
 
-- [Guide 1](TOTO) - [TODO]()
+- [Guide 1]() - [TODO]()
 
 ## Releases
 

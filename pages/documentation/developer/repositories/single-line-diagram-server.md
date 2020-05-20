@@ -2,7 +2,7 @@
 The service provided in this [repository](https://github.com/powsybl/powsybl-single-line-diagram-server) can generate a voltage level single line diagram (in SVG format) for a 
 given voltage level in an IIDM network, from a network store server.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)<br/>
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ## Features
@@ -11,7 +11,7 @@ given voltage level in an IIDM network, from a network store server.
 
 ## Getting started
 
-- [Guide 1](TOTO) - [TODO]()
+- [Guide 1]() - [TODO]()
 
 ## Releases
 
