@@ -4,7 +4,7 @@ layout: default
 
 # Contributing
 
-## Lincese and Developer Certificate of Origin
+## License and Developer Certificate of Origin
 PowSyBl is an open source framework licensed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/). By contributing to PowSyBl, you accept and agree to the terms and conditions for your present and future contributions submitted to PowSyBl.
 
 The project also uses a mechansim known as a [Developer Certificate of Origin (DCO)](https://developercertificate.org/) to manage the process of ensuring that we are legally allowed to distribute all the code and assets for the project. A DCO is a legally binding statement that asserts that you are the creator of your contribution, and that you wish to allow PowSyBl to use your work.
@@ -50,7 +50,7 @@ You can also track your proposal by filling an issue in the appropriate [GitHub 
 
 Please give us as much details as you can on your needs or use cases filling the issue template to help the development team to fulfill your needs.
 
-## Contribute to the code or the documentation
+## Contributing to the code or the documentation
 Before contributing to the project, be sure that you have read and understood the [code of conduct](code-of-conduct.md) and the [license and the Developer Certificate of Origin](#license-and-developer-certificate-of-origin) paragraph. Before you start coding, you have to agree with the [maintainers](../documentation/developer/repositories/index.md) about the technical solution you will implement, to be sure is will be align with the project guidelines. If you are not part of the development team, you have to fork the Github project to start, otherwise you can clone the project.
 
 Once the development is done, you have to create a [pull request](https://help.github.com/en/articles/about-pull-requests):
