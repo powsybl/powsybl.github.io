@@ -15,7 +15,7 @@ Therefore, network data should usually be accessed from this service using the p
 Java client (the one which implements the IIDM API) and not directly from the REST 
 interface because the Java client is safe and prevents inconsistent modifications.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)<br/>
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ## Features
@@ -24,7 +24,7 @@ interface because the Java client is safe and prevents inconsistent modification
 
 ## Getting started
 
-- [Guide 1](TOTO) - [TODO]()
+- [Guide 1]() - [TODO]()
 
 ## Releases
 

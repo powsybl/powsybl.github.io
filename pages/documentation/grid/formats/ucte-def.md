@@ -105,14 +105,14 @@ Notations:
 | Check | Consequence |
 | :-------------------: | :----------------: |
 | Voltage value \\(<=0\\) | Voltage value set to NaN |
-| Invalid (\\(n = 0\\) or undefined (\\(n\\), \\(n'\\) or \\(\delta U\\)) data provided | Regulation ignored |
+| Invalid (\\(n = 0\\)) or undefined (\\(n\\), \\(n'\\) or \\(\delta U\\)) data provided | Regulation ignored |
 
 ##### Angle regulation
 
 | Check | Consequence |
 | :-------------------: | :----------------: |
-| Invalid (\\(n = 0\\) or undefined (\\(n\\), \\(n'\\) or \\(\delta U\\)) data provided | Regulation ignored |
-| Undefined type | type set to 'ASYM' |
+| Invalid (\\(n = 0\\)) or undefined (\\(n\\), \\(n'\\) or \\(\delta U\\)) data provided | Regulation ignored |
+| Undefined type | type set to `ASYM` |
 
 ### From UCTE to IIDM
 The UCTE file name is parsed to extract metadata required to initialize the IIDM network, such as its ID, the case date and the forecast distance.  

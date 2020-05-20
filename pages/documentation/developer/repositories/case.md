@@ -3,7 +3,7 @@ The PowSyBl Case Server [repository](https://github.com/powsybl/powsybl-case) ha
 It relies on a file system to store the data and makes it possible to upload 
 and fetch networks in any format supported by PowSyBl (CGMES, UCTE, XIIDM, etc).
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)<br/>
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ## Features
@@ -12,7 +12,7 @@ and fetch networks in any format supported by PowSyBl (CGMES, UCTE, XIIDM, etc).
 
 ## Getting started
 
-- [Guide 1](TOTO) - [TODO]()
+- [Guide 1]() - [TODO]()
 
 ## Releases
 

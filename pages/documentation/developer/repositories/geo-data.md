@@ -6,7 +6,7 @@ Data can be indexed by countries and nominal voltages.
 This service is typically used to display a network on a map. 
 This service abstracts away the different sources of geographical data.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)<br/>
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ## Features
@@ -15,7 +15,7 @@ This service abstracts away the different sources of geographical data.
 
 ## Getting started
 
-- [Guide 1](TOTO) - [TODO]()
+- [Guide 1]() - [TODO]()
 
 ## Releases
 

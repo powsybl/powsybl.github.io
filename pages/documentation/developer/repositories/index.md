@@ -12,49 +12,49 @@ This [repository](https://github.com/powsybl/powsybl.github.io) contains the sou
 
 **Committers:** all the [committers](../../../overview/governance.md#members)
 
-## [powsybl-afs](./afs) [![v3.2.0](https://img.shields.io/badge/-v3.2.0-blue.svg)](https://github.com/powsybl/powsybl-afs/releases/tag/v3.2.0)
+## [powsybl-afs](afs.md) [![v3.2.0](https://img.shields.io/badge/-v3.2.0-blue.svg)](https://github.com/powsybl/powsybl-afs/releases/tag/v3.2.0)
 This [repository](https://github.com/powsybl/powsybl-afs) provides a standardized way to organize the data for a power system study, called AFS (**A**pplication **F**ile **S**ystem). It supports several storage system such as [MapDB](http://www.mapdb.org) or [Apache Cassandra](https://cassandra.apache.org). It is designed to be extensible using custom plugins to manage new types of data.
 
 **Reviewers:** [pl-buiquang](https://github.com/pl-buiquang), [geofjamg](https://github.com/geofjamg)
 **Committers:** [pl-buiquang](https://github.com/pl-buiquang), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
 
-## [powsybl-balances-adjustment](./balances-adjustment) [![v1.0.0](https://img.shields.io/badge/-v1.0.0-blue.svg)](https://github.com/powsybl/powsybl-balances-adjustment/releases/tag/v1.0.0)
+## [powsybl-balances-adjustment](balances-adjustment.md) [![v1.0.0](https://img.shields.io/badge/-v1.0.0-blue.svg)](https://github.com/powsybl/powsybl-balances-adjustment/releases/tag/v1.0.0)
 This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provides a functional module to reach target net positions across networks, through an iterative process based on power flow computations and injections scaling.
 
 **Reviewers:** [murgeyseb](https://github.com/murgeyseb)
 **Committers:** [murgeyseb](https://github.com/murgeyseb)
 
-## [powsybl-case](./case)
+## [powsybl-case](case.md)
 This [repository](https://github.com/powsybl/powsybl-case) provides a web service for network cases management.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
-## [powsybl-cgmes-gl](./cgmes-dl)
+## [powsybl-cgmes-gl](cgmes-dl.md)
 This [repository](https://github.com/powsybl/powsybl-cgmes-gl) provides modules to support the [CGMES](https://www.entsoe.eu/digital/common-information-model/cim-for-grid-models-exchange/) Geographical Location Profile  as well as a web service.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
-## [powsybl-core](./powsybl-core) [![v3.2.0](https://img.shields.io/badge/-v3.2.0-blue.svg)](https://github.com/powsybl/powsybl-core/releases/tag/v3.2.0)
+## [powsybl-core](powsybl-core.md) [![v3.2.0](https://img.shields.io/badge/-v3.2.0-blue.svg)](https://github.com/powsybl/powsybl-core/releases/tag/v3.2.0)
 This [repository](https://github.com/powsybl/powsybl-core) provides the core feature of the PowSyBl framework such as the grid modelling, the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity computation, dynamic simulation...).
 
 **Reviewers:** [annetill](https://github.com/annetill), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia), [zamarrenolm](https://github.com/zamarrenolm)
 **Committers:** [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
 
-## [powsybl-dynawo](./dynawo)
+## [powsybl-dynawo](dynawo.md)
 This [repository](https://github.com/powsybl/powsybl-dynawo) provides an implementation of the dynamic simulation API for the [Dyna&omega;o](https://dynawo.github.io/) time domain simulation tool.
 
 **Reviewers:** [agnesLeroy](https://github.com/agnesLeroy), [mathbagu](https://github.com/mathbagu), [zamarrenolm](https://github.com/zamarrenolm)
 **Committers** [mathbagu](https://github.com/mathbagu)
 
-## [powsybl-geo-data](./geo-data)
+## [powsybl-geo-data](geo-data.md)
 This [repository](https://github.com/powsybl/powsybl-geo-data) provides modules to manage geographical data such as substation or lines location as well as a web service.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
-## [powsybl-hpc](./hpc) [![v2.10.1](https://img.shields.io/badge/-v2.10.1-blue.svg)](https://github.com/powsybl/powsybl-hpc/releases/tag/v2.10.1)
+## [powsybl-hpc](hpc.md) [![v2.10.1](https://img.shields.io/badge/-v2.10.1-blue.svg)](https://github.com/powsybl/powsybl-hpc/releases/tag/v2.10.1)
 This [repository](https://github.com/powsybl/powsybl-hpc) provides two implementations of the Computation API, to distribute the computation using [MPI](https://www.open-mpi.org) or [Slurm Workload Manager](https://slurm.schedmd.com).
 
 **Reviewers:** [sylvlecl](https://github.com/sylvlecl) (Slurm), [geofjamg](https://github.com/geofjamg) (MPI)
@@ -65,37 +65,37 @@ This [repository](https://github.com/powsybl/powsybl-incubator) provides incubat
 
 **Reviewers:** all the committers
 
-## [powsybl-iidm4cpp](./iidm4cpp) [![v1.0.0](https://img.shields.io/badge/-v1.0.0-blue.svg)](https://github.com/powsybl/powsybl-dynawo/releases/tag/v1.0.0)
+## [powsybl-iidm4cpp](iidm4cpp.md) [![v1.0.0](https://img.shields.io/badge/-v1.0.0-blue.svg)](https://github.com/powsybl/powsybl-dynawo/releases/tag/v1.0.0)
 This [repository](https://github.com/powsybl/powsybl-iidm4cpp) provides a C++ implementation of the IIDM grid model.
 
 **Reviewers:** [mathbagu](https://github.com/mathbagu)
 **Committers:** [mathbagu](https://github.com/mathbagu)
 
-## [powsybl-math-native](./math-native) [![v1.0.2](https://img.shields.io/badge/-v1.0.2-blue.svg)](https://github.com/powsybl/powsybl-math-native/releases/tag/v1.0.2)
+## [powsybl-math-native](math-native.md) [![v1.0.2](https://img.shields.io/badge/-v1.0.2-blue.svg)](https://github.com/powsybl/powsybl-math-native/releases/tag/v1.0.2)
 This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++ implementation of sparse matrix, based on the [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) project. This 64-bits libraries for Linux, Windows and MacOS are packaged as a Jar file and published on maven central.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)
 **Committers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)
 
-## [powsybl-network-conversion-server](./network-conversion)
+## [powsybl-network-conversion-server](network-conversion.md)
 This [repository](https://github.com/powsybl/powsybl-network-conversion-server) provides a web service that exposes conversion functions.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
-## [powsybl-network-map-server](./network-map)
+## [powsybl-network-map-server](network-map.md)
 This [repository](https://github.com/powsybl/powsybl-network-map-server) provides a web service for the generation of geographical data in order to draw a network on a map.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
-## [powsybl-network-store](./network-store)
+## [powsybl-network-store](network-store.md)
 This [repository](https://github.com/powsybl/powsybl-network-store) provides a persistent implementation of the IIDM grid model in [Apache Cassandra](https://cassandra.apache.org) database. The grid model is exposed as a web service.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
-## [powsybl-open-loadflow](./open-loadflow) [![v0.2.0](https://img.shields.io/badge/-v0.2.0-blue.svg)](https://github.com/powsybl/powsybl-open-loadflow/releases/tag/v0.2.0)
+## [powsybl-open-loadflow](open-loadflow.md) [![v0.2.0](https://img.shields.io/badge/-v0.2.0-blue.svg)](https://github.com/powsybl/powsybl-open-loadflow/releases/tag/v0.2.0)
 This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an implementation of the LoadFlow API based on the [powsybl-math-native](#powsybl-math-native) project.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg)
@@ -107,13 +107,13 @@ This [repository](https://github.com/powsybl/powsybl-parent) provides the build 
 **Reviewers:** [jonenst](https://github.com/jonenst), [mathbagu](https://github.com/mathbagu)
 - Release: [jonenst](https://github.com/jonenst), [mathbagu](https://github.com/mathbagu)
 
-## [powsybl-single-line-diagram](./single-line-diagram) [![v1.2.0](https://img.shields.io/badge/-v1.2.0-blue.svg)](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.2.0)
+## [powsybl-single-line-diagram](single-line-diagram.md) [![v1.2.0](https://img.shields.io/badge/-v1.2.0-blue.svg)](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.2.0)
 This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provides modules to generate single line diagrams.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
-## [powsybl-single-line-diagram-server](./single-line-diagram-server)
+## [powsybl-single-line-diagram-server](single-line-diagram-server.md)
 This [repository](https://github.com/powsybl/powsybl-single-line-diagram-server) provides a web service to generate single line diagrams.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)

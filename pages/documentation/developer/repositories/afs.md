@@ -3,7 +3,7 @@ The PowSyBl AFS (**A**pplication **F**ile **S**ystem) [repository](https://githu
 It supports several storage system such as [MapDB](http://www.mapdb.org) or [Apache Cassandra](https://cassandra.apache.org). 
 It is designed to be extensible using custom plugins to manage new types of data.
 
-**Reviewers:** [pl-buiquang](https://github.com/pl-buiquang), [geofjamg](https://github.com/geofjamg)<br/>
+**Reviewers:** [pl-buiquang](https://github.com/pl-buiquang), [geofjamg](https://github.com/geofjamg)  
 **Committers:** [pl-buiquang](https://github.com/pl-buiquang), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
 
 ## Features
@@ -12,7 +12,7 @@ It is designed to be extensible using custom plugins to manage new types of data
 
 ## Getting started
 
-- [Guide 1](TOTO) - [TODO]() create an application file system
+- [Guide 1]() - [TODO]() create an application file system
 
 ## Releases
 
