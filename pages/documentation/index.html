@@ -3,6 +3,9 @@ layout: default
 ---
 
 <h1 id="user-documentation">User documentation</h1>
+<p>In this section, you'll discover the basics about PowSyBl. 'Getting started' describes how to install PowSyBl and run your first iTools command from the terminal.
+In 'Configuration', you'll get a thourough description of the configuration of PowSyBl for different usages. The 'iTools' section describes in moe details the available 
+commands you can use and how to use them. Finally, some user stories are described in the last section.</p>
 <div class="row">
     <!-- Getting started -->
     <div class="col-lg-4 col-sm-6 my-2">
@@ -66,6 +69,11 @@ layout: default
 </div>
 
 <h1 id="grid-model">Grid model</h1>
+<p> This section provides information about the way the network is modelled at the core of PowSyBl, i.e. in the IIDM internal format.
+In 'Grid model', you'll get details about the way the topology is handled, with different available views, but also the extensions mechanism, the way synchronous
+components are treated, etc. 'Merging' and 'Network extraction' are two sections that describe how you can merge networks for handling European data for example,
+but also how to extract sub-parts of a network.
+</p>
 <div class="row">
     <!-- Grid modelling -->
     <div class="col-lg-4 col-sm-6 my-2">
@@ -114,6 +122,10 @@ layout: default
 </div>
 
 <h1 id="grid-formats">Grid exchange formats</h1>
+<p>This section is dedicated to the description of the various grid formats available in PowSyBl.
+While IIDM is at the core of it, it is possible to import or export data in a number of formats that may be dedicated to
+European data exchanges or network simulation via different tools: check them out below.
+</p>
 <div class="row">
     <!-- CIM-CGMES -->
     <div class="col-lg-4 col-sm-6 my-2">
@@ -222,6 +234,11 @@ layout: default
 </div>
 
 <h1 id="simulation">Simulation</h1>
+<p>One major aim of the PowSyBl project is to make it easy to plug it with different solvers for grid simulation.
+At the moment, four types of simulations are supported: power flow, security analysis, time-domain simulation and sensitivity analysis.
+For each of them, one or several simulators is officially supported, but it is also possible to plug your own simulator within the framework.
+Below comes a description of the various types of simulation and supported solvers.
+</p>
 <div class="row">
     <!-- Power flow -->
     <div class="col-lg-4 col-sm-6 my-2">
@@ -285,6 +302,9 @@ layout: default
 </div>
 
 <h1 id="hpc">High Performance Computing</h1>
+<p>Grid simulation comes with a computational cost, and in this section we describe how to take advantage of the High Performance Computing capabilities of PowSyBl to reduce 
+computational times to a minimum.
+</p>
 <div class="row">
     <!-- Slurm -->
     <div class="col-lg-4 col-sm-6 my-2">
@@ -318,6 +338,10 @@ layout: default
 </div>
 
 <h1 id="data">Data management</h1>
+<p>
+This section is dedicated to data management: PowSyBl makes it possible to handle study data in a scalable way through an Application File System (AFS).
+Besides, it also makes it possible to output time-series of the network data. These two features are described here.
+</p>
 <div class="row">
     <!-- AFS -->
     <div class="col-lg-4 col-sm-6 my-2">
@@ -351,6 +375,10 @@ layout: default
 </div>
 
 <h1 id="microservices">Microservices</h1>
+<p>
+Since PowSyBl is meant to make it easy to build state-of-the-art applications for grid modeling, it also comes
+with a set of microservices. The aim is to make it easier to build web-based applications. Check them out below.
+</p>
 <div class="row">
     <!-- Repositories -->
     <div class="col-lg-4 col-sm-6 my-2">
@@ -370,6 +398,10 @@ layout: default
 </div>
 
 <h1 id="developer-documentation">Developer documentation</h1>
+<p>This section is dedicated to the developer documentation. You'll find a description of all the repositories and artifacts
+of the project, but also documentation about the framework itself and the way it has been designed, and a set of tutorials aimed
+at helping developers get into the code.
+</p>
 <div class="row">
     <!-- Repositories -->
     <div class="col-lg-4 col-sm-6 my-2">
