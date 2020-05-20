@@ -76,11 +76,11 @@ with PowSyBl
 balances adjustment is a process that consists in acting on 
 specified injections to ensure given balance on specific network areas.
 
-- [PowSyBl GSE]() (archived): a library to make it easier to 
+- <span style="color: red">PowSyBl GSE</span> (archived): a library to make it easier to 
 write desktop applications based on PowSyBl. This repository is archived. The Grid Study Environment (GSE) project
 aimed at helping developers to write desktop applications based on PowSyBl, through a JavaFX user interface.
 
-All these repositories also contain the associated DSL when necessary, for a very simple use of PowSyBl through the command line.
+All these repositories also contain the associated DSL when necessary, for a very simple use of PowSyBl through the command line and/or scripts.
 
 ## Microservices
 
@@ -132,9 +132,9 @@ Study tool front end developped in React.js.
 
 ## C++ libraries
 
-- [IIDM for C++](): a C++ implementation of IIDM, to enable C++ developers to use PowSyBl. 
+- [IIDM for C++](../documentation/developer/repositories/iidm4cpp): a C++ implementation of IIDM, to enable C++ developers to use PowSyBl. 
 
-- [Math native](): a C++ library for sparse matrices. Used in open loadflow for example.
+- [Math native](../documentation/developer/repositories/math-native): a C++ library for sparse matrices. Used in open loadflow for example.
 
 ## Tutorials
 PowSyBl provides a repository containing all the necessary code to go through its tutorials: 

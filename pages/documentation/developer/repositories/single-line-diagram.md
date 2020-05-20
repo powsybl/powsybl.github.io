@@ -1,7 +1,7 @@
-# powsybl-single-line-diagram
-This repository provides modules to generate single line diagrams for given voltage levels.
+# powsybl-single-line-diagram [![v1.2.0](https://img.shields.io/badge/-v1.2.0-blue.svg)](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.2.0)
+This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provides modules to generate single line diagrams.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)<br/>
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ## Features

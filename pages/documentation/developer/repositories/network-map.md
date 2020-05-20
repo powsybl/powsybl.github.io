@@ -1,8 +1,8 @@
 # powsybl-network-map-server
-The PowSyBl Network Map server is used to extract network data from a network store server 
+The PowSyBl Network Map server [repository](https://github.com/powsybl/powsybl-network-map-server) is used to extract network data from a network store server 
 and reshape it to feed a user interface network map component.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)<br/>
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ## Features
@@ -17,5 +17,6 @@ and reshape it to feed a user interface network map component.
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| TODO | TODO | TODO | TODO |
 
 

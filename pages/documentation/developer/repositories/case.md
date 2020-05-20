@@ -1,9 +1,9 @@
 ## powsybl-case
-The PowSyBl Case Server handles raw network data storage.
+The PowSyBl Case Server [repository](https://github.com/powsybl/powsybl-case) handles raw network data storage.
 It relies on a file system to store the data and makes it possible to upload 
 and fetch networks in any format supported by PowSyBl (CGMES, UCTE, XIIDM, etc).
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)<br/>
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ## Features
@@ -18,5 +18,6 @@ and fetch networks in any format supported by PowSyBl (CGMES, UCTE, XIIDM, etc).
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| TODO | TODO | TODO | TODO |
 
 

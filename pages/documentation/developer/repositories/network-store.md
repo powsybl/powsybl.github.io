@@ -1,5 +1,5 @@
 # powsybl-network-store
-The PowSyBl Network store provides a persistent IIDM implementation, that is exposed as a web service.
+The PowSyBl Network store [repository](https://github.com/powsybl/powsybl-network-store) provides a persistent IIDM implementation, that is exposed as a web service.
 Almost all the features developed in PowSyBl rely on the IIDM API for accessing network data. 
 The idea of this service is to re-implement the IIDM API for a better integration in a 
 typical microservice architecture. Instead of an in-memory implementation like in the 
@@ -15,7 +15,7 @@ Therefore, network data should usually be accessed from this service using the p
 Java client (the one which implements the IIDM API) and not directly from the REST 
 interface because the Java client is safe and prevents inconsistent modifications.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)<br/>
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ## Features
@@ -30,4 +30,5 @@ interface because the Java client is safe and prevents inconsistent modification
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| TODO | TODO | TODO | TODO |
 
