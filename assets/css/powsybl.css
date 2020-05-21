@@ -24,6 +24,15 @@ span.heading {
     padding-top: 4rem;
 }
 
+/* Table of contents */
+#markdown-toc::before {
+    content: "Table of contents";
+    margin-left: -2.5rem;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.5em;
+}
+
 /* Links */
 a[href=""] {
     color: #fd495c;
