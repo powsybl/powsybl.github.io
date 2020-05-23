@@ -1,4 +1,4 @@
-# powsybl-core [![v3.2.0](https://img.shields.io/badge/-v3.2.0-blue.svg)](https://github.com/powsybl/powsybl-core/releases/tag/v3.2.0)
+# powsybl-core [![v3.3.0](https://img.shields.io/badge/-v3.3.0-blue.svg)](https://github.com/powsybl/powsybl-core/releases/tag/v3.3.0)
 The PowSyBl Core [repository](https://github.com/powsybl/powsybl-core) provides the core features of the framework and a large set of APIs to import/export grid data or run various type of simulations (power flow, security analysis, sensitivity calculation, time domain simulation).
 
 **Reviewers:** [annetill](https://github.com/annetill), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia), [zamarrenolm](https://github.com/zamarrenolm)  
@@ -21,6 +21,7 @@ The PowSyBl Core [repository](https://github.com/powsybl/powsybl-core) provides 
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 3.3.0 | 2020-04-29 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v3.3.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/3.3.0/index.html) |
 | 3.2.0 | 2020-02-28 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v3.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/3.2.0/index.html) |
 | 3.1.0 | 2020-01-08 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v3.1.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/3.1.0/index.html) |
 | 3.0.0 | 2019-10-23 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v3.0.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/3.0.0/index.html) |
@@ -37,5 +38,3 @@ The PowSyBl Core [repository](https://github.com/powsybl/powsybl-core) provides 
 | 2.0.0 | 2018-07-30 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v2.0.0) | |
 | 1.1.0 | 2018-05-29 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v1.1.0) | |
 | 1.0.0 | 2018-03-14 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v1.0.0) | |
-
-

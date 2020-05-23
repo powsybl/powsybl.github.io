@@ -4,14 +4,14 @@ This page shortly describes each repository of the [PowSyBl organization](https:
 
 ## Java libraries
 
-### [powsybl-core](powsybl-core.md) [![v3.2.0](https://img.shields.io/badge/-v3.2.0-blue.svg)](https://github.com/powsybl/powsybl-core/releases/tag/v3.2.0)
+### [powsybl-core](powsybl-core.md) [![v3.3.0](https://img.shields.io/badge/-v3.3.0-blue.svg)](https://github.com/powsybl/powsybl-core/releases/tag/v3.3.0)
 This [repository](https://github.com/powsybl/powsybl-core) provides the core feature of the PowSyBl framework such as the grid modelling, the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity computation, dynamic simulation...).
 
 **Reviewers:** [annetill](https://github.com/annetill), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia), [zamarrenolm](https://github.com/zamarrenolm)
 **Committers:** [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
 
-### [powsybl-open-loadflow](powsybl-open-loadflow.md) [![v0.2.0](https://img.shields.io/badge/-v0.2.0-blue.svg)](https://github.com/powsybl/powsybl-open-loadflow/releases/tag/v0.2.0)
-This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an implementation of the LoadFlow API based on the [powsybl-math-native](#powsybl-math-native) project.
+### [powsybl-open-loadflow](powsybl-open-loadflow.md) [![v0.3.0](https://img.shields.io/badge/-v0.3.0-blue.svg)](https://github.com/powsybl/powsybl-open-loadflow/releases/tag/v0.3.0)
+This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an implementation of the LoadFlow API based on the [powsybl-math-native](powsybl-math-native.md) project.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg)
 **Release:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)
@@ -34,7 +34,7 @@ This [repository](https://github.com/powsybl/powsybl-hpc) provides two implement
 **Reviewers:** [sylvlecl](https://github.com/sylvlecl) (Slurm), [geofjamg](https://github.com/geofjamg) (MPI)
 **Committers:** [sylvlecl](https://github.com/sylvlecl)
 
-### [powsybl-balances-adjustment](balances-adjustment.md) [![v1.0.0](https://img.shields.io/badge/-v1.0.0-blue.svg)](https://github.com/powsybl/powsybl-balances-adjustment/releases/tag/v1.0.0)
+### [powsybl-balances-adjustment](powsybl-balances-adjustment.md) [![v1.1.0](https://img.shields.io/badge/-v1.1.0-blue.svg)](https://github.com/powsybl/powsybl-balances-adjustment/releases/tag/v1.1.0)
 This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provides a functional module to reach target net positions across networks, through an iterative process based on power flow computations and injections scaling.
 
 **Reviewers:** [murgeyseb](https://github.com/murgeyseb)
@@ -92,7 +92,7 @@ This [repository](https://github.com/powsybl/powsybl-network-map-server) provide
 
 ## C++ libraries
 
-### [powsybl-iidm4cpp](powsybl-iidm4cpp.md) [![v1.0.0](https://img.shields.io/badge/-v1.0.0-blue.svg)](https://github.com/powsybl/powsybl-dynawo/releases/tag/v1.0.0)
+### [powsybl-iidm4cpp](powsybl-iidm4cpp.md) [![v1.0.1](https://img.shields.io/badge/-v1.0.1-blue.svg)](https://github.com/powsybl/powsybl-iidm4cpp/releases/tag/v1.0.1)
 This [repository](https://github.com/powsybl/powsybl-iidm4cpp) provides a C++ implementation of the IIDM grid model.
 
 **Reviewers:** [mathbagu](https://github.com/mathbagu)
@@ -111,11 +111,11 @@ This [repository](https://github.com/powsybl/powsybl-incubator) provides incubat
 
 **Reviewers:** all the committers
 
-### powsybl-parent [![v3](https://img.shields.io/badge/-v3-blue.svg)](https://github.com/powsybl/powsybl-math-native/releases/tag/v3)
+### powsybl-parent [![v3](https://img.shields.io/badge/-v3-blue.svg)](https://github.com/powsybl/powsybl-parent/releases/tag/v3)
 This [repository](https://github.com/powsybl/powsybl-parent) provides the build configuration shared as maven pom files, shared by all our Java repositories.
 
 **Reviewers:** [jonenst](https://github.com/jonenst), [mathbagu](https://github.com/mathbagu)
-- Release: [jonenst](https://github.com/jonenst), [mathbagu](https://github.com/mathbagu)
+**Release:** [jonenst](https://github.com/jonenst), [mathbagu](https://github.com/mathbagu)
 
 ### powsybl-tutorials
 This [repositories](https://github.com/powsybl/powsybl-tutorials) contains the source code of the different [tutorials]() presented on this website.

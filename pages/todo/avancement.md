@@ -6,8 +6,8 @@ layout: default
     - [X] Hero
     - [ ] Contributeurs
     - [X] About
-    - [ ] Features
-    - [ ] Projects
+    - [X] Features
+    - [X] Projects
 - [ ] community
     - [ ] events.md
     - [X] index.md
