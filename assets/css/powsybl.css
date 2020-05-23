@@ -48,6 +48,27 @@ div.doc-icon {
     margin-right: 2rem;
 }
 
+.services .fa-icon i {
+    font-size: 30px;
+    padding-top: 5px;
+}
+
+.services .icon-box:hover a {
+    color: #0e3650;
+}
+
+.services .icon-box:hover a:hover {
+    color: #dbedf9;
+}
+
+.services .icon-box:hover .title a:hover {
+    color: #ffffff;
+}
+
+.services .description {
+    text-align: justify;
+}
+
 /* Highlight */
 div.highlight {
     border: 1px solid #808080;
