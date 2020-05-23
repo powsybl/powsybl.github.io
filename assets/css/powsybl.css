@@ -131,6 +131,11 @@ table tr:nth-child(2n) {
     padding-top: 0;
 }
 
+.portfolio .portfolio-item {
+    padding: 30px;
+    margin: 0;
+}
+
 .portfolio .portfolio-wrap {
     background: rgba(34, 34, 34, 0.8);
 }
