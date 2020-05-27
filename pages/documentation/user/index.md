@@ -51,9 +51,9 @@ Script:
 After installing your powsybl distribution, you will be able to use the following itools commands:
 
 **Computation**
-- [`compare-security-analysis-results`](../404.md)
+- [`compare-security-analysis-results`](itools/compare-security-analysis-results.md)
 - [`loadflow`](itools/loadflow.md)
-- [`loadflow-validation`](../404.md)
+- [`loadflow-validation`](itools/loadflow-validation.md)
 - [`security-analysis`](itools/security-analysis.md)
 
 
@@ -61,7 +61,7 @@ After installing your powsybl distribution, you will be able to use the followin
 - [`convert-network`](itools/convert-network.md)
 
 **Misc**
-- [`plugins-info`](../404.md)
+- [`plugins-info`](itools/plugins-info.md)
 
 **Script**
 - [`run-script`](itools/run-script.md)
