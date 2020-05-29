@@ -21,9 +21,9 @@ layout: default
     - [ ] developer
         - [ ] artifacts.md (**)
         - [ ] itools-packager.md
-        - [ ] repositories (*)
-            - [ ] index.md
-            - [ ] powsybl-core.md
+        - [X] repositories (*)
+            - [X] index.md
+            - [X] powsybl-core.md
         - [ ] tutorials
             - [ ] afs.md
             - [ ] exporter.md
@@ -34,7 +34,7 @@ layout: default
             - [X] itools-packager.md
             - [ ] loadflow
             - [ ] security-analysis.md
-            - [ ] sensitivity-computation.md
+            - [X] sensitivity-computation.md
             - [ ] topology
     - [ ] grid
         - [ ] features
@@ -53,8 +53,8 @@ layout: default
     - [ ] hpc
         - [ ] index.md
     - [ ] index.html
-    - [ ] microservices (*)
-        - [ ] index.md
+    - [X] microservices (*)
+        - [X] index.md
     - [ ] simulation
         - [ ] powerflow
             - [ ] index.md
@@ -62,8 +62,8 @@ layout: default
         - [ ] securityanalysis
             - [ ] index.md  (**)
             - [ ] actionDSL (**)
-        - [ ] sensitivity
-            - [ ] index.md
+        - [X] sensitivity
+            - [X] index.md
         - [ ] timedomain
             - [ ] dynawo.md
             - [ ] index.md
@@ -71,20 +71,23 @@ layout: default
         - [ ] configuration
             - [ ] index.md (**)
         - [ ] index.md
-        - [ ] itools
-            - [ ] action-simulator.md (*)
+        - [X] itools
+            - [X] action-simulator.md (*)
             - [X] index.md
-            - [ ] loadflow.md (**)
-            - [ ] security-analysis.md (**)
-            - [ ] convert-network.md (**)
-            - [ ] sensitivity-computation (*)
-        - [ ] user-stories
-            - [ ] index.md
-- [ ] download
-    - [ ] index.md (**)
-- [ ] overview
+            - [X] loadflow.md (**)
+            - [X] security-analysis.md (**)
+            - [X] convert-network.md (**)
+            - [X] sensitivity-computation (*)
+        - [X] user-stories
+            - [X] index.md
+            - [ ] Export THT pour un TSO
+            - [ ] Merging Function
+            - [X] Capacity calculation
+- [X] download
+    - [X] index.md (**)
+- [X] overview
     - [X] governance.md
-    - [ ] index.md (***)
+    - [X] index.md (***)
     - [X] license.md
-    - [ ] roadmap.md ==> à transférer depuis .github
+    - [X] roadmap.md ==> à transférer depuis .github
 
