@@ -4,6 +4,11 @@ layout: default
 
 # Sensitivity analysis
 
+`` TOC
+{:toc}
+
+## Introduction
+
 The sensitivity analysis module is dedicated to computing the linearized impact of small network 
 variations on the state variables of some components.
 
@@ -33,10 +38,10 @@ A standard sensitivity analysis input thus comprises of a list of sensitivity fa
 - a sensitivity function (the observed function).
 
 The currently available sensitivity factors are:
-- *BranchFlowPerInjectionIncrease* : calculates the linear impact of a specific injection increase on a specific branch's active flow (in MW/MW) 
-- *BranchFlowPerLinearGlsk* : calculates the linear impact of a linear combination of injections (GLSK) increase on a specific branch's active flow (in MW/MW)
-- *BranchFlowPerPSTAngle* : calculates the linear impact of a PST angle increase on a specific branch's active flow (in MW/°)
-- *BranchIntensityPerPSTAngle* : calculates the linear impact of a PST angle increase on a specific branch's current (in A/°)
+- `BranchFlowPerInjectionIncrease` : calculates the linear impact of a specific injection increase on a specific branch's active flow (in MW/MW) 
+- `BranchFlowPerLinearGlsk` : calculates the linear impact of a linear combination of injections (GLSK) increase on a specific branch's active flow (in MW/MW)
+- `BranchFlowPerPSTAngle` : calculates the linear impact of a PST angle increase on a specific branch's active flow (in MW/°)
+- `BranchIntensityPerPSTAngle` : calculates the linear impact of a PST angle increase on a specific branch's current (in A/°)
 
 #### How to provide the sensitivity factors input
 
@@ -52,12 +57,6 @@ analysis on the active power through a line, with respect to an injection on the
     "id" : "BRANCH_FLOW_ID",
     "name" : "My monitored branch",
     "branchId" : "BRANCH_ID_IN_NETWORK"
-  },
-  "variable" : {
-    "@c" : ".InjectionIncrease",
-    "id" : "INJECTION_INCREASE_ID",
-    "name" : "My impacting injection",
-    "injectionId" : "INJECTION_ID_IN_NETWORK"
   }
 } ]
 ```
@@ -66,7 +65,7 @@ analysis on the active power through a line, with respect to an injection on the
 The sensitivity analysis may also take, optionnally, a list of contingencies as an input. 
 When contingencies are provided, the sensitivity values
 shall be calculated on the network at state N, but also after the application of each contingency.
-The contingencies are provided in the same way than for the [security analysis](../securityanalysis/index.md).
+The contingencies are provided in the same way than for the [security analysis]().
 This then constitutes a systematic sensitivity analysis.
 
 At the moment the only available sensitivity simulator officially compatible with PowSyBl is
@@ -87,9 +86,9 @@ These results may be serialized in JSON or CSV format.
 
 ### Example of interpretation
 Let's imagine that one wants to compute the impact of an increase of active power generation of the 
-generator *G* on the branch *B*.
+generator `G` on the branch `B`.
 The sensitivity analysis input will contain one sensitivity factor, 
-of type *BranchFlowPerInjectionIncrease*, and we do not provide any input contingencies.
+of type `BranchFlowPerInjectionIncrease`, and we do not provide any input contingencies.
 
 After the computation, let us consider that the values of the three elements of the sensitivity 
 result are:
@@ -98,12 +97,12 @@ result are:
 - a function reference value of 265
 
 This can be interpreted in the following way:
-- an increase of 100 MW on generator *G* may be approximated on branch *B* as a 5MW decrease of the 
+- an increase of 100 MW on generator `G` may be approximated on branch `B` as a 5MW decrease of the 
 active flow from side 1 to side 2 
-- the initial generation on generator *G* is 150MW
-- the initial active flow on branch *B* is 265MW from side 1 to side 2
+- the initial generation on generator `G` is 150MW
+- the initial active flow on branch `B` is 265MW from side 1 to side 2
  
-## Sensitivity analysis implementations
+## Implementations
 
 At the moment, the only sensitivity analysis implementation compatible with PowSyBl is the one provided
 with the Hades2 freeware, developped by RTE.
