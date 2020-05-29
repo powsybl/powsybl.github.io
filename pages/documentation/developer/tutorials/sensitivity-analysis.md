@@ -241,7 +241,7 @@ keep all the sensitivity values in the results.
 ## Summary
 You have learnt to create a redistribuable `iTools` package, and to configure the `itools-packager` plugin. Refer to the [iTools manual](../../user/itools/index.md#available-commands) to know the list of available commands, and the [itools-packager manual](../itools-packager.md) to configure more deeply your `iTools` distribution.  
 
-## See also
+## Going further
 The following links could also be useful:
 - [iTools manual](../../user/itools/index.md): Learn how to use `iTools`, and which commands are available
 - [itools-packager manual](../itools-packager.md): Learn all the features of the maven plugin

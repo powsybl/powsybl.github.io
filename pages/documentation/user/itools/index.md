@@ -80,7 +80,7 @@ The `iTools` script relies on a [plugin mechanism](): the commands are discovere
 | [security-analysis](security-analysis.md) | Computation | Run a security analysis |
 | [sensitivity-computation](sensitivity-computation.md) | Computation | Run a sensitivity analysis |
 
-## See also
+## Going further
 The following links could also be useful:
 - [Bundle an iTools package](../../developer/tutorials/itools-packager.md): Learn how to use the `itools-packager` maven plugin
 - [Create an iTools command](../../developer/tutorials/itools-command.md): Learn how to create your own `iTools` command in Java
