@@ -5,20 +5,20 @@ layout: default
 # Bundle an iTools package with maven
 This tutorial shows you how to bundle an `iTools` package using the `itools-packager` maven plugin.
 
-## What you will build?
+## What will you build?
 You will create an `iTools` redistribuable package with only a single `plugins-info` command. You will learn to how to configure the `itools-packager` plugin to override the default configurations.
 
-## What you will need?
+## What will you need?
 - About 30 minutes
 - A favorite text editor or IDE
 - JDK 1.8 or later
 - You can also import the code straight into your IDE:
     - [IntelliJ IDEA](intellij.md)
 
-## How to complete this tutorial
+## How to complete this tutorial?
 Like most tutorials, you can start from scratch and complete each step or you can bypass basic setup steps that are already familiar to you. Either way, you end up with working code.
 
-To start from scratch, move on to [Creating a new project](#creating-a-new-project-from-scratch).
+To start from scratch, move on to [Create a new project](#create-a-new-project-from-scratch).
 
 To skip the basics, do the following:
 - Download and unzip the [source repository](https://github.com/powsybl/powsybl-tutorials), or clone it using Git: `git clone https://github.com/powsybl/powsybl-tutorials`.
@@ -27,7 +27,7 @@ To skip the basics, do the following:
 
 When you finish, you can check your results against the code in `itools-packager/complete`.
 
-## Creating a new project from scratch
+## Create a new project from scratch
 Create a new Maven's `pom.xml` file with the following content:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -46,7 +46,7 @@ Create a new Maven's `pom.xml` file with the following content:
 This will create a Maven artifact `com.powsybl.tutorials:powsybl-itools-packager:1.0.0` of type pom.
 
 ## Configure itools-packager
-In the `pom.xml`, add the following lines enable the `itools-packager` maven plugin during the compilation.
+In the `pom.xml`, add the following lines to enable the `itools-packager` maven plugin during the compilation.
 ```xml
 <build>
     <plugins>
@@ -98,7 +98,7 @@ target/powsybl-itools-packager-1.0.0
 5 directories, 6 files
 ```
 
-Then we'll add few **required** maven dependencies:
+Then we'll add a few **required** maven dependencies:
 - `com.powsybl:powsybl-tools`: to provide the iTools main java class
 - `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration
 - `com.powsybl:powsybl-computation-local`: to run the simulations locally
@@ -232,7 +232,7 @@ Misc:
 ``` 
 
 ## Summary
-You have learn to create a redistribuable `iTools` package, and to configure the `itools-packager` plugin. Refer to the [iTools manual](../../user/itools/index.md#available-commands) to know the list of available commands, and the [itools-packager manual](../itools-packager.md) to configure more deeply your `iTools` distribution.  
+You have learnt to create a redistribuable `iTools` package, and to configure the `itools-packager` plugin. Refer to the [iTools manual](../../user/itools/index.md#available-commands) to know the list of available commands, and the [itools-packager manual](../itools-packager.md) to configure more deeply your `iTools` distribution.  
 
 ## See also
 The following links could also be useful:
