@@ -15,5 +15,5 @@ This tutorial shows you how to create a simple `iTools` command in Java.
 
 ## Summary
 
-## See also
+## Going further
 - [Bundle an iTools package](itools-packager.md): Learn how to use the `itools-packager` maven plugin

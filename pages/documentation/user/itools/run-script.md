@@ -127,5 +127,5 @@ To run the previous script, pass the input and output file names:
 $> itools run-script loadflow.groovy XIIDM /tmp/case.xiidm /tmp/case-lf.xiidm
 ```
 
-## See also
+## Going further
 - [Create a Groovy extension](): Learn how to create a groovy extension to use it with the `run-script` command

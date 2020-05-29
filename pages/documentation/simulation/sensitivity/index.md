@@ -75,9 +75,9 @@ only once in state N, and then all the calculations are done successively by mod
 matrix directly in the solver based on the contingencies input.
 The network is thus loaded only once, which improves performance.
 
-# Sensitivity analysis outputs
+## Sensitivity analysis outputs
 
-## Sensitivity values
+### Sensitivity values
 The outputs of the sensitivity analysis are called sensitivity values. 
 These values are a list of objects associated to each sensitivity factor, for each state of the network:
 - The actual value of the partial derivative
@@ -85,7 +85,7 @@ These values are a list of objects associated to each sensitivity factor, for ea
 - The reference value of the function at linearization point 
 These results may be serialized in JSON or CSV format.
 
-## Example of interpretation
+### Example of interpretation
 Let's imagine that one wants to compute the impact of an increase of active power generation of the 
 generator *G* on the branch *B*.
 The sensitivity analysis input will contain one sensitivity factor, 
@@ -103,7 +103,7 @@ active flow from side 1 to side 2
 - the initial generation on generator *G* is 150MW
 - the initial active flow on branch *B* is 265MW from side 1 to side 2
  
-# Sensitivity analysis implementations
+## Sensitivity analysis implementations
 
 At the moment, the only sensitivity analysis implementation compatible with PowSyBl is the one provided
 with the Hades2 freeware, developped by RTE.
@@ -134,7 +134,7 @@ before sensitivity values are calculated, but it doesn't seem to have any effect
 - `hubPtdf` is not supported at the moment: if we integrate the PTDF calculation ype of Hades2 we should make it work but at the moment sensiDC calculations seem to fit our needs.
 
 
-# See also
+## Going further
 
 To go further about the sensitivity analysis, check the following content:
 - [Perform sensitivity analyses](/../../developer/tutorials/sensitivity-analysis.md): learn how to write the Java code to perform sensitivity analyses

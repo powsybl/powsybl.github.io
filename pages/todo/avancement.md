@@ -36,6 +36,9 @@ layout: default
             - [ ] security-analysis.md
             - [X] sensitivity-computation.md
             - [ ] topology
+        - [ ] Patterns de developpement
+            - [ ] Integrate a simulator
+            - [ ] Integrate an importer
     - [ ] grid
         - [ ] features
             - [ ] extraction.md (*)
