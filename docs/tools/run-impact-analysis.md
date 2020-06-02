@@ -57,7 +57,7 @@ To run an impact analysis, one has to choose the implementation of the `com.pows
 to use, by setting the `ContingenciesProviderFactory` property to the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
 module. To learn more about contingencies or available `ContingenciesProvider` read this [documentation](../contingencies/index.md) page.
 
-Read the [simulation-parameters](../configuration/modules/simulation-parameters.md) documentation to learn how to
+Read the [simulation-parameters](../../pages/documentation/user/configuration/simulation-parameters.md) documentation to learn how to
 configure the impact analysis parameters.
 
 # Maven configuration

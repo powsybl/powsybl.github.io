@@ -84,5 +84,5 @@ module2:
 - [remote-service](remote-service.md)
 - [security](security.md)
 - [security-analysis](security-analysis.md)
-- [simulation-parameters](simulation-parameters.md)
-- [table-formatter](table-formatter.md)
+- [simulation-parameters](../../../pages/documentation/user/configuration/simulation-parameters.md)
+- [table-formatter](../../../pages/documentation/user/configuration/table-formatter.md)
