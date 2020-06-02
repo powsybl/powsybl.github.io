@@ -83,7 +83,7 @@ The available implementation of the `TableFormatterFactory` are:
 - `com.powsybl.commons.io.table.CsvTableFormatterFactory`: to create a CSV file
 - `com.powsybl.commons.io.table.AsciiTableFormatterFactory`: to render table in ASCII
 
-The table formatter can be configured by the [table-formatter](table-formatter.md) module.
+The table formatter can be configured by the [table-formatter](../../../pages/documentation/user/configuration/table-formatter.md) module.
 
 ## threshold
 The `threshold` property is an optional property that defines the margin used for values comparison. The default value
