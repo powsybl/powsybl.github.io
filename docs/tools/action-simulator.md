@@ -91,7 +91,7 @@ parameter is defined.
 Use the `--verbose` parameter to activate the verbose mode.
 
 # Configuration
-Read the [configuration](../configuration/modules/load-flow-action-simulator.md) page to learn how to set up the
+Read the [configuration](../../pages/documentation/user/configuration/load-flow-action-simulator.md) page to learn how to set up the
 `load-flow-action-simulator` module.
 
 # Examples

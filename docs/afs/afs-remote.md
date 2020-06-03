@@ -10,7 +10,7 @@ To configure AFS drives that are remotely accessible, set the optional `remotely
 in the [configuration](../configuration/modules/index.md) file of the server. This drive can either be a [local](afs-local.md)
 drive or a [MapDB](afs-mapdb.md) drive.
 
-On the client side, configure the [remote-service](../configuration/modules/remote-service.md) module to set the connection
+On the client side, configure the [remote-service](../../pages/documentation/user/configuration/remote-service.md) module to set the connection
 settings.
 
 # Maven dependencies

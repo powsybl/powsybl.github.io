@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Tables formatter
+# table-formatter
 The `table-formatter` module is used to configure the rendering of tables displayed in the console. It is also used to export data in CSV files.
 
 ## Optional properties

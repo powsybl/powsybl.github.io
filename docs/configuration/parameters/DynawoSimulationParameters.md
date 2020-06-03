@@ -29,5 +29,5 @@ The `solver.parametersFile` property is a required property that defines the pat
 The `solver.parametersId` property is an optional property that defines the set of solver parameters. The default value for this property is `SIM`.
 
 # Configuration
-The default values of all the optional properties are read from the [dynawo-default-parameter](../modules/dynawo-default-parameters.md)
+The default values of all the optional properties are read from the [dynawo-default-parameter](../../../pages/documentation/user/configuration/dynawo-default-parameters.md)
 module, defined in the configuration file.

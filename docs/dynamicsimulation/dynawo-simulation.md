@@ -6,10 +6,10 @@ layout: default
 Powsybl provides an implementation to run dynamic simulations with [Dynawo](https://dynawo.github.io/).
 
 # Configuration
-See [Dynawo Configuration](../configuration/modules/dynawo.md) to configure the default dynawo.
+See [Dynawo Configuration](../../pages/documentation/user/configuration/dynawo.md) to configure the default dynawo.
 
 To set the default configuration of the dynawo simulator, one has to configure the
-[dynawo-default-parameters](../configuration/modules/dynawo-default-parameters.md) module.
+[dynawo-default-parameters](../../pages/documentation/user/configuration/dynawo-default-parameters.md) module.
 
 To learn more about configuration files, read the [DynawoSimulationParameters](../configuration/parameters/DynawoSimulationParameters.md) documentation
 page.

@@ -1,29 +1,27 @@
 ---
-title: security-analysis-config
 layout: default
 ---
 
-The `security-analysis` module is used to configure the execution of the
-[security-analysis](../../tools/security-analysis.md) tool.
+# security-analysis
 
-# Required properties
+The `security-analysis` module is used to configure the execution of the [security-analysis](../itools/security-analysis.md) command.
 
-# Optional property
+## Optional property
 
-## preprocessor
+**preprocessor:**  
 The `preprocessor` property is an optional property which requires that the `SecurityAnalysisPreprocessor` with specified name is used to preprocess inputs, based on the contingencies file, before actually running the security analysis.
 
-If absent, the default behavior of the tool is used : the contingencies file is simply interpreted by the configured `ContingenciesProvider`.
+If absent, the default behavior of the tool is used: the contingencies file is simply interpreted by the configured contingencies provider.
 
-# Examples
+## Examples
 
-## YAML
+**YAML configuration:**  
 ```yaml
 security-analysis:
     preprocessor: my_custom_preprocessor_name
 ```
 
-## XML
+**XML configuration:**  
 ```xml
 <security-analysis>
     <preprocessor>my_custom_preprocessor_name</preprocessor>

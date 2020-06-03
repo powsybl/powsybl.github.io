@@ -20,4 +20,4 @@ computation.
 does nothing. An external implementation is available: [hades2](http://rte-france.github.io/hades2/index.html).
 
 # Configuration
-See [Loadflow Configuration](../configuration/modules/load-flow.md) to configure the default load-flow.
+See [Loadflow Configuration](../../pages/documentation/user/configuration/load-flow.md) to configure the default load-flow.

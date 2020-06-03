@@ -17,7 +17,7 @@ The `stopTime` property is an optional property that defined the instant of time
 seconds.
 
 # Configuration
-The default values of all the optional properties are read from the [dynamic-simulation-default-parameter](../modules/dynamic-simulation-default-parameters.md)
+The default values of all the optional properties are read from the [dynamic-simulation-default-parameter](../../../pages/documentation/user/configuration/dynamic-simulation-default-parameters.md)
 module, defined in the configuration file.
 
 ## Examples

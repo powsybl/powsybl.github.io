@@ -19,9 +19,9 @@ Please see the `com.powsybl.iidm.network.util.BranchData` class for more details
 
 # Configuration
 To activate the `LoadFlowResultsCompletionPostProcessor`, add `loadflowResultsCompletion` to the `postProcessors`
-property of the [import](../../../configuration/modules/import.md) module.
+property of the [import](../../../../pages/documentation/user/configuration/import.md) module.
 
-Read the [loadflow-results-completion-parameters](../../../configuration/modules/loadflow-results-completion-parameters.md)
+Read the [loadflow-results-completion-parameters](../../../../pages/documentation/user/configuration/loadflow-results-completion-parameters.md)
 documentation page to learn how to configure the parameters of this post processor.
 
 ## YAML

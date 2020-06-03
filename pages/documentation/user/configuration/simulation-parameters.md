@@ -1,61 +1,57 @@
 ---
-title: simulation-parameters
 layout: default
 ---
 
-The `simulation-parameters` module is used in the [run-impact-analysis](../../tools/run-impact-analysis.md) command
-or when a dynamic simulation is run, its properties define a simulation scenario. 
+# simulation-parameters
+The `simulation-parameters` module is used by the [run-impact-analysis]() command or when a dynamic simulation is run. Its properties define a simulation scenario.
 
-# Required properties
+## Required properties
 
-## branchSideOneFaultShortCircuitDuration
+**branchSideOneFaultShortCircuitDuration:**  
 The `branchSideOneFaultShortCircuitDuration` property is a required property that defines the duration of the short
 circuit in seconds for the side `ONE` of a branch. 
 
-## branchSideTwoFaultShortCircuitDuration
+**branchSideTwoFaultShortCircuitDuration:**  
 The `branchSideTwoFaultShortCircuitDuration` property is a required property that defines the duration of the short
 circuit in seconds for the side `TWO` of a branch.
 
-## faultEventInstant
+**faultEventInstant:**  
 The `faultEventInstant` property is a required property that defines the fault instant event in seconds.
 
-## generatorFaultShortCircuitDuration
-The `generatorFaultShortCircuitDuration` property is a required property that defines the duration of the short circuit
-in seconds for a generator.
+**generatorFaultShortCircuitDuration:**  
+The `generatorFaultShortCircuitDuration` property is a required property that defines the duration of the short circuit in seconds for a generator.
 
-## preFaultSimulationStopInstant
+**preFaultSimulationStopInstant:**  
 The `preFaultSimulationStopInstant` property is a required property that defines the stop instant event for pre fault
 simulations in seconds.
 
-## postFaultSimulationStopInstant
-The `postFaultSimulationStopInstant` property is a required property that defines the stop instant event for post fault
-simulations in seconds.
+**postFaultSimulationStopInstant:**
+The `postFaultSimulationStopInstant` property is a required property that defines the stop instant event for post fault simulations in seconds.
 
-# Optional properties
+## Optional properties
 
-## branchFaultReactance
+**branchFaultReactance:**  
 The `branchFaultReactance` property is an optional property that defines the branch fault reactance. The default
 value of this property is `0.01`.
 
-## branchFaultResistance
+**branchFaultResistance:**  
 The `branchFaultResistance` property is an optional property that defines the branch fault resistance. The default
 value of this property is 0.
 
-## branchShortCircuitDistance
+**branchShortCircuitDistance:**  
 The `branchShortCircuitDistance` property is an optional property that defines the branch short circuit distance. The
 default value of this property is `50`.
 
-## generatorFaultReactance
+**generatorFaultReactance:**  
 The `generatorFaultReactance` property is an optional property that defines the generator fault reactance. The default
 value of this property is `0.00001`.
 
-## generatorFaultResistance
-The `generatorFaultResistance` property is an optional property that defines the generator fault resistance. The default
-value of this property is `0.00001`.
+**generatorFaultResistance:**  
+The `generatorFaultResistance` property is an optional property that defines the generator fault resistance. The default value of this property is `0.00001`.
 
-# Examples
+## Examples
 
-## YAML
+**YAML configuration:**
 ```yaml
 simulation-parameters:
     preFaultSimulationStopInstant: 0.1
@@ -63,10 +59,10 @@ simulation-parameters:
     branchSideOneFaultShortCircuitDuration: 0.35
     branchSideTwoFaultShortCircuitDuration: 0.75
     generatorFaultShortCircuitDuration: 0.3
-    postFaultSimulationStopInstant: 0.8   
+    postFaultSimulationStopInstant: 0.8
 ```
 
-## XML
+**XML configuration:**
 ```xml
 <simulation-parameters>
     <preFaultSimulationStopInstant>0.1</preFaultSimulationStopInstant>

@@ -12,5 +12,5 @@ The list of post processors currently implemented and available in powsybl-core 
 - [LoadFlowResultsCompletion](LoadFlowResultsCompletionPostProcessor.md)
 
 # Configuration
-To enable an import post processor, add its name to the `postProcessors` property of the [import](../../../configuration/modules/import.md)
+To enable an import post processor, add its name to the `postProcessors` property of the [import](../../../../pages/documentation/user/configuration/import.md)
 module.

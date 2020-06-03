@@ -68,7 +68,7 @@ mapdb-app-file-system:
 </mapdb-app-file-system>
 ```
 
-Read this [page](../../configuration/modules/mapdb-app-file-system.md) to learn more about the configuration of MapDB
+Read this [page](../../../pages/documentation/user/configuration/mapdb-app-file-system.md) to learn more about the configuration of MapDB
 drives.
 
 Here, we have defined a MapDB drive, named `my-first-fs`. The data will be stored in the file `/path/to/my/mapdb/file`.
@@ -219,7 +219,7 @@ remote-service:
     port: 8080
     secure: false
 ```
-For more information, see the documentation of the [remove-service](../../configuration/modules/remote-service.md) module.
+For more information, see the documentation of the [remove-service](../../../pages/documentation/user/configuration/remote-service.md) module.
 
 Now all file systems defined in the server configurations will be transparently accessible from your client application,
 without changing any of your code!
