@@ -10,28 +10,28 @@ mapped to a local hard-drive.
 
 ## Required properties
 
-**drive-name:**  
+**drive-name**  
 The `drive-name` property is a required property that defines the primary drive's name.
 
-**root-dir:**  
+**root-dir**  
 The `root-dir` property is a required property that defines the path to the root directory mapped to the primary AFS drive. If the root directory does not exist, an `AfsException` is thrown.
 
 ## Optional properties
 
-**drive-name-X:**  
+**drive-name-X**  
 The `drive-name-X` property is an optional property that defines the Xth drive's name. This parameter is required if the `root-dir-X` property is set.
 
-**max-additional-drive-count:**  
+**max-additional-drive-count**  
 The `max-additional-drive-count` property is an optional property that defines the maximal number of secondary drives.
 
-**remotely-accessible:**  
+**remotely-accessible**  
 The `remotely-accessible` property is an optional property that defines whether the primary drive is remotely accessible or not. The default value of this property is `false`.
 
-**remotely-accessible-X:**  
+**remotely-accessible-X**  
 The `remotely-accessible-X` property is an optional property that defines whether the Xth secondary drive is remotely
 accessible or not. The default value of this property is `false`.
 
-**root-dir-X:**  
+**root-dir-X**  
 The `root-dir-X` property is an optional property that defines the root directory mapped to the Xth secondary MapDB drive. This parameter is required if the `drive-name-X` property is set. If the root directory does not exist, an `AfsException` is thrown.
 
 ## Examples

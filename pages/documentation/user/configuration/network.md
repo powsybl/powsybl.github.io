@@ -7,7 +7,7 @@ The `network` module is used to configure the network default implementation nam
 
 ## Required properties
 
-**default-impl-name:**  
+**default-impl-name**  
 The `default-impl-name` property is a required property that specifies the name of the default network implementation.
 
 ## Examples

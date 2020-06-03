@@ -9,12 +9,12 @@ If this module is not set, the `com.powsybl.computation.local.LocalComputationMa
 
 ## Required properties
 
-**short-time-execution-computation-manager-factory:**  
+**short-time-execution-computation-manager-factory**  
 The `short-time-execution-computation-manager-factory` property is a required property that defines the name of the `com.powsybl.computation.ComputationManagerFactory` implementation to use for short-time computations.
 
 ## Optional properties
 
-**long-time-execution-computation-manager-factory:**  
+**long-time-execution-computation-manager-factory**  
 The `long-time-execution-computation-manager-factory` property is an optional property that defines the name of the `com.powsybl.computation.ComputationManagerFactory` implementation to use for long-time computations. If not defined, this property returns the same value as the `short-time-execution-manager-factory`.
 
 ## Examples

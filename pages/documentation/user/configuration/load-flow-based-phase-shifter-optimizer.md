@@ -7,7 +7,7 @@ The `load-flow-based-phase-shifter-optimizer` module is used by the `com.powsybl
 
 ## Required properties
 
-**load-flow-name:**
+**load-flow-name**  
 The `load-flow-name` property is an optional property that defines the implementation name to use for running the load flow. If this property is not set, the default loadflow implementation is used. See [Loadflow Configuration](load-flow.md) to configure the default load flow.
 
 **Note**: In previous PowSyBl releases (before 3.0.0), this was configured by the `load-flow-factory` property with the full classname of the implementation.

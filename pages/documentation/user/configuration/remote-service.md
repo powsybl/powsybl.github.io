@@ -8,18 +8,18 @@ The `remote-service` module is used by [AFS]() to define a remote AFS server.
 
 ## Required properties
 
-**host-name:**  
+**host-name**  
 The `host-name` property is a required property that defines the name of the remote host.
 
-**app-name:**  
+**app-name**  
 The `app-name` property is a required property that defines the name of the remote application server.
 
 ## Optional properties
 
-**secure:**  
+**secure**  
 The `secure` property is an optional property that defines whether SSL/TLS protocol should be used to connect to the remote server or not. The default value of this property is `true`.
 
-**port:**  
+**port**  
 The `port` property is an optional property that defines the connection port. By default, if SSL/TLS protocol is used, the default value of this property is `443`. Otherwise, it is `80`.
 
 ## Examples

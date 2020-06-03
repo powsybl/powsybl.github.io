@@ -9,33 +9,33 @@ The `loadflow-validation` module is used by the [loadflow-validation]() command.
 
 ## Optional properties
 
-**apply-reactance-correction:**  
+**apply-reactance-correction**  
 The `apply-reactance-correction` property is an optional property that defines whether the too small reactance values have to be fixed to `epsilon-x` value or not. To solve numeric issues with very small reactance values, it's necessary to set the too small values to a minimal value. The default value of this property is `false`.
 
-**check-main-component-only:**  
+**check-main-component-only**  
 The `check-main-component-only` property is an optional property that defines whether the validation checks are done only on the equiments in the main connected component or in all components. The default value of this property is `true`.
 
-**compare-results:**  
+**compare-results**  
 Set the `compare-results` property to true to compare the results of 2 validations, i.e. print output files with data of both ones. The default value of this property is `false`.
 
-**epsilon-x:**  
+**epsilon-x**  
 The `epsilon-x` property is an optional property that defines the value used to correct the reactance in flows validation. The default value of this property is `0.1`.
 
-**load-flow-name:**  
+**load-flow-name**  
 The `load-flow-name` property is an optional property that defines the implementation name to use for running the load flow. If this property is not set, the default load flow implementation is used. See [Loadflow Configuration](load-flow.md) to configure the default load flow.
 
 **Note**: In previous PowSyBl releases (before 3.0.0), this was configured by the `load-flow-factory` property with the full classname of the implementation.
 
-**no-requirement-if-reactive-bound-inversion:**  
+**no-requirement-if-reactive-bound-inversion**  
 The `no-requirement-if-reactive-bound-inversion` property is an optional property that defines whether the validation checks fail if there is a reactive bounds inversion (maxQ < minQ) or not. The default value of this property is `false`.
 
-**no-requirement-if-setpoint-outside-power-bounds:**  
+**no-requirement-if-setpoint-outside-power-bounds**  
 The `no-requirement-if-setpoint-outside-power-bounds` property is an optional property that defines whether the validation checks fail if there is a setpoint outside the active power bounds (targetP < minP or targetP > maxP) or not. The default value of this property is `false`.
 
-**ok-missing-values:**  
+**ok-missing-values**  
 The `ok-missing-values` property is an optional property that defines whether the validation checks fail if some parameters of connected components have `NaN` values or not. The default value of this property is `false`.
 
-**output-writer:**  
+**output-writer**  
 The `output-writer` property is an optional property that defines the output format. Currently, `CSV` and `CSV_MULTILINE` are supported. The default value of this property is set to `CSV_MULTILINE`.
 
 If this property is set to `CSV`, in the output files a line contains all values of a validated equipment. If the property is set to `CSV_MULTILINE`, in the output files the values of an equipment are split in multiple lines, one value for each line, see examples below:

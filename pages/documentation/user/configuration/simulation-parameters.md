@@ -7,46 +7,46 @@ The `simulation-parameters` module is used by the [run-impact-analysis]() comman
 
 ## Required properties
 
-**branchSideOneFaultShortCircuitDuration:**  
+**branchSideOneFaultShortCircuitDuration**  
 The `branchSideOneFaultShortCircuitDuration` property is a required property that defines the duration of the short
 circuit in seconds for the side `ONE` of a branch. 
 
-**branchSideTwoFaultShortCircuitDuration:**  
+**branchSideTwoFaultShortCircuitDuration**  
 The `branchSideTwoFaultShortCircuitDuration` property is a required property that defines the duration of the short
 circuit in seconds for the side `TWO` of a branch.
 
-**faultEventInstant:**  
+**faultEventInstant**  
 The `faultEventInstant` property is a required property that defines the fault instant event in seconds.
 
-**generatorFaultShortCircuitDuration:**  
+**generatorFaultShortCircuitDuration**  
 The `generatorFaultShortCircuitDuration` property is a required property that defines the duration of the short circuit in seconds for a generator.
 
-**preFaultSimulationStopInstant:**  
+**preFaultSimulationStopInstant**  
 The `preFaultSimulationStopInstant` property is a required property that defines the stop instant event for pre fault
 simulations in seconds.
 
-**postFaultSimulationStopInstant:**
+**postFaultSimulationStopInstant**  
 The `postFaultSimulationStopInstant` property is a required property that defines the stop instant event for post fault simulations in seconds.
 
 ## Optional properties
 
-**branchFaultReactance:**  
+**branchFaultReactance**  
 The `branchFaultReactance` property is an optional property that defines the branch fault reactance. The default
 value of this property is `0.01`.
 
-**branchFaultResistance:**  
+**branchFaultResistance**  
 The `branchFaultResistance` property is an optional property that defines the branch fault resistance. The default
 value of this property is 0.
 
-**branchShortCircuitDistance:**  
+**branchShortCircuitDistance**  
 The `branchShortCircuitDistance` property is an optional property that defines the branch short circuit distance. The
 default value of this property is `50`.
 
-**generatorFaultReactance:**  
+**generatorFaultReactance**  
 The `generatorFaultReactance` property is an optional property that defines the generator fault reactance. The default
 value of this property is `0.00001`.
 
-**generatorFaultResistance:**  
+**generatorFaultResistance**  
 The `generatorFaultResistance` property is an optional property that defines the generator fault resistance. The default value of this property is `0.00001`.
 
 ## Examples
