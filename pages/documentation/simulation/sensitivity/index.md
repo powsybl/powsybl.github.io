@@ -107,10 +107,40 @@ active flow from side 1 to side 2
 At the moment, the only sensitivity analysis implementation compatible with PowSyBl is the one provided
 with the Hades2 freeware, developped by RTE.
 Read this [documentation page](https://rte-france.github.io/hades2/index.html) to learn how to 
-install and configure PowSyBl to use Hades2.
+install and configure PowSyBl to use the load flow of Hades2.
 
-In order to run sensitivity analyses, it is necessary to configure the loadflow parameters first.
-Then, some parameters specific to sensitivity analyses may also be set in an `hades2-default-sensitivity-parameters` section.
+To use this sensitivity implementation, you first need to add these lines to your YML configuration file:
+```yaml
+loadflow:
+  default-impl-name: "hades2"
+```
+(it is actually the same configuraiton as for the load flow). Then, provide the path to your Hades2 installation:
+```yaml
+hades2:
+    homeDir: <PATH_TO_HADES_2>
+```
+Then, you need to configure the load flow calculation itself, because the
+sensitivity analysis of Hades2 relies on an initial load flow calculation. For example:
+```yaml
+load-flow-default-parameters:
+    voltageInitMode: DC_VALUES
+    transformerVoltageControlOn: false
+    specificCompatibility: true 
+
+hades2-default-parameters:
+    dcMode: false
+```
+Read this [page](../loadflow/index.md) to learn how to 
+configure PowSyBl to run a load flow using Hades2.
+
+Finally, you need to choose which parameters specific to sensitivity analyses to use.
+```yaml
+hades2-default-sensitivity-parameters:
+    computeSensitivityToPsts: true
+    computeSensitivityToInjections: false
+    resultsThreshold: 0
+```
+The complete list of parameters specific to sensitvity analyses is provided below:
 
 **Supported parameters**
 - `computeSensitivityToPsts` is a boolean: when set to false, Hades2 will not output any sensitivity
