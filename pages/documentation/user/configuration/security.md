@@ -7,10 +7,10 @@ The `security` module is used by the [AFS]() web-server to define the authentica
 
 ## Optional properties
 
-**skip-token-validity-check:**  
+**skip-token-validity-check**  
 The `skip-token-validity-check` property defines whether the check of the token validity is skipped or not. The default value of this property is `true`.
 
-**token-validity:**  
+**token-validity**  
 The `token-validity` property defines the validity of the connection token in minutes. The default value of this property is `3600` minutes.
  
 ## Examples

@@ -7,7 +7,7 @@ The `dynamic-simulation` module is used to configure the dynamic simulation defa
 
 ## Properties
 
-**default-impl-name:**  
+**default-impl-name**  
 Use the `default-impl-name` property to specify the name of the default dynamic simulation implementation.
 
 ## Examples

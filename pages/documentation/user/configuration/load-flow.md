@@ -7,7 +7,7 @@ The `load-flow` module is used to configure the loadflow default implementation 
 
 ## Properties
 
-**default-impl-name:**
+**default-impl-name**  
 Use the `default-impl-name` property to specify the name of the default loadflow implementation.
 
 **Note**: In PowSyBl releases 3.0.0 and 3.0.1 this property was named `default`. Newer PowSyBl versions read the deprecated for backwards compatibility but support will be removed eventually.

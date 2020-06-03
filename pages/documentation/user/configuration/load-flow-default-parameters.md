@@ -7,19 +7,19 @@ The `load-flow-default-parameters` module is used every time a load-flow is run.
 
 ## Optional properties
 
-**noGeneratorReactiveLimits:**  
+**noGeneratorReactiveLimits**  
 The `noGeneratorReactiveLimits` property is an optional property that defines wheter the load-flow is allowed to find a setpoint value outside the reactive limits of a generator or not. The default value of this property is `false`.
 
-**phaseShifterRegulationOn:**  
+**phaseShifterRegulationOn**  
 The `phaseShifterRegulationOn` property is an optional property that defined whether the load-flow is allowed to change taps of a phase tap changer or not. The default value of this property is `false`.
 
-**specificCompatibility:**  
+**specificCompatibility**  
 The `specificCompatibility` property is an optional property that defines whether the load-flow run in a legacy mode (implementation specific) or not. The default value of this property is `false`.
 
-**transformerVoltageControlOn:**  
+**transformerVoltageControlOn**  
 The `transformerVoltageControlOn` property is an optional property that defines whether the load-flow is allowed to change taps of a ratio tap changer or not. The default value of this property is `false`.
 
-**voltageInitMode:**  
+**voltageInitMode**  
 The `voltageInitMode` property is an optional property that defines the policy used by the load-flow to initialize the
 voltage values. The default value for this property is `UNIFORM_VALUES`. The available `com.powsybl.loadflow.LoadFlowParameters.VoltageInitMode`
 values are:

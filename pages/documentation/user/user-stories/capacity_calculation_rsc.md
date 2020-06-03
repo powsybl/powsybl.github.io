@@ -36,14 +36,14 @@ A security analysis is performed at the end of the process to validate the set o
 
 All PowSyBl features used in this workflow are described below with some implementation examples.
 
-![Workflow](img/capacity_calculation/Workflow_Capacity_Calculation_RSC.svg){: width="70%" .center-image}
+![Workflow](img/capacity_calculation_rsc/Workflow_Capacity_Calculation_RSC.svg){: width="70%" .center-image}
 
 ## Identification of the power system blocks
 
 This user story involves several features from the PowSyBl framework and some other features that are specific:
 
 <p style="text-align:center">
-  <img src="img/capacity_calculation/File.svg"/>
+  <img src="img/capacity_calculation_rsc/File.svg"/>
 </p>
 The studied network comes from a set of TSOs' networks. The TSOs' networks can be provided in a common TSO exchange format such as UCTE or CIM-CGMES formats. 
 The following lines of code come format from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrate this functionality.
@@ -56,7 +56,7 @@ File fileNl = new File("/path/to/file/MicroGridTestConfiguration_T4_NL_BB_Comple
 <br />
 
 <p style="text-align:center">
-  <img src="img/capacity_calculation/Import.svg"/>
+  <img src="img/capacity_calculation_rsc/Import.svg"/>
 </p>
 Each input file is imported and transformed to an in-memory object representing the network.
 
@@ -68,7 +68,7 @@ Network networkNl = Importers.loadNetwork(fileNl.toString());
 <br />
 
 <p style="text-align:center">
-  <img src="img/capacity_calculation/Network_merging.svg"/>
+  <img src="img/capacity_calculation_rsc/Network_merging.svg"/>
 </p>
 A topological merge of the TSOs' networks is done. The following lines of code come from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrate this functionality.
 
@@ -79,7 +79,7 @@ networkBe.merge(networkNl);
 <br />
 
 <p style="text-align:center">
-  <img src="img/capacity_calculation/Compute_LF.svg"/>
+  <img src="img/capacity_calculation_rsc/Compute_LF.svg"/>
 </p>
 Then, flows are computed with a load flow simulator. Since there is no fully functional open source load flow simulator integrated to powsybl for the time being, we use Hades2 for the purpose of the tutorial, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
 
@@ -92,14 +92,14 @@ LoadFlowResult result = LoadFlow.run(network, loadFlowParameters);
 <br />
 
 <p style="text-align:center">
-  <img src="img/capacity_calculation/Compute_Sensitivity.svg"/>
+  <img src="img/capacity_calculation_rsc/Compute_Sensitivity.svg"/>
 </p>
 The sensitivity computation module is dedicated to compute the linearized impact of small network variations on the state variables of some elements. The sensivity computation is fully described [here](../sensitivity/index.md). In this user story, we use this module to compute all coefficients of the cost function. Since there is no fully functional open source sensitivity computation module integrated to PowSyBl for the time being, we use Hades2 for the purpose of the tutorial, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
 
 <br />
 
 <p style="text-align:center">
-  <img src="img/capacity_calculation/Modify_iAL.svg"/>
+  <img src="img/capacity_calculation_rsc/Modify_iAL.svg"/>
 </p>
 Remedial actions are read from the CRAC file and given to the optimizer which is a specific module. The best set of remedial actions is converted in actions understandable by PowSyBl. The CRAC file also provides the contingency list, which is also converted to an understandable object for PowSyBl called [Contingency](../contingencies/index.md).
 
@@ -115,7 +115,7 @@ ContingenciesProvider contingenciesProvider = new ContingenciesProvider() {
 <br />
 
 <p style="text-align:center">
-  <img src="img/capacity_calculation/Compute_SA.svg"/>
+  <img src="img/capacity_calculation_rsc/Compute_SA.svg"/>
 </p>
 The final set of remedial actions is validated through a security analysis. A security analysis needs an input variant, a set of parameters as a `securityAnalysisParameters` object and a set of contingencies as a `contingenciesProvider` object.
 
@@ -128,7 +128,7 @@ SecurityAnalysisResult securityAnalysisResult = securityAnalysis.run(VariantMana
 ## External features are:
 
 <p style="text-align:center">
-  <img src="img/capacity_calculation/Compute_Optimizer.svg"/>
+  <img src="img/capacity_calculation_rsc/Compute_Optimizer.svg"/>
 </p>
 The cost function builder is in fact a big toolbox using some power system blocks from the PowSyBl framework. For more details about this builder, please refer to [FARAO website](https://farao-community.github.io/). The Google OR-Tools open source library is used to perform the optimization: please visit this [page for more details](https://developers.google.com/optimization/).
 
