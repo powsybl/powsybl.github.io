@@ -129,7 +129,6 @@ that is global to your system:
 Now, we'll add a few **required** maven dependencies:
 - `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration
 - `com.rte-france.powsybl:powsybl-hades2-integration`: to provide an implementation of the sensitivity analysis
-- `com.powsybl:powsybl-iidm-impl`: to provide an IIDM implementation
 - `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j` 
 - `org.slf4j:log4j-over-slf4j`: to create a bridge between `log4j` and `slf4j` 
 
@@ -174,10 +173,10 @@ In this way, PowSyBl will be set to use the Hades2 implementation of the loadflo
 Then, set the following general Hades2 configuration parameters:
 ```
 hades2:
-    homeDir: <path_to_hades_2>
+    homeDir: <PATH_TO_HADES_2>
 ```
 where the path to Hades2 should point to your installation directory.
-It is something of the kind `$PATH_TO_ROOT_DIRECTORY/hades2-V6.4.0.1.1/`,
+It is something of the kind `<PATH_TO_ROOT_DIRECTORY/hades2-V6.4.0.1.1/>`,
 where the path to the root directory points to where you extracted the Hades2 distribution,
 and the version of Hades2 will vary depending on your installation.
 
@@ -214,41 +213,235 @@ keep all the sensitivity values in the results.
 
 ## Import the network from an XML IIDM file
 
+The network we use here is available in the tutorial's resources and is described in the iTesla Internal Data Model format.
+Start by adding the following lines in the main function of the tutorial:
+```
+Path networkPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_network_12_nodes.xml").getPath());
+Network network = Importers.loadNetwork(networkPath.toString());
+```
+The first line defines the path to the network file in the resources, while the second line performs the import of the data.
+We now have an IIDM network in memory.
+
 ## Create sensitivity factors through Java code
+
+In order to show how the factors creation work in Java, we start by creating them directly from within the Java code,
+without using the resource file for factors available in the resources. We'll see how to create factors by directly
+loading this file [further on](#create-sensitivity-factors-by-reading-a-json-file).
+
+First, we need to define which branches (in our case lines) will be monitored. We'll just create a list of `Line`,
+and add the ones we wish to monitor in the list by using their IDs:
+```
+ List<Line> monitoredLines = new ArrayList<>();
+ monitoredLines.add(network.getLine("BBE2AA1  FFR3AA1  1"));
+ monitoredLines.add(network.getLine("FFR2AA1  DDE3AA1  1"));
+ monitoredLines.add(network.getLine("DDE2AA1  NNL3AA1  1"));
+ monitoredLines.add(network.getLine("NNL2AA1  BBE3AA1  1"));
+```
+Here we will monitor all the lines that link countries together.
+The initial flow through each of the monitored lines constitutes the `function reference` values in the
+sensitivity results. Here, since we did not run a load flow calculation on the newtork, these flows are not set yet.
+If you wish to display them, add the following lines in the file (optional):
+```
+LoadFlow.run(network, LoadFlowParameters.load());
+LOGGER.info("Initial active power through the four monitored lines");
+for (Line line : monitoredLines) {
+    LOGGER.info("LINE {} - P: {} MW", line.getId(), line.getTerminal1().getP());
+}
+```
+
+To create the factors themselves, we need to create a `Provider` for them in the following way:
+```
+SensitivityFactorsProvider factorsProvider = net -> {
+    List<SensitivityFactor> factors = new ArrayList<>();
+    monitoredLines.forEach(l -> {
+        String monitoredBranchId = l.getId();
+        String monitoredBranchName = l.getName();
+        BranchFlow branchFlow = new BranchFlow(monitoredBranchId, monitoredBranchName, l.getId());
+        String twtId = network.getTwoWindingsTransformer("BBE2AA1  BBE3AA1  1").getId();
+        factors.add(new BranchFlowPerPSTAngle(branchFlow,
+                new PhaseTapChangerAngle(twtId, twtId, twtId)));
+    });
+    return factors;
+};
+```
+In this provider, we first define the variable of interest: here the branch flow (we may also choose intensity) on the monitored lines.
+Then we choose to monitor the branch flow with respect to a PST angle, with the Belgian phase shift transformer's angle as the varying function.
 
 ## Run a single sensitivity analysis
 
-## Output the results to a CSV file
+Now the sensitivity inputs are prepared, we can run a sensitivity analysis. This is done in the following way:
+```
+ComputationManager computationManager = LocalComputationManager.getDefault();
+SensitivityComputation sensitivityComputation = new Hades2SensitivityFactory().create(network,
+    computationManager, 1);
+SensitivityComputationResults sensiResults = sensitivityComputation.run(factorsProvider,
+    VariantManagerConstants.INITIAL_VARIANT_ID, SensitivityComputationParameters.load()).join();
+
+```
+In order to run the calculation, we need to create a `ComputationManager` (TODO: explain its role), and a `SensitivityComputation` object based on the Hades2 implementation.
+Then we can run the calcuation itself, using the initial netork variant as network data.
+Here we directly loaded the sensitivity analysis parameters from the YML configuration file in the resources.
+
+## Output the results in the terminal
+
+We can now print the results in the terminal:
+```
+LOGGER.info("Initial sensitivity results");
+sensiResults.getSensitivityValues().forEach(value ->
+    LOGGER.info("Value: {} MW/°", value.getValue()));
+```
+The values of the four factors are expressed in MW/°, which
+means that for a 1° phase change introduced by the PST, the flow
+through a given monitored line is modified by the value of the
+factor (in MW).
+Here we see that each line will undergo a variation of 25MW for a phase change of 1°
+introduced by the PST (and -25MW for a -1° change).
+The four monitored lines are affected identically, because in this very simple
+network all lines have the same reactance.
+
+## Output the results in a JSON file
+
+It is also possible to output the results to a JSON file. First we will define the path to the file
+where we want to write the results, and if the file does not exist we'll create it:
+```
+Path jsonSensiResultPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_result.json").getPath());
+File jsonSensiResultFile = new File(jsonSensiResultPath.toString());
+if (!jsonSensiResultFile.exists()) {
+    boolean fileCreated = jsonSensiResultFile.createNewFile();
+    if (!fileCreated) {
+        throw new IOException("Unable to create the result file");
+    }
+}
+```
+Then, we can export the results to that file in JSON format:
+```
+ SensitivityComputationResultExporter jsonExporter = new JsonSensitivityComputationResultExporter();
+ try (FileOutputStream os = new FileOutputStream(jsonSensiResultFile.toString())) {
+   jsonExporter.export(sensiResults, new OutputStreamWriter(os));
+ } catch (IOException e) {
+   throw new UncheckedIOException(e);
+ }
+```
 
 ## Create a set of contingencies 
 
+We now reach the last part of this tutorial, where we'll run
+a series of sensitivity calculations on a network, given a list of contingencies and sensitivity factors.
+Here we use the systematic sensitivity feature of Hades2, creating one variant on which all
+the calculations are done successively, without re-loading the network each time, by
+modifying the Jacobian matrix directly in the solver.
+
+First, we need to implement a contingencies provider.
+Here the list of contingencies is composed of the lines that are not monitored
+in the sensitivity analysis.
+```
+ContingenciesProvider contingenciesProvider = n -> n.getLineStream()
+  .filter(l -> {
+      final boolean[] isContingency = {true};
+      monitoredLines.forEach(monitoredLine -> {
+          if (l.equals(monitoredLine)) {
+          isContingency[0] = false;
+          return;
+          }
+          });
+      return isContingency[0];
+      })
+.map(l -> new Contingency(l.getId(), new BranchContingency(l.getId())))
+  .collect(Collectors.toList());
+```
+This makes a total of 11 contingencies, which you can check through:
+```
+LOGGER.info("Number of contingencies: {}", contingenciesProvider.getContingencies(network).size());
+```
+
 ## Create sensitivity factors by reading a JSON file
+
+Now, we'll read factors from a JSON file (this is the second example of how to create factors, actually we created the same twice).
+```
+Path factorsFile = Paths.get(SensitivityTutorialComplete.class.getResource("/factors.json").getPath());
+SensitivityFactorsProvider jsonFactorsProvider = net -> {
+  try (InputStream is = Files.newInputStream(factorsFile)) {
+    return SensitivityFactorsJsonSerializer.read(new InputStreamReader(is));
+  } catch (IOException e) {
+    throw new UncheckedIOException(e);
+  }
+};
+```
+You can check the content of the file `src/main/resources/factors.json` to verify which factors were created.
 
 ## Overwrite the Hades2 sensitivity parameters with a JSON file
 
+It is possible to overwrite the Hades2 sensitivity parameters with a JSON file, which we'll do now:
+```
+Path parametersFile = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_parameters.json").getPath());
+SensitivityComputationParameters params = SensitivityComputationParameters.load();
+JsonSensitivityComputationParameters.update(params, parametersFile);
+```
+We first create sensitivity analysis parameters by loading the YML configuration file, and then update them
+based on the provided JSON file for sensitivity parameters.
+
 ## Run a set of sensitivity analyses on all network states
 
-## Check the files Hades2 generated for the calculation
-In order to be able to check what Hades2 itself generated for the calculation, you can set the following configuration options in your config file:
+We can now run all the sensitivity analyses at once, through:
+```
+SensitivityComputationResults systematicSensiResults = sensitivityComputation.run(
+    jsonFactorsProvider, contingenciesProvider, VariantManagerConstants.INITIAL_VARIANT_ID,
+    params).join();
+```
+
+## Output the results to a CSV file
+
+First, we'll create the file if it does not exist yet:
+```
+Path csvResultPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_syst_result.json").getPath());
+File csvResultFile = new File(csvResultPath.toString());
+if (!csvResultFile.exists()) {
+  boolean fileCreated = csvResultFile.createNewFile();
+  if (!fileCreated) {
+    throw new IOException("Unable to create the systematic sensi result file");
+  }
+}
+```
+Then, we can export the results in CSV format:
+```
+SensitivityComputationResultExporter csvExporter = new CsvSensitivityComputationResultExporter();
+try (FileOutputStream os = new FileOutputStream(csvResultFile.toString())) {
+  csvExporter.export(systematicSensiResults, new OutputStreamWriter(os));
+} catch (IOException e) {
+  throw new UncheckedIOException(e);
+}
+```
+The output will contain the sensitivity results on all considered network states, for all the factors (hence it is more
+convenient to use the CSV format instead of JSON to analyze them).
+
+## Check the files Hades2 generated for the calculation (optional)
+
+In order to be able to check what files Hades2 itself generated for the calculation, you can set the following configuration options in your config file:
 ```
 computation-local:
-    tmp-dir: <path_to_local_tmp>
+    tmp-dir: <PATH_TO_LOCAL_TMP>
     availableCore: 1
 
 hades2:
-    homeDir: <path_to_hades_2>
+    homeDir: <PATH_TO_HADES_2>
     debug: true
 ```
 where you can provide the path you wish for storing the temporary files generated by PowSyBl.
-By default, that path is set to `/tmp` on Linux.
+By default, that path is set to </tmp> on Linux.
 Each PowSyBl run will generate a folder named `itesla_hades2_XXX` where `XXX` stands for random a series of numbers.
 In this folder, you will find several files:
 - `adn_in`
 - `adn_out`
 - log
+which can be useful to understand what happened during the Hades2 calculation in more details.
+The adn files contain the input and output network data, while the log files provide information about the run's behavior.
 
 ## Summary
-You have learnt to create a redistribuable `iTools` package, and to configure the `itools-packager` plugin. Refer to the [iTools manual](../../user/itools/index.md#available-commands) to know the list of available commands, and the [itools-packager manual](../itools-packager.md) to configure more deeply your `iTools` distribution.  
+We have learnt how to write Java code to run sensitivity analyses in single mode or in a systematic way, by providing contingencies to the `run` call.
+We've seen how to create sensitivity factors, in Java directly but also by reading a JSON file.
+We've shown how to set the sensitivity parameters, and how to overwrite them using a JSON file.
+We've also seen how to output the results, in the terminal but also into JSON or CSV files.
+Finally, we've also explained how to check what Hades2 itself generated during the calculation, which may be useful for debugging purposes.
 
 ## Going further
 The following links could also be useful:
