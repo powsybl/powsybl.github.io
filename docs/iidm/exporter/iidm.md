@@ -58,7 +58,7 @@ IIDM networks can be serialized in XML files. The IIDM exporter generates files 
 
 # Configuration properties for the IIDM-XML exporter
 
-These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
+These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../../pages/documentation/user/configuration/import-export-parameters-default-value.md)
 module.
 
 ## iidm.export.xml.indent

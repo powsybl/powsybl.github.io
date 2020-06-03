@@ -56,7 +56,7 @@ IIDM is not only an exchange format, but also the internal format used in Powsyb
 
 # Configuration properties for the IIDM-XML importer
 
-These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
+These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../../pages/documentation/user/configuration/import-export-parameters-default-value.md)
 module.
 
 ## iidm.import.xml.throw-exception-if-extension-not-found

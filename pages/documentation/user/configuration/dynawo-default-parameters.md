@@ -1,40 +1,38 @@
 ---
-title: dynawo-default-parameters
 layout: default
 --- 
 
+# dynawo-default-parameters
 The `dynawo-default-parameters` module defines the default values for all specific parameters of a dynamic simulation run with Dynawo. 
-
-# Properties
 
 ## Required properties
 
-## parametersFile
+**parametersFile:**  
 The `parametersFile` property is a required property that defines the path of the main parameters file.
 
-## network.parametersFile
+**network.parametersFile:**  
 The `network.parametersFile` property is a required property that defines the path of the network parameters file
 
-## solver.parametersFile
+**solver.parametersFile:**  
 The `solver.parametersFile` property is a required property that defines the path of the solver parameters file
 
 ## Optional properties
 
-## network.parametersId
+**network.parametersId:**  
 The `network.parametersId` property is an optional property that defines the set of network parameters. The default value for this property is `NETWORK`.
 
-## solver.type
+**solver.type:**  
 The `solver.type` property is an optional property that defines the solver used in the simulation. The default value for this property is `SIM`. The available `com.powsybl.dynawo.simulator.DynawoSimulationParameters.SolverType`
 values are:
-- SIM: the simplified solver (fixed time step solver)
-- IDA: the IDA solver (variable time step solver)
+- `SIM`: the simplified solver (fixed time step solver)
+- `IDA`: the IDA solver (variable time step solver)
 
-## solver.parametersId
+**solver.parametersId:**  
 The `solver.parametersId` property is an optional property that defines the set of solver parameters. The default value for this property is `SIM`.
 
-# Examples
+## Examples
 
-## YAML
+**YAML configuration:**
 ```yaml
 dynawo-default-parameters:
   parametersFile: /home/user/parametersFile
@@ -45,7 +43,7 @@ dynawo-default-parameters:
   solver.parametersId: SIM
 ```
 
-## XML
+**XML configuration:**
 ```xml
 <dynawo-default-parameters>
   <parametersFile>/home/user/parametersFile</parametersFile>

@@ -150,7 +150,7 @@ you have to use the `run-computation` (or `load-flow`) parameter.
 
 # Configuration
 To learn how to configure the `loadflow-validation` command, read the documentation of the
-[loadflow-validation](../configuration/modules/loadflow-validation.md) module.
+[loadflow-validation](../../pages/documentation/user/configuration/loadflow-validation.md) module.
 
 # Examples
 

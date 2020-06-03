@@ -33,7 +33,7 @@ values are:
 - DC_VALUES: preprocessing to compute DC angles
 
 # Configuration
-The default values of all the optional properties are read from the [load-flow-default-parameter](../modules/load-flow-default-parameters.md)
+The default values of all the optional properties are read from the [load-flow-default-parameter](../../../pages/documentation/user/configuration/load-flow-default-parameters.md)
 module, defined in the configuration file.
 
 ## Examples

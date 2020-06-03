@@ -7,7 +7,7 @@ Powsybl provides a simple implementation of the AFS storage API, based on [MapDB
 for prototyping or standalone applications.
 
 # Configuration
-To learn how to configure a MapDB AFS drive, read this documentation [page](../configuration/modules/mapdb-app-file-system.md).
+To learn how to configure a MapDB AFS drive, read this documentation [page](../../pages/documentation/user/configuration/mapdb-app-file-system.md).
 
 # Maven configuration
 To use the AFS local implementation, add the following dependencies to your `pom.xml` file:

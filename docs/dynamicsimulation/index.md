@@ -19,10 +19,10 @@ computation.
 **Note**: Powsybl provides an [implementation](./dynawo-simulation.md) to run dynamic simulations with Dynawo.
 
 # Configuration
-To run a dynamic simulation, one has to choose the implementation, follow the instructions at [dynamic simulation Configuration](../configuration/modules/dynamic-simulation.md).
+To run a dynamic simulation, one has to choose the implementation, follow the instructions at [dynamic simulation Configuration](../../pages/documentation/user/configuration/dynamic-simulation.md).
 
 To set the default configuration of the dynamic simulation, one has to configure the
-[dynamic-simulation-default-parameters](../configuration/modules/dynamic-simulation-default-parameters.md) module.
+[dynamic-simulation-default-parameters](../../pages/documentation/user/configuration/dynamic-simulation-default-parameters.md) module.
 
 To learn more about configuration files, read the [DynamicSimulationParameters](../configuration/parameters/DynamicSimulationParameters.md) documentation
 page.

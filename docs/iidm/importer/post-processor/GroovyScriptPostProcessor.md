@@ -11,7 +11,7 @@ The groovy script has access to two variables:
 - `computationManager` : a computation manager instance to use to run simulations
 
 # Configuration
-To activate the `GroovyScriptPostProcessor`, add `groovyScript` to the `postProcessors` property of the [import](../../../configuration/modules/import.md)
+To activate the `GroovyScriptPostProcessor`, add `groovyScript` to the `postProcessors` property of the [import](../../../../pages/documentation/user/configuration/import.md)
 module.
 
 Read the [groovy-post-processor](../../../configuration/modules/groovy-post-processor.md) documentation to learn how to

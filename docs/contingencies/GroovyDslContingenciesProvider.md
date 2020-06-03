@@ -110,8 +110,8 @@ network.generatorStream
 
 # Configuration
 To use the `GroovyDslContingenciesProvider`, configure the `ContingenciesProviderFactory` property of the
-[componentDefaultConfig](../configuration/modules/componentDefaultConfig.md) module and configure the 
-[groovy-dsl-contingencies](../configuration/modules/groovy-dsl-contingencies.md) module.
+[componentDefaultConfig](../../pages/documentation/user/configuration/componentDefaultConfig.md) module and configure the 
+[groovy-dsl-contingencies](../../pages/documentation/user/configuration/groovy-dsl-contingencies.md) module.
 
 ### YAML
 ```yaml

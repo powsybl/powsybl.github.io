@@ -10,7 +10,7 @@ implementation should be use to check violations on a N-state.
 # Configuration
 
 To use the `EmptyContingencyListProvider`, configure the `ContingenciesProviderFactory` property of the
-[componentDefaultConfig](../configuration/modules/componentDefaultConfig.md) module.
+[componentDefaultConfig](../../pages/documentation/user/configuration/componentDefaultConfig.md) module.
 
 ## YAML
 ```yaml

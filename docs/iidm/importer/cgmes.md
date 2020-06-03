@@ -19,7 +19,7 @@ from ENTSO-E Test Configurations for Conformity Assessment Scheme v2.0.
 
 # Configuration properties for CGMES importer
 
-These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../configuration/modules/import-export-parameters-default-value.md)
+These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../../pages/documentation/user/configuration/import-export-parameters-default-value.md)
 module.
 
 ## iidm.import.cgmes.allow-unsupported-tap-changers
