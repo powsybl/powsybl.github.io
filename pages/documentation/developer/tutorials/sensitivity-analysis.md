@@ -140,10 +140,13 @@ Add the following dependencies to the `pom.xml` file:
 </dependencies>
 ```
 ## Configure PowSyBl
-We have configured this tutorial so as to use a locally defined `config.yml` file. Create a file named `config.yml` at the location `sensitivity/initial/src/main/resources`. Start the configuration by writing:
+<<<<<<< HEAD
+We have configured this tutorial so as to use a locally defined `config.yml` file.
+Edit the file named `config.yml` at the location `sensitivity/initial/src/main/resources`.
+Start the configuration by writing:
 ```yaml
-componentDefaultConfig:
-    LoadFlowFactory: com.rte_france.powsybl.hades2.Hades2Factory
+loadflow:
+  default-impl-name: "hades2"
 ```
 In this way, PowSyBl will be set to use the Hades2 implementation of the loadflow and sensitivity analysis.
 
@@ -154,7 +157,8 @@ hades2:
 ```
 where the path to Hades2 should point to your installation directory. It is something of the kind `<PATH_TO_ROOT_DIRECTORY/hades2-V6.4.0.1.1/>`, where the path to the root directory points to where you extracted the Hades2 distribution, and the version of Hades2 will vary depending on your installation.
 
-In order to configure the sensitivity analysis parameters, we need to fill also two sections relative  to the loadflow calculations:
+In order to configure the sensitivity analysis parameters, we need to fill also two sections relative 
+to the loadflow calculations:
 ```yaml
 load-flow-default-parameters:
     voltageInitMode: DC_VALUES
@@ -166,7 +170,9 @@ hades2-default-parameters:
 ```
 These parameters will be used by the sensitivity solver: in order to compute the sensitivity values themselves Hades2 has to perform a load flow calculation. You can use the `dcMode` parameter to switch between AC and DC modes sensitivity calculations.
 
-Some specific sensitivity parameters should also be set. Check the [sensitivity analysis documentation](/pages/documentation/simulation/sensitivity/index.html#sensitivity-analysis-implementations) for more information about the parameters:
+Some specific sensitivity parameters should also be set. Check the 
+[sensitivity analysis documentation](/pages/documentation/simulation/sensitivity/index.html#sensitivity-analysis-implementations)
+for more information about the parameters:
 ```yaml
 hades2-default-sensitivity-parameters:
     computeSensitivityToPsts: true
@@ -177,7 +183,8 @@ Here we activate `computeSensitivityToPsts` so as to output sensitivity results 
 
 ## Import the network from an XML IIDM file
 
-The network we use here is available in the tutorial's resources and is described in the iTesla Internal Data Model format. Start by adding the following lines in the main function of the tutorial:
+The network we use here is available in the tutorial's resources and is described in the iTesla Internal Data Model format.
+Start by adding the following lines in the main function of the tutorial:
 ```java
 Path networkPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_network_12_nodes.xml").getPath());
 Network network = Importers.loadNetwork(networkPath.toString());
@@ -188,7 +195,8 @@ The first line defines the path to the network file in the resources, while the 
 
 In order to show how the factors creation work in Java, we start by creating them directly from within the Java code, without using the resource file for factors available in the resources. We'll see how to create factors by directly loading this file [further on](#create-sensitivity-factors-by-reading-a-json-file).
 
-First, we need to define which branches (in our case lines) will be monitored. We'll just create a list of `Line`, and add the ones we wish to monitor in the list by using their IDs:
+First, we need to define which branches (in our case lines) will be monitored. We'll just create a list of `Line`,
+and add the ones we wish to monitor in the list by using their IDs:
 ```java
  List<Line> monitoredLines = new ArrayList<>();
  monitoredLines.add(network.getLine("BBE2AA1  FFR3AA1  1"));
@@ -196,7 +204,10 @@ First, we need to define which branches (in our case lines) will be monitored. W
  monitoredLines.add(network.getLine("DDE2AA1  NNL3AA1  1"));
  monitoredLines.add(network.getLine("NNL2AA1  BBE3AA1  1"));
 ```
-Here we will monitor all the lines that link countries together. The initial flow through each of the monitored lines constitutes the `function reference` values in the sensitivity results. Here, since we did not run a load flow calculation on the newtork, these flows are not set yet. If you wish to display them, add the following lines in the file (optional):
+Here we will monitor all the lines that link countries together.
+The initial flow through each of the monitored lines constitutes the `function reference` values in the
+sensitivity results. Here, since we did not run a load flow calculation on the newtork, these flows are not set yet.
+If you wish to display them, add the following lines in the file (optional):
 ```java
 LoadFlow.run(network, LoadFlowParameters.load());
 LOGGER.info("Initial active power through the four monitored lines");
@@ -233,7 +244,10 @@ SensitivityComputationResults sensiResults = sensitivityComputation.run(factorsP
     VariantManagerConstants.INITIAL_VARIANT_ID, SensitivityComputationParameters.load()).join();
 
 ```
-In order to run the calculation, we need to create a `ComputationManager` (TODO: explain its role), and a `SensitivityComputation` object based on the Hades2 implementation. Then we can run the calcuation itself, using the initial netork variant as network data. Here we directly loaded the sensitivity analysis parameters from the YML configuration file in the resources.
+In order to run the calculation, we need to create a `ComputationManager` (<span style="color: red">TODO: explain its role</span>), 
+and a `SensitivityComputation` object based on the Hades2 implementation.
+Then we can run the calcuation itself, using the initial netork variant as network data.
+Here we directly loaded the sensitivity analysis parameters from the YML configuration file in the resources.
 
 ## Output the results in the terminal
 
@@ -273,19 +287,21 @@ Then, we can export the results to that file in JSON format:
 
 We now reach the last part of this tutorial, where we'll run a series of sensitivity calculations on a network, given a list of contingencies and sensitivity factors. Here we use the systematic sensitivity feature of Hades2, creating one variant on which all the calculations are done successively, without re-loading the network each time, by modifying the Jacobian matrix directly in the solver.
 
-First, we need to implement a contingencies provider. Here the list of contingencies is composed of the lines that are not monitored in the sensitivity analysis.
+First, we need to implement a contingencies provider.
+Here the list of contingencies is composed of the lines that are not monitored
+in the sensitivity analysis.
 ```java
 ContingenciesProvider contingenciesProvider = n -> n.getLineStream()
   .filter(l -> {
       final boolean[] isContingency = {true};
       monitoredLines.forEach(monitoredLine -> {
           if (l.equals(monitoredLine)) {
-          isContingency[0] = false;
-          return;
+            isContingency[0] = false;
+            return;
           }
-          });
+      });
       return isContingency[0];
-      })
+  })
   .map(l -> new Contingency(l.getId(), new BranchContingency(l.getId())))
   .collect(Collectors.toList());
 ```
