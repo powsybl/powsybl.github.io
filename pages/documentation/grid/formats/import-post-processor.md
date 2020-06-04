@@ -38,7 +38,10 @@ groovy-post-processor:
 **Note**: the `script` property is optional. If it is not defined, the `import-post-processor.groovy` script from the PowSyBl configuration folder is used.
 
 ### Example
-<span style="color: red">TODO: insert an example
+The following example prints meta-information from the network:
+```groovy
+println "Network " + network.getId() + " (" + network.getSourceFormat()+ ") is imported"
+```
 
 ## JavaScript post-processor
 This post-processor executes a JS script, loaded from a file. The script can access to the network and the [computation manager]() using the variables `network` and `computationManager`. To use this post-processor, add the `com.powsybl:powsybl-iidm-scripting` dependency to your classpath, and configure both `import` and `javaScriptPostProcessor` modules:
@@ -66,7 +69,11 @@ javaScriptPostProcessor:
 **Note**: the `script` property is optional. If it is not defined, the `import-post-processor.js` script from the PowSyBl configuration folder is used.
 
 ### Example
-<span style="color: red">TODO: insert an example
+The following example prints meta-information from the network:
+```javascript
+print("Network " + network.getId() + " (" + network.getSourceFormat()+ ") is imported");
+```
+
 
 ## LoadFlow post-processor
 Mathematically speaking, a [power flow]() result is fully defined by the complex voltages at each node. The consequence is that most load flow algorithms converge very fast if they are initialized with voltages. As a result, it happens that load flow results include only voltages and not flows on branches. This post-processors computes the flows given the voltages. The equations (Kirchhoff law) used are the same as the one used in the [load flow validation]() to compute $$P_1^{\text{calc}}$$, $$Q_1^{\text{calc}}$$, $$P_2^{\text{calc}}$$, $$Q_2^{\text{calc}}$$ for branches and $$P_3^{\text{calc}}$$, $$Q_3^{\text{calc}}$$ in addition for three-windings transformers.
