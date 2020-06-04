@@ -31,8 +31,6 @@ Available arguments are:
     --output-file <FILE>                               sensitivity computation results
                                                        output path
     --output-format <FORMAT>                           the output format [JSON]
-    --skip-postproc                                    skip network importer post
-                                                       processors (when configured)
 ```
 
 ## Required parameters
@@ -57,10 +55,6 @@ used, the results are printed to the console.
 ### output-format
 Use the `--output-format` parameter to specify the format of the result file. Currently, the only supported format is JSON. This
 parameter is required if the `output-file` parameter is used.
-
-### skip-postproc
-Use the `--skip-postproc` parameter to skip the importer's post processors. Read the [post processor](../iidm/importer/post-processor/index.md)
-documentation page to learn more about importer's post processors.
 
 # Configuration
 To run a sensitivity computation, one has to configure the the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)

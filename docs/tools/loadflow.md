@@ -33,9 +33,6 @@ Available arguments are:
      --output-format <FORMAT>                     loadflow results output format
                                                   [CSV, JSON]
      --parameters-file <FILE>                     loadflow parameters as JSON file
-     --skip-postproc                              skip network importer post
-                                                  processors (when configured)
-
 ```
 
 ## Required parameters
@@ -74,10 +71,6 @@ parameter is required if the `output-file` parameter is used.
 ### parameters-file
 Use the `--parameters-file` parameter to specify a JSON configuration file. If this parameter is not set, the default
 configuration is used.
-
-### skip-postproc
-Use the `--skip-postproc` parameter to skip the importer's post processors. Read the [post processor](../iidm/importer/post-processor/index.md)
-documentation page to learn more about importer's post processors.
 
 # Configuration
 To run a load flow, one has to choose the implementation, follow the instructions at [LoadFlow Configuration](../configuration/modules/load-flow.md).
