@@ -12,7 +12,7 @@ usage: itools [OPTIONS] loadflow --case-file <FILE> [-E <property=value>]
               [--export-parameters <EXPORT_PARAMETERS>] [--help] [-I <property=value>]
               [--import-parameters <IMPORT_PARAMETERS>] [--output-case-file <FILE>]
               [--output-case-format <CASEFORMAT>] [--output-file <FILE>]
-              [--output-format <FORMAT>] [--parameters-file <FILE>] [--skip-postproc]
+              [--output-format <FORMAT>] [--parameters-file <FILE>]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name

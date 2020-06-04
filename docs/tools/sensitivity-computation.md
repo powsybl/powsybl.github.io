@@ -14,7 +14,6 @@ $> itools sensitivity-computation --help
 usage: itools [OPTIONS] sensitivity-computation --case-file <FILE>
        --factors-file <FILE> [--help] [-I <property=value>] [--import-parameters
        <IMPORT_PARAMETERS>] [--output-file <FILE>] [--output-format <FORMAT>]
-       [--skip-postproc]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
