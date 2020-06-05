@@ -140,7 +140,6 @@ Add the following dependencies to the `pom.xml` file:
 </dependencies>
 ```
 ## Configure PowSyBl
-<<<<<<< HEAD
 We have configured this tutorial so as to use a locally defined `config.yml` file.
 Edit the file named `config.yml` at the location `sensitivity/initial/src/main/resources`.
 Start the configuration by writing:
@@ -153,7 +152,7 @@ In this way, PowSyBl will be set to use the Hades2 implementation of the loadflo
 Then, set the following general Hades2 configuration parameters:
 ```yaml
 hades2:
-    homeDir: /path/to/hades2
+    homeDir: <PATH_TO_HADES2>
 ```
 where the path to Hades2 should point to your installation directory. It is something of the kind `<PATH_TO_ROOT_DIRECTORY/hades2-V6.4.0.1.1/>`, where the path to the root directory points to where you extracted the Hades2 distribution, and the version of Hades2 will vary depending on your installation.
 
