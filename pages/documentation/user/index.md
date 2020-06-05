@@ -7,6 +7,8 @@ layout: default
 * TOC
 {:toc}
 
+## Introduction
+
 Follow these simple steps to get familiar with the PowSyBl environment. Below are instructions to install a 
 basic PowSyBl distribution and to start running iTools commands.
 

@@ -109,12 +109,13 @@ with the Hades2 freeware, developped by RTE.
 Read this [documentation page](https://rte-france.github.io/hades2/index.html) to learn how to 
 install and configure PowSyBl to use the load flow of Hades2.
 
-To use this sensitivity implementation, you first need to add these lines to your YML configuration file:
+## Configuration
+To use Hades2 and perform sensitivity analyses, you first need to add these lines to your YML configuration file:
 ```yaml
 loadflow:
   default-impl-name: "hades2"
 ```
-(it is actually the same configuraiton as for the load flow). Then, provide the path to your Hades2 installation:
+(it is actually the same configuration as for the load flow). Then, provide the path to your Hades2 installation:
 ```yaml
 hades2:
     homeDir: <PATH_TO_HADES_2>
@@ -130,7 +131,7 @@ load-flow-default-parameters:
 hades2-default-parameters:
     dcMode: false
 ```
-Read this [page](../loadflow/index.md) to learn how to 
+Read this [page](../loadflow/index.html#configuration) to learn how to 
 configure PowSyBl to run a load flow using Hades2.
 
 Finally, you need to choose which parameters specific to sensitivity analyses to use.
@@ -166,4 +167,5 @@ before sensitivity values are calculated, but it doesn't seem to have any effect
 ## Going further
 
 To go further about the sensitivity analysis, check the following content:
-- [Perform sensitivity analyses](/../../developer/tutorials/sensitivity-analysis.md): learn how to write the Java code to perform sensitivity analyses
+- [Run a sensitivity analysis through an iTools command](../../user/itools/sensitivity-computation.md): Learn how to perform a sensitivity analysis from the command line 
+- [Sensitivity analysis tutorial](/../../developer/tutorials/sensitivity-analysis.md): learn how to write the Java code to perform sensitivity analyses
