@@ -19,14 +19,93 @@
 - _includes/navbar.html
     - Améliorer le rendu du menu hamburger
 
+## Index
+- Ajouter dans le bandeau bleu des pictos de features
+- Features:
+     - fond highlight passe en bleu ciel comme le coin droit
+     - texte + titre reste en noir
+     - lien couleur a adapter
+Projets:
+     - 3 par lignes
+     - 5è = votre projet ici pour référencer un nouveau projet
+Ajouter une section Partners
+     - logo des prestataires
+     - lien vers leurs sites
+     ==> demander l'autorisation
+     - ajouter MHP + IESS
+
+## Overview > About
+- virer short circuit computation
+- ajouter des liens dans paragraphe Core
+- powsybl-dynawo: corriger la description
+- powsybl-afs: voir ci-dessous
+
+## Overview > Roadmap
+- Travailler la roadmap (Debut 2021)
+
 ## Documentation
-- Définir les bullets points à afficher (icone + description)
 - Ajouter une barre de recherche
+
+Index:
+- Trouver des icones --> Faire des icones
+- Finaliser les description
+
+## Documentation > User stories
+- Améliorer le rendu des images
+- Ecrire user-stories sur:
+     - Extraction THT + export pour envoie ENTSOE (TSO)
+     - Merging Function (RSC)
+     ==> essayer de trouver des images pertinentes pour illustrer les US
+
+## Documentation > Grid Model
+- Ajouter des TODO partout
+- Mettre les tableaux actuels dans la javadoc et mettre des liens vers la javadoc depuis les titres de section des équipements
+- Mettre un lien vers les extensions dans le paragraphe des equipements
+- Faire une 1/2 journée de workshop dédiée pour passer en revue tous les TODO
+
+## Documentation > Grid Extensions
+- Regrouper les extensions par extendable
 
 ## Download
 - Créer un package standalone autour de iTools
-    - Quelques commandes uniquement
-    - Quelques formats uniquement
-    - Configuration
-    - Open LoadFlow
-- Ajouter un lien vers GitHub pour télécharger à partir des sources
+  - Merger le PR
+  - Faire une release
+  - Automatiser la génération d'un package + upload sur github (Fin 2020)
+- Changer la largeur du tableau de la page download
+- Remplir les liens de la case download du tableau
+
+
+## powsybl-afs
+Description: ajouter le fait que les données sont "métier"
+(input/output) de l'ecosysteme powsybl, organisées hierarchiquement mais
+aussi avec des dependances fonctionnelles. Sert à construire une étude
+de réseau sous la forme d'un graphe de dépendances fonctionnelles
+     ==> faire un résumé
+
+## Configuration
+- déplacer les fichiers dans les bonnes sections "fonctionnelles"
+- retravailler le contenu pour supprimer toutes les références aux classes
+- créer un index global
+- Faire des issues pour nettoyer la configuration des noms complets de
+classes
+
+Ajouter les conventions d'écriture dans le README du site
+- chemin <PREFIX> vs $PREFIX
+- répertoires d'images (img/nom_de_la_page)
+- liens invalides [texte]()
+- referencer les artefacts: com.powsybl:powsybl-iidm-scripting
+- Créer un SVG pour avoir les pictos des equipements
+
+## API Guide
+- déplacer la page time-series
+- Créer une page AFS a partir du README.md de powsybl-afs
+
+
+Agnès: reprendre le load-flow
+Mathieu:
+- AS (contingencies, AS, ActionSimulator)
+- Post processor
+- Configuration
+Miora
+- download
+- grid model

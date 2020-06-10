@@ -8,7 +8,17 @@ latex: true
 * TOC
 {:toc}
 
-## Concepts
+- <span style="color:red"> TODO: add links to javadoc for each section/subsection.</span>
+- <span style="color:red"> TODO: put all the current Table in the corresponding javadoc pages.</span>
+- <span style="color:red"> TODO: only keep electrotech/regulation/etc. information in this page (not code-oriented information).</span>
+
+## Introduction
+
+In this page the different network components are described in terms of electrotechnical representation.
+Each component is identified through a unique ID, and optionally by a name that is easier to interpret for a human.
+Note that the equipments in the IIDM model may be flagged as fictitious, in order to fine tune the network modelling.
+<span style="color:red"> TODO: complete me.</span>
+<span style="color:red"> TODO: when we have aliases, add a description here too.</span>
 
 ## Network core model
 
@@ -22,6 +32,14 @@ latex: true
 | Name | String | no | - | The name of the network |
 | CaseDate | `DateTime` | no | Now | The date of the case |
 | ForecastDistance | Integer | no | 0 | The number of minutes between the date of the case generation and the date of the case |
+
+<span style="color:red"> TODO: remove the Table.</span>
+
+In IIDM, the network is constituted of [substations](#substation), which are themselves constituted of [voltage levels](#voltage-level).
+All the equipments are then connected to the voltage levels.
+The network comprises metadata in IIDM: 
+- a case date: the date and time of the target network that is being modelled
+- a forecast distance: the number of minutes between the network generation date and the case date
 
 **Available extensions**
 
@@ -40,6 +58,14 @@ latex: true
 | Tso | String | no | - | The TSO this substations belongs to |
 | GeographicalTags | List of String | no | - | A list of geographical tags |
 
+<span style="color:red"> TODO: remove the Table.</span>
+
+A substation in IIDM represents a specific geographical location with a set of equipments connected to one or several [voltage levels](#voltage-level).
+It comprises metadata in IIDM:
+- a country: to specify in which country the substation is located. It is an optional attribute, not set on fictitious test networks for example.
+- a set of geographical tags: they make it possible to accurately locate the substation
+- a [TSO](/pages/glossary.md#tso) information: to track to which TSO the substation belongs
+
 **Available extensions**
 
 - [ENTSOE Area]()
@@ -57,33 +83,38 @@ latex: true
 | HighVoltageLimit | double | kV | no | - | The high voltage limit |
 | TopologyKind | `TopologyKind` | - | yes | - | The kind of topology |
 
-### Injections
+<span style="color:red"> TODO: remove the Table.</span>
 
-An injection in IIDM Grid model is any AC equipment with a single connection point to the network.
-Below are the different types of injections supported by PowSyBl.
+A voltage level in IIDM represents a set of equipments connected together with the same nominal voltage, physically close to each other (~ 1-100m).
+Two voltage levels may be connected through a line (they are then located in different substations) or through transformers (they are then located within
+the same substation).
 
-#### Battery
+A voltage level in IIDM comprises some metadata:
+- a nominal voltage (in $$kV$$)
+- a low voltage limit and a high voltage limit (in $$kV$$): they are both optional metadata. The voltage should always remain within these bounds, otherwise it means that the equipments will suffer extra wear compared to
+their normal use
+- a topology information: indicates whether the voltage level is described in [node/breaker]() or [bus/breaker]() view
 
-A battery on the electric grid is an energy storage device that is either capable of capturing energy from the grid or of injecting it into the grid. The electric energy on the grid side is thus transformed into chemical energy on the battery side and vice versa. The power flow is bidirectional and it is controlled via a power electronic converter.
+#### Node/breaker topology
+<span style="color:red"> TODO: explain the topology.</span>
 
-**Characteristics**
+In node/breaker topology, the voltage level is described with the finest level of detail. See the sketch below for an example.
+<span style="color:red"> TODO: add sketch of voltage level.</span>
+The topology is then described as a graph structure, where busbar sections, injections or branches are connected to the vertices.
+When an equipment is connected to a vertex, in the IIDM descrition it corresponds to a `Terminal` object.
+It is not possible to connect two equipments on the same vertex.
+The edges are constituted of switches or internal connections. See the following sketch corresponding to the previous example:
+<span style="color:red"> TODO: add sketch of voltage level topology graph.</span>
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the battery |
-| Name | String | - | no | - | The name of the battery |
-| P0 | double | MW | yes | - | The Constant active power |
-| Q0 | double | MVar | yes | - | The Constant reactive power |
-| MinP | double | MW | yes | - | The Minimal active power |
-| MaxP | double | MW | yes | - | The Maximum active power |
 
-**Available extensions**
-
-- [Active Power Control]()
-
-#### Busbar Section
-
+**Busbar section**  
 A busbar section is a non impedant element used in a node/breaker substation topology to connect equipments.
+
+**Switch**  
+<span style="color:red"> TODO</span>
+
+**Internal connection**  
+An internal connection is a non-impedant connection between two components in a voltage level.
 
 **Characteristics**
 
@@ -94,37 +125,34 @@ A busbar section is a non impedant element used in a node/breaker substation top
 | V | double | kV | no | - | The voltage magnitude of the busbar section |
 | Angle | double | ° |  no | - | The voltage angle of the busbar section |
 
-#### Dangling Line
+<span style="color:red"> TODO: remove the Table</span>
 
-A dangling line is a component that aggregates a line chunk and a constant power injection.
-The active and reactive power setpoints are fixed.
 
-**Characteristics**
+#### Bus/breaker topology
+In bus/breaker topology, the voltage level is described with a coarser level of detail. See the sketch below for an example.
+<span style="color:red"> TODO: add sketch of voltage level in bus/breaker topology.</span>
+The topology is then described as a graph structure, where the vertices are buses and the edges are switches.
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the dangling line |
-| Name | String | - | no | - | The name of the dangling line |
-| P0 | double | MW | yes | - | The active power setpoint |
-| Q0 | double | MVar | yes | - | The reactive power setpoint |
-| R | double | $$\Omega\$$ | yes | - | The series resistance |
-| X | double | $$\Omega\$$ | yes | - | The series reactance |
-| G | double | S | yes | - | The shunt conductance |
-| B | double | S | yes | - | The shunt susceptance |
-| UcteXnodeCode | String | - | no | - | The dangling line's UCTE Xnode code |
+**Bus**  
+A bus is a set of equipments connected at the same voltage.
+When an equipment is connected to a bus, in the IIDM descrition it corresponds to a `Terminal` object.
+In IIDM there is thus one `Terminal` per connected equipment.
 
-**Specifications**
+**Switch**  
+<span style="color:red"> TODO: explain the difference with node/breaker switches</span>
 
-- R, X, G and B correspond to a percent of the original line and have to be consistent with the declared length of the
-dangling line.
-- The UCTE Xnode code is defined in the case where the line is a boundary. See the [UCTE-DEF](../importer/ucte.md) documentation
-page to learn more about this format.
+### Injections
 
-**Available extensions**
-
-- [Xnode]()
+An injection in IIDM is any AC equipment with a single connection point to a voltage level.
+Below are the different types of injections supported by PowSyBl.
 
 #### Generator
+
+A generator is an active equipment that injects active power, and injects or consumes reactive power. 
+It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
+More details about this behavior, which is called regulation, are available [here](#voltage-regulation).
+
+<span style="color:red"> TODO: add a sketch where the sign convention is indicated.</span>
 
 **Characteristics**
 
@@ -141,32 +169,46 @@ page to learn more about this format.
 | TargetQ | double | MVAr | only if `VoltageRegulatorOn` is set to `false` | - | The reactive power target |
 | TargetV | double | kV | only if `VoltageRegulatorOn` is set to `true` | - | The voltage target |
 | RatedS | double | MVA | yes | - | The rated nominal power |
+| ReactiveLimits | - | - | no | min/max | Operational limits of the generator (P/Q/U diagram) |
+
+<span style="color:red"> TODO: remove name and Id from the Table and define variables with $$X$$ style.</span>
+<span style="color:red"> TODO: remove energy source, regulating terminal, voltage regulator on from the Table.</span>
 
 **Specifications**
+- The minimal active power (in $$MW$$), expected to be lower than the maximal active power. The target $$P$$ is necessarily comprised between the two.
+- Setpoints for generators ($$targetV$$, $$targetP$$ and $$targetQ$$):
+    - They follow the generator sign convention: a positive value of $$targetP$$ means an injection into the bus.
+    - A positive value for the $$targetP$$ and the $$targetQ$$ means a negative value at the corresponding terminal (which is in passive-sign convention).
+- A set of reactive limits can be associated to a generator. All the reactive limits modelings available in the library are described [here](#reactive-limits).
+- the rated nominal power (MVA)
+<span style="color:red"> TODO: explain what it is.</span>
 
-- The `EnergySource` of a generator can be:
-    - HYDRO
-    - NUCLEAR
-    - WIND
-    - THERMAL
-    - SOLAR
-    - OTHER
-- The minimal active power is expected to be lower than the maximal active power.
-- The voltage target is required if the voltage regulator is on.
-The reactive power target is required if the voltage regulator is off.
-- The regulating terminal can be local or remote.
-- A set of reactive limits can be associated to a generator. All the reactive limits modelings available in the library are described [here](reactiveLimits.md).
-- Target values for generators (TargetP and TargetQ) are seen as target values for injections.
-    - They follow the generator sign convention.
-    - A value of TargetP positive means an injection into the bus.
-    - A positive value for the TargetP and the TargetQ means a negative value at the corresponding terminal.
-    
+<span style="color:red"> TODO: add a link to the future Regulation section.</span>
+
+- Either the generator is regulating the voltage, and the voltage setpoint is required, or it is not regulating and the reactive power setpoint is required instead.
+
+**Metadata**    
+A generator in IIDM comprises some metadata:
+- the energy source, which can be:
+    - `HYDRO`
+    - `NUCLEAR`
+    - `WIND`
+    - `THERMAL`
+    - `SOLAR`
+    - `OTHER`
+- The participation to regulation (through a boolean)
+- The regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
+
 **Available extensions**
 
 - [Active Power Control]()
 - [Coordinated Reactive Control]()
 
 #### Load
+
+A load is a passive equipment representing a delivery point that consumes active and reactive power.
+
+<span style="color:red"> TODO: add a sketch where the sign convention is indicated.</span>
 
 **Characteristics**
 
@@ -178,31 +220,112 @@ The reactive power target is required if the voltage regulator is off.
 | P0 | double | MW | yes | - | The active power setpoint |
 | Q0 | double | MVar | yes | - | The reactive power setpoint |
 
+<span style="color:red"> TODO: remove name and Id from the Table and define variables with $$X$$ style.</span>
+<span style="color:red"> TODO: remove load type from the Table.</span>
+
 **Specifications**
 
-- The `LoadType` can be:
-    - UNDEFINED
-    - AUXILIARY
-    - FICTITIOUS
-- Initial values for loads P0 and Q0 follow the load sign convention:
-    - Flow out from bus has positive sign.
+- Initial values for loads P0 and Q0 follow the passive-sign convention:
+    - Flow out from the bus has a positive sign.
     - Consumptions are positive.
 
-#### Shunt Compensator
+**Metadata**
+In IIDM, loads comprise the following metadata:
+- The load type, which can be:
+    - `UNDEFINED`
+    - `AUXILIARY`
+    - `FICTITIOUS`
+
+#### Battery
+
+A battery on the electric grid is an energy storage device that is either capable of capturing energy from the grid or of injecting it into the grid. The electric energy on the grid side is thus transformed into chemical energy on the battery side and vice versa. The power flow is bidirectional and it is controlled via a power electronic converter.
+
+<span style="color:red"> TODO: add a sketch.</span>
 
 **Characteristics**
 
 | Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- |-------- | ------------- | ----------- |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| Id | String | - | yes | - | The ID of the battery |
+| Name | String | - | no | - | The name of the battery |
+| P0 | double | MW | yes | - | The Constant active power |
+| Q0 | double | MVar | yes | - | The Constant reactive power |
+| MinP | double | MW | yes | - | The Minimal active power |
+| MaxP | double | MW | yes | - | The Maximum active power |
+
+<span style="color:red"> TODO: remove name and Id from the Table.</span>
+<span style="color:red"> TODO: add link to the Regulation section when it exists.</span>
+
+**Available extensions**
+
+- [Active Power Control]()
+
+#### Dangling Line
+
+The IIDM network may be connected to other networks for which a full description is not available.
+In this case, a boundary line exists between the two networks. In the IIDM model of the fully described network,
+that connection is represented through a dangling line, which represents the part of that boundary line which is known.
+A dangling line is thus a passive or active component that aggregates a line chunk and a constant power injection, in passive-sign convention.
+The active and reactive power setpoints are fixed: the injection represents the power flow that would occur through the connection, were the other
+network fully described.
+
+<span style="color:red"> TODO: add a sketch with the sign convention.</span>
+<span style="color:red"> TODO: add a link to the Merging documentation.</span>
+
+**Characteristics**
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| Id | String | - | yes | - | The ID of the dangling line |
+| Name | String | - | no | - | The name of the dangling line |
+| P0 | double | MW | yes | - | The active power setpoint |
+| Q0 | double | MVar | yes | - | The reactive power setpoint |
+| R | double | $$\Omega\$$ | yes | - | The series resistance |
+| X | double | $$\Omega\$$ | yes | - | The series reactance |
+| G | double | S | yes | - | The shunt conductance |
+| B | double | S | yes | - | The shunt susceptance |
+| UcteXnodeCode | String | - | no | - | The dangling line's UCTE Xnode code |
+
+<span style="color:red"> TODO: remove name and Id from the Table and define variables with $$X$$ style.</span>
+
+**Specifications**
+
+- $$P0$$ and $$Q0$$ are the active and reactive power setpoints
+- $$R$$, $$X$$, $$G$$ and $$B$$ correspond to a fraction of the original line and have to be consistent with the declared length of the
+dangling line.
+- The UCTE Xnode code is defined in case where the line is a boundary. See the [UCTE-DEF](../importer/ucte.md) documentation
+page to learn more about this format.
+<span style="color:red"> TODO: reformulate the Xnode description: it is related to ENTSOE, not only UCTE. it is a key to match two dangling lines and reconstruct the full boundary line.</span>
+
+
+**Available extensions**
+
+- [Xnode]()
+
+#### Shunt Compensator
+
+<span style="color:red"> TODO: add a description.</span>
+<span style="color:red"> TODO: add a sketch with the sign convention.</span>
+<span style="color:red"> TODO: explain that there are two shunt models: linear and non-linear.</span>
+Shunt compensators follow a passive-sign convention:
+  - Flow out from bus has positive sign.
+  - Consumptions are positive.
+
+**Characteristics**
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- |--------- | ------------- | ----------- |
 | Id | String | - | yes | - | The ID of the shunt compensator |
 | Name | String | - | no | - | The name of the shunt compensator |
 | bPerSection | double | S | yes | - | The Positive sequence shunt (charging) susceptance per section |
 | MaximumSectionCount| integer | int | yes | - | The maximum number of sections that may be switched on |
 | CurrentSectionCount | integer | int | yes | - | The current number of section that may be switched on |
-| RegulatingTerminal | `Terminal | - | no | The shunt compensator's terminal | The terminal used for regulation |
+| RegulatingTerminal | `Terminal` | - | no | The shunt compensator's terminal | The terminal used for regulation |
 | TargetV | double | kV | only if `VoltageRegulatorOn` is set to `true` | - |  The voltage target |
 | TargetDeadband | double | kV | only if `VoltageRegulatorOn` is set to `true` | - | The deadband used to avoid excessive update of controls |
 | VoltageRegulatorOn | boolean | - | no | false | The voltage regulating status |
+
+<span style="color:red"> TODO: redo the Table and specifications to be up to date with Miora's work.</span>
 
 **Specifications**
 
@@ -215,13 +338,16 @@ from the network.
 - Regulation for shunt compensators does not necessarily model automation, it can represent human actions on the network
 e.g. an operator activating or deactivating a shunt compensator). However, it can of course be integrated on a power flow
 calculation or not, depending of what is wanted to be shown.
-    - Shunt compensators follow a load sign convention:
-    - Flow out from bus has positive sign.
-    - Consumptions are positive.
 - In case of a capacitor, the value for its Q will be negative.
 - In case of a reactor, the value for its Q will be positive.
 
 #### Static VAR Compensator
+
+<span style="color:red"> TODO: add a description with sign convention.</span>
+<span style="color:red"> TODO: add a sketch with the sign convention.</span>
+<span style="color:red"> TODO: add a link to the regulation.</span>
+It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
+More details about this behavior, which is called regulation, are available [here](#voltage-regulation).
 
 **Characteristics**
 
@@ -236,14 +362,24 @@ calculation or not, depending of what is wanted to be shown.
 | RegulatingTerminal | `Terminal`| - | no | The static var compensator's terminal | The terminal used for regulation |
 | RegulationMode | `RegulationMode` | - | yes | - | The regulation mode |
 
+<span style="color:red"> TODO: remove the name and Id from the Table, regulating terminal, regulation mode.</span>
+
 **Specifications**
 
-- The `RegulationMode` can be:
-    - VOLTAGE
-    - REACTIVE_POWER
-    - OFF
-- The voltage setpoint is required when the regulation mode is set to VOLTAGE.
-The reactive power setpoint is required when the regulation mode is set to REACTIVE_POWER.
+- $$Bmin$$ and $$Bmax$$ are the susceptance bounds of the static VAR compensator
+<span style="color:red"> TODO: add the equation that links $$B$$ to $$Q$$, and say that $$B$$ has to be comprised between the bounds.</span>
+- The voltage setpoint is required when the regulation mode is set to `VOLTAGE`.
+- The reactive power setpoint is required when the regulation mode is set to `REACTIVE_POWER`.
+
+**Metadata**
+In IIDM the static VAR compensator also comprise some metadata:
+
+- The regulation mode, which can be:
+    - `VOLTAGE`
+    - `REACTIVE_POWER`
+    - `OFF`
+Note that it is different than the generators' regulation definition, which is only done through a boolean.
+- The regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
 
 ### Branches
 
@@ -260,9 +396,11 @@ With series impedance $$z$$ and the shunt admittance on each side $$y_1$$ and $$
 
 $$
 \begin{align*}
-    & z=r+j.x\\
-    & y_1 = g_1 +j. b_1\\
-    & y_2 = g_2 +j. b_2
+  \begin{array}{lcl}
+    z & = & r+j.x\\
+    y_1 & = & g_1 +j. b_1\\
+    y_2 & = & g_2 +j. b_2
+  \end{array}
 \end{align*}
 $$
 
@@ -296,17 +434,23 @@ $$
 | G2 | double | S | yes | - | The second side shunt conductance |
 | B2 | double | S | yes | - | The second side shunt susceptance |
 
-**Specifications**
+<span style="color:red"> TODO: remove the name and Id from the Table</span>
 
-- Lines can have current limits
+**Metadata**
+
+- Lines can have [current limits](#current-limits)
 
 **Available extensions**
 
 - [Merged Xnode]()
 
-#### Tie Line
+##### Tie Line
 
-A Tie Line is an AC line sharing power between two neighbouring regional grids. It is composed of two Half Lines.
+A tie line is an AC line sharing power between two neighbouring regional grids. It is constituted of two [half lines](#half-line).
+A tie line is created by matching two [dangling lines](#dangling-line) with the same Xnode code.
+It has line characteristics, with $$R$$ (resp. $$X$$) being the sum of the series resistances (resp. reactances) of the two half lines.
+$$G1$$ (resp. $$B1$$) is equal to the sum of the first half line's $$G1$$ and $$G2$$ (resp. $$B1$$ and $$B2$$).
+$$G2$$ (resp. $$B2$$) is equal to the sum of the second half line's $$G1$$ and $$G2$$ (resp. $$B1$$ and $$B2$$).
 
 **Characteristics**
 
@@ -324,7 +468,10 @@ A Tie Line is an AC line sharing power between two neighbouring regional grids. 
 | G2 | double | S | yes | - | The second side shunt conductance (sum of the second side shunt conductances of the two Half lines) **NB: this attribute is read-only** |
 | B2 | double | S | yes | - | The second side shunt susceptance (sum of the second side shunt susceptances of the two Half lines) **NB: this attribute is read-only** |
 
-##### Half Line
+<span style="color:red"> TODO: remove the Table</span>
+
+
+###### Half Line
 
 **Characteristics**
 
@@ -340,6 +487,10 @@ A Tie Line is an AC line sharing power between two neighbouring regional grids. 
 | B2 | double | S | yes | - | The second side shunt susceptance |
 | XnodeP | double | MW | yes | - | The active power consumption |
 | XnodeQ | double | MVar | yes | - | The reactive power consumption |
+
+<span style="color:red"> TODO: remove the id and name from the Table, xnodeP and xnodeQ too</span>
+
+<span style="color:red"> TODO: describe xnodeP and xnodeQ</span>
 
 #### Transformers
 
@@ -518,6 +669,22 @@ and should be between -1 and 1. Note that at terminal on AC side, Q is always po
 - The voltage setpoint is required if the voltage regulator is on.
 The reactive power setpoint is required if the voltage regulator is off.
 - A set of reactive limits can be associated to a VSC converter station. All the reactive limits modelings available in the library are described [here](reactiveLimits.md).
+
+## Additional network models
+
+<span style="color:red"> TODO</span>
+
+### Reactive limits
+
+<span style="color:red"> TODO</span>
+
+### Current limits
+
+<span style="color:red"> TODO</span>
+
+### Voltage regulation
+
+<span style="color:red"> TODO</span>
 
 ## Going further
 
