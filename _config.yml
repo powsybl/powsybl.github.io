@@ -10,7 +10,7 @@ theme: null
 markdown: kramdown
 
 kramdown:
-  toc_levels: 2..6
+  toc_levels: 2..3
 
 plugins:
   - jekyll-relative-links
