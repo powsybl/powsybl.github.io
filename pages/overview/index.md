@@ -41,7 +41,7 @@ PowSyBl as a library provides several APIs for power systems’ simulation and a
 ([power flow computation](../documentation/simulation/powerflow/index.md), 
 [security analysis](../documentation/simulation/securityanalysis/index.md), 
 [remedial action simulation](), 
-[short circuit computation](), [sensitivity analysis](../documentation/simulation/sensitivity/index.md),
+[sensitivity analysis](../documentation/simulation/sensitivity/index.md),
 [time domain simulation](../documentation/simulation/timedomain/index.md), etc.). 
 These simulations can run either on a personal computer or on a server, but they can 
 also run on a supercomputer like in the iTesla project with the Curie supercomputer. 
@@ -64,18 +64,17 @@ applications on top of the framework.
 The PowSyBl project contains of a set of Java libraries that cover all the abovementioned features:
 
 - [Core](../documentation/developer/repositories/powsybl-core.md): provides the core features of the PowSyBl framework such as the grid modelling, 
-the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity computation, dynamic simulation, etc.).
+the support of several data exchange format ([CGMES](../documentation/grid/formats/cim-cgmes.md), [UCTE](../documentation/grid/formats/ucte-def.md)...), computation APIs ([power flow](../documentation/simulation/powerflow), [security analysis](../documentation/simulation/securityanalysis), [sensitivity computation](../documentation/simulation/sensitivity), [dynamic simulation](../documentation/simulation/timedomain), etc.).
 
 - [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power
-flow simulation
+flow simulation.
 
-- [Dynawo](../documentation/developer/repositories/powsybl-dynawo.md): an API to run time domain simulations
-with the open source [Dynawo](https://github.com/dynawo/) software
+- [Dynawo](../documentation/developer/repositories/powsybl-dynawo.md): a library based on the open source [Dynawo](https://github.com/dynawo/) software for time domain simulation.
 
-- [Application File System](../documentation/developer/repositories/powsybl-afs.md): a library to handle study files
+- [Application File System](../documentation/developer/repositories/powsybl-afs.md): a library to handle study files.
 
 - [High Performance Computing](../documentation/developer/repositories/powsybl-hpc.md): a library to facilitate high performance computing
-with PowSyBl
+with PowSyBl.
 
 - [Balances adjustments](../documentation/developer/repositories/powsybl-balances-adjustment.md): 
 balances adjustment is a process that consists in acting on 
