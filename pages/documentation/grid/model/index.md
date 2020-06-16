@@ -390,7 +390,7 @@ Below are the different types of branches supported by PowSyBl.
 
 AC Power lines are modeled using a standard $$\pi$$ model with distributed parameters.
 
-![Power line model](./images/line-model.svg){: width="50%" .center-image}
+![Power line model](img/index/line-model.svg){: width="50%" .center-image}
 
 With series impedance $$z$$ and the shunt admittance on each side $$y_1$$ and $$y_2$$:
 
@@ -505,7 +505,7 @@ same substation. We usually have:
 A three windings transformer is modeled with three legs, where every leg model is electrically equivalent to a two windings transformer.
 For each leg, the network bus is at side 1 and the star bus is at side 2.
 
-![Power line model](./images/three-windings-transformer-model.svg){: width="50%" .center-image}
+![Power line model](img/index/three-windings-transformer-model.svg){: width="50%" .center-image}
 
 **Characteristics**
 
@@ -551,7 +551,7 @@ A two windings power transformer is connected to two voltage levels (side 1 and 
 
 Two windings transformer are modeled with the following equivalent $$\pi$$ model:
 
-![Power line model](./images/two-windings-transformer-model.svg){: width="50%" .center-image}
+![Power line model](img/index/two-windings-transformer-model.svg){: width="50%" .center-image}
 
 With the series impedance $$z$$ and the shunt admittance $$y$$ and the voltage ratio $$\rho$$ and the angle difference $$\alpha$$ and potentially parameters from the current step of a ratio tap changer and/or a phase tap changer, we have:
 
