@@ -27,7 +27,7 @@ PowSyBl provides a complete [internal grid model](../documentation/grid/formats/
 with substations, voltage levels, AC and DC lines, two and three windings transformers, batteries,
 generators, loads, shunt and static VAR compensators, etc. 
 
-![Node breaker topology](./img/nodeBreakerTopology.svg){: width="50%" .center-image}
+![Node breaker topology](img/index/nodeBreakerTopology.svg){: width="50%" .center-image}
 
 For [security analyses](../documentation/simulation/securityanalysis/index.md), it offers the possibility to define contingencies on the network.
 The grid model can also be enhanced with [extensions]() that complete the equipments modeling 
@@ -58,7 +58,7 @@ applications on top of the framework.
 
 # Projects
 
-![GitHub logo](./img/github-logo.png){: width="30%" .center-image}
+![GitHub logo](img/index/github-logo.png){: width="30%" .center-image}
 
 ## Java libraries
 The PowSyBl project contains of a set of Java libraries that cover all the abovementioned features:
@@ -112,7 +112,7 @@ given voltage level in an IIDM network, from a network store server.
 this service is used to extract network data from a network store server 
 and reshape it to feed a UI network map component.
 
-![GridSuite screenshot](./img/gridsuite.png){: width="50%" .center-image}
+![GridSuite screenshot](img/index/gridsuite.png){: width="50%" .center-image}
 
 <!--
 Loadflow Server
