@@ -163,7 +163,7 @@ module to indicate the implementations to use for:
 componentDefaultConfig:
     ContingenciesProviderFactory: com.powsybl.action.dsl.GroovyDslContingenciesProviderFactory
     SecurityAnalysisFactory: com.powsybl.security.SecurityAnalysisFactoryImpl
-load-flow
+load-flow:
   default: Mock
 ```
 

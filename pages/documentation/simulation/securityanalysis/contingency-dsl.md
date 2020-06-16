@@ -111,5 +111,27 @@ network.generatorStream
     })
 ```
 
+## Configuration
+To provide contingencies list using this DSL, you have to add the following lines to your configuration file:
+
+**YAML configuration:**
+```yaml
+componentDefaultConfig:
+    ContingenciesProviderFactory: com.powsybl.contingency.dsl.GroovyDslContingenciesProviderFactory
+
+groovy-dsl-contingencies:
+    dsl-file: /path/to/contingencies.groovy
+```
+
+**XML configuration:**
+```xml
+<componentDefaultConfig>
+    <ContingenciesProviderFactory>com.powsybl.contingency.dsl.GroovyDslContingenciesProviderFactory</ContingenciesProviderFactory>
+</componentDefaultConfig>
+<groovy-dsl-contingencies>
+     <dsl-file>/path/to/contingencies.groovy</dsl-file>
+</groovy-dsl-contingencies>
+```
+
 ## Going further
 - [Action DSL](action-dsl.md): Lean how to write scripts for security analyses with remedial actions
