@@ -48,25 +48,16 @@ div.doc-icon {
     margin-right: 2rem;
 }
 
-.services .fa-icon i {
-    font-size: 30px;
-    padding-top: 5px;
+.services .icon-box:hover .title a {
+    color: #000000;
 }
 
-.services .icon-box:hover a {
-    color: #0e3650;
+.services .icon-box:hover .description {
+    color: #444444;
 }
 
-.services .icon-box:hover a:hover {
-    color: #dbedf9;
-}
-
-.services .icon-box:hover .title a:hover {
-    color: #ffffff;
-}
-
-.services .description {
-    text-align: justify;
+.services .icon-box:hover::before {
+    background: #dbedf9;
 }
 
 /* Highlight */
@@ -142,6 +133,40 @@ table tr:nth-child(2n) {
 
 .portfolio .portfolio-wrap::before {
     background: rgba(34, 34, 34, 0.8);
+}
+
+.partners .col-lg-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partners img {
+    width: 50%;
+    -webkit-filter: grayscale(100);
+    filter: grayscale(100);
+    transition: all 0.4s ease-in-out;
+    display: inline-block;
+    padding: 10px 0;
+    margin: 30px;
+}
+
+.partners img:hover {
+    -webkit-filter: none;
+    filter: none;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .partners img {
+        width: 40%;
+    }
+}
+
+@media (max-width: 575px) {
+    .partners img {
+        width: 30%;
+    }
 }
 
 .center-image {

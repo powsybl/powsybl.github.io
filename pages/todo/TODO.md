@@ -25,19 +25,22 @@
      - fond highlight passe en bleu ciel comme le coin droit
      - texte + titre reste en noir
      - lien couleur a adapter
+     ==> DONE
 Projets:
      - 3 par lignes
      - 5è = votre projet ici pour référencer un nouveau projet
+     ==> PARTIELLEMENT FAIT
 Ajouter une section Partners
      - logo des prestataires
      - lien vers leurs sites
      ==> demander l'autorisation
      - ajouter MHP + IESS
+     ==> PARTIELLEMENT FAIT
 
 ## Overview > About
-- virer short circuit computation
-- ajouter des liens dans paragraphe Core
-- powsybl-dynawo: corriger la description
+- virer short circuit computation ==> DONE
+- ajouter des liens dans paragraphe Core ==> DONE
+- powsybl-dynawo: corriger la description ==> DONE
 - powsybl-afs: voir ci-dessous
 
 ## Overview > Roadmap
