@@ -136,10 +136,18 @@ The following example is a result of a security analysis with remedial action, e
 }
 ```
 
+## Implementations
+
+Different implementations are available to run security analyses:
+- [Load flow based](security-analysis-impl.md#load-flow-based-implementation): a security analysis implementation based on a power flow simulator 
+- [Hades2](security-analysis-impl.md#hades2): a security analysis provided by RTE as a freeware
+
+For remedial actions simulation, only a [load flow based]() implementation is supported at the moment.
+
 ## Configuration
-- contingency provider
-- security analysis provider
-- action simulator
+<span style="color: red">TODO</span>
+- <span style="color: red">Contingencies provider</span>
+- <span style="color: red">Simulator</span>
 
 ### Violations filtering
 The violations listed in the results can be filtered to consider only certain type of violations, to consider only few voltage levels or to limit the geographical area by filtering equipments by countries. Check out the documentation of the [limit-violation-default-filter](../../user/configuration/limit-violation-default-filter.md) configuration module.
@@ -156,10 +164,6 @@ limit-violation-default-filter:
         - HIGH_VOLTAGE
 ```
 
-## Implementations
-- Slow
-- Hades2
-- LoadFlowActionSimulator
-
 ## Going further
-- itools security-analysis
+To go further about the sensitivity analysis, check the following content:
+- [Run a security analysis through an iTools command](../../user/itools/security-analysis.md): Learn how to perform a security analysis from the command line 

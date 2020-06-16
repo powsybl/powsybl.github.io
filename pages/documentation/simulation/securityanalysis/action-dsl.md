@@ -288,5 +288,8 @@ rule('example3') {
 ### Dry-run mode
 <span style="color: red">TODO</span>
 
+## Configuration
+<span style="color: red">TODO</span>
+
 ## Going further
 <span style="color: red">TODO</span>
