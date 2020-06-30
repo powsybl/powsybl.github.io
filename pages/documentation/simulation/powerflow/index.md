@@ -12,19 +12,27 @@ latex: true
 The power flow is a numerical analysis of the flow of electric power in an interconnected system, where that system is considered to be in normal steady-state operation.
 Power-flow or load-flow studies are important for planning future expansion of power systems as well as in determining the best operation of existing systems. 
 The principal information obtained from the power-flow study is the magnitude and phase angle of the voltage at each bus, and the real and reactive power flowing in each line. 
-In this page we'll go into some details about what is expected for a power flow result, how the validation feature of PowSyBl works, what power-flow implementations
+In this page we'll go into some details about what are the inputs and outputs of a load flow simulatio, what is expected from a power flow result, how the validation feature of PowSyBl works, what power flow implementations
 are compatible with PowSyBl, and how to configure PowSyBl for the different implementations. 
 
-<span style="color: red">TODO: add a section about the general principles behind a loadflow</span>
+## Inputs
 
-## Expected results
+The only input for a power flow simulation is a network.
+
+## Outputs
+
+The power flow simulation output consists of a network, which has been modified based on the simulation results, and some metrics regarding the computation: whether or not it has converged, in how many iterations. Depending on the loadflow implementation the content of these metrics may vary. 
+
+## Validation
+
+### Expected results
 
 A load-flow result is considered *acceptable* if it
 describes a feasible steady-state of a power system given its physics and its logics. More practically, generations of
 practitioners have set quasi-standard ways to describe them that makes it possible to define precise rules.
 They are described below for the different elements of the network.
 
-### Buses
+#### Buses
 
 The first law of Kirchhoff must be satisfied for every bus for active and reactive power:
 
@@ -35,7 +43,7 @@ $$
 \end{align*}
 $$
 
-### Branches
+#### Branches
 Lines and two windings transformers are converted into universal branches:
 
 <span style="color: red">TODO: make a proper sketch</span>
@@ -66,12 +74,12 @@ documentation), estimations of powers are computed according to the voltages and
 
 $$(P_1^{calc}, Q_1^{calc}, P_2^{calc}, Q_2^{calc}) = f(\text{Voltages}, \text{Characteristics})$$
 
-### Three-windings transformers
+#### Three-windings transformers
 <span style="color: red">To be implemented, based on a conversion into 3 two-windings transformers.</span>
 
-### Generators
+#### Generators
 
-#### Active power
+##### Active power
 There may be an imbalance between the sum of generator active power setpoints $$\text{targetP}$$ on one side and consumption
 and losses on the other side, after the load flow optimization process. Note that, if it is possible to modify the setpoints during the computation
 (for example if the results were computed by an Optimal Power Flow and not a Power Flow), there should be no imbalance left.
@@ -99,14 +107,14 @@ $$P <- P \times \hat{K} \times F$$
 where $$\hat{K}$$ is a proportionality factor, usually defined for each unit by $$\dfrac{P_{max}}{\sum{F}}$$, $$\dfrac{targetP}{\sum{F}}$$ or $$\dfrac{P_{diff}}{\sum{F}}$$ 
 depending on the adjustment mode (the sums run over all the units participating to the compensation).
 
-#### Voltage and reactive power
+##### Voltage and reactive power
 
-##### Voltage regulation deactivated
+###### Voltage regulation deactivated
 If the voltage regulation is deactivated, it is expected that:
 
 $$\left| targetQ - Q \right| < \epsilon$$
 
-##### Voltage regulation activated
+###### Voltage regulation activated
 If the voltage regulation is activated, the generator is modeled as a $$PV/PQ$$ node: the voltage target should be reached
 except if reactive bounds are hit (PV mode). If the reactive bounds are hit, the reactive power should be equal to a limit.
 Mathematically speaking, one of the following 3 conditions should be met:
@@ -119,10 +127,10 @@ $$
 \end{align*}
 $$
 
-### Loads
+#### Loads
 <span style="color: red">To be implemented, with tests similar to generators with voltage regulation.</span>
 
-### Shunts
+#### Shunts
 A shunt is expected not to generate or absorb active power:
 
 $$\left| P \right| < \epsilon$$
@@ -130,7 +138,7 @@ $$\left| P \right| < \epsilon$$
 A shunt is expected to generate reactive power according to the number of actived section and to the susceptance per section:
 $$\left| Q + \text{#sections} * B  V^2 \right| < \epsilon$$
 
-### Static VAR Compensators
+#### Static VAR Compensators
 Static VAR Compensators behave like generators producing 0 active power except that their reactive bounds are expressed
 in susceptance, so that they are voltage dependent.
 
@@ -141,17 +149,17 @@ $$targetP = 0$$ MW
 - If the regulation mode is `VOLTAGE`, it behaves like a generator with voltage regulation with the following bounds (dependent on the voltage, which is not the case for generators):
 $$minQ = - Bmax * V^2$$ and $$maxQ = - Bmin V^2$$
 
-### HVDC lines
+#### HVDC lines
 <span style="color: red">To be done.</span>
 
-#### VSC
+##### VSC
 VSC converter stations behave like generators with the additional constraints that the sum of active power on converter
 stations paired by a cable is equal to the losses on the converter stations plus the losses on the cable.
 
-#### LCC
+##### LCC
 <span style="color: red">To be done.</span>
 
-### Ratio tap transformers
+#### Ratio tap transformers
 
 Ratio tap transformers have a tap with a finite discrete number of position that allows to change their transformer ratio. 
 Let's assume that the logic is based on deadband: if the deviation between the measurement
@@ -160,7 +168,7 @@ and the setpoint is higher than the deadband width, the tap position is increase
 As a result, a state is a steady state only if the regulated value is within the deadband or if the tap position is at
 minimum or maximum: this corresponds to a valid load flow result for the ratio tap changers tap positions. 
 
-## Results validation
+### Results validation
 
 It is possible to check the quality of the power flow results using the 
 [validation feature of PowSyBl]().
@@ -179,13 +187,13 @@ incomplete to go through the rest of the validation.
 
 In this section we go into more details about the checks performed by the validation feature of load-flow results available in PowSyBl.
 
-### Buses
+#### Buses
 If all values are present, or if only one value is missing, the result is considered to be consistent.
 Note that if the result contains only the voltages (phase and angle), the PowSyBl validation provides a load-flow results completion feature.
 It can be used to compute the flows from the voltages in order to ensure the results consistency, with the [run-computation]() option of
 the PowSyBl validation.
 
-### Branches
+#### Branches
 The result on the branch is considered consistent if:
 
 $$\max( \left| P_1^{calc} - P_1 \right|, \left| Q_1^{calc} - Q_1 \right|, \left| P_2^{calc} - P_2 \right|, \left| Q_2^{calc} - Q_2 \right| ) \leq \epsilon$$
@@ -202,12 +210,12 @@ check more lenient.
 In case the voltages are available but not the powers, the results completion feature of the PowSyBl validation
 can be used to recompute them using the validation equations (meaning that the branch validation tests will always be OK, so that it allows to perform the bus validation tests).
 
-### Three-windings transformers
+#### Three-windings transformers
 <span style="color: red">To be implemented, based on a conversion into 3 two-windings transformers.</span>
 
-### Generators
+#### Generators
 
-#### Active power
+##### Active power
 
 The load-flow validation of PowSyBl checks whether the adjustment of balances has been done consistently by the power flow.
 The load-flow results do not include the adjustment mode used, nor the participation factors. They thus have to be inferred. 
@@ -219,15 +227,15 @@ Once the mode is determined, the new target can be computed for each unit. The f
 
 $$\left| \max(P_{min}, \min(P_{max}, (1+\hat{K} F(g)))) targetP - P \right| < \epsilon$$
 
-#### Voltage and reactive power
+##### Voltage and reactive power
 
-##### Voltage regulation deactivated
+###### Voltage regulation deactivated
 
 The results' validity, the following condition:
 
 $$\left| targetQ - Q \right| < \epsilon$$
 
-##### Voltage regulation activated
+###### Voltage regulation activated
 As mentioned before, depending on the generator's mode, one of the three conditions should be respected:
 $$
 \begin{align*}
@@ -242,15 +250,15 @@ In the PowSyBl validation, there are a few tricks to handle special cases:
 - in case of a missing value, the corresponding test is OK
 - $$minQ$$ and $$maxQ$$ are function of $$P$$. If $$targetP$$ is outside $$[minP, maxP]$$, no test is done.
 
-### Loads
+#### Loads
 <span style="color: red">To be implemented, with tests similar to generators with voltage regulation.</span>
 
-### Shunts
+#### Shunts
 The two following conditions must be fulfilled in valid results:
 $$\left| P \right| < \epsilon$$
 $$\left| Q + \text{#sections} * B  V^2 \right| < \epsilon$$
 
-### Static VAR Compensators
+#### Static VAR Compensators
 The following conditions must be fulfilled in valid results:
 $$targetP = 0$$ MW
 - If the regulation mode is `OFF`, then $$targetQ = 0$$ MVar
@@ -258,17 +266,17 @@ $$targetP = 0$$ MW
 - If the regulation mode is `VOLTAGE`, same checks as a generator with voltage regulation with the following bounds:
 $$minQ = - Bmax * V^2$$ and $$maxQ = - Bmin V^2$$
 
-### HVDC lines
+#### HVDC lines
 <span style="color: red">To be done.</span>
 
-#### VSC
+##### VSC
 Same checks as a generator. Besides, for stations paired by a cable:
 $$\sum_{\text{stations}}{P} = \sum_{\text{stations}}{Loss} + Loss_{cable}$$
 
-#### LCC
+##### LCC
 <span style="color: red">To be done.</span>
 
-### Ratio tap transformers
+#### Ratio tap transformers
 
 To check a steady-state has been reached, an upper bound of the deadband value is needed. Generally, the value of the
 deadband is not available in data models. Usual load flow solvers simply consider a continuous tap that is rounded
@@ -329,8 +337,51 @@ load-flow-default-parameters:
     transformerVoltageControlOn: false
     specificCompatibility: true 
 ```
-<span style="color: red">TODO: describe all the options</span>
 
+The parameters may also be overridden with a JSON file, in which case the configuration will look like:
+```json
+{
+  "version" : "1.0",
+  "voltageInitMode" : "PREVIOUS_VALUES",
+  "transformerVoltageControlOn" : true,
+  "phaseShifterRegulationOn" : false,
+  "noGeneratorReactiveLimits" : true,
+  "specificCompatibility" : false,
+  "extensions" : {
+    ...
+  }
+}
+```
+
+### Available parameters
+#### noGeneratorReactiveLimits
+The `noGeneratorReactiveLimits` property is an optional property that defines whether the load-flow is allowed to find a
+setpoint value outside the reactive limits of a generator or not.
+
+#### phaseShifterRegulationOn
+The `phaseShifterRegulationOn` property is an optional property that defines whether the load-flow is allowed to change taps
+of a phase tap changer or not.
+
+#### specificCompatibility
+The `specificCompatibility` property is an optional property that defines whether the load-flow runs in legacy mode
+(implementation specific) or not.
+
+#### transformerVoltageControlOn
+The `transformerVoltageControlOn` property is an optional property that defines whether the load-flow is allowed to change
+taps of a ratio tap changer or not.
+
+#### voltageInitMode
+The `voltageInitMode` property is an optional property that defines the policy used by the load-flow to initialize the
+voltage values. The default value for this property is `UNIFORM_VALUES`. The available `com.powsybl.loadflow.LoadFlowParameters.VoltageInitMode`
+values are:
+- UNIFORM_VALUES: v=1pu, theta=0
+- PREVIOUS_VALUES: use previous computed value from the network
+- DC_VALUES: preprocessing to compute DC angles
+
+
+### Default configuration
+The default values of all the optional properties are read from the [load-flow-default-parameter](../../user/configuration/load-flow-default-parameters.md)
+module, defined in the configuration file.
 
 ### Open LoadFlow configuration
 <span style="color: red">TODO</span>
@@ -361,11 +412,7 @@ hades2-default-parameters:
     hvdcAcEmulation: false
 ```
 
-**Supported parameters**
-
-**Unsupported parameters**:
-
-<span style="color: red">TODO: describe all the options</span>
+The complete list of available parameters for the Hades2 load flow is available [here](https://rte-france.github.io/hades2/configuration/ADNLoadFlowParameters.html).
 
 ## Going further
 To go further about the power flow with PowSyBl, check the following pages:
