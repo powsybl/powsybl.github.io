@@ -16,41 +16,59 @@ layout: default
     - [X] index.md
 - [ ] documentation
     - [ ] data
-        - [ ] afs.md (**)
-        - [ ] timeseries.md (**)
+        - [ ] afs.md (**): reprendre /docs/afs/*
+        - [ ] timeseries.md
     - [ ] developer
-        - [ ] artifacts.md (**)
-        - [ ] itools-packager.md
+        - [ ] API Guide
+            - [ ] Grid model
+                - [ ] IIDM
+                - [ ] Topology
+                - [ ] Reduction de réseau: reprendre partiellement /docs/iidm/reducer/index.md
+            - [ ] Simulation
+                - [ ] LoadFlow: /docs/loadflow/loadflow.md
+                - [ ] SecurityAnalysis: /docs/loadflow/security-analysis.md
+                - [ ] DynamicSimulation: /docs/dynamicsimulation/index.md
+            - [ ] How to use AFS (*)
+                /docs/tutorials/afs/afs.md
+            - [ ] How to use timeseries (*): /docs/timeseries/index.md
+        - [X] artifacts.md (**)
+        - [ ] itools-packager.md: reprendre /docs/installation/itools-packager.md
         - [X] repositories (*)
             - [X] index.md
             - [X] powsybl-core.md
         - [ ] tutorials
             - [ ] afs.md
-            - [ ] exporter.md
-            - [ ] importer.md
+            - [ ] exporter.md (*): /docs/tutorials/iidm/exporter.md
+            - [ ] importer.md (*): /docs/tutorials/iidm/importer.md
             - [ ] index.md
-            - [ ] intellij.md
-            - [ ] itools-command.md
+            - [X] intellij.md
+            - [ ] itools-command.md (*): : /docs/tutorials/itools/extend-itools.md
             - [X] itools-packager.md
-            - [ ] loadflow
+            - [ ] loadflow (*)
+                - Reprendre partiellement /docs/user_stories/loadflow_tutorial.md
+            - [ ] runscript (*)
             - [ ] security-analysis.md
             - [X] sensitivity-computation.md
             - [ ] topology
+                - Reprendre partiellement /docs/user_stories/topology.md
         - [ ] Patterns de developpement
             - [ ] Integrate a simulator
             - [ ] Integrate an importer
     - [ ] grid
         - [ ] features
-            - [ ] extraction.md (*)
-            - [ ] merging.md
+            - [ ] extraction.md (*): reprendre partiellement /docs/iidm/reducer/index.md
+            - [ ] merging.md ()
         - [ ] formats
-            - [ ] ampl.md
+            - [ ] ampl.md: reprendre /docs/iidm/exporter/ampl.md
             - [ ] cim-cgmes.md
+                - /docs/importer/cgmes.md
             - [ ] ieee-cdf.md
             - [ ] matpower.md
             - [ ] psse.md
-            - [ ] ucte-def.md
-            - [ ] xiidm.md (*)
+            - [ ] ucte-def.md: finir l'export
+            - [ ] xiidm.md (*):
+                - /docs/iidm/exporter/iidm.md
+                - /docs/iidm/importer/iidm.md
         - [ ] model (**)
             - [ ] index.md
     - [ ] hpc
@@ -60,24 +78,32 @@ layout: default
         - [X] index.md
     - [ ] simulation
         - [ ] powerflow
-            - [ ] index.md
+            - [ ] index.md:
+                - /docs/configuration/parameters/LoadFlowParameters.md
+                - /docs/loadflow/validation.md
             - [ ] openlf.md
         - [ ] securityanalysis
-            - [ ] index.md  (**)
+            - [ ] index.md  (**): reprendre /docs/configuration/parameters/SecurityAnalysisParameters.md
             - [ ] actionDSL (**)
         - [X] sensitivity
             - [X] index.md
         - [ ] timedomain
-            - [ ] dynawo.md
+            - [ ] dynawo.md:
+                - /docs/configuration/parameters/DynawoSimulationParameters.md
+                - /docs/dynamic-simulation/dynawo-simulation.md
             - [ ] index.md
+                - /docs/configuration/parameters/DynamicSimulationParameters.md
     - [ ] user
         - [ ] configuration
-            - [ ] index.md (**)
+            - [ ] index.md (**): reprend /docs/configuration/modules
         - [ ] index.md
         - [X] itools
-            - [X] action-simulator.md (*)
+            - [ ] action-simulator.md (*): /docs/tools/action-simulator.md
+            - [ ] afs: /docs/tools/afs.md
+            - [ ] compare-security-analysis-results.md: /docs/tools/compare-security-analysis-results.md
             - [X] index.md
             - [X] loadflow.md (**)
+            - [ ] loadflow-validation: /docs/tools/loadflow-validation
             - [X] security-analysis.md (**)
             - [X] convert-network.md (**)
             - [X] sensitivity-computation (*)
@@ -93,4 +119,9 @@ layout: default
     - [X] index.md (***)
     - [X] license.md
     - [X] roadmap.md ==> à transférer depuis .github
+- [ ] archive
+    - [ ] itools-mpi.md
+    - [ ] EmptyContingenciesListProvider.md
+    - [ ] tools/plugins-info.md
+    - [ ] tools/run-impact-analysis.md
 
