@@ -21,26 +21,15 @@
 
 ## Index
 - Ajouter dans le bandeau bleu des pictos de features
-- Features:
-     - fond highlight passe en bleu ciel comme le coin droit
-     - texte + titre reste en noir
-     - lien couleur a adapter
-     ==> DONE
 Projets:
-     - 3 par lignes
      - 5è = votre projet ici pour référencer un nouveau projet
-     ==> PARTIELLEMENT FAIT
 Ajouter une section Partners
      - logo des prestataires
      - lien vers leurs sites
      ==> demander l'autorisation
-     - ajouter MHP + IESS
      ==> PARTIELLEMENT FAIT
 
 ## Overview > About
-- virer short circuit computation ==> DONE
-- ajouter des liens dans paragraphe Core ==> DONE
-- powsybl-dynawo: corriger la description ==> DONE
 - powsybl-afs: voir ci-dessous
 
 ## Overview > Roadmap
@@ -71,8 +60,8 @@ Index:
 
 ## Download
 - Créer un package standalone autour de iTools
+  - Faire une release basée sur la 3.4.0
   - Merger le PR
-  - Faire une release
   - Automatiser la génération d'un package + upload sur github (Fin 2020)
 - Changer la largeur du tableau de la page download
 - Remplir les liens de la case download du tableau
@@ -103,12 +92,6 @@ Ajouter les conventions d'écriture dans le README du site
 - déplacer la page time-series
 - Créer une page AFS a partir du README.md de powsybl-afs
 
-
-Agnès: reprendre le load-flow
-Mathieu:
-- AS (contingencies, AS, ActionSimulator)
-- Post processor
-- Configuration
-Miora
-- download
-- grid model
+## Contributing
+- Changer les liens code of conduct vers LFEnergy
+- Ajouter Technical Charter
