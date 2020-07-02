@@ -96,6 +96,34 @@ that is global to your system:
 ```
 
 Now, we'll add a few **required** maven dependencies:
+- `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration
+- `com.rte-france.powsybl:powsybl-hades2-integration`: to provide an implementation of the sensitivity analysis
+- `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j` 
+- `org.slf4j:log4j-over-slf4j`: to create a bridge between `log4j` and `slf4j` 
+
+**Note:** PowSyBl uses [slf4j](http://www.slf4j.org/) as a facade for various logging framework, but some APIs we use in PowSyBl use [log4j](https://logging.apache.org/log4j), which is not compatible with slf4j, making it necessary to create a bridge between the two logging system.
+
+Add the following dependencies to the `pom.xml` file:
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.powsybl</groupId>
+        <artifactId>powsybl-config-classic</artifactId>
+        <version>${powsybl.core.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.rte-france.powsybl</groupId>
+        <artifactId>powsybl-hades2-integration</artifactId>
+        <version>${powsybl.rte-core.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${slf4j.version}</version>
+        <scope>runtime</scope>
+    </dependency>
+</dependencies>
+```
 
 ## Configure PowSyBl
 We have configured this tutorial so as to use a locally defined `config.yml` file.
@@ -114,17 +142,6 @@ hades2:
 ```
 where the path to Hades2 should point to your installation directory. It is something of the kind `<PATH_TO_ROOT_DIRECTORY/hades2-V6.4.0.1.1/>`, where the path to the root directory points to where you extracted the Hades2 distribution, and the version of Hades2 will vary depending on your installation.
 
-In order to configure the loadflow parameters, we need to fill two configuration sections:
-```yaml
-load-flow-default-parameters:
-    voltageInitMode: DC_VALUES
-    transformerVoltageControlOn: false
-    specificCompatibility: true 
-```
-```yaml
-hades2-default-parameters:
-    dcMode: false
-```
 ## Import the network from an XML IIDM file
 
 In this tutorial, the network is quite simple and made of two lines in parallel, with a generator on the left side and a load on the right side. 
@@ -196,6 +213,23 @@ LoadFlow.run(network, loadflowParameters);
 ```
 
 The flow through the upper line is of 302.4 MW at its entrance and of 300.4 MW at its exit. The flow through the lower line is the same. The power losses are of 2 MW on each line.   
+
+If you wish to set the parameters in the config file and use them directly, you can write instead:
+```java
+LoadFlowParameters loadflowParameters = LoadFlowParameters().load();
+LoadFlow.run(network, loadflowParameters);
+```
+You'll have to fill two configuration sections in the `config.yml` file, for example:
+```yaml
+load-flow-default-parameters:
+    voltageInitMode: DC_VALUES
+    transformerVoltageControlOn: false
+    specificCompatibility: true 
+```
+```yaml
+hades2-default-parameters:
+    dcMode: true
+```
 
 ## Output the results in the terminal
 
