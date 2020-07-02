@@ -12,4 +12,5 @@ layout: default
 - [Create an iTools command](itools-command.md): Learn how to create your own `iTools` command in Java
 
 ## Simulation
+- [Create the Java code to run power flows](loadflow.md): Learn how to create the Java code to setup and run power flows
 - [Create the Java code to run sensitivity analyses](sensitivity-analysis.md): Learn how to create the Java code to setup and run sensitivity analyses
