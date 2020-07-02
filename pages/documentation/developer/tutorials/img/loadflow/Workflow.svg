@@ -15,7 +15,7 @@
    viewBox="0 0 95.214874 38.106224"
    version="1.1"
    id="svg5144"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   inkscape:version="0.92.4 (unknown)"
    sodipodi:docname="Workflow.svg">
   <defs
      id="defs5138">
@@ -135,16 +135,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="174.21933"
-     inkscape:cy="-250.84538"
+     inkscape:zoom="1.4"
+     inkscape:cx="-15.186044"
+     inkscape:cy="36.311227"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1680"
-     inkscape:window-height="987"
-     inkscape:window-x="-8"
-     inkscape:window-y="20"
+     inkscape:window-height="986"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5141">
@@ -154,7 +154,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -164,7 +164,7 @@
      id="layer1"
      transform="translate(-59.737803,-44.357603)">
     <g
-       transform="translate(28.763523,-94.163787)"
+       transform="matrix(0.92064788,0,0,0.92064788,32.279732,-81.584321)"
        id="g5034">
       <path
          inkscape:export-ydpi="265.23999"
