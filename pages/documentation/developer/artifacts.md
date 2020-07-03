@@ -120,11 +120,11 @@ This module provides a common API for power flow computation. You have to implem
 This module provides an [implementation](../simulation/powerflow/openlf.md) of the load flow API.
 
 **powsybl-loadflow-results-completion**  
-This module implements power flow equations to initialize the P, Q, V and $$\theta$$ from the characteristics of the equipments. This module can be used as a [post processor](../grid/formats/import-post-processor.md) of the import or with the [load flow validation]() tool.
+This module implements power flow equations to initialize the P, Q, V and $$\theta$$ from the characteristics of the equipments. This module can be used as a [post processor](../grid/formats/import-post-processor.md) of the import or with the [load flow validation](../user/itools/loadflow-validation.md#load-flow-results-validation) tool.
 
 **powsybl-loadflow-validation**  
 This module provides functions to check the consistency of a power flow result. It can be use as a java library, but the
-easiest way to use it is through the [iTools CLI]().
+easiest way to use it is through the [iTools CLI](../user/itools/loadflow-validation.md).
 
 ### Contingencies
 The following artifacts are used to model contingencies. Contingencies can then be used to run security analyses with or without remedial actions, sensitivity calculation...

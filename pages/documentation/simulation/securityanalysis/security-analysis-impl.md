@@ -22,7 +22,7 @@ componentDefaultConfig:
 </componentDefaultConfig>
 ```
 
-Remember that this implementation relies on a power flow simulator. It will automatically use the default implementation, except if there are many in your classpath. In that specific case, you have to adjust your configuration defining the name of the power flow simulator to use. Please refer to the [power flow]() page to know the list of available implementations.
+Remember that this implementation relies on a power flow simulator. It will automatically use the default implementation, except if there are many in your classpath. In that specific case, you have to adjust your configuration defining the name of the power flow simulator to use. Please refer to the [power flow](../powerflow/index.md) page to know the list of available implementations.
 
 **YAML configuration:**
 ```yaml

@@ -55,7 +55,7 @@ This option defines the path where to export the modified network.
 This option defines the format of the output case file. The list of [supported formats](../../index.html#grid-formats) are listed between brackets in the command help. This option is required if `--output-case-file` is used.
 
 **\-\-output-file**  
-This option defines the path where to export the [results]() of the power flow.
+This option defines the path where to export the [results](../../simulation/powerflow/index.html#outputs) of the power flow.
 
 **\-\-output-format**  
 This option defines the format of the output file. The supported format are `CSV` and `JSON`. This option is required if the `--output-file` is used.
@@ -64,13 +64,14 @@ This option defines the format of the output file. The supported format are `CSV
 This option defines the path of the [parameters](#parameters) file of the simulation. If this option is not used, the simulation is run with the default parameters. 
 
 ## Simulators
-<span style="color: red">TODO</span>
+
+The available power flow simulators implementations are described [here](../../simulation/powerflow/index.html#implementations).
 
 ## Parameters
-<span style="color: red">TODO</span>
+The available parameters are described [here](../../simulation/powerflow/index.html#configuration).
 
 ## Results
-<span style="color: red">TODO</span>
+The expected results are described in the [power flow documentation](../../simulation/powerflow/index.html#outputs)
 
 ## Examples
 The following example shows how to run a power flow simulation, using the default configuration:
