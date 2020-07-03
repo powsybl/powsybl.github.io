@@ -17,7 +17,7 @@ There is a violation if the computed value is greater than the maximum allowed v
 ## Inputs
 
 ### Network
-The first input of the security analysis is a network. As this simulation is basically [power flow]() simulations for a list of contingencies, this network should converge.
+The first input of the security analysis is a network. As this simulation is basically [power flow](../powerflow/index.md) simulations for a list of contingencies, this network should converge.
 
 ### Contingencies
 The security analysis may also take, optionally, a list of contingencies as an input. When contingencies are provided, the violations are detected on the network at state N, but also after the application of each contingency. At the moment, the only way to provide contingencies is to use the [Contingency Domain Specific Language](contingency-dsl.md), written in Groovy.
