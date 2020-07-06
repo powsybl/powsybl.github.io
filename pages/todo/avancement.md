@@ -44,8 +44,7 @@ layout: default
             - [X] intellij.md
             - [ ] itools-command.md (*): : /docs/tutorials/itools/extend-itools.md
             - [X] itools-packager.md
-            - [ ] loadflow (*)
-                - Reprendre partiellement /docs/user_stories/loadflow_tutorial.md
+            - [X] loadflow (*)
             - [ ] runscript (*)
             - [ ] security-analysis.md
             - [X] sensitivity-computation.md
@@ -77,8 +76,8 @@ layout: default
     - [X] microservices (*)
         - [X] index.md
     - [ ] simulation
-        - [ ] powerflow
-            - [ ] index.md:
+        - [X] powerflow
+            - [X] index.md:
                 - /docs/configuration/parameters/LoadFlowParameters.md
                 - /docs/loadflow/validation.md
             - [ ] openlf.md

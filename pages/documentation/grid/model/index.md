@@ -22,7 +22,7 @@ Note that the equipments in the IIDM model may be flagged as fictitious, in orde
 
 ## Network core model
 
-### Network
+### Network [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
 
 **Characteristics**
 
@@ -46,7 +46,7 @@ The network comprises metadata in IIDM:
 - [CGMES conversion context extension]()
 - [CGMES model extension]()
 
-### Substation
+### Substation [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Substation.html)
 
 **Characteristics**
 
@@ -70,7 +70,7 @@ It comprises metadata in IIDM:
 
 - [ENTSOE Area]()
 
-### Voltage Level
+### Voltage Level [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VoltageLevel.html)
 
 **Characteristics**
 
@@ -107,10 +107,10 @@ The edges are constituted of switches or internal connections. See the following
 <span style="color:red"> TODO: add sketch of voltage level topology graph.</span>
 
 
-**Busbar section**  
+**Busbar section**  [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/BusbarSection.html)<br>
 A busbar section is a non impedant element used in a node/breaker substation topology to connect equipments.
 
-**Switch**  
+**Switch**  [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
 <span style="color:red"> TODO</span>
 
 **Internal connection**  
@@ -133,12 +133,12 @@ In bus/breaker topology, the voltage level is described with a coarser level of 
 <span style="color:red"> TODO: add sketch of voltage level in bus/breaker topology.</span>
 The topology is then described as a graph structure, where the vertices are buses and the edges are switches.
 
-**Bus**  
+**Bus**  [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Bus.html)<br>
 A bus is a set of equipments connected at the same voltage.
 When an equipment is connected to a bus, in the IIDM descrition it corresponds to a `Terminal` object.
 In IIDM there is thus one `Terminal` per connected equipment.
 
-**Switch**  
+**Switch**  [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
 <span style="color:red"> TODO: explain the difference with node/breaker switches</span>
 
 ### Injections
@@ -146,7 +146,7 @@ In IIDM there is thus one `Terminal` per connected equipment.
 An injection in IIDM is any AC equipment with a single connection point to a voltage level.
 Below are the different types of injections supported by PowSyBl.
 
-#### Generator
+#### Generator [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Generator.html)
 
 A generator is an active equipment that injects active power, and injects or consumes reactive power. 
 It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
@@ -204,7 +204,7 @@ A generator in IIDM comprises some metadata:
 - [Active Power Control]()
 - [Coordinated Reactive Control]()
 
-#### Load
+#### Load [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
 
 A load is a passive equipment representing a delivery point that consumes active and reactive power.
 
@@ -236,7 +236,7 @@ In IIDM, loads comprise the following metadata:
     - `AUXILIARY`
     - `FICTITIOUS`
 
-#### Battery
+#### Battery [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Battery.html)
 
 A battery on the electric grid is an energy storage device that is either capable of capturing energy from the grid or of injecting it into the grid. The electric energy on the grid side is thus transformed into chemical energy on the battery side and vice versa. The power flow is bidirectional and it is controlled via a power electronic converter.
 
@@ -260,7 +260,7 @@ A battery on the electric grid is an energy storage device that is either capabl
 
 - [Active Power Control]()
 
-#### Dangling Line
+#### Dangling Line [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/DanglingLine.html)
 
 The IIDM network may be connected to other networks for which a full description is not available.
 In this case, a boundary line exists between the two networks. In the IIDM model of the fully described network,
@@ -302,7 +302,7 @@ page to learn more about this format.
 
 - [Xnode]()
 
-#### Shunt Compensator
+#### Shunt Compensator [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ShuntCompensator.html)
 
 <span style="color:red"> TODO: add a description.</span>
 <span style="color:red"> TODO: add a sketch with the sign convention.</span>
@@ -341,7 +341,7 @@ calculation or not, depending of what is wanted to be shown.
 - In case of a capacitor, the value for its Q will be negative.
 - In case of a reactor, the value for its Q will be positive.
 
-#### Static VAR Compensator
+#### Static VAR Compensator [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/StaticVarCompensator.html)
 
 <span style="color:red"> TODO: add a description with sign convention.</span>
 <span style="color:red"> TODO: add a sketch with the sign convention.</span>
@@ -386,7 +386,7 @@ Note that it is different than the generators' regulation definition, which is o
 A branch in IIDM Grid model is any AC equipment with two or more connection points to the network.
 Below are the different types of branches supported by PowSyBl.
 
-#### Line
+#### Line [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Line.html)
 
 AC Power lines are modeled using a standard $$\pi$$ model with distributed parameters.
 
@@ -444,7 +444,7 @@ $$
 
 - [Merged Xnode]()
 
-##### Tie Line
+##### Tie Line [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TieLine.html)
 
 A tie line is an AC line sharing power between two neighbouring regional grids. It is constituted of two [half lines](#half-line).
 A tie line is created by matching two [dangling lines](#dangling-line) with the same Xnode code.
@@ -494,7 +494,7 @@ $$G2$$ (resp. $$B2$$) is equal to the sum of the second half line's $$G1$$ and $
 
 #### Transformers
 
-##### Three windings transformer
+##### Three windings transformer [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ThreeWindingsTransformer.html)
 
 A three windings power transformer is connected to three voltage levels (side 1, side 2 and side 3) that belong to the
 same substation. We usually have:
@@ -545,7 +545,7 @@ Only one Tap Changer (either ratio or phase tap changer) is allowed to be regula
 
 - A leg can have current limits.
 
-##### Two windings transformer
+##### Two windings transformer [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TwoWindingsTransformer.html)
 
 A two windings power transformer is connected to two voltage levels (side 1 and side 2) that belong to a same substation.
 
@@ -610,7 +610,7 @@ $$
 
 ### DC components
 
-#### HVDC Line
+#### HVDC Line [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/HvdcLine.html)
 
 An HVDC line is connected to the DC side of two HVDC converter stations.
 
@@ -635,7 +635,7 @@ An HVDC line is connected to the DC side of two HVDC converter stations.
     - SIDE_1_INVERTER_SIDE_2_RECTIFIER
 - The active power setpoint and the maximum active power should always be positive values. The flow sign is given by the type of the converter station. Power always flows from rectifier converter station to inverter converter station. At a terminal on AC side, P and Q follow load sign convention. P is positive on rectifier side. P is negative at inverter side.
 
-#### LCC Converter Station
+#### LCC Converter Station [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/LccConverterStation.html)
 
 **Characteristics**
 
@@ -654,7 +654,7 @@ $$
 and should be between -1 and 1. Note that at terminal on AC side, Q is always positive: the converter station always consumes reactive power.
 
 
-#### VSC Converter Station
+#### VSC Converter Station [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VscConverterStation.html)
 
 **Characteristics**
 
@@ -674,11 +674,11 @@ The reactive power setpoint is required if the voltage regulator is off.
 
 <span style="color:red"> TODO</span>
 
-### Reactive limits
+### Reactive limits [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ReactiveLimits.html)
 
 <span style="color:red"> TODO</span>
 
-### Current limits
+### Current limits [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/CurrentLimits.html)
 
 <span style="color:red"> TODO</span>
 
