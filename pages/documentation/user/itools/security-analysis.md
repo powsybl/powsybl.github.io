@@ -49,12 +49,11 @@ This option defines the path of the case file on which the power flow simulation
 ### Optional arguments
 
 **\-\-contingencies-file**  
-This option defines the path of the contingencies files. If this parameter is not set, the security violations are checked on the base state only.
-<span style="color: red">TODO</span>: quels formats???
+This option defines the path of the contingencies files. If this parameter is not set, the security violations are checked on the base state only. This file is a groovy script that respects the [contingency DSL](../../simulation/securityanalysis/contingency-dsl.md) syntax.
 
 **\-\-external**  
-Use this argument to run the security analysis as an external process.
-<span style="color: red">TODO</span>: mieux expliquer ce que ca implique
+<span style="color: red">TODO:</span> Use this argument to run the security analysis as an external process.
+
 
 **\-\-import-parameters**  
 This option defines the path of the [importer](../../glossary.md#importer)'s configuration file. It's possible to overload one or many parameters using the `-I property=value` syntax. The list of supported properties depends on the [input format](../../index.html#grid-formats).

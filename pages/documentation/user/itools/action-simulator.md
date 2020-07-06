@@ -1,14 +1,13 @@
 ---
-title: action-simulator
 layout: default
-todo:
-    - add description of --apply-if-solved-violations optional parameter
 ---
 
-The `action-simulator` command is used to test remedial actions to solve security violations.
+# iTools action-simulator
 
-# Usage
-```shell
+The `action-simulator` command loads a grid file and run a [security analysis with remedial actions](../../simulation/securityanalysis/index.md). This tool is used to create or validate a strategy in order to solve violations. 
+
+## Usage
+```
 $> itools action-simulator --help
 usage: itools [OPTIONS] action-simulator [--apply-if-solved-violations]
        --case-file <FILE> [--contingencies <CONTINGENCY1,CONTINGENCY2,...>]
@@ -46,56 +45,57 @@ Available arguments are:
     --verbose                                          verbose mode
 ```
 
-## Required parameters
+### Required arguments
 
-### case-file
-Use the `--case-file` parameter to specify the path of the case file.
+**--case-file**  
+This option defines the path of the case file on which the power flow simulation is run. The [supported formats](../../index.html#grid-formats) depend on the execution class path.
 
-### dsl-file
-Use the `--dsl-file` parameter to specify the path of the [action DSL](../todo.md) script that defines the strategy to simulate.
+**--dsl-file**  
+This option defines the path of the strategy to evaluate. This is a groovy script that respects the [action DSL](../../simulation/securityanalysis/action-dsl.md) syntax.
 
-## Optional parameters
+### Optional parameters
 
-### contingencies
-Use the `--contingencies` parameter to specify the list of contingencies to simulate.
+**--apply-if-solved-violations**  
+<span style="color: red">TODO</span>
 
-### export-after-each-round
-Use the `--export-after-each-round` parameter to export a case file after each round of the simulation. If this option
-is not set, a single case file is exported at the end of simulation (e.g. once there is no more violations or matching
-rules).
+**--contingencies**  
+This option defines the list of contingencies to simulate. If this parameter is omitted, all the contingencies defined in the DSL file are simulated.
 
-### import-parameters
-Use the `--import-parameters` parameter to specify the path of the configuration file of the importer. It is possible to
-overload one or many parameters using the `-I property=value` parameter. The properties depend on the input format.
-Refer to the documentation page of each [importer](../iidm/importer/index.md) to know their specific configuration.
+**--export-after-each-round**  
+If this option is passed, a case file is exported after each round of the simulation. Otherwise, a single case file is exported at the end of the simulation (once there is no more violations or matching rules).
 
-### output-case-folder
-Use the `--output-case-folder` parameter to set the folder in which the case files are exported.
+**\-\-import-parameters**  
+This option defines the path of the [importer](../../glossary.md#importer)'s configuration file. It's possible to overload one or many parameters using the `-I property=value` syntax. The list of supported properties depends on the [input format](../../index.html#grid-formats).
 
-### output-case-format
-Use the `--output-case-format` parameter to set the case exporter to use to export case files. Read the [exporter](../iidm/exporter/index.md)
-documentation page to learn more about supported case formats.
+**\-\-output-case-folder**  
+This option defines the path to the folder in which the case files will be exported.
 
-### output-compression-format
-Use the `--output-compression-format` parameter to set the compression format of the case files.
+**\-\-output-case-format**  
+This option defines the format of the output case files. The list of [supported formats](../../index.html#grid-formats) are listed between brackets in the command help.
 
-### output-file
-Use the `--output-file` parameter to specify the path of the output file. If this option is not set, the results are
-displayed in the console.
+**\-\-output-compression-format**  
+This option defines the compression format of the case files. The list of supported formats are listed between brackets in the command help.
 
-### output-format
-Use the `--output-format` parameter to specify the format of the output file. This option is required if the `output-file`
-parameter is defined.
+**\-\-output-file**  
+This option defines the path of the result file. If this option is omitted, the results are displayed in the console.
 
-### verbose
-Use the `--verbose` parameter to activate the verbose mode.
+**\-\-output-format**  
+This option defines the format of the result file. This option is required if `--output-file` is used. The supported format are listed between brackets in the command help.
 
-# Configuration
-Read the [configuration](../../pages/documentation/user/configuration/load-flow-action-simulator.md) page to learn how to set up the
-`load-flow-action-simulator` module.
+**\-\-verbose**  
+This option enables the verbose mode, to display more information during the simulation.
 
-# Examples
-This example shows a small [action DSL](../todo.md) script:
+## Simulators
+Currently the only simulator which is supported is the [load-flow based]() simulator. 
+
+## Parameters
+<span style="color: red">TODO</span>
+
+## Results
+<span style="color: red">TODO</span>
+
+## Examples
+This example shows a small [action DSL](../../simulation/securityanalysis/action-dsl.md) script:
 ```groovy
 contingency('HV_line_1') {
     equipments 'NHV1_NHV2_1'
@@ -209,27 +209,3 @@ Post-contingency limit violations:
 |             |          |               | NHV1_NHV2_2   | VLHV2 | FR      |          380 | CURRENT        | Permanent limit | 566.1081 | 500.0000 |          66.1081 |         113.22 |
 +-------------+----------+---------------+---------------+-------+---------+--------------+----------------+-----------------+----------+----------+------------------+----------------+
 ```
-
-# Maven configuration
-To use the `action-simulator` command, add the following dependencies to the `pom.xml` file:
-```xml
-<dependency>
-    <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-action-dsl</artifactId>
-    <version>${powsybl.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-action-simulator</artifactId>
-    <version>${powsybl.version}</version>
-</dependency>
-<dependency>
-    <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-action-util</artifactId>
-    <version>${powsybl.version}</version>
-</dependency>
-```
-
-# Load-flow implementations
-Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure powsybl to use
-Hades2, a RTE load-flow tool, for remedial action simulations.

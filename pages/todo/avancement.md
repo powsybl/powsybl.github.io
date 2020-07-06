@@ -97,7 +97,7 @@ layout: default
             - [ ] index.md (**): reprend /docs/configuration/modules
         - [ ] index.md
         - [X] itools
-            - [ ] action-simulator.md (*): /docs/tools/action-simulator.md
+            - [X] action-simulator.md (*): /docs/tools/action-simulator.md
             - [ ] afs: /docs/tools/afs.md
             - [ ] compare-security-analysis-results.md: /docs/tools/compare-security-analysis-results.md
             - [X] index.md

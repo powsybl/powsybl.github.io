@@ -1,19 +1,16 @@
 ---
-title: afs
 layout: default
-todo:
-    - add links to missing pages
 ---
 
-The `afs` command performs some basic actions on a [AFS](../afs/index.md) drive:
+# iTools AFS
+
+The `afs` command performs some basic actions on a [AFS]() drive:
 - list the content of an AFS folder
 - archive/restore an AFS content from/to a directory for backup purposes
-- allow taking corrective actions on inconsistent nodes (remove/list inconsistent nodes ...).
+- allow taking corrective actions on inconsistent nodes (remove/list inconsistent nodes ...). 
 
-Read this [tutorial](../tutorials/afs/afs.md) to learn how to configure an AFS drive. 
-
-# Usage
-```shell
+## Usage
+```
 $> itools afs --help
 usage: itools [OPTIONS] afs [--archive <FILE_SYSTEM_NAME>] [--dir <DIR>]
        [--help] [--ls <PATH>] [--unarchive <FILE_SYSTEM_NAME>] [--rm-inconsistent-nodes  <FILE_SYSTEM_NAME>  <NODE_ID>]
@@ -36,71 +33,59 @@ Available arguments are:
     --deleteResults                                        delete results
 ```
 
-## Commands
+### Available commands
 
-### archive
-Use the `--archive` command to archive an AFS root node and all its children to a directory.
+**archive**  
+The `--archive` command archives an AFS root not and all its children to a directory.
 
-### ls
-Use the `--ls` command to list the content of the specified AFS node.
+**deleteResults**  
+The `--deleteResults` command deletes the results.
 
-### unarchive
-Use the `--unarchive` command to restore an AFS root node from a backup directory.
-
-### ls-inconsistent-nodes
-Use the `--ls-inconsistent-nodes` to list all inconsistent nodes in a specified AFS.
-
-### rm-inconsistent-nodes
-Use the `--rm-inconsistent-nodes` to remove all inconsistent nodes in a specified AFS.
-
-### set-inconsistent-nodes
-Use the `--set-inconsistent-nodes` to mark all inconsistent nodes (or a specified node) as consistent in a specified AFS.
-
-### zip
-Use the `--zip` command to create a zipped archive file.
-
-### dependencies
+**dependencies**  
 Use the `--dependencies` command to archive the dependencies of the selected file or folder.
 
-### deleteResults
-Use the `--deleteResults` command to not archive the results.
+**ls**  
+The `--ls` command lists the content of the specified AFS node.
 
-## Required parameters
+**ls-inconsistent-nodes**  
+The `--ls-inconsistent-nodes` command lists all inconsistent nodes in a specified AFS.
 
-### dir
-Use the `--dir` parameter to specify the directory. This parameter is required by the `archive` and `unarchive` commands.
+**rm-inconsistent-nodes**  
+The `--rm-inconsistent-nodes` command removes all inconsistent nodes in a specified AFS.
 
-# Examples
+**set-inconsistent-nodes**  
+The `--set-inconsistent-nodes` command marks all inconsistent nodes (or a specified node) as consistent in a specified AFS.
+
+**unarchive**  
+The `--unarchive` command restores an AFS root node from a backup directory.
+
+**zip**  
+The `--zip` command create a zipped archive file.
+
+### Required parameters
+
+**dir**  
+The `--dir` defines the path the folder the `archive` or `unarchive` commands will used to save or load the archive.
+
+## Examples
 This example shows how to list the content of an AFS root folder:
-```shell
+```
 $> itools afs --ls "my-first-fs"
 my-first-folder
 ```
 
 This example shows how to list the content of a specific folder:
-```shell
+```
 $> itools afs --ls "my-first-fs:/my-first-folder"
 my-first-project
 ```
 
 This example shows how to backup an AFS node to a directory:
-```shell
+```
 $> itools afs --archive my-first-fs --dir /tmp
 ```
 
 This example shows how to restore an AFS node from a backup directory:
-```shell
+```
 $> itools afs --unarchive my-first-fs --dir /tmp
 ```
-
-# Maven configuration
-To use the `afs` command, add the following dependencies to the `pom.xml` file:
-```xml
-<dependency>
-    <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-afs-core</artifactId>
-    <version>${powsybl.version}</version>
-</dependency>
-```
-
-Read the [documentation](../afs/index.md) page to learn more about the AFS implementations.
