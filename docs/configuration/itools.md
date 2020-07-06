@@ -40,10 +40,10 @@ The `itools_config_dir` property is deprecated since V2.2.0. Use the `powsybl_co
 The `itools_config_name` property is deprecated since V2.2.0. Use the `powsybl_config_name` property instead.
 
 ## mpi_hosts
-The `mpi_hosts` property is deprecated since V3.0.0. This parameter is configured in [itools-mpi.conf](itools-mpi.md).
+The `mpi_hosts` property is deprecated since V3.0.0. This parameter is configured in [itools-mpi.conf](../../backup/itools-mpi.md).
 
 ## mpi_tasks
-The `mpi_tasks` property is deprecated since V3.0.0. This parameter is configured in [itools-mpi.conf](itools-mpi.md).
+The `mpi_tasks` property is deprecated since V3.0.0. This parameter is configured in [itools-mpi.conf](../../backup/itools-mpi.md).
 
 # Example
 ```properties

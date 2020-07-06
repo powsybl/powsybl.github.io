@@ -93,16 +93,16 @@ layout: default
             - [ ] index.md
                 - /docs/configuration/parameters/DynamicSimulationParameters.md
     - [ ] user
-        - [ ] configuration
-            - [ ] index.md (**): reprend /docs/configuration/modules
+        - [X] configuration
+            - [X] index.md (**): reprend /docs/configuration/modules
         - [ ] index.md
         - [X] itools
             - [X] action-simulator.md (*): /docs/tools/action-simulator.md
-            - [ ] afs: /docs/tools/afs.md
-            - [ ] compare-security-analysis-results.md: /docs/tools/compare-security-analysis-results.md
+            - [X] afs: /docs/tools/afs.md
+            - [X] compare-security-analysis-results.md: /docs/tools/compare-security-analysis-results.md
             - [X] index.md
             - [X] loadflow.md (**)
-            - [ ] loadflow-validation: /docs/tools/loadflow-validation
+            - [X] loadflow-validation: /docs/tools/loadflow-validation
             - [X] security-analysis.md (**)
             - [X] convert-network.md (**)
             - [X] sensitivity-computation (*)
@@ -119,8 +119,7 @@ layout: default
     - [X] license.md
     - [X] roadmap.md ==> à transférer depuis .github
 - [ ] archive
-    - [ ] itools-mpi.md
-    - [ ] EmptyContingenciesListProvider.md
-    - [ ] tools/plugins-info.md
-    - [ ] tools/run-impact-analysis.md
+    - [X] itools-mpi.md
+    - [X] tools/plugins-info.md
+    - [X] tools/run-impact-analysis.md
 
