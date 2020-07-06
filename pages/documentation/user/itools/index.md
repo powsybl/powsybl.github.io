@@ -75,6 +75,8 @@ The `iTools` script relies on a [plugin mechanism](): the commands are discovere
 
 | Command | Theme | Description |
 | ------- | ----- | ----------- |
+| [action-simulator](action-simulator.md) | Computation | Run a security analysis with remedial actions |
+| [compare-security-analysis-results.md](compare-security-analysis-results.md) | Computation | Compare security analysis results |
 | [convert-network](convert-network.md) | Data conversion | Convert a grid file from a format to another |
 | [loadflow](loadflow.md) | Computation | Run a power flow simulation |
 | [loadflow-validation](loadflow-validation.md) | Computation | Validate load flow results on a network |
