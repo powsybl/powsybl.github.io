@@ -25,9 +25,9 @@ layout: default
                 - [ ] Topology
                 - [ ] Reduction de réseau: reprendre partiellement /docs/iidm/reducer/index.md
             - [ ] Simulation
-                - [ ] LoadFlow: /docs/loadflow/loadflow.md
-                - [ ] SecurityAnalysis: /docs/loadflow/security-analysis.md
-                - [ ] DynamicSimulation: /docs/dynamicsimulation/index.md
+                - [x] LoadFlow: /docs/loadflow/loadflow.md
+                - [x] SecurityAnalysis: /docs/loadflow/security-analysis.md
+                - [x] DynamicSimulation: /docs/dynamicsimulation/index.md
             - [ ] How to use AFS (*)
                 /docs/tutorials/afs/afs.md
             - [ ] How to use timeseries (*): /docs/timeseries/index.md
