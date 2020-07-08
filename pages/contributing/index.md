@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Contributing
+# How to contribute
 
 ## Code of conduct
 This project applies the [LF Energy Code of Conduct](https://www.lfenergy.org/about/code-of-conduct/). By participating, you are expected to uphold this code. Please report unacceptable behavior to the project's Technical Steering Committee [powsybl-tsc@lists.lfenergy.org](mailto:powsybl-tsc@lists.lfenergy.org).
