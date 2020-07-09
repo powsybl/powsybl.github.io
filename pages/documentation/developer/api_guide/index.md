@@ -1,13 +1,10 @@
 ---
-title: API Guide
 layout: default
 ---
 
 # API guide
 
-This page describes the way the Java objects have been
-designed to effectively handle the grid modelling and all the associated features
-of PowSyBl.
+This page describes the way the Java objects have been designed to effectively handle the grid modelling and all the associated features of PowSyBl.
 
 ## Grid model
 - [IIDM]()
