@@ -17,7 +17,7 @@ layout: default
 - [ ] documentation
     - [ ] data
         - [ ] afs.md (**): reprendre /docs/afs/*
-        - [ ] timeseries.md
+        - [x] timeseries.md
     - [ ] developer
         - [ ] API Guide
             - [ ] Grid model
@@ -30,7 +30,7 @@ layout: default
                 - [x] DynamicSimulation: /docs/dynamicsimulation/index.md
             - [ ] How to use AFS (*)
                 /docs/tutorials/afs/afs.md
-            - [ ] How to use timeseries (*): /docs/timeseries/index.md
+            - [x] How to use timeseries (*): /docs/timeseries/index.md
         - [X] artifacts.md (**)
         - [ ] itools-packager.md: reprendre /docs/installation/itools-packager.md
         - [X] repositories (*)
