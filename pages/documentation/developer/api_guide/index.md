@@ -18,4 +18,4 @@ This page describes the way the Java objects have been designed to effectively h
 
 ## Data management
 - [AFS]()
-- [Time series]()
+- [Time series](timeseries.md)

@@ -1,33 +1,15 @@
 ---
-title: Time series
 layout: default
 ---
 
-To use time-series, add the following dependency to the `pom.xml` file:
-```xml
-<dependency>
-  <groupId>com.powsybl</groupId>
-  <artifactId>powsybl-time-series-api</artifactId>
-  <version>${powsybl.version}</version>
-</dependency>
-```
+# Time series API
 
-# Time series modeling
+This page provides some examples of how to use the time series API.
+Please check the [time series functional documentation](../../data/timeseries.md) to learn about the
+time series modeling in PowSyBl.
 
-In Powsybl, time series are modeled by:
-- A name to uniquely identify a time series inside a store.
-- A data type which is `double` or `String`.
-- A time index to define an instants list for which data exists. Three different implementation of time index are available
-in the framework depending of the need:
-    - Regular index
-    - Irregular index
-    - Infinite index
-- Metadata: a list of key/value string data
-- Data chunks: an ordered list of data that will be associated to instants of the time index.
-
-# Time index
-
-## Irregular
+## Handling the index type
+### Create time series with irregular index
 
 The following example shows how to create an [irregular](https://en.wikipedia.org/wiki/Unevenly_spaced_time_series) time
 series index with 3 instants, and how to iterate over all instants of the time index.
@@ -52,7 +34,7 @@ Output:
 2018-01-01T00:00:06Z
 ```
 
-## Regular
+### Create time series with regular index
 
 The following example shows how to create a regular time series with 3 instants in steps of 1 second, and how to iterate
 over all instants:
@@ -63,7 +45,7 @@ Duration spacing = Duration.ofSeconds(1);
 TimeSeriesIndex regularIndex = RegularTimeSeriesIndex.create(start, end, spacing);
 ```
 
-As for irregular time indexes, we can iterate over all instants:
+As with irregular time indexes, we can iterate over all instants:
 ```java
 regularIndex.stream().forEach(System.out::println);
 ```
@@ -76,7 +58,7 @@ Output:
 2018-01-01T00:00:03Z
 ```
 
-## Infinite
+### Create time series with infinite index
 
 An infinite time series is a time series with only two points: one at instant 0 and another at instant `Long.MAX_VALUE`.
 To get an infinite time series:
@@ -84,9 +66,8 @@ To get an infinite time series:
 TimeSeriesIndex infiniteIndex = InfiniteTimeSeriesIndex.INSTANCE;
 ```
 
-# Time series
-
-## Double data
+## Handling the data type
+### Create double type time series
 
 To create a double data time series based on time index `regularIndex`:
 ```java
@@ -105,7 +86,7 @@ Output:
 [NaN, NaN, NaN, NaN]
 ```
 
-## String data
+## Create string type time series
 
 Similarly to double time series, to create a string data time series based on time index `regularIndex`:
 ```java
@@ -123,14 +104,14 @@ Output:
 [null, null, null, null]
 ```
 
-# Data chunks
+## Handle data chunks
 
 In order to add data to a time series, we need to create data chunks: `DoubleDataChunk`s for double time series and
 `StringDataChunk`s for string time series.
 
-## Double data chunk
+### Double data chunk
 
-The following example shows how to create an uncompress data chunk and print its JSON representation:
+The following example shows how to create an uncompressed data chunk and print its JSON representation:
 ```java
 DoubleDataChunk chunk = DataChunk.create(1d, 1d, 1d, 3d);
 System.out.println(chunk.toJson());
@@ -144,10 +125,7 @@ Output:
 }
 ```
 
-We can see that an uncompress data chunk is modeled with a double array and an offset. It defines values associated to
-instants of the time index from `offset` to `offset + values.length`.
-
-The folowing example shows how to compress the chunk using the [RLE](https://fr.wikipedia.org/wiki/Run-length_encoding)
+The following example shows how to compress the chunk using the [RLE](https://fr.wikipedia.org/wiki/Run-length_encoding)
 compression algorithm:
 ```java
 DoubleDataChunk compressedChunk = chunk.tryToCompress();
@@ -195,7 +173,7 @@ Output:
 [1.0, 1.0, 1.0, 3.0]
 ```
 
-## String data chunk
+### String data chunk
 
 The following example shows how to create a `StringDataChunk` instance, and the JSON representation of both the compressed and
 uncompressed version of this data chunk:
@@ -219,17 +197,14 @@ Output:
 }
 ```
 
-As for double time series, string data chunks can be added to a string time series:
+As with double time series, string data chunks can be added to a string time series:
 ```java
 sts.addChunk(chunk2); 
 ```
 
 ## Calculated time series
 
-Starting from a double time series, it is possible to create calculated time series using a [Groovy](http://groovy-lang.org/)
-script.
-
-For instance, the following example creates a calculated time series from an existing time series.
+The following example creates a calculated time series from an existing time series:
 
 ```java
 TimeSeriesIndex index = RegularTimeSeriesIndex.create(Interval.parse("2015-01-01T00:00:00Z/2015-07-20T00:00:00Z"), Duration.ofDays(200));
@@ -283,36 +258,9 @@ Output:
 [4.0, 4.0, 4.0, 8.0]
 ```
 
-Here is the list of supported vector operations:
+Check the [functional documentation](../../data/timeseries.md#calculated-time-series) for the list of supported vector operations.
 
-| Operator | Purpose | Example |
-| -------- | ------- | ------- |
-| + | addition | ts['a'] + ts['b'] |
-| - | substraction | ts['a'] - ts['b'] |
-| * | multiplication | ts['a'] * ts['b'] |
-| / | division | ts['a'] / ts['b'] |
-| == | 1 if equals, 0 otherwise | ts['a'] == ts['b'] |
-| != | 1 if not equals, 0 otherwise | ts['a'] != ts['b'] |
-| < | 1 if less than, 0 otherwise | ts['a'] < ts['b'] |
-| <= | 1 if less than or equals to, 0 otherwise | ts['a'] <= ts['b'] |
-| > | 1 if greater, 0 otherwise | ts['a'] > ts['b'] |
-| >= | 1 if greater than or equals to, 0 otherwise | ts['a'] >= ts['b'] |
-| - | negation | -ts['a'] |
-| abs | absolute value | ts['a'].abs() |
-| time | convert to time index vector ([epoch](https://en.wikipedia.org/wiki/Unix_time)) | ts['a'].time() |
-| min | min value | ts['a'].min(10) |
-| max | max value | ts['a'].max(10) |
-
-About the Groovy DSL syntax, both `timeSeries['a']` and `ts['a']` are supported and are equivalent.
-
-### Functions
-To compare a time index vector to a literal date, the `time('2018-01-01T00:00:01Z')` function is available. For instance, the
-following code create a time series of 0 and 1 values:
-```groovy
-a = ts['dts'].time() < time('2018-01-01T00:00:01Z')
-```
-
-# CSV
+## Handling CSV data
 
 Time series can be imported from CSV:
 ```java
@@ -342,3 +290,4 @@ ts1 values: [1.0, NaN, 3.0]
 ts2 instants: [1970-01-01T00:00:00Z, 1970-01-01T01:00:00Z, 1970-01-01T02:00:00Z]
 ts2 values: [null, a, b]
 ```
+
