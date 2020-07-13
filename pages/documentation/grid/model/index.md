@@ -8,7 +8,6 @@ latex: true
 * TOC
 {:toc}
 
-- <span style="color:red"> TODO: add links to javadoc for each section/subsection.</span>
 - <span style="color:red"> TODO: put all the current Table in the corresponding javadoc pages.</span>
 - <span style="color:red"> TODO: only keep electrotech/regulation/etc. information in this page (not code-oriented information).</span>
 
@@ -24,17 +23,6 @@ Note that the equipments in the IIDM model may be flagged as fictitious, in orde
 
 ### Network [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
 
-**Characteristics**
-
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| Id | String | yes | - | The ID of the network |
-| Name | String | no | - | The name of the network |
-| CaseDate | `DateTime` | no | Now | The date of the case |
-| ForecastDistance | Integer | no | 0 | The number of minutes between the date of the case generation and the date of the case |
-
-<span style="color:red"> TODO: remove the Table.</span>
-
 In IIDM, the network is constituted of [substations](#substation), which are themselves constituted of [voltage levels](#voltage-level).
 All the equipments are then connected to the voltage levels.
 The network comprises metadata in IIDM: 
@@ -48,18 +36,6 @@ The network comprises metadata in IIDM:
 
 ### Substation [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Substation.html)
 
-**Characteristics**
-
-| Attribute | Type | Required | Default value | Description |
-| --------- | ---- | -------- | ------------- | ----------- |
-| Id | String | yes | - | The ID of the substation |
-| Name | String | no | - | The name of the substation |
-| Country | `Country` | no | - | The country where this substation is located |
-| Tso | String | no | - | The TSO this substations belongs to |
-| GeographicalTags | List of String | no | - | A list of geographical tags |
-
-<span style="color:red"> TODO: remove the Table.</span>
-
 A substation in IIDM represents a specific geographical location with a set of equipments connected to one or several [voltage levels](#voltage-level).
 It comprises metadata in IIDM:
 - a country: to specify in which country the substation is located. It is an optional attribute, not set on fictitious test networks for example.
@@ -71,19 +47,6 @@ It comprises metadata in IIDM:
 - [ENTSOE Area]()
 
 ### Voltage Level [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VoltageLevel.html)
-
-**Characteristics**
-
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the voltage level |
-| Name | String | - | no | - | The name of the voltage level |
-| NominalV | double | kV | yes | - | The nominal voltage |
-| LowVoltageLimit | double | kV | no | - | The low voltage limit |
-| HighVoltageLimit | double | kV | no | - | The high voltage limit |
-| TopologyKind | `TopologyKind` | - | yes | - | The kind of topology |
-
-<span style="color:red"> TODO: remove the Table.</span>
 
 A voltage level in IIDM represents a set of equipments connected together with the same nominal voltage, physically close to each other (~ 1-100m).
 Two voltage levels may be connected through a line (they are then located in different substations) or through transformers (they are then located within
@@ -116,18 +79,6 @@ A busbar section is a non impedant element used in a node/breaker substation top
 **Internal connection**  
 An internal connection is a non-impedant connection between two components in a voltage level.
 
-**Characteristics**
-
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the busbar section |
-| Name | String | - | no | - | The name of the busbar section |
-| V | double | kV | no | - | The voltage magnitude of the busbar section |
-| Angle | double | ° |  no | - | The voltage angle of the busbar section |
-
-<span style="color:red"> TODO: remove the Table</span>
-
-
 #### Bus/breaker topology
 In bus/breaker topology, the voltage level is described with a coarser level of detail. See the sketch below for an example.
 <span style="color:red"> TODO: add sketch of voltage level in bus/breaker topology.</span>
@@ -156,23 +107,15 @@ More details about this behavior, which is called regulation, are available [her
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the generator |
-| Name | String | - | no | - | The name of the generator |
-| EnergySource | `EnergySource` | - | yes | `OTHER` | The energy source |
-| MinP | double | MW | yes | - | The minimal active power |
-| MaxP | double | MW | yes | - | The maximum active power |
-| RegulatingTerminal | `Terminal` | - | no | The generator's terminal | The terminal used for regulation |
-| VoltageRegulatorOn | boolean | - | yes | - | The voltage regulator status |
-| TargetP | double | MW | yes | - | The active power target |
-| TargetQ | double | MVAr | only if `VoltageRegulatorOn` is set to `false` | - | The reactive power target |
-| TargetV | double | kV | only if `VoltageRegulatorOn` is set to `true` | - | The voltage target |
-| RatedS | double | MVA | yes | - | The rated nominal power |
-| ReactiveLimits | - | - | no | min/max | Operational limits of the generator (P/Q/U diagram) |
-
-<span style="color:red"> TODO: remove name and Id from the Table and define variables with $$X$$ style.</span>
-<span style="color:red"> TODO: remove energy source, regulating terminal, voltage regulator on from the Table.</span>
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$MinP$$ | MW | The minimal active power |
+| $$MaxP$$ | MW | The maximum active power |
+| $$TargetP$$ | MW | The active power target |
+| $$TargetQ$$ | MVAr | The reactive power target |
+| $$TargetV$$ | kV | The voltage target |
+| $$RatedS$$ | MVA | The rated nominal power |
+| $$ReactiveLimits$$ | - | Operational limits of the generator (P/Q/U diagram) |
 
 **Specifications**
 - The minimal active power (in $$MW$$), expected to be lower than the maximal active power. The target $$P$$ is necessarily comprised between the two.
@@ -212,16 +155,10 @@ A load is a passive equipment representing a delivery point that consumes active
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- |-------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the load |
-| Name | String | - | no | - | The name of the load |
-| LoadType | `LoadType` | - | no | `UNDEFINED` | The type of the load |
-| P0 | double | MW | yes | - | The active power setpoint |
-| Q0 | double | MVar | yes | - | The reactive power setpoint |
-
-<span style="color:red"> TODO: remove name and Id from the Table and define variables with $$X$$ style.</span>
-<span style="color:red"> TODO: remove load type from the Table.</span>
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$P0$$ | MW | The active power setpoint |
+| $$Q0$$ | MVar | The reactive power setpoint |
 
 **Specifications**
 
@@ -244,16 +181,13 @@ A battery on the electric grid is an energy storage device that is either capabl
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the battery |
-| Name | String | - | no | - | The name of the battery |
-| P0 | double | MW | yes | - | The Constant active power |
-| Q0 | double | MVar | yes | - | The Constant reactive power |
-| MinP | double | MW | yes | - | The Minimal active power |
-| MaxP | double | MW | yes | - | The Maximum active power |
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$P0$$ | MW | The Constant active power |
+| $$Q0$$ | MVar | The Constant reactive power |
+| $$MinP$$ | MW | The Minimal active power |
+| $$MaxP$$ | MW | The Maximum active power |
 
-<span style="color:red"> TODO: remove name and Id from the Table.</span>
 <span style="color:red"> TODO: add link to the Regulation section when it exists.</span>
 
 **Available extensions**
@@ -274,28 +208,23 @@ network fully described.
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the dangling line |
-| Name | String | - | no | - | The name of the dangling line |
-| P0 | double | MW | yes | - | The active power setpoint |
-| Q0 | double | MVar | yes | - | The reactive power setpoint |
-| R | double | $$\Omega\$$ | yes | - | The series resistance |
-| X | double | $$\Omega\$$ | yes | - | The series reactance |
-| G | double | S | yes | - | The shunt conductance |
-| B | double | S | yes | - | The shunt susceptance |
-| UcteXnodeCode | String | - | no | - | The dangling line's UCTE Xnode code |
-
-<span style="color:red"> TODO: remove name and Id from the Table and define variables with $$X$$ style.</span>
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$P0$$ | MW | The active power setpoint |
+| $$Q0$$ | MVar | The reactive power setpoint |
+| $$R$$ | $$\Omega\$$ | The series resistance |
+| $$X$$ | $$\Omega\$$ | The series reactance |
+| $$G$$ | S | The shunt conductance |
+| $$B$$ | S | The shunt susceptance |
 
 **Specifications**
 
 - $$P0$$ and $$Q0$$ are the active and reactive power setpoints
 - $$R$$, $$X$$, $$G$$ and $$B$$ correspond to a fraction of the original line and have to be consistent with the declared length of the
 dangling line.
-- The UCTE Xnode code is defined in case where the line is a boundary. See the [UCTE-DEF](../importer/ucte.md) documentation
-page to learn more about this format.
-<span style="color:red"> TODO: reformulate the Xnode description: it is related to ENTSOE, not only UCTE. it is a key to match two dangling lines and reconstruct the full boundary line.</span>
+
+In case the line is a boundary, a UCTE Xnode code is defined besides the characteristics of the Table. See the [UCTE-DEF](../importer/ucte.md) documentation
+page to learn more about this format. This code is actually related to ENTSOE, not only UCTE: it is a key to match two dangling lines and reconstruct the full boundary line.
 
 
 **Available extensions**
@@ -313,17 +242,13 @@ Shunt compensators follow a passive-sign convention:
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- |--------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the shunt compensator |
-| Name | String | - | no | - | The name of the shunt compensator |
-| bPerSection | double | S | yes | - | The Positive sequence shunt (charging) susceptance per section |
-| MaximumSectionCount| integer | int | yes | - | The maximum number of sections that may be switched on |
-| CurrentSectionCount | integer | int | yes | - | The current number of section that may be switched on |
-| RegulatingTerminal | `Terminal` | - | no | The shunt compensator's terminal | The terminal used for regulation |
-| TargetV | double | kV | only if `VoltageRegulatorOn` is set to `true` | - |  The voltage target |
-| TargetDeadband | double | kV | only if `VoltageRegulatorOn` is set to `true` | - | The deadband used to avoid excessive update of controls |
-| VoltageRegulatorOn | boolean | - | no | false | The voltage regulating status |
+| Attribute | Unit | Description |
+| --------- | ---- |------------ |
+| $$bPerSection$$ | S | The Positive sequence shunt (charging) susceptance per section |
+| $$MaximumSectionCount$$ | - | The maximum number of sections that may be switched on |
+| $$CurrentSectionCount$$ | - | The current number of section that may be switched on |
+| $$TargetV$$ | kV | The voltage target |
+| $$TargetDeadband$$ | kV | The deadband used to avoid excessive update of controls |
 
 <span style="color:red"> TODO: redo the Table and specifications to be up to date with Miora's work.</span>
 
@@ -351,18 +276,12 @@ More details about this behavior, which is called regulation, are available [her
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- |-------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the static VAR compensator |
-| Name | String | - | no | - | The name of the static VAR compensator |
-| Bmin | double | S | yes | - | The minimum susceptance |
-| Bmax | double | S | yes | - | The maximum susceptance |
-| VoltageSetpoint | double | kV | only if `RegulationMode` is set to `VOLTAGE` | - | The voltage setpoint |
-| ReactivePowerSetpoint | double | MVar | only if `RegulationMode` is set to `REACTIVE_POWER` | - | The reactive power setpoint |
-| RegulatingTerminal | `Terminal`| - | no | The static var compensator's terminal | The terminal used for regulation |
-| RegulationMode | `RegulationMode` | - | yes | - | The regulation mode |
-
-<span style="color:red"> TODO: remove the name and Id from the Table, regulating terminal, regulation mode.</span>
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$Bmin$$ | S | The minimum susceptance |
+| $$Bmax$$ | S | The maximum susceptance |
+| $$VoltageSetpoint$$ | kV | The voltage setpoint |
+| $$ReactivePowerSetpoint$$ | MVar | The reactive power setpoint |
 
 **Specifications**
 
@@ -372,7 +291,7 @@ More details about this behavior, which is called regulation, are available [her
 - The reactive power setpoint is required when the regulation mode is set to `REACTIVE_POWER`.
 
 **Metadata**
-In IIDM the static VAR compensator also comprise some metadata:
+In IIDM the static VAR compensator also comprises some metadata:
 
 - The regulation mode, which can be:
     - `VOLTAGE`
@@ -423,18 +342,14 @@ $$
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | string | - | yes | - | Unique identifier of the line|
-| Name | string | - | no | "" | Human-readable name of the line|
-| R | double | $$\Omega\$$ | yes | - | The series resistance |
-| X | double | $$\Omega\$$ | yes | - | The series reactance |
-| G1 | double | S | yes | - | The first side shunt conductance |
-| B1 | double | S | yes | - | The first side shunt susceptance |
-| G2 | double | S | yes | - | The second side shunt conductance |
-| B2 | double | S | yes | - | The second side shunt susceptance |
-
-<span style="color:red"> TODO: remove the name and Id from the Table</span>
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$R$$ | $$\Omega\$$ | The series resistance |
+| $$X$$ | $$\Omega\$$ | The series reactance |
+| $$G1$$ | S | The first side shunt conductance |
+| $$B1$$ | S | The first side shunt susceptance |
+| $$G2$$ | S | The second side shunt conductance |
+| $$B2$$ | S | The second side shunt susceptance |
 
 **Metadata**
 
@@ -452,47 +367,24 @@ It has line characteristics, with $$R$$ (resp. $$X$$) being the sum of the serie
 $$G1$$ (resp. $$B1$$) is equal to the sum of the first half line's $$G1$$ and $$G2$$ (resp. $$B1$$ and $$B2$$).
 $$G2$$ (resp. $$B2$$) is equal to the sum of the second half line's $$G1$$ and $$G2$$ (resp. $$B1$$ and $$B2$$).
 
-**Characteristics**
-
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | string | - | yes | - | Unique identifier of the tie line |
-| Name | string | - | no | "" | Human-readable name of the tie line |
-| HalfLine1 | `TieLine.HalfLine` | - | yes | - | The first half of the line characteristics |
-| HalfLine2 | `TieLine.HalfLine` | - | yes | - | The second half of the line characteristics |
-| UcteXnodeCode | String | - | no | - | The UCTE Xnode code corresponding to this line (only required if the line crosses a boundary) |
-| R | double | $$\Omega\$$ | yes | - | The series resistance (sum of the series resistances of the two Half lines) **NB: this attribute is read-only** |
-| X | double | $$\Omega\$$ | yes | - | The series reactance (sum of the series reactances of the two Hald lines) **NB: this attribute is read-only**  |
-| G1 | double | S | yes | - | The first side shunt conductance (sum of the first side shunt conductances of the two Half lines) **NB: this attribute is read-only** |
-| B1 | double | S | yes | - | The first side shunt susceptance (sum of the first side shunt susceptances of the two Half lines) **NB: this attribute is read-only**  |
-| G2 | double | S | yes | - | The second side shunt conductance (sum of the second side shunt conductances of the two Half lines) **NB: this attribute is read-only** |
-| B2 | double | S | yes | - | The second side shunt susceptance (sum of the second side shunt susceptances of the two Half lines) **NB: this attribute is read-only** |
-
-<span style="color:red"> TODO: remove the Table</span>
-
-
 ###### Half Line
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | String | - | yes | - | The ID of the Half Line |
-| Name | String | - | no | - | The name of the Half Line |
-| R | double | $$\Omega\$$ | yes | - | The series resistance |
-| X | double | $$\Omega\$$ | yes | - | The series reactance |
-| G1 | double | S | yes | - | The first side shunt conductance |
-| B1 | double | S | yes | - | The first side shunt susceptance |
-| G2 | double | S | yes | - | The second side shunt conductance |
-| B2 | double | S | yes | - | The second side shunt susceptance |
-| XnodeP | double | MW | yes | - | The active power consumption |
-| XnodeQ | double | MVar | yes | - | The reactive power consumption |
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$R$$ | $$\Omega\$$ | The series resistance |
+| $$X$$ | $$\Omega\$$ | The series reactance |
+| $$G1$$ | S | The first side shunt conductance |
+| $$B1$$ | S | The first side shunt susceptance |
+| $$G2$$ | S | The second side shunt conductance |
+| $$B2$$ | S | The second side shunt susceptance |
 
-<span style="color:red"> TODO: remove the id and name from the Table, xnodeP and xnodeQ too</span>
-
-<span style="color:red"> TODO: describe xnodeP and xnodeQ</span>
+<span style="color:red"> TODO: describe xnodeP and xnodeQ in the java doc and here with a sentence.</span>
 
 #### Transformers
+
+<span style="color:red"> TODO: CONTINUE FROM HERE. THE TABLES HAVE ALREADY BEEN COPIED TO THE JAVADOC.</span>
 
 ##### Three windings transformer [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ThreeWindingsTransformer.html)
 
@@ -509,14 +401,12 @@ For each leg, the network bus is at side 1 and the star bus is at side 2.
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- |-------- | ------------- | ----------- |
-| Id | string | - | yes | - | Unique identifier of the transformer |
-| Name | string | - | yes | - | Human-readable name of the transformer |
-| RatedU0 | double | kV | yes | - | The rated voltage at the star bus |
-| Leg1 | `ThreeWindingsTransformer.Leg` | - | yes | - | The leg at the primary side |
-| Leg2 | `ThreeWindingsTransformer.Leg` | - | yes | - | The leg at the secondary side |
-| Leg3 | `ThreeWindingsTransformer.Leg` | - | yes | - | getId()The leg at the tertiary side |
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| RatedU0 | kV | The rated voltage at the star bus |
+| Leg1 | - | The leg at the primary side |
+| Leg2 | - | The leg at the secondary side |
+| Leg3 | - | getId()The leg at the tertiary side |
 
 **Specifications**
 
@@ -531,15 +421,14 @@ Only one Tap Changer (either ratio or phase tap changer) is allowed to be regula
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- |-------- | ------------- | ----------- |
-| Terminal | [`Terminal`](terminal.md) | - | yes | - | The terminal the leg is connected to |
-| R | double | $$\Omega\$$ | yes | - | The nominal series resistance specified at the voltage of the leg |
-| X | double | $$\Omega\$$ | yes | - | The nominal series reactance specified at the voltage of the leg |
-| G | double | S | yes | - | The nominal magnetizing conductance specified at the voltage of the leg |
-| B | double | S | yes | - | The nominal magnetizing susceptance specified at the voltage of the leg |
-| RatedU | double | kV | yes | - | The rated voltage |
-| RatedS | double | MVA | no | - | The normal apparent power |
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$R$$ | $$\Omega\$$ | The nominal series resistance specified at the voltage of the leg |
+| $$X$$ | $$\Omega\$$ | The nominal series reactance specified at the voltage of the leg |
+| $$G$$ | S | The nominal magnetizing conductance specified at the voltage of the leg |
+| $$B$$ | S | The nominal magnetizing susceptance specified at the voltage of the leg |
+| $$RatedU$$ | kV | The rated voltage |
+| $$RatedS$$ | MVA | The normal apparent power |
 
 **Specifications**
 
@@ -587,17 +476,15 @@ $$
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | string | - | yes | - | Unique identifier of the transformer |
-| Name | string | - | yes | - | Human-readable name of the transformer |
-| $$R_{nom}$$ | double | $$\Omega$$  | yes | - | The nominal series resistance at the side 2 of the transformer |
-| $$X_{nom}$$ | double | $$\Omega$$ | yes | - | The nominal series reactance at the side 2 of the transformer |
-| $$G_{nom}$$ | double | S | yes | - | The nominal magnetizing conductance at the side 2 of the transformer |
-| $$B_{nom}$$ | double | S | yes | - | The nominal magnetizing susceptance at the side 2 of the transformer |
-| $$V_{1\ nom}$$ | double | kV | yes | - | The rated voltage at side 1 |
-| $$V_{2\ nom}$$ | double | kV | yes | - | The rated voltage at side 2 |
-| RatedS | double | MVA | no | - | The normal apparent power |
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$R_{nom}$$ | $$\Omega$$  | The nominal series resistance at the side 2 of the transformer |
+| $$X_{nom}$$ | $$\Omega$$ | The nominal series reactance at the side 2 of the transformer |
+| $$G_{nom}$$ | S | The nominal magnetizing conductance at the side 2 of the transformer |
+| $$B_{nom}$$ | S | The nominal magnetizing susceptance at the side 2 of the transformer |
+| $$V_{1\ nom}$$ | kV | The rated voltage at side 1 |
+| $$V_{2\ nom}$$ | kV | The rated voltage at side 2 |
+| $$RatedS$$ | MVA | The normal apparent power |
 
 **Specifications**
 
@@ -616,34 +503,27 @@ An HVDC line is connected to the DC side of two HVDC converter stations.
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | string | - | yes | - | Unique identifier of the HVDC line |
-| Name | string | - | yes | - | Human-readable name of the HVDC line |
-| R | double | $$\Omega\$$ | yes | - | The resistance of the HVDC line |
-| ConvertersMode | `ConvertersMode`| - | yes | - | The converter's mode |
-| NominalV | double | kV | yes | - | The nominal voltage |
-| ActivePowerSetpoint | MW | double | yes | - | The active power setpoint |
-| MaxP | double | MW | yes | - | The maximum active power |
-| ConverterStationId1 | String | - | yes | - | The ID of the HVDC converter station connected on side 1 |
-| ConverterStationId2 | String | - | yes | - | The ID of the HVDC converter station connected on side 2 |
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$R$$ | double | $$\Omega\$$ | The resistance of the HVDC line |
+| $$NominalV$$ | double | kV | The nominal voltage |
+| $$ActivePowerSetpoint$$ | MW | The active power setpoint |
+| $$MaxP$$ | MW | The maximum active power |
 
 **Specifications**
 
 - The `ConvertersMode` can be:
-    - SIDE_1_RECTIFIER_SIDE_2_INVERTER
-    - SIDE_1_INVERTER_SIDE_2_RECTIFIER
+    - `SIDE_1_RECTIFIER_SIDE_2_INVERTER`
+    - `SIDE_1_INVERTER_SIDE_2_RECTIFIER`
 - The active power setpoint and the maximum active power should always be positive values. The flow sign is given by the type of the converter station. Power always flows from rectifier converter station to inverter converter station. At a terminal on AC side, P and Q follow load sign convention. P is positive on rectifier side. P is negative at inverter side.
 
 #### LCC Converter Station [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/LccConverterStation.html)
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Id | string | - | yes | - | Unique identifier of the LCC converter station |
-| Name | string | - | yes | - | Human-readable name of the LCC converter station |
-| PowerFactor | float | - | yes | - | The power factor |
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| PowerFactor | - | The power factor |
 
 **Specifications**
 
@@ -666,8 +546,8 @@ and should be between -1 and 1. Note that at terminal on AC side, Q is always po
 
 **Specifications**
 
-- The voltage setpoint is required if the voltage regulator is on.
-The reactive power setpoint is required if the voltage regulator is off.
+- The voltage setpoint (in kV) is required if the voltage regulator is on.
+- The reactive power setpoint (in MVar) is required if the voltage regulator is off.
 - A set of reactive limits can be associated to a VSC converter station. All the reactive limits modelings available in the library are described [here](reactiveLimits.md).
 
 ## Additional network models
