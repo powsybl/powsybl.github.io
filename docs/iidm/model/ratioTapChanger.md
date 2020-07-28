@@ -10,13 +10,13 @@ It can be added to both [two windings transformers](twoWindingsTransformer.md) a
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Low tap position | int | - | no | 0 | The position index of the tap changer's low tap |
-| Tap position | int | - | yes | - | The position index of current tap |
-| Load tap changing capabilities | boolean | - | no | false | ```true``` if the ratio tap changer has load tap changing capabilities, ```false``` otherwise |
+| LowTapPosition | int | - | no | 0 | The position index of the tap changer's low tap |
+| TapPosition | int | - | yes | - | The position index of current tap |
+| LoadTapChangingCapabilities | boolean | - | no | false | ```true``` if the ratio tap changer has load tap changing capabilities, ```false``` otherwise |
 | Regulating | boolean | - | no | false | ```true``` if the ratio tap changer is regulating, ```false``` otherwise. [State variable](../../todo.md) |
-| Target Deadband | double | - | no | `Double.NaN` | The deadband used to avoid excessive update of controls |
-| Target V | double | kV | yes | - | The target voltage |
-| Regulation terminal | Terminal | - | no | - | The terminal which voltage is regulated |
+| TargetDeadband | double | - | only if `Regulating` is set to `true` | - | The deadband used to avoid excessive update of controls |
+| TargetV | double | kV | only if `Regulating` is set to `true` | - | The target voltage |
+| RegulationTerminal | [`Terminal`](terminal.md) | - | only if `Regulating` is set to `true` | - | The terminal which voltage is regulated |
 
 Each step of a ratio tap changer has the following attributes:
 
@@ -30,6 +30,10 @@ Each step of a ratio tap changer has the following attributes:
 
 # Model
 A ratio tap changer is regulating if both **Load tap changing capabilities** and **Regulating** are set to ```true```.
+
+The **Target Deadband** defines the margin withing which the target voltage is considered as respected for discrete regulation i.e. the target voltage is considered as respected
+if the read voltage equals `targetV±(targetDeadband/2)`.
+
 Remote control can be modeled by setting a distant terminal as the regulation terminal.
 
 For more information on how ratio tap changers are taken into account in the transformers model, please refer to the [two windings transformers documentation](twoWindingsTransformer.md) and the [three windings transformers one](threeWindingsTransformer.md).
@@ -44,6 +48,7 @@ twoWindingsTransformer.newRatioTapChanger()
     .setLoadTapChangingCapabilities(true)
     .setRegulating(true)
     .setTargetV(25)
+    .setTargetDeaband(5)
     .setRegulationTerminal(twoWindingsTransformer.getTerminal1())
     .beginStep()
         .setRho(0.95)
@@ -68,4 +73,3 @@ twoWindingsTransformer.newRatioTapChanger()
         .endStep()
     .add()
 ```
- 

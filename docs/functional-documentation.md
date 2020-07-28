@@ -26,6 +26,7 @@ Using powsybl, we can run different kind of simulations:
 - [security analysis](loadflow/security-analysis.md)
 - [sensitivity calculation](sensitivity/index.md)
 - [loadflow validation](loadflow/validation.md)
+- [dynamic simulation](dynamicsimulation/index.md)
 
 # Time series for grid studies
 Read this page to learn more about the [time series](timeseries/index.md) modeling in powsybl.

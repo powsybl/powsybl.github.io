@@ -10,13 +10,14 @@ It can be added to both [two windings transformers](./twoWindingsTransformer.md)
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Low tap position | int | - | no | 0 | The position index of the tap changer's low tap |
-| Tap position | int | - | yes | - | The position index of current tap |
+| LowTapPosition | int | - | no | 0 | The position index of the tap changer's low tap |
+| TapPosition | int | - | yes | - | The position index of current tap |
 | Regulating | boolean | - | no | false | ```true``` if the ratio tap changer is regulating, ```false``` otherwise. This is a State variable. |
-| Target Deadband | double | - | no | `Double.NaN` | The deadband used to avoid excessive update of controls |
-| Regulation mode | enum | - | no | FIXED_TAP | The regulation mode of the phase tap changer. May be ```CURRENT_LIMITER```, ```ACTIVE_POWER_CONTROL``` or ```FIXED_TAP``` |
-| Regulation value | double | MW or A | yes | - | The target value, depending on the regulation mode |
-| Regulation terminal | Terminal | - | no | - | The terminal where regulation is done |
+| TargetDeadband | double | - | only if `RegulationMode` is not set to `FIXED_TAP` | - | The deadband used to avoid excessive update of controls |
+| RegulationMode | enum | - | no | `FIXED_TAP` | The regulation mode of the phase tap changer. May be ```CURRENT_LIMITER```, ```ACTIVE_POWER_CONTROL``` or ```FIXED_TAP``` |
+| RegulationValue | double | MW or A | only if `RegulationMode` is not set to `FIXED_TAP` | - | The target value, depending on the regulation mode |
+| RegulationTerminal | [`Terminal`](terminal.md) | - | only if `RegulationMode` is not set to `FIXED_TAP` | - | The terminal where regulation is done |
+
 
 Each step of a phase tap changer has the following attributes:
 
@@ -31,6 +32,9 @@ Each step of a phase tap changer has the following attributes:
 
 # Model
 A phase tap changer is regulating if **Regulating** is set to ```true```.
+
+The **Target Deadband** defines the margin withing which the target voltage is considered as respected for discrete regulation i.e. the target voltage is considered as respected
+if the read voltage equals `targetV±(targetDeadband/2)`.
 
 Remote control can be modeled by setting a distant terminal as the regulation terminal.
 
@@ -50,6 +54,7 @@ twoWindingsTransformer.newPhaseTapChanger()
     .setRegulating(true)
     .setRegulationMode(PhaseTapChanger.RegulationMode.CURRENT_LIMITER)
     .setRegulationValue(25)
+    .setTargetDeadband(10)
     .setRegulationTerminal(twoWindingsTransformer.getTerminal2())
     .beginStep()
         .setAlpha(-10)

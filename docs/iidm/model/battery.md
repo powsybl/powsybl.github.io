@@ -14,7 +14,6 @@ A battery on the electric grid is an energy storage device that is either capabl
 | q0 | double | MVar | yes | - | The Constant reactive power |
 | MinP | double | MW | yes | - | The Minimal active power |
 | MaxP | double | MW | yes | - | The Maximum active power |
-| RegulatingTerminal | `TerminalExt` | - | no | - | The terminal used for regulation |
 
 ## Active Limits
 The minimal active power is expected to be lower than the maximal active power.
@@ -38,4 +37,4 @@ Battery battery = network.getVoltageLevel("VL").newBattery()
 
 ## Active power control
 
-This extension is used for both batteries and generators, see [generators](generator.md).
+This extension is used for both batteries and generators, see [more on generators' documentation page](generator.md#active-power-control).

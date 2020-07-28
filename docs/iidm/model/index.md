@@ -8,13 +8,11 @@ and its main attributes and [network extensions](#network-extensions) which can 
 
 # Network core model
 
-The [Network](network.md) core modeling is made of two main objects: substations and lines. A substation can have several voltage levels and a line can be of several types (AC lines, DC lines and AC lines shared between two countries).
+The [Network](network.md) core modeling is made of two main objects: substations and lines. A substation can have several voltage levels and a line can be of several types:
 
-- [Line](line.md)
-
-- [Tie line](tieLine.md)
-
-- [HVDC line](hvdcLine.md)
+- [Line](line.md) to model AC lines;
+- [HVDC line](hvdcLine.md) to model DC lines;
+- [Tie line](tieLine.md) to model a AC line segment shared between two countries;
 
 - A [Substation](substation.md) can be made of several voltage levels, which are connected through transformers:
 
@@ -31,12 +29,17 @@ The [Network](network.md) core modeling is made of two main objects: substations
         - [Shunt compensator](shuntCompensator.md)
         - [Dangling line](danglingLine.md)
         - [Static VAR compensator](staticVarCompensator.md)
-        - [VSC converter station](vscConverterStation.md)
-        - [LCC converter station](lccConverterStation.md)
+        - [AC/DC converter station](hvdcConverterStation.md)
 
 The following image shows some elements of the internal data model:
 
 ![IIDM model](./images/schema-iidm.png){: width="70%" .center-image}
+
+IIDM format and its serialization/deserialization have several versions.
+This page documents the latest IIDM version, available on latest `SNAPSHOT` version.
+
+For more information on prior versions, [`powsybl-core`'s wiki page](https://github.com/powsybl/powsybl-core/wiki) lists
+all the format's evolutions for each version.
 
 # Network extensions
 

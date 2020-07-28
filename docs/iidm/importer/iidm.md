@@ -5,20 +5,8 @@ todo:
     - add support to JSON files
 ---
 
-The IIDM (**i**Tesla **I**nternal **D**ata **M**odel) format was designed during the [iTesla project](http://www.itesla-project.eu).
+The [IIDM (**i**Tesla **I**nternal **D**ata **M**odel)](../model/index.md) format was designed during the [iTesla project](http://www.itesla-project.eu).
 IIDM is not only an exchange format, but also the internal format used in Powsybl because it is designed for running simulations.
-For more information about the IIDM model, see [here](../model/index.md).
-
-IIDM networks can be serialized in XML files. The IIDM importer supports files with the following extensions: `*.xml`,
-`*.xiidm` and `*.iidm`.
-
-The IIDM importer has three importing modes:
-
-- **First mode** : Imports the network and its extensions from a unique file.
-    
-- **Second mode** : Imports the network from a file and the extensions from another file. 
-    
-- **Third mode** : Imports the network from a file and each extension type from a separate file.
 
 # Example
 ```xml
@@ -76,6 +64,16 @@ The `iidm.import.xml.throw-exception-if-extension-not-found` property is an opti
 that defines if the XIIDM importer throws an exception while trying to import an unknown or undeserializable extension or if
 it just ignores it. Its default value is `false`.
 
+## iidm.import.xml.extensions
+The `iidm.import.xml.extensions` property is an optional property that defines the list of extensions that will be imported by the XIIDM importer. 
+By default all extensions will be imported.
+
+# Deprecated configuration properties for IIDM-XML importer
+
+## throwExceptionIfExtensionNotFound
+The `throwExceptionIfExtensionNotFound` property is deprecated since v2.0.0. Use the `iidm.import.xml.throw-exception-if-extension-not-found` property instead.
+
+## Removed configuration properties for IIDM-XML importer
 
 ## iidm.import.xml.import-mode
 The `iidm.import.xml.import-mode` property is an optional property
@@ -94,16 +92,7 @@ Its possible values are :
       from the `network.xiidm` file and `loadFoo` and `loadBar` will be imported respectively from `network-loadFoo.xiidm` and `network-loadBar.xiidm`.
       
 The default value of this parameter is `IidmImportExportMode.NO_SEPARATED_FILE_FOR_EXTENSIONS`.
-
-## iidm.import.xml.extensions
-The `iidm.import.xml.extensions` property is an optional property that defines the list of extensions that will be imported by the XIIDM importer. 
-By default all extensions will be imported.
-
-# Deprecated configuration properties for IIDM-XML importer
-
-## throwExceptionIfExtensionNotFound
-The `throwExceptionIfExtensionNotFound` property is deprecated since v2.0.0. Use the `iidm.import.xml.throw-exception-if-extension-not-found` property instead.
-
+This property has been removed in v3.3.0.
 
 # Maven configuration
 To support IIDM-XML files, add the following dependencies to the `pom.xml` file.

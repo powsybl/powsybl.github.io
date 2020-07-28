@@ -3,7 +3,7 @@ title: HVDC converter station
 layout: default
 ---
 
-The `com.powsybl.iidm.network.HvdcConverterStation` interface is used to model an AC/DC Converter Station. An AC/DC converter station can do a rectifier operation with losses or an inverter operation with losses. This is the base class for [VSC](../../todo.md) and [LCC](../../todo.md). As such, its sub interfaces are:
+The `com.powsybl.iidm.network.HvdcConverterStation` interface is used to model an AC/DC Converter Station. An AC/DC converter station can do a rectifier operation with losses or an inverter operation with losses. This is the base class for VSC converter station and LCC converter station. As such, its sub interfaces are:
 - [LCC Converter Station](lccConverterStation.md)
 - [VSC Converter Station](vscConverterStation.md)
 
@@ -13,6 +13,8 @@ The `com.powsybl.iidm.network.HvdcConverterStation` interface is used to model a
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | HvdcType | `HvdcType` | - | yes | - | The HVDC type |
 | LossFactor | float | % | yes | - | The loss factor |
+
+The LossFactor should be greater than 0.
 
 ## HVDC Type
 The `com.powsybl.iidm.network.HvdcConverterStation.HvdcType` enum contains these two values:
