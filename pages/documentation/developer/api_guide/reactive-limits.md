@@ -1,21 +1,5 @@
----
-title: Reactive limits
-layout: default
----
+# Reactive limits
 
-The `com.powsybl.iidm.network.ReactiveLimits` interface is used to model limitations of the reactive power of
-[generators](generator.md), [VSC converter stations](vscConverterStation.md) and [batteries](battery.md).
-
-# MinMaxReactiveLimits
-The `com.powsybl.iidm.network.MinMaxReactiveLimits` class is a `ReactiveLimits` implementation where the reactive power
-does not depend on the active power. For any active power value, the reactive power value is in the [minQ, maxQ] interval.
-
-# ReactiveCapabilityCurve
-The `com.powsybl.iidm.network.ReactiveCapabilityCurve` class is a `ReactiveLimits` implementation where the reactive power
-depends on the active power. The curve is made of `Point`s and each point defines the minimum and maximum reactive limits
-for a given active power.
-
-# Examples
 This example shows how to use the `MinMaxReactiveLimits` and `ReactiveCapabilityCurve` classes:
 ```java
 Generator generator = network.getGenerator("G");

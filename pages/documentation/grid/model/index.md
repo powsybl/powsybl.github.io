@@ -8,20 +8,18 @@ latex: true
 * TOC
 {:toc}
 
-- <span style="color:red"> TODO: put all the current Table in the corresponding javadoc pages.</span>
-- <span style="color:red"> TODO: only keep electrotech/regulation/etc. information in this page (not code-oriented information).</span>
-
 ## Introduction
 
 In this page the different network components are described in terms of electrotechnical representation.
 Each component is identified through a unique ID, and optionally by a name that is easier to interpret for a human.
 Note that the equipments in the IIDM model may be flagged as fictitious, in order to fine tune the network modelling.
-<span style="color:red"> TODO: complete me.</span>
+
 <span style="color:red"> TODO: when we have aliases, add a description here too.</span>
 
 ## Network core model
 
-### Network [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
+### Network 
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
 
 In IIDM, the network is constituted of [substations](#substation), which are themselves constituted of [voltage levels](#voltage-level).
 All the equipments are then connected to the voltage levels.
@@ -34,7 +32,8 @@ The network comprises metadata in IIDM:
 - [CGMES conversion context extension]()
 - [CGMES model extension]()
 
-### Substation [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Substation.html)
+### Substation
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Substation.html)
 
 A substation in IIDM represents a specific geographical location with a set of equipments connected to one or several [voltage levels](#voltage-level).
 It comprises metadata in IIDM:
@@ -46,7 +45,8 @@ It comprises metadata in IIDM:
 
 - [ENTSOE Area]()
 
-### Voltage Level [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VoltageLevel.html)
+### Voltage Level
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VoltageLevel.html)
 
 A voltage level in IIDM represents a set of equipments connected together with the same nominal voltage, physically close to each other (~ 1-100m).
 Two voltage levels may be connected through a line (they are then located in different substations) or through transformers (they are then located within
@@ -70,10 +70,12 @@ The edges are constituted of switches or internal connections. See the following
 <span style="color:red"> TODO: add sketch of voltage level topology graph.</span>
 
 
-**Busbar section**  [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/BusbarSection.html)<br>
+**Busbar section**
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/BusbarSection.html)<br>
 A busbar section is a non impedant element used in a node/breaker substation topology to connect equipments.
 
-**Switch**  [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
+**Switch**
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
 <span style="color:red"> TODO</span>
 
 **Internal connection**  
@@ -84,12 +86,14 @@ In bus/breaker topology, the voltage level is described with a coarser level of 
 <span style="color:red"> TODO: add sketch of voltage level in bus/breaker topology.</span>
 The topology is then described as a graph structure, where the vertices are buses and the edges are switches.
 
-**Bus**  [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Bus.html)<br>
+**Bus**
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Bus.html)<br>
 A bus is a set of equipments connected at the same voltage.
 When an equipment is connected to a bus, in the IIDM descrition it corresponds to a `Terminal` object.
 In IIDM there is thus one `Terminal` per connected equipment.
 
-**Switch**  [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
+**Switch**
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
 <span style="color:red"> TODO: explain the difference with node/breaker switches</span>
 
 ### Injections
@@ -97,11 +101,11 @@ In IIDM there is thus one `Terminal` per connected equipment.
 An injection in IIDM is any AC equipment with a single connection point to a voltage level.
 Below are the different types of injections supported by PowSyBl.
 
-#### Generator [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Generator.html)
+#### Generator 
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Generator.html)
 
 A generator is an active equipment that injects active power, and injects or consumes reactive power. 
 It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
-More details about this behavior, which is called regulation, are available [here](#voltage-regulation).
 
 <span style="color:red"> TODO: add a sketch where the sign convention is indicated.</span>
 
@@ -126,8 +130,6 @@ More details about this behavior, which is called regulation, are available [her
 - the rated nominal power (MVA)
 <span style="color:red"> TODO: explain what it is.</span>
 
-<span style="color:red"> TODO: add a link to the future Regulation section.</span>
-
 - Either the generator is regulating the voltage, and the voltage setpoint is required, or it is not regulating and the reactive power setpoint is required instead.
 
 **Metadata**    
@@ -147,7 +149,8 @@ A generator in IIDM comprises some metadata:
 - [Active Power Control]()
 - [Coordinated Reactive Control]()
 
-#### Load [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
+#### Load
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
 
 A load is a passive equipment representing a delivery point that consumes active and reactive power.
 
@@ -173,7 +176,8 @@ In IIDM, loads comprise the following metadata:
     - `AUXILIARY`
     - `FICTITIOUS`
 
-#### Battery [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Battery.html)
+#### Battery
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Battery.html)
 
 A battery on the electric grid is an energy storage device that is either capable of capturing energy from the grid or of injecting it into the grid. The electric energy on the grid side is thus transformed into chemical energy on the battery side and vice versa. The power flow is bidirectional and it is controlled via a power electronic converter.
 
@@ -188,13 +192,12 @@ A battery on the electric grid is an energy storage device that is either capabl
 | $$MinP$$ | MW | The Minimal active power |
 | $$MaxP$$ | MW | The Maximum active power |
 
-<span style="color:red"> TODO: add link to the Regulation section when it exists.</span>
-
 **Available extensions**
 
 - [Active Power Control]()
 
-#### Dangling Line [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/DanglingLine.html)
+#### Dangling line
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/DanglingLine.html)
 
 The IIDM network may be connected to other networks for which a full description is not available.
 In this case, a boundary line exists between the two networks. In the IIDM model of the fully described network,
@@ -205,6 +208,7 @@ network fully described.
 
 <span style="color:red"> TODO: add a sketch with the sign convention.</span>
 <span style="color:red"> TODO: add a link to the Merging documentation.</span>
+<span style="color:red"> TODO: update the documentation according to Anne's developments.</span>
 
 **Characteristics**
 
@@ -231,7 +235,8 @@ page to learn more about this format. This code is actually related to ENTSOE, n
 
 - [Xnode]()
 
-#### Shunt Compensator [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ShuntCompensator.html)
+#### Shunt Compensator
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ShuntCompensator.html)
 
 <span style="color:red"> TODO: add a description.</span>
 <span style="color:red"> TODO: add a sketch with the sign convention.</span>
@@ -266,13 +271,12 @@ calculation or not, depending of what is wanted to be shown.
 - In case of a capacitor, the value for its Q will be negative.
 - In case of a reactor, the value for its Q will be positive.
 
-#### Static VAR Compensator [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/StaticVarCompensator.html)
+#### Static VAR Compensator
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/StaticVarCompensator.html)
 
 <span style="color:red"> TODO: add a description with sign convention.</span>
 <span style="color:red"> TODO: add a sketch with the sign convention.</span>
-<span style="color:red"> TODO: add a link to the regulation.</span>
 It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
-More details about this behavior, which is called regulation, are available [here](#voltage-regulation).
 
 **Characteristics**
 
@@ -305,7 +309,8 @@ Note that it is different than the generators' regulation definition, which is o
 A branch in IIDM Grid model is any AC equipment with two or more connection points to the network.
 Below are the different types of branches supported by PowSyBl.
 
-#### Line [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Line.html)
+#### Line
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Line.html)
 
 AC Power lines are modeled using a standard $$\pi$$ model with distributed parameters.
 
@@ -331,8 +336,8 @@ $$
     I_{1}\\
     I_{2}
     \end{array}\right)=\left(\begin{array}{cc}
-    y_{1}+\frac{1}{z} & -\frac{1}{z}\\
-    -\frac{1}{z} & y_{2}+\frac{1}{z}
+    y_{1}+\dfrac{1}{z} & -\dfrac{1}{z}\\
+    -\dfrac{1}{z} & y_{2}+\dfrac{1}{z}
     \end{array}\right)\left(\begin{array}{c}
     V_{1}\\
     V_{2}
@@ -359,7 +364,8 @@ $$
 
 - [Merged Xnode]()
 
-##### Tie Line [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TieLine.html)
+##### Tie Line
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TieLine.html)
 
 A tie line is an AC line sharing power between two neighbouring regional grids. It is constituted of two [half lines](#half-line).
 A tie line is created by matching two [dangling lines](#dangling-line) with the same Xnode code.
@@ -384,79 +390,29 @@ $$G2$$ (resp. $$B2$$) is equal to the sum of the second half line's $$G1$$ and $
 
 #### Transformers
 
-<span style="color:red"> TODO: CONTINUE FROM HERE. THE TABLES HAVE ALREADY BEEN COPIED TO THE JAVADOC.</span>
-
-##### Three windings transformer [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ThreeWindingsTransformer.html)
-
-A three windings power transformer is connected to three voltage levels (side 1, side 2 and side 3) that belong to the
-same substation. We usually have:
-- Side 1 as the primary side (side with highest rated voltage)
-- Side 2 as the secondary side (side with the medium rated voltage)
-- Side 3 as the tertiary side (side with the lowest rated voltage)
-
-A three windings transformer is modeled with three legs, where every leg model is electrically equivalent to a two windings transformer.
-For each leg, the network bus is at side 1 and the star bus is at side 2.
-
-![Power line model](img/index/three-windings-transformer-model.svg){: width="50%" .center-image}
-
-**Characteristics**
-
-| Attribute | Unit | Description |
-| --------- | ---- | ----------- |
-| RatedU0 | kV | The rated voltage at the star bus |
-| Leg1 | - | The leg at the primary side |
-| Leg2 | - | The leg at the secondary side |
-| Leg3 | - | getId()The leg at the tertiary side |
-
-**Specifications**
-
-- A Ratio Tap Changer and/or a Phase Tap Changer can be associated to all three sides of a three windings power transformer.
-Only one Tap Changer (either ratio or phase tap changer) is allowed to be regulating on the equipment at a given time.
-
-**Available extensions**
-
-- [Phase Angle Clock]()
-
-###### Leg
-
-**Characteristics**
-
-| Attribute | Unit | Description |
-| --------- | ---- | ----------- |
-| $$R$$ | $$\Omega\$$ | The nominal series resistance specified at the voltage of the leg |
-| $$X$$ | $$\Omega\$$ | The nominal series reactance specified at the voltage of the leg |
-| $$G$$ | S | The nominal magnetizing conductance specified at the voltage of the leg |
-| $$B$$ | S | The nominal magnetizing susceptance specified at the voltage of the leg |
-| $$RatedU$$ | kV | The rated voltage |
-| $$RatedS$$ | MVA | The normal apparent power |
-
-**Specifications**
-
-- A leg can have current limits.
-
-##### Two windings transformer [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TwoWindingsTransformer.html)
+##### Two windings transformer
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TwoWindingsTransformer.html)
 
 A two windings power transformer is connected to two voltage levels (side 1 and side 2) that belong to a same substation.
-
-Two windings transformer are modeled with the following equivalent $$\pi$$ model:
+Two windings transformers are modeled with the following equivalent $$\Pi$$ model:
 
 ![Power line model](img/index/two-windings-transformer-model.svg){: width="50%" .center-image}
 
-With the series impedance $$z$$ and the shunt admittance $$y$$ and the voltage ratio $$\rho$$ and the angle difference $$\alpha$$ and potentially parameters from the current step of a ratio tap changer and/or a phase tap changer, we have:
+With the series impedance $$z$$ and the shunt admittance $$y$$ and the voltage ratio $$\rho$$ and the angle difference $$\alpha$$ and potentially parameters from the current step of a [ratio tap changer](#ratio-tap-changer) and/or a [phase tap changer](#phase-tap-changer), we have:
 
 $$
-\begin{align*}
-    r=r_{nom}.\left(1+\frac{r_{r, tap} + r_{\phi, tap}}{100}\right)\\
-    x=x_{nom}.\left(1+\frac{x_{r, tap} + x_{\phi, tap}}{100}\right)\\
-    g=g_{nom}.\left(1+\frac{g_{r, tap} + g_{\phi, tap}}{100}\right)\\
-    b=b_{nom}.\left(1+\frac{b_{r, tap} + b_{\phi, tap}}{100}\right)\\
-    \rho=\frac{V_{2nom}}{V_{1nom}}.\rho_{r, tap}.\rho_{\phi, tap}\\
-    \alpha=\alpha_{\phi, tap}\\
-    z=r+j.x\\
-    y=g+j.b\\
-    V_{0}=V_{1}.\rho e^{j\alpha}\\
-    I_{0}=\frac{I_{1}}{\rho e^{-j\alpha}}\\
-\end{align*}
+\begin{array}{lcl}
+    r & = & r_{nom}.\left(1+\dfrac{r_{r, tap} + r_{\phi, tap}}{100}\right)\\
+    x & = & x_{nom}.\left(1+\dfrac{x_{r, tap} + x_{\phi, tap}}{100}\right)\\
+    g & = & g_{nom}.\left(1+\dfrac{g_{r, tap} + g_{\phi, tap}}{100}\right)\\
+    b & = & b_{nom}.\left(1+\dfrac{b_{r, tap} + b_{\phi, tap}}{100}\right)\\
+    \rho & = & \dfrac{V_{2nom}}{V_{1nom}}.\rho_{r, tap}.\rho_{\phi, tap}\\
+    \alpha & = & \alpha_{\phi, tap}\\
+    z & = & r + j.x\\
+    y & = & g + j.b\\
+    V_{0} & = & V_{1}.\rho e^{j\alpha}\\
+    I_{0} & = & \dfrac{I_{1}}{\rho e^{-j\alpha}}\\
+\end{array}
 $$
 
 Using the above notation, the equations of the two windings transformer, in complex notations, are as follow:
@@ -466,8 +422,8 @@ $$
 I_{1}\\
 I_{2}
 \end{array}\right)=\left(\begin{array}{cc}
-\rho\text{²}(y+\frac{1}{z}) & -\rho e^{-j\alpha}\frac{1}{z}\\
--\rho e^{j\alpha}\frac{1}{z} & \frac{1}{z}
+\rho\text{²}(y+\dfrac{1}{z}) & -\dfrac{1}{z}\rho e^{-j\alpha}\\
+-\rho\dfrac{1}{z} e^{j\alpha} & \dfrac{1}{z}
 \end{array}\right)\left(\begin{array}{c}
 V_{1}\\
 V_{2}
@@ -488,98 +444,241 @@ $$
 
 **Specifications**
 
-- A Ratio tap changer and/or a Phase tap changer can be associated with a two windings power transformer.
+- A [ratio tap changer](#ratio-tap-changer) and/or a [phase tap changer](#phase-tap-changer) can be associated with a two windings power transformer.
 - For a two windings transformer, the normal apparent power shall be identical at both sides 1 and 2.
 
 **Available extensions**
 
 - [Phase Angle Clock]()
 
-### DC components
+##### Three windings transformer
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ThreeWindingsTransformer.html)
 
-#### HVDC Line [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/HvdcLine.html)
+A three windings power transformer is connected to three voltage levels (side 1, side 2 and side 3) that belong to the
+same substation. We usually have:
+- Side 1 as the primary side (side with highest rated voltage)
+- Side 2 as the secondary side (side with the medium rated voltage)
+- Side 3 as the tertiary side (side with the lowest rated voltage)
 
-An HVDC line is connected to the DC side of two HVDC converter stations.
+A three windings transformer is modeled with three legs, where every leg model is electrically equivalent to a two windings transformer.
+For each leg, the network bus is at side 1 and the star bus is at side 2.
+
+![Power line model](img/index/three-windings-transformer-model.svg){: width="50%" .center-image}
 
 **Characteristics**
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
-| $$R$$ | double | $$\Omega\$$ | The resistance of the HVDC line |
-| $$NominalV$$ | double | kV | The nominal voltage |
+| $$RatedU0$$ | kV | The rated voltage at the star bus |
+
+<span style="color:red"> TODO: place RatedU0 on the sketch.</span>
+
+**Specifications**
+
+- A [ratio tap changer](#ratio-tap-changer) and/or a [phase tap changer](#phase-tap-changer) can be associated to all three sides of a three windings power transformer.
+Only one tap changer (either ratio or phase tap changer) is allowed to be regulating on the equipment at a given time.
+
+**Available extensions**
+
+- [Phase Angle Clock]()
+
+##### Three windings transformer leg
+
+**Characteristics**
+
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$R$$ | $$\Omega\$$ | The nominal series resistance specified at the voltage of the leg |
+| $$X$$ | $$\Omega\$$ | The nominal series reactance specified at the voltage of the leg |
+| $$G$$ | S | The nominal magnetizing conductance specified at the voltage of the leg |
+| $$B$$ | S | The nominal magnetizing susceptance specified at the voltage of the leg |
+| $$RatedU$$ | kV | The rated voltage |
+| $$RatedS$$ | MVA | The normal apparent power |
+
+**Specifications**
+
+- A leg can have [current limits](#current-limits).
+
+### DC components
+
+#### HVDC Line
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/HvdcLine.html)
+
+An HVDC line is connected to the DC side of two HVDC converter stations, either an [LCC station](#lcc-converter-station) or a [VSC station](#vsc-converter-station).
+
+**Characteristics**
+
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$R$$ | $$\Omega\$$ | The resistance of the HVDC line |
+| $$NominalV$$ | kV | The nominal voltage |
 | $$ActivePowerSetpoint$$ | MW | The active power setpoint |
 | $$MaxP$$ | MW | The maximum active power |
 
 **Specifications**
 
-- The `ConvertersMode` can be:
-    - `SIDE_1_RECTIFIER_SIDE_2_INVERTER`
-    - `SIDE_1_INVERTER_SIDE_2_RECTIFIER`
-- The active power setpoint and the maximum active power should always be positive values. The flow sign is given by the type of the converter station. Power always flows from rectifier converter station to inverter converter station. At a terminal on AC side, P and Q follow load sign convention. P is positive on rectifier side. P is negative at inverter side.
+- The HVDC line operation depends on a converters mode, which indicates the flow direction. In the specification it is thus mandatory to define `ConvertersMode`, which can be:
+    - `SIDE_1_RECTIFIER_SIDE_2_INVERTER`: the flow goes from side 1 to side 2
+    - `SIDE_1_INVERTER_SIDE_2_RECTIFIER`: the flow goes from side 2 to side 1
 
-#### LCC Converter Station [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/LccConverterStation.html)
+  The flow sign is thus given by the type of the converter station: the power always flows from the rectifier converter station to the inverter converter station. 
+  At a terminal on the AC side, `P` and `Q` follow the passive sign convention. `P` is positive on the rectifier side. `P` is negative at the inverter side.
+- The active power setpoint and the maximum active power should always be positive values. 
+
+#### HVDC Converter Station
+
+An HVDC converter station converts electric power from high voltage alternating current (AC) to high-voltage direct current (HVDC), or vice versa. 
+Electronic converters for HVDC are divided into two main categories: line-commutated converters (LCC) and voltage-sourced converters (VSC). 
+
+##### LCC Converter Station
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/LccConverterStation.html)
+
+An LCC converter station is made with electronic switches that can only be turned on (thyristors). Below are some characteristics:
+- Use semiconductors which can withstand voltage in either polarity
+- Output voltage can be either polarity to change the power direction
+- Current direction does not change 
+- Store energy inductively
+- Use semiconductors which can turn on by control action
+- Turn-off and commutation rely on the external circuit
 
 **Characteristics**
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
-| PowerFactor | - | The power factor |
+| $$PowerFactor$$ | - | Ratio between the active power $$P$$ and the apparent power $$S$$. |
 
 **Specifications**
 
-- The PowerFactor is equal to
+- The power factor is equal to
 $$
-\frac{P}{\sqrt{P^{2} + Q^{2}}}
+\dfrac{P}{\sqrt{P^{2} + Q^{2}}}
 $$
-and should be between -1 and 1. Note that at terminal on AC side, Q is always positive: the converter station always consumes reactive power.
+and should be between -1 and 1. Note that at the terminal on the AC side, $$Q$$ is always positive: the converter station always consumes reactive power.
 
+##### VSC Converter Station
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VscConverterStation.html)
 
-#### VSC Converter Station [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VscConverterStation.html)
+A VSC converter station is made with switching devices that can be turned both on and off (transistors). Below are some characteristics:
+- Use semiconductors which can pass current in either direction
+- Output voltage polarity does not change
+- Current direction changes to change the power direction
+- Store energy capacitively
+- Use semiconductors which can turn on or off by control action
+- Turn-off is independant of external circuit
 
 **Characteristics**
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| VoltageRegulatorOn | boolean | - | yes | - | The voltage regulator status |
-| VoltageSetpoint | double | kV | only if `VoltageRegulatorOn` is set to `true` | - | The voltage setpoint |
-| ReactivePowerSetpoint | double | MVar | only if `VoltageRegulatorOn` is set to `false` | - | The reactive power setpoint |
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$VoltageSetpoint$$ | kV | The voltage setpoint for regulation |
+| $$ReactivePowerSetpoint$$ | MVar | The reactive power setpoint for regulation |
 
 **Specifications**
 
-- The voltage setpoint (in kV) is required if the voltage regulator is on.
-- The reactive power setpoint (in MVar) is required if the voltage regulator is off.
+- The voltage setpoint (in kV) is required if the voltage regulator is on for the VSC station.
+- The reactive power setpoint (in MVar) is required if the voltage regulator is off for the VSC station.
+    - A positive value of $$ReactivePowerSetpoint$$ means an injection into the bus, thus a negative value at the corresponding terminal (which is in passive-sign convention).
+<span style="color:red"> TODO: check the sign convention</span>
 - A set of reactive limits can be associated to a VSC converter station. All the reactive limits modelings available in the library are described [here](reactiveLimits.md).
+
+**Metadata**
+- The participation to regulation (through a boolean)
 
 ## Additional network models
 
-<span style="color:red"> TODO</span>
+In this section, the additional models available in IIDM are described: reactive limits, current limits, voltage regulation, phase and ratio tap changers. 
+They can be used by various equipment models.
 
-### Reactive limits [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ReactiveLimits.html)
+### Reactive limits
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ReactiveLimits.html)
 
-<span style="color:red"> TODO</span>
+The reactive limits may be used to model limitations of the reactive power of
+[generators](#generator), [VSC converter stations](#vsc-converter-station) and [batteries](#battery).
 
-### Current limits [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/CurrentLimits.html)
+#### Min-Max reactive limits
+With the min-max reactive limits, the reactive power does not depend on the active power. For any active power value, the reactive power value is in the [minQ, maxQ] interval.
 
-<span style="color:red"> TODO</span>
+#### Reactive capability curve
+With the reactive capability curve limits, the reactive power limitation depends on the active power value. This dependency is based on a curve provided by the user.
+The curve is defined as a set of points that associate, to each active power value, a minimum and maximum reactive power value.
+In between the defined points of the curve, the reactive power limits are computed through a linear interpolation.
 
-### Voltage regulation
+### Current limits
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/CurrentLimits.html)
 
-<span style="color:red"> TODO</span>
+Some equipments have operational limits regarding the current value, corresponding to the equipment's physical limitations (related to heating).
+The current limits may be set in IIDM for [lines](#line),
+[dangling lines](#dangling-line), [two windings transformers](#two-windings-transformer) and [three windings transformers](#three-windings-transformer).
+Current limits are defined by at most one permanent limit and/or any number of temporary limits.
+The permanent limit sets the current value (in `A`) under which the equipment can safely
+be operated for any duration.
+The temporary limits can be used to define higher current limitations corresponding
+to specific operational durations.
+A temporary limit thus has an **acceptable duration**. 
+The component on which the current limits are applied can safely remain
+between the preceding limit (it could be another temporary limit or a permanent limit) and this limit for a duration up to the acceptable duration.
+
+### Phase tap changer
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/PhaseTapChanger.html)
+
+A phase tap changer can be added to either [two windings transformers](#two-windings-transformer) or [three windings transformers' legs](#three-windings-transformer-leg).
+
+**Specifications**
+
+A phase tap changer is described by a set of tap positions (or steps) within which the transformer or transformer leg can operate. Additionally to that set of steps, it is necessary to specify:
+- the lowest tap position 
+- the highest tap position
+- the position index of the current tap (which has to be within the highest and lowest tap position bounds)
+- whether the tap changer is regulating or not
+- the regulation mode, which can be `CURRENT_LIMITER`, `ACTIVE_POWER_CONTROL` or `FIXED_TAP`: the tap changer either regulates the current or the active power. 
+- the regulation value (either a current value in `A` or an active power value in `MW`)
+- the regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
+- the target deadband, which defines a margin on the regulation so as to avoid an excessive update of controls 
+
+The phase tap changer can always switch tap positions while loaded, which is not the case of the ratio tap changer described below.
+
+<span style="color:red"> TODO: check what happens when setting `isRegulating` to true and `FIXED_TAP` as regulating mode</span>
+
+Each step of a phase tap changer has the following attributes:
+
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$r_{\phi, tap}$$ | % | The resistance deviation in percent of nominal value |
+| $$x_{\phi, tap}$$ | % | The reactance deviation in percent of nominal value |
+| $$g_{\phi, tap}$$ | % | The conductance deviation in percent of nominal value |
+| $$b_{\phi, tap}$$ | % | The susceptance deviation in percent of nominal value |
+| $$\rho_{\phi, tap}$$ | p.u. | The voltage ratio in per unit of the rated voltages |
+| $$\alpha_{\phi, tap}$$ | $$^{\circ}$$ | Angle difference |
+
+### Ratio tap changer
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/RatioTapChanger.html)
+
+A ratio tap changer can be added to either [two windings transformers](#two-windings-transformer) or [three windings transformers' legs](#three-windings-transformer-leg).
+
+**Specifications**
+
+A ratio tap changer is described by a set of tap positions (or steps) within which the transformer or transformer leg can operate (or be operated offload). Additionally to that set of steps, it is necessary to specify:
+- the lowest tap position 
+- the highest tap position
+- the position index of the current tap (which has to be within the highest and lowest tap position bounds)
+- whether the tap changer is regulating or not; a ratio tap changer always regulates on the voltage
+- the regulation value (in `kV`)
+- the regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
+- the target deadband, which defines a margin on the regulation so as to avoid an excessive update of controls 
+- whether the ratio tap changer can change tap positions onload or only offload
+
+
+Each step of a ratio tap changer has the following attributes:
+
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$r_{r, tap}$$ | % | The resistance deviation in percent of nominal value |
+| $$x_{r, tap}$$ | % | The reactance deviation in percent of nominal value |
+| $$g_{r, tap}$$ | % | The conductance deviation in percent of nominal value |
+| $$b_{r, tap}$$ | % | The susceptance deviation in percent of nominal value |
+| $$\rho_{r, tap}$$ | p.u. | The voltage ratio in per unit of the rated voltages |
 
 ## Going further
 
-- [How to create your own IIDM network]()
+<span style="color:red"> TODO: create a tutorial showing how to create the FourSubstationsNodeBreakerFactory network of the tests.</span>
 
-
-------
-
-**TODO**
-
-Cette section explique la moThe voltage setpoint is required when the regulation mode is set to VOLTAGE.
-The reactive power setpoint is required when the regulation mode is set to REACTIVE_POWER.
-délisation IIDM (caractéristique, equations, schémas) et les services offerts:
-- Topologie
-    - parler des switches, bus et internal connections
-- Vues
-- Composantes connexes / synchrones
-- Extensions
