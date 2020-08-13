@@ -10,9 +10,12 @@ This page describes the way the Java objects have been designed to effectively h
 - [Configuration providers](configuration.md)
 
 ## Grid model
-- [IIDM]()
+- IIDM
+  - [Tap changers](tap-changers.md)
+  - [Operational limits](limits.md)
+  - [Reactive limits](reactive-limits.md)
 - [Topology]()
-- [Network reduction]()
+- [Network reduction](extraction.md)
 
 ## Simulation
 - [Load flow](loadflow.md)
