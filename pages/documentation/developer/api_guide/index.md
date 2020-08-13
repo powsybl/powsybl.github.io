@@ -6,6 +6,9 @@ layout: default
 
 This page describes the way the Java objects have been designed to effectively handle the grid modelling and all the associated features of PowSyBl.
 
+## Configuration
+- [Configuration providers](configuration.md)
+
 ## Grid model
 - [IIDM]()
 - [Topology]()
