@@ -21,16 +21,18 @@ layout: default
     - [ ] developer
         - [ ] API Guide
             - [ ] Grid model
-                - [ ] IIDM
+                - Grid modelling
+                  - [x] limits
+                  - [x] reactive-limits
+                  - [x] tap-changers
                 - [ ] Topology
-                - [ ] Reduction de réseau: reprendre partiellement /docs/iidm/reducer/index.md
-            - [ ] Simulation
-                - [x] LoadFlow: /docs/loadflow/loadflow.md
-                - [x] SecurityAnalysis: /docs/loadflow/security-analysis.md
-                - [x] DynamicSimulation: /docs/dynamicsimulation/index.md
-            - [ ] How to use AFS (*)
-                /docs/tutorials/afs/afs.md
-            - [x] How to use timeseries (*): /docs/timeseries/index.md
+                - [x] Reduction de réseau
+            - [x] Simulation
+                - [x] LoadFlow
+                - [x] SecurityAnalysis
+                - [x] DynamicSimulation
+            - [x] How to use AFS (*)
+            - [x] How to use timeseries (*)
         - [X] artifacts.md (**)
         - [ ] itools-packager.md: reprendre /docs/installation/itools-packager.md
         - [X] repositories (*)
@@ -55,7 +57,7 @@ layout: default
             - [ ] Integrate an importer
     - [ ] grid
         - [ ] features
-            - [ ] extraction.md (*): reprendre partiellement /docs/iidm/reducer/index.md
+            - [x] extraction.md (*)
             - [ ] merging.md ()
         - [ ] formats
             - [ ] ampl.md: reprendre /docs/iidm/exporter/ampl.md
@@ -68,8 +70,9 @@ layout: default
             - [ ] xiidm.md (*):
                 - /docs/iidm/exporter/iidm.md
                 - /docs/iidm/importer/iidm.md
-        - [ ] model (**)
-            - [ ] index.md
+        - [x] model (**)
+            - [x] index.md
+            - [ ] reprendre les shunts (Miora), les dangling lines (Anne), la topo et les composantes connexes
     - [ ] hpc
         - [ ] index.md
     - [ ] index.html
@@ -95,7 +98,7 @@ layout: default
     - [ ] user
         - [X] configuration
             - [X] index.md (**): reprend /docs/configuration/modules
-        - [ ] index.md
+        - [x] index.md
         - [X] itools
             - [X] action-simulator.md (*): /docs/tools/action-simulator.md
             - [X] afs: /docs/tools/afs.md
@@ -122,4 +125,5 @@ layout: default
     - [X] itools-mpi.md
     - [X] tools/plugins-info.md
     - [X] tools/run-impact-analysis.md
+    - [X] schema-iidm.svg
 
