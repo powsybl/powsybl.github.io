@@ -10,12 +10,14 @@ This page describes the way the Java objects have been designed to effectively h
 - [Configuration providers](configuration.md)
 
 ## Grid model
-- IIDM
+- Grid modelling
   - [Tap changers](tap-changers.md)
   - [Operational limits](limits.md)
   - [Reactive limits](reactive-limits.md)
-- [Topology]()
-- [Network reduction](extraction.md)
+  - [Topology]()
+- [Grid extension]()
+- [Merging]()
+- [Network extraction](extraction.md)
 
 ## Simulation
 - [Load flow](loadflow.md)
@@ -23,5 +25,5 @@ This page describes the way the Java objects have been designed to effectively h
 - [Dynamic simulation](dynamic-simulation.md)
 
 ## Data management
-- [AFS]()
+- [AFS](afs.md)
 - [Time series](timeseries.md)
