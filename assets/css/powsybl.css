@@ -48,6 +48,10 @@ div.doc-icon {
     margin-right: 2rem;
 }
 
+.clients img {
+  width: 25%;
+}
+
 .services .icon-box:hover .title a {
     color: #000000;
 }
