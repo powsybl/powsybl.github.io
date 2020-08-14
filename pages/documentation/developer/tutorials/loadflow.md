@@ -3,12 +3,14 @@ layout: default
 ---
 
 # Write the Java code to perform power flows
+This tutorial shows you how to write a Java code to perform load flow calculations on a network, just on its current state but also on an N-1 state by applying a contingencies. You'll see how to configure PowSyBl, through a YML file and overwriting it with a JSON file, how to provide the input network, and how to output the load flow results to the terminal.
+
+* TOC
+{:toc}
 
 ## What will you build?
 
-This tutorial shows you how to write a Java code to perform load flow calculations on a network, just on its current state but also on an N-1 state by applying a contingencies. You'll see how to configure PowSyBl, through a YML file and overwriting it with a JSON file, how to provide the input network, and how to output the load flow results to the terminal.
-
-The tutorial can be expressed in a short and easy workflow. All the input data is stored in an XIIDM file. This file is imported with the IIDM importer. Then, a load flow simulator is launched to get flows on all nodes. In this tutorial, the simulator is Hades2, but it could be an other load flow simulator, as long as the API contract is respected. A contingency is created and finally, the flows are computed again in order to get the final state.  
+The tutorial can be expressed in a short and easy workflow: all the input data is stored in an XIIDM file. This file is imported with the IIDM importer. Then, a load flow simulator is launched to get flows on all nodes. In this tutorial, the simulator is Hades2, but it could be an other load flow simulator, as long as the API contract is respected. A contingency is created and finally, the flows are computed again in order to get the final state.  
 
 ![Workflow](./img/loadflow/Workflow.svg){: width="75%" .center-image}
 

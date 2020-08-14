@@ -50,8 +50,6 @@ Index:
      ==> essayer de trouver des images pertinentes pour illustrer les US
 
 ## Documentation > Grid Model
-- Ajouter des TODO partout
-- Mettre les tableaux actuels dans la javadoc et mettre des liens vers la javadoc depuis les titres de section des équipements
 - Mettre un lien vers les extensions dans le paragraphe des equipements
 - Faire une 1/2 journée de workshop dédiée pour passer en revue tous les TODO
 
@@ -59,13 +57,7 @@ Index:
 - Regrouper les extensions par extendable
 
 ## Download
-- Créer un package standalone autour de iTools
-  - Faire une release basée sur la 3.4.0
-  - Merger le PR
-  - Automatiser la génération d'un package + upload sur github (Fin 2020)
 - Changer la largeur du tableau de la page download
-- Remplir les liens de la case download du tableau
-
 
 ## powsybl-afs
 Description: ajouter le fait que les données sont "métier"
@@ -88,10 +80,3 @@ Ajouter les conventions d'écriture dans le README du site
 - referencer les artefacts: com.powsybl:powsybl-iidm-scripting
 - Créer un SVG pour avoir les pictos des equipements
 
-## API Guide
-- déplacer la page time-series
-- Créer une page AFS a partir du README.md de powsybl-afs
-
-## Contributing
-- Changer les liens code of conduct vers LFEnergy
-- Ajouter Technical Charter
