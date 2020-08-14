@@ -5,6 +5,9 @@ layout: default
 # Create an iTools command in Java
 This tutorial shows you how to create a simple `iTools` command in Java.
 
+* TOC
+{:toc}
+
 ## What you need
 
 ## How to complete this tutorial
