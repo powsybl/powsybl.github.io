@@ -65,5 +65,5 @@ remote-service:
 
 ## Going further
 To go further with AFS, check out the following content
-- [AFS API guide](): learn how to use AFS in your java project
+- [AFS API guide](../developer/api_guide/afs.md): learn how to use AFS in your java project
 - [AFS in run-script](../user/itools/run-script.md#access-to-afs): learn how to access to AFS using the `run-script` iTools command 

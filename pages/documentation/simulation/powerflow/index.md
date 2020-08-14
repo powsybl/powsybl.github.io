@@ -23,6 +23,7 @@ The only input for a power flow simulation is a network.
 
 The power flow simulation output consists of a network, which has been modified based on the simulation results, and some metrics regarding the computation: whether or not it has converged, in how many iterations. Depending on the loadflow implementation the content of these metrics may vary. 
 In the network, the modified variables are the active and reactive power at the terminals, and the voltage and angle at all buses.
+If the load flow calculation has converged, PowSyBl also identifies the slack bus(es) used by the simulator: the bus at which the power balance was done for each synchronous component.
 
 ## Validation
 

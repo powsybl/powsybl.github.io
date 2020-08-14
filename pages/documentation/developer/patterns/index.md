@@ -7,6 +7,6 @@ layout: default
 
 This page describes some programming patterns used throughout PowSyBl:
 
-- [Integrate a simulator]()
+- [Integrate a simulator](simulator-integration.md)
 - [Integrate an importer]()
 
