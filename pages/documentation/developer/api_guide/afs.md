@@ -198,6 +198,7 @@ Read this documentation [page](../../data/afs.md#remote-storage) to learn more a
 In order to use it you will need to:
 - package in a war and deploy `powsybl-afs-ws-server` in a JEE server, like Wildfly
 - configure the AFS drives to allow remote access, by setting the optional `remotely-accessible` property to `true`
+
  ```yml
 mapdb-app-file-system:
     drive-name : my-first-fs
@@ -206,6 +207,7 @@ mapdb-app-file-system:
  ```
 - add `powsybl-afs-ws-client` to the runtime dependencies of your client application
 - configure in the PowSyBl configuration of your application the following rest file system:
+
 ```yml
 remote-service:
     host-name: my-afs-server
