@@ -43,6 +43,19 @@
                         <li><a href="/pages/community/events">Events</a></li>
                     </ul>
                 </li>
+                {% if page.dir contains "/pages/documentation"  %}
+                <li>
+                    <!--
+                        inside a <a/> for similar styling as other items. Add
+                         py-1 because the input is taller than just text, so
+                        compensate with less padding on the <a/>
+                    -->
+                    <a class="py-1" ><form class="d-inline-flex form-inline" action="/pages/documentation/search" method="get">
+                        <!-- px-2 py-1 like in form-control-sm but overriden by vesper.css so put it back -->
+                        <input class="form-control form-control-sm px-2 py-1" id="search-box" name="query" type="text" placeholder="Search" aria-label="Search" />
+                    </form></a>
+                </li>
+                {% endif %}
             </ul>
         </nav>
     </div>
@@ -69,13 +82,7 @@
                         <a class="nav-link mx-1" href="https://github.com/powsybl" target="_blank" rel="noopener" aria-label="GitHub" data-toggle="tooltip" data-placement="bottom" title="GitHub"><i class="fab fa-github"></i></a>
                         <a class="nav-link mx-1" href="https://spectrum.chat/powsybl" target="_blank" rel="noopener" aria-label="Spectrum" data-toggle="tooltip" data-placement="bottom" title="Spectrum"><i class="fas fa-comment"></i></a>
                         <a class="nav-link mx-1" href="https://lists.lfenergy.org/g/powsybl" target="_blank" rel="noopener" aria-label="Mailing Lists" data-toggle="tooltip" data-placement="bottom" title="Mailing Lists"><i class="fas fa-envelope"></i></a>
-                        <a id="search-icon" class="nav-link mx-1 d-block d-sm-none" href="/search"><i class="fas fa-search"></i></a>
                     </ul>
-                </div>
-                <div class="col-sm-auto">
-                    <form class="form-inline" action="/search" method="get">
-                        <input id="search-box" name="query" class="form-control {% if page.title != "Search"  %}d-none{% endif %} d-sm-block ml-3" type="text" placeholder="Search" aria-label="Search" />
-                    </form>
                 </div>
             </div>
         </div>
