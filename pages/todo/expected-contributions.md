@@ -13,7 +13,7 @@ Ce document identifie les contributions attendues sur le site web et les personn
   - trouver des icônes plus sympa pour les features de la page d'accueil
   - améliorer les icônes de l'index de la documentation
 
-- Ajouter une barre de recherche dans la page de documentation : Jon
+- Ajouter une barre de recherche dans la page de documentation : Jon (OK)
 
 # Home
 
@@ -68,7 +68,7 @@ Ce document identifie les contributions attendues sur le site web et les personn
   - documenter chaque microservice pour expliquer à quoi il sert/comment il fonctionne : GridSuite
 
 - Développeur
-  - repositories : tenir à jour la liste des repos et les versions : TSC powsybl
+  - repositories : tenir à jour la liste des repos et les versions : TSC powsybl. Jon a mis des liens qui pointent toujours vers la dernière version des repos mais il faudra tenir la liste des repos à jour et pour les microservices pointer vers les images docker quand il y en aura.
   - artifacts : tenir à jour : TSC powsybl
   - patterns :
     - définir ce qu'on souhaite décrire
