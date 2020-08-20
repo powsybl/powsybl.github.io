@@ -118,7 +118,7 @@ This [repository](https://github.com/powsybl/powsybl-parent) provides the build 
 **Release:** [jonenst](https://github.com/jonenst), [mathbagu](https://github.com/mathbagu)
 
 ### powsybl-tutorials
-This [repositories](https://github.com/powsybl/powsybl-tutorials) contains the source code of the different [tutorials]() presented on this website.
+This [repositories](https://github.com/powsybl/powsybl-tutorials) contains the source code of the different [tutorials](../tutorials/index.md) presented on this website.
 
 **Reviewers:** [annetill](https://github.com/annetill)
 
