@@ -16,7 +16,7 @@ This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an 
 **Reviewers:** [geofjamg](https://github.com/geofjamg)
 **Release:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)
 
-### [powsybl-dynawo](powsybl-dynawo.md)
+### [powsybl-dynawo](powsybl-dynawo.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-dynawo.svg)](https://github.com/powsybl/powsybl-dynawo/releases/)
 This [repository](https://github.com/powsybl/powsybl-dynawo) provides an implementation of the dynamic simulation API for the [Dyna&omega;o](https://dynawo.github.io/) time domain simulation tool.
 
 **Reviewers:** [agnesLeroy](https://github.com/agnesLeroy), [mathbagu](https://github.com/mathbagu), [zamarrenolm](https://github.com/zamarrenolm)
