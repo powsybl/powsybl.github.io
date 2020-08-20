@@ -1,4 +1,4 @@
-# powsybl-single-line-diagram [![v1.2.0](https://img.shields.io/badge/-v1.2.0-blue.svg)](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.2.0)
+# powsybl-single-line-diagram [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-single-line-diagram.svg)](https://github.com/powsybl/powsybl-single-line-diagram/releases/)
 This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provides modules to generate single line diagrams.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
