@@ -40,7 +40,6 @@ for several common pan-european exchange formats (Entso-E CIM/CGMES, UCTE-DEF, e
 PowSyBl as a library provides several APIs for power systems’ simulation and analysis 
 ([power flow computation](../documentation/simulation/powerflow/index.md), 
 [security analysis](../documentation/simulation/securityanalysis/index.md), 
-[remedial action simulation](), 
 [sensitivity analysis](../documentation/simulation/sensitivity/index.md),
 [time domain simulation](../documentation/simulation/timedomain/index.md), etc.). 
 These simulations can run either on a personal computer or on a server, but they can 
@@ -48,10 +47,8 @@ also run on a supercomputer like in the iTesla project with the Curie supercompu
 The separation of the simulation API and the implementations allows developers to 
 provide their own implementations if necessary, which makes the framework very flexible.
 
-PowSyBl is also available as a [command line tool](../documentation/user/itools/index.md), 
-for quick shot modelling and/or simulation.
-PowSyBl scripts may be written and executed thanks to the [dedicated Domain Specific Language]()
-code included in the project.
+PowSyBl is also available as a [command line tool](../documentation/user/itools/index.md), for quick shot modelling and/or simulation.
+PowSyBl scripts may be written and executed thanks to the [dedicated Domain Specific Language](../documentation/user/itools/run-script.md) code included in the project.
 
 All the features of PowSyBl are exposed as [web services](../documentation/index.html#microservices), so as to make it easy to build web-based 
 applications on top of the framework.

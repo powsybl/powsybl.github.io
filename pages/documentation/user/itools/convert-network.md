@@ -53,7 +53,7 @@ This option defines the path of the [importer](../../glossary.md#importer)'s con
 
 ## Examples
 
-This example shows how to convert a [UCTE-DEF]() file to an [XIIDM]() file:
+This example shows how to convert a [UCTE-DEF](../../grid/formats/ucte-def.md) file to an [XIIDM](../../grid/formats/xiidm.md) file:
 ```
 $> itools convert-network --input-file case-file.uct --output-format XIIDM --output-file case-file.xiidm
 ```

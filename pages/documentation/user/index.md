@@ -129,10 +129,10 @@ go to the [documentation page of iTools command](itools/index.md).
 The available iTools commands in a basic PowSyBl distribution (installation guide described above) are the following:
 
 
-- [`compare-security-analysis-results`](): Compare results of two security analyses (their violations pre and post contingencies)
+- [`compare-security-analysis-results`](itools/compare-security-analysis-results.md): Compare results of two security analyses (their violations pre and post contingencies)
 - [`convert-network`](itools/convert-network.md): Convert a file describing a network in a given format into another format
 - [`loadflow`](itools/loadflow.md): Run a load-flow on a network imported from a file
-- [`loadflow-validation`](): Check if a load-flow's results (voltages, angles, flows...) are valid
+- [`loadflow-validation`](itools/loadflow-validation.md): Check if a load-flow's results (voltages, angles, flows...) are valid
 - [`security-analysis`](itools/security-analysis.md): Run a security analysis on a network imported from a file
 - [`plugins-info`](): List the available implementations for each plugins
 - [`run-script`](itools/run-script.md): Run a script based on PowSyBl

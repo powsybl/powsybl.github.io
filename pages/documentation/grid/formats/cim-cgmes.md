@@ -43,7 +43,7 @@ that defines if the CGMES importer inverts the sign of reactive power flows for 
 The `iidm.import.cgmes.convert-boundary` property is an optional property that defines if the CGMES importer imports equipments inside the boundaries or not. Its default value is `false`.
 
 **iidm.import.cgmes.create-busbar-section-for-every-connectivity-node**  
-The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates an [IIDM Busbar Section]() for each CGMES connectivity node. Its default value is `false`.
+The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates an [IIDM Busbar Section](../model/index.md#busbar-section) for each CGMES connectivity node. Its default value is `false`.
 
 **iidm.import.cgmes.powsybl-triplestore**  
 The `iidm.import.cgmes.powsybl-triplestore` property is an optional property that defines which triplestore implementation is used. PowSyBl supports the [RDF4J](#rdf4j), [Jena](#jena) and [Blazegraph](#blazegraph) triplestore implementations. This property has `rdf4j` as default value.

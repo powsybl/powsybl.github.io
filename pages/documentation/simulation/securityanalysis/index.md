@@ -11,8 +11,8 @@ layout: default
 The security analysis is a simulation that check violations on a network. These checks can be done on the base case or after a contingency, with or without remedial actions.
 
 There is a violation if the computed value is greater than the maximum allowed value. Depending on the equipments, the violations can have different types:
-- Current: this kind of violations can be detected on a [branch](), if the computed intensity is greater than its [permanent limit]() or one of its [temporary limits]().
-- Voltage: this kind of violations can be detected on a bus or a [busbar section](), if the computed voltage is out of the voltage limits bounds of a [voltage level]().
+- Current: this kind of violations can be detected on a [branch](../../grid/model/index.md#branches), if the computed intensity is greater than its [permanent limit](../../grid/model/index.md#current-limits) or one of its [temporary limits](../../grid/model/index.md#current-limits).
+- Voltage: this kind of violations can be detected on a bus or a [busbar section](), if the computed voltage is out of the voltage limits bounds of a [voltage level](../../grid/model/index.md#busbar-section).
 
 ## Inputs
 
@@ -25,7 +25,7 @@ The security analysis may also take, optionally, a list of contingencies as an i
 At the moment, it is possible to trigger generators, static VAR compensators, shunts, power lines or two windings transformers, HVDC lines and busbar sections. Equipments can be triggered one at a time (N-1 contingency) or several at a time (N-K contingency). Busbar contingency are special N-K contingency as it triggers all the equipments connected to a given busbar section.
 
 ### Remedial actions
-Remedial actions are actions that are applied automatically when exploitation rules are violated. For example, this is used to model automatons that can open [switches]() or change the tap position of a [phase tap changer](). The remedial actions should be provided using the [Action Domain Specific Language](action-dsl.md) written in Groovy.
+Remedial actions are actions that are applied automatically when exploitation rules are violated. For example, this is used to model automatons that can open [switches](../../grid/model/index.md#nb-switch) or change the tap position of a [phase tap changer](../../grid/model/index.md#phase-tap-changer). The remedial actions should be provided using the [Action Domain Specific Language](action-dsl.md) written in Groovy.
 
 The action DSL, provides 3 different inputs:
 - the contingencies
