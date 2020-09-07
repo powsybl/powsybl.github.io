@@ -5,8 +5,7 @@ todo:
 ---
 
 # local-app-file-system
-The `local-app-file-system` module is used by [AFS]() to define one or several drives
-mapped to a local hard-drive.
+The `local-app-file-system` module is used by [AFS](../../data/afs.md) to define one or several drives mapped to a local hard-drive.
 
 ## Required properties
 

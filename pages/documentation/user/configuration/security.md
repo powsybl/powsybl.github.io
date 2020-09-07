@@ -3,7 +3,7 @@ layout: default
 ---
 
 # security
-The `security` module is used by the [AFS]() web-server to define the authentication token validity.
+The `security` module is used by the [AFS](../../data/afs.md) web-server to define the authentication token validity.
 
 ## Optional properties
 

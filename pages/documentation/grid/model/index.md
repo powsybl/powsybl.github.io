@@ -70,11 +70,11 @@ The edges are constituted of switches or internal connections. See the following
 <span style="color:red"> TODO: add sketch of voltage level topology graph.</span>
 
 
-**Busbar section**
+<span class="heading" id="busbar-section"></span>**Busbar section**
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/BusbarSection.html)<br>
 A busbar section is a non impedant element used in a node/breaker substation topology to connect equipments.
 
-**Switch**
+<span class="heading" id="nb-switch"></span>**Switch**
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
 <span style="color:red"> TODO</span>
 
@@ -92,7 +92,7 @@ A bus is a set of equipments connected at the same voltage.
 When an equipment is connected to a bus, in the IIDM descrition it corresponds to a `Terminal` object.
 In IIDM there is thus one `Terminal` per connected equipment.
 
-**Switch**
+<span class="heading" id="bb-switch"></span>**Switch**
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
 <span style="color:red"> TODO: explain the difference with node/breaker switches</span>
 

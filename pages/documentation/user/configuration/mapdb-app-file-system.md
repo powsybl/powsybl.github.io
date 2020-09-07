@@ -6,8 +6,7 @@ todo:
 ---
 
 # mapdb-app-file-system
-The `mapdb-app-file-system` module is used by [AFS]() to define one or several drives
-mapped to a [MapDB](http://www.mapdb.org) file.
+The `mapdb-app-file-system` module is used by [AFS](../../data/afs.md) to define one or several drives mapped to a [MapDB](http://www.mapdb.org) file.
 
 ## Required properties
 

@@ -5,7 +5,7 @@ todo:
 ---
 
 # loadflow-validation
-The `loadflow-validation` module is used by the [loadflow-validation]() command. It defines the parameters used during the validation of load flow results.
+The `loadflow-validation` module is used by the [loadflow-validation](../itools/loadflow-validation.md) command. It defines the parameters used during the validation of load flow results.
 
 ## Optional properties
 
@@ -70,7 +70,7 @@ The table formatter can be configured by the [table-formatter](table-formatter.m
 The `threshold` property is an optional property that defines the margin used for values comparison. The default value of this property is `0`.
 
 **verbose:**  
-The `verbose` property is an optional property that defines whether the [loadflow-validation]() command runs in verbose or quiet mode.
+The `verbose` property is an optional property that defines whether the [loadflow-validation](../itools/loadflow-validation.md) command runs in verbose or quiet mode.
 
 If this property is set to `true`, the output files contain all the data of the validated equipments, otherwise they contain only the main data of the validated equipments.
 
