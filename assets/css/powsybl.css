@@ -161,6 +161,10 @@ table tr:nth-child(2n) {
     transform: scale(1.1);
 }
 
+.services .title {
+    color: #111111;
+}
+
 @media (max-width: 768px) {
     .partners img {
         width: 40%;
