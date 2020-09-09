@@ -9,7 +9,7 @@ It is part of the [LF Energy Foundation](https://www.lfenergy.org/), a project o
 open source innovation projects within the energy and electricity sectors. 
 PowSyBl in an open source framework licensed under the [Mozilla Public License 2.0](./license).
 
-The power system blocks may be used through scripts for a quick shot, but also be assembled to build state of the art applications.
+The power system blocks may be used through scripts for a quick implementation (or prototyping), but also be assembled to build state of the art applications.
 Indeed, one major aim of the project is to make it easy to write complex software for power 
 system simulation and analysis. For example, using PowSyBl one can create applications able to:
 - handle a variety of formats, such as CGMES for European data exchanges
