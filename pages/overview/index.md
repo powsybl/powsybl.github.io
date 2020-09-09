@@ -4,10 +4,8 @@ layout: default
 
 # Overview
 PowSyBl (<b>Pow</b>er <b>Sy</b>stem <b>Bl</b>ocks) is an open source framework written in Java,
-dedicated to electrical grid modelling and simulation. 
-It is part of the [LF Energy Foundation](https://www.lfenergy.org/), a project of The Linux Foundation that supports 
-open source innovation projects within the energy and electricity sectors. 
-PowSyBl in an open source framework licensed under the [Mozilla Public License 2.0](./license).
+dedicated to electrical grid modelling and simulation, licensed under the [Mozilla Public License version 2.0](./license). 
+It is part of [LF Energy](https://www.lfenergy.org/), an open source foundation focused on the power systems sector, hosted within The Linux Foundation. 
 
 The power system blocks may be used through scripts for a quick implementation (or prototyping), but also be assembled to build state of the art applications.
 Indeed, one major aim of the project is to make it easy to write complex software for power 
