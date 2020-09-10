@@ -12,5 +12,14 @@ markdown: kramdown
 kramdown:
   toc_levels: 2..3
 
+exclude:
+  - /backup
+  - /pages/todo
+  - /vendor
+  - /CNAME
+  - /Gemfile
+  - /Gemfile.lock
+  - /LICENSE
+
 plugins:
   - jekyll-relative-links
