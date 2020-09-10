@@ -1,0 +1,258 @@
+---
+layout: base
+---
+
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                <h1 data-aos="fade-up">Model your power grid with PowSyBl</h1>
+                <h2 data-aos="fade-up" data-aos-delay="400">The open source set of Power System Blocks in Java,
+                dedicated to grid analysis and simulation</h2>
+                <div data-aos="fade-up" data-aos-delay="800">
+                    <a href="#about" class="mr-2 btn-get-started scrollto">Get Started</a>
+                    <a href="/pages/download" class="ml-2 btn-get-started scrollto">Download</a>
+                </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
+                <img src="/assets/img/hero.jpg" class="img-fluid hero-img" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<main id="main">
+
+    <section id="clients" class="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 center-image">
+                  <a href="http://www.lfenergy.org"><img src="/assets/img/logos/logo_lfenergy.png" alt="" data-aos="zoom-in"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>About PowSyBl</h2>
+            </div>
+            <div class="row content">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                    <p class="text-justify">
+                        PowSyBl (<b>Pow</b>er <b>Sy</b>stem <b>Bl</b>ocks) is an open source framework written in Java,
+                        dedicated to electrical grid modelling and simulation. The power system blocks may be used through
+                        scripts for a quick shot, but also be assembled to build state of the art applications.
+                    </p>
+                    <p class="text-justify">
+                        PowSyBl is part of the <a href="http://www.lfenergy.org">LF Energy Foundation</a>, a project of
+                        The Linux Foundation that supports open source innovation projects within the energy and electricity sectors.
+                    </p>
+                    <p class="text-justify">
+                        One major aim of the project is to make it easy to write complex software for power 
+                        system simulation and analysis.
+                    </p>
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
+                    <p class="text-justify">
+                        For example, using PowSyBl one can create applications able to:
+                    </p>
+                    <ul>
+                      <li><i class="ri-check-double-line"></i> handle a variety of formats, such as CGMES for European data exchanges</li>
+                      <li><i class="ri-check-double-line"></i> perform power flow simulations and security analyses on the network</li>
+                      <li><i class="ri-check-double-line"></i> perform dynamic simulations on the network</li>
+                    </ul>
+                    <p class="text-justify">
+                        Another key characteristic of PowSyBl is its modular design, at the core of the open source approach.
+                        It enables developers to extend or customize its features by providing their own plugins.
+                    </p>
+                    <a href="/pages/overview" class="ml-2 btn-learn-more scrollto">Learn more</a>
+                    <a href="/pages/documentation/user/user-stories" class="ml-2 btn-learn-more scrollto">User stories</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TODO.md(mathbagu): cleanup CSS -->
+    <section id="features" class="services">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Features</h2>
+                <p>PowSyBl offers a comprehensive set of features for grid modeling and simulation.</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                        <a href="/pages/documentation/grid/model/index.html">
+                            <div class="icon fa-icon"><i class="fas fa-project-diagram"></i></div>
+                            <h4 class="title">Grid modeling</h4>
+                        </a>
+                        <p class="description">
+                            PowSyBl provides a thorough library for grid components modeling, fully editable and extendable.
+                        </p>
+                        <a href="/pages/documentation/grid/model/index.html" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                        <a href="/pages/documentation/index.html#grid-formats">
+                            <div class="icon"><i class="bx bx-file"></i></div>
+                            <h4 class="title">Exchange formats</h4>
+                        </a>
+                        <p class="description">
+                            PowSyBl supports imports and exports in several standard formats, such as
+                            <a href="/pages/documentation/grid/formats/cim-cgmes.html">CIM-CGMES</a>,
+                            <a href="/pages/documentation/grid/formats/ucte-def.html">UCTE-DEF</a>, etc.
+                        </p>
+                        <a href="/pages/documentation/index.html#grid-formats" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                        <a href="/pages/documentation/index.html#simulation">
+                            <div class="icon"><i class="bx bx-line-chart"></i></div>
+                            <h4 class="title">Grid simulation</h4>
+                        </a>
+                        <p class="description">
+                            Run grid simulations, such as <a href="/pages/documentation/simulation/powerflow/index.html">power flows</a>,
+                            <a href="/pages/documentation/simulation/securityanalysis/index.html">security analyses</a> (with or without remedial actions),
+                            <a href="/pages/documentation/simulation/sensitivity/index.html">sensitivity analyses</a>, etc.
+                        </p>
+                        <a href="/pages/documentation/index.html#simulation" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                        <a href="/pages/documentation/index.html">
+                            <div class="icon fa-icon"><i class="fas fa-cogs"></i></div>
+                            <h4 class="title">Advanced features</h4>
+                        </a>
+                        <p class="description">
+                            PowSyBl provides a <a href="/pages/documentation/developer/python">python binding</a>,
+                            <a href="/pages/documentation/index.html#hpc">HPC support</a>,
+                            <a href="/pages/documentation/index.html#microservices">microservices</a>,
+                            <a href="/pages/documentation/data/timeseries.html">time-series</a>,
+                            <a href="/pages/documentation/data/afs.html">scalable data management</a>, and more
+                        </p>
+                        <a href="/pages/documentation/index.html" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TODO.md(mathbagu): ajouter des liens vers les projets avec une integration (helm, hades2)? -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>They use PowSyBl</h2>
+                <p>PowSyBl is already used in a number of projects, discover them below.</p>
+            </div>
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
+                <div class="col-md-6 col-lg-4 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="/assets/img/portfolio/farao.png" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Farao</h4>
+                            <p>Open-source modular toolbox for power system coordination process</p>
+                            <div class="portfolio-links">
+                                <!--<a href="/assets/img/portfolio/farao3.png" data-gall="portfolioGallery" class="venobox" title="FARAO project logo"><i class="bx bx-plus"></i></a>-->
+                                <a href="https://farao-community.github.io/" title="More Details"><i class="bx bx-link"></i></a>
+                                <a href="https://github.com/farao-community/" title="GitHub"><i class="bx bxl-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                        <img src="/assets/img/portfolio/dynawo.png" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>Dynawo</h4>
+                            <p>Open source time domain simulation tool for power systems using the Modelica language</p>
+                            <div class="portfolio-links">
+                                <!--<a href="/assets/img/portfolio/dynawo.png" data-gall="portfolioGallery" class="venobox" title="Dynawo logo"><i class="bx bx-plus"></i></a>-->
+                                <a href="https://dynawo.github.io" title="More Details"><i class="bx bx-link"></i></a>
+                                <a href="https://github.com/dynawo/" title="GitHub"><i class="bx bxl-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="/assets/img/portfolio/gridsuite.png" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>GridSuite</h4>
+                            <p>A suite of web-based tools for grid simulation and analysis</p>
+                            <div class="portfolio-links">
+                                <!--<a href="/assets/img/portfolio/gridsuite.png" data-gall="portfolioGallery" class="venobox" title="GridSuite illustration"><i class="bx bx-plus"></i></a>-->
+                                <a href="/pages/projects/grid-suite.html" title="More Details"><i class="bx bx-link"></i></a>
+                                <a href="https://github.com/gridsuite" title="GitHub"><i class="bx bxl-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                        <img src="/assets/img/portfolio/safet.png" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>SafeT</h4>
+                            <p>PowSyBl's first POC to perform merging and security analysis across countries</p>
+                            <div class="portfolio-links">
+                                <!--<a href="/assets/img/portfolio/safet.png" data-gall="portfolioGallery" class="venobox" title="SafeT logo"><i class="bx bx-plus"></i></a>-->
+                                <a href="/pages/projects/safe-t.html" title="More Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="partners">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Partners and vendors</h2>
+                <p>The institutions below contribute to PowSyBl and/or build services and products based on PowSyBl. Please contact us if your institution ought to be listed here but is missing.</p>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="400">
+                <div class="col-md-3 col-6">
+                    <a href="http://www.acotel.com/">
+                        <img src="/assets/img/logos/acotel.svg" class="img-fluid" alt="" data-aos="zoom-in">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="https://aia.es/?lang=en">
+                        <img src="/assets/img/logos/aia-grupo.png" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="https://www.mhp.com/en/intelligent-energy-system-services">
+                        <img src="/assets/img/logos/ie2s.svg" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="https://www.mhp.com/en/home">
+                        <img src="/assets/img/logos/mhp.svg" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="300">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="https://www.rte-france.com">
+                        <img src="/assets/img/logos/rte-france.png" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="400">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="https://www.rte-international.com/?lang=enttps://www.mhp.com/en/intelligent-energy-system-services">
+                        <img src="/assets/img/logos/rte-i.png" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="500">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="https://silicom.fr/fr">
+                        <img src="/assets/img/logos/silicom.png" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="600">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
