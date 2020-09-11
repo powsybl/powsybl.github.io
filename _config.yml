@@ -16,7 +16,6 @@ exclude:
   - /backup
   - /pages/todo
   - /vendor
-  - /CNAME
   - /Gemfile
   - /Gemfile.lock
   - /LICENSE
