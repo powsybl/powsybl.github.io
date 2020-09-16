@@ -60,7 +60,12 @@ The `iidm.export.xml.only-main-cc` property is an optional property that defines
 The `iidm.export.xml.anonymised` property is an optional property that defines whether the XIIDM exporter anonymizes all equipments in the generated file or not. Its default value is `false`.
 
 **iidm.export.xml.topology-level**  
-The `iidm.export.xml.topology-level` property is an optional property that defines the most detailed topology in which the XIIDM exporter can export the network. Its default value is `NODE_BREAKER`.
+The `iidm.export.xml.topology-level` property is an optional property that defines the most detailed topology in which the XIIDM exporter can export the network. The topology level can be:
+- `NODE_BREAKER`: the voltage levels are exported using the [Node/Breaker view](). Voltage levels described in Bus/Breaker topology are exported using the [Bus/Breaker view]().
+- `BUS_BREAKER`: all voltage levels are all exported using the [Bus/Breaker view]()
+- `BUS_BRANCH`:  all voltage levels are exported using the [Bus view]()
+
+The default value is `NODE_BREAKER` to export all voltage levels in the same level of details than the one they are described.
 
 **iidm.export.xml.throw-exception-if-extension-not-found**  
 The `iidm.export.xml.throw-exception-if-extension-not-found` property is an optional property that defines whether the XIIDM exporter throws an exception if the network contains an unknown or unserializable extension or if it just ignores it. Its default value is `false`.
