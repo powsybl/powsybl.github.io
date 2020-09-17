@@ -31,9 +31,10 @@ Ce document identifie les contributions attendues sur le site web et les personn
 
 - Utilisateur
   - configuration : enlever les références en dur aux classes Java, repenser l'organisation pour décider si on fait porter les infos sur la conf par les pages de description des features (ex : load flow) ou par les pages de configuration
-  - user story autour de SEA : Sylvain Leclerc
+  - user story autour de SEA : Sylvain Leclerc, Anne
   - user story autour du merging : équipes core-merging/GridSuite
   - user story autour de l'extraction de réseau : Mathieu, Stéphane Fliscounakis, Benjamin Donnot, Antoine Marot
+  - user story autour de ImaGrid : Anne
 
 - Modèle de réseau
   - topologie : Mathieu
