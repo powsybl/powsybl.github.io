@@ -16,5 +16,6 @@ The PowSyBl AFS (**A**pplication **F**ile **S**ystem) [repository](https://githu
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 3.3.0 | 2020-08-03 | [Release notes](https://github.com/powsybl/powsybl-afs/releases/tag/v3.3.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-afs/3.3.0/index.html) |
 | 3.2.0 | 2020-03-13 | [Release notes](https://github.com/powsybl/powsybl-afs/releases/tag/v3.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-afs/3.2.0/index.html) |
 | 3.1.0 | 2020-01-24 | [Release notes](https://github.com/powsybl/powsybl-afs/releases/tag/v3.1.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-afs/3.1.0/index.html) |
