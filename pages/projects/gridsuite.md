@@ -2,4 +2,4 @@
 layout: default
 ---
 
-# Grid Suite
+# GridSuite
