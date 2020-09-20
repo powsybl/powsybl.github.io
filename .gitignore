@@ -10,4 +10,4 @@ Gemfile.lock
 
 # Bundle
 .bundle
-vendor
+/vendor
