@@ -245,12 +245,12 @@ Then, you need to configure several specific parameters:
 The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is false.
 
 **lowImpedanceBranchMode**  
-The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines ($$Z$$ is less than the thresold `Math.pow(10, -8)` in per-unit. Two options are available:
+The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines ($$Z$$ is less than the thresold $$10^{-8}$$ in per-unit. Two options are available:
 - Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider a low impedance line has $$R$$ and $$X$$ equals to zero.
 - Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider a low impedance line with a small value equals to the previously given thresold.
 
 **distributedSlack**  
-The `distributedSlack` property is an optional property that defines if you want to distribute the active power mismatch over the network or not. The defaut value is `true`.
+The `distributedSlack` property is an optional property that defines if you want to distribute the active power mismatch over the network or not. The defaut value is true.
 
 **throwsExceptionInCaseOfSlackDistributionFailure**  
 The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure. This could happens in small synchronous component without enough generators or loads. In that case, the remaining active power mismatch remains on the selected slack bus.
