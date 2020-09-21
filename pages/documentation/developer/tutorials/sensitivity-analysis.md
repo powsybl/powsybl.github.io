@@ -2,8 +2,8 @@
 layout: default
 ---
 
-# Write the Java code to perform sensitivity analyses
-This tutorial shows you how to write a Java code to perform sensitivity analyses on a network, just on its current state but also on N-1 states by providing a set of contingencies. You'll see how to configure PowSyBl, through a YML file and overwriting it with a JSON file, how to provide input sensitivity factors, and how to output the sensitivity results to a CSV file.
+# Write the Java code to perform sensitivity analysis
+This tutorial shows you how to write a Java code to perform sensitivity analysis on a network, just on its current state but also on N-1 states by providing a set of contingencies. You'll see how to configure PowSyBl, through a YML file and overwriting it with a JSON file, how to provide input sensitivity factors, and how to output the sensitivity results to a CSV file.
 
 * TOC
 {:toc}
@@ -68,8 +68,8 @@ Create a new Maven's `pom.xml` file in `sensitivity/initial` with the following 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>3.3.0</powsybl.core.version>
-        <powsybl.rte-core.version>2.10.0</powsybl.rte-core.version>
+        <powsybl.core.version>3.5.0</powsybl.core.version>
+        <powsybl.rte-core.version>2.12.0</powsybl.rte-core.version>
     </properties>
 </project>
 ```
@@ -148,9 +148,16 @@ Edit the file named `config.yml` at the location `sensitivity/initial/src/main/r
 Start the configuration by writing:
 ```yaml
 loadflow:
-  default-impl-name: "hades2"
+  default-impl-name: "Hades2"
 ```
-In this way, PowSyBl will be set to use the Hades2 implementation of the loadflow and sensitivity analysis.
+In this way, PowSyBl will be set to use the Hades2 implementation of the loadflow.
+
+You can also add:
+```yaml
+sensitivity-analysis:
+  default-impl-name: "Sensi2"
+```
+In this way, PowSyBl will be set to use the Sensi2 implementation of a sensitivity analysis.
 
 Then, set the following general Hades2 configuration parameters:
 ```yaml
@@ -208,7 +215,7 @@ and add the ones we wish to monitor in the list by using their IDs:
 ```
 Here we will monitor all the lines that link countries together.
 The initial flow through each of the monitored lines constitutes the `function reference` values in the
-sensitivity results. Here, since we did not run a load flow calculation on the newtork, these flows are not set yet.
+sensitivity analysis results. Here, since we did not run a load flow calculation on the newtork, these flows are not set yet.
 If you wish to display them, add the following lines in the file (optional):
 ```java
 LoadFlow.run(network, LoadFlowParameters.load());
@@ -239,17 +246,10 @@ In this provider, we first define the variable of interest: here the branch flow
 
 Now the sensitivity inputs are prepared, we can run a sensitivity analysis. This is done in the following way:
 ```java
-ComputationManager computationManager = LocalComputationManager.getDefault();
-SensitivityComputation sensitivityComputation = new Hades2SensitivityFactory().create(network,
-    computationManager, 1);
-SensitivityComputationResults sensiResults = sensitivityComputation.run(factorsProvider,
-    VariantManagerConstants.INITIAL_VARIANT_ID, SensitivityComputationParameters.load()).join();
-
+SensitivityAnalysisResults sensiResults = SensitivityAnalysis.find().run(network, factorsProvider);
 ```
-In order to run the calculation, we need to create a `ComputationManager` (<span style="color: red">TODO: explain its role</span>), 
-and a `SensitivityComputation` object based on the Hades2 implementation.
-Then we can run the calcuation itself, using the initial netork variant as network data.
-Here we directly loaded the sensitivity analysis parameters from the YML configuration file in the resources.
+When no variants are explicitely specified, the analysis will be performed on network working variant.
+Here we directly load the sensitivity analysis parameters from the YML configuration file in the resources.
 
 ## Output the results in the terminal
 
@@ -277,12 +277,12 @@ if (!jsonSensiResultFile.exists()) {
 ```
 Then, we can export the results to that file in JSON format:
 ```java
- SensitivityComputationResultExporter jsonExporter = new JsonSensitivityComputationResultExporter();
- try (FileOutputStream os = new FileOutputStream(jsonSensiResultFile.toString())) {
-   jsonExporter.export(sensiResults, new OutputStreamWriter(os));
- } catch (IOException e) {
-   throw new UncheckedIOException(e);
- }
+SensitivityAnalysisResultExporter jsonExporter = new JsonSensitivityAnalysisResultExporter();
+try (FileOutputStream os = new FileOutputStream(jsonSensiResultFile.toString())) {
+    jsonExporter.export(sensiResults, new OutputStreamWriter(os));
+} catch (IOException e) {
+    throw new UncheckedIOException(e);
+}
 ```
 
 ## Create a set of contingencies 
@@ -332,8 +332,8 @@ You can check the content of the file `src/main/resources/factors.json` to verif
 It is possible to overwrite the Hades2 sensitivity parameters with a JSON file, which we'll do now:
 ```java
 Path parametersFile = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_parameters.json").getPath());
-SensitivityComputationParameters params = SensitivityComputationParameters.load();
-JsonSensitivityComputationParameters.update(params, parametersFile);
+SensitivityAnalysisParameters params = SensitivityAnalysisParameters.load();
+JsonSensitivityAnalysisParameters.update(params, parametersFile);
 ```
 We first create sensitivity analysis parameters by loading the YML configuration file, and then update them based on the provided JSON file for sensitivity parameters.
 
@@ -341,9 +341,8 @@ We first create sensitivity analysis parameters by loading the YML configuration
 
 We can now run all the sensitivity analyses at once, through:
 ```java
-SensitivityComputationResults systematicSensiResults = sensitivityComputation.run(
-    jsonFactorsProvider, contingenciesProvider, VariantManagerConstants.INITIAL_VARIANT_ID,
-    params).join();
+SensitivityAnalysisResults systematicSensiResults = SensitivityAnalysis.find().run(network,
+      jsonFactorsProvider, contingenciesProvider, params);
 ```
 
 ## Output the results to a CSV file
@@ -361,11 +360,11 @@ if (!csvResultFile.exists()) {
 ```
 Then, we can export the results in CSV format:
 ```java
-SensitivityComputationResultExporter csvExporter = new CsvSensitivityComputationResultExporter();
+SensitivityAnalysisResultExporter csvExporter = new CsvSensitivityAnalysisResultExporter();
 try (FileOutputStream os = new FileOutputStream(csvResultFile.toString())) {
-  csvExporter.export(systematicSensiResults, new OutputStreamWriter(os));
+    csvExporter.export(systematicSensiResults, new OutputStreamWriter(os));
 } catch (IOException e) {
-  throw new UncheckedIOException(e);
+    throw new UncheckedIOException(e);
 }
 ```
 The output will contain the sensitivity results on all considered network states, for all the factors (hence it is more convenient to use the CSV format instead of JSON to analyze them).
@@ -389,7 +388,7 @@ where you can provide the path you wish for storing the temporary files generate
 which can be useful to understand what happened during the Hades2 calculation in more details. The adn files contain the input and output network data, while the log files provide information about the run's behavior.
 
 ## Summary
-We have learnt how to write Java code to run sensitivity analyses in single mode or in a systematic way, by providing contingencies to the `run` call. We've seen how to create sensitivity factors, in Java directly but also by reading a JSON file. We've shown how to set the sensitivity parameters, and how to overwrite them using a JSON file. We've also seen how to output the results, in the terminal but also into JSON or CSV files.
+We have learnt how to write Java code to run sensitivity analysis in single mode or in a systematic way, by providing contingencies to the `run` call. We've seen how to create sensitivity factors, in Java directly but also by reading a JSON file. We've shown how to set the sensitivity parameters, and how to overwrite them using a JSON file. We've also seen how to output the results, in the terminal but also into JSON or CSV files.
 Finally, we've also explained how to check what Hades2 itself generated during the calculation, which may be useful for debugging purposes.
 
 ## Going further
