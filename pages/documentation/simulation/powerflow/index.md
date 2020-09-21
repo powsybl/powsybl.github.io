@@ -10,10 +10,10 @@ latex: true
 
 ## Introduction
 The power flow is a numerical analysis of the flow of electric power in an interconnected system, where that system is considered to be in normal steady-state operation.
-Power-flow or load-flow studies are important for planning future expansion of power systems as well as in determining the best operation of existing systems. 
-The principal information obtained from the power-flow study is the magnitude and phase angle of the voltage at each bus, and the real and reactive power flowing in each line. 
+Power-flow or load-flow studies are important for planning future expansion of power systems as well as in determining the best operation of existing systems.
+The principal information obtained from the power-flow study is the magnitude and phase angle of the voltage at each bus, and the real and reactive power flowing in each line.
 In this page we'll go into some details about what are the inputs and outputs of a load flow simulatio, what is expected from a power flow result, how the validation feature of PowSyBl works, what power flow implementations
-are compatible with PowSyBl, and how to configure PowSyBl for the different implementations. 
+are compatible with PowSyBl, and how to configure PowSyBl for the different implementations.
 
 ## Inputs
 
@@ -21,7 +21,7 @@ The only input for a power flow simulation is a network.
 
 ## Outputs
 
-The power flow simulation output consists of a network, which has been modified based on the simulation results, and some metrics regarding the computation: whether or not it has converged, in how many iterations. Depending on the loadflow implementation the content of these metrics may vary. 
+The power flow simulation output consists of a network, which has been modified based on the simulation results, and some metrics regarding the computation: whether or not it has converged, in how many iterations. Depending on the loadflow implementation the content of these metrics may vary.
 In the network, the modified variables are the active and reactive power at the terminals, and the voltage and angle at all buses.
 If the load flow calculation has converged, PowSyBl also identifies the slack bus(es) used by the simulator: the bus at which the power balance was done for each synchronous component.
 
@@ -91,10 +91,10 @@ It may also be done by modifying the loads connected to the slack node.
 The slack node is a computation point designated to be the place where adjustments are done.
 
 This way of performing the adjustment is the simplest solution from a mathematical point of view, but it presents several drawbacks.
-In particular, it may not be enough in case of a large imbalance. 
-This is why other schemes have been developed, called "distributed slack nodes". 
+In particular, it may not be enough in case of a large imbalance.
+This is why other schemes have been developed, called "distributed slack nodes".
 
-Generators or loads are usually adjusted proportionally to a shift function to be defined. 
+Generators or loads are usually adjusted proportionally to a shift function to be defined.
 Three keys have been retained for the validation ($$g$$ is a generator):
 Usual ways of defining this function, for each equipment that may be involved in the compensation (generator or load), read:
 - proportional to $$P_{max}$$: $$F = f \times P_{max}$$
@@ -104,7 +104,7 @@ Usual ways of defining this function, for each equipment that may be involved in
 $$f$$ is a participation factor, per unit. For example, a usual definition is: $$f\in\{0,1\}$$: either the unit
 participates or not. The adjustment is then done by doing:
 $$P <- P \times \hat{K} \times F$$
-where $$\hat{K}$$ is a proportionality factor, usually defined for each unit by $$\dfrac{P_{max}}{\sum{F}}$$, $$\dfrac{targetP}{\sum{F}}$$ or $$\dfrac{P_{diff}}{\sum{F}}$$ 
+where $$\hat{K}$$ is a proportionality factor, usually defined for each unit by $$\dfrac{P_{max}}{\sum{F}}$$, $$\dfrac{targetP}{\sum{F}}$$ or $$\dfrac{P_{diff}}{\sum{F}}$$
 depending on the adjustment mode (the sums run over all the units participating to the compensation).
 
 ##### Voltage and reactive power
@@ -142,7 +142,7 @@ in susceptance, so that they are voltage dependent.
 
 $$targetP = 0$$ MW
 
-- If the regulation mode is `OFF`, then $$targetQ$$ is constant 
+- If the regulation mode is `OFF`, then $$targetQ$$ is constant
 - If the regulation mode is `REACTIVE_POWER`, it behaves like a generator without voltage regulation
 - If the regulation mode is `VOLTAGE`, it behaves like a generator with voltage regulation with the following bounds (dependent on the voltage, which is not the case for generators):
 $$minQ = - Bmax * V^2$$ and $$maxQ = - Bmin V^2$$
@@ -159,18 +159,18 @@ stations paired by a cable is equal to the losses on the converter stations plus
 
 #### Transformers with a ratio tap changer
 
-Transformers with a ratio tap changer have a tap with a finite discrete number of position that allows to change their transformer ratio. 
+Transformers with a ratio tap changer have a tap with a finite discrete number of position that allows to change their transformer ratio.
 Let's assume that the logic is based on deadband: if the deviation between the measurement
 and the setpoint is higher than the deadband width, the tap position is increased or decreased by one unit.
 
 As a result, a state is a steady state only if the regulated value is within the deadband or if the tap position is at
-minimum or maximum: this corresponds to a valid load flow result for the ratio tap changers tap positions. 
+minimum or maximum: this corresponds to a valid load flow result for the ratio tap changers tap positions.
 
 ## Implementations
 
 The following power flow implementations are supported:
 - [Open LoadFlow](openlf.md)
-- [Hades2](https://rte-france.github.io/hades2/index.html): learn how to 
+- [Hades2](https://rte-france.github.io/hades2/index.html): learn how to
 install Hades2 and use it with PowSyBl.
 
 ## Configuration
@@ -189,7 +189,7 @@ Then, configure some generic parameters for all load flow implementations:
 load-flow-default-parameters:
     voltageInitMode: DC_VALUES
     transformerVoltageControlOn: false
-    specificCompatibility: true 
+    specificCompatibility: true
 ```
 
 The parameters may also be overridden with a JSON file, in which case the configuration will look like:
@@ -237,7 +237,32 @@ The default values of all the optional properties are read from the [load-flow-d
 module, defined in the configuration file.
 
 ### Open LoadFlow configuration
-<span style="color: red">TODO</span>
+Once you have chosen OpenLoadFlow as a load flow implementation, the PowSyBl artifact you have to use is `powsybl-open-loadflow` within the groudId `com.powsybl`. The last release number is available [here](https://github.com/powsybl/powsybl-open-loadflow/releases).
+
+Then, you need to configure several specific parameters:  
+
+**dc**  
+The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is false.
+
+**lowImpedanceBranchMode**  
+The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines ($$Z$$ is less than the thresold `Math.pow(10, -8)` in per-unit. Two options are available:
+- Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider a low impedance line has $$R$$ and $$X$$ equals to zero.
+- Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider a low impedance line with a small value equals to the previously given thresold.
+
+**distributedSlack**  
+The `distributedSlack` property is an optional property that defines if you want to distribute the active power mismatch over the network or not. The defaut value is `true`.
+
+**throwsExceptionInCaseOfSlackDistributionFailure**  
+The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure. This could happens in small synchronous component without enough generators or loads. In that case, the remaining active power mismatch remains on the selected slack bus.
+
+**balanceType**  
+The `balanceType` property is an optional property that defines, in case of `distributedSlack` parameter set to true, how to manage the distribution. Several algorithm are supported. All algorithms follow the same scheme: we have some elements that participate to the slack distribution in a given participation factor:
+- Use `PROPORTIONAL_TO_GENERATION_P_MAX` if the elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is 4. If present, the simulator uses the droop of the generator located in extension active power control. This option is the default one.
+- Use `PROPORTIONAL_TO_LOAD` if the elements are the loads. The participation factor is computed using the active power $$P0$$.
+- Use `PROPORTIONAL_TO_CONFORM_LOAD` if the elements are the loads that have a conform active power part. The participation factor is computed using the load detail extension that details the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, all $$P0$$ is considered as variable.
+
+**voltageRemoteControl**  
+The `voltageRemoteControl`property is an optional property that defines if the remote control for voltage controllers has to be modeled. The default value is false.
 
 ### Hades2 configuration
 Once you have chosen Hades2 as a load flow implementation, you have to provide the path to your Hades2
@@ -247,7 +272,7 @@ hades2:
     homeDir: <PATH_TO_HADES_2>
 ```
 In this section, you may also choose the option `debug: true` to tell PowSyBl not to erase the
-temporary folder created by Hades2 for the calculation. Thismakes it possible to 
+temporary folder created by Hades2 for the calculation. Thismakes it possible to
 check what happened on the Hades2 side for debugging purposes.
 
 Then, you need to configure the load flow calculation itself, because the
@@ -269,6 +294,5 @@ The complete list of available parameters for the Hades2 load flow is available 
 
 ## Going further
 To go further about the power flow with PowSyBl, check the following pages:
-- [Run a power flow through an iTools command](../../user/itools/loadflow.md): Learn how to perform a power flow calculation from the command line 
+- [Run a power flow through an iTools command](../../user/itools/loadflow.md): Learn how to perform a power flow calculation from the command line
 - [Load flow tutorial](../../developer/tutorials/loadflow.md)
-
