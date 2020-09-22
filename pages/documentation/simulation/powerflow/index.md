@@ -237,31 +237,31 @@ The default values of all the optional properties are read from the [load-flow-d
 module, defined in the configuration file.
 
 ### Open LoadFlow configuration
-Once you have chosen OpenLoadFlow as a load flow implementation, the PowSyBl artifact you have to use is `powsybl-open-loadflow` within the groudId `com.powsybl`. The last release number is available [here](https://github.com/powsybl/powsybl-open-loadflow/releases).
+Once you have chosen OpenLoadFlow as a load flow implementation, the PowSyBl artifact you have to use is `powsybl-open-loadflow` within the groudId `com.powsybl`. The last release version is available [here](https://github.com/powsybl/powsybl-open-loadflow/releases).
 
-Then, you need to configure several specific parameters:  
+Then, you need to configure several specific parameters:
 
-**dc**  
+**dc**
 The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is false.
 
-**lowImpedanceBranchMode**  
-The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines ($$Z$$ is less than the thresold $$10^{-8}$$ in per-unit. Two options are available:
-- Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider a low impedance line has $$R$$ and $$X$$ equals to zero.
-- Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider a low impedance line with a small value equals to the previously given thresold.
+**lowImpedanceBranchMode**
+The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines (when $$Z$$ is less than the $$10^{-8}$$ per-unit threshold). Two options are available:
+- Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider a low impedance line has $$R$$ and $$X$$ equal to zero.
+- Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider a low impedance line with a small value equal to the previously given threshold.
 
-**distributedSlack**  
+**distributedSlack**
 The `distributedSlack` property is an optional property that defines if you want to distribute the active power mismatch over the network or not. The defaut value is true.
 
-**throwsExceptionInCaseOfSlackDistributionFailure**  
-The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure. This could happens in small synchronous component without enough generators or loads. In that case, the remaining active power mismatch remains on the selected slack bus.
+**throwsExceptionInCaseOfSlackDistributionFailure**
+The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure. This could happen in small synchronous component without enough generators or loads. In that case, the remaining active power mismatch remains on the selected slack bus.
 
-**balanceType**  
-The `balanceType` property is an optional property that defines, in case of `distributedSlack` parameter set to true, how to manage the distribution. Several algorithm are supported. All algorithms follow the same scheme: we have some elements that participate to the slack distribution in a given participation factor:
-- Use `PROPORTIONAL_TO_GENERATION_P_MAX` if the elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is 4. If present, the simulator uses the droop of the generator located in extension active power control. This option is the default one.
-- Use `PROPORTIONAL_TO_LOAD` if the elements are the loads. The participation factor is computed using the active power $$P0$$.
-- Use `PROPORTIONAL_TO_CONFORM_LOAD` if the elements are the loads that have a conform active power part. The participation factor is computed using the load detail extension that details the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, all $$P0$$ is considered as variable.
+**balanceType**
+The `balanceType` property is an optional property that defines, if `distributedSlack` parameter is set to true, how to manage the distribution. Several algorithms are supported. All algorithms follow the same scheme: only some elements participate in the slack distribution, with a given participation factor. Three options are available:
+- If using `PROPORTIONAL_TO_GENERATION_P_MAX` then the participating elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is 4. If present, the simulator uses the droop of the generator located in extension active power control. This option is the default one.
+- If using `PROPORTIONAL_TO_LOAD` then the participating elements are the loads. The participation factor is computed using the active power $$P0$$.
+- If using `PROPORTIONAL_TO_CONFORM_LOAD` then the participating elements are the loads which have a conform active power part. The participation factor is computed using the load detail extension, which specifies the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, the whole $$P0$$ is considered as a variable.
 
-**voltageRemoteControl**  
+**voltageRemoteControl**
 The `voltageRemoteControl`property is an optional property that defines if the remote control for voltage controllers has to be modeled. The default value is false.
 
 ### Hades2 configuration
