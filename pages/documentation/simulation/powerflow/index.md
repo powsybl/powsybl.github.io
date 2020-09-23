@@ -12,8 +12,7 @@ latex: true
 The power flow is a numerical analysis of the flow of electric power in an interconnected system, where that system is considered to be in normal steady-state operation.
 Power-flow or load-flow studies are important for planning future expansion of power systems as well as in determining the best operation of existing systems.
 The principal information obtained from the power-flow study is the magnitude and phase angle of the voltage at each bus, and the real and reactive power flowing in each line.
-In this page we'll go into some details about what are the inputs and outputs of a load flow simulatio, what is expected from a power flow result, how the validation feature of PowSyBl works, what power flow implementations
-are compatible with PowSyBl, and how to configure PowSyBl for the different implementations.
+In this page we'll go into some details about what are the inputs and outputs of a load flow simulation, what is expected from a power flow result, how the validation feature of PowSyBl works, what power flow implementations are compatible with PowSyBl, and how to configure PowSyBl for the different implementations.
 
 ## Inputs
 
@@ -237,32 +236,36 @@ The default values of all the optional properties are read from the [load-flow-d
 module, defined in the configuration file.
 
 ### Open LoadFlow configuration
-Once you have chosen OpenLoadFlow as a load flow implementation, the PowSyBl artifact you have to use is `powsybl-open-loadflow` within the groudId `com.powsybl`. The last release version is available [here](https://github.com/powsybl/powsybl-open-loadflow/releases).
+Once you have chosen OpenLoadFlow as a load flow implementation, you have to add the `com.powsybl:powsybl-open-loadflow` dependency to your project.
+The latest release is available [here](https://github.com/powsybl/powsybl-open-loadflow/releases).
 
 Then, you need to configure several specific parameters:
 
-**dc**
-The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is false.
+**dc**  
+The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is `false`.
 
-**lowImpedanceBranchMode**
+**lowImpedanceBranchMode**  
 The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines (when $$Z$$ is less than the $$10^{-8}$$ per-unit threshold). Two options are available:
 - Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider a low impedance line has $$R$$ and $$X$$ equal to zero.
 - Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider a low impedance line with a small value equal to the previously given threshold.
 
-**distributedSlack**
-The `distributedSlack` property is an optional property that defines if you want to distribute the active power mismatch over the network or not. The defaut value is true.
+**distributedSlack**  
+The `distributedSlack` property is an optional property that defines if the active power mismatch is distributed over the network or not. The default value is `true`.
 
-**throwsExceptionInCaseOfSlackDistributionFailure**
+**throwsExceptionInCaseOfSlackDistributionFailure**  
 The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure. This could happen in small synchronous component without enough generators or loads. In that case, the remaining active power mismatch remains on the selected slack bus.
 
-**balanceType**
-The `balanceType` property is an optional property that defines, if `distributedSlack` parameter is set to true, how to manage the distribution. Several algorithms are supported. All algorithms follow the same scheme: only some elements participate in the slack distribution, with a given participation factor. Three options are available:
-- If using `PROPORTIONAL_TO_GENERATION_P_MAX` then the participating elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is 4. If present, the simulator uses the droop of the generator located in extension active power control. This option is the default one.
+**balanceType**  
+The `balanceType` property is an optional property that defines, if `distributedSlack` parameter is set to true, how to manage the distribution. Several algorithms are supported. All algorithms follow the same scheme: only some elements are participating in the slack distribution, with a given participation factor. Three options are available:
+- If using `PROPORTIONAL_TO_GENERATION_P_MAX` then the participating elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension](). This option is the default one.
 - If using `PROPORTIONAL_TO_LOAD` then the participating elements are the loads. The participation factor is computed using the active power $$P0$$.
-- If using `PROPORTIONAL_TO_CONFORM_LOAD` then the participating elements are the loads which have a conform active power part. The participation factor is computed using the load detail extension, which specifies the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, the whole $$P0$$ is considered as a variable.
+- If using `PROPORTIONAL_TO_CONFORM_LOAD` then the participating elements are the loads which have a conform active power part. The participation factor is computed using the [load detail extension](), which specifies the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, the whole $$P0$$ is considered as a variable.
 
-**voltageRemoteControl**
-The `voltageRemoteControl`property is an optional property that defines if the remote control for voltage controllers has to be modeled. The default value is false.
+**voltageRemoteControl**  
+The `voltageRemoteControl`property is an optional property that defines if the remote control for voltage controllers has to be modeled. The default value is `false`.
+
+#### Example
+<span class="color: red">provide an JSON example of loadflow configuration file for OpenLF, based on the example above</span>
 
 ### Hades2 configuration
 Once you have chosen Hades2 as a load flow implementation, you have to provide the path to your Hades2
@@ -272,7 +275,7 @@ hades2:
     homeDir: <PATH_TO_HADES_2>
 ```
 In this section, you may also choose the option `debug: true` to tell PowSyBl not to erase the
-temporary folder created by Hades2 for the calculation. Thismakes it possible to
+temporary folder created by Hades2 for the calculation. This makes it possible to
 check what happened on the Hades2 side for debugging purposes.
 
 Then, you need to configure the load flow calculation itself, because the
