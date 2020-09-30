@@ -63,7 +63,7 @@ The configuration for a simulator consists of several modules:
 
 Regarding the configuration for the simulator choice, the standard in PowSyBl is to proceed as follows:
 - the module name is based on the utility class name: for example `dynamic-simulation` or `load-flow`
-- in that module, the property to be defined to select the implementation is named: `default-impl-name` (see for example the [load flow configuration](../../simulation/powerflow.md#configuration)
+- in that module, the property to be defined to select the implementation is named: `default-impl-name` (see for example the [load flow configuration](../../simulation/powerflow/index.md#configuration)
 
 ### Simulator configuration
 
