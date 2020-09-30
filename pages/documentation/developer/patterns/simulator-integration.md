@@ -32,11 +32,11 @@ simulations a `DynamicSimulationProvider` interface exists.
 These interfaces inherit from the `Versionable` and the `PlatformConfigNamedProvider` interfaces, and provide two methods:
 - `getName` (inherited from `Versionable`): returns the implementation name, which has to be the one given in the configuration
 - `getVersion` (inherited from `Versionable`): returns the version of the simulator, which may be used to check that the binary for the simulator and the integration code in PowSyBl are compatible
-- `runAsync`: the main method, to launch the simulation
+- `run`: the main method, to launch the simulation
 
 ## Implementation
 
-For each simulator, it is then necessary to implement the `getName`, `getVersion` and `runAsync` methods.
+For each simulator, it is then necessary to implement the `getName`, `getVersion` and `run` methods.
 For example, for load flow simulations, some existing implementations are `OpenLoadFlowProvider` and `Hades2Provider`, and for time-domain simulations the `DynawoProvider` exists.
 
 **Remarks**:
