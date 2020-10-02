@@ -164,7 +164,7 @@ Then, set the following general Hades2 configuration parameters:
 hades2:
     homeDir: <PATH_TO_HADES2>
 ```
-where the path to Hades2 should point to your installation directory. It is something of the kind `<PATH_TO_ROOT_DIRECTORY/hades2-V6.4.0.1.1/>`, where the path to the root directory points to where you extracted the Hades2 distribution, and the version of Hades2 will vary depending on your installation.
+where the path to Hades2 should point to your installation directory. It is something of the kind `<PATH_TO_ROOT_DIRECTORY/hades2-V6.6.0.1/>`, where the path to the root directory points to where you extracted the Hades2 distribution, and the version of Hades2 will vary depending on your installation.
 
 In order to configure the sensitivity analysis parameters, we need to fill also two sections relative 
 to the loadflow calculations:
@@ -184,6 +184,7 @@ Some specific sensitivity parameters should also be set. Check the
 for more information about the parameters:
 ```yaml
 hades2-default-sensitivity-parameters:
+    computeInitialLoadflow: true
     computeSensitivityToPsts: true
     computeSensitivityToInjections: false
     resultsThreshold: 0
@@ -246,10 +247,10 @@ In this provider, we first define the variable of interest: here the branch flow
 
 Now the sensitivity inputs are prepared, we can run a sensitivity analysis. This is done in the following way:
 ```java
-SensitivityAnalysisResults sensiResults = SensitivityAnalysis.run(network, factorsProvider);
+SensitivityAnalysisResults sensiResults = SensitivityAnalysis.run(network, factorsProvider, new EmptyContingencyListProvider());
 ```
-When no variants are explicitely specified, the analysis will be performed on network working variant.
-Here we directly load the sensitivity analysis parameters from the YML configuration file in the resources.
+When no variants are explicitly specified, the analysis will be performed on network working variant.
+Here we directly load the sensitivity analysis parameters from the YML configuration file in the resources. We also pass an `EmptyContingencyListProvider` to run a simulation without contingencies.
 
 ## Output the results in the terminal
 
@@ -264,21 +265,15 @@ The values of the four factors are expressed in MW/Â°, which means that for a 1Â
 ## Output the results in a JSON file
 
 It is also possible to output the results to a JSON file. First we will define the path to the file
-where we want to write the results, and if the file does not exist we'll create it:
+where we want to write the results. Here the result files will be stored in the `target` folder.
 ```java
-Path jsonSensiResultPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_result.json").getPath());
-File jsonSensiResultFile = new File(jsonSensiResultPath.toString());
-if (!jsonSensiResultFile.exists()) {
-    boolean fileCreated = jsonSensiResultFile.createNewFile();
-    if (!fileCreated) {
-        throw new IOException("Unable to create the result file");
-    }
-}
+Path resultsPath = networkPath.getParent().getParent();
+Path jsonSensiResultPath = resultsPath.resolve("sensi_result.json");
 ```
 Then, we can export the results to that file in JSON format:
 ```java
 SensitivityAnalysisResultExporter jsonExporter = new JsonSensitivityAnalysisResultExporter();
-try (FileOutputStream os = new FileOutputStream(jsonSensiResultFile.toString())) {
+try (OutputStream os = Files.newOutputStream(jsonSensiResultPath)) {
     jsonExporter.export(sensiResults, new OutputStreamWriter(os));
 } catch (IOException e) {
     throw new UncheckedIOException(e);
@@ -346,21 +341,11 @@ SensitivityAnalysisResults systematicSensiResults = SensitivityAnalysis.run(netw
 
 ## Output the results to a CSV file
 
-First, we'll create the file if it does not exist yet:
+Finally, we can export the results in CSV format:
 ```java
-Path csvResultPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_syst_result.json").getPath());
-File csvResultFile = new File(csvResultPath.toString());
-if (!csvResultFile.exists()) {
-  boolean fileCreated = csvResultFile.createNewFile();
-  if (!fileCreated) {
-    throw new IOException("Unable to create the systematic sensi result file");
-  }
-}
-```
-Then, we can export the results in CSV format:
-```java
+Path csvResultPath = resultsPath.resolve("sensi_syst_result.csv");
 SensitivityAnalysisResultExporter csvExporter = new CsvSensitivityAnalysisResultExporter();
-try (FileOutputStream os = new FileOutputStream(csvResultFile.toString())) {
+try (OutputStream os = Files.newOutputStream(csvResultPath)) {
     csvExporter.export(systematicSensiResults, new OutputStreamWriter(os));
 } catch (IOException e) {
     throw new UncheckedIOException(e);
