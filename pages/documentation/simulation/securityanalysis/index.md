@@ -22,7 +22,7 @@ The first input of the security analysis is a network. As this simulation is bas
 ### Contingencies
 The security analysis may also take, optionally, a list of contingencies as an input. When contingencies are provided, the violations are detected on the network at state N, but also after the application of each contingency. At the moment, the only way to provide contingencies is to use the [Contingency Domain Specific Language](contingency-dsl.md), written in Groovy.
 
-At the moment, it is possible to trigger generators, static VAR compensators, shunts, power lines or two windings transformers, HVDC lines and busbar sections. Equipments can be triggered one at a time (N-1 contingency) or several at a time (N-K contingency). Busbar contingency are special N-K contingency as it triggers all the equipments connected to a given busbar section.
+At the moment, it is possible to trigger generators, static VAR compensators, shunts, power lines or two windings transformers, HVDC lines, busbar sections and dangling lines. Equipments can be triggered one at a time (N-1 contingency) or several at a time (N-K contingency). Busbar contingency are special N-K contingency as it triggers all the equipments connected to a given busbar section.
 
 ### Remedial actions
 Remedial actions are actions that are applied automatically when exploitation rules are violated. For example, this is used to model automatons that can open [switches](../../grid/model/index.md#nb-switch) or change the tap position of a [phase tap changer](../../grid/model/index.md#phase-tap-changer). The remedial actions should be provided using the [Action Domain Specific Language](action-dsl.md) written in Groovy.
