@@ -5,7 +5,7 @@ This page shortly describes each repository of the [PowSyBl organization](https:
 ## Java libraries
 
 ### [powsybl-core](powsybl-core.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-core.svg)](https://github.com/powsybl/powsybl-core/releases/)
-This [repository](https://github.com/powsybl/powsybl-core) provides the core feature of the PowSyBl framework such as the grid modelling, the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity computation, dynamic simulation...).
+This [repository](https://github.com/powsybl/powsybl-core) provides the core feature of the PowSyBl framework such as the grid modelling, the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity analysis, dynamic simulation...).
 
 **Reviewers:** [annetill](https://github.com/annetill), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia), [zamarrenolm](https://github.com/zamarrenolm)
 **Committers:** [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)

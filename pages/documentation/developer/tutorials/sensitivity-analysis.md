@@ -68,8 +68,8 @@ Create a new Maven's `pom.xml` file in `sensitivity/initial` with the following 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>3.5.0</powsybl.core.version>
-        <powsybl.rte-core.version>2.12.0</powsybl.rte-core.version>
+        <powsybl.core.version>3.7.0</powsybl.core.version>
+        <powsybl.rte-core.version>2.14.0</powsybl.rte-core.version>
     </properties>
 </project>
 ```
@@ -246,7 +246,7 @@ In this provider, we first define the variable of interest: here the branch flow
 
 Now the sensitivity inputs are prepared, we can run a sensitivity analysis. This is done in the following way:
 ```java
-SensitivityAnalysisResults sensiResults = SensitivityAnalysis.find().run(network, factorsProvider);
+SensitivityAnalysisResults sensiResults = SensitivityAnalysis.run(network, factorsProvider);
 ```
 When no variants are explicitely specified, the analysis will be performed on network working variant.
 Here we directly load the sensitivity analysis parameters from the YML configuration file in the resources.
@@ -341,8 +341,7 @@ We first create sensitivity analysis parameters by loading the YML configuration
 
 We can now run all the sensitivity analyses at once, through:
 ```java
-SensitivityAnalysisResults systematicSensiResults = SensitivityAnalysis.find().run(network,
-      jsonFactorsProvider, contingenciesProvider, params);
+SensitivityAnalysisResults systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingenciesProvider, params);
 ```
 
 ## Output the results to a CSV file

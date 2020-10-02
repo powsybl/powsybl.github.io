@@ -2,17 +2,18 @@
 layout: default
 ---
 
-# iTools sensitivity-computation
+# iTools sensitivity-analysis
 
-The `sensitivity-computation` command is used to run a [sensitivity computation](../../simulation/sensitivity/index.md) on a network. At the end of the simulation the results are printed or exported to a file.
+The `sensitivity-analysis` command is used to run a [sensitivity analysis](../../simulation/sensitivity/index.md) on a network. At the end of the simulation the results are printed or exported to a file.
 
 ## Usage
 ```
-$> itools sensitivity-computation --help
-usage: itools [OPTIONS] sensitivity-computation --case-file <FILE>
+$> itools sensitivity-analysis --help
+usage: itools [OPTIONS] sensitivity-analysis --case-file <FILE>
        [--contingencies-file <FILE>] --factors-file <FILE> [--help] [-I
        <property=value>] [--import-parameters <IMPORT_PARAMETERS>]
-       [--output-file <FILE>] [--output-format <FORMAT>]
+       [--output-file <FILE>] [--output-format <FORMAT>] [--parameters-file
+       <FILE>]
 
 Available options are:
     --config-name <CONFIG_NAME>   Override configuration file name
@@ -26,9 +27,11 @@ Available arguments are:
  -I <property=value>                          use value for given importer
                                               parameter
     --import-parameters <IMPORT_PARAMETERS>   the importer configuation file
-    --output-file <FILE>                      sensitivity computation results
+    --output-file <FILE>                      sensitivity analysis results
                                               output path
     --output-format <FORMAT>                  the output format [CSV, JSON]
+    --parameters-file <FILE>                  sensitivity analysis parameters as
+                                              JSON file
 ```
 
 ### Required arguments
@@ -37,14 +40,12 @@ Available arguments are:
 This option defines the path of the case file on which the power flow simulation is run. The [supported formats](../../index.html#grid-formats) depend on the execution class path.
 
 **\-\-factors-file**  
-This option defines the path of the sensitivity factors file.
-<span style="color: red">TODO</span>: quels formats???
-
+This option defines the path of the sensitivity factors file. At the moment, only JSON files are supported.
 
 ### Optional arguments
 
 **\-\-contingencies-file**  
-<span style="color: red">TODO</span>
+This option defines the path of the contingencies files. If this parameter is not set, the security violations are checked on the base state only. This file is a groovy script that respects the [contingency DSL](../../simulation/securityanalysis/contingency-dsl.md) syntax.
 
 **\-\-import-parameters**  
 This option defines the path of the [importer](../../glossary.md#importer)'s configuration file. It's possible to overload one or many parameters using the `-I property=value` syntax. The list of supported properties depends on the [input format](../../index.html#grid-formats).
@@ -71,11 +72,11 @@ This option defines the format of the output file. This option is required if th
 <span style="color: red">TODO</span>
 
 ## Examples
-The following example shows how to run a sensitivity computation, using the default configuration:
+The following example shows how to run a sensitivity analysis, using the default configuration:
 ```shell
-$> itools sensitivity-computation --case-file case.xiidm --factors-file factors.json
+$> itools sensitivity-analysis --case-file case.xiidm --factors-file factors.json
 Loading network 'case.xiidm'
-sensitivity computation results:
+sensitivity analysis results:
 +--------------------+--------------------+---------------------+---------------------+------------------+------------------+------------------+
 | VariableId         | VariableName       | FunctionId          | FunctionName        | VariableRefValue | FunctionRefValue | SensitivityValue |
 +--------------------+--------------------+---------------------+---------------------+------------------+------------------+------------------+
@@ -88,34 +89,30 @@ sensitivity computation results:
 ***
 
 # Configuration
-To run a sensitivity computation, one has to configure the the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
-module to indicate the implementations to use for:
-- the `com.powsybl.sensitivity.SensitivityComputation` to use, by setting the `SensitivityComputationFactory` property
-- the `com.powsybl.sensitivity.SensitivityFactorsProvider` to use, by setting the `SensitivityFactorsProviderFactory` property
+To run a sensitivity analysis, one has to configure the the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
+module to indicate the implementations to use for parsing the factors file. At the moment, only JSON format is supported.
 
 ## YAML version
 ```yaml
 componentDefaultConfig:
-    SensitivityComputationFactory: com.powsybl.sensitivity.mock.SensitivityComputationFactoryMock
     SensitivityFactorsProviderFactory: com.powsybl.sensitivity.JsonSensitivityFactorsProviderFactory
 ```
 ### XML version
 ```xml
 <componentDefaultConfig>
-    <SensitivityComputationFactory>com.powsybl.sensitivity.mock.SensitivityComputationFactoryMock</SensitivityComputationFactory>
     <SensitivityFactorsProviderFactory>com.powsybl.sensitivity.JsonSensitivityFactorsProviderFactory</SensitivityFactorsProviderFactory>
 </componentDefaultConfig>
 ```
-*Note*: different sensitivity computation implementations might require specific configurations, in additional config file's sections.
+*Note*: different sensitivity analysis implementations might require specific configurations, in additional config file's sections.
 
 To learn more about sensitivity factors or available `SensitivityFactorsProvider` read this [documentation](../sensitivity/index.md) page.
 
 # Maven configuration
-To use the `sensitivity-computation` command, add the following dependencies to the `pom.xml` file:
+To use the `sensitivity-analysis` command, add the following dependencies to the `pom.xml` file:
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-sensitivity-api</artifactId>
+    <artifactId>powsybl-sensitivity-analysis-api</artifactId>
     <version>${powsybl.version}</version>
 </dependency>
 ```
