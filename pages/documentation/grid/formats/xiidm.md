@@ -73,6 +73,9 @@ The `iidm.export.xml.throw-exception-if-extension-not-found` property is an opti
 **iidm.export.xml.extensions**  
 The `iidm.export.xml.extensions` property is an optional property that defines the list of extensions that we will be exported by the XIIDM exporter. By default all extensions will be exported.
 
+**iidm.export.xml.version**  
+The `iidm.export.xml.version` property is an optional property that defines the XIIDM version to use for the exported file. If the chosen version is not compatible with the network to write, an error occurs. This is typically the case when an attribute appeared in a version more recent than the target one, and its value is not the default one (importing back the file will lead to a different network). By default, the export is done in the more recent version that is supported.
+
 #### Removed properties
 
 **iidm.export.xml.export-mode**  
