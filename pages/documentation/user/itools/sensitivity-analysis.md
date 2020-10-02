@@ -89,7 +89,7 @@ sensitivity analysis results:
 ***
 
 # Configuration
-To run a sensitivity analysis, one has to configure the the [componentDefaultConfig](../configuration/modules/componentDefaultConfig.md)
+To run a sensitivity analysis, one has to configure the the [componentDefaultConfig](../configuration/componentDefaultConfig.md)
 module to indicate the implementations to use for parsing the factors file. At the moment, only JSON format is supported.
 
 ## YAML version
@@ -105,7 +105,7 @@ componentDefaultConfig:
 ```
 *Note*: different sensitivity analysis implementations might require specific configurations, in additional config file's sections.
 
-To learn more about sensitivity factors or available `SensitivityFactorsProvider` read this [documentation](../sensitivity/index.md) page.
+To learn more about sensitivity factors or available `SensitivityFactorsProvider` read this [documentation](../../simulation/sensitivity/index.md) page.
 
 # Maven configuration
 To use the `sensitivity-analysis` command, add the following dependencies to the `pom.xml` file:

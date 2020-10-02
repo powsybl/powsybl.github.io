@@ -392,4 +392,4 @@ Finally, we've also explained how to check what Hades2 itself generated during t
 
 ## Going further
 The following links could also be useful:
-- [Run a sensitivity analysis through an iTools command](../../user/itools/sensitivity-computation.md): Learn how to perform a sensitivity analysis from the command line 
+- [Run a sensitivity analysis through an iTools command](../../user/itools/sensitivity-analysis.md): Learn how to perform a sensitivity analysis from the command line 
