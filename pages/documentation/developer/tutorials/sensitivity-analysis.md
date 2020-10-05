@@ -247,7 +247,7 @@ In this provider, we first define the variable of interest: here the branch flow
 
 Now the sensitivity inputs are prepared, we can run a sensitivity analysis. This is done in the following way:
 ```java
-SensitivityAnalysisResults sensiResults = SensitivityAnalysis.run(network, factorsProvider, new EmptyContingencyListProvider());
+SensitivityAnalysisResult sensiResults = SensitivityAnalysis.run(network, factorsProvider, new EmptyContingencyListProvider());
 ```
 When no variants are explicitly specified, the analysis will be performed on network working variant.
 Here we directly load the sensitivity analysis parameters from the YML configuration file in the resources. We also pass an `EmptyContingencyListProvider` to run a simulation without contingencies.
@@ -336,7 +336,7 @@ We first create sensitivity analysis parameters by loading the YML configuration
 
 We can now run all the sensitivity analyses at once, through:
 ```java
-SensitivityAnalysisResults systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingenciesProvider, params);
+SensitivityAnalysisResult systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingenciesProvider, params);
 ```
 
 ## Output the results to a CSV file
