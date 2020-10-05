@@ -59,7 +59,7 @@ applications on top of the framework.
 The PowSyBl project contains of a set of Java libraries that cover all the abovementioned features:
 
 - [Core](../documentation/developer/repositories/powsybl-core.md): provides the core features of the PowSyBl framework such as the grid modelling, 
-the support of several data exchange format ([CGMES](../documentation/grid/formats/cim-cgmes.md), [UCTE](../documentation/grid/formats/ucte-def.md)...), computation APIs ([power flow](../documentation/simulation/powerflow), [security analysis](../documentation/simulation/securityanalysis), [sensitivity computation](../documentation/simulation/sensitivity), [dynamic simulation](../documentation/simulation/timedomain), etc.).
+the support of several data exchange format ([CGMES](../documentation/grid/formats/cim-cgmes.md), [UCTE](../documentation/grid/formats/ucte-def.md)...), computation APIs ([power flow](../documentation/simulation/powerflow), [security analysis](../documentation/simulation/securityanalysis), [sensitivity analysis](../documentation/simulation/sensitivity), [dynamic simulation](../documentation/simulation/timedomain), etc.).
 
 - [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power
 flow simulation.

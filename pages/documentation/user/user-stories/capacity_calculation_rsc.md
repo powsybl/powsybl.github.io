@@ -28,9 +28,9 @@ it contains a contingencies list, the constraints to monitor and the available r
 
 In this process, we also need two computation engines:
 - A loadflow computation is launched before and after each contingency to identify overloads.
-- A sensitivity computation: for each border, a sensitivity analysis determines the impact on the flow of a small variation of the PST angle, and that for all PSTs, and determines the impact on the flow of a small variation of the generation, and that for all generators.
+- A sensitivity analysis: for each border, a sensitivity analysis determines the impact on the flow of a small variation of the PST angle, and that for all PSTs, and determines the impact on the flow of a small variation of the generation, and that for all generators.
 
-A cost function is built from the previous results of the sensitivity computation. It is then sent to a solver to find the remedial actions avoiding constraints at a minimal cost.
+A cost function is built from the previous results of the sensitivity analysis. It is then sent to a solver to find the remedial actions avoiding constraints at a minimal cost.
 
 A security analysis is performed at the end of the process to validate the set of remedial actions found by the optimization.
 
@@ -94,7 +94,7 @@ LoadFlowResult result = LoadFlow.run(network, loadFlowParameters);
 <p style="text-align:center">
   <img src="img/capacity_calculation_rsc/Compute_Sensitivity.svg"/>
 </p>
-The sensitivity computation module is dedicated to compute the linearized impact of small network variations on the state variables of some elements. The sensivity computation is fully described [here](../sensitivity/index.md). In this user story, we use this module to compute all coefficients of the cost function. Since there is no fully functional open source sensitivity computation module integrated to PowSyBl for the time being, we use Hades2 for the purpose of the tutorial, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
+The sensitivity analysis module is dedicated to compute the linearized impact of small network variations on the state variables of some elements. The sensivity computation is fully described [here](../sensitivity/index.md). In this user story, we use this module to compute all coefficients of the cost function. Since there is no fully functional open source sensitivity analysis module integrated to PowSyBl for the time being, we use Hades2 for the purpose of the tutorial, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
 
 <br />
 
