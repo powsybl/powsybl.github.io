@@ -207,21 +207,12 @@ The parameters may also be overridden with a JSON file, in which case the config
 ```
 
 ### Available parameters
-**noGeneratorReactiveLimits**  
-The `noGeneratorReactiveLimits` property is an optional property that defines whether the load-flow is allowed to find a
-setpoint value outside the reactive limits of a generator or not.
-
-**phaseShifterRegulationOn**  
-The `phaseShifterRegulationOn` property is an optional property that defines whether the load-flow is allowed to change taps
-of a phase tap changer or not.
 
 **specificCompatibility**  
-The `specificCompatibility` property is an optional property that defines whether the load-flow runs in legacy mode
-(implementation specific) or not.
+The `specificCompatibility` property is an optional property that defines whether the shunt admittance is split at each side of the serie impedance for lines. The default value is false.
 
-**transformerVoltageControlOn**  
-The `transformerVoltageControlOn` property is an optional property that defines whether the load-flow is allowed to change
-taps of a ratio tap changer or not.
+**twtSplitShuntAdmittance**  
+The `twtSplitShuntAdmittance` property is an optional property that defines whether the shunt admittance is split at each side of the serie impedance for transformers. The default value is false.
 
 **voltageInitMode**  
 The `voltageInitMode` property is an optional property that defines the policy used by the load-flow to initialize the
@@ -229,6 +220,37 @@ voltage values. The default value for this property is `UNIFORM_VALUES`. The ava
 - `UNIFORM_VALUES`: `v=1pu`, $$\theta=0$$
 - `PREVIOUS_VALUES`: use previous computed value from the network
 - `DC_VALUES`: preprocessing to compute DC angles
+
+**distributedSlack**  
+The `distributedSlack` property is an optional property that defines if the active power mismatch is distributed over the network or not. The default value is true.
+
+**balanceType**  
+The `balanceType` property is an optional property that defines, if `distributedSlack` parameter is set to true, how to manage the distribution. Several algorithms are supported. All algorithms follow the same scheme: only some elements are participating in the slack distribution, with a given participation factor. Three options are available:
+- If using `PROPORTIONAL_TO_GENERATION_P_MAX` then the participating elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension](). This option is the default one.
+- If using `PROPORTIONAL_TO_GENERATION_P` then the participating elements are the generators. The participation factor is computed using the active power set point $$TargetP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension](). This option is the default one.
+- If using `PROPORTIONAL_TO_LOAD` then the participating elements are the loads. The participation factor is computed using the active power $$P0$$.
+- If using `PROPORTIONAL_TO_CONFORM_LOAD` then the participating elements are the loads which have a conform active power part. The participation factor is computed using the [load detail extension](), which specifies the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, the whole $$P0$$ is considered as a variable.
+
+**readSlackBus**  
+The `readSlackBus` is an optional property that says if the slack bus has to be selected in the network through the [slack terminal extension](). The default value is false.
+
+**writeSlackBus**   
+The `writeSlackBus` is an optional property that says if the slack bus has to be written in the network using the [slack terminal extension]() after a load-flow computation. The default value is false.
+
+**noGeneratorReactiveLimits**  
+The `noGeneratorReactiveLimits` property is an optional property that defines whether the load-flow is allowed to find a
+setpoint value outside the reactive limits of a generator or not. The default value is false.
+
+**phaseShifterRegulationOn**  
+The `phaseShifterRegulationOn` property is an optional property that defines whether the load-flow is allowed to change taps
+of a phase tap changer or not. The default value is false.
+
+**transformerVoltageControlOn**  
+The `transformerVoltageControlOn` property is an optional property that defines whether the load-flow is allowed to change
+taps of a ratio tap changer or not. The default value is false.
+
+**simulShunt**  
+The `simulShunt` property is an optional property that defines wheter the load-flow is allowed to to change sections of a shunt compensator with multiple sections or not. The default value is false.
 
 
 ### Default configuration
@@ -249,20 +271,36 @@ The `lowImpedanceBranchMode` property is an optional property that defines how t
 - Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider a low impedance line has $$R$$ and $$X$$ equal to zero.
 - Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider a low impedance line with a small value equal to the previously given threshold.
 
-**distributedSlack**  
-The `distributedSlack` property is an optional property that defines if the active power mismatch is distributed over the network or not. The default value is `true`.
-
 **throwsExceptionInCaseOfSlackDistributionFailure**  
 The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure. This could happen in small synchronous component without enough generators or loads. In that case, the remaining active power mismatch remains on the selected slack bus.
 
-**balanceType**  
-The `balanceType` property is an optional property that defines, if `distributedSlack` parameter is set to true, how to manage the distribution. Several algorithms are supported. All algorithms follow the same scheme: only some elements are participating in the slack distribution, with a given participation factor. Three options are available:
-- If using `PROPORTIONAL_TO_GENERATION_P_MAX` then the participating elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension](). This option is the default one.
-- If using `PROPORTIONAL_TO_LOAD` then the participating elements are the loads. The participation factor is computed using the active power $$P0$$.
-- If using `PROPORTIONAL_TO_CONFORM_LOAD` then the participating elements are the loads which have a conform active power part. The participation factor is computed using the [load detail extension](), which specifies the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, the whole $$P0$$ is considered as a variable.
-
 **voltageRemoteControl**  
-The `voltageRemoteControl`property is an optional property that defines if the remote control for voltage controllers has to be modeled. The default value is `false`.
+The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled. The default value is `false`.
+
+**slackBusSelectorType**   
+The `slackBusSelectorType` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
+- `First` if you want to choose the first bus of all the network buses.  
+- `Name` if you want to choose a specific bus as slack bus. In that case, the other property `nameSlackBusSelectorBusId` is required.
+- `MostMeshed` if you want to choose the most meshed bus as slack bus. This option is required for computation on several computed component.
+
+Note that if you want to choose the slack bus that is defined inside the network with a slackTerminal extension, you have to use the `LoadflowParameters`
+
+**nameSlackBusSelectorBusId**  
+The `nameSlackBusSelectorBusId` property is a required property if you choose `Name` for property `slackBusSelectorType`. It defines the bus chosen for slack distribution by its identifiable. It is a String and there is no default value.
+
+See below an extract of a config file that could help:
+
+```yaml
+open-loadflow-default-parameters:
+  dc: false
+  lowImpedanceBranchMode: REPLACE_BY_ZERO_IMPEDANCE_LINE
+  distributedSlack: true
+  throwsExceptionInCaseOfSlackDistributionFailure: false
+  balanceType: PROPORTIONAL_TO_LOAD
+  voltageRemoteControl: false
+  slackBusSelectorType: Name
+  nameSlackBusSelectorBusId: Bus3_0
+```
 
 #### Example
 <span class="color: red">provide an JSON example of loadflow configuration file for OpenLF, based on the example above</span>
