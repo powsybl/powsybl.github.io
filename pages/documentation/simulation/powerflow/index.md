@@ -176,12 +176,12 @@ install Hades2 and use it with PowSyBl.
 ## Configuration
 You first need to choose which implementation to use in your configuration file:
 ```yaml
-loadflow:
+load-flow:
   default-impl-name: "hades2"
 ```
 or
 ```yaml
-loadflow:
+load-flow:
   default-impl-name: "OpenLoadFlow"
 ```
 Then, configure some generic parameters for all load flow implementations:

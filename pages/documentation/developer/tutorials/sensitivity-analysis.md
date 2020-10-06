@@ -147,7 +147,7 @@ We have configured this tutorial so as to use a locally defined `config.yml` fil
 Edit the file named `config.yml` at the location `sensitivity/initial/src/main/resources`.
 Start the configuration by writing:
 ```yaml
-loadflow:
+load-flow:
   default-impl-name: "hades2"
 ```
 In this way, PowSyBl will be set to use the Hades2 implementation of the loadflow and sensitivity analysis.
