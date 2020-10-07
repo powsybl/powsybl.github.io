@@ -112,7 +112,7 @@ install and configure PowSyBl to use the load flow of Hades2.
 ## Configuration
 To use Hades2 and perform sensitivity analyses, you first need to add these lines to your YML configuration file:
 ```yaml
-loadflow:
+load-flow:
   default-impl-name: "hades2"
 ```
 (it is actually the same configuration as for the load flow). Then, provide the path to your Hades2 installation:
