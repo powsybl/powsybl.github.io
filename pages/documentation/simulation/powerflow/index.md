@@ -20,15 +20,18 @@ The only input for a power flow simulation is a network.
 
 ## Outputs
 
-The power flow simulation output consists of a network, which has been modified based on the simulation results, and some metrics regarding the computation: whether or not it has converged, in how many iterations. Depending on the loadflow implementation the content of these metrics may vary.
-In the network, the modified variables are the active and reactive power at the terminals, and the voltage and angle at all buses.
-If the load flow calculation has converged, PowSyBl also identifies the slack bus(es) used by the simulator: the bus at which the power balance was done for each synchronous component.
-
+The power flow simulation outputs consists of: 
+ - A network, which has been modified based on the simulation results. The modified variables are the active and reactive power at the terminals, the voltage and angle at all buses and taps.
+ - A global status which is equal to `true` if at least one of the component of the network has converged, false otherwise.
+ - Detailed results per synchronous component: a convergence status, the number of iterations (could be equal to `-1` if not relevant for a specific implementation), the selected slack bus (the bus at which the power balance has been done) and active power mismatch at slack bus.
+ - Some metrics regarding the computation. Depending on the load flow implementation the content of these metrics may vary.
+ - Logs in a simulator specific format.
+ 
 ## Validation
 
 ### Expected results
 
-A load-flow result is considered *acceptable* if it describes a feasible steady-state of a power system given its physics and its logics.
+A load flow result is considered *acceptable* if it describes a feasible steady-state of a power system given its physics and its logics.
 More practically, generations of practitioners have set quasi-standard ways to describe them that makes it possible to define precise rules.
 They are described below for the different elements of the network.
 
@@ -215,7 +218,7 @@ For example, Hades2 implementation uses this parameter to define whether the shu
 The `twtSplitShuntAdmittance` property is an optional property that defines whether the shunt admittance is split at each side of the serie impedance for transformers. The default value is `false`.
 
 **voltageInitMode**  
-The `voltageInitMode` property is an optional property that defines the policy used by the load-flow to initialize the
+The `voltageInitMode` property is an optional property that defines the policy used by the load flow to initialize the
 voltage values. The default value for this property is `UNIFORM_VALUES`. The available values are:
 - `UNIFORM_VALUES`: `v=1pu`, $$\theta=0$$
 - `PREVIOUS_VALUES`: use previous computed value from the network
@@ -238,7 +241,7 @@ The `readSlackBus` is an optional property that defines if the slack bus has to 
 The default value is `false`.
 
 **writeSlackBus**   
-The `writeSlackBus` is an optional property that says if the slack bus has to be written in the network using the [slack terminal extension]() after a load-flow computation.
+The `writeSlackBus` is an optional property that says if the slack bus has to be written in the network using the [slack terminal extension]() after a load flow computation.
 The default value is `false`.
 
 **noGeneratorReactiveLimits**  
@@ -254,7 +257,7 @@ The `transformerVoltageControlOn` property is an optional property that defines 
 The default value is `false`.
 
 **simulShunt**  
-The `simulShunt` property is an optional property that defines whether the load-flow is allowed to change sections of a shunt compensator with multiple sections or not.
+The `simulShunt` property is an optional property that defines whether the load flow is allowed to change sections of a shunt compensator with multiple sections or not.
 The default value is `false`.
 
 ### Default configuration
