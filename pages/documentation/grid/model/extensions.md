@@ -64,7 +64,7 @@ svc.newExtension(VoltagePerReactivePowerControlAdder.class).withSlope(0.5).add()
 
 ## Slack terminal
 
-This extension is attached to a [voltage level](index.md#voltage-level) and is used to define the slack bus of a power flow calculation. Use this extension before a computation to force the slack bus selection. You should enabled default load flow parameter `isReadSlackBus` for that. Use this extension after a computation to attach to the network the slack bus that has be selected by the load flow engine (one by connected component). You should enabled default load flow parameter `isWriteSlackBus` for that.
+This extension is attached to a [voltage level](index.md#voltage-level) and is used to define the slack bus of a power flow calculation. Use this extension before a computation to force the slack bus selection. You should enabled default load flow parameter [`isReadSlackBus`](../simulation/powerflow/index.md#available-parameters). Use this extension after a computation to attach to the network the slack bus that has be selected by the load flow engine (one by connected component). You should enabled default load flow parameter [`isWriteSlackBus`](../simulation/powerflow/index.md#available-parameters).
 
 The slack bus is defined through the terminal of a connectable that belongs to the bus. It is totally allowed to define a disconnected terminal as slack as the connectable could be reconnected during a grid study.
 
