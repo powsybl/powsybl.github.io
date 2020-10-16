@@ -80,10 +80,16 @@ $> itools loadflow --case-file case.xiidm
 Loading network 'case.xiidm'
 loadflow results:
 +--------+-----------------------------------------------------------------------------------------+
-| Result | Metrics                                                                                 |
+| Ok     | Metrics                                                                                 |
 +--------+-----------------------------------------------------------------------------------------+
 | true   | {nbIter=4, dureeCalcul=0.001569, cause=0, contraintes=0, statut=OK, csprMarcheForcee=0} |
 +--------+-----------------------------------------------------------------------------------------+
+Components results:
++------------------+-----------+-----------------+--------------+--------------------+
+| Component number | Status    | Iteration count | Slack bus ID | Slack bus mismatch |
++------------------+-----------+-----------------+--------------+--------------------+
+| 0                | CONVERGED | 8               | BUS_0        | -0,00954794        |
++------------------+-----------+-----------------+--------------+--------------------+
 ```
 
 The following example shows how to run a power flow simulation flow, using a parameters file:
@@ -91,10 +97,16 @@ The following example shows how to run a power flow simulation flow, using a par
 $> itools loadflow --case-file case.xiidm --parameters-file loadflowparameters.json
 loadflow results:
 +--------+-----------------------------------------------------------------------------------------+
-| Result | Metrics                                                                                 |
+| Ok     | Metrics                                                                                 |
 +--------+-----------------------------------------------------------------------------------------+
 | true   | {nbIter=4, dureeCalcul=0.001569, cause=0, contraintes=0, statut=OK, csprMarcheForcee=0} |
 +--------+-----------------------------------------------------------------------------------------+
+Components results:
++------------------+-----------+-----------------+--------------+--------------------+
+| Component number | Status    | Iteration count | Slack bus ID | Slack bus mismatch |
++------------------+-----------+-----------------+--------------+--------------------+
+| 0                | CONVERGED | 8               | BUS_0        | -0,00954794        |
++------------------+-----------+-----------------+--------------+--------------------+
 ```
 
 ## See also
