@@ -278,8 +278,8 @@ calculation or not, depending of what is wanted to be shown.
 #### Static VAR Compensator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/StaticVarCompensator.html)
 
-<span style="color:red"> TODO: add a description with sign convention.</span>
-<span style="color:red"> TODO: add a sketch with the sign convention.</span>
+<span style="color:red"> TODO: add a description with sign convention.</span>  
+<span style="color:red"> TODO: add a sketch with the sign convention.</span>  
 It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
 Static VAR compensators follow a passive-sign convention:
   - Flow out from bus has positive sign.
@@ -296,9 +296,9 @@ Static VAR compensators follow a passive-sign convention:
 
 **Specifications**
 
-- $$Bmin$$ and $$Bmax$$ are the susceptance bounds of the static VAR compensator. Reactive power output of a static VAR compensator is limited by the maximum and the minimum susceptance values. The min/max reactive power of a static VAR compensator are determined by:
-$$Qmin = -Bmin \times V^2$$
-$$Qmax = -Bmax \times V^2$$
+- $$Bmin$$ and $$Bmax$$ are the susceptance bounds of the static VAR compensator. Reactive power output of a static VAR compensator is limited by the maximum and the minimum susceptance values. The min/max reactive power of a static VAR compensator are determined by:  
+$$Qmin = -Bmin \times V^2$$  
+$$Qmax = -Bmax \times V^2$$  
 where $$V$$ is the voltage of the bus that connects the static VAR compensator to the network. Even if the regulating terminal is remote, only the local voltage has to be considered to retrive the minimum and the maximum amouts of reactive power. Reactive limits can be handled in an approximative way using the nominal voltage of the connected bus.   
 - The voltage setpoint is required when the regulation mode is set to `VOLTAGE`.
 - The reactive power setpoint is required when the regulation mode is set to `REACTIVE_POWER`.

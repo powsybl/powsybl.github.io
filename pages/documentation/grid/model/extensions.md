@@ -1,20 +1,14 @@
 ---
 layout: default
-- Expliquer à quoi sert l'extension et à quel(s) type(s) d'équipements elle est attachée. Mettre des liens vers la page index.html
-- Faire un tableau avec les caractéristiques, comme ce qu'on a fait pour le modèle IIDM
-- Pour certains attributs, c'est plus simple d'écrire 2-3 phrases (cf. ce qu'on a fait dans le modele)
-- Modifier dans la page index.html, le lien inverse "Available extensions" 
-- Indiquer dans quel module se trouve l'extension (`com.powsybl:powsybl-iidm-extensions`), si elle est compatible transiant/persistant, si elle est multi-variante
-- ...
+latex: true
 ---
 
 # Grid model extensions
-<span style="color: red">TODO: expliquer ce que sont les extensions</span>
+<span style="color: red">TODO: What is an extension?</span>  
+<span style="color: red">TODO: Missing: for each extension, you should say if the extension is transiant/persistant, multi-variant</span>
 
 * TOC
 {:toc}
-
-<span style="color: red">A voir si on regroupe les extensions par type d'ouvrages, par modules..., auquel cas il faut un niveau de titre en plus</span>
 
 ## Active power control
 This extension is used to configure the participation factor of the generator, typically in the case of a loadflow computation with distributed slack enabled. This extension is attached to a [generator](index.md#generator) and to a [battery](index.md#battery).
@@ -28,6 +22,7 @@ Here is how to add an active power control extension to a generator:
 ```java
 generator.newExtension(ActivePowerControlAdder.class).withParticipate(true).withDroop(4).add();
 ```
+The extension is located in the module `com.powsybl:powsybl-iidm-extensions`. 
 
 ## Coordinated reactive control
 
@@ -42,7 +37,9 @@ Here is how to add a coordinated reactive control extension to a generator:
 generator.newExtension(CoordinatedReactiveControlAdder.class).withQPercent(40).add();
 ```
 
-Please note that the sum of the `qPercent` values of the generators coordinating a same point of the network must be 100.
+Please note that the sum of the $$qPercent$$ values of the generators coordinating a same point of the network must be 100.
+
+The extension is located in the module `com.powsybl:powsybl-iidm-extensions`.
 
 ## Voltage per reactive power control
 
@@ -62,9 +59,11 @@ Here is how to add a voltage per reactive power control extension to a static VA
 svc.newExtension(VoltagePerReactivePowerControlAdder.class).withSlope(0.5).add();
 ```
 
+The extension is located in the module `com.powsybl:powsybl-iidm-extensions`.
+
 ## Slack terminal
 
-This extension is attached to a [voltage level](index.md#voltage-level) and is used to define the slack bus of a power flow calculation. Use this extension before a computation to force the slack bus selection. You should enabled default load flow parameter [`isReadSlackBus`](../simulation/powerflow/index.md#available-parameters). Use this extension after a computation to attach to the network the slack bus that has be selected by the load flow engine (one by connected component). You should enabled default load flow parameter [`isWriteSlackBus`](../simulation/powerflow/index.md#available-parameters).
+This extension is attached to a [voltage level](index.md#voltage-level) and is used to define the slack bus of a power flow calculation. Use this extension before a computation to force the slack bus selection. You should enabled default load flow parameter [`isReadSlackBus`](../../simulation/powerflow/index.md#available-parameters). Use this extension after a computation to attach to the network the slack bus that has been selected by the load flow engine (one by connected component). You should enabled default load flow parameter [`isWriteSlackBus`](../../simulation/powerflow/index.md#available-parameters).
 
 The slack bus is defined through the terminal of a connectable that belongs to the bus. It is totally allowed to define a disconnected terminal as slack as the connectable could be reconnected during a grid study.
 
@@ -75,6 +74,8 @@ The slack bus is defined through the terminal of a connectable that belongs to t
  ```java
   SlackTerminal.attach(bus);
 ```
+
+The extension is located in the module `com.powsybl:powsybl-iidm-extensions`.
 
 ## Two windings transformer phase angle clock
 
@@ -88,6 +89,8 @@ This extension is used to model the Vector Group of a two windings transformer. 
 transformer.addExtension(TwoWindingsTransformerPhaseAngleClock.class, new TwoWindingsTransformerPhaseAngleClock(transformer, 3));
 ```
 
+The extension is located in the module `com.powsybl:powsybl-iidm-extensions`.
+
 ## Three windings transformer phase angle clock 
 
 This extension is used to model the Vector Group of a three windings transformer. The phase angle clock could be modeled at leg 2, leg 3 or both legs 2 and 3 and of a three windings transformer (network side). The voltage phase angle displacement is represented with clock hours. The valid values are 0 to 11. This extension is attached to a [three windings transformer](index.md#three-windings-transformer).
@@ -100,3 +103,5 @@ This extension is used to model the Vector Group of a three windings transformer
 ```java
 transformer.addExtension(ThreeWindingsTransformerPhaseAngleClock.class, new ThreeWindingsTransformerPhaseAngleClock(transformer, 10, 1));
 ```
+
+The extension is located in the module `com.powsybl:powsybl-iidm-extensions`.
