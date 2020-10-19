@@ -127,7 +127,7 @@ This module provides functions to check the consistency of a power flow result. 
 easiest way to use it is through the [iTools CLI](../user/itools/loadflow-validation.md).
 
 ### Contingencies
-The following artifacts are used to model contingencies. Contingencies can then be used to run security analyses with or without remedial actions, sensitivity calculation...
+The following artifacts are used to model contingencies. Contingencies can then be used to run security analyses with or without remedial actions, sensitivity analysis...
 
 **powsybl-contingency-api**  
 This module provides an API to model and create contingencies.
@@ -152,10 +152,13 @@ This module provides an API to run [security analyses with remedial actions](). 
 **powsybl-action-util**  
 This module provides a set of common remedial actions an user would like to use in his action script.
 
-### Sensitivity calculation
+### Sensitivity analysis
 
-**powsybl-sensitivity-api**  
-This module provides a common API for [sensitivity calculation](../simulation/sensitivity/index.md). You have to implement this API to use your own simulator through PowSyBl.
+**powsybl-sensitivity-analysis-api**  
+This module provides a common API for [sensitivity analysis](../simulation/sensitivity/index.md). You have to implement this API to use your own simulator through PowSyBl.
+
+**powsybl-sensitivity-api** (Deprecated)  
+This module has been replaced by `powsybl-sensitivity-analysis-api` since powsybl-core v3.7.0.
 
 ### Time domain simulation
 
