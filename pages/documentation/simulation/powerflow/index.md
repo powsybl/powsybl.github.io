@@ -173,6 +173,7 @@ The following power flow implementations are supported:
 - [Open LoadFlow](openlf.md)
 - [Hades2](https://rte-france.github.io/hades2/index.html): learn how to
 install Hades2 and use it with PowSyBl.
+- [Dynaflow](dynaflow.md)
 
 ## Configuration
 You first need to choose which implementation to use in your configuration file:
@@ -184,6 +185,11 @@ or
 ```yaml
 load-flow:
   default-impl-name: "OpenLoadFlow"
+```
+or
+```yaml
+load-flow:
+  default-impl-name: "Dynaflow"
 ```
 Then, configure some generic parameters for all load flow implementations:
 ```yaml
@@ -343,6 +349,26 @@ hades2-default-parameters:
 
 The complete list of available parameters for the Hades2 load flow is available [here](https://rte-france.github.io/hades2/configuration/ADNLoadFlowParameters.html).
 
+### Dynaflow configuration
+Once you have chosen Dynaflow as a load flow implementation, you have to provide the path to your Dynaflow
+installation:
+```yaml
+dynaflow:
+    homeDir: <PATH_TO_DYNAFLOW>
+```
+In this section, you may also choose the option `debug: true` to tell PowSyBl not to erase the temporary folder created by Dynaflow for the calculation.
+This makes it possible to check what happened on the Dynaflow side for debugging purposes.
+
+Then, you need to configure the specific simulation parameters.
+For example:
+```yaml
+dynaflow-default-parameters:
+  lccAsLoads: false
+  vscAsGenerators: false
+  svcRegulationOn: true
+```
+
+The complete list of available parameters for the Dynaflow load flow is available [here](dynaflow.md).
 ## Going further
 To go further about the power flow with PowSyBl, check the following pages:
 - [Run a power flow through an iTools command](../../user/itools/loadflow.md): Learn how to perform a power flow calculation from the command line
