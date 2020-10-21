@@ -5,82 +5,92 @@ latex: true
 
 # Time domain simulation
 
-* TOC
-{:toc}
-
-## Introduction
-
 The time domain simulation aims at capturing the transient response of the system, and not only to compute the steady state solution.
 It may or not involve the activation of events like a line disconnection for example.
+
+* TOC
+{:toc}
 
 ## Inputs
 
 The inputs of a dynamic simulation are the following:
-- a set of parameters for the simulator itself (simulation start and stop time, solver parameters, etc.)
-- a set of dynamic models to be used (for example, provided by Dynawo through their preassembled models and CPP models)
-- a set of parameters associated to each dynamic model, with carefully chosen values
 - a static network
+- a set of dynamic models provided by the simulator
+- a set of parameters associated to each dynamic model, with carefully chosen values
 - a mapping between static components of the network and dynamic models
 - optionally, a description of events occurring in the dynamic simulation (disconnection of a line, change of tap for a transformer, etc.)
+- a set of parameters for the simulator itself (simulation start and stop time, solver parameters, etc.)
+- a configuration file to configure the curves to export at the end of the simulation
+
+### Dynamic models mapping
+At the moment, the only way to associate dynamic models to static components is through a groovy script. Note that the syntax of this script is specific to each simulator:
+- [Dynawo DSL](dynawo.md#dynamic-models-dsl)
+
+### Event models mapping
+At the moment, the only way to add events to the simulation is through a groovy script. Note that the syntax of this script is specific to each simulator:
+- [Dynawo DSL](dynawo.md#event-models-dsl)
+
+### Curves configuration
+At the moment, the only way to monitor dynamic variables of the simulation in order to export curves at the end of the simulation is to provide a groovy script to the simulation. Note that the syntax of this script is specific to each simulator:
+- [Dynawo DSL](dynawo.md#curves-dsl)
 
 ## Outputs
 
 The outputs of a dynamic simulation are:
 - the updated static network (which may have been topologically modified depending on the events or automatons defined as inputs)
-- a zipped file containing the different results of the dynamic simulation :
- - some curves, asked for by the user to track the evolution of specific variables throughout the simulation
- - some aggregated data regarding constraints, like a security analysis output
- - timelines, that contain the list of events that occurred during the dynamic simulation, be them planned beforehand through events, or not
- - logs about the execution of the dynamic simulator
+- a zipped file containing the different results of the dynamic simulation:
+    - some curves, asked for by the user to track the evolution of specific variables throughout the simulation
+    - some aggregated data regarding constraints, like a security analysis output
+    - timelines, that contain the list of events that occurred during the dynamic simulation, be them planned beforehand through events, or not
+    - logs about the execution of the dynamic simulator
 
 ## Implementations
 
-At the moment the only available implementation of time domain simulation compatible with PowSyBl is the one provided by [Dynawo](dynawo.md).
+At the moment, the only available implementation of time domain simulation compatible with PowSyBl is the one provided by [Dynawo](dynawo.md).
 
 ## Configuration
 
-The default dynamic simulator can be configured in the `config.yml` file:
-```yml
+You first need to choose which implementation to use in your configuration file:
+```yaml
 dynamic-simulation:
-    default-impl-name: dynawo
+  default-impl-name: "<IMPLEMENTATION_NAME>"
 ```
-This module is optional. If only one implementation is found it’s used, otherwise if several are available but nothing is specified in the configuration file an exception is thrown.
+
+Each implementation is identified by its name, that may be unique in the classpath:
+- use "dynawo" to use [Dynawo](dynawo.md) implementation
+
+## Parameters
+
+Then, configure some generic parameters for all implementations:
+```yaml
+dynamic-simulation-default-parameters:
+    startTime: 0
+    stopTime: 1
+```
+
+The parameters may also be overridden with a JSON file, in which case the configuration will look like:
+```json
+{
+  "version" : "1.0",
+  "startTime" : 0,
+  "stopTime" : 1
+  "extensions" : {
+    ...
+  }
+}
+```
 
 ### Available parameters
 
-There are only two parameters common to all time domain simulators: the start and stop times of the simulation, in seconds. 
-They should be set in a module named `dynamic-simulation-default-parameters`:
-```yml
-dynamic-simulation-default-parameters:
-    startTime: 0
-    stopTime: 3600
-```
+**startTime**  
+The `startTime` parameter is an optional parameter that defines when the simulation begins, in seconds. By default, it's set to `0s`.
 
-### Default configuration
+**stopTime**  
+The `stopTime` parameter is an optional parameter that defines when the simulation stops, in seconds. By default, it's set to `1s`.
 
-By default the start time is 0s and the stop time is 3600s.
+### Default parameters
+The default values of all the optional properties are read from the [dynamic-simulation-default-parameter](../../user/configuration/dynamic-simulation-default-parameters.md) module, defined in the configuration file.
 
-### Dynawo configuration
-
-The `dynawo` module may be used to setup a Dynawo simulation: it defines the install directory of the dynawo simulator and whether the temporary folder where the inputs are generated should be kept after the simulation (for debug purposes).
-```yml
-dynawo:
-    homeDir: /home/user/dynawo
-    debug: false
-```
-
-To setup specific Dynawo parameters, the `dynawo-default-parameters` should be used:
-```yml
-dynawo-default-parameters:
-    parametersFile: <PATH_TO_MAIN_PARAMETERS_FILE>  
-    network.parametersFile: <PATH_TO_NETWORK_PARAMETERS_FILE> 
-    network.parametersId: id
-    solver.type: IDA
-    solver.parametersFile: <PATH_TO_SOLVER_PARAMETERS_FILE>
-    solver.parametersId: id
-```
-
-
-## Going further
-
-- You may find extensive documentation of the Dynawo project [here](https://github.com/dynawo/dynawo/releases/download/v1.1.0/DynawoDocumentation.pdf).
+### Specific parameters
+Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
+- [Dynawo](dynawo.md#specific-parameters)
