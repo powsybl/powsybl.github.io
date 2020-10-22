@@ -192,6 +192,8 @@ load-flow-default-parameters:
     voltageInitMode: DC_VALUES
     transformerVoltageControlOn: false
     specificCompatibility: true
+    dc: false
+    balanceType: PROPORTIONAL_TO_LOAD
 ```
 
 The parameters may also be overridden with a JSON file, in which case the configuration will look like:
@@ -203,6 +205,8 @@ The parameters may also be overridden with a JSON file, in which case the config
   "phaseShifterRegulationOn" : false,
   "noGeneratorReactiveLimits" : true,
   "specificCompatibility" : false,
+  "dc" : false,
+  "balanceType" : "PROPORTIONAL_TO_LOAD",
   "extensions" : {
     ...
   }
@@ -260,6 +264,9 @@ The default value is `false`.
 **simulShunt**  
 The `simulShunt` property is an optional property that defines whether the load flow is allowed to change sections of a shunt compensator with multiple sections or not.
 The default value is `false`.
+
+**dc**  
+The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is `false`.
 
 ### Default parameters
 The default values of all the optional properties are read from the [load-flow-default-parameter](../../user/configuration/load-flow-default-parameters.md) module, defined in the configuration file.

@@ -35,13 +35,14 @@ Then, you need to configure the load flow calculation itself. For example:
 hades2-default-parameters:
     balanceType: PROPORTIONAL_TO_LOAD
     computedConnectedComponentNumber: 0
-    reactiveCapabilityCurveWithMoreThanThreePoints: THREE_POINTS_DIAGRAM
-    withMinimumReactance: false
-    minimumReactancePerUnit: 0.0007
-    anglePerte: false
     remoteVoltageGenerators: true
     dcMode: false
     hvdcAcEmulation: false
+
+import-export-parameters-default-value:
+  iidm.export.adn.angle-perte: false
+  iidm.export.adn.with-minimum-reactance: true
+  iidm.export.adn.minimum-reactance-per-unit: 0.0007
 ```
 
 The complete list of available parameters for the Hades2 load flow is available [here](https://rte-france.github.io/hades2/configuration/ADNLoadFlowParameters.html).

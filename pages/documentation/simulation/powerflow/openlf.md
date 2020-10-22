@@ -18,9 +18,6 @@ load-flow:
 
 ### Specific parameters
 
-**dc**  
-The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is `false`.
-
 **lowImpedanceBranchMode**  
 The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines (when $$Z$$ is less than the $$10^{-8}$$ per-unit threshold).
 Possible values are:
@@ -52,14 +49,12 @@ See below an extract of a config file that could help:
 
 ```yaml
 open-loadflow-default-parameters:
-  dc: false
   lowImpedanceBranchMode: REPLACE_BY_ZERO_IMPEDANCE_LINE
   distributedSlack: true
   throwsExceptionInCaseOfSlackDistributionFailure: false
-  balanceType: PROPORTIONAL_TO_LOAD
   voltageRemoteControl: false
   slackBusSelectorType: Name
   nameSlackBusSelectorBusId: Bus3_0
 ```
 
-At the moment, overriding the parameters by a JSON file is not supported by Open LF.
+At the moment, overriding the parameters by a JSON file is not supported by OpenLoadFlow.
