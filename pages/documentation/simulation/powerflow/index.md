@@ -189,7 +189,7 @@ load-flow:
 or
 ```yaml
 load-flow:
-  default-impl-name: "Dynaflow"
+  default-impl-name: "DynaFlow"
 ```
 Then, configure some generic parameters for all load flow implementations:
 ```yaml
