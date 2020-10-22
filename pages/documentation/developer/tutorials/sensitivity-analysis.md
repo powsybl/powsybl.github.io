@@ -68,8 +68,8 @@ Create a new Maven's `pom.xml` file in `sensitivity/initial` with the following 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>3.7.0</powsybl.core.version>
-        <powsybl.rte-core.version>2.14.0</powsybl.rte-core.version>
+        <powsybl.core.version>3.7.1</powsybl.core.version>
+        <powsybl.rte-core.version>2.14.1</powsybl.rte-core.version>
     </properties>
 </project>
 ```
@@ -148,7 +148,7 @@ Edit the file named `config.yml` at the location `sensitivity/initial/src/main/r
 Start the configuration by writing:
 ```yaml
 load-flow:
-  default-impl-name: "hades2"
+  default-impl-name: "Hades2"
 ```
 In this way, PowSyBl will be set to use the Hades2 implementation of the loadflow.
 
