@@ -57,8 +57,8 @@ Create a new Maven's `pom.xml` file in `loadflow/initial` with the following con
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>3.3.0</powsybl.core.version>
-        <powsybl.rte-core.version>2.10.0</powsybl.rte-core.version>
+        <powsybl.core.version>3.7.1</powsybl.core.version>
+        <powsybl.rte-core.version>2.14.1</powsybl.rte-core.version>
     </properties>
 </project>
 ```
@@ -133,7 +133,7 @@ Edit the file named `config.yml` at the location `loadflow/initial/src/main/reso
 Start the configuration by writing:
 ```yaml
 load-flow:
-  default-impl-name: "hades2"
+  default-impl-name: "Hades2"
 ```
 In this way, PowSyBl will be set to use the Hades2 implementation for the power flow.
 
@@ -142,7 +142,7 @@ Then, set the following Hades2 configuration parameters:
 hades2:
     homeDir: <PATH_TO_HADES2>
 ```
-where the path to Hades2 should point to your installation directory. It is something of the kind `<PATH_TO_ROOT_DIRECTORY/hades2-V6.4.0.1.1/>`, where the path to the root directory points to where you extracted the Hades2 distribution, and the version of Hades2 will vary depending on your installation.
+where the path to Hades2 should point to your installation directory. It is something of the kind `<PATH_TO_ROOT_DIRECTORY/hades2-V6.6.0.1/>`, where the path to the root directory points to where you extracted the Hades2 distribution, and the version of Hades2 will vary depending on your installation.
 
 ## Import the network from an XML IIDM file
 
@@ -218,7 +218,7 @@ The flow through the upper line is of 302.4 MW at its entrance and of 300.4 MW a
 
 If you wish to set the parameters in the config file and use them directly, you can write instead:
 ```java
-LoadFlowParameters loadflowParameters = LoadFlowParameters().load();
+LoadFlowParameters loadflowParameters = LoadFlowParameters.load();
 LoadFlow.run(network, loadflowParameters);
 ```
 You'll have to fill two configuration sections in the `config.yml` file, for example:
@@ -227,8 +227,7 @@ load-flow-default-parameters:
     voltageInitMode: DC_VALUES
     transformerVoltageControlOn: false
     specificCompatibility: true 
-```
-```yaml
+
 hades2-default-parameters:
     dcMode: true
 ```
