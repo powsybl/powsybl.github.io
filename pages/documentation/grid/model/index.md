@@ -58,6 +58,10 @@ A voltage level in IIDM comprises some metadata:
 their normal use
 - a topology information: indicates whether the voltage level is described in [node/breaker]() or [bus/breaker]() view
 
+**Available extensions**
+
+- [Slack terminal](extensions.md#slack-terminal)
+
 #### Node/breaker topology
 <span style="color:red"> TODO: explain the topology.</span>
 
@@ -146,8 +150,8 @@ A generator in IIDM comprises some metadata:
 
 **Available extensions**
 
-- [Active Power Control]()
-- [Coordinated Reactive Control]()
+- [Active Power Control](extensions.md#active-power-control)
+- [Coordinated Reactive Control](extensions.md#coordinated-reactive-control)
 
 #### Load
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
@@ -194,7 +198,7 @@ A battery on the electric grid is an energy storage device that is either capabl
 
 **Available extensions**
 
-- [Active Power Control]()
+- [Active Power Control](extensions.md#active-power-control)
 
 #### Dangling line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/DanglingLine.html)
@@ -274,9 +278,12 @@ calculation or not, depending of what is wanted to be shown.
 #### Static VAR Compensator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/StaticVarCompensator.html)
 
-<span style="color:red"> TODO: add a description with sign convention.</span>
-<span style="color:red"> TODO: add a sketch with the sign convention.</span>
+<span style="color:red"> TODO: add a description with sign convention.</span>  
+<span style="color:red"> TODO: add a sketch with the sign convention.</span>  
 It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
+Static VAR compensators follow a passive-sign convention:
+  - Flow out from bus has positive sign.
+  - Consumptions are positive.
 
 **Characteristics**
 
@@ -289,8 +296,10 @@ It may be controlled to hold a voltage or reactive setpoint somewhere in the net
 
 **Specifications**
 
-- $$Bmin$$ and $$Bmax$$ are the susceptance bounds of the static VAR compensator
-<span style="color:red"> TODO: add the equation that links $$B$$ to $$Q$$, and say that $$B$$ has to be comprised between the bounds.</span>
+- $$Bmin$$ and $$Bmax$$ are the susceptance bounds of the static VAR compensator. Reactive power output of a static VAR compensator is limited by the maximum and the minimum susceptance values. The min/max reactive power of a static VAR compensator are determined by:  
+$$Qmin = -Bmin \times V^2$$  
+$$Qmax = -Bmax \times V^2$$  
+where $$V$$ is the voltage of the bus that connects the static VAR compensator to the network. Even if the regulating terminal is remote, only the local voltage has to be considered to retrive the minimum and the maximum amouts of reactive power. Reactive limits can be handled in an approximative way using the nominal voltage of the connected bus.   
 - The voltage setpoint is required when the regulation mode is set to `VOLTAGE`.
 - The reactive power setpoint is required when the regulation mode is set to `REACTIVE_POWER`.
 
@@ -303,6 +312,10 @@ In IIDM the static VAR compensator also comprises some metadata:
     - `OFF`
 Note that it is different than the generators' regulation definition, which is only done through a boolean.
 - The regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
+
+**Available extensions**
+
+- [VoltagePerReactivePowerControl](extensions.md#voltage-per-reactive-power-control)
 
 ### Branches
 
@@ -449,7 +462,7 @@ $$
 
 **Available extensions**
 
-- [Phase Angle Clock]()
+- [Phase Angle Clock](extensions.md#two-windings-transformer-phase-angle-clock)
 
 ##### Three windings transformer
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ThreeWindingsTransformer.html)
@@ -480,7 +493,7 @@ Only one tap changer (either ratio or phase tap changer) is allowed to be regula
 
 **Available extensions**
 
-- [Phase Angle Clock]()
+- [Phase Angle Clock](extensions.md#three-windings-transformer-phase-angle-clock)
 
 ##### Three windings transformer leg
 
