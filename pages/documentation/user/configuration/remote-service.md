@@ -22,6 +22,14 @@ The `secure` property is an optional property that defines whether SSL/TLS proto
 **port**  
 The `port` property is an optional property that defines the connection port. By default, if SSL/TLS protocol is used, the default value of this property is `443`. Otherwise, it is `80`.
 
+**auto-reconnection**
+The `auto-reconnection` is an optional boolean property, set to `false` by default. If set to `true`, when the client loses the websocket connection to the server (which allows to receive AFS events from the server), it will try to reconnect every X seconds. X is defined by the `reconnection-delay` property.
+
+**reconnection-delay**
+If `auto-reconnection` is set to `true`, the `reconnection-delay` property defines the number of seconds the client will wait between 2 attempts to reconnect to the server.
+This property is optional, with a default value of `60` seconds (1 minute). Note that this value should be a tradeoff between the quantity (or duration) of lost messages, and the frequency of requests to the server.
+
+
 ## Examples
 
 **YAML configuration:**
@@ -31,6 +39,8 @@ remote-service:
     app-name: my-server-app
     secure: false
     port: 8080
+    auto-reconnection: true
+    reconnection-delay: 300
 ```
 
 **XML configuration:**
@@ -40,5 +50,7 @@ remote-service:
     <app-name>my-server-app</app-name>
     <secure>false</secure>
     <port>8080</port>
+    <auto-reconnection>true</auto-reconnection>
+    <reconnection-delay>300</reconnection-delay>
 </remote-service>
 ```
