@@ -16,7 +16,7 @@ In this page we'll go into some details about what are the inputs and outputs of
 
 ## Inputs
 
-The only input for a power flow simulation is a network.
+The only input for a power flow simulation is a network and optionally a set of parameters.
 
 ## Outputs
 
@@ -170,33 +170,32 @@ minimum or maximum: this corresponds to a valid load flow result for the ratio t
 ## Implementations
 
 The following power flow implementations are supported:
-- [Open LoadFlow](openlf.md)
-- [Hades2](https://rte-france.github.io/hades2/index.html): learn how to
-install Hades2 and use it with PowSyBl.
+- [PowSyBl OpenLoadFlow](openlf.md)
+- [Hades2](hades2.md)
 - [Dynaflow](dynaflow.md)
 
 ## Configuration
 You first need to choose which implementation to use in your configuration file:
 ```yaml
 load-flow:
-  default-impl-name: "hades2"
+  default-impl-name: "<IMPLEMENTATION_NAME>"
 ```
-or
-```yaml
-load-flow:
-  default-impl-name: "OpenLoadFlow"
-```
-or
-```yaml
-load-flow:
-  default-impl-name: "DynaFlow"
-```
+
+Each implementation is identified by its name, that may be unique in the classpath:
+- use "OpenLoadFlow" to use PowSyBl OpenLoadFlow
+- use "Hades2" to use RTE Hades2
+- use "DynaFlow" to use DynaFlow implementation
+
+## Parameters
+
 Then, configure some generic parameters for all load flow implementations:
 ```yaml
 load-flow-default-parameters:
     voltageInitMode: DC_VALUES
     transformerVoltageControlOn: false
     specificCompatibility: true
+    dc: false
+    balanceType: PROPORTIONAL_TO_LOAD
 ```
 
 The parameters may also be overridden with a JSON file, in which case the configuration will look like:
@@ -208,6 +207,8 @@ The parameters may also be overridden with a JSON file, in which case the config
   "phaseShifterRegulationOn" : false,
   "noGeneratorReactiveLimits" : true,
   "specificCompatibility" : false,
+  "dc" : false,
+  "balanceType" : "PROPORTIONAL_TO_LOAD",
   "extensions" : {
     ...
   }
@@ -266,107 +267,17 @@ The default value is `false`.
 The `simulShunt` property is an optional property that defines whether the load flow is allowed to change sections of a shunt compensator with multiple sections or not.
 The default value is `false`.
 
-### Default configuration
-The default values of all the optional properties are read from the [load-flow-default-parameter](../../user/configuration/load-flow-default-parameters.md)
-module, defined in the configuration file.
-
-### Open LoadFlow configuration
-Once you have chosen OpenLoadFlow as a load flow implementation, you have to add the `com.powsybl:powsybl-open-loadflow` dependency to your project.
-The latest release is available [here](https://github.com/powsybl/powsybl-open-loadflow/releases).
-
-Then, you need to configure several specific parameters:
-
 **dc**  
 The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is `false`.
 
-**lowImpedanceBranchMode**  
-The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines (when $$Z$$ is less than the $$10^{-8}$$ per-unit threshold).
-Possible values are:
-- Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider a low impedance line has $$R$$ and $$X$$ equal to zero.
-- Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider a low impedance line with a small value equal to the previously given threshold.
+### Default parameters
+The default values of all the optional properties are read from the [load-flow-default-parameter](../../user/configuration/load-flow-default-parameters.md) module, defined in the configuration file.
 
-**throwsExceptionInCaseOfSlackDistributionFailure**  
-The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure.
-This could happen in small synchronous component without enough generators or loads to balance the mismatch.
-In that case, the remaining active power mismatch remains on the selected slack bus.
-
-**voltageRemoteControl**  
-The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
-The default value is `false`.
-
-**slackBusSelectorType**  
-The `slackBusSelectorType` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
-- `First` if you want to choose the first bus of all the network buses, identified by the [slack terminal extension]().
-- `Name` if you want to choose a specific bus as the slack bus. In that case, the other `nameSlackBusSelectorBusId` property has to be filled.
-- `MostMeshed` if you want to choose the most meshed bus as the slack bus. This option is required for computation with several synchronous component.
-
-Note that if you want to choose the slack bus that is defined inside the network with a slackTerminal extension, you have to use the `LoadflowParameters`
-
-**nameSlackBusSelectorBusId**  
-The `nameSlackBusSelectorBusId` property is a required property if you choose `Name` for property `slackBusSelectorType`.
-It defines the bus chosen for slack distribution by its ID.
-
-See below an extract of a config file that could help:
-
-```yaml
-open-loadflow-default-parameters:
-  dc: false
-  lowImpedanceBranchMode: REPLACE_BY_ZERO_IMPEDANCE_LINE
-  distributedSlack: true
-  throwsExceptionInCaseOfSlackDistributionFailure: false
-  balanceType: PROPORTIONAL_TO_LOAD
-  voltageRemoteControl: false
-  slackBusSelectorType: Name
-  nameSlackBusSelectorBusId: Bus3_0
-```
-
-At the moment, overriding the parameters by a JSON file is not supported by Open LF.
-
-### Hades2 configuration
-Once you have chosen Hades2 as a load flow implementation, you have to provide the path to your Hades2
-installation:
-```yaml
-hades2:
-    homeDir: <PATH_TO_HADES_2>
-```
-In this section, you may also choose the option `debug: true` to tell PowSyBl not to erase the temporary folder created by Hades2 for the calculation.
-This makes it possible to check what happened on the Hades2 side for debugging purposes.
-
-Then, you need to configure the load flow calculation itself, because the sensitivity analysis of Hades2 relies on an initial load flow calculation.
-For example:
-```yaml
-hades2-default-parameters:
-    balanceType: PROPORTIONAL_TO_LOAD
-    computedConnectedComponentNumber: 0
-    reactiveCapabilityCurveWithMoreThanThreePoints: THREE_POINTS_DIAGRAM
-    withMinimumReactance: false
-    minimumReactancePerUnit: 0.0007
-    anglePerte: false
-    remoteVoltageGenerators: true
-    dcMode: false
-    hvdcAcEmulation: false
-```
-
-The complete list of available parameters for the Hades2 load flow is available [here](https://rte-france.github.io/hades2/configuration/ADNLoadFlowParameters.html).
-
-### Dynaflow configuration
-Once you have chosen Dynaflow as a load flow implementation, you have to provide the path to your Dynaflow
-installation:
-```yaml
-dynaflow:
-    homeDir: <PATH_TO_DYNAFLOW>
-```
-In this section, you may also choose the option `debug: true` to tell PowSyBl not to erase the temporary folder created by Dynaflow for the calculation.
-This makes it possible to check what happened on the Dynaflow side for debugging purposes.
-
-Then, you need to configure the specific simulation parameters.
-For example:
-```yaml
-dynaflow-default-parameters:
-  lccAsLoads: false
-  vscAsGenerators: false
-  svcRegulationOn: true
-```
+### Specific parameters
+Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
+- [PowSyBl OpenLoadFlow parameters](openlf.md#parameters)
+- [Hades2](hades2.md#specific-parameters)
+- [DynaFlow](dynaflow.md#specific-parameters)
 
 The complete list of available parameters for the Dynaflow load flow is available [here](dynaflow.md).
 ## Going further
