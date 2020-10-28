@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" height="610" width="130">
+<style><![CDATA[
+.BUSBAR_SECTION {
+    stroke: rgb(0,0,0);
+    stroke-width: 3;
+}
+
+.BREAKER {
+    stroke: rgb(0, 0, 255);
+    stroke-width: 2;
+    fill: rgb(255, 255, 255);
+}
+
+.DISCONNECTOR {
+    stroke: rgb(0, 0, 0);
+    stroke-width: 3
+}
+
+.GENERATOR {
+    stroke: rgb(0, 0, 255);
+    stroke-width: 1;
+    fill-opacity: 0;
+}
+
+.LOAD {
+    stroke: rgb(0, 0, 255);
+    stroke-width: 1;
+    fill-opacity: 0;
+}
+
+.LOAD_BREAK_SWITCH {
+    stroke: rgb(0, 0, 255);
+    stroke-width: 1;
+    fill: rgb(255, 255, 255);
+}
+
+.NODE {
+    stroke: rgb(0, 0, 0);
+    fill: rgb(0, 0, 0);
+    fill-opacity: 1;
+}
+
+.CAPACITOR {
+    stroke: rgb(0, 0, 255);
+    stroke-width: 1;
+    fill-opacity: 0;
+}
+
+.INDUCTOR {
+    stroke: rgb(0, 0, 255);
+    stroke-width: 1;
+    fill-opacity: 0;
+}
+
+.STATIC_VAR_COMPENSATOR {
+    stroke: rgb(0, 0, 255);
+}
+
+.TWO_WINDINGS_TRANSFORMER {
+    stroke: rgb(0, 0, 255);
+    fill-opacity: 0;
+}
+
+.THREE_WINDINGS_TRANSFORMER {
+    stroke: rgb(0, 0, 255);
+    fill-opacity: 0;
+}
+
+.VSC_CONVERTER_STATION {
+    stroke: rgb(0, 0, 255);
+    font-size: 7.4314661px;
+    line-height: 1.25;
+    font-family: sans-serif;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-feature-settings: normal;
+    text-align: start;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    writing-mode: lr-tb;
+    text-anchor: start;
+    stroke-miterlimit: 4;
+}
+
+.PHASE_SHIFT_TRANSFORMER {
+    stroke: rgb(0, 0, 255);
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 4;
+    stroke-width: 1;
+    fill-opacity: 0;
+}
+
+.wire {
+    stroke: rgb(200,0,0);
+    stroke-width: 1;
+    fill-opacity: 0;
+}
+
+.grid {
+    stroke: rgb(0,55,0);
+    stroke-width: 1;
+    stroke-dasharray: 1,10;
+}
+
+.component-label {
+    fill: black;
+    color: black;
+    stroke: none;
+    fill-opacity: 1;
+}
+
+.LINE {
+    stroke: rgb(0, 0, 255);
+    stroke-width: 1;
+    fill-opacity: 0;
+}
+.ARROW1_CI_95_ONE_UP .arrow-up {stroke: black; fill: black; fill-opacity:1; visibility: visible;}.ARROW1_CI_95_ONE_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW1_CI_95_ONE_DOWN .arrow-down {stroke: black; fill: black; fill-opacity:1;  visibility: visible;}.ARROW1_CI_95_ONE_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2_CI_95_ONE_UP .arrow-up {stroke: blue; fill: blue; fill-opacity:1; visibility: visible;}.ARROW2_CI_95_ONE_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2_CI_95_ONE_DOWN .arrow-down {stroke: blue; fill: blue; fill-opacity:1;  visibility: visible;}.ARROW2_CI_95_ONE_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}
+.ARROW1_CJ_95_ONE_UP .arrow-up {stroke: black; fill: black; fill-opacity:1; visibility: visible;}.ARROW1_CJ_95_ONE_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW1_CJ_95_ONE_DOWN .arrow-down {stroke: black; fill: black; fill-opacity:1;  visibility: visible;}.ARROW1_CJ_95_ONE_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2_CJ_95_ONE_UP .arrow-up {stroke: blue; fill: blue; fill-opacity:1; visibility: visible;}.ARROW2_CJ_95_ONE_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2_CJ_95_ONE_DOWN .arrow-down {stroke: blue; fill: blue; fill-opacity:1;  visibility: visible;}.ARROW2_CJ_95_ONE_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}
+.idF .open { visibility: hidden;}.idF .closed { visibility: visible;}
+.idH .open { visibility: hidden;}.idH .closed { visibility: visible;}
+.idJ .open { visibility: hidden;}.idJ .closed { visibility: visible;}
+.idL .open { visibility: hidden;}.idL .closed { visibility: visible;}
+.idFICT_95_C_95_FFictif {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
+.idFICT_95_C_95_HFictif {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
+]]></style>
+    <g>
+        <g class="BUSBAR_SECTION idD" id="idD" transform="translate(30.0,310.0)">
+            <line y2="0" fill="#228b22" x1="0" x2="80.0" stroke="#228b22" y1="0"/>
+            <text x="-5.0" font-size="8" y="-5.0" transform="rotate(0,0,0)" font-family="Verdana" class="component-label" id="D_NW_LABEL">D</text>
+        </g>
+        <g class="cell idEXTERN_32_0" id="idEXTERN_32_0">
+            <g class="NODE idFICT_95_C_95_FFictif" id="idFICT_95_C_95_FFictif" transform="translate(41.0,276.0)">
+                <circle fill-opacity="0" fill="#228b22" r="4" cx="4" cy="4" stroke="#228b22" stroke-opacity="0"/>
+            </g>
+            <g class="PHASE_SHIFT_TRANSFORMER idCI_95_ONE" id="idCI_95_ONE" transform="translate(38.0,21.5)">
+                <circle fill="#228b22" r="5" id="idCI_95_ONE_TWO_WINDINGS_TRANSFORMER-WINDING1" cx="7" cy="12" stroke="#228b22"/>
+                <g fill="#228b22" id="idCI_95_ONE_TWO_WINDINGS_TRANSFORMER-WINDING2" stroke="#228b22">
+                    <circle r="5" cx="7" cy="7"/>
+                    <line y2="14" x1="14" x2="0" y1="0"/>
+                    <line y2="0" x1="14" x2="11" y1="0"/>
+                    <line y2="3" x1="14" x2="14" y1="0"/>
+                </g>
+                <text x="-5.0" font-size="8" y="-5.0" transform="rotate(0,0,0)" font-family="Verdana" class="component-label" id="CI_ONE_N_LABEL">CI</text>
+            </g>
+            <g class="wire" id="_95_C_95_D_95_F">
+                <polyline points="45.0,310.0,45.0,310.0" stroke-width="1" stroke="#228b22"/>
+            </g>
+            <g class="wire" id="_95_C_95_F_95_FICT_95_C_95_FFictif">
+                <polyline points="45.0,310.0,45.0,280.0" stroke-width="1" stroke="#228b22"/>
+            </g>
+            <g class="wire" id="_95_C_95_J_95_FICT_95_C_95_FFictif">
+                <polyline points="45.0,165.0,45.0,280.0" stroke-width="1" stroke="#228b22"/>
+            </g>
+            <g class="wire" id="_95_C_95_J_95_CI_95_ONE">
+                <polyline points="45.0,145.0,45.0,39.0" stroke-width="1" stroke="#228b22"/>
+            </g>
+            <g class="ARROW1_CI_95_ONE_DOWN" id="_95_C_95_J_95_CI_95_ONE_ARROW1" transform="matrix(1.0,0.0,-0.0,1.0,40.0,54.0)">
+                <g class="arrow-up" id="_95_C_95_J_95_CI_95_ONE_ARROW1_ARROW-arrow-up">
+                    <polygon points="5,0 10,10 0,10"/>
+                </g>
+                <g class="arrow-down" id="_95_C_95_J_95_CI_95_ONE_ARROW1_ARROW-arrow-down">
+                    <polygon points="0,0 10,0 5,10"/>
+                </g>
+                <text x="15.0" font-size="8" y="9.0" transform="rotate(0,0,0)" font-family="Verdana" class="component-label" xml:space="preserve" textLength="25">0    </text>
+            </g>
+            <g class="ARROW2_CI_95_ONE_DOWN" id="_95_C_95_J_95_CI_95_ONE_ARROW2" transform="matrix(1.0,0.0,-0.0,1.0,40.0,74.0)">
+                <g class="arrow-up" id="_95_C_95_J_95_CI_95_ONE_ARROW2_ARROW-arrow-up">
+                    <polygon points="5,0 10,10 0,10"/>
+                </g>
+                <g class="arrow-down" id="_95_C_95_J_95_CI_95_ONE_ARROW2_ARROW-arrow-down">
+                    <polygon points="0,0 10,0 5,10"/>
+                </g>
+                <text x="15.0" font-size="8" y="9.0" transform="rotate(0,0,0)" font-family="Verdana" class="component-label" xml:space="preserve" textLength="25">0    </text>
+            </g>
+            <g class="DISCONNECTOR idF" id="idF" transform="translate(41.0,306.0)">
+                <g class="closed" id="idF_DISCONNECTOR-closed">
+                    <line y2="8" x1="0" x2="8" y1="0"/>
+                    <line y2="8" x1="8" x2="0" y1="0"/>
+                </g>
+                <g class="open" id="idF_DISCONNECTOR-open">
+                    <line y2="8" x1="8" x2="0" y1="0"/>
+                </g>
+            </g>
+            <g class="BREAKER idJ" id="idJ" transform="translate(35.0,145.0)">
+                <g class="closed" id="idJ_BREAKER-closed">
+                    <rect x="1" width="18" y="1" height="18"/>
+                    <line y2="15" x1="10" x2="10" y1="5"/>
+                </g>
+                <g class="open" id="idJ_BREAKER-open">
+                    <rect x="1" width="18" y="1" height="18"/>
+                    <line y2="10" x1="5" x2="15" y1="10"/>
+                </g>
+            </g>
+        </g>
+        <g class="cell idEXTERN_32_1" id="idEXTERN_32_1">
+            <g class="NODE idFICT_95_C_95_HFictif" id="idFICT_95_C_95_HFictif" transform="translate(91.0,336.0)">
+                <circle fill-opacity="0" fill="#228b22" r="4" cx="4" cy="4" stroke="#228b22" stroke-opacity="0"/>
+            </g>
+            <g class="LINE idCJ_95_ONE" id="idCJ_95_ONE" transform="translate(95.0,590.0)">
+                <text x="-5.0" font-size="8" y="13.0" transform="rotate(0,0,0)" font-family="Verdana" class="component-label" id="CJ_ONE_S_LABEL">CJ</text>
+            </g>
+            <g class="wire" id="_95_C_95_D_95_H">
+                <polyline points="95.0,310.0,95.0,310.0" stroke-width="1" stroke="#228b22"/>
+            </g>
+            <g class="wire" id="_95_C_95_H_95_FICT_95_C_95_HFictif">
+                <polyline points="95.0,310.0,95.0,340.0" stroke-width="1" stroke="#228b22"/>
+            </g>
+            <g class="wire" id="_95_C_95_L_95_FICT_95_C_95_HFictif">
+                <polyline points="95.0,455.0,95.0,340.0" stroke-width="1" stroke="#228b22"/>
+            </g>
+            <g class="wire" id="_95_C_95_L_95_CJ_95_ONE">
+                <polyline points="95.0,475.0,95.0,590.0" stroke-width="1" stroke="#228b22"/>
+            </g>
+            <g class="ARROW1_CJ_95_ONE_DOWN" id="_95_C_95_L_95_CJ_95_ONE_ARROW1" transform="matrix(1.0,0.0,-0.0,1.0,90.0,565.0)">
+                <g class="arrow-up" id="_95_C_95_L_95_CJ_95_ONE_ARROW1_ARROW-arrow-up" transform="rotate(180.0,5.0,5.0)">
+                    <polygon points="5,0 10,10 0,10"/>
+                </g>
+                <g class="arrow-down" id="_95_C_95_L_95_CJ_95_ONE_ARROW1_ARROW-arrow-down" transform="rotate(180.0,5.0,5.0)">
+                    <polygon points="0,0 10,0 5,10"/>
+                </g>
+                <text x="15.0" font-size="8" y="9.0" transform="rotate(0,0,0)" font-family="Verdana" class="component-label" xml:space="preserve" textLength="25">0    </text>
+            </g>
+            <g class="ARROW2_CJ_95_ONE_DOWN" id="_95_C_95_L_95_CJ_95_ONE_ARROW2" transform="matrix(1.0,0.0,-0.0,1.0,90.0,545.0)">
+                <g class="arrow-up" id="_95_C_95_L_95_CJ_95_ONE_ARROW2_ARROW-arrow-up" transform="rotate(180.0,5.0,5.0)">
+                    <polygon points="5,0 10,10 0,10"/>
+                </g>
+                <g class="arrow-down" id="_95_C_95_L_95_CJ_95_ONE_ARROW2_ARROW-arrow-down" transform="rotate(180.0,5.0,5.0)">
+                    <polygon points="0,0 10,0 5,10"/>
+                </g>
+                <text x="15.0" font-size="8" y="9.0" transform="rotate(0,0,0)" font-family="Verdana" class="component-label" xml:space="preserve" textLength="25">0    </text>
+            </g>
+            <g class="DISCONNECTOR idH" id="idH" transform="translate(91.0,306.0)">
+                <g class="closed" id="idH_DISCONNECTOR-closed">
+                    <line y2="8" x1="0" x2="8" y1="0"/>
+                    <line y2="8" x1="8" x2="0" y1="0"/>
+                </g>
+                <g class="open" id="idH_DISCONNECTOR-open">
+                    <line y2="8" x1="8" x2="0" y1="0"/>
+                </g>
+            </g>
+            <g class="BREAKER idL" id="idL" transform="translate(85.0,455.0)">
+                <g class="closed" id="idL_BREAKER-closed">
+                    <rect x="1" width="18" y="1" height="18"/>
+                    <line y2="15" x1="10" x2="10" y1="5"/>
+                </g>
+                <g class="open" id="idL_BREAKER-open">
+                    <rect x="1" width="18" y="1" height="18"/>
+                    <line y2="10" x1="5" x2="15" y1="10"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

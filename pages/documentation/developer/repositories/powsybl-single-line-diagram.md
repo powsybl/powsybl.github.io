@@ -6,11 +6,13 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 
 ## Features
 
-- creation of single line diagrams for given voltage levels
+- creation of single line diagrams for given voltage levels or substations
 
 ## Getting started
 
-- [Guide 1]() - Create a single line diagram on a simple example
+- [Guide 1](powsybl-single-line-diagram_guide1.md) - Create single line diagrams on a simple example
+- [Guide 2](powsybl-single-line-diagram_guide2.md) - Create single line diagrams based on CGMES sample files
+- [Guide 3]() - Changing single line diagram layouts
 
 ## Releases
 
