@@ -22,29 +22,29 @@ load-flow:
 
 ### Specific parameters
 
-**SvcRegulationOn**  
-The `SvcRegulationOn` is an optional boolean property that defines if SVCs (Static Var Compensator) take part in the voltage regulation. The default value of this parameter is `false`.
+**svcRegulationOn**  
+The `svcRegulationOn` is an optional boolean property that defines if SVCs (Static Var Compensator) take part in the voltage regulation. The default value of this parameter is `false`.
 
-**ShuntRegulationOn**  
-The `ShuntRegulationOn` is an optional boolean property that defines if Shunts take part in the voltage regulation. 
+**shuntRegulationOn**  
+The `shuntRegulationOn` is an optional boolean property that defines if Shunts take part in the voltage regulation. 
 The default value of this parameter is `false`.
 
-**AutomaticSlackBusOn**  
-The `AutomaticSlackbusOn` is an optional boolean property that defines if DynaFlow computes the slack bus (phase reference bus) by itself or if the slack bus is provided.
+**automaticSlackBusOn**  
+The `automaticSlackbusOn` is an optional boolean property that defines if DynaFlow computes the slack bus (phase reference bus) by itself or if the slack bus is provided.
 The default value of this parameter is `true`.
 
-**VscAsGenerators**
-The `VscAsGenerators` is an optional boolean property that defines if VSCs (Voltage Source Converters) are modeled as generators.
+**vscAsGenerators**
+The `vscAsGenerators` is an optional boolean property that defines if VSCs (Voltage Source Converters) are modeled as generators.
 The default value of this parameter is `true`.
 
-**LccAsLoads**  
-The `LccAsLoads` is an optional boolean property that defines if LCCs (Line Commutated Converters) are modeled as loads.
+**lccAsLoads**  
+The `lccAsLoads` is an optional boolean property that defines if LCCs (Line Commutated Converters) are modeled as loads.
 The default value of this parameter is `true`.
 
 ### Generic parameters
 Furthermore, DynaFlow only supports two of the generic parameters: 
-- NoGeneratorReactiveLimits
-- PhaseShifterRegulationOn
+- noGeneratorReactiveLimits
+- phaseShifterRegulationOn
 
 You may have a description of these parameters [here](index.md#parameters). The other parameters are ignored.
 
@@ -53,12 +53,8 @@ You may have a description of these parameters [here](index.md#parameters). The 
 This is an example of a load flow parameters file with specific parameters for DynaFlow:
 ```json
 {
-  "version" : "1.0",
-  "voltageInitMode" : "PREVIOUS_VALUES",
-  "transformerVoltageControlOn" : true,
   "phaseShifterRegulationOn" : false,
   "noGeneratorReactiveLimits" : false,
-  "specificCompatibility" : false,
   "extensions" : {
     "DynaflowParameters" : {
       "svcRegulationOn": true,
