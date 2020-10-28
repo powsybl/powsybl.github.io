@@ -56,7 +56,7 @@ import com.powsybl.iidm.network.Country
 for (l in network.lines) {
     country1 = l.terminal1.voltageLevel.substation.country
     country2 = l.terminal2.voltageLevel.substation.country
-    if (country != country) {
+    if (country1 != country2) {
         contingency(l.id) {
             equipments l.id
         }
