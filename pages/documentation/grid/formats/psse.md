@@ -104,25 +104,25 @@ The `psse.import.ignore-base-voltage` property is an optional property that defi
 ### Conversion, General description
 -<span style="color: red">TODO</span>
 
-### BusData into IIDM Buses Conversion
+### BusData to Buses Conversion
 -<span style="color: red">TODO</span>
 
-### LoadData into IIDM Loads Conversion
+### LoadData to Loads Conversion
 -<span style="color: red">TODO</span>
 
-### FixedBusShuntData into IIDM Linear Shunt Compensators Conversion
+### FixedBusShuntData to Linear Shunt Compensators Conversion
 -<span style="color: red">TODO</span>
 
-### SwitchedShuntData into IIDM Non-Linear Shunt Compensators Conversion
+### SwitchedShuntData to Non-Linear Shunt Compensators Conversion
 -<span style="color: red">TODO</span>
 
-### GeneratorData into IIDM Generators Conversion
+### GeneratorData to Generators Conversion
 -<span style="color: red">TODO</span>
 
-### Non-TransformerBranchData into IIDM Lines Conversion
+### Non-TransformerBranchData to Lines Conversion
 -<span style="color: red">TODO</span>
 
-### TransformerData into IIDM TwoWindings and ThreeWindings Transformers Conversion
+### TransformerData to TwoWindings and ThreeWindings Transformers Conversion
 -<span style="color: red">TODO</span>
 
 ### Slack Conversion
