@@ -53,6 +53,7 @@ You may have a description of these parameters [here](index.md#parameters). The 
 This is an example of a load flow parameters file with specific parameters for DynaFlow:
 ```json
 {
+  "version" : "1.4",
   "phaseShifterRegulationOn" : false,
   "noGeneratorReactiveLimits" : false,
   "extensions" : {
