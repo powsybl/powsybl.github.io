@@ -106,6 +106,13 @@ This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++
 
 ## Development
 
+### [pypowsybl](pypowsybl.md)
+
+This [repository](https://github.com/powsybl/pypowsybl) provides an integration of the PowSyBl framework for Python developers.
+
+**Reviewers:** [mathbagu](https://github.com/mathbagu), [sylvlecl](https://github.com/sylvlecl)
+**Committers:** [mathbagu](https://github.com/mathbagu), [sylvlecl](https://github.com/sylvlecl)
+
 ### powsybl-incubator
 This [repository](https://github.com/powsybl/powsybl-incubator) provides incubating modules that are not mature enough to be released.
 
