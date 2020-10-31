@@ -73,7 +73,7 @@ Two voltage levels may be connected through a line (they are then located in dif
 | $$HighVoltageLimit$$ | kV | High voltage limit magnitude |
 | $$TopologyKind$$ |  | Level of connectivity detail |
 
-Only `NominalVoltage` and `TopologyKind` are required. Additionally the [SlackTerminal](extensions.md#slack-terminal) could be defined as an extension so the associated bus will be used to balance the active and reactive power.
+Only `NominalVoltage` and `TopologyKind` are required. Additionally the [Slack Terminal](extensions.md#slack-terminal) could be defined as an extension so the associated bus will be used to balance the active and reactive power.
 
 Inside the voltage level the grid model supports two connectivity levels, **node-breaker** where the connectivity is described with the finest level of detail and can provide the exactly field representation. This topology level could be described as a graph structure where the vertex are `nodes` and the edges `switches` or `internalConnections`. The network components are attached to one `node`, (busbar sections, loads, generators, ..) two `nodes` (transmission lines, two windings transformers, ...) or three `nodes` (three windings transformers). The second level is **bus-breaker**, where the voltage level is described with a coarser level of detail. In that case the vertices are `buses` and the edges are also `switches`, but they are not required. The network components are attached to one, two or three buses. In the bus-breaker topology level only the connected network components are attached to buses and in the node-breaker level only one network component is allowed per node. The attachment in both topology levels is done through an internal reference called `Terminal`.
 
