@@ -10,148 +10,108 @@ latex: true
 
 ## Introduction
 
-In this page the different network components are described in terms of electrotechnical representation.
-Each component is identified through a unique ID, and optionally by a name that is easier to interpret for a human.
-Note that the equipments in the IIDM model may be flagged as fictitious, in order to fine tune the network modelling.
+The IIDM (iTesla Internal Data Model) was designed during the iTesla project for running simulations and it is the internal format model used in Powsybl (Power System Blocks). To build an electrical transmission network model using IIDM the electrical substations and the transmission lines connecting them (AC and DC lines) should be represented. Voltage levels, phase shifters and transformers are included within the substations and the rest of the network components (breakers, loads, generators, shunts, SVC, DC converters ...) are defined inside the voltage levels.
 
-<span style="color:red"> TODO: when we have aliases, add a description here too.</span>
+The IIDM model can provide a fully representation of the substations (node-breaker model) where all the breakers and busbars are defined  or a gradual simplification of the connectivity up to a bus-branch model where each node inside the substation represents a nominal voltage. It allows to extract sub-parts of the network model and to merge individual networks expressed in different formats, for handling European data for instance.
+
+The Grid Model can be envisioned as a set of classes (lines, transformers, generators, loads, HVDC, static var compensator, shunt compensators ...) extensible with plugins to add additional data to equipments.
 
 ## Network core model
+
+In the following sections the different network components are described in terms of electro-technical representation.
+All modeled elements are identified through a unique ID, and optionally by a name that is easier to interpret for a human.
+Next table provides the attributes shared by all the network components.
+
+| Attribute | Description |
+| --------- | ----------- |
+| $$Id$$ | Unique Id assigned to each network component |
+| $$Name$$ | Human readable alphanumeric identifier |
+| $$Fictitious$$ | To identify non-physical network components |
+| $$Aliases$$ | Additional unique identifiers associated with each network component |
+| $$Properties$$ | To add additional data items to network components |
+
+`Id` is the only required attribute and by default `Fictitious` is set to false. `Aliases` offers the possibility of adding additional unique identifiers to each component. An `AliasType` can be specified to indicate what it corresponds to. `Properties` allows to associate additional data items under the general format <PropertyKeyword, Value>.
 
 ### Network 
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
 
 In IIDM, the network is constituted of [substations](#substation), which are themselves constituted of [voltage levels](#voltage-level).
-All the equipments are then connected to the voltage levels.
-The network comprises metadata in IIDM: 
-- a case date: the date and time of the target network that is being modelled
-- a forecast distance: the number of minutes between the network generation date and the case date
+All the grid elements are then connected to the voltage levels and their associated classes contain the equipment information,
+the steady state hypothesis information and the state variables.
 
-**Available extensions**
+| Attribute | Description |
+| --------- | ----------- |
+| $$SourceFormat$$ | Source format of the imported network model |
+| $$CaseDate$$ | Date and time of the target network that is being modeled |
+| $$ForecastDistance$$ | Number of minutes between the network generation date and the case date |
 
-- [CGMES conversion context extension]()
-- [CGMES model extension]()
+Only the `SourceFormat` attribute is required.
 
 ### Substation
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Substation.html)
 
 A substation in IIDM represents a specific geographical location with a set of equipments connected to one or several [voltage levels](#voltage-level).
-It comprises metadata in IIDM:
-- a country: to specify in which country the substation is located. It is an optional attribute, not set on fictitious test networks for example.
-- a set of geographical tags: they make it possible to accurately locate the substation
-- a [TSO](/pages/glossary.md#tso) information: to track to which TSO the substation belongs
 
-**Available extensions**
+| Attribute | Description |
+| --------- | ----------- |
+| $$Country$$ | To specify in which country the substation is located |
+| $$GeographicalTags$$ | They make it possible to accurately locate the substation |
+| $$TSO$$ | To track to which [TSO](/pages/glossary.md#tso) the substation belongs |
 
-- [ENTSOE Area]()
+All three attributes are optional. 
 
 ### Voltage Level
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VoltageLevel.html)
 
 A voltage level in IIDM represents a set of equipments connected together with the same nominal voltage, physically close to each other (~ 1-100m).
-Two voltage levels may be connected through a line (they are then located in different substations) or through transformers (they are then located within
-the same substation).
+Two voltage levels may be connected through a line (they are then located in different substations) or through transformers (they are then located within the same substation).
 
-A voltage level in IIDM comprises some metadata:
-- a nominal voltage (in $$kV$$)
-- a low voltage limit and a high voltage limit (in $$kV$$): they are both optional metadata. The voltage should always remain within these bounds, otherwise it means that the equipments will suffer extra wear compared to
-their normal use
-- a topology information: indicates whether the voltage level is described in [node/breaker]() or [bus/breaker]() view
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$NominalVoltage$$ | kV | Nominal base voltage |
+| $$LowVoltageLimit$$ | kV | Low voltage limit magnitude |
+| $$HighVoltageLimit$$ | kV | High voltage limit magnitude |
+| $$TopologyKind$$ |  | Level of connectivity detail |
 
-**Available extensions**
+Only `NominalVoltage` and `TopologyKind` are required. Additionally the [SlackTerminal](extensions.md#slack-terminal) could be defined as an extension so the associated bus will be used to balance the active and reactive power.
 
-- [Slack terminal](extensions.md#slack-terminal)
+Inside the voltage level the grid model supports two connectivity levels, **node-breaker** where the connectivity is described with the finest level of detail and can provide the exactly field representation. This topology level could be described as a graph structure where the vertex are `nodes` and the edges `switches` or `internalConnections`. The network components are attached to one `node`, (busbar sections, loads, generators, ..) two `nodes` (transmission lines, two windings transformers, ...) or three `nodes` (three windings transformers). The second level is **bus-breaker**, where the voltage level is described with a coarser level of detail. In that case the vertices are `buses` and the edges are also `switches`, but they are not required. The network components are attached to one, two or three buses. In the bus-breaker topology level only the connected network components are attached to buses and in the node-breaker level only one network component is allowed per node. The attachment in both topology levels is done through an internal reference called `Terminal`.
 
-#### Node/breaker topology
-<span style="color:red"> TODO: explain the topology.</span>
+Powsybl provides a Network Topology Processor that allows to obtain a bus-breaker view from a node-breaker view and a bus-branch view from a bus-breaker view using the status (open/close) of the `switches` and the analog measurement data to determine the new topology, the bus voltage magnitude measurements and the bus power flow injection measurements. Only the `switches` marked as retained in the node-breaker view are preserved in the bus-breaker view. A bus-branch view is an abstract representation of a physical network at a particular time where each substation is represented with a single bus at each nominal voltage level and subestations are connected by transmission lines and transformers.
 
-In node/breaker topology, the voltage level is described with the finest level of detail. See the sketch below for an example.
-<span style="color:red"> TODO: add sketch of voltage level.</span>
-The topology is then described as a graph structure, where busbar sections, injections or branches are connected to the vertices.
-When an equipment is connected to a vertex, in the IIDM descrition it corresponds to a `Terminal` object.
-It is not possible to connect two equipments on the same vertex.
-The edges are constituted of switches or internal connections. See the following sketch corresponding to the previous example:
-<span style="color:red"> TODO: add sketch of voltage level topology graph.</span>
+![VoltageLevel](img/index/voltage-level.svg){: width="100%" .center-image}
 
-
-<span class="heading" id="busbar-section"></span>**Busbar section**
-[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/BusbarSection.html)<br>
-A busbar section is a non impedant element used in a node/breaker substation topology to connect equipments.
-
-<span class="heading" id="nb-switch"></span>**Switch**
-[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
-<span style="color:red"> TODO</span>
-
-**Internal connection**  
-An internal connection is a non-impedant connection between two components in a voltage level.
-
-#### Bus/breaker topology
-In bus/breaker topology, the voltage level is described with a coarser level of detail. See the sketch below for an example.
-<span style="color:red"> TODO: add sketch of voltage level in bus/breaker topology.</span>
-The topology is then described as a graph structure, where the vertices are buses and the edges are switches.
-
-**Bus**
-[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Bus.html)<br>
-A bus is a set of equipments connected at the same voltage.
-When an equipment is connected to a bus, in the IIDM descrition it corresponds to a `Terminal` object.
-In IIDM there is thus one `Terminal` per connected equipment.
-
-<span class="heading" id="bb-switch"></span>**Switch**
-[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
-<span style="color:red"> TODO: explain the difference with node/breaker switches</span>
-
-### Injections
-
-An injection in IIDM is any AC equipment with a single connection point to a voltage level.
-Below are the different types of injections supported by PowSyBl.
-
-#### Generator 
+### Generator 
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Generator.html)
 
 A generator is an active equipment that injects active power, and injects or consumes reactive power. 
 It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
 
-<span style="color:red"> TODO: add a sketch where the sign convention is indicated.</span>
-
-**Characteristics**
-
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
-| $$MinP$$ | MW | The minimal active power |
-| $$MaxP$$ | MW | The maximum active power |
+| $$Node$$ |  | Node where the generator is attached |
+| $$ConnectableBus$$ |  | Bus where the generator is attached |
+| $$MinP$$ | MW | Minimum generator active power output |
+| $$MaxP$$ | MW | Maximum generator active power output |
+| $$ReactiveLimits$$ | Mvar | Operational limits of the generator (P/Q/U diagram) |
+| $$RatedS$$ | MVA | The rated nominal power |
 | $$TargetP$$ | MW | The active power target |
 | $$TargetQ$$ | MVAr | The reactive power target |
 | $$TargetV$$ | kV | The voltage target |
-| $$RatedS$$ | MVA | The rated nominal power |
-| $$ReactiveLimits$$ | - | Operational limits of the generator (P/Q/U diagram) |
+| $$RegulatingTerminal$$ |  | Associated node or bus for which voltage is to be regulated |
+| $$VoltageRegulatorOn$$ |  | True if the generator regulates voltage |
+| $$EnergySource$$ |  | The energy source harnessed to turn the generator |
 
-**Specifications**
-- The minimal active power (in $$MW$$), expected to be lower than the maximal active power. The target $$P$$ is necessarily comprised between the two.
-- Setpoints for generators ($$targetV$$, $$targetP$$ and $$targetQ$$):
-    - They follow the generator sign convention: a positive value of $$targetP$$ means an injection into the bus.
-    - A positive value for the $$targetP$$ and the $$targetQ$$ means a negative value at the corresponding terminal (which is in passive-sign convention).
-- A set of reactive limits can be associated to a generator. All the reactive limits modelings available in the library are described [here](#reactive-limits).
-- the rated nominal power (MVA)
-<span style="color:red"> TODO: explain what it is.</span>
+The generator is attached to a node o a bus depending on the topology level of the grid model and one of both (`Node`, `ConnectableBus`) must be defined. Also `MinP`, `MaxP` and `TargetP` are required and the minimum active power can not be greater than the maximum active. `TargetP` must be inside active power limits. `RatedS` specifies the nameplate apparent power rating for the unit, it is optional and should be a positive value when is defined. The Reactive limits of the generator (`ReactiveLimits`) are optional and by default the generator is considered with unlimited reactive power.
 
-- Either the generator is regulating the voltage, and the voltage setpoint is required, or it is not regulating and the reactive power setpoint is required instead.
+The `VoltageRegulatorOn` attribute is required and if it has been defined as on then `TargetV` and `RegulatingTerminal` must also be defined. If the voltage regulator is off then `TargetQ` is required. Finally, `EnergySource` is optional and the default values is `OTHER`. All defined energy sources are: `HYDRO`, `NUCLEAR`, `WIND`, `THERMAL`, `SOLAR` and `OTHER`.
 
-**Metadata**    
-A generator in IIDM comprises some metadata:
-- the energy source, which can be:
-    - `HYDRO`
-    - `NUCLEAR`
-    - `WIND`
-    - `THERMAL`
-    - `SOLAR`
-    - `OTHER`
-- The participation to regulation (through a boolean)
-- The regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
+Target values for generators (`TargetP` and `TargetQ`) follow the generator sign convention. A positive value means an injection into the bus.
+A positive value for `targetP` and `targetQ` means a negative value at the corresponding generator active power and reactive power output.
 
-**Available extensions**
+The [Active Power Control](extensions.md#active-power-control) attributes and the percent of the reactive control that comes from this generator in a [Coordinated Reactive Control](extensions.md#coordinated-reactive-control) configuration are available as grid model extensions.
 
-- [Active Power Control](extensions.md#active-power-control)
-- [Coordinated Reactive Control](extensions.md#coordinated-reactive-control)
+![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="60%" .center-image}
 
 #### Load
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
