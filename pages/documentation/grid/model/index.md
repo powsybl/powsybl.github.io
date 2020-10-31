@@ -111,7 +111,7 @@ A positive value for `targetP` and `targetQ` means a negative value at the corre
 
 The [Active Power Control](extensions.md#active-power-control) attributes and the percent of the reactive control that comes from this generator in a [Coordinated Reactive Control](extensions.md#coordinated-reactive-control) configuration are available as grid model extensions.
 
-![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="60%" .center-image}
+![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="40%" .center-image}
 
 #### Load
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
