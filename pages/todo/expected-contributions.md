@@ -1,9 +1,9 @@
 This document aims to list the expected contributions for the website and propose potential writers (people or project).
 
 **Guidelines:**  
-- When someone asks a question to the community, send a link to the website. If the documentation is not ready yet, write the missing page instead of answering by email, even it's not complete.
+- When someone asks a question to the community, send a link to the website. If the documentation is not ready yet, write the missing page instead of answering by email, even if it's not complete.
 - When you write a new page, try to follow the plan used in the existing pages (specially for tutorials)
-- Try to write functional pages understandable by everyone (avoid the references to the Java code) and document the code in the dedicated sections. 
+- Try to write functional pages understandable by everyone (avoid the references to the Java code) and document the code in the dedicated sections.
 
 # General subjects
 - Cosmetic:
@@ -20,7 +20,7 @@ This document aims to list the expected contributions for the website and propos
 
 # Documentation
 - User documentation
-    - remove the references to the java classes in the module configuration pages. Try to integrate this information in the functional pages (simululators, import/export...)
+    - remove the references to the java classes in the module configuration pages. Try to integrate this information in the functional pages (simulators, import/export...)
     - Write more user stories:
         - About forecast security-analysis (Sylvain, Anne)
         - About the merging (core-merging, GridSuite)
@@ -41,7 +41,7 @@ This document aims to list the expected contributions for the website and propos
     - IEEE (Geoffroy)
     - PSS/E (Geoffroy, Jean-Baptiste, AIA)
     - AMPL (Ringo)
-- Simulateurs
+- Simulators
     - Power Flow
         - OpenLF implementation
         - DynaFlow implementation
@@ -60,16 +60,16 @@ This document aims to list the expected contributions for the website and propos
     - AFS (Paul)
     - TimeSeries (AIA, Thomas)
 - Microservices
-    - architecture (GridSuite)
+    - Architecture (GridSuite)
     - Document each micro-service to explain its purpose and how it works (GridSuite)
 - Developer documentation
-    - repositories: maintain the list and versions up-to-date. Add a description for all repositories (All)
-    - artefacts: maintain the list up-to-date (All)
-    - patterns
+    - Repositories: maintain the list and versions up-to-date. Add a description for all repositories (All)
+    - Artifacts: maintain the list up-to-date (All)
+    - Patterns
         - Define which patterns may have to be explained (configuration, simulation runner, importer, exporter, extensions, computation management, variants...)
         - Explain how to write a new importer (TechRain, AIA)
         - Explain how to write a new exporter (TechRain, AIA)
-    - API Guide: explain how to use a specific API (Single line diagram, time series...) 
+    - API Guide: explain how to use a specific API (Single line diagram, time series...)
     - Tutorials
         - Create a network from scratch based on FourSubstationsNodeBreakerFactory (Agnès)
         - How to create a new IIDM extension
