@@ -1,98 +1,83 @@
-Ce document identifie les contributions attendues sur le site web et les personnes/projets a priori compétents pour les réaliser.
+This document aims to list the expected contributions for the website and propose potential writers (people or project).
 
-**Guidelines pour la mise à jour du site en continu** :
+**Guidelines:**  
+- When someone asks a question to the community, send a link to the website. If the documentation is not ready yet, write the missing page instead of answering by email, even it's not complete.
+- When you write a new page, try to follow the plan used in the existing pages (specially for tutorials)
+- Try to write functional pages understandable by everyone (avoid the references to the Java code) and document the code in the dedicated sections. 
 
-- quand un projet ou un utilisateur pose une question, le renvoyer vers la documentation. Si elle n'existe pas, au lieu d'envoyer un contenu par email, remplir la page de documentation correspondante et envoyer le lien vers la page
-- lors de la rédaction, reprendre les plans proposés pour les pages existantes (notamment pour les tutoriels)
-- essayer de vulgariser les pages fonctionnelles (ne pas faire référence au Java), documenter les API dans la section dédiée
+# General subjects
+- Cosmetic:
+    - Propose a better icon set for the features listed in the home page
+    - Propose a better icon set for the documentation index.
 
-
-# Sujets généraux
-
-- Cosmétique : 
-  - trouver des icônes plus sympa pour les features de la page d'accueil
-  - améliorer les icônes de l'index de la documentation
-
-- Ajouter une barre de recherche dans la page de documentation : Jon (OK)
-
-# Home
-
-- Projets utilisateurs : 
-  - remplir page de présentation GridSuite : Geoffroy, Michaël, Christine
-  - remplir page de présentation SafeT : Michaël, Mathieu, MHP
-
-- Partenaires : demander leur accord aux entreprises citées dans la section de la page d'accueil : Lucian
+# Home page
+- Projects list
+    - Write the presentation page of GridSuite (Geoffroy, Michaël, Christine)
+    - Write the presentation page of Safe-T (Michaël, Mathieu, MHP)
 
 # Overview
-
-- Roadmap : Lucian et Anne
+- Update the roadmap (Lucian, Anne)
 
 # Documentation
-
-- Utilisateur
-  - configuration : enlever les références en dur aux classes Java, repenser l'organisation pour décider si on fait porter les infos sur la conf par les pages de description des features (ex : load flow) ou par les pages de configuration
-  - user story autour de SEA : Sylvain Leclerc, Anne
-  - user story autour du merging : équipes core-merging/GridSuite
-  - user story autour de l'extraction de réseau : Mathieu, Stéphane Fliscounakis, Benjamin Donnot, Antoine Marot
-  - user story autour de ImaGrid : Anne
-
-- Modèle de réseau
-  - topologie : Mathieu
-  - composantes connexes : Mathieu
-  - schémas : Florian
-  - extensions : Miora
-  - shunts : Miora
-  - dangling lines : Anne
-  - merging : core merging, GridSuite, Silicom sur la merging view
-
-- Formats d'import-export
-  - CGMES : AIA, Anne, Miora
-  - UCTE : Sébastien Murgey/équipe core-merging
-  - Matpower : TechRain
-  - IEEE : Geoffroy
-  - PSS/E : JB et Geoffroy, peut-être AIA
-  - XIIDM : Miora, Mathieu
-  - AMPL : Naza/Ringo ?
-
+- User documentation
+    - remove the references to the java classes in the module configuration pages. Try to integrate this information in the functional pages (simululators, import/export...)
+    - Write more user stories:
+        - About forecast security-analysis (Sylvain, Anne)
+        - About the merging (core-merging, GridSuite)
+        - About network extraction (Mathieu, Stéphane F., Benjamin D., Antoine M.)
+        - About long term planning studies (Paul B., Anne)
+- Grid model
+    - Explain the topology (Mathieu)
+    - Connected/Synchronous components (Mathieu)
+    - Add sketches (Florian)
+    - IIDM Extensions (Miora)
+    - Shunts (Miora)
+    - Dangling Lines (Anne)
+    - Merging (core-merging, GridSuite, and Silicom for the merging view)
+- Grid formats
+    - CGMES (AIA, Anne, Miora)
+    - UCTE (Sébastien M, core-merging)
+    - MatPower (TechRain)
+    - IEEE (Geoffroy)
+    - PSS/E (Geoffroy, Jean-Baptiste, AIA)
+    - AMPL (Ringo)
 - Simulateurs
-  - Security analysis : relecture, AS avec parade : SEA
-  - Dynawo: AIA, Mathieu, Agnès, équipe Dynawo
-  - Open Load Flow : Geoffroy, Anne
-
-- HPC : Sylvain Leclerc, Paul Bui-Quang
-
+    - Power Flow
+        - OpenLF implementation
+        - DynaFlow implementation
+        - Hades2 implementation
+    - Security analysis (Sylvain, Anne, Geoffroy, Florian)
+        - Slow implementation
+        - OpenLF implementation
+        - Hades2 implementation
+    - Sensitivity analysis
+        - Hades2 implementation
+    - Dynawo (AIA, Mathieu, Agnès, Dynawo)
+- HPC
+    - Slurm (Sylvain, Yichen)
+    - MPI (Geoffroy, Paul B.)
 - Data management
-  - AFS : Paul Bui-Quang
-
+    - AFS (Paul)
+    - TimeSeries (AIA, Thomas)
 - Microservices
-  - architecture : GridSuite
-  - documenter chaque microservice pour expliquer à quoi il sert/comment il fonctionne : GridSuite
-
-- Développeur
-  - repositories : tenir à jour la liste des repos et les versions : TSC powsybl. Jon a mis des liens qui pointent toujours vers la dernière version des repos mais il faudra tenir la liste des repos à jour et pour les microservices pointer vers les images docker quand il y en aura.
-  - artifacts : tenir à jour : TSC powsybl
-  - patterns :
-    - définir ce qu'on souhaite décrire
-    - extensions, computation manager, variant, etc ?
-    - comment intégrer un importer : TechRain, AIA ?
-    - comment intégrer un exporter : TechRain, AIA ?
-  - guide d'API
-    - contingences : Mathieu
-    - time series : à reprendre par Paul Bui-Quang, peut-être avec un use case ou un tuto ?
-    - définir ce qu'on souhaite écrire 
-      
-  - tutoriels
-    - création d'un réseau from scratch basé sur FourSubstationsNodeBreakerFactory
-    - création d'une extension
-    - manipulation de la topologie
-    - import export CSV
-    - à compléter
+    - architecture (GridSuite)
+    - Document each micro-service to explain its purpose and how it works (GridSuite)
+- Developer documentation
+    - repositories: maintain the list and versions up-to-date. Add a description for all repositories (All)
+    - artefacts: maintain the list up-to-date (All)
+    - patterns
+        - Define which patterns may have to be explained (configuration, simulation runner, importer, exporter, extensions, computation management, variants...)
+        - Explain how to write a new importer (TechRain, AIA)
+        - Explain how to write a new exporter (TechRain, AIA)
+    - API Guide: explain how to use a specific API (Single line diagram, time series...) 
+    - Tutorials
+        - Create a network from scratch based on FourSubstationsNodeBreakerFactory (Agnès)
+        - How to create a new IIDM extension
+        - How to play with the network topology
+        - How to write a basic CSV importer/exporter
 
 # Download
-
-Créer une nouvelle distribution sur powsybl 3.5.0 : Miora
-Finir la release et mettre à jour les liens : Miora
+- Update the powsybl-distribution each time a new version is released and maintain the download link up-to-date
 
 # Community
-
-Evénements : Lucian, Anne, Boris
+- Events: list the events to which PowSyBl participate (Lucian, Anne, Boris)
