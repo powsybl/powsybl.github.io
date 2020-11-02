@@ -7,10 +7,12 @@ The PowSyBl Open Load Flow [repository](https://github.com/powsybl/powsybl-open-
 ## Features
 
 - a load flow solver
+- a security analysis (beta version)
 
 ## Getting started
 
 - [Guide 1]() - Run a load flow computation
+- [Guide 2]() - Run a security analysis
 
 ## Releases
 

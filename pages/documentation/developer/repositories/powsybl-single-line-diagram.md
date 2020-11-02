@@ -10,9 +10,8 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 
 ## Getting started
 
-- [Guide 1](powsybl-single-line-diagram_guide1.md) - Create single line diagrams on a simple example
-- [Guide 2](powsybl-single-line-diagram_guide2.md) - Create single line diagrams based on CGMES sample files
-- [Guide 3]() - Changing single line diagram layouts
+- [SVG Writing](../api_guide/single-line-diagram_svg-writing.md) - Create single line diagrams from test networks
+- [SVG Layouts]() - Change single line diagram default layout
 
 ## Releases
 
