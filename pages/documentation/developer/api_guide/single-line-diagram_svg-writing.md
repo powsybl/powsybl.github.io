@@ -9,6 +9,9 @@ We are showing in this guide how to create some single line diagrams
 - first from a test network,
 - then from a CGMES file.
 
+*Note: the 1.8.0-SNAPSHOT version of powsybl-single-line-diagram was used to generate the SVGs of this guide. Because of that, you might experience some differences with the examples shown, which will be corrected by 1.8.0 release (expected: 2020-11-26).*
+
+
 ## Prerequisites
 
 ### Maven dependencies
@@ -72,7 +75,7 @@ Here are some details about these dependencies:
 For both example networks, we need to initialize a few layout parameters before generating diagrams (see [SVG layouts]() API guide for more info):
 
 ```java
-// "Convergence" style component library
+// Instantiating the default style component library
 ComponentLibrary componentLibrary = new ResourcesComponentLibrary("/ConvergenceLibrary");
 
 // fully automatic layout

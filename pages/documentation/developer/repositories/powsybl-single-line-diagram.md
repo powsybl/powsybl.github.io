@@ -6,7 +6,15 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 
 ## Features
 
-- creation of single line diagrams for given voltage levels or substations
+- creation of single line diagrams for given voltage levels, substations or zones in SVG format
+- diagrams customization
+     - several layout algorithms to generate the diagrams
+     - several layout parameters to adjust the rendering
+     - use your own component library or modify the existing
+- small demo app to display the diagrams (note that this app is mainly for debug purposes and therefore is not included in the release)
+- extensions to force positions in the diagram 
+
+// TODO: complete the list
 
 ## Getting started
 
