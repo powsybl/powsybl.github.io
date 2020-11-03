@@ -47,7 +47,7 @@ A minimum network model is included as an example in version 35 of both formats 
 Q
 ```
 
-```text
+```json
 {
      "network":{
          "caseid":{
