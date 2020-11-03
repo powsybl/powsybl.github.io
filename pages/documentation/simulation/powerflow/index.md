@@ -172,6 +172,7 @@ minimum or maximum: this corresponds to a valid load flow result for the ratio t
 The following power flow implementations are supported:
 - [PowSyBl OpenLoadFlow](openlf.md)
 - [Hades2](hades2.md)
+- [Dynaflow](dynaflow.md)
 
 ## Configuration
 You first need to choose which implementation to use in your configuration file:
@@ -183,6 +184,7 @@ load-flow:
 Each implementation is identified by its name, that may be unique in the classpath:
 - use "OpenLoadFlow" to use PowSyBl OpenLoadFlow
 - use "Hades2" to use RTE Hades2
+- use "DynaFlow" to use DynaFlow implementation
 
 ## Parameters
 
@@ -275,7 +277,9 @@ The default values of all the optional properties are read from the [load-flow-d
 Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
 - [PowSyBl OpenLoadFlow parameters](openlf.md#parameters)
 - [Hades2](hades2.md#specific-parameters)
+- [DynaFlow](dynaflow.md#specific-parameters)
 
+The complete list of available parameters for the Dynaflow load flow is available [here](dynaflow.md).
 ## Going further
 To go further about the power flow with PowSyBl, check the following pages:
 - [Run a power flow through an iTools command](../../user/itools/loadflow.md): Learn how to perform a power flow calculation from the command line
