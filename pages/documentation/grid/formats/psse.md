@@ -3,7 +3,7 @@ layout: default
 ---
 
 # PSS®E
-[PSS®E software](https://new.siemens.com/global/en/products/energy/energy-automation-and-smart-grid/pss-software/pss-e.html) from Siemens provides analysis functions for power system networks in steady-state and dynamic conditions. PSS®E uses different types of files to exchange data about the network. One of them is the RAW file (power flow data file). A PSS®E RAW file contains a collection of unprocessed data that specifies a bus branch network model for the establishment of a power flow working case.
+[PSS®E software](https://new.siemens.com/global/en/products/energy/energy-automation-and-smart-grid/pss-software/pss-e.html) from Siemens provides analysis functions for power system networks in steady-state and dynamic conditions. PSS®E uses different types of files to exchange data about the network. One of them is the RAW file (power flow data file). A PSS®E RAW file contains a collection of unprocessed data that specifies a Bus/Branch network model for the establishment of a power flow working case.
 
 The RAW file has multiple groups of records (data blocks), with each group containing a particular type of data needed in power flow. The last record of each data block is a record specifying a value of zero to indicate the end of the category.
 
@@ -89,7 +89,7 @@ The import module reads and converts a PSS®E power flow data file to the PowSyB
 - Validate input data.
 - Convert input data into PowSyBl grid model.
 
-First, input data is obtained by reading and parsing the input file and as result a PS®SE model is created in memory. This model can be viewed as a set of Java classes where each data block of the PSS®E model is associated with a specific Java class that describes all their attributes or data items. Then, some inconsistency checks are performed on this model. If the validation succeeds the PSS®E model is converted to a PowSyBl grid model.
+First, input data is obtained by reading and parsing the input file and as result a PSS®E model is created in memory. This model can be viewed as a set of Java classes where each data block of the PSS®E model is associated with a specific Java class that describes all their attributes or data items. Then, some inconsistency checks are performed on this model. If the validation succeeds the PSS®E model is converted to a PowSyBl grid model.
 
 ### Options
 Parameters for the import can be defined in the configuration file in the [import-export-parameters-default-value](../../user/configuration/import-export-parameters-default-value.md) module.
