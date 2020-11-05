@@ -5,7 +5,7 @@ The PyPowSyBl project gives access to PowSyBl framework to Python developers. Th
 **Committers:** [mathbagu](https://github.com/mathbagu), [sylvlecl](https://github.com/sylvlecl)
 
 ## Features
-- Load and Save case file (Supported formats are: [XIIDM](../../grid/formats/xiidm.md))
+- Load and save case file (Supported formats are: [XIIDM](../../grid/formats/xiidm.md))
 - Run power flows with [PowSyBl OpenLoadFlow](../../simulation/powerflow/openlf.md)
 
 ## Getting started
