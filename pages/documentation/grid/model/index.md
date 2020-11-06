@@ -557,6 +557,25 @@ A VSC converter station is made with switching devices that can be turned both o
 **Metadata**
 - The participation to regulation (through a boolean)
 
+### Busbar Section
+
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/BusbarSection.html)<br>
+A busbar section is a non impedant element used in a node/breaker substation topology to connect equipments.
+<span style="color:red"> TODO</span>
+
+### Breaker/Switch
+
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
+
+<span style="color:red"> TODO</span>
+
+### Internal Connection
+
+**Internal connection**  
+An internal connection is a non-impedant connection between two components in a voltage level.
+
+<span style="color:red"> TODO</span>
+
 ## Additional network models
 
 In this section, the additional models available in IIDM are described: reactive limits, current limits, voltage regulation, phase and ratio tap changers. 
