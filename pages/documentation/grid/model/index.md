@@ -113,7 +113,7 @@ The [Active Power Control](extensions.md#active-power-control) attributes and th
 
 ![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="40%" .center-image}
 
-#### Load
+### Load
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
 
 A load is a passive equipment representing a delivery point that consumes active and reactive power.
@@ -140,7 +140,7 @@ In IIDM, loads comprise the following metadata:
     - `AUXILIARY`
     - `FICTITIOUS`
 
-#### Battery
+### Battery
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Battery.html)
 
 A battery on the electric grid is an energy storage device that is either capable of capturing energy from the grid or of injecting it into the grid. The electric energy on the grid side is thus transformed into chemical energy on the battery side and vice versa. The power flow is bidirectional and it is controlled via a power electronic converter.
@@ -160,7 +160,7 @@ A battery on the electric grid is an energy storage device that is either capabl
 
 - [Active Power Control](extensions.md#active-power-control)
 
-#### Dangling line
+### Dangling line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/DanglingLine.html)
 
 The IIDM network may be connected to other networks for which a full description is not available.
@@ -199,7 +199,7 @@ page to learn more about this format. This code is actually related to ENTSOE, n
 
 - [Xnode]()
 
-#### Shunt Compensator
+### Shunt Compensator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ShuntCompensator.html)
 
 <span style="color:red"> TODO: add a description.</span>
@@ -235,7 +235,7 @@ calculation or not, depending of what is wanted to be shown.
 - In case of a capacitor, the value for its Q will be negative.
 - In case of a reactor, the value for its Q will be positive.
 
-#### Static VAR Compensator
+### Static VAR Compensator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/StaticVarCompensator.html)
 
 <span style="color:red"> TODO: add a description with sign convention.</span>  
