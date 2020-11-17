@@ -4,7 +4,7 @@ layout: default
 
 # DynaFlow
 
-<span style="color: red">TODO: explain what is DynaFlow, add a link to DynaFlow website</span>
+DynaFlow is a new steady-state simulation tool that aims at calculating the steady-state point by using a simplified time-domain simulation, guaranteeing the correctness of the solution found. You can find more information about it [here](https://dynawo.github.io/about/dynaflow).
 
 * TOC
 {:toc}
@@ -26,7 +26,7 @@ load-flow:
 The `svcRegulationOn` is an optional boolean property that defines if SVCs (Static Var Compensator) take part in the voltage regulation. The default value of this parameter is `false`.
 
 **shuntRegulationOn**  
-The `shuntRegulationOn` is an optional boolean property that defines if Shunts take part in the voltage regulation. 
+The `shuntRegulationOn` is an optional boolean property that defines if Shunts take part in the voltage regulation.
 The default value of this parameter is `false`.
 
 **automaticSlackBusOn**  
@@ -42,7 +42,7 @@ The `lccAsLoads` is an optional boolean property that defines if LCCs (Line Comm
 The default value of this parameter is `true`.
 
 ### Generic parameters
-Furthermore, DynaFlow only supports two of the generic parameters: 
+Furthermore, DynaFlow only supports two of the generic parameters:
 - noGeneratorReactiveLimits
 - phaseShifterRegulationOn
 
