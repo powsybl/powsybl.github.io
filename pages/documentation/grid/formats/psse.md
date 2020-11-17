@@ -115,12 +115,12 @@ For each substation the following attributes are defined:
 
 Every voltage level is assigned to its corresponding substation, with attributes:
   - **Id** following the pattern `VL<n>` where `n` represents the minimum PSS®E bus number included inside the voltage level.
-  - **NominalV** Nominal voltage of the voltage level. Equal to `1` if `psse.import.ignore-base-voltage` property is `true`. Otherwise, it is assigned to the base voltage of one representative bus inside the voltage level, read from PSS®E field `BASKV` field.
+  - **NominalV** Nominal voltage of the voltage level. Equal to `1` if `psse.import.ignore-base-voltage` property is `true`. Otherwise, it is assigned to the base voltage of one representative bus inside the voltage level, read from PSS®E field `BASKV`.
   - **TopologyKind** Topology level assigned to the network model, always `BUS_BREAKER`.
 
 The following sections describe in detail how each supported PSS®E data block is converted to PowSyBl network model objects.
 
-#### _Bus Data_ conversion
+#### _Bus Data_
 
 There is a one-to-one correspondence between the records of the PSS®E _Bus Data_ block and the buses of the PowSyBl network model. For each record in the _Bus Data_ block a PowSyBl bus is created and assigned to its corresponding voltage level with the following attributes:
 - **Id** according to the pattern `B<n>` where `n` represents the PSS@E bus number (field `I` in the _Bus Data_ record).
@@ -129,25 +129,25 @@ There is a one-to-one correspondence between the records of the PSS®E _Bus Data
 - **Angle** is copied from the PSS®E bus voltage phase angle, `VA`.
 
 
-#### _Load Data_ conversion
+#### _Load Data_
 -<span style="color: red">TODO</span>
 
-#### _Fixed Bus Shunt Data_ conversion
+#### _Fixed Bus Shunt Data_
 -<span style="color: red">TODO</span>
 
-#### _Switched Shunt Data_ conversion
+#### _Switched Shunt Data_
 -<span style="color: red">TODO</span>
 
-#### _Generator Data_ conversion
+#### _Generator Data_
 -<span style="color: red">TODO</span>
 
-#### _Non-Transformer Branch Data_ conversion
+#### _Non-Transformer Branch Data_
 -<span style="color: red">TODO</span>
 
-#### _Transformer Data_ conversion
+#### _Transformer Data_
 -<span style="color: red">TODO</span>
 
-#### Slack bus conversion
+#### Slack bus
 -<span style="color: red">TODO</span>
 
 ### Export
