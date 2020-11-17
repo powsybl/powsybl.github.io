@@ -113,7 +113,7 @@ For each substation the following attributes are defined:
   
 Every voltage level is assigned to it's corresponding substation and its attributes are:
   - **Id** following the pattern `VLn` where `n` represents the minimum PSS®E bus number included inside of the voltage level (`BusData.I`, Bus Data record, I attribute or field name).
-  - **NominalV** Nominal voltage of the voltage level. Forced to `1` if `psse.import.ignore-base-voltage` property is true, otherwise it is assigned to the base voltage of the representative bus, `BusData.BASKV` field name.
+  - **NominalV** Nominal voltage of the voltage level. Forced to `1` if `psse.import.ignore-base-voltage` property is true, otherwise it is assigned to the base voltage of the representative bus, `BusData.BASKV` field name. Entered in kV.
   - **TopologyKind** Topology level assigned to the network model, must be BUS_BREAKER.
   
 
@@ -122,8 +122,8 @@ Every voltage level is assigned to it's corresponding substation and its attribu
 There is a one-to-one correspondence between the PSS®E BusData block and the buses of the IIDM network model. For each record of the BusData block an IIDM bus is created and assigned to it's corresponding voltage level with the following attributes:
 - **Id** according to the pattern `Bn` where `n` represents the bus number (`BusData.I`).
 - **Name** As human readable identifier the alphanumeric identifier of the PSS®E bus is assigned (`BusData.NAME`).
-- **V** Voltage of the PSS®E solved case defined as the bus voltage magnitude (`BusData.VM`) multiply by the nominal voltage of the associated voltage level previously defined.
-- **Angle** Phase angle of the solved case defined as the bus voltage phase angle (`BusData.VA`).
+- **V** Voltage of the PSS®E solved case defined as the bus voltage magnitude (`BusData.VM`) multiply by the nominal voltage of the associated voltage level previously defined. Entered in kV.
+- **Angle** Phase angle of the solved case defined as the bus voltage phase angle (`BusData.VA`). Entered in degrees.
 
 
 ### LoadData to Loads Conversion
