@@ -201,7 +201,7 @@ load-flow-default-parameters:
 The parameters may also be overridden with a JSON file, in which case the configuration will look like:
 ```json
 {
-  "version" : "1.0",
+  "version" : "1.4",
   "voltageInitMode" : "PREVIOUS_VALUES",
   "transformerVoltageControlOn" : true,
   "phaseShifterRegulationOn" : false,
