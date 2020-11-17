@@ -100,53 +100,56 @@ The `psse.import.ignore-base-voltage` property is an optional property that defi
 ### Inconsistency checks
 -<span style="color: red">TODO</span>
 
-### Conversion. General description
+### Conversion
 
-A PSS®E file specifies a Bus/Branch network model where typically there is a bus for each voltage level inside a substation and where the concept of substation is usually not defined. (Since version 35 PSS®E provides a substation data block, but it is optional and it may not be defined in the case). On the other side, the IIDM model is a hierarchical network model where the voltage levels and the network components, except transmission lines, are defined indoor substations so the first step in the conversion process is to define a substation for each PSS®E bus ensuring that all transformer buses are inside the same substation. 
+A PSS®E file specifies a Bus/Branch network model where typically there is a bus for each voltage level inside a substation and where substation objects are not explicitly defined. Breakers and switchers were traditionally modeled as zero impedance lines with special identifiers. Since version 35 PSS®E supports explicit definition of substation data and switching devices at both system and substation level. However, this information is optional and may not be present in the case.
 
-The current conversion version does not support PSS®E substation information so, in all the network cases, a fictitious voltage level and a fictitious substation are created for each bus. Before creating them, buses are grouped using zero impedance branches and transformers as connectors. A voltage level is assigned to each group of buses connected by zero impedance branches and a substation to every group of buses connected by zero impedance branches and transformers. 
+The PowSyBl grid model establishes the substation as a required container of voltage levels and equipment. The first step in the conversion process assigns a substation for each PSS®E bus, ensuring that all buses at transformer ends are kept in the same substation.
 
-In the IIDM model all the network components are identified through a global and unique alphanumeric identifier (**Id**) and optionally by a human readable identifier (**Name**).
+The current conversion does not use explicit PSS®E substation information. Instead, buses are grouped using zero impedance branches and transformers as connectors. A new voltage level is created for each group of buses connected by zero impedance branches, and a new substation is created for the voltage levels connected by transformers.
+
+In the PowSyBl grid model all the network components are identified through a global and unique alphanumeric identifier (**Id**). Optionally, they may receive a name (**Name**).
 
 For each substation the following attributes are defined:
-  - **Id** following the pattern `Sn` where `n` represents a consecutive integer number starting from 1.
-  
-Every voltage level is assigned to it's corresponding substation and its attributes are:
-  - **Id** following the pattern `VLn` where `n` represents the minimum PSS®E bus number included inside of the voltage level (`BusData.I`, Bus Data record, I attribute or field name).
-  - **NominalV** Nominal voltage of the voltage level. Forced to `1` if `psse.import.ignore-base-voltage` property is true, otherwise it is assigned to the base voltage of the representative bus, `BusData.BASKV` field name. Entered in kV.
-  - **TopologyKind** Topology level assigned to the network model, must be BUS_BREAKER.
-  
+  - **Id** following the pattern `S<n>` where `n` represents a consecutive integer number starting from 1.
 
-### BusData to Buses Conversion
+Every voltage level is assigned to its corresponding substation, with attributes:
+  - **Id** following the pattern `VL<n>` where `n` represents the minimum PSS®E bus number included inside the voltage level.
+  - **NominalV** Nominal voltage of the voltage level. Equal to `1` if `psse.import.ignore-base-voltage` property is `true`. Otherwise, it is assigned to the base voltage of one representative bus inside the voltage level, read from PSS®E field `BASKV` field.
+  - **TopologyKind** Topology level assigned to the network model, always `BUS_BREAKER`.
 
-There is a one-to-one correspondence between the PSS®E BusData block and the buses of the IIDM network model. For each record of the BusData block an IIDM bus is created and assigned to it's corresponding voltage level with the following attributes:
-- **Id** according to the pattern `Bn` where `n` represents the bus number (`BusData.I`).
-- **Name** As human readable identifier the alphanumeric identifier of the PSS®E bus is assigned (`BusData.NAME`).
-- **V** Voltage of the PSS®E solved case defined as the bus voltage magnitude (`BusData.VM`) multiply by the nominal voltage of the associated voltage level previously defined. Entered in kV.
-- **Angle** Phase angle of the solved case defined as the bus voltage phase angle (`BusData.VA`). Entered in degrees.
+The following sections describe in detail how each supported PSS®E data block is converted to PowSyBl network model objects.
+
+#### _Bus Data_ conversion
+
+There is a one-to-one correspondence between the records of the PSS®E _Bus Data_ block and the buses of the PowSyBl network model. For each record in the _Bus Data_ block a PowSyBl bus is created and assigned to its corresponding voltage level with the following attributes:
+- **Id** according to the pattern `B<n>` where `n` represents the PSS@E bus number (field `I` in the _Bus Data_ record).
+- **Name** is copied from PSS®E field `NAME`.
+- **V** is obtained from the PSS®E bus voltage magnitude, `VM`, multiplied by the nominal voltage of the corresponding voltage level.
+- **Angle** is copied from the PSS®E bus voltage phase angle, `VA`.
 
 
-### LoadData to Loads Conversion
+#### _Load Data_ conversion
 -<span style="color: red">TODO</span>
 
-### FixedBusShuntData to Linear Shunt Compensators Conversion
+#### _Fixed Bus Shunt Data_ conversion
 -<span style="color: red">TODO</span>
 
-### SwitchedShuntData to Non-Linear Shunt Compensators Conversion
+#### _Switched Shunt Data_ conversion
 -<span style="color: red">TODO</span>
 
-### GeneratorData to Generators Conversion
+#### _Generator Data_ conversion
 -<span style="color: red">TODO</span>
 
-### Non-TransformerBranchData to Lines Conversion
+#### _Non-Transformer Branch Data_ conversion
 -<span style="color: red">TODO</span>
 
-### TransformerData to TwoWindings and ThreeWindings Transformers Conversion
+#### _Transformer Data_ conversion
 -<span style="color: red">TODO</span>
 
-### Slack Conversion
+#### Slack bus conversion
 -<span style="color: red">TODO</span>
 
-## Export
+### Export
 
-The export of network into the PSS/E format is not supported.
+The export of PowSyBl networks to PSS®E format is not yet supported.
