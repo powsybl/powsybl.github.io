@@ -47,6 +47,31 @@ It defines the bus chosen for slack distribution by its ID.
 
 See below an extract of a config file that could help:
 
+**powerFactorConstant**  
+Optional boolean property (default value : false). This property is used in <span style="color: green">DistributedSlackOnLoad</span> outer loop if :
+- `distributedSlack` property is set to true in [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters"),
+- and `balanceType` parameter is set to `PROPORTIONAL_TO_LOAD` or `PROPORTIONAL_TO_CONFORM_LOAD` in  [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters").
+
+If prerequisites satisfied and `powerFactorConstant` property is set to true, when the outer loop adjust <span style="color: green">P</span>, it adjust <span style="color: green">Q</span> too in order to remain <span style="color: red">power factor</span> a constant value. <span style="color: red">Power Factor</span> is given with this equation :
+
+$$
+Power Factor = {\frac {P} {\sqrt {P^2+{Q^2}}}}
+$$ 
+
+To remain <span style="color: red">power factor</span> a constant value with new $$P_2$$, it means we have to isolate $$Q_2$$ in this equation :
+
+$$
+{\frac {P_1} {\sqrt {P^2_1+{Q^2_1}}}}={\frac {P_2} {\sqrt {P^2_2+{Q^2_2}}}}
+$$
+
+Finally, a simple rule of three is implemented in <span style="color: green">DistributedSlackOnLoad</span> outer loop :
+
+$$
+Q_2={\frac {{Q_1}{P_2}} {P_1}}
+$$
+
+The default value for `powerFactorConstant` property is `false`.
+
 ```yaml
 open-loadflow-default-parameters:
   lowImpedanceBranchMode: REPLACE_BY_ZERO_IMPEDANCE_LINE
@@ -55,6 +80,7 @@ open-loadflow-default-parameters:
   voltageRemoteControl: false
   slackBusSelectorType: Name
   nameSlackBusSelectorBusId: Bus3_0
+  powerFactorConstant: true
 ```
 
 At the moment, overriding the parameters by a JSON file is not supported by OpenLoadFlow.
