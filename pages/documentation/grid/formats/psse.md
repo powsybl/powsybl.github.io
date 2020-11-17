@@ -100,11 +100,31 @@ The `psse.import.ignore-base-voltage` property is an optional property that defi
 ### Inconsistency checks
 -<span style="color: red">TODO</span>
 
-### Conversion, General description
--<span style="color: red">TODO</span>
+### Conversion. General description
+
+A PSS®E file specifies a Bus/Branch network model where typically there is a bus for each voltage level inside a substation and where the concept of substation is usually not defined. (Since version 35 PSS®E provides a substation data block, but it is optional and it may not be defined in the case). On the other side, the IIDM model is a hierarchical network model where the voltage levels and the network components, except transmission lines, are defined indoor substations so the first step in the conversion process is to define a substation for each PSS®E bus ensuring that all transformer buses are inside the same substation. 
+
+The current conversion version does not support PSS®E substation information so, in all the network cases, a fictitious voltage level and a fictitious substation are created for each bus. Before creating them, buses are grouped using zero impedance branches and transformers as connectors. A voltage level is assigned to each group of buses connected by zero impedance branches and a substation to every group of buses connected by zero impedance branches and transformers. 
+
+In the IIDM model all the network components are identified through a global and unique alphanumeric identifier (**Id**) and optionally by a human readable identifier (**Name**).
+
+For each substation the following attributes are defined:
+  - **Id** following the pattern `Sn` where `n` represents a consecutive integer number starting from 1.
+  
+Every voltage level is assigned to it's corresponding substation and its attributes are:
+  - **Id** following the pattern `VLn` where `n` represents the minimum PSS®E bus number included inside of the voltage level (`BusData.I`, Bus Data record, I attribute or field name).
+  - **NominalV** Nominal voltage of the voltage level. Forced to `1` if `psse.import.ignore-base-voltage` property is true, otherwise it is assigned to the base voltage of the representative bus, `BusData.BASKV` field name.
+  - **TopologyKind** Topology level assigned to the network model, must be BUS_BREAKER.
+  
 
 ### BusData to Buses Conversion
--<span style="color: red">TODO</span>
+
+There is a one-to-one correspondence between the PSS®E BusData block and the buses of the IIDM network model. For each record of the BusData block an IIDM bus is created and assigned to it's corresponding voltage level with the following attributes:
+- **Id** according to the pattern `Bn` where `n` represents the bus number (`BusData.I`).
+- **Name** As human readable identifier the alphanumeric identifier of the PSS®E bus is assigned (`BusData.NAME`).
+- **V** Voltage of the PSS®E solved case defined as the bus voltage magnitude (`BusData.VM`) multiply by the nominal voltage of the associated voltage level previously defined.
+- **Angle** Phase angle of the solved case defined as the bus voltage phase angle (`BusData.VA`).
+
 
 ### LoadData to Loads Conversion
 -<span style="color: red">TODO</span>
