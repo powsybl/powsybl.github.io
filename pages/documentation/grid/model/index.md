@@ -10,17 +10,21 @@ latex: true
 
 ## Introduction
 
-The IIDM (iTesla Internal Data Model) was designed during the iTesla project for running simulations and it is the internal format model used in Powsybl (Power System Blocks). To build an electrical transmission network model using IIDM the electrical substations and the transmission lines connecting them (AC and DC lines) should be represented. Voltage levels, phase shifters and transformers are included within the substations and the rest of the network components (breakers, loads, generators, shunts, SVC, DC converters ...) are defined inside the voltage levels.
+PowSyBl uses an internal grid model initially developed under the iTesla project, a research project funded by the European Union 7th Framework programme (FP7). The grid model is known as iIDM (iTesla Internal Data Model). One of the iTesla outputs was a toolbox designed to support the decision-making process of power system operation from two-days ahead to real time. The iIDM grid model was at the center of the toolbox.
 
-The IIDM model can provide a fully representation of the substations (node-breaker model) where all the breakers and busbars are defined  or a gradual simplification of the connectivity up to a bus-branch model where each node inside the substation represents a nominal voltage. It allows to extract sub-parts of the network model and to merge individual networks expressed in different formats, for handling European data for instance.
+To build an electrical network model using iIDM first the substations must be defined. The equipment in a substation (loads, generators, shunts, Static Var Compensators, DC converters ...) are grouped in voltage levels. Transformers present in a substation connect its different voltage levels. Transmission lines (AC and DC) connect the substations. A connection point for an equipment is a _terminal_.
 
-The Grid Model can be envisioned as a set of classes (lines, transformers, generators, loads, HVDC, static var compensator, shunt compensators ...) extensible with plugins to add additional data to equipments.
+The PowSyBl grid model allows a full representation of the substation connectivity where all the switching devices and busbars are defined (_node/breaker_ level). Automated topology calculation permits to obtain views of the network up to the _bus/branch_ level.
+
+Different states of the network can be stored together with the power system model in an efficient way. The set of attributes that define a given state of the network (steady state hypothesis and state variables) are collectively organized in _variants_. The user can create and remove _variants_ as needed. Setting and getting variant dependent attributes on network objects use the current _variant_.
+
+A set of PowSyBl networks can be merged together in a single network view, and sub-parts of the network model can be easily extracted as separate networks.
+
+All elements modeled in the network are identified through a unique ID, and optionally described by a name that is easier to interpret for a human. All components can be _extended_ by the user to incorporate additional structured data.
 
 ## Network core model
 
-In the following sections the different network components are described in terms of electro-technical representation.
-All modeled elements are identified through a unique ID, and optionally by a name that is easier to interpret for a human.
-Next table provides the attributes shared by all the network components.
+In the following sections the different network components are described in terms of its main attributes and electro-technical representation. The attributes shared by all the network components are described in the next table:
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -30,14 +34,12 @@ Next table provides the attributes shared by all the network components.
 | $$Aliases$$ | Additional unique identifiers associated with each network component |
 | $$Properties$$ | To add additional data items to network components |
 
-`Id` is the only required attribute and by default `Fictitious` is set to false. `Aliases` offers the possibility of adding additional unique identifiers to each component. An `AliasType` can be specified to indicate what it corresponds to. `Properties` allows to associate additional data items under the general format <PropertyKeyword, Value>.
+The `Id` is the only required attribute and by default `Fictitious` is set to false. `Aliases` offers the possibility of adding additional unique identifiers to each component. An `AliasType` can be specified to indicate what it corresponds to. `Properties` allows to associate additional arbitrary data items under the general schema of pairs `<key, value>`.
 
-### Network 
+### Network
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
 
-In IIDM, the network is constituted of [substations](#substation), which are themselves constituted of [voltage levels](#voltage-level).
-All the grid elements are then connected to the voltage levels and their associated classes contain the equipment information,
-the steady state hypothesis information and the state variables.
+In the PowSyBl grid model, the Network contains [substations](#substation), which themselves contain [voltage levels](#voltage-level).
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -50,7 +52,7 @@ Only the `SourceFormat` attribute is required.
 ### Substation
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Substation.html)
 
-A substation in IIDM represents a specific geographical location with a set of equipments connected to one or several [voltage levels](#voltage-level).
+A substation represents a specific geographical location with equipment grouped in one or several [voltage levels](#voltage-level).
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -58,13 +60,13 @@ A substation in IIDM represents a specific geographical location with a set of e
 | $$GeographicalTags$$ | They make it possible to accurately locate the substation |
 | $$TSO$$ | To track to which [TSO](/pages/glossary.md#tso) the substation belongs |
 
-All three attributes are optional. 
+All three attributes are optional.
 
 ### Voltage Level
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VoltageLevel.html)
 
-A voltage level in IIDM represents a set of equipments connected together with the same nominal voltage, physically close to each other (~ 1-100m).
-Two voltage levels may be connected through a line (they are then located in different substations) or through transformers (they are then located within the same substation).
+A voltage level contains equipment with the same nominal voltage.
+Two voltage levels may be connected through lines (when they belong to different substations) or through transformers (they must be located within the same substation).
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
@@ -73,18 +75,27 @@ Two voltage levels may be connected through a line (they are then located in dif
 | $$HighVoltageLimit$$ | kV | High voltage limit magnitude |
 | $$TopologyKind$$ |  | Level of connectivity detail |
 
-Only `NominalVoltage` and `TopologyKind` are required. Additionally the [Slack Terminal](extensions.md#slack-terminal) could be defined as an extension so the associated bus will be used to balance the active and reactive power.
+Only `NominalVoltage` and `TopologyKind` are required.
 
-Inside the voltage level the grid model supports two connectivity levels, **node-breaker** where the connectivity is described with the finest level of detail and can provide the exactly field representation. This topology level could be described as a graph structure where the vertex are `nodes` and the edges `breakers`, `switches` or `internalConnections`. The network components are attached to one `node`, (busbar sections, loads, generators, ..) two `nodes` (transmission lines, two windings transformers, ...) or three `nodes` (three windings transformers). The second level is **bus-breaker**, where the voltage level is described with a coarser level of detail. In that case the vertices are `buses` and the edges are also `breakers` and `switches`, but they are not required. The network components are attached to one, two or three buses. In the bus-breaker topology level only the connected network components are attached to buses and in the node-breaker level only one network component is allowed per node. The attachment in both topology levels is done through an internal reference called `Terminal`.
+The [Slack Terminal](extensions.md#slack-terminal) _extension_ defines the terminal marking which bus will be used to balance the active and reactive power in load flow analysis.
 
-Powsybl provides a Network Topology Processor that allows to obtain a bus-breaker view from a node-breaker view and a bus-branch view from a bus-breaker view using the status (open/close) of the `breakers` and `switches` and the analog measurement data to determine the new topology, the bus voltage magnitude measurements and the bus power flow injection measurements. Only the `breakers` and `switches` marked as retained in the node-breaker view are preserved in the bus-breaker view. A bus-branch view is an abstract representation of a physical network at a particular time where each substation is represented with a single bus at each nominal voltage level and subestations are connected by transmission lines and transformers.
+The connectivity in each voltage level of the netwrork can be defined at one of two levels: **node/breaker** or **bus/breaker**.
+
+In **node/breaker** the connectivity is described with the finest level of detail and can provide an exact field representation. This level could be described as a graph structure where the vertices are `nodes` and the edges are `switches` (breakers, disconnectors) or `internalConnections`. Each equipment is associated to one `node` (busbar sections, loads, generators, ..), two `nodes` (transmission lines, two-windings transformers, ...) or three `nodes` (three-windings transformers). Each `node` can have only one associated equipment. `Nodes` do not have an alphanumeric `Id` or `name`.
+
+Using **bus/breaker** the voltage level connectivity is described with a coarser level of detail. In this case the vertices of the graph are `buses`, defined explicitly by the user. A `bus` has an `Id`, a may have a `name`. Each equipment defines the bus or buses to which it is connected. `Switches` can be defined between buses.
+
+Powsybl provides an integrated Topology Processor that allows to automatically obtain a bus/breaker view from a node/breaker view, and a bus/branch view from a bus/breaker view. It builds the topology views from the open/close status of `switches`. `Switches` marked as retained in the node/breaker level are preserved in the bus/breaker view.
 
 ![VoltageLevel](img/index/voltage-level.svg){: width="100%" .center-image}
 
-### Generator 
+=========== XXX(LUMA)
+
+
+### Generator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Generator.html)
 
-A generator is an active equipment that injects active power, and injects or consumes reactive power. 
+A generator is an active equipment that injects active power, and injects or consumes reactive power.
 It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
 
 | Attribute | Unit | Description |
@@ -494,14 +505,14 @@ An HVDC line is connected to the DC side of two HVDC converter stations, either 
     - `SIDE_1_RECTIFIER_SIDE_2_INVERTER`: the flow goes from side 1 to side 2
     - `SIDE_1_INVERTER_SIDE_2_RECTIFIER`: the flow goes from side 2 to side 1
 
-  The flow sign is thus given by the type of the converter station: the power always flows from the rectifier converter station to the inverter converter station. 
+  The flow sign is thus given by the type of the converter station: the power always flows from the rectifier converter station to the inverter converter station.
   At a terminal on the AC side, `P` and `Q` follow the passive sign convention. `P` is positive on the rectifier side. `P` is negative at the inverter side.
-- The active power setpoint and the maximum active power should always be positive values. 
+- The active power setpoint and the maximum active power should always be positive values.
 
 #### HVDC Converter Station
 
-An HVDC converter station converts electric power from high voltage alternating current (AC) to high-voltage direct current (HVDC), or vice versa. 
-Electronic converters for HVDC are divided into two main categories: line-commutated converters (LCC) and voltage-sourced converters (VSC). 
+An HVDC converter station converts electric power from high voltage alternating current (AC) to high-voltage direct current (HVDC), or vice versa.
+Electronic converters for HVDC are divided into two main categories: line-commutated converters (LCC) and voltage-sourced converters (VSC).
 
 ##### LCC Converter Station
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/LccConverterStation.html)
@@ -509,7 +520,7 @@ Electronic converters for HVDC are divided into two main categories: line-commut
 An LCC converter station is made with electronic switches that can only be turned on (thyristors). Below are some characteristics:
 - Use semiconductors which can withstand voltage in either polarity
 - Output voltage can be either polarity to change the power direction
-- Current direction does not change 
+- Current direction does not change
 - Store energy inductively
 - Use semiconductors which can turn on by control action
 - Turn-off and commutation rely on the external circuit
@@ -578,7 +589,7 @@ An internal connection is a non-impedant connection between two components in a 
 
 ## Additional network models
 
-In this section, the additional models available in IIDM are described: reactive limits, current limits, voltage regulation, phase and ratio tap changers. 
+In this section, the additional models available in IIDM are described: reactive limits, current limits, voltage regulation, phase and ratio tap changers.
 They can be used by various equipment models.
 
 ### Reactive limits
@@ -606,7 +617,7 @@ The permanent limit sets the current value (in `A`) under which the equipment ca
 be operated for any duration.
 The temporary limits can be used to define higher current limitations corresponding
 to specific operational durations.
-A temporary limit thus has an **acceptable duration**. 
+A temporary limit thus has an **acceptable duration**.
 The component on which the current limits are applied can safely remain
 between the preceding limit (it could be another temporary limit or a permanent limit) and this limit for a duration up to the acceptable duration.
 
@@ -618,14 +629,14 @@ A phase tap changer can be added to either [two windings transformers](#two-wind
 **Specifications**
 
 A phase tap changer is described by a set of tap positions (or steps) within which the transformer or transformer leg can operate. Additionally to that set of steps, it is necessary to specify:
-- the lowest tap position 
+- the lowest tap position
 - the highest tap position
 - the position index of the current tap (which has to be within the highest and lowest tap position bounds)
 - whether the tap changer is regulating or not
-- the regulation mode, which can be `CURRENT_LIMITER`, `ACTIVE_POWER_CONTROL` or `FIXED_TAP`: the tap changer either regulates the current or the active power. 
+- the regulation mode, which can be `CURRENT_LIMITER`, `ACTIVE_POWER_CONTROL` or `FIXED_TAP`: the tap changer either regulates the current or the active power.
 - the regulation value (either a current value in `A` or an active power value in `MW`)
 - the regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
-- the target deadband, which defines a margin on the regulation so as to avoid an excessive update of controls 
+- the target deadband, which defines a margin on the regulation so as to avoid an excessive update of controls
 
 The phase tap changer can always switch tap positions while loaded, which is not the case of the ratio tap changer described below.
 
@@ -650,13 +661,13 @@ A ratio tap changer can be added to either [two windings transformers](#two-wind
 **Specifications**
 
 A ratio tap changer is described by a set of tap positions (or steps) within which the transformer or transformer leg can operate (or be operated offload). Additionally to that set of steps, it is necessary to specify:
-- the lowest tap position 
+- the lowest tap position
 - the highest tap position
 - the position index of the current tap (which has to be within the highest and lowest tap position bounds)
 - whether the tap changer is regulating or not; a ratio tap changer always regulates on the voltage
 - the regulation value (in `kV`)
 - the regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
-- the target deadband, which defines a margin on the regulation so as to avoid an excessive update of controls 
+- the target deadband, which defines a margin on the regulation so as to avoid an excessive update of controls
 - whether the ratio tap changer can change tap positions onload or only offload
 
 
@@ -673,4 +684,3 @@ Each step of a ratio tap changer has the following attributes:
 ## Going further
 
 <span style="color:red"> TODO: create a tutorial showing how to create the FourSubstationsNodeBreakerFactory network of the tests.</span>
-
