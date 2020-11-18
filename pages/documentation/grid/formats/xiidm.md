@@ -76,6 +76,13 @@ The `iidm.export.xml.extensions` property is an optional property that defines t
 **iidm.export.xml.version**  
 The `iidm.export.xml.version` property is an optional property that defines the XIIDM version to use for the exported file. If the chosen version is not compatible with the network to write, an error occurs. This is typically the case when an attribute appeared in a version more recent than the target one, and its value is not the default one (importing back the file will lead to a different network). By default, the export is done in the more recent version that is supported.
 
+**iidm.export.xml.iidm-version-incompatibility-behavior**
+The `iidm.export.xml.iidm-version-incompatibility-behavior` property is an optional property that defines the behavior of the XIIDM exporter when there is a version incompatibility between the IIDM network and the XIIDM version in which the export is done.
+There is two possible behaviors:
+- `LOG_ERROR`: an error is logged when there is a version incompatibility
+- `THROW_EXCEPTION`: an exception is thrown when there is a version incompatibility
+By default, this behavior is set as `THROW_EXCEPTION`
+
 #### Removed properties
 
 **iidm.export.xml.export-mode**  
