@@ -45,8 +45,6 @@ Note that if you want to choose the slack bus that is defined inside the network
 The `nameSlackBusSelectorBusId` property is a required property if you choose `Name` for property `slackBusSelectorType`.
 It defines the bus chosen for slack distribution by its ID.
 
-See below an extract of a config file that could help:
-
 **powerFactorConstant**  
 Optional boolean property (default value : false). This property is used in <span style="color: green">DistributedSlackOnLoad</span> outer loop if :
 - `distributedSlack` property is set to true in [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters"),
@@ -71,6 +69,9 @@ Q_2={\frac {{Q_1}{P_2}} {P_1}}
 $$
 
 The default value for `powerFactorConstant` property is `false`.
+
+### Configuration file example
+See below an extract of a config file that could help:
 
 ```yaml
 open-loadflow-default-parameters:
