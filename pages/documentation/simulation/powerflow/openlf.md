@@ -48,9 +48,12 @@ It defines the bus chosen for slack distribution by its ID.
 **powerFactorConstant**  
 Optional boolean property (default value : false). This property is used in <span style="color: green">DistributedSlackOnLoad</span> outer loop if :
 - `distributedSlack` property is set to true in [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters"),
-- and `balanceType` parameter is set to `PROPORTIONAL_TO_LOAD` or `PROPORTIONAL_TO_CONFORM_LOAD` in  [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters").
+- and `balanceType` property is set to `PROPORTIONAL_TO_LOAD` or `PROPORTIONAL_TO_CONFORM_LOAD` in  [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters").
 
-If prerequisites satisfied and `powerFactorConstant` property is set to true, when the outer loop adjust <span style="color: green">P</span>, it adjust <span style="color: green">Q</span> too in order to remain <span style="color: red">power factor</span> a constant value. <span style="color: red">Power Factor</span> is given with this equation :
+If prerequisites fullfilled and `powerFactorConstant` property is set to true, when the outer loop adjust <span style="color: green">P</span> value,
+it adjust <span style="color: green">Q</span> value too in order to remain <span style="color: red">power factor</span> a constant value.
+At the end, the network file produced as output is updated with Q ending value in loads.
+<span style="color: red">Power Factor</span> is given with this equation :
 
 $$
 Power Factor = {\frac {P} {\sqrt {P^2+{Q^2}}}}
