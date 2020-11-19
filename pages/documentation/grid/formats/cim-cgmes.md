@@ -55,7 +55,7 @@ The `iidm.import.cgmes.powsybl-triplestore` property is an optional property tha
 The `iidm.import.cgmes.profile-used-for-initial-state-values` property is an optional property that defines which profile is used in priority for initial state values. It can be `SSH` or `SV`. Its default value is `SSH`.
 
 **iidm.import.cgmes.store-cgmes-model-as-network-extension**  
-The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an optional property that defines if the CGMES model is stored in the imported IIDM network as an extension. Its default value is `true`.
+The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an optional property that defines if the CGMES model is stored in the imported IIDM network as an [extension](). Its default value is `true`.
 
 **iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension**
 The `iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension` property is an optional property that defines if the CGMES Conversion context will be stored as an extension of the IIDM output network. Its default value is `false`.
