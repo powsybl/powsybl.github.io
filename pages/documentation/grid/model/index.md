@@ -34,7 +34,7 @@ In the following sections the different network components are described in term
 | $$Aliases$$ | Additional unique identifiers associated with each network component |
 | $$Properties$$ | To add additional data items to network components |
 
-The `Id` is the only required attribute and by default `Fictitious` is set to false. `Aliases` offers the possibility of adding additional unique identifiers to each component. An `AliasType` can be specified to indicate what it corresponds to. `Properties` allows to associate additional arbitrary data items under the general schema of pairs `<key, value>`.
+The `Id` is the only required attribute and by default `Fictitious` is set to `false`. `Aliases` offers the possibility of adding additional unique identifiers to each component. An `AliasType` can be specified to indicate what it corresponds to. `Properties` allows to associate additional arbitrary data items under the general schema of pairs `<key, value>`.
 
 ### Network
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
@@ -81,15 +81,17 @@ The [Slack Terminal](extensions.md#slack-terminal) _extension_ defines the termi
 
 The connectivity in each voltage level of the network can be defined at one of two levels: **node/breaker** or **bus/breaker**.
 
-In **node/breaker** the connectivity is described with the finest level of detail and can provide an exact field representation. This level could be described as a graph structure where the vertices are `nodes` and the edges are `switches` (breakers, disconnectors) or `internalConnections`. Each equipment is associated to one `node` (busbar sections, loads, generators, ..), two `nodes` (transmission lines, two-windings transformers, ...) or three `nodes` (three-windings transformers). Each `node` can have only one associated equipment. `Nodes` do not have an alphanumeric `Id` or `name`.
+In **node/breaker** the connectivity is described with the finest level of detail and can provide an exact field representation. This level could be described as a graph structure where the vertices are `Nodes` and the edges are `Switches` (breakers, disconnectors) or internal connections. Each equipment is associated to one `Node` (busbar sections, loads, generators, ..), two `Nodes` (transmission lines, two-windings transformers, ...) or three `Nodes` (three-windings transformers). Each `Node` can only have one associated equipment. `Nodes` do not have an alphanumeric `Id` or `name`.
 
-Using **bus/breaker** the voltage level connectivity is described with a coarser level of detail. In this case the vertices of the graph are `buses`, defined explicitly by the user. A `bus` has an `Id`, a may have a `name`. Each equipment defines the bus or buses to which it is connected. `Switches` can be defined between buses.
+Using **bus/breaker** the voltage level connectivity is described with a coarser level of detail. In this case the vertices of the graph are `Buses`, defined explicitly by the user. A `Bus` has an `Id`, and may have a `name`. Each equipment defines the bus or buses to which it is connected. `Switches` can be defined between buses.
 
-Powsybl provides an integrated Topology Processor that allows to automatically obtain a bus/breaker view from a node/breaker view, and a bus/branch view from a bus/breaker view. It builds the topology views from the open/close status of `switches`. `Switches` marked as retained in the node/breaker level are preserved in the bus/breaker view.
+Powsybl provides an integrated Topology Processor that allows to automatically obtain a bus/breaker view from a node/breaker definition, and a bus/branch view from a bus/breaker view or definition. It builds the topology views from the open/close status of `Switches`. `Switches` marked as `retained` in the node/breaker level are preserved in the bus/breaker view.
+
+The following diagram represent an example voltage level with two busbars separated by a circuit breaker, a transformer connected to one of them and three generators that can connect to any of the two busbars. The three topology levels are shown.
 
 ![VoltageLevel](img/index/voltage-level.svg){: width="100%" .center-image}
 
-=========== XXX(LUMA)
+When defining the model, the user has to specify how the different equipment connect to the network. The connectivity level can be different in each voltage level of the model. If the voltage level is built at node/breaker level, the user has to specify a `Node` when adding an equipment to the model. If the user is building using bus/breaker level, the `ConnectableBus` of the equipment must be specified. If the equipment connection to the network is closed, then the attribute `Bus` must be set and must be equal to `ConnectableBus`. Using this information, the model creates a `Terminal` that will be used to manage the point of connection of the equipment to the network.
 
 
 ### Generator
@@ -100,8 +102,6 @@ It may be controlled to hold a voltage or reactive setpoint somewhere in the net
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
-| $$Node$$ |  | Node where the generator is attached |
-| $$ConnectableBus$$ |  | Bus where the generator is attached |
 | $$MinP$$ | MW | Minimum generator active power output |
 | $$MaxP$$ | MW | Maximum generator active power output |
 | $$ReactiveLimits$$ | Mvar | Operational limits of the generator (P/Q/U diagram) |
@@ -113,16 +113,17 @@ It may be controlled to hold a voltage or reactive setpoint somewhere in the net
 | $$VoltageRegulatorOn$$ |  | True if the generator regulates voltage |
 | $$EnergySource$$ |  | The energy source harnessed to turn the generator |
 
-The generator is attached to a node o a bus depending on the topology level of the grid model and one of both (`Node`, `ConnectableBus`) must be defined. Also `MinP`, `MaxP` and `TargetP` are required and the minimum active power can not be greater than the maximum active. `TargetP` must be inside active power limits. `RatedS` specifies the nameplate apparent power rating for the unit, it is optional and should be a positive value when is defined. The Reactive limits of the generator (`ReactiveLimits`) are optional and by default the generator is considered with unlimited reactive power.
+The values `MinP`, `MaxP` and `TargetP` are required. The minimum active power output can not be greater than the maximum active power output. `TargetP` must be inside this active power limits. `RatedS` specifies the nameplate apparent power rating for the unit, it is optional and should be a positive value if it is defined. The reactive limits of the generator (`ReactiveLimits`) are optional, if they are not given the generator is considered with unlimited reactive power. Reactive limits can be given as a pair or min/max values or as a  reactive capability curve.
 
-The `VoltageRegulatorOn` attribute is required and if it has been defined as on then `TargetV` and `RegulatingTerminal` must also be defined. If the voltage regulator is off then `TargetQ` is required. Finally, `EnergySource` is optional and the default values is `OTHER`. All defined energy sources are: `HYDRO`, `NUCLEAR`, `WIND`, `THERMAL`, `SOLAR` and `OTHER`.
+The `VoltageRegulatorOn` attribute is required. It voltage regulation is enabled, then `TargetV` and `RegulatingTerminal` must also be defined. If the voltage regulation is disabled, then `TargetQ` is required. `EnergySource` is optional, it can be: `HYDRO`, `NUCLEAR`, `WIND`, `THERMAL`, `SOLAR` or `OTHER`.
 
-Target values for generators (`TargetP` and `TargetQ`) follow the generator sign convention. A positive value means an injection into the bus.
-A positive value for `targetP` and `targetQ` means a negative value at the corresponding generator active power and reactive power output.
-
-The [Active Power Control](extensions.md#active-power-control) attributes and the percent of the reactive control that comes from this generator in a [Coordinated Reactive Control](extensions.md#coordinated-reactive-control) configuration are available as grid model extensions.
+Target values for generators (`TargetP` and `TargetQ`) follow the generator sign convention: a positive value means an injection into the bus.
+Positive values for `targetP` and `targetQ` mean negative values at the flow observed at the generator terminal, as `Terminal` flow always follows load sign convention. The following diagram shows the sign convention of these quantities with an example.
 
 ![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="40%" .center-image}
+
+The [Active Power Control](extensions.md#active-power-control) participation and the percent of the reactive control that comes from this generator in a [Coordinated Reactive Control](extensions.md#coordinated-reactive-control) configuration are available as grid model extensions.
+
 
 ### Load
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
