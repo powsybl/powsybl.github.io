@@ -20,14 +20,14 @@ This small example shows how to load a case file and run a power simulation in G
 ```groovy
 import com.powsybl.loadflow.LoadFlow
 
-# Load a case file
+// Load a case file
 network = loadNetwork("eurostag-tutorial-example1.xml")
 
-# Run a power flow with OpenLF implementation
+// Run a power flow with OpenLF implementation
 result = LoadFlow.find("OpenLoadFlow").run(network)
 println "Computation OK? " + result.isOk()
 println "Metrics: " + result.getMetrics()
 
-# Save the network
+// Save the network
 saveNetwork("XIIDM", network, null, "eurostag-tutorial-example1-after-lf.xml")
 ```
