@@ -79,7 +79,7 @@ Only `NominalVoltage` and `TopologyKind` are required.
 
 The [Slack Terminal](extensions.md#slack-terminal) _extension_ defines the terminal marking which bus will be used to balance the active and reactive power in load flow analysis.
 
-The connectivity in each voltage level of the netwrork can be defined at one of two levels: **node/breaker** or **bus/breaker**.
+The connectivity in each voltage level of the network can be defined at one of two levels: **node/breaker** or **bus/breaker**.
 
 In **node/breaker** the connectivity is described with the finest level of detail and can provide an exact field representation. This level could be described as a graph structure where the vertices are `nodes` and the edges are `switches` (breakers, disconnectors) or `internalConnections`. Each equipment is associated to one `node` (busbar sections, loads, generators, ..), two `nodes` (transmission lines, two-windings transformers, ...) or three `nodes` (three-windings transformers). Each `node` can have only one associated equipment. `Nodes` do not have an alphanumeric `Id` or `name`.
 
