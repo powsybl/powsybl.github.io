@@ -102,11 +102,11 @@ The `psse.import.ignore-base-voltage` property is an optional property that defi
 
 ### Conversion
 
-A PSS®E file specifies a Bus/Branch network model where typically there is a bus for each voltage level inside a substation and where substation objects are not explicitly defined. Breakers and switchers were traditionally modeled as zero impedance lines with special identifiers. Since version 35 PSS®E supports explicit definition of substation data and switching devices at both system and substation level. However, this information is optional and may not be present in the case.
+A PSS®E file specifies a Bus/Branch network model where typically there is a bus for each voltage level inside a substation and where substation objects are not explicitly defined. Breakers and switches were traditionally modeled as zero impedance lines with special identifiers. Since version 35 PSS®E supports explicit definition of substation data and switching devices at both system and substation level. However, this information is optional and may not be present in the case.
 
 The PowSyBl grid model establishes the substation as a required container of voltage levels and equipment. The first step in the conversion process assigns a substation for each PSS®E bus, ensuring that all buses at transformer ends are kept in the same substation.
 
-The current conversion does not use explicit PSS®E substation information. Instead, buses are grouped using zero impedance branches and transformers as connectors. A new voltage level is created for each group of buses connected by zero impedance branches, and a new substation is created for the voltage levels connected by transformers.
+The current conversion does not use explicit PSS®E substation information. Instead, buses are grouped using zero impedance branches and transformers as connectors. A new voltage level is created for each group of buses connected by zero impedance branches, and a new substation is created for the voltage levels connected by transformers. Explicit substations will be supported in future versions, allowing to represent the internal connectivity.
 
 In the PowSyBl grid model all the network components are identified through a global and unique alphanumeric identifier (**Id**). Optionally, they may receive a name (**Name**).
 
