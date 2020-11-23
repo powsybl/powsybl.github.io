@@ -102,11 +102,11 @@ The `psse.import.ignore-base-voltage` property is an optional property that defi
 
 ### Conversion
 
-A PSS®E file specifies a Bus/Branch network model where typically there is a bus for each voltage level inside a substation and where substation objects are not explicitly defined. Breakers and switchers were traditionally modeled as zero impedance lines with special identifiers. Since version 35 PSS®E supports explicit definition of substation data and switching devices at both system and substation level. However, this information is optional and may not be present in the case.
+A PSS®E file specifies a Bus/Branch network model where typically there is a bus for each voltage level inside a substation and where substation objects are not explicitly defined. Breakers and switches were traditionally modeled as zero impedance lines with special identifiers. Since version 35 PSS®E supports explicit definition of substation data and switching devices at both system and substation level. However, this information is optional and may not be present in the case.
 
 The PowSyBl grid model establishes the substation as a required container of voltage levels and equipment. The first step in the conversion process assigns a substation for each PSS®E bus, ensuring that all buses at transformer ends are kept in the same substation.
 
-The current conversion does not use explicit PSS®E substation information. Instead, buses are grouped using zero impedance branches and transformers as connectors. A new voltage level is created for each group of buses connected by zero impedance branches, and a new substation is created for the voltage levels connected by transformers.
+The current conversion does not use explicit PSS®E substation information. Instead, buses are grouped using zero impedance branches and transformers as connectors. A new voltage level is created for each group of buses connected by zero impedance branches, and a new substation is created for the voltage levels connected by transformers. Explicit substations will be supported in future versions, allowing to represent the internal connectivity.
 
 In the PowSyBl grid model all the network components are identified through a global and unique alphanumeric identifier (**Id**). Optionally, they may receive a name (**Name**).
 
@@ -123,37 +123,16 @@ The following sections describe in detail how each supported PSS®E data block i
 #### _Bus Data_
 
 There is a one-to-one correspondence between the records of the PSS®E _Bus Data_ block and the buses of the PowSyBl network model. For each record in the _Bus Data_ block a PowSyBl bus is created and assigned to its corresponding voltage level with the following attributes:
-- **Id** according to the pattern `B<n>` where `n` represents the PSS®E bus number (field `I` in the _Bus Data_ record).
+- **Id** according to the pattern `B<n>` where `n` represents the PSS@E bus number (field `I` in the _Bus Data_ record).
 - **Name** is copied from PSS®E field `NAME`.
-- **V**- **Id** is obtained from the PSS®E bus voltage magnitude, `VM`, multiplied by the nominal voltage of the corresponding voltage level.
+- **V** is obtained from the PSS®E bus voltage magnitude, `VM`, multiplied by the nominal voltage of the corresponding voltage level.
 - **Angle** is copied from the PSS®E bus voltage phase angle, `VA`.
 
 
 #### _Load Data_
-
-Every _Load Data_ record represents one load. Multiple loads are allowed at a PSS®E bus by specifying one _Load Data_ record with the same bus and different load identifier. Each record defines a new load in the PowSyBl grid model associated with its corresponding voltage level and with the following attributes:
-- **Id** according to the pattern `<n>L-<m>` where `n` represents the PSS®E bus number (field `I` in the _Load Data_ record) and `m` is the PSS®E alphanumeric load identifier (field `ID` in the _Load Data_ record).
-- **ConnectableBus** PowSyBl bus identifier **Id** associated to the PSS®E bus number (field `I` in the _Load Data_ record).
-- **P0** Active power. It is copied form PSS®E field `PL`.
-- **Q0** Reactive power. It is copied form PSS®E field `QL`.
-
-The load is connected to the **ConnectableBus** if Load status (field `STATUS` in the _Load Data_ record) is `1` (In-service).
-
-PSS®E supports loads with three different characteristics: Constant Power, Constant Current and Constant Admittance. The current version only takes into consideration the Constant Power discarding the Constant Current component (fields `IP` and `IQ` in the _Load Data_ record) and the Constant Admittance component (fields `YP` and `YQ` in the _Load Data_ record).
-
+-<span style="color: red">TODO</span>
 
 #### _Fixed Bus Shunt Data_
-
-Each  _Fixed Bus Shunt Data_ record defines a PowSyBl shunt component with a linear model and in both models it is possible to define multiple shunts at a bus. The PowSyBl shunt component is associated with its corresponding voltage level and has the following attributes:
-
-- **Id** according to the pattern `<n>SH-<m>` where `n` represents the PSS®E bus number (field `I` in the _Fixed Bus Shunt Data_ record) and `m` is the PSS®E alphanumeric shunt identifier (field `ID` in the _Fixed Bus Shunt Data_ record).
-- **ConnectableBus** PowSyBl bus identifier **Id** associated to the PSS®E bus number (field `I` in the _Fixed Bus Shunt Data_ record).
-- **SectionCount** Always forced to `1`.
-- **GPerSection** Reactive power. It is copied form PSS®E field `QL`.
-- **BPerSection** Reactive power. It is copied form PSS®E field `QL`.
-- **MaximumSectionCount** Reactive power. It is copied form PSS®E field `QL`.
-
-
 -<span style="color: red">TODO</span>
 
 #### _Switched Shunt Data_
