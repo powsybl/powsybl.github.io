@@ -58,7 +58,7 @@ A substation represents a specific geographical location with equipment grouped 
 | --------- | ----------- |
 | $$Country$$ | To specify in which country the substation is located |
 | $$GeographicalTags$$ | They make it possible to accurately locate the substation |
-| $$TSO$$ | To track to which [TSO](/pages/glossary.md#tso) the substation belongs |
+| $$TSO$$ | To track to which [TSO](../../glossary.md#tso) the substation belongs |
 
 All three attributes are optional.
 
@@ -104,7 +104,7 @@ It may be controlled to hold a voltage or reactive setpoint somewhere in the net
 | --------- | ---- | ----------- |
 | $$MinP$$ | MW | Minimum generator active power output |
 | $$MaxP$$ | MW | Maximum generator active power output |
-| $$ReactiveLimits$$ | Mvar | Operational limits of the generator (P/Q/U diagram) |
+| $$ReactiveLimits$$ | Mvar | Operational limits of the generator (P/Q/V diagram) |
 | $$RatedS$$ | MVA | The rated nominal power |
 | $$TargetP$$ | MW | The active power target |
 | $$TargetQ$$ | MVAr | The reactive power target |
