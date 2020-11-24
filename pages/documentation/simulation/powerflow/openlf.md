@@ -45,12 +45,12 @@ Note that if you want to choose the slack bus that is defined inside the network
 The `nameSlackBusSelectorBusId` property is a required property if you choose `Name` for property `slackBusSelectorType`.
 It defines the bus chosen for slack distribution by its ID.
 
-**powerFactorConstant**  
+**remainsLoadPowerFactorConstant**  
 Optional boolean property (default value : false). This property is used in <span style="color: green">DistributedSlackOnLoad</span> outer loop if :
 - `distributedSlack` property is set to true in [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters"),
 - `balanceType` property is set to `PROPORTIONAL_TO_LOAD` or `PROPORTIONAL_TO_CONFORM_LOAD` in  [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters").
 
-If prerequisites fullfilled and `powerFactorConstant` property is set to true, when the outer loop adjust <span style="color: green">P</span> value,
+If prerequisites fullfilled and `remainsLoadPowerFactorConstant` property is set to true, when the outer loop adjust <span style="color: green">P</span> value,
 it adjust <span style="color: green">Q</span> value too in order to remain <span style="color: red">power factor</span> a constant value (on total power if  `PROPORTIONAL_TO_LOAD`, variable power if `PROPORTIONAL_TO_CONFORM_LOAD`).
 At the end, the network file produced as output, is updated with Q ending value in loads.
 <span style="color: red">Power Factor</span> is given with this equation :
@@ -71,7 +71,7 @@ $$
 Q_2={\frac {{Q_1}{P_2}} {P_1}}
 $$
 
-Case 2 : `balanceType` = `PROPORTIONAL_TO_CONFORM_LOAD` : in order to remain <span style="color: red">variable power factor</span> a constant value with new $$PV_2$$, it means we have to isolate $$Q_2$$ in this equation (V : variable, F : fixed) :
+Case 2 : `balanceType` = `PROPORTIONAL_TO_CONFORM_LOAD` : in order to remain <span style="color: red">variable power factor</span> a constant value with new $$P_2$$, it means we have to isolate $$Q_2$$ in this equation (V : variable, F : fixed) :
 
 > $$
 QV_2={\frac {{QV_1}{PV_2}} {PV_1}}
@@ -86,7 +86,7 @@ Q_2=QF+{\frac {{(Q_1-QF)}{(P_2-PF)}} {P_1-PF}}
 $$
 
 
-The default value for `powerFactorConstant` property is `false`.
+The default value for `remainsLoadPowerFactorConstant` property is `false`.
 
 ### Configuration file example
 See below an extract of a config file that could help:
@@ -99,7 +99,7 @@ open-loadflow-default-parameters:
   voltageRemoteControl: false
   slackBusSelectorType: Name
   nameSlackBusSelectorBusId: Bus3_0
-  powerFactorConstant: true
+  remainsLoadPowerFactorConstant: true
 ```
 
 At the moment, overriding the parameters by a JSON file is not supported by OpenLoadFlow.
