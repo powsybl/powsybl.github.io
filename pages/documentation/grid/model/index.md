@@ -77,7 +77,7 @@ Two voltage levels may be connected through lines (when they belong to different
 
 Only `NominalVoltage` and `TopologyKind` are required.
 
-The [Slack Terminal](extensions.md#slack-terminal) _extension_ defines the terminal marking which bus will be used to balance the active and reactive power in load flow analysis.
+The [Slack Terminal](extensions.md#slack-terminal) extension defines the terminal marking which bus will be used to balance the active and reactive power in load flow analysis.
 
 The connectivity in each voltage level of the network can be defined at one of two levels: **node/breaker** or **bus/breaker**.
 
@@ -87,7 +87,7 @@ Using **bus/breaker** the voltage level connectivity is described with a coarser
 
 Powsybl provides an integrated Topology Processor that allows to automatically obtain a bus/breaker view from a node/breaker definition, and a bus/branch view from a bus/breaker view or definition. It builds the topology views from the open/close status of `Switches`. `Switches` marked as `retained` in the node/breaker level are preserved in the bus/breaker view.
 
-The following diagram represent an example voltage level with two busbars separated by a circuit breaker, a transformer connected to one of them and three generators that can connect to any of the two busbars. The three topology levels are shown.
+The following diagram represents an example voltage level with two busbars separated by a circuit breaker, a transformer connected to one of them and three generators that can connect to any of the two busbars. The three topology levels are shown.
 
 ![VoltageLevel](img/index/voltage-level.svg){: width="100%" .center-image}
 
