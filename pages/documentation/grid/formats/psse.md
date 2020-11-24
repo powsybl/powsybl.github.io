@@ -123,19 +123,46 @@ The following sections describe in detail how each supported PSS®E data block i
 #### _Bus Data_
 
 There is a one-to-one correspondence between the records of the PSS®E _Bus Data_ block and the buses of the PowSyBl network model. For each record in the _Bus Data_ block a PowSyBl bus is created and assigned to its corresponding voltage level with the following attributes:
-- **Id** according to the pattern `B<n>` where `n` represents the PSS@E bus number (field `I` in the _Bus Data_ record).
+- **Id** according to the pattern `B<n>` where `n` represents the PSS®E bus number (field `I` in the _Bus Data_ record).
 - **Name** is copied from PSS®E field `NAME`.
 - **V** is obtained from the PSS®E bus voltage magnitude, `VM`, multiplied by the nominal voltage of the corresponding voltage level.
 - **Angle** is copied from the PSS®E bus voltage phase angle, `VA`.
 
 
 #### _Load Data_
--<span style="color: red">TODO</span>
+
+Every _Load Data_ record represents one load. Multiple loads are allowed at a PSS®E bus by specifying one _Load Data_ record with the same bus and different load identifier. Each record defines a new load in the PowSyBl grid model associated with its corresponding voltage level and with the following attributes:
+- **Id** according to the pattern `<n>L-<m>` where `n` represents the PSS®E bus number (field `I` in the _Load Data_ record) and `m` is the PSS®E alphanumeric load identifier (field `ID` in the _Load Data_ record).
+- **ConnectableBus** PowSyBl bus identifier **Id** associated to the PSS®E bus number (field `I` in the _Load Data_ record).
+- **P0** Active power. It is copied form PSS®E field `PL`.
+- **Q0** Reactive power. It is copied form PSS®E field `QL`.
+
+The load is connected to the **ConnectableBus** if Load status (field `STATUS` in the _Load Data_ record) is `1` (In-service).
+
+PSS®E supports loads with three different characteristics: Constant Power, Constant Current and Constant Admittance. The current version only takes into consideration the Constant Power discarding the Constant Current component (fields `IP` and `IQ` in the _Load Data_ record) and the Constant Admittance component (fields `YP` and `YQ` in the _Load Data_ record).
 
 #### _Fixed Bus Shunt Data_
--<span style="color: red">TODO</span>
+
+Each  _Fixed Bus Shunt Data_ record defines a PowSyBl shunt compensator with a linear model and in both models it is possible to define multiple shunts at a bus. The PowSyBl shunt compensator is associated with its corresponding voltage level and has the following attributes:
+
+- **Id** according to the pattern `<n>SH-<m>` where `n` represents the PSS®E bus number (field `I` in the _Fixed Bus Shunt Data_ record) and `m` is the PSS®E alphanumeric shunt identifier (field `ID` in the _Fixed Bus Shunt Data_ record).
+- **ConnectableBus** PowSyBl bus identifier **Id** associated to the PSS®E bus number (field `I` in the _Fixed Bus Shunt Data_ record).
+- **SectionCount** Always forced to `1`.
+- **gPerSection** Positive sequence shunt (charging) conductance per section. It is defined as `GL` / (`vnom` *`vnom`), where `GL` is the active component of shunt admittance to ground, entered in MW at one per unit voltage (field `GL` in the _Fixed Bus Shunt Data_ record) and `vnom` is the nominal voltage of the corresponding voltage level.
+- **bPerSection** Positive sequence shunt (charging) susceptance per section. It is defined as `BL` / (`vnom` *`vnom`), where `BL` is the reactive component of shunt admittance to groun, entered in Mvar at one per unit voltage (field `BL` in the _Fixed Bus Shunt Data_ record).
+- **MaximumSectionCount** Always forced to `1`.
+
+The shunt compensator is connected to the **ConnectableBus** if fixed shunt status (field `STATUS` in the _Load Data_ record) is `1` (In-service).
 
 #### _Switched Shunt Data_
+
+In the PSS®E model, version 33, only one switched shunt element can be defined by bus and it may consist entirely of blocks of shunt reactors, entirely of blocks of capacitor banks or of both reactors and capacitors. Version 35 allows to define multiple switched shunt by bus adding one- or two-character uppercase non-blank alphanumeric switched shunt identifier. Each switched shunt record defines a PowSyBl shunt compensator with a non-linear model. The PowSyBl shunt compensator is associated with its corresponding voltage level and has the following attributes:
+
+- **Id** according to the pattern `<n>Sw-SH-<m>` where `n` represents the PSS®E bus number (field `I` in the _Switched Shunt Data_ record) and `m` is the PSS®E alphanumeric shunt identifier (field `ID` in the _Switched Shunt Data_ record in version 35, forced to `"1"` in version 33).
+- **ConnectableBus** PowSyBl bus identifier **Id** associated to the PSS®E bus number (field `I` in the _Switched Shunt Data_ record).
+- **SectionCount** Always forced to `1`.
+
+
 -<span style="color: red">TODO</span>
 
 #### _Generator Data_
