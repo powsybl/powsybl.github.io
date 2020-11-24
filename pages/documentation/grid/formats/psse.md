@@ -149,7 +149,7 @@ Each  _Fixed Bus Shunt Data_ record defines a PowSyBl shunt compensator with a l
 - **ConnectableBus** PowSyBl bus identifier **Id** associated to the PSS®E bus number (field `I` in the _Fixed Bus Shunt Data_ record).
 - **SectionCount** Always forced to `1`.
 - **gPerSection** Positive sequence shunt (charging) conductance per section. It is defined as `GL` / (`vnom` *`vnom`), where `GL` is the active component of shunt admittance to ground, entered in MW at one per unit voltage (field `GL` in the _Fixed Bus Shunt Data_ record) and `vnom` is the nominal voltage of the corresponding voltage level.
-- **bPerSection** Positive sequence shunt (charging) susceptance per section. It is defined as `BL` / (`vnom` *`vnom`), where `BL` is the reactive component of shunt admittance to groun, entered in Mvar at one per unit voltage (field `BL` in the _Fixed Bus Shunt Data_ record).
+- **bPerSection** Positive sequence shunt (charging) susceptance per section. It is defined as `BL` / (`vnom` *`vnom`), where `BL` is the reactive component of shunt admittance to ground, entered in Mvar at one per unit voltage (field `BL` in the _Fixed Bus Shunt Data_ record).
 - **MaximumSectionCount** Always forced to `1`.
 
 The shunt compensator is connected to the **ConnectableBus** if fixed shunt status (field `STATUS` in the _Load Data_ record) is `1` (In-service).
@@ -160,10 +160,20 @@ In the PSS®E model, version 33, only one switched shunt element can be defined 
 
 - **Id** according to the pattern `<n>Sw-SH-<m>` where `n` represents the PSS®E bus number (field `I` in the _Switched Shunt Data_ record) and `m` is the PSS®E alphanumeric shunt identifier (field `ID` in the _Switched Shunt Data_ record in version 35, forced to `"1"` in version 33).
 - **ConnectableBus** PowSyBl bus identifier **Id** associated to the PSS®E bus number (field `I` in the _Switched Shunt Data_ record).
-- **SectionCount** Always forced to `1`.
+- **SectionCount** Defined as the section count (section index + 1) where section `B` is closer to Initial switched shunt admittance (field `BINIT` in the _Switched Shunt Data_ record).
+- **Section G** Positive sequence shunt (charging) conductance of this section. Always `0.0`.
+- **Section B** Positive sequence shunt (charging) susceptance of this section. It is defined as `B` / (`vnom` *`vnom`), where `B` is the reactive component of shunt admittance to ground, entered in Mvar at one per unit voltage associated to this section and `vnom` is the nominal voltage of the corresponding voltage level.
+- **TargetV** Voltage setpoint defined as 0.5 * (`VSWLO` + `VSWHI`) * `vnom`, where `VSWLO` is the controlled voltage lower limit (field `VSWLO` in the _Switched Shunt Data_ record) and `VSWHI` is the controlled voltage upper limit (field `VSWHI` in the _Switched Shunt Data_ record).
+- **TargetDeadband** defined as (`VSWHI` - `VSWLO`) * `vnom`.
+- **RegulatingTerminal** Regulating terminal associated to the bus where voltage is controlled by this switched shunt (field `SWREM` in the _Switched Shunt Data_ record if it is not `0`. Otherwise field `I` in the _Switched Shunt Data_ record).
+- **VoltageRegulatorOn** defined as `true` if the control mode is not `0` (field `MODSW` in the _Switched Shunt Data_ record) and `TargetV` is not `0.0`.
 
+The shunt compensator is connected to the **ConnectableBus** if fixed shunt status (field `STAT` in the _Load Data_ record) is `1` (In-service).
 
--<span style="color: red">TODO</span>
+The sections of the non-linear model are defined according to the adjustment method of the switched shunt (field `ADJM` in the _Load Data_ record). If the PSS®E adjustment method is `0` reactor blocks (negative susceptance) are specified first followed by the capacitor blocks (positive susceptance) and both blocks are switched on in input order. A section is assigned to each step of the reactor and capacitor shunt blocks by accumulating the admittance of the corresponding step that are in-service. Only the in-service switched shunt blocks are considered (field `SI` in the _Load Data_ record version 35 equals to `1`, always in-service in version 33. A section with 0.0 susceptance is added between sections associated to reactor and capacitor blocks.
+
+If the adjustment method is `1` reactor and capacitor blocks can be specified at any order are switched on and off such that the next highest (or lowest) total susceptance is achieved. All the switching combinations are considered in PSS®E. Current version does not support a section for each switching combination. To match the shunt blocks into sections first reactor and capacitor blocks are increasingly ordered by the susceptance increment (field `BI` in the _Load Data_ record) and then sections are created like in the previous adjustment considering that both blocks are switched on in sorted order.
+
 
 #### _Generator Data_
 -<span style="color: red">TODO</span>
