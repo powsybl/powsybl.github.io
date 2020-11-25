@@ -10,9 +10,9 @@ latex: true
 
 ## Introduction
 
-PowSyBl uses an internal grid model initially developed under the iTesla project, a research project funded by the European Union 7th Framework programme (FP7). The grid model is known as iIDM (iTesla Internal Data Model). One of the iTesla outputs was a toolbox designed to support the decision-making process of power system operation from two-days ahead to real time. The iIDM grid model was at the center of the toolbox.
+PowSyBl uses an internal grid model initially developed under the iTesla project, a research project funded by the [European Union 7th Framework programme](https://cordis.europa.eu/project/id/283012) (FP7). The grid model is known as IIDM (iTesla Internal Data Model). One of the iTesla outputs was a toolbox designed to support the decision-making process of power system operation from two-days ahead to real time. The IIDM grid model was at the center of the toolbox.
 
-To build an electrical network model using iIDM first the substations must be defined. The equipment in a substation (loads, generators, shunts, Static Var Compensators, DC converters ...) are grouped in voltage levels. Transformers present in a substation connect its different voltage levels. Transmission lines (AC and DC) connect the substations. A connection point for an equipment is a _terminal_.
+To build an electrical network model using IIDM first the substations must be defined. The equipment in a substation (loads, generators, shunts, static VAR compensators, DC converters ...) are grouped in voltage levels. Transformers present in a substation connect its different voltage levels. Transmission lines (AC and DC) connect the substations. A connection point for an equipment is a _terminal_.
 
 The PowSyBl grid model allows a full representation of the substation connectivity where all the switching devices and busbars are defined (_node/breaker_ level). Automated topology calculation permits to obtain views of the network up to the _bus/branch_ level.
 
@@ -29,12 +29,12 @@ In the following sections the different network components are described in term
 | Attribute | Description |
 | --------- | ----------- |
 | $$Id$$ | Unique Id assigned to each network component |
-| $$Name$$ | Human readable alphanumeric identifier |
+| $$Name$$ | Human readable identifier (not necessary unique) |
 | $$Fictitious$$ | To identify non-physical network components |
 | $$Aliases$$ | Additional unique identifiers associated with each network component |
 | $$Properties$$ | To add additional data items to network components |
 
-The `Id` is the only required attribute and by default `Fictitious` is set to `false`. `Aliases` offers the possibility of adding additional unique identifiers to each component. An `AliasType` can be specified to indicate what it corresponds to. `Properties` allows to associate additional arbitrary data items under the general schema of pairs `<key, value>`.
+The `Id` is the only required attribute and by default `Fictitious` is set to `false`. `Aliases` offers the possibility of adding additional unique identifiers to each component. An `Alias` can be qualified to indicate what it corresponds to. `Properties` allows to associate additional arbitrary data items under the general schema of pairs `<key, value>`.
 
 ### Network
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
@@ -85,7 +85,7 @@ In **node/breaker** the connectivity is described with the finest level of detai
 
 Using **bus/breaker** the voltage level connectivity is described with a coarser level of detail. In this case the vertices of the graph are `Buses`, defined explicitly by the user. A `Bus` has an `Id`, and may have a `name`. Each equipment defines the bus or buses to which it is connected. `Switches` can be defined between buses.
 
-Powsybl provides an integrated Topology Processor that allows to automatically obtain a bus/breaker view from a node/breaker definition, and a bus/branch view from a bus/breaker view or definition. It builds the topology views from the open/close status of `Switches`. `Switches` marked as `retained` in the node/breaker level are preserved in the bus/breaker view.
+PowSyBl provides an integrated topology processor that allows to automatically obtain a bus/breaker view from a node/breaker definition, and a bus/branch view from a bus/breaker view or definition. It builds the topology views from the open/close status of `Switches`. `Switches` marked as `retained` in the node/breaker level are preserved in the bus/breaker view.
 
 The following diagram represents an example voltage level with two busbars separated by a circuit breaker, a transformer connected to one of them and three generators that can connect to any of the two busbars. The three topology levels are shown.
 
@@ -113,7 +113,7 @@ It may be controlled to hold a voltage or reactive setpoint somewhere in the net
 | $$VoltageRegulatorOn$$ |  | True if the generator regulates voltage |
 | $$EnergySource$$ |  | The energy source harnessed to turn the generator |
 
-The values `MinP`, `MaxP` and `TargetP` are required. The minimum active power output can not be greater than the maximum active power output. `TargetP` must be inside this active power limits. `RatedS` specifies the nameplate apparent power rating for the unit, it is optional and should be a positive value if it is defined. The reactive limits of the generator (`ReactiveLimits`) are optional, if they are not given the generator is considered with unlimited reactive power. Reactive limits can be given as a pair or min/max values or as a  reactive capability curve.
+The values `MinP`, `MaxP` and `TargetP` are required. The minimum active power output can not be greater than the maximum active power output. `TargetP` must be inside this active power limits. `RatedS` specifies the nameplate apparent power rating for the unit, it is optional and should be a positive value if it is defined. The reactive limits of the generator (`ReactiveLimits`) are optional, if they are not given the generator is considered with unlimited reactive power. Reactive limits can be given as a pair or min/max values or as a [reactive capability curve](#reactive-capability-curve).
 
 The `VoltageRegulatorOn` attribute is required. It voltage regulation is enabled, then `TargetV` and `RegulatingTerminal` must also be defined. If the voltage regulation is disabled, then `TargetQ` is required. `EnergySource` is optional, it can be: `HYDRO`, `NUCLEAR`, `WIND`, `THERMAL`, `SOLAR` or `OTHER`.
 
@@ -572,7 +572,7 @@ A VSC converter station is made with switching devices that can be turned both o
 ### Busbar Section
 
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/BusbarSection.html)<br>
-A busbar section is a non impedant element used in a node/breaker substation topology to connect equipments.
+A busbar section is a non impedant element used in a node/breaker substation topology to connect equipment.
 <span style="color:red"> TODO</span>
 
 ### Breaker/Switch
@@ -610,7 +610,7 @@ In between the defined points of the curve, the reactive power limits are comput
 ### Current limits
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/CurrentLimits.html)
 
-Some equipments have operational limits regarding the current value, corresponding to the equipment's physical limitations (related to heating).
+Some equipment have operational limits regarding the current value, corresponding to the equipment's physical limitations (related to heating).
 The current limits may be set in IIDM for [lines](#line),
 [dangling lines](#dangling-line), [two windings transformers](#two-windings-transformer) and [three windings transformers](#three-windings-transformer).
 Current limits are defined by at most one permanent limit and/or any number of temporary limits.
