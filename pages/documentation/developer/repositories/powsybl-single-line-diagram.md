@@ -14,7 +14,7 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 - small demo app to display the diagrams (note that this app is mainly for debug purposes and therefore is not included in the release)
 - extensions to force positions in the diagram 
 
-// TODO: complete the list
+<span style="color: red">TODO: complete the list</span>
 
 ## Getting started
 
