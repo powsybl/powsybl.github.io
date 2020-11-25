@@ -67,7 +67,7 @@ Here are some details about these dependencies:
 - `slf4j-simple` allows you to have simple logging capabilities.
 
 ### Layout parameters
-For both examples, we need to initialize a few layout parameters before generating diagrams (see [SVG layouts guide]() for more information):
+For both examples, we need to initialize a few layout parameters before generating diagrams (see [SVG layouts guide]() (*soon available*) for more information):
 
 ```java
 // Instantiating the default style component library
