@@ -36,7 +36,7 @@ The default value is `false`.
 
 **slackBusSelectorType**  
 The `slackBusSelectorType` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
-- `First` if you want to choose the first bus of all the network buses, identified by the [slack terminal extension]().
+- `First` if you want to choose the first bus of all the network buses, identified by the [slack terminal extension](../../grid/model/extensions.md#slack-terminal).
 - `Name` if you want to choose a specific bus as the slack bus. In that case, the other `nameSlackBusSelectorBusId` property has to be filled.
 - `MostMeshed` if you want to choose the most meshed bus as the slack bus. This option is required for computation with several synchronous component.
 
@@ -47,45 +47,31 @@ The `nameSlackBusSelectorBusId` property is a required property if you choose `N
 It defines the bus chosen for slack distribution by its ID.
 
 **remainsLoadPowerFactorConstant**  
-Optional boolean property (default value : false). This property is used in <span style="color: green">DistributedSlackOnLoad</span> outer loop if :
-- `distributedSlack` property is set to true in [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters"),
-- `balanceType` property is set to `PROPORTIONAL_TO_LOAD` or `PROPORTIONAL_TO_CONFORM_LOAD` in  [load-flow-default-parameters](https://www.powsybl.org/pages/documentation/simulation/powerflow/index.html#available-parameters "load-flow-default-parameters").
+The `remainsLoadPowerFactorConstant` property is an optional boolean property. The default value is `false`. This property is used in the outer loop that distributes slack on loads if :
+- `distributedSlack` property is set to true in the [load flow default parameters](index.md#available-parameters),
+- `balanceType` property is set to `PROPORTIONAL_TO_LOAD` or `PROPORTIONAL_TO_CONFORM_LOAD` in the [load flow default parameters](index.md#available-parameters).
 
-If prerequisites fullfilled and `remainsLoadPowerFactorConstant` property is set to true, when the outer loop adjust <span style="color: green">P</span> value,
-it adjust <span style="color: green">Q</span> value too in order to remain <span style="color: red">power factor</span> a constant value (apply on total power if  `PROPORTIONAL_TO_LOAD`, only variable power if `PROPORTIONAL_TO_CONFORM_LOAD`).
-At the end, loads elements in the network file produced as output, are updated with Q ending value.
-<span style="color: red">Power Factor</span> is given with this equation :
+If prerequisites fullfilled and `remainsLoadPowerFactorConstant` property is set to true, when the outer loop adjust the load P value,
+it adjust the load Q value too in order to maintain the power factor as a constant value (apply on total power if  `PROPORTIONAL_TO_LOAD`, only variable power if `PROPORTIONAL_TO_CONFORM_LOAD`).
+At the end of the load flow calculation, $$P$$ and $$Q$$ at loads terminals are both updated. Note that the power factor of a load is given by this equation :
 
 $$
 Power Factor = {\frac {P} {\sqrt {P^2+{Q^2}}}}
 $$ 
 
-Case 1 : `balanceType` = `PROPORTIONAL_TO_LOAD` : in order to remain <span style="color: red">power factor</span> a constant value with new $$P_2$$, it means we have to isolate $$Q_2$$ in this equation :
+If `balanceType` equals to `PROPORTIONAL_TO_LOAD`, maintaining the power factor constant from an updated active power $$P^‎\prime$$ means we have to isolate $$Q^‎\prime$$ in this equation :
 
 > $$
-{\frac {P_1} {\sqrt {P^2_1+{Q^2_1}}}}={\frac {P_2} {\sqrt {P^2_2+{Q^2_2}}}}
+{\frac {P} {\sqrt {P^2+{Q^2}}}}={\frac {P^‎\prime} {\sqrt {P^‎\prime^2+{Q^‎\prime^2}}}}
 $$
 
-> Finally, a simple rule of three is implemented in <span style="color: green">DistributedSlackOnLoad</span> outer loop :
+> Finally, a simple rule of three is implemented in the outer loop :
 
 > $$
-Q_2={\frac {Q_1P_2} {P_1}}
+Q^\prime={\frac {Q P^\prime} {P}}
 $$
 
-Case 2 : `balanceType` = `PROPORTIONAL_TO_CONFORM_LOAD` : in order to remain <span style="color: red">variable power factor</span> a constant value with new $$P_2$$, it means we have to isolate $$Q_2$$ in this equation (V : variable part, F : fixed part) :
-
-> $$
-QV_2={\frac {QV_1PV_2} {PV_1}}
-$$
-
-> $$
-Q_2-QF={\frac {(Q_1-QF)(P_2-PF)} {P_1-PF}}
-$$
-
-> $$
-Q_2=QF+{\frac {(Q_1-QF)(P_2-PF)} {P_1-PF}}
-$$
-
+If `balanceType` equals to `PROPORTIONAL_TO_CONFORM_LOAD`, we follow the same logic as before but we do not use the total amount of active and reactive power of the loads. The power factor remains constant only considering the variable parts. Thus, we fully rely on [load detail extension](../../grid/model/extensions.md#load-detail).
 
 The default value for `remainsLoadPowerFactorConstant` property is `false`.
 
