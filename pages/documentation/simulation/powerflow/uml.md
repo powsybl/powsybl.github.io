@@ -28,6 +28,9 @@ Give a summary view about **Open Load Flow** and its integration with **powsybl-
 ![Slack](img/uml/loadflow.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
 ## Activities diagrams about powsybl-open-loadflow internal process
+### RunLoadFlowTool.run
+![Slack](img/uml/loadflow - RunLoadFlowTool.run.png){: width="100%" style="margin-top: 2rem;" .center-image}
+
 ### OpenLoadFlowProvider.runAc
 ![Slack](img/uml/loadflow - OpenLoadFlowProvider.runAc.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
