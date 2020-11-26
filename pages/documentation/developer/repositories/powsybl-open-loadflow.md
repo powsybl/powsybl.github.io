@@ -7,6 +7,7 @@ The PowSyBl Open Load Flow [repository](https://github.com/powsybl/powsybl-open-
 ## Features
 
 - a load flow solver
+- a sensitivity analysis provider
 
 ## Getting started
 
