@@ -8,22 +8,44 @@ layout: default
 {:toc}
 
 ## Purpose
-Give a summary view about Open Load Flow and its integration with powsybl-tools.
+Give a summary view about **Open Load Flow** and its integration with **powsybl-tools**.
 
 ## Bibliography
+[Web page of Thierry Van Cutsem](https://people.montefiore.uliege.be/vct/courses) :
 - [Introduction to electric power and energy systems](https://people.montefiore.uliege.be/vct/elec0014/elec0014.pdf)
 - [Le calcul de repartition de charge (ou load flow)](https://people.montefiore.uliege.be/vct/elec0029/lf.pdf)
-- [Web page of Thierry Van Cutsem](https://people.montefiore.uliege.be/vct/courses)
 
 ## Classes involved when running loadflow with itools
 
-| Maven&nbsp;dependency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Usage |
+| Maven&nbsp;dependency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Usage |
 | -------------------------- | - |
-| powsybl-tools              | provide a main method to run a tool (**loadflow** in this documentation) |
-| powsybl-computation        | load config file in **PlatformConfig** object, config file is provided with two VM parameters : **powsybl.config.dirs** and **powsybl.config.name** |
-| powsybl-loadflow-api       | load network from given file defined by parameter **--case-file**. Then, init **LoadFlowParameters** with **PlatformConfig** previously loaded : call **ExtensionConfigLoader** implementation on each module, for example, specific configuration of **open-loadflow** module is loaded in **OpenLoadFlowConfigLoader** inner class |
-| powsybl-iidm-converter-api | used to load **network** from **xiidm** file (xml format) |
-| powsybl-open-loadflow      | this dependency is the one we discuss about in this documentation. Network simulation is run in this dependency. It builds an equation system before calling Newton-Raphson with a Jacobian Matrix. It adjusts network parameters and run again NewtonRaphson to improve result. At the end, it returns CONVERGED if |
+| powsybl-tools              | provide a main method to run a tool (this current documentation is about **loadflow** tool) |
+| powsybl-computation        | load all **module** configuration from config file into ***PlatformConfig*** object. User can specify config file with these two VM parameters : **powsybl.config.dirs** and **powsybl.config.name** |
+| powsybl-loadflow-api       | this dependency provide the implementation of ***Tool*** interface : ***RunLoadFlowTool***. ***RunLoadFlowTool*** proceed in initialization before running the loadflow simulation on a network. First, load the network from file given with parameter **--case-file**. Second, init ***LoadFlowParameters*** with ***PlatformConfig*** previously loaded (module **load-flow-default-parameters**). Third, load extensions of ***LoadFlowParameters*** : in case of running loadflow, it uses ***ExtensionConfigLoader*** implementation in ***OpenLoadFlowParameters*** (module **open-loadflow-default-parameters**) |
+| powsybl-iidm-converter-api | used to load ***Network*** object from **xiidm** file (xml format) |
+| powsybl-open-loadflow      | this dependency is the one we discuss about in this documentation. Network simulation is run in this dependency. It builds an equation system before calling **Newton-Raphson** with a **Jacobian Matrix**. It adjusts network parameters in **outer loop** and run again Newton-Raphson until getting minimal **iteration** count and lower **mismatch**. At the end, it returns **CONVERGED** if equation system can be solved with a minimal ending mismatch on **slacked bus**.|
 
-![Slack](img/uml/loadflow.png){: width="100%" .center-image}
+![Slack](img/uml/loadflow.png){: width="100%" style="margin-top: 2rem;" .center-image}
+
+## Activities diagrams about powsybl-open-loadflow internal process
+### OpenLoadFlowProvider.runAc
+![Slack](img/uml/loadflow - OpenLoadFlowProvider.runAc.png){: width="100%" style="margin-top: 2rem;" .center-image}
+
+### AcloadFlowEngine.run
+![Slack](img/uml/loadFlow - AcloadFlowEngine.run.png){: width="100%" style="margin-top: 2rem;" .center-image}
+
+### AcloadFlowEngine.runOuterLoop
+![Slack](img/uml/loadflow - AcloadFlowEngine.runOuterLoop.png){: width="100%" style="margin-top: 2rem;" .center-image}
+
+### NewtonRaphson.run
+![Slack](img/uml/loadflow - NewtonRaphson.run.png){: width="100%" style="margin-top: 2rem;" .center-image}
+
+### Details about all OuterLoop implementations
+#### PhaseControlOuterLoop
+
+#### ReactiveLimitsOuterLoop
+
+#### DistributedSlackOnGenerationOuterLoop
+
+#### DistributedSlackOnLoadOuterLoop
 
