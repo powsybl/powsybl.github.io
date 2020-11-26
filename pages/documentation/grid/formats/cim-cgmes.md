@@ -46,7 +46,9 @@ The `iidm.import.cgmes.convert-boundary` property is an optional property that d
 The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates an [IIDM Busbar Section](../model/index.md#busbar-section) for each CGMES connectivity node. Its default value is `false`.
 
 **iidm.import.cgmes.post-processors**
-The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which are to be activated after import. By default, it is an empty list.
+The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which are to be activated after import.
+By default, it is an empty list.
+One implementation of such a post-processor is available in PowSyBl in the [powsybl-single-line-diagram](../../developer/repositories/powsybl-single-line-diagram.md) repository, named [CgmesDLImportPostProcessor](#CgmesDLImportPostProcessor).
 
 **iidm.import.cgmes.powsybl-triplestore**  
 The `iidm.import.cgmes.powsybl-triplestore` property is an optional property that defines which triplestore implementation is used. PowSyBl supports the [RDF4J](#rdf4j), [Jena](#jena) and [Blazegraph](#blazegraph) triplestore implementations. This property has `rdf4j` as default value.
@@ -79,6 +81,16 @@ The `storeCgmesModelAsNetworkExtension` property is deprecated since v2.4.0. Use
 
 ## Export
 <span style="color: red">TODO</span>
+
+## CGMES post-processors
+
+### CgmesDLImportPostProcessor
+This post-processor loads the diagram layout (DL) profile contained in the CGMES file, if available, into the triplestore.
+The diagram layout profile contains the data which is necessary to represent a drawing of the diagram corresponding to the CGMES file.
+For instance, it contains the position of all equipments.
+ 
+This post-processor is enabled by adding the name `cgmesDLImport` to the list associated to `iidm.import.cgmes.post-processors` property.
+
 
 ## Triple stores
 
