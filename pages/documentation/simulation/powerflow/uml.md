@@ -27,23 +27,24 @@ Give a summary view about **Open Load Flow** and its integration with **powsybl-
 
 ![Slack](img/uml/loadflow - dependencies involved.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
-## Network modelisation
+## Sub-network modelisation in powsybl-open-loadflow
+The list of **LfNetwork** objects is build from **Network** Object in **LfNetworkLoaderImpl**. **Network** object from **powsybl-iidm-api** dependency is previously loaded by **Importer** in **powsybl-iidm-xml-converter** dependency.
 ![Slack](img/uml/openloadflow - network classes.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
 ## Activities diagrams about powsybl-open-loadflow internal process
 ### 1. RunLoadFlowTool.run (Tool interface implementation)
 ![Slack](img/uml/openloadflow - RunLoadFlowTool.run.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
-### OpenLoadFlowProvider.runAc (run on AC Network)
+### 2. OpenLoadFlowProvider.runAc (run on AC Network)
 ![Slack](img/uml/openloadflow - OpenLoadFlowProvider.runAc.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
-### AcloadFlowEngine.run (internal openloadflow engine)
+### 3. AcloadFlowEngine.run (internal openloadflow engine)
 ![Slack](img/uml/openloadflow - AcloadFlowEngine.run.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
-### AcloadFlowEngine.runOuterLoop (detail about OuterLoop usage)
+### 4. AcloadFlowEngine.runOuterLoop (detail about OuterLoop usage)
 ![Slack](img/uml/openloadflow - AcloadFlowEngine.runOuterLoop.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
-### NewtonRaphson.run (NewtonRaphson implementation)
+### 5. NewtonRaphson.run (NewtonRaphson implementation)
 ![Slack](img/uml/openloadflow - NewtonRaphson.run.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
 ## Details about all OuterLoop implementations
