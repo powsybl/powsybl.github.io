@@ -247,10 +247,10 @@ In this provider, we first define the variable of interest: here the branch flow
 
 Now the sensitivity inputs are prepared, we can run a sensitivity analysis. This is done in the following way:
 ```java
-SensitivityAnalysisResult sensiResults = SensitivityAnalysis.run(network, factorsProvider, new EmptyContingencyListProvider());
+SensitivityAnalysisResult sensiResults = SensitivityAnalysis.run(network, factorsProvider, Collections.emptyList());
 ```
 When no variants are explicitly specified, the analysis will be performed on network working variant.
-Here we directly load the sensitivity analysis parameters from the YML configuration file in the resources. We also pass an `EmptyContingencyListProvider` to run a simulation without contingencies.
+Here we directly load the sensitivity analysis parameters from the YML configuration file in the resources. We also pass an empty list to run a simulation without contingencies.
 
 ## Output the results in the terminal
 
@@ -284,27 +284,28 @@ try (OutputStream os = Files.newOutputStream(jsonSensiResultPath)) {
 
 We now reach the last part of this tutorial, where we'll run a series of sensitivity calculations on a network, given a list of contingencies and sensitivity factors. Here we use the systematic sensitivity feature of Hades2, creating one variant on which all the calculations are done successively, without re-loading the network each time, by modifying the Jacobian matrix directly in the solver.
 
-First, we need to implement a contingencies provider.
 Here the list of contingencies is composed of the lines that are not monitored
 in the sensitivity analysis.
 ```java
-ContingenciesProvider contingenciesProvider = n -> n.getLineStream()
-  .filter(l -> {
-      final boolean[] isContingency = {true};
-      monitoredLines.forEach(monitoredLine -> {
-          if (l.equals(monitoredLine)) {
-            isContingency[0] = false;
-            return;
-          }
-      });
-      return isContingency[0];
-  })
-  .map(l -> new Contingency(l.getId(), new BranchContingency(l.getId())))
-  .collect(Collectors.toList());
+List<Contingency> contingencies = network.getLineStream()
+        .filter(l -> {
+            final boolean[] isContingency = {true};
+            monitoredLines.forEach(monitoredLine -> {
+                if (l.equals(monitoredLine)) {
+                    isContingency[0] = false;
+                    return;
+                }
+            });
+            return isContingency[0];
+        })
+        .map(l -> Contingency.builder(l.getId())
+                             .addBranch(l.getId())
+                             .build())
+        .collect(Collectors.toList());
 ```
 This makes a total of 11 contingencies, which you can check through:
 ```java
-LOGGER.info("Number of contingencies: {}", contingenciesProvider.getContingencies(network).size());
+LOGGER.info("Number of contingencies: {}", contingencies.size());
 ```
 
 ## Create sensitivity factors by reading a JSON file
@@ -336,7 +337,7 @@ We first create sensitivity analysis parameters by loading the YML configuration
 
 We can now run all the sensitivity analyses at once, through:
 ```java
-SensitivityAnalysisResult systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingenciesProvider, params);
+SensitivityAnalysisResult systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingencies, params);
 ```
 
 ## Output the results to a CSV file
