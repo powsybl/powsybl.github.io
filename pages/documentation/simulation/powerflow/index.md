@@ -275,7 +275,7 @@ The default values of all the optional properties are read from the [load-flow-d
 
 ### Specific parameters
 Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
-- [PowSyBl OpenLoadFlow parameters](openlf.md#parameters)
+- [PowSyBl OpenLoadFlow](openlf.md#parameters)
 - [Hades2](hades2.md#specific-parameters)
 - [DynaFlow](dynaflow.md#specific-parameters)
 
