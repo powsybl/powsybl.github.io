@@ -28,9 +28,9 @@ hades2:
 In this section, you may also choose the option `debug: true` to tell PowSyBl not to erase the temporary folder created by Hades2 for the calculation.
 This makes it possible to check what happened on the Hades2 side for debugging purposes.
 
-### Specific parameters
+## Specific parameters
 
-#### Import export parameters
+### Import export parameters
 
 **computedLossAngle**  
 The `computedLossAngle` property is an optional property that defines if the ADN `computedLossAngle` attribute is exported during ADN export for tap changers or not.
@@ -58,7 +58,7 @@ import-export-parameters-default-value:
   iidm.export.adn.minimum-reactance-per-unit: 0.0007
 ```
 
-#### Hades2 default parameters
+### Hades2 default parameters
 
 **balanceNormEpsilon**  
 The `balanceNormEpsilon` property is an optional property that defines the epsilon on production-consumption balance. The
@@ -198,7 +198,7 @@ hades2-default-parameters:
     detectPermanentLimitViolation: true
 ```
 
-#### Hades2 limit reductions parameters
+### Hades2 limit reductions parameters
 
 **limitReductions**  
 The `limitReductions` property is an optional property that defines the limit reductions for permanent and temporary

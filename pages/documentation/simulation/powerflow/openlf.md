@@ -35,7 +35,7 @@ The default value is `false`.
 
 **slackBusSelectorType**  
 The `slackBusSelectorType` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
-- `First` if you want to choose the first bus of all the network buses, identified by the [slack terminal extension]().
+- `First` if you want to choose the first bus of all the network buses, identified by the [slack terminal extension](../../grid/model/extensions.md#slack-terminal).
 - `Name` if you want to choose a specific bus as the slack bus. In that case, the other `nameSlackBusSelectorBusId` property has to be filled.
 - `MostMeshed` if you want to choose the most meshed bus as the slack bus. This option is required for computation with several synchronous component.
 
