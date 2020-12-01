@@ -17,15 +17,35 @@ The network is represented by a graph whose nodes are the network buses and edge
 The PI-model is used for branches and transformers.
 
 ### PI-model for branches and transformers
-Test
 
-$$ a^2 = b^2 + c^2 $$
+In OpenLoadFlow, Pi-model is used for branches and transformers.
+That is, each branch or transformer is represented with the following electrical scheme.
+
+TO DO : convert using inkscape.
+![Pimodel](img/PI-model.png){: width="500" .center-image}
+
 
 ### AC flows model
+TO DO
 
 ### DC flows model
+The DC flows model make several asumptions to build a model where the active power flowing throught a line depends linearly from the voltage angles at its ends.
+In this model, reactive power flows and active losses are neglected.
+Following asumptions are made:
+- The voltage magnitude is equal to 1 per unit at each bus,
+- The conductance \\(G_{i,j}\\) of each line \\((i,j)\\) is neglected, only the susceptance \\(B_{i,j}\\) is considered,
+- The voltage angle difference between two adjacent buses is small.
 
-## Sensitivity analysis for DC flows model
+Therefore, the power flowing from bus \\(i\\) to bus \\(j\\) is given by the linear expression:
+
+$$ P_{i,j} = \frac{\theta_i-\theta_j+\phi_{i,j}}{X_{i,j}} $$
+
+Where \\(X_{i,j}\\) is the rectance of the line \\((i,j)\\).
+
+$$ \left( \begin{matrix}  aa & bb \\ cc & dd  \end{matrix} \right) = AM $$
+
+## Sensitivity analysis with DC flows model
+TO DO
 
 
 ## Configuration
