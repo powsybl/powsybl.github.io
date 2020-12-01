@@ -26,9 +26,11 @@ TO DO : convert using inkscape.
 
 
 ### AC flows model
+
 TO DO
 
 ### DC flows model
+
 The DC flows model make several asumptions to build a model where the active power flowing throught a line depends linearly from the voltage angles at its ends.
 In this model, reactive power flows and active losses are neglected.
 Following asumptions are made:
@@ -40,12 +42,34 @@ Therefore, the power flowing from bus \\(i\\) to bus \\(j\\) is given by the lin
 
 $$ P_{i,j} = \frac{\theta_i-\theta_j+\phi_{i,j}}{X_{i,j}} $$
 
-Where \\(X_{i,j}\\) is the rectance of the line \\((i,j)\\).
-
-$$ \left( \begin{matrix}  aa & bb \\ cc & dd  \end{matrix} \right) = AM $$
+Where \\(X_{i,j}\\) is the rectance of the line \\((i,j)\\), and \\(\theta_i\\) the voltage angle at bus \\(i\\).
 
 ## Sensitivity analysis with DC flows model
-TO DO
+
+With OpenLoadFlow it is possible to perform several types of sensitivity analysis listed below.
+
+### Injection and phase shifting sensitivity
+
+This type of sensitivity measures how the active flow on several given lines will be impacted when the injection is increased
+by one MW on a given bus or when the phase shifting angle of one phase-shifting transformer is increased by one degree.
+
+To do this, the first step is to build the grid constraints linear system.
+
+The variable of the system are the voltage angles \\(\theta\\) (one for each bus).
+The constraints of the system are the balancing of power at each bus, except for the slack bus.
+One additional constraint states that the voltage angle is null at the slack bus.
+Therefore the linear system is composed of \\(N\\) variables and \\(N\\) constraints, where \\(N\\) is the number of buses in the network:
+
+$$ A\theta = b$$
+
+The vector \\(b\\) of right-hand sides is linearly computed from the given injections and phase-shifting angles.
+
+Second step consists in decomposing the square matrix \\(A\\) using the LU matrices decomposition:
+$$ A = LU $$
+Whence matrices \\(L\\) and \\(U\\) are obtained, it is quite easy to solve the grid constraints linear system.
+
+
+$$ \left( \begin{matrix}  aa & bb \\ cc & dd  \end{matrix} \right) = AM $$
 
 
 ## Configuration
