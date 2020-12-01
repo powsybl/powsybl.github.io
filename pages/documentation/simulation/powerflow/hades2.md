@@ -200,7 +200,44 @@ hades2-default-parameters:
 
 ### Hades2 limit reductions parameters
 
+The [ADNLimitReductionsParameters](https://javadoc.io/doc/com.rte-france.powsybl/powsybl-rte-core/latest/com/rte_france/powsybl/iidm/export/adn/ADNLimitReductionsParameters.html)
+class is used to model limit reductions for a given voltage range (inclusive). It contains a coefficient for permanent limits and a list of coefficients for temporary limits.
+
 **limitReductions**  
 The `limitReductions` property is an optional property that defines the limit reductions for permanent and temporary
-limits for a given range of voltage. See the [ADNLimitReductionsParameters](https://rte-france.github.io/hades2/configuration/ADNLimitReductionsParameters.html) page for
-more details.
+limits for a given range of voltage. 
+
+Here is an example of a `limitReductions` description:
+```yaml
+limitReductions: "[{\"minVoltage\": 250.0, \"maxVoltage\": 450.0, \"permanent\": 1.0, \"temporaries\": [{\"minDuration\": 0.0, \"maxDuration\": 300.0, \"reduction\": 0.95}, {\"minDuration\": 300.0, \"maxDuration\": 600.0, \"reduction\": 0.98}]}, {\"minVoltage\": 150.0, \"maxVoltage\": 250.0, \"permanent\": 1.0, \"temporaries\": [{\"minDuration\": 0.0, \"maxDuration\": 300.0, \"reduction\": 0.95}, {\"minDuration\": 300.0, \"maxDuration\": 600.0, \"reduction\": 0.98}]}]"
+```
+
+The optional properties of limit reductions are:
+
+***maxVoltage***  
+The `maxVoltage` property is an optional property that defines the upper bound of the [minVoltage, maxVoltage] range. The
+default value of this property is `Float.MAX_VALUE`.
+
+***minVoltage***  
+The `minVoltage` property is an optional property that defines the lower bound of the [minVoltage, max] range. The
+default value of this property is 0.
+
+***permanent***  
+The `permanent` property is an optional property that define the limit reduction for permanent limits. The default value
+of this property is 1 (e.g. 100%). 
+
+***temporaries***  
+The `temporaries` property is an optional property that defines the temporary limits reductions, model by the
+`ADNTemporaryLimitsParameters` class.
+
+The `com.rte_france.powsybl.iidm.export.adn.ADNTemporaryLimitParameters` class is used to model limit reductions for
+temporary limits in a given duration range (inclusive), with the following optional properties:
+
+- The `maxDuration` property is an optional property that defines the upper bound of the [minDuration, maxDuration] range.
+The default value of this property is `Integer.MAX_VALUE`.
+
+- The `minDuration` property is an optional property that defines the lower bound of the [minDuration, maxDuration] range.
+The default value of this property is 0.
+
+- The `reduction` property is an optional property that defines the limit reduction for temporary limits. The default
+value of this property is 1 (e.g. 100%).
