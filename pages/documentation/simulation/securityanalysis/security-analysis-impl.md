@@ -69,7 +69,7 @@ The [ADNSecurityAnalysisParameters](https://javadoc.io/doc/com.rte-france.powsyb
 is an extension of the [SecurityAnalysisParameters](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/security/SecurityAnalysisParameters.html)
 class that provides specific configuration for the security analysis mode of Hades2.
 
-Read the load flow [specific parameters](../powerflow/hades2.md#specific-parameters) page to learn more about the Hades load-flow configuration.
+Read the [import export parameters](../powerflow/hades2.md#import-export-parameters) and the load flow [specific parameters](../powerflow/hades2.md#specific-parameters) pages to learn more about the Hades load-flow configuration.
 
 **afterContingencyBalanceEpsilon**  
 The `afterContingencyBalanceEpsilon` property is an optional property that defines the maximum value accepted for the
