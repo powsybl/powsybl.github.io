@@ -100,33 +100,56 @@ The `psse.import.ignore-base-voltage` property is an optional property that defi
 ### Inconsistency checks
 -<span style="color: red">TODO</span>
 
-### Conversion, General description
+### Conversion
+
+A PSS®E file specifies a Bus/Branch network model where typically there is a bus for each voltage level inside a substation and where substation objects are not explicitly defined. Breakers and switches were traditionally modeled as zero impedance lines with special identifiers. Since version 35 PSS®E supports explicit definition of substation data and switching devices at both system and substation level. However, this information is optional and may not be present in the case.
+
+The PowSyBl grid model establishes the substation as a required container of voltage levels and equipment. The first step in the conversion process assigns a substation for each PSS®E bus, ensuring that all buses at transformer ends are kept in the same substation.
+
+The current conversion does not use explicit PSS®E substation information. Instead, buses are grouped using zero impedance branches and transformers as connectors. A new voltage level is created for each group of buses connected by zero impedance branches, and a new substation is created for the voltage levels connected by transformers. Explicit substations will be supported in future versions, allowing to represent the internal connectivity.
+
+In the PowSyBl grid model all the network components are identified through a global and unique alphanumeric identifier (**Id**). Optionally, they may receive a name (**Name**).
+
+For each substation the following attributes are defined:
+  - **Id** following the pattern `S<n>` where `n` represents a consecutive integer number starting from 1.
+
+Every voltage level is assigned to its corresponding substation, with attributes:
+  - **Id** following the pattern `VL<n>` where `n` represents the minimum PSS®E bus number included inside the voltage level.
+  - **NominalV** Nominal voltage of the voltage level. Equal to `1` if `psse.import.ignore-base-voltage` property is `true`. Otherwise, it is assigned to the base voltage of one representative bus inside the voltage level, read from PSS®E field `BASKV`.
+  - **TopologyKind** Topology level assigned to the network model, always `BUS_BREAKER`.
+
+The following sections describe in detail how each supported PSS®E data block is converted to PowSyBl network model objects.
+
+#### _Bus Data_
+
+There is a one-to-one correspondence between the records of the PSS®E _Bus Data_ block and the buses of the PowSyBl network model. For each record in the _Bus Data_ block a PowSyBl bus is created and assigned to its corresponding voltage level with the following attributes:
+- **Id** according to the pattern `B<n>` where `n` represents the PSS@E bus number (field `I` in the _Bus Data_ record).
+- **Name** is copied from PSS®E field `NAME`.
+- **V** is obtained from the PSS®E bus voltage magnitude, `VM`, multiplied by the nominal voltage of the corresponding voltage level.
+- **Angle** is copied from the PSS®E bus voltage phase angle, `VA`.
+
+
+#### _Load Data_
 -<span style="color: red">TODO</span>
 
-### BusData to Buses Conversion
+#### _Fixed Bus Shunt Data_
 -<span style="color: red">TODO</span>
 
-### LoadData to Loads Conversion
+#### _Switched Shunt Data_
 -<span style="color: red">TODO</span>
 
-### FixedBusShuntData to Linear Shunt Compensators Conversion
+#### _Generator Data_
 -<span style="color: red">TODO</span>
 
-### SwitchedShuntData to Non-Linear Shunt Compensators Conversion
+#### _Non-Transformer Branch Data_
 -<span style="color: red">TODO</span>
 
-### GeneratorData to Generators Conversion
+#### _Transformer Data_
 -<span style="color: red">TODO</span>
 
-### Non-TransformerBranchData to Lines Conversion
+#### Slack bus
 -<span style="color: red">TODO</span>
 
-### TransformerData to TwoWindings and ThreeWindings Transformers Conversion
--<span style="color: red">TODO</span>
+### Export
 
-### Slack Conversion
--<span style="color: red">TODO</span>
-
-## Export
-
-The export of network into the PSS/E format is not supported.
+The export of PowSyBl networks to PSS®E format is not yet supported.

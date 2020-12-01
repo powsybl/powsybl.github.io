@@ -45,11 +45,24 @@ The `iidm.import.cgmes.convert-boundary` property is an optional property that d
 **iidm.import.cgmes.create-busbar-section-for-every-connectivity-node**  
 The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates an [IIDM Busbar Section](../model/index.md#busbar-section) for each CGMES connectivity node. Its default value is `false`.
 
+**iidm.import.cgmes.ensure-id-alias-unicity**
+The `iidm.import.cgmes.ensure-id-alias-unicity` property is an optional property that defines if IDs and aliases' unicity is ensured during CGMES import. If it is set to `true`, identical CGMES IDs will be modified to be unique.
+If it is set to `false`, identical CGMES IDs will throw an exception. Its default value is `false`. 
+
+**iidm.import.cgmes.post-processors**
+The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which are to be activated after import. By default, it is an empty list.
+
 **iidm.import.cgmes.powsybl-triplestore**  
 The `iidm.import.cgmes.powsybl-triplestore` property is an optional property that defines which triplestore implementation is used. PowSyBl supports the [RDF4J](#rdf4j), [Jena](#jena) and [Blazegraph](#blazegraph) triplestore implementations. This property has `rdf4j` as default value.
 
+**iidm.import.cgmes.profile-used-for-initial-state-values**
+The `iidm.import.cgmes.profile-used-for-initial-state-values` property is an optional property that defines which profile is used in priority for initial state values. It can be `SSH` or `SV`. Its default value is `SSH`.
+
 **iidm.import.cgmes.store-cgmes-model-as-network-extension**  
-The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an optional property that defines if the CGMES model is stored in the imported IIDM network as an extension. Its default value is `true`.
+The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an optional property that defines if the CGMES model is stored in the imported IIDM network as an [extension](). Its default value is `true`.
+
+**iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension**
+The `iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension` property is an optional property that defines if the CGMES Conversion context will be stored as an extension of the IIDM output network. Its default value is `false`.
 
 #### Deprecated properties
 

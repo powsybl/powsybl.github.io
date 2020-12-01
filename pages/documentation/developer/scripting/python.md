@@ -17,10 +17,6 @@ This small example shows how to load a case file and run a power simulation in P
 ```python
 import jpype
 import jpype.imports
-import pypowsybl
-
-# Start the JVM before importing java classes
-pypowsybl.start()
 
 from pypowsybl import Network, LoadFlow
 
@@ -34,7 +30,4 @@ print("Metrics: {}".format(result.getMetrics()))
 
 # Save the network
 Network.save(network, "eurostag-tutorial-example1-after-lf.xml", "XIIDM")
-
-# Shutdown the JVM.
-pypowsybl.stop()
 ```
