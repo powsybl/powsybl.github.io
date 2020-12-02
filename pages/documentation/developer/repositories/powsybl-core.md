@@ -7,9 +7,9 @@ The PowSyBl Core [repository](https://github.com/powsybl/powsybl-core) provides 
 ## Features
 
 - A complete and extendable grid data model
-- Support of common exchange format (CGMES, UCTE, IEEE-CDF, PSS/E, Matpower...)
+- Support of common exchange format ([CGMES](../../grid/formats/cim-cgmes.md), [UCTE](../../grid/formats/ucte-def.md), [IEEE-CDF](../../grid/formats/ieee-cdf.md), [PSS/E](../../grid/formats/psse.md), [Matpower](../../grid/formats/matpower.md)...)
 - A large set of simulation APIs
-- A command-line interface to run simulations
+- A [command-line interface](../../user/itools) to run simulations
 - Some core features (configuration, calculation distribution)
 
 ## Getting started
@@ -21,6 +21,7 @@ The PowSyBl Core [repository](https://github.com/powsybl/powsybl-core) provides 
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 3.8.0 | 2020-12-02 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v3.8.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/3.8.0/index.html) |
 | 3.7.1 | 2020-10-16 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v3.7.1) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/3.7.1/index.html) |
 | 3.7.0 | 2020-10-14 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v3.7.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/3.7.0/index.html) |
 | 3.6.0 | 2020-09-09 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v3.6.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/3.6.0/index.html) |
