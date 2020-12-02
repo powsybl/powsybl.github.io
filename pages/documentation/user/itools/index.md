@@ -44,7 +44,7 @@ java_xmx=8G
 
 **powsybl_config_dirs:** This is an optional property that defines the list of the folders where the configuration files are located. If this property is not set, the configuration files are read from `<USER_HOME>/.itools` and `<ITOOLS_PREFIX>/etc` folders. Note that the order of the folder is really import as the PowSyBl configuration is [stackable]().
 
-<span class="heading" id="powsybl_config_name">**powsybl_config_name:**</span> This is an optional property that defines the base name of the configuration files. The default value for this property is `config`.
+<a class="heading" id="powsybl_config_name"/>**powsybl_config_name:** This is an optional property that defines the base name of the configuration files. The default value for this property is `config`.
 
 **java_xmx:** This is an optional property that defines the maximum size of the memory allocation pool of the JVM. The default value for this property is 8 gigabytes.
 
@@ -76,7 +76,7 @@ The `iTools` script relies on a [plugin mechanism](): the commands are discovere
 | Command | Theme | Description |
 | ------- | ----- | ----------- |
 | [action-simulator](action-simulator.md) | Computation | Run a security analysis with remedial actions |
-| [compare-security-analysis-results.md](compare-security-analysis-results.md) | Computation | Compare security analysis results |
+| [compare-security-analysis-results](compare-security-analysis-results.md) | Computation | Compare security analysis results |
 | [convert-network](convert-network.md) | Data conversion | Convert a grid file from a format to another |
 | [loadflow](loadflow.md) | Computation | Run a power flow simulation |
 | [loadflow-validation](loadflow-validation.md) | Computation | Validate load flow results on a network |
