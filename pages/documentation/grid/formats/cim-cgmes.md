@@ -45,6 +45,10 @@ The `iidm.import.cgmes.convert-boundary` property is an optional property that d
 **iidm.import.cgmes.create-busbar-section-for-every-connectivity-node**  
 The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates an [IIDM Busbar Section](../model/index.md#busbar-section) for each CGMES connectivity node. Its default value is `false`.
 
+**iidm.import.cgmes.ensure-id-alias-unicity**
+The `iidm.import.cgmes.ensure-id-alias-unicity` property is an optional property that defines if IDs and aliases' unicity is ensured during CGMES import. If it is set to `true`, identical CGMES IDs will be modified to be unique.
+If it is set to `false`, identical CGMES IDs will throw an exception. Its default value is `false`. 
+
 **iidm.import.cgmes.post-processors**
 The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which are to be activated after import. By default, it is an empty list.
 
