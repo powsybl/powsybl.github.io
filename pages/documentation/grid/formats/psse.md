@@ -133,7 +133,7 @@ There is a one-to-one correspondence between the records of the PSS®E _Bus Data
 
 Every _Load Data_ record represents one load. Multiple loads are allowed at a PSS®E bus by specifying one _Load Data_ record with the same bus and different load identifier. Each record defines a new load in the PowSyBl grid model associated with its corresponding voltage level and with the following attributes:
 - **Id** according to the pattern `<n>-L<m>` where `n` represents the PSS®E bus number (field `I` in the _Load Data_ record) and `m` is the PSS®E alphanumeric load identifier (field `ID` in the _Load Data_ record).
-- **ConnectableBus** PowSyBl bus identifier associated to the PSS®E bus number (field `I` in the _Load Data_ record).
+- **ConnectableBus** PowSyBl bus identifier assigned to the PSS®E bus number (field `I` in the _Load Data_ record).
 - **P0** Active power. It is copied from PSS®E field `PL`.
 - **Q0** Reactive power. It is copied from PSS®E field `QL`.
 
@@ -146,7 +146,7 @@ PSS®E supports loads with three different characteristics: Constant Power, Cons
 Each  _Fixed Bus Shunt Data_ record defines a PowSyBl shunt compensator with a linear model and in both models it is possible to define multiple shunts at a bus. The PowSyBl shunt compensator is associated with its corresponding voltage level and has the following attributes:
 
 - **Id** according to the pattern `<n>-SH<m>` where `n` represents the PSS®E bus number (field `I` in the _Fixed Bus Shunt Data_ record) and `m` is the PSS®E alphanumeric shunt identifier (field `ID` in the _Fixed Bus Shunt Data_ record).
-- **ConnectableBus** PowSyBl bus identifier associated to the PSS®E bus number (field `I` in the _Fixed Bus Shunt Data_ record).
+- **ConnectableBus** PowSyBl bus identifier assigned to the PSS®E bus number (field `I` in the _Fixed Bus Shunt Data_ record).
 - **SectionCount** Always `1`.
 - **gPerSection** Positive sequence shunt (charging) conductance per section. It is defined as `GL` / (`vnom` *`vnom`), where `GL` is the active component of shunt admittance to ground, entered in Mw at one per unit voltage (field `GL` in the _Fixed Bus Shunt Data_ record) and `vnom` is the nominal voltage of the corresponding voltage level.
 - **bPerSection** Positive sequence shunt (charging) susceptance per section. It is defined as `BL` / (`vnom` *`vnom`), where `BL` is the reactive component of shunt admittance to ground, entered in Mvar at one per unit voltage (field `BL` in the _Fixed Bus Shunt Data_ record).
@@ -159,19 +159,19 @@ The shunt compensator is connected to the connectableBus if fixed shunt status (
 In the PSS®E model, version 33, only one switched shunt element can be defined by bus and it may consist entirely of blocks of shunt reactors, entirely of blocks of capacitor banks or of both reactors and capacitors. Version 35 allows to define multiple switched shunt by bus adding an alphanumeric switched shunt identifier. Each switched shunt record defines a PowSyBl shunt compensator with a non-linear model. The PowSyBl shunt compensator is associated with its corresponding voltage level and has the following attributes:
 
 - **Id** according to the pattern `<n>-SwSH<m>` where `n` represents the PSS®E bus number (field `I` in the _Switched Shunt Data_ record) and `m` is the PSS®E alphanumeric shunt identifier (field `ID` in version 35 of the _Switched Shunt Data_ record, forced to `"1"` in version 33).
-- **ConnectableBus** PowSyBl bus identifier associated to the PSS®E bus number (field `I` in the _Switched Shunt Data_ record).
+- **ConnectableBus** PowSyBl bus identifier assigned to the PSS®E bus number (field `I` in the _Switched Shunt Data_ record).
 - **SectionCount** Defined as the section count (section index + 1) where section `B` is closer to the initial switched shunt admittance (field `BINIT` in the _Switched Shunt Data_ record).
 - **TargetV** Voltage setpoint defined as `0.5` * (`VSWLO` + `VSWHI`) * `vnom`, where `VSWLO` is the controlled voltage lower limit (field `VSWLO` in the _Switched Shunt Data_ record) and `VSWHI` is the controlled voltage upper limit (field `VSWHI` in the _Switched Shunt Data_ record).
 - **TargetDeadband** defined as (`VSWHI` - `VSWLO`) * `vnom`.
-- **RegulatingTerminal** Regulating terminal associated to the bus where voltage is controlled by this switched shunt (field `SWREM` in the _Switched Shunt Data_ record if it is not `0`. Otherwise field `I` in the _Switched Shunt Data_ record).
+- **RegulatingTerminal** Regulating terminal assigned to the bus where voltage is controlled by this switched shunt (field `SWREM` in the _Switched Shunt Data_ record if it is not `0`. Otherwise field `I` in the _Switched Shunt Data_ record).
 - **VoltageRegulatorOn** defined as `true` if the control mode is not `0` (field `MODSW` in the _Switched Shunt Data_ record) and `TargetV` is greater than `0.0`.
 
 The shunt compensator is connected to the connectableBus if switched shunt status (field `STAT` in the _Switched Shunt Data_ record) is `1` (In-service).
 In the non-linear model a set of sections can be defined, each section has two attributes:
 - **Section G** Positive sequence shunt (charging) conductance of this section. Always `0.0`.
-- **Section B** Positive sequence shunt (charging) susceptance of this section. It is defined as `B` / (`vnom` *`vnom`), where `B` is the reactive component of shunt admittance to ground, entered in Mvar at one per unit voltage associated to this section and `vnom` is the nominal voltage of the corresponding voltage level.
+- **Section B** Positive sequence shunt (charging) susceptance of this section. It is defined as `B` / (`vnom` *`vnom`), where `B` is the reactive component of shunt admittance to ground, entered in Mvar at one per unit voltage assigned to this section and `vnom` is the nominal voltage of the corresponding voltage level.
 
-The sections of the non-linear model are defined according to the adjustment method of the switched shunt (field `ADJM` in the _Switched Shunt Data_ record). If the PSS®E adjustment method is `0`, reactor blocks (negative susceptance) are specified first followed by the capacitor blocks (positive susceptance) and both blocks are switched on in input order. A section is assigned to each step of the reactor and capacitor shunt blocks by accumulating the admittance of the corresponding steps that are in-service. Only the in-service switched shunt blocks are considered (field `SI` in version 35 of the _Switched Shunt Data_ record, always in-service in version 33. A section with 0.0 susceptance is added between sections associated to reactor and capacitor blocks.
+The sections of the non-linear model are defined according to the adjustment method of the switched shunt (field `ADJM` in the _Switched Shunt Data_ record). If the PSS®E adjustment method is `0`, reactor blocks (negative susceptance) are specified first followed by the capacitor blocks (positive susceptance) and both blocks are switched on in input order. A section is assigned to each step of the reactor and capacitor shunt blocks by accumulating the admittance of the corresponding steps that are in-service. Only the in-service switched shunt blocks are considered (field `SI` in version 35 of the _Switched Shunt Data_ record, always in-service in version 33. A section with 0.0 susceptance is added between sections assigned to reactor and capacitor blocks.
 
 If the adjustment method is `1`, reactor and capacitor blocks can be specified at any order and are switched on and off such that the next highest (or lowest) total susceptance is achieved. All the switching combinations are considered in PSS®E. Current version does not support a section for each switching combination. To match the shunt blocks into sections, first reactor and capacitor blocks are increasingly ordered by the susceptance increment (field `BI` in the _Switched Shunt Data_ record) and then sections are created like in the previous adjustment considering that both blocks are switched on in sorted order.
 
@@ -179,7 +179,7 @@ If the adjustment method is `1`, reactor and capacitor blocks can be specified a
 
 Every _Generator Data_ single line record represents one generator. Multiple generators are allowed at a PSS®E bus by specifying the same bus and a different identifier. Each record defines a new generator in the PowSyBl grid model associated with its corresponding voltage level and with the following attributes:
 - **Id** according to the pattern `<n>-G<m>` where `n` represents the PSS®E bus number (field `I` in the _Generator Data_ record) and `m` is the PSS®E alphanumeric load identifier (field `ID` in the _Generator Data_ record).
-- **ConnectableBus** PowSyBl bus identifier associated to the PSS®E bus number (field `I` in the _Generator Data_ record).
+- **ConnectableBus** PowSyBl bus identifier assigned to the PSS®E bus number (field `I` in the _Generator Data_ record).
 - **TargetP** Active power. It is copied from PSS®E field `PG`.
 - **MinP** Minimum generator active power. It is copied from PSS®E field `PB`.
 - **MaxP** Maximum generator active power. It is copied from PSS®E field `PT`.
@@ -187,7 +187,7 @@ Every _Generator Data_ single line record represents one generator. Multiple gen
 - **MinQ** Minimum generator reactive power. It is copied from PSS®E field `QB`.
 - **MaxQ** Maximum generator reactive power. It is copied from PSS®E field `QT`.
 - **TargetV** Voltage setpoint defined as `VS` * `vnom`, where `VS` is the regulated voltage (field `VS` in the _Generator Data_ record) and `vnom` is the nominal voltage of the corresponding voltage level.
-- **RegulatingTerminal** Regulating terminal associated to the bus where voltage is controlled by this generator (field `IREG` in the _Generator Data_ record if it is not `0`. Otherwise field `I` in the _Generator Data_ record).
+- **RegulatingTerminal** Regulating terminal assigned to the bus where voltage is controlled by this generator (field `IREG` in the _Generator Data_ record if it is not `0`. Otherwise field `I` in the _Generator Data_ record).
 - **VoltageRegulatorOn** defined as `true` if the type code of the associated bus is `2` or `3` (field `IDE` in the _Bus Data_ record) and `TargetV` is greater than `0.0` and `MaxQ` is bigger than `MinQ`.
 
 The generator is connected to the connectableBus if generator status (field `STAT` in the _Generator Data_ record) is `1` (In-service).
@@ -197,11 +197,11 @@ The generator is connected to the connectableBus if generator status (field `STA
 
 In PSS®E each ac transmission line is represented as a non-transformer branch record and defines a new line in the PowSyBl grid model with the following attributes:
 - **Id** according to the pattern `L-<n>-<m>-<p>` where `n` represents the PSS®E from bus number (field `I` in the _Non-Transformer Branch Data_ record), `m` represents the to bus number (field `J` in the _Non-Transformer Branch Data_ record) and `p` is the circuit identifier (field `CKT` in the _Non-Transformer Branch Data_ record).
-- **ConnectableBus1** PowSyBl bus identifier associated to the from PSS®E bus number (field `I` in the _Non-Transformer Branch Data_ record).
-- **VoltageLevel1** PowSyBl voltage level associated to the from bus.
-- **ConnectableBus2** PowSyBl bus identifier associated to the to PSS®E bus number (field `J` in the _Non-Transformer Branch Data_ record).
-- **VoltageLevel2** PowSyBl voltage level associated to the to bus.
-- **R** Resistance defined as `R` * `vnom2` * `vnom2` / `sbase` where `R` is the resistance of the branch (field `R` in the _Non-Transformer Branch Data_ record), `vnom2` is the nominal voltage of the voltage level associated to the bus to end and `sbase` is the system MVA base (field `SBASE` in the _Case Identification Data_ record).
+- **ConnectableBus1** PowSyBl bus identifier assigned to the from PSS®E bus number (field `I` in the _Non-Transformer Branch Data_ record).
+- **VoltageLevel1** PowSyBl voltage level assigned to the from bus.
+- **ConnectableBus2** PowSyBl bus identifier assigned to the to PSS®E bus number (field `J` in the _Non-Transformer Branch Data_ record).
+- **VoltageLevel2** PowSyBl voltage level assigned to the to bus.
+- **R** Resistance defined as `R` * `vnom2` * `vnom2` / `sbase` where `R` is the resistance of the branch (field `R` in the _Non-Transformer Branch Data_ record), `vnom2` is the nominal voltage of the voltage level assigned to the bus to end and `sbase` is the system MVA base (field `SBASE` in the _Case Identification Data_ record).
 - **X** Reactance defined as `X` * `vnom2` * `vnom2` / `sbase` where `X` is the reactance of the branch (field `X` in the _Non-Transformer Branch Data_ record).
 - **G1** Conductance of the line shunt at the from bus end defined as (`GI` * `sbase`) / ( `vnom2` * `vnom2`) where `GI` is the conductance at the bus from end (field `GI` in the _Non-Transformer Branch Data_ record).
 - **B1** Susceptance defined as (( `0.5` * `B` + `BI` ) * `sbase`) / ( `vnom2` * `vnom2`) where `B` is the total branch charging susceptance (field `B` in the _Non-Transformer Branch Data_ record) and `BI` is the susceptance at the bus from end (field `BI` in the _Non-Transformer Branch Data_ record).
