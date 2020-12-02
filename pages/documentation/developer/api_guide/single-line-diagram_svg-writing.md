@@ -79,8 +79,8 @@ VoltageLevelLayoutFactory voltageLevelLayoutFactory = new PositionVoltageLevelLa
 // create default parameters for the SVG layout
 LayoutParameters layoutParameters = new LayoutParameters();
 
-// display line ID instead of line name
-boolean usename = false;
+// display line name instead of line ID
+boolean usename = true;
 
 // prefix used for the IDs of all diagram components
 String prefix = "";
@@ -201,7 +201,7 @@ substationDiagram.writeSvg(prefix,
 );
 ```
 
-We then obtain the following SVG file representing the whole PP_Amsterdam substation with its four voltage levels:
+We then obtain the following SVG file representing the whole PP_Amsterdam substation with its three voltage levels:
 
 ![Amsterdam_substation](img/single-line-diagram/svg-basics/example_Amsterdam_substation.svg)
 
