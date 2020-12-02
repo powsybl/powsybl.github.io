@@ -12,15 +12,15 @@ latex: true
 
 PowSyBl uses an internal grid model initially developed under the iTesla project, a research project funded by the [European Union 7th Framework programme](https://cordis.europa.eu/project/id/283012) (FP7). The grid model is known as IIDM (iTesla Internal Data Model). One of the iTesla outputs was a toolbox designed to support the decision-making process of power system operation from two-days ahead to real time. The IIDM grid model was at the center of the toolbox.
 
-To build an electrical network model using IIDM first the substations must be defined. The equipment in a substation (loads, generators, shunts, static VAR compensators, DC converters ...) are grouped in voltage levels. Transformers present in a substation connect its different voltage levels. Transmission lines (AC and DC) connect the substations. A connection point for an equipment is a _terminal_.
+To build an electrical network model using IIDM first the substations must be defined. The equipment in a substation (loads, generators, shunts, static VAR compensators, DC converters ...) are grouped in voltage levels. Transformers present in a substation connect its different voltage levels. Transmission lines (AC and DC) connect the substations.
 
-The PowSyBl grid model allows a full representation of the substation connectivity where all the switching devices and busbars are defined (_node/breaker_ level). Automated topology calculation permits to obtain views of the network up to the _bus/branch_ level.
+The PowSyBl grid model allows a full representation of the substation connectivity where all the switching devices and busbars are defined (node/breaker level). Automated topology calculation permits obtaining views of the network up to the bus/branch level.
 
-Different states of the network can be stored together with the power system model in an efficient way. The set of attributes that define a given state of the network (steady state hypothesis and state variables) are collectively organized in _variants_. The user can create and remove _variants_ as needed. Setting and getting variant dependent attributes on network objects use the current _variant_.
+Different states of the network can be stored together with the power system model efficiently. The set of attributes that define a given state of the network (steady state hypothesis and state variables) are collectively organized in variants. The user can create and remove variants as needed. Setting and getting variant dependent attributes on network objects use the current variant.
 
 A set of PowSyBl networks can be merged together in a single network view, and sub-parts of the network model can be easily extracted as separate networks.
 
-All elements modeled in the network are identified through a unique ID, and optionally described by a name that is easier to interpret for a human. All components can be _extended_ by the user to incorporate additional structured data.
+All elements modeled in the network are identified through a unique ID, and optionally described by a name that is easier to interpret for a human. All components can be [extended](extensions.md) by the user to incorporate additional structured data.
 
 ## Network core model
 
@@ -34,7 +34,11 @@ In the following sections the different network components are described in term
 | $$Aliases$$ | Additional unique identifiers associated with each network component |
 | $$Properties$$ | To add additional data items to network components |
 
-The `Id` is the only required attribute and by default `Fictitious` is set to `false`. `Aliases` offers the possibility of adding additional unique identifiers to each component. An `Alias` can be qualified to indicate what it corresponds to. `Properties` allows to associate additional arbitrary data items under the general schema of pairs `<key, value>`.
+All equipment and the network itself are identified by a unique identifier which is the only required attribute. They can have a human readable name. offer the possibility of adding additional unique identifiers to each component. An alias can be qualified to indicate what it corresponds to.
+
+Properties allow associating additional arbitrary data items under the general schema of pairs `<Key, Value>`.
+
+To identify non-physical network components, one can use the fictitious property that is set to `false` by default.
 
 ### Network
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
@@ -47,7 +51,7 @@ In the PowSyBl grid model, the Network contains [substations](#substation), whic
 | $$CaseDate$$ | Date and time of the target network that is being modeled |
 | $$ForecastDistance$$ | Number of minutes between the network generation date and the case date |
 
-Only the `SourceFormat` attribute is required.
+The `SourceFormat` attribute is a required attribute that indicates the origin of the network model automatically set by the [importers](../../index.html#grid-formats). If the case date and the forecast distance cannot be found in the case file, the network is considered as a snapshot: the case date is set to the current date, and the forecast distance is set to `0`.
 
 ### Substation
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Substation.html)
@@ -77,13 +81,11 @@ Two voltage levels may be connected through lines (when they belong to different
 
 Only `NominalVoltage` and `TopologyKind` are required.
 
-The [Slack Terminal](extensions.md#slack-terminal) extension defines the terminal marking which bus will be used to balance the active and reactive power in load flow analysis.
+The connectivity in each voltage level of the network can be defined at one of two levels: `node/breaker` or `bus/breaker`. The connectivity level can be different in each voltage level of the model.
 
-The connectivity in each voltage level of the network can be defined at one of two levels: **node/breaker** or **bus/breaker**.
+In `node/breaker` the connectivity is described with the finest level of detail and can provide an exact field representation. This level could be described as a graph structure where the vertices are `Nodes` and the edges are `Switches` (breakers, disconnectors) or internal connections. Each equipment is associated to one `Node` (busbar sections, loads, generators, ..), two `Nodes` (transmission lines, two-windings transformers, ...) or three `Nodes` (three-windings transformers). Each `Node` can only have one associated equipment. `Nodes` do not have an alphanumeric `Id` or `Name`, they are identified by an integer.
 
-In **node/breaker** the connectivity is described with the finest level of detail and can provide an exact field representation. This level could be described as a graph structure where the vertices are `Nodes` and the edges are `Switches` (breakers, disconnectors) or internal connections. Each equipment is associated to one `Node` (busbar sections, loads, generators, ..), two `Nodes` (transmission lines, two-windings transformers, ...) or three `Nodes` (three-windings transformers). Each `Node` can only have one associated equipment. `Nodes` do not have an alphanumeric `Id` or `name`.
-
-Using **bus/breaker** the voltage level connectivity is described with a coarser level of detail. In this case the vertices of the graph are `Buses`, defined explicitly by the user. A `Bus` has an `Id`, and may have a `name`. Each equipment defines the bus or buses to which it is connected. `Switches` can be defined between buses.
+Using `bus/breaker` the voltage level connectivity is described with a coarser level of detail. In this case the vertices of the graph are `Buses`, defined explicitly by the user. A `Bus` has an `Id`, and may have a `Name`. Each equipment defines the bus or buses to which it is connected. `Switches` can be defined between buses.
 
 PowSyBl provides an integrated topology processor that allows to automatically obtain a bus/breaker view from a node/breaker definition, and a bus/branch view from a bus/breaker view or definition. It builds the topology views from the open/close status of `Switches`. `Switches` marked as `retained` in the node/breaker level are preserved in the bus/breaker view.
 
@@ -91,20 +93,22 @@ The following diagram represents an example voltage level with two busbars separ
 
 ![VoltageLevel](img/index/voltage-level.svg){: width="100%" .center-image}
 
-When defining the model, the user has to specify how the different equipment connect to the network. The connectivity level can be different in each voltage level of the model. If the voltage level is built at node/breaker level, the user has to specify a `Node` when adding an equipment to the model. If the user is building using bus/breaker level, the `ConnectableBus` of the equipment must be specified. If the equipment connection to the network is closed, then the attribute `Bus` must be set and must be equal to `ConnectableBus`. Using this information, the model creates a `Terminal` that will be used to manage the point of connection of the equipment to the network.
+When defining the model, the user has to specify how the different equipment connect to the network. If the voltage level is built at node/breaker level, the user has to specify a `Node` when adding equipment to the model. If the user is building using bus/breaker level, the `Bus` of the equipment must be specified. Using this information, the model creates a `Terminal` that will be used to manage the point of connection of the equipment to the network.
 
+**Available extensions**
+
+The [Slack Terminal](extensions.md#slack-terminal) extension defines the `Terminal` marking which bus will be used to balance the active and reactive power in load flow analysis.
 
 ### Generator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Generator.html)
 
-A generator is an active equipment that injects active power, and injects or consumes reactive power.
-It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
+A generator is an active equipment that injects active power, and injects or consumes reactive power. It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
 | $$MinP$$ | MW | Minimum generator active power output |
 | $$MaxP$$ | MW | Maximum generator active power output |
-| $$ReactiveLimits$$ | Mvar | Operational limits of the generator (P/Q/V diagram) |
+| $$ReactiveLimits$$ | MVar | Operational limits of the generator (P/Q/V diagram) |
 | $$RatedS$$ | MVA | The rated nominal power |
 | $$TargetP$$ | MW | The active power target |
 | $$TargetQ$$ | MVAr | The reactive power target |
@@ -113,17 +117,15 @@ It may be controlled to hold a voltage or reactive setpoint somewhere in the net
 | $$VoltageRegulatorOn$$ |  | True if the generator regulates voltage |
 | $$EnergySource$$ |  | The energy source harnessed to turn the generator |
 
-The values `MinP`, `MaxP` and `TargetP` are required. The minimum active power output can not be greater than the maximum active power output. `TargetP` must be inside this active power limits. `RatedS` specifies the nameplate apparent power rating for the unit, it is optional and should be a positive value if it is defined. The reactive limits of the generator (`ReactiveLimits`) are optional, if they are not given the generator is considered with unlimited reactive power. Reactive limits can be given as a pair or min/max values or as a [reactive capability curve](#reactive-capability-curve).
+The values `MinP`, `MaxP` and `TargetP` are required. The minimum active power output can not be greater than the maximum active power output. `TargetP` must be inside this active power limits. `RatedS` specifies the nameplate apparent power rating for the unit, it is optional and should be a positive value if it is defined. The [reactive limits](#reactive-limits) of the generator are optional, if they are not given the generator is considered with unlimited reactive power. Reactive limits can be given as a pair of [min/max values](#min-max-reactive-limits) or as a [reactive capability curve](#reactive-capability-curve).
 
 The `VoltageRegulatorOn` attribute is required. It voltage regulation is enabled, then `TargetV` and `RegulatingTerminal` must also be defined. If the voltage regulation is disabled, then `TargetQ` is required. `EnergySource` is optional, it can be: `HYDRO`, `NUCLEAR`, `WIND`, `THERMAL`, `SOLAR` or `OTHER`.
 
-Target values for generators (`TargetP` and `TargetQ`) follow the generator sign convention: a positive value means an injection into the bus.
-Positive values for `targetP` and `targetQ` mean negative values at the flow observed at the generator terminal, as `Terminal` flow always follows load sign convention. The following diagram shows the sign convention of these quantities with an example.
+Target values for generators (`TargetP` and `TargetQ`) follow the generator sign convention: a positive value means an injection into the bus. Positive values for `TargetP` and `TargetQ` mean negative values at the flow observed at the generator `Terminal`, as `Terminal` flow always follows load sign convention. The following diagram shows the sign convention of these quantities with an example.
 
 ![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="40%" .center-image}
 
 The [Active Power Control](extensions.md#active-power-control) participation and the percent of the reactive control that comes from this generator in a [Coordinated Reactive Control](extensions.md#coordinated-reactive-control) configuration are available as grid model extensions.
-
 
 ### Load
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
