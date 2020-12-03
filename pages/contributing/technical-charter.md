@@ -83,9 +83,9 @@ b. Except as described in Section [7.c.](#7c), all contributions to the Project 
 - To the extent a contribution includes or consists of data sets, any rights in such data will be made available under the CDLA-Permissive 1.0 License.
 - The Project may seek to integrate and contribute back to other open source projects (“Upstream Projects”). In such cases, the Project will conform to all license requirements of the Upstream Projects, including dependencies, leveraged by the Project. Upstream Project code contributions not stored within the Project’s main code repository will comply with the contribution process and license terms for the applicable Upstream Project.
 
-<span class="heading" id="7c"></span>c. The TSC may approve the use of an alternative license or licenses for inbound or outbound contributions on an exception basis. To request an exception, please describe the contribution, the alternative open source license(s), and the justification for using an alternative open source license for the Project. License exceptions must be approved by a two-thirds vote of the entire TSC.
+<a class="heading" id="7c"/>c. The TSC may approve the use of an alternative license or licenses for inbound or outbound contributions on an exception basis. To request an exception, please describe the contribution, the alternative open source license(s), and the justification for using an alternative open source license for the Project. License exceptions must be approved by a two-thirds vote of the entire TSC.
 
 d. Contributed files should contain license information, such as SPDX short form identifiers, indicating the open source license or licenses pertaining to the file.
 
 ## 8. Amendments
-<span class="heading" id="8a"></span>a. This charter may be amended by a two-thirds vote of the entire TSC and is subject to approval by LF Projects.
+<a class="heading" id="8a"/>a. This charter may be amended by a two-thirds vote of the entire TSC and is subject to approval by LF Projects.
