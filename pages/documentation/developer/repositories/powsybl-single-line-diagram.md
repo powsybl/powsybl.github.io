@@ -14,8 +14,6 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 - small demo app to display the diagrams (note that this app is mainly for debug purposes and therefore is not included in the release)
 - extensions to force positions in the diagram 
 
-<span style="color: red">TODO: complete the list</span>
-
 ## Getting started
 
 - [SVG Writing](../api_guide/single-line-diagram_svg-writing.md) - Create single line diagrams from test networks
