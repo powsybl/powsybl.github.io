@@ -29,5 +29,5 @@ This page describes the way the Java objects have been designed to effectively h
 - [Time series](timeseries.md)
 
 ## Single line diagram
-- [SVG writing](single-line-diagram_svg-writing.md)
+- [SVG writing](single-line-diagram/svg-writing.md)
 - [SVG layouts]()

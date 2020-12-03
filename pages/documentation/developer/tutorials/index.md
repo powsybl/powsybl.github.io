@@ -16,4 +16,4 @@ layout: default
 - [Create the Java code to run sensitivity analyses](sensitivity-analysis.md): Learn how to create the Java code to setup and run sensitivity analyses
 
 ## Single line diagram
-- [Create the Java code to display single line diagram](../api_guide/single-line-diagram_svg-writing.md): Learn how to create the Java code to generate diagram SVG
+- [Create the Java code to display single line diagram](../api_guide/single-line-diagram/svg-writing.md): Learn how to create the Java code to generate diagram SVG

@@ -4,8 +4,8 @@ layout: default
 
 # Single Line Diagram - SVG Writing
 
-The `com.powsybl.sld.svg.DefaultSVGWriter` class of [powsybl-single-line-diagram](../repositories/powsybl-single-line-diagram.md) is an implementation of the `SVGWriter` interface which allows to generate SVG files representing single line diagrams of a substation, a voltage level or a zone. 
-We are showing in this guide how to create some single line diagrams first from a test network, then from a [CGMES](../../grid/formats/cim-cgmes.md) file.
+The `com.powsybl.sld.svg.DefaultSVGWriter` class of [powsybl-single-line-diagram](../../repositories/powsybl-single-line-diagram.md) is an implementation of the `SVGWriter` interface which allows to generate SVG files representing single line diagrams of a substation, a voltage level or a zone. 
+We are showing in this guide how to create some single line diagrams first from a test network, then from a [CGMES](../../../grid/formats/cim-cgmes.md) file.
 
 ## Prerequisites
 
@@ -58,11 +58,11 @@ First of all, we need to add some Maven dependencies in our `pom.xml` file:
 </properties>
 ```
 
-Here are some details about these dependencies (see also the [powsybl artifacts documentation page](../artifacts.md)):
+Here are some details about these dependencies (see also the [powsybl artifacts documentation page](../../artifacts.md)):
 - `powsybl-single-line-diagram-core` is the core module of single-line-diagram,
 - `powsybl-iidm-impl` is for the network model,
 - `powsybl-iidm-test` is for loading the test network,
-- `powsybl-config-test` is for loading the test configuration (see [configuration API guide](configuration.md)),
+- `powsybl-config-test` is for loading the test configuration (see [configuration API guide](../configuration.md)),
 - `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j`  are for importing a CGMES file,
 - `slf4j-simple` allows you to have simple logging capabilities.
 
@@ -108,7 +108,7 @@ voltageLevelDiagram.writeSvg(prefix
 
 We obtain the following SVG:
 
-![N_voltageLevel](img/single-line-diagram/svg-basics/example_n.svg)
+![N_voltageLevel](img/svg-writing/example_n.svg)
 
 Similarly, we could generate a SVG for voltage level `C`:
  
@@ -126,7 +126,7 @@ voltageLevelDiagram.writeSvg(prefix,
  
 leading to the following diagram:
 
-![C_voltageLevel](img/single-line-diagram/svg-basics/example_c.svg)
+![C_voltageLevel](img/svg-writing/example_c.svg)
 
 ### Generating the substation diagram
 In order to build the diagram for the whole substation, named `A`, containing both voltage levels displayed previously, we need to build the corresponding `SubstationDiagram`:
@@ -147,7 +147,7 @@ substationDiagram.writeSvg(prefix,
 
 We then obtain the following wider SVG file:
 
-![A_substation](img/single-line-diagram/svg-basics/example_sub_a.svg)
+![A_substation](img/svg-writing/example_sub_a.svg)
 
 ## Diagrams from a CGMES file
 
@@ -179,7 +179,7 @@ voltageLevelDiagram.writeSvg(prefix,
 
 We obtain the following SVG:
 
-![Brussels_voltageLevel](img/single-line-diagram/svg-basics/example_Brussels_110.svg)
+![Brussels_voltageLevel](img/svg-writing/example_Brussels_110.svg)
 
 ### Generating a substation diagram
 Similarly to voltage level diagrams, we can generate substation diagrams. 
@@ -203,7 +203,7 @@ substationDiagram.writeSvg(prefix,
 
 We then obtain the following SVG file representing the whole PP_Amsterdam substation with its three voltage levels:
 
-![Amsterdam_substation](img/single-line-diagram/svg-basics/example_Amsterdam_substation.svg)
+![Amsterdam_substation](img/svg-writing/example_Amsterdam_substation.svg)
 
 That's it, you are now able to generate diagrams for substations and voltage levels! You can now try to change the default layout settings by reading the next guide [SVG Layouts]().
 
