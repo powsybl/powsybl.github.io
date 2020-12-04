@@ -24,7 +24,7 @@ To setup specific Dynawo parameters, the `dynawo-default-parameters` should be u
 ```yml
 dynawo-default-parameters:
     parametersFile: <PATH_TO_MAIN_PARAMETERS_FILE>  
-    network.parametersFile: <PATH_TO_NETWORK_PARAMETERS_FILE> 
+    network.parametersFile: <PATH_TO_NETWORK_PARAMETERS_FILE>
     network.parametersId: id
     solver.type: IDA
     solver.parametersFile: <PATH_TO_SOLVER_PARAMETERS_FILE>
@@ -68,7 +68,7 @@ The event models domain specific language helps user to simulate events during t
 - EventQuadripoleDisconnection
 - EventSetPointBoolean
 
-To go further, you should read the [Dynamic Models DSL](event-models-dsl.md) reference page.
+To go further, you should read the [Event Models DSL](event-models-dsl.md) reference page.
 
 ## Curves DSL
 The curves domain specific language allow an user to configure the curves Dynawo will export at the end of the simulation. This DSL defines the `curve` and the `curves` keywords.
@@ -101,7 +101,7 @@ curve {
     variable "load_QPu"
 }
 
-// is equivalent to: 
+// is equivalent to:
 curves {
     dynamicModelId load.id
     variables "load_PPu", "load_QPu"

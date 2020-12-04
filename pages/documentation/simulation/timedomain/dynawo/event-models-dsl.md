@@ -11,9 +11,9 @@ The Event Models DSL is a domain specific language written in groovy for the sim
 
 ## BlackBoxModel
 Most of the event models supported are `BlackBoxModels`. This kind of dynamic models have three attributes:
-- `staticId` refers to the ID of the load in the network
+- `staticId` refers to the ID of the load in the network.
 - `eventModelId` is an optional attribute to identify this model. By default, it is equal to the `staticId`.
-- `parameterSetId` refers a set of parameters for this model in one of the network parameters file
+- `parameterSetId` refers a set of parameters for this model in one of the network parameters file.
 
 ## EventQuadripoleDisconnection
 Use this event to disconnect a line or a two windings transformer during the simulation. The `EventQuadripoleDisconnection` is a [BlackBoxModel](#blackboxmodel) of which the `staticId` refers to a line or a two windings transformer of the network.

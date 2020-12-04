@@ -11,9 +11,9 @@ The Dynamic Models DSL is a domain specific language written in groovy for the a
 
 ## BlackBoxModel
 Most of the models supported are `BlackBoxModels`. This kind of dynamic models have three attributes:
-- `staticId` refers to the ID of the load in the network
+- `staticId` refers to the ID of the load in the network.
 - `dynamicModelId` is an optional attribute to identify this model. By default, it is equal to the `staticId`.
-- `parameterSetId` refers a set of parameters for this model in one of the network parameters file
+- `parameterSetId` refers a set of parameters for this model in one of the network parameters file.
 
 ## Generators
 All the following models are [BlackBoxModels](#blackboxmodel) you can associate to an IIDM generator. To do so, you have to use their name as a keyword and define at least a `staticId` and a `parameterSetId`. Like every other `BlackBoxModel`, the `dynamicModelId` is optional and would be equal to the `staticId` if not set.
@@ -72,7 +72,7 @@ This is a model shared by generators with the same frequency reference. To link 
 OmegaRef {
     generatorModelId '<DYNAMIC_MODEL_ID>'
 }
-``` 
+```
 
 ## Automatons
 
