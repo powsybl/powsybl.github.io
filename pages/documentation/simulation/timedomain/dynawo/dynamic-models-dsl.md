@@ -27,32 +27,26 @@ Supported models are:
 **Example**
 ```groovy
 GeneratorSynchronousThreeWindings {
-    staticId '<LOAD_ID>'
+    staticId '<GENERATOR_ID>'
     dynamicModelId '<DYNAMIC_MODEL_ID>'
     parameterSetId '<PARAMETER_ID>'
 }
 GeneratorSynchronousThreeWindingsProportionalRegulations {
-    staticId '<LOAD_ID>'
+    staticId '<GENERATOR_ID>'
     dynamicModelId '<DYNAMIC_MODEL_ID>'
     parameterSetId '<PARAMETER_ID>'
 }
 GeneratorSynchronousFourWindings {
-    staticId '<LOAD_ID>'
+    staticId '<GENERATOR_ID>'
     dynamicModelId '<DYNAMIC_MODEL_ID>'
     parameterSetId '<PARAMETER_ID>'
 }
 GeneratorSynchronousFourWindingsProportionalRegulations {
-    staticId '<LOAD_ID>'
+    staticId '<GENERATOR_ID>'
     dynamicModelId '<DYNAMIC_MODEL_ID>'
     parameterSetId '<PARAMETER_ID>'
 }
 ```
-
-### GeneratorSynchronousThreeWindingsProportionalRegulations
-- GeneratorSynchronousThreeWindings
-- GeneratorSynchronousThreeWindingsProportionalRegulations
-- GeneratorSynchronousFourWindings
-- GeneratorSynchronousFourWindingsProportionalRegulations
 
 ## Loads
 
@@ -90,7 +84,7 @@ This model has also another required attribute to define which side is monitored
 **Example**
 ```groovy
 CurrentLimitAutomaton {
-    staticId '<LOAD_ID>'
+    staticId '<BRANCH_ID>'
     dynamicModelId '<DYNAMIC_MODEL_ID>'
     parameterSetId '<PARAMETER_ID>'
     side '<SIDE>'
