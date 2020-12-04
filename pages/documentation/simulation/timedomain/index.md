@@ -24,15 +24,15 @@ The inputs of a dynamic simulation are the following:
 
 ### Dynamic models mapping
 At the moment, the only way to associate dynamic models to static components is through a groovy script. Note that the syntax of this script is specific to each simulator:
-- [Dynawo DSL](dynawo.md#dynamic-models-dsl)
+- [Dynawo DSL](dynawo/index.md#dynamic-models-dsl)
 
 ### Event models mapping
 At the moment, the only way to add events to the simulation is through a groovy script. Note that the syntax of this script is specific to each simulator:
-- [Dynawo DSL](dynawo.md#event-models-dsl)
+- [Dynawo DSL](dynawo/index.md#event-models-dsl)
 
 ### Curves configuration
 At the moment, the only way to monitor dynamic variables of the simulation in order to export curves at the end of the simulation is to provide a groovy script to the simulation. Note that the syntax of this script is specific to each simulator:
-- [Dynawo DSL](dynawo.md#curves-dsl)
+- [Dynawo DSL](dynawo/index.md#curves-dsl)
 
 ## Outputs
 
@@ -46,7 +46,7 @@ The outputs of a dynamic simulation are:
 
 ## Implementations
 
-At the moment, the only available implementation of time domain simulation compatible with PowSyBl is the one provided by [Dynawo](dynawo.md).
+At the moment, the only available implementation of time domain simulation compatible with PowSyBl is the one provided by [Dynawo](dynawo/index.md).
 
 ## Configuration
 
@@ -57,7 +57,7 @@ dynamic-simulation:
 ```
 
 Each implementation is identified by its name, that may be unique in the classpath:
-- use "dynawo" to use [Dynawo](dynawo.md) implementation
+- use "dynawo" to use [Dynawo](dynawo/index.md) implementation
 
 ## Parameters
 
@@ -93,4 +93,4 @@ The default values of all the optional properties are read from the [dynamic-sim
 
 ### Specific parameters
 Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
-- [Dynawo](dynawo.md#specific-parameters)
+- [Dynawo](dynawo/index.md#specific-parameters)
