@@ -68,9 +68,17 @@ Second step consists in decomposing the square matrix \\(A\\) using the LU matri
 $$ A = LU $$
 Whence matrices \\(L\\) and \\(U\\) are obtained, it is quite easy to solve the grid constraints linear system.
 
+The solution of this system gives the voltage angles corresponding to injections at each bus (minus the slack bus).
 
-$$ \left( \begin{matrix}  aa & bb \\ cc & dd  \end{matrix} \right) = AM $$
+From those angles it is easy to compute the power flow on a given line using the previous formula. 
 
+To get the sensitivity from injection in a given bus to a given line,
+OpenLF computes the right-hand side \\(b\\) corresponding to an injection of 1 MW at this bus and 0 MW elsewhere.
+Solving the system with matrices \\(L\\) and \\(U\\), vector \\(\theta\\) is obtained and is used to retrieve the power flow in the line.
+
+To get the sensitivity from phase-shifting angle in a given bus to a given line,
+OpenLF computes the right-hand side \\(b\\) corresponding to an increase of one degree for the phase-shifting angle at this bus and 0 elsewhere.
+Solving the system with matrices \\(L\\) and \\(U\\), vector \\(\theta\\) is obtained and is used to retrieve the power flow in the line.
 
 ## Configuration
 
