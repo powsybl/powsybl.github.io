@@ -92,7 +92,7 @@ Components results:
 +------------------+-----------+-----------------+--------------+--------------------+
 ```
 
-The following example shows how to run a power flow simulation flow, using a parameters file:
+The following example shows how to run a power flow simulation, using a parameters file:
 ```
 $> itools loadflow --case-file case.xiidm --parameters-file loadflowparameters.json
 loadflow results:
