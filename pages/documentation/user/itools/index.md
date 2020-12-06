@@ -78,6 +78,7 @@ The `iTools` script relies on a [plugin mechanism](): the commands are discovere
 | [action-simulator](action-simulator.md) | Computation | Run a security analysis with remedial actions |
 | [compare-security-analysis-results](compare-security-analysis-results.md) | Computation | Compare security analysis results |
 | [convert-network](convert-network.md) | Data conversion | Convert a grid file from a format to another |
+| [dynamic-simulation](dynamic-simulation.md) | Computation | Run a dynamic simulation |
 | [loadflow](loadflow.md) | Computation | Run a power flow simulation |
 | [loadflow-validation](loadflow-validation.md) | Computation | Validate load flow results on a network |
 | [run-script](run-script.md) | Script | Run a script on top of PowSyBl | 
