@@ -196,21 +196,21 @@ The generator is connected to the connectableBus if generator status (field `STA
 #### _Non-Transformer Branch Data_
 
 In PSS®E each ac transmission line is represented as a non-transformer branch record and defines a new line in the PowSyBl grid model with the following attributes:
-- **Id** according to the pattern `L-<n>-<m>-<p>` where `n` represents the PSS®E from bus number (field `I` in the _Non-Transformer Branch Data_ record), `m` represents the to bus number (field `J` in the _Non-Transformer Branch Data_ record) and `p` is the circuit identifier (field `CKT` in the _Non-Transformer Branch Data_ record).
-- **ConnectableBus1** PowSyBl bus identifier assigned to the from PSS®E bus number (field `I` in the _Non-Transformer Branch Data_ record).
-- **VoltageLevel1** PowSyBl voltage level assigned to the from bus.
-- **ConnectableBus2** PowSyBl bus identifier assigned to the to PSS®E bus number (field `J` in the _Non-Transformer Branch Data_ record).
-- **VoltageLevel2** PowSyBl voltage level assigned to the to bus.
-- **R** Resistance defined as `R` * `vnom2` * `vnom2` / `sbase` where `R` is the resistance of the branch (field `R` in the _Non-Transformer Branch Data_ record), `vnom2` is the nominal voltage of the voltage level assigned to the bus to end and `sbase` is the system MVA base (field `SBASE` in the _Case Identification Data_ record).
+- **Id** according to the pattern `L-<n>-<m>-<p>` where `n` represents the PSS®E bus `1` number (field `I` in the _Non-Transformer Branch Data_ record), `m` represents the bus `2` number (field `J` in the _Non-Transformer Branch Data_ record) and `p` is the circuit identifier (field `CKT` in the _Non-Transformer Branch Data_ record).
+- **ConnectableBus1** PowSyBl bus identifier assigned to the PSS®E bus `1` number (field `I` in the _Non-Transformer Branch Data_ record).
+- **VoltageLevel1** PowSyBl voltage level assigned to the bus `1`.
+- **ConnectableBus2** PowSyBl bus identifier assigned to the PSS®E bus `2` number (field `J` in the _Non-Transformer Branch Data_ record).
+- **VoltageLevel2** PowSyBl voltage level assigned to the bus `2`.
+- **R** Resistance defined as `R` * `vnom2` * `vnom2` / `sbase` where `R` is the resistance of the branch (field `R` in the _Non-Transformer Branch Data_ record), `vnom2` is the nominal voltage of the voltage level assigned to the bus `2` and `sbase` is the system MVA base (field `SBASE` in the _Case Identification Data_ record).
 - **X** Reactance defined as `X` * `vnom2` * `vnom2` / `sbase` where `X` is the reactance of the branch (field `X` in the _Non-Transformer Branch Data_ record).
-- **G1** Conductance of the line shunt at the from bus end defined as (`GI` * `sbase`) / ( `vnom2` * `vnom2`) where `GI` is the conductance at the bus from end (field `GI` in the _Non-Transformer Branch Data_ record).
-- **B1** Susceptance defined as (( `0.5` * `B` + `BI` ) * `sbase`) / ( `vnom2` * `vnom2`) where `B` is the total branch charging susceptance (field `B` in the _Non-Transformer Branch Data_ record) and `BI` is the susceptance at the bus from end (field `BI` in the _Non-Transformer Branch Data_ record).
-- **G2** Conductance of the line shunt at the bus to end defined as (`GJ` * `sbase`) / ( `vnom2` * `vnom2`) where `GJ` is the conductance at the bus from end (field `GJ` in the _Non-Transformer Branch Data_ record).
-- **B2** Susceptance defined as (( `0.5` * `B` + `BJ` ) * `sbase`) / ( `vnom2` * `vnom2`) where `B` is the total branch charging susceptance (field `B` in the _Non-Transformer Branch Data_ record) and `BJ` is the susceptance at the bus to end (field `BJ` in the _Non-Transformer Branch Data_ record).
+- **G1** Conductance of the line shunt at the bus `1` defined as (`GI` * `sbase`) / ( `vnom2` * `vnom2`) where `GI` is the conductance at the bus `1` (field `GI` in the _Non-Transformer Branch Data_ record).
+- **B1** Susceptance defined as (( `0.5` * `B` + `BI` ) * `sbase`) / ( `vnom2` * `vnom2`) where `B` is the total branch charging susceptance (field `B` in the _Non-Transformer Branch Data_ record) and `BI` is the susceptance at the bus `1` (field `BI` in the _Non-Transformer Branch Data_ record).
+- **G2** Conductance of the line shunt at the bus `2` defined as (`GJ` * `sbase`) / ( `vnom2` * `vnom2`) where `GJ` is the conductance at the bus `2` (field `GJ` in the _Non-Transformer Branch Data_ record).
+- **B2** Susceptance defined as (( `0.5` * `B` + `BJ` ) * `sbase`) / ( `vnom2` * `vnom2`) where `B` is the total branch charging susceptance (field `B` in the _Non-Transformer Branch Data_ record) and `BJ` is the susceptance at the bus `2` (field `BJ` in the _Non-Transformer Branch Data_ record).
 
 The line is connected at both ends if the branch status (field `ST` in the _Non-Transformer Branch Data_ record) is `1` (In-service)
 
-A set of current permanent limits is defined as `1000.0` * `rateMva` / (`sqrt(3.0)` * `vnom1`) at the from end and `1000.0` * `rateMva` / (`sqrt(3.0)` * `vnom2`) at the to end where `rateMva` is the first rating of the branch (field `RATEA` in version 33 of the _Non-Transformer Branch Data_ record and field `RATE1` in version 35) and `vnom1` and `vnom2` are the nominal voltage of the associated voltage levels.
+A set of current permanent limits is defined as `1000.0` * `rateMva` / (`sqrt(3.0)` * `vnom1`) at the end `1` and `1000.0` * `rateMva` / (`sqrt(3.0)` * `vnom2`) at the end `2` where `rateMva` is the first rating of the branch (field `RATEA` in version 33 of the _Non-Transformer Branch Data_ record and field `RATE1` in version 35) and `vnom1` and `vnom2` are the nominal voltage of the associated voltage levels.
 
 
 #### _Transformer Data_
