@@ -6,16 +6,24 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 
 ## Features
 
-- creation of single line diagrams for given voltage levels
+- creation of single line diagrams for given voltage levels, substations or zones in SVG format, for both node/breaker and bus/breaker topologies
+- diagrams customization
+     - several layout algorithms to generate the diagrams
+     - many layout parameters to adjust the rendering
+     - use your own component library or modify the existing
+- small demo app to display the diagrams (note that this app is mainly for debug purposes and therefore is not included in the release)
+- extensions to force positions in the diagram 
 
 ## Getting started
 
-- [Guide 1]() - Create a single line diagram on a simple example
+- [SVG Writing](../api_guide/single-line-diagram_svg-writing.md) - Create single line diagrams from test networks
+- [SVG Layouts]() (*soon available*) - Change single line diagram default layout
 
 ## Releases
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 1.8.0 | 2020-12-02 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.8.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.8.01/index.html) |
 | 1.7.1 | 2020-10-15 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.7.1) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.7.1/index.html) |
 | 1.7.0 | 2020-10-15 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.7.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.7.0/index.html) |
 | 1.6.0 | 2020-09-09 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.6.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.6.0/index.html) |

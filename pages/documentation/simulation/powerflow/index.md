@@ -279,7 +279,6 @@ Some implementation use specific parameters that can be defined in the configura
 - [Hades2](hades2.md#specific-parameters)
 - [DynaFlow](dynaflow.md#specific-parameters)
 
-The complete list of available parameters for the Dynaflow load flow is available [here](dynaflow.md).
 ## Going further
 To go further about the power flow with PowSyBl, check the following pages:
 - [Run a power flow through an iTools command](../../user/itools/loadflow.md): Learn how to perform a power flow calculation from the command line
