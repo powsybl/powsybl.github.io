@@ -136,7 +136,7 @@ Add the following dependencies to the `pom.xml` file:
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>log4j-over-slf4j</artifactId>
-        <version>1.17.22</version>
+        <version>1.7.22</version>
     </dependency>
 </dependencies>
 ```
