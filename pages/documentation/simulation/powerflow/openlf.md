@@ -12,15 +12,15 @@ PowSyBl OpenLoadFlow is an open-source power flow implementation in Java provide
 
 ## Grid modelling
 
-OpenLoadFlow computes power flows from IIDM grid model in bus/view topology. From the view, a very simple network, composed of only buses and branches is created. In the graph vision, we rely on a `Pi` model for branches (lines, transformers, dangling lines, etc.):
+OpenLoadFlow computes power flows from IIDM grid model in bus/view topology. From the view, a very simple network, composed of only buses and branches is created. In the graph vision, we rely on a \\(\Pi\\) model for branches (lines, transformers, dangling lines, etc.):
 
-- `R` and `X` are respectively the real part (resistance) and the imaginary part (reactance) of the complex impedance ;  
-- `G1` and `G2` are the real parts (conductance) on respectively side 1 and side 2 of the branch ;
-- `B1` and `B2` are the imaginary parts (susceptance) on respectively side 1 and side 2 of the branch ;
-- `A1` is the angle shifting on side 1, before the series impedance. For classical branches, the default value is zero ;
-- `R1` is the ratio of voltages between side 2 and side 1, before the series impedance. For classical branches, the default value is `1`.
+- \\(R\\) and \\(X\\) are respectively the real part (resistance) and the imaginary part (reactance) of the complex impedance ;  
+- \\(G_1\\) and \\(G_2\\) are the real parts (conductance) on respectively side 1 and side 2 of the branch ;
+- \\(B_1\\) and \\(B_2\\) are the imaginary parts (susceptance) on respectively side 1 and side 2 of the branch ;
+- \\(A_1\\) is the angle shifting on side 1, before the series impedance. For classical branches, the default value is zero ;
+- \\(R_1\\) is the ratio of voltages between side 2 and side 1, before the series impedance. For classical branches, the default value is \\(1\\).
 
-As the `Pi` model is created from IIDM grid modelling that locates its ratio and phase tap changers in side 1, `A2` and `R2` are always equal to zero and `1`. In case of a branch with voltage or phase control, the `Pi` model becomes an array. See below our model:
+As the \\(\Pi\\) model is created from IIDM grid modelling that locates its ratio and phase tap changers in side 1, \\(A_2\\) and \\(R_2\\) are always equal to zero and \\(1\\). In case of a branch with voltage or phase control, the \\(\Pi\\) model becomes an array. See below our model:
 
 ![Pi model](img/pi-model.svg){: width="50%" .center-image}
 
@@ -31,24 +31,53 @@ TO DO
 ### DC flows computing
 
 The DC flows computing relies on several classical assumptions to build a model where the active power flowing through a line depends linearly from the voltage angles at its ends.
-In this simple model, reactive power flows and active power losses are totally neglected. The following assumptions are made to ease and speed the computation:
+In this simple model, reactive power flows and active power losses are totally neglected. The following assumptions are made to ease and speed the computations:
 - The voltage magnitude is equal to 1 per unit at each bus,
 - The conductance \\(G_{i,j}\\) of each line \\((i,j)\\) is neglected, only the susceptance \\(B_{i,j}\\) is considered,
 - The voltage angle difference between two adjacent buses is considered as very small.
 
 Therefore, the power flows from bus \\(i\\) to bus \\(j\\) following the linear expression:
 
-$$ P_{i,j} = \frac{\theta_i-\theta_j+\phi_{i,j}}{X_{i,j}} $$
+$$ P_{i,j} = \frac{\theta_i-\theta_j+A_{i,j}}{X_{i,j}} $$
 
-Where \\(X_{i,j}\\) is the reactance of the line \\((i,j)\\), and \\(\theta_i\\) the voltage angle at bus \\(i\\).
+Where \\(X_{i,j}\\) is the reactance of the line \\((i,j)\\), \\(\theta_i\\) the voltage angle at bus \\(i\\) and \\(A_{i,j}\\) is the phase angle shifting on side \\(j\\).
 
-The first step to compute the sensitivities is to build the grid constraints linear system. The variables of the system are, for each bus, the voltage angle \\(\theta\\). The constraints of the system are the active power balance at each bus, except for the slack bus. The voltage angle at slack bus is set to zero. Therefore the linear system is composed of \\(N\\) variables and \\(N\\) constraints, where \\(N\\) is the number of buses in the network:
+DC flows computing give a linear grid constraints system.
+The variables of the system are, for each bus, the voltage angle \\(\theta\\).
+The constraints of the system are the active power balance at each bus, except for the slack bus.
+The voltage angle at slack bus is set to zero.
+Therefore the linear system is composed of \\(N\\) variables and \\(N\\) constraints, where \\(N\\) is the number of buses in the network.
 
-$$ A\theta = b $$
+The linear matrix \\(J\\) of this system satisfied:
 
-The vector \\(b\\) of right-hand sides is linearly computed from the given injections and phase-shifting angles.
+- If \\(i\\) is the slack bus:
 
-The second step consists in decomposing the square matrix \\(A\\) using the LU matrices decomposition $$ A = LU $$. Hence matrices \\(L\\) and \\(U\\) are obtained, it is quite easy to solve the grid constraints linear system. The solution of this system gives the voltage angles corresponding to injections at each bus (minus the slack bus). From those angles it is easy to compute the power flow on a given line using the previous formula.
+	$$J_{i,i} = 1$$
+- Else, let \\(v(i)\\) be the buses linked to \\(i\\) in the network graph:
+
+	$$J_{i,i} = \sum_{j \in v(i)} \frac{1}{X_{i,j}}.$$
+
+	$$ \forall j \in v(i), \quad J_{i,j} = - \frac{1}{X_{i,j}}.$$
+- All other entries of \\(J\\) are zeroes.
+
+The right-hand-side \\(b\\) of the system satisfied:
+
+- If \\(i\\) is the slack bus:
+
+	$$b_{i} = 0$$
+- Else, let \\(v(i)\\) be the buses linked to \\(i\\) in the network graph:
+
+	$$b_{i} = P_i - \sum_{j \in v(i)} \frac{A_{i,j}}{X_{i,j}}.$$
+	
+	Where \\(P_i\\) is the injection at bus \\(i\\).
+
+This linear system is resumed by:
+$$ J\theta = b $$
+Note that the vector \\(b\\) of right-hand sides is linearly computed from the given injections and phase-shifting angles.
+
+To solve this system, the classic technic is to use the LU matrices decomposition $$ J = LU $$.
+Hence matrices \\(L\\) and \\(U\\) are obtained, it is quite easy to solve the grid constraints linear system.
+The solution of this system gives the voltage angles corresponding to injections at each bus (minus the slack bus) and phase shifting angles.
 
 ## Configuration
 To use PowSyBl OpenLoadFlow for all power flow computations, you have to configure the `load-flow` module in your configuration file:
