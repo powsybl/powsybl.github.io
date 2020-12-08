@@ -15,6 +15,8 @@ Give a summary view about **Open Load Flow** and its integration with **powsybl-
 - [Introduction to electric power and energy systems](https://people.montefiore.uliege.be/vct/elec0014/elec0014.pdf)
 - [Le calcul de repartition de charge (ou load flow)](https://people.montefiore.uliege.be/vct/elec0029/lf.pdf)
 
+[Grid model](https://www.powsybl.org/pages/documentation/grid/model/)
+
 ## Classes involved when running loadflow with itools
 
 | Maven&nbsp;dependency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Usage |
@@ -27,8 +29,12 @@ Give a summary view about **Open Load Flow** and its integration with **powsybl-
 
 ![Slack](img/uml/loadflow - dependencies involved.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
+## Network modelisation in powsybl-iidm-api
+This is the **Network** object from **powsybl-iidm-api** dependency loaded by **Importer** in **powsybl-iidm-xml-converter** dependency.
+![Slack](img/uml/powsybl-iidm-api - network classes.png){: width="100%" style="margin-top: 2rem;" .center-image}
+
 ## Sub-network modelisation in powsybl-open-loadflow
-The list of **LfNetwork** objects is build from **Network** Object in **LfNetworkLoaderImpl**. **Network** object from **powsybl-iidm-api** dependency is previously loaded by **Importer** in **powsybl-iidm-xml-converter** dependency.
+The list of **LfNetwork** objects is build from **Network** Object in **LfNetworkLoaderImpl** from **powsybl-open-loadflow** dependency.
 ![Slack](img/uml/openloadflow - network classes.png){: width="100%" style="margin-top: 2rem;" .center-image}
 
 ## Activities diagrams about powsybl-open-loadflow internal process
