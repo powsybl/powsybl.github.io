@@ -276,6 +276,7 @@ When a three winding transformer is modeled the two winding transformer steps sh
 - Each winding can have a complex ratio and a `ratioTapChanger` or `phaseTapChanger` with its corresponding control, always at end `1`. The current PowSyBl version only supports one enabled control by three winding transformer so if there is more than one enabled only the first (winding `1`, winding `2`, winding `3`) is kept enabled, the rest are automatically disabled.
 - In three winding transformers the status attribute (field `STAT` in the _Transformer Data_ record) could be `0` that means all tre windings disconnected, `1` for all windings connected, `2` for only the second winding disconnected, `3` for the third winding disconnected and `4` for the first winding disconnected.
 
+![ThreeWindingTransformerModels](img/psse/three-windings-transformer-model.svg){: width="100%" .center-image}
 
 #### Slack bus
 
