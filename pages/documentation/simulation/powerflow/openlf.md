@@ -144,6 +144,9 @@ If `balanceType` equals to `PROPORTIONAL_TO_CONFORM_LOAD`, the power factor rema
 
 The default value for `loadPowerFactorConstant` property is `false`.
 
+**dcUseTransformerRatio**  
+The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the flow equations during DC approximation. The default value of this parameter is `false`.
+
 ### Configuration file example
 See below an extract of a config file that could help:
 
