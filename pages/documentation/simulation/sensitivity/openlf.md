@@ -32,7 +32,7 @@ For example, to get the sensitivity from injection increase in bus \\(i\\) to br
 	
 Then, we retrieve the sensitivity with \\(\theta\\) calculating:
 
-$$ \frac{\theta_k-\theta_l}{X_{k,l}} $$
+$$ s_{b,kl} = \frac{\theta_k-\theta_l}{X_{k,l}} $$
 
 To get the sensitivity from phase-shifting angle in a given branch to a given branch, we compute the right-hand side \\(b\\) corresponding to an increase of one degree for the phase-shifting angle at this branch and 0 elsewhere. The LU decomposition gives the matrices \\(L\\) and \\(U\\) in order to compute the vector \\(\theta\\). Then it is easy to retrieve the power flow in the branch.
 
@@ -50,11 +50,22 @@ For example, to get the sensitivity from phase-shifting angle increase in branch
 	
 Then, we retrieve the sensitivity with \\(\theta\\) calculating:
 
-$$ \frac{\theta_k-\theta_l}{X_{k,l}} $$
+$$ s_{ij,kl} = \frac{\theta_k-\theta_l}{X_{k,l}} $$
 
 In the special case where \\((i,j)=(k,l)\\), we retrieve the sensitivity calculating:
 
-$$ \frac{\theta_k-\theta_l + \frac{\pi}{180}}{X_{k,l}} $$
+$$ s_{ij,kl} = \frac{\theta_k-\theta_l + \frac{\pi}{180}}{X_{k,l}} $$
+
+### Sensitivities in case of compensation
+
+In the case of a sensitivity from injection at bus \\(b\\) it is implied that the variation of power is compensated by the slack bus.
+However, it is possible to perform a sensitivity analysis where the variation of injection is compensated by a list of participating units.
+In this case, it is expected that the user provides a list of participating units,\\((g \in U)\\) in the compensation and their respective ratio \\((r^c_g)\\) of participation.
+Therefore, the new sensitivity value is computed from sensitivity values in the slack compensated case, using following formula:
+
+$$
+s_{b,kl}^c = s_{b,kl} - \sum_{g \in U} r^c_g s_{g,kl}
+$$
 
 ### Contingencies management
 
