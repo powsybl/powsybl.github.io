@@ -18,6 +18,7 @@ The PowSyBl HPC (High Performance Computing) [repository](https://github.com/pow
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 2.11.0 | 2020-12-11 | [Release notes](https://github.com/powsybl/powsybl-hpc/releases/tag/v2.11.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-hpc/2.11.0/index.html) |
 | 2.10.1 | 2020-05-15 | [Release notes](https://github.com/powsybl/powsybl-hpc/releases/tag/v2.10.1) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-hpc/2.10.1/index.html) |
 | 2.10.0 | 2020-04-30 | [Release notes](https://github.com/powsybl/powsybl-hpc/releases/tag/v2.10.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-hpc/2.10.0/index.html) |
 | 2.9.0 | 2020-03-26 | [Release notes](https://github.com/powsybl/powsybl-hpc/releases/tag/v2.9.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-hpc/2.9.0/index.html) |
