@@ -243,7 +243,7 @@ The complex shunt admittance `Ysh` is calculated using the transformer magnetizi
 
 To define the `tapChanger` the first step is to calculate the complex ratio at end `1` and the ratio at end `2`. The ratio at end `1` is calculated using the winding ratio (field `WINDV1` in the _Transformer Data_ record), the nominal (rated) Winding voltage base (field `NOMV1` in the _Transformer Data_ record) and the bus base base voltage (field `BASKV` in the _Bus Data_ record) according to the code that defines the units in which the turns ratios are specified (field `CZ` in the _Transformer Data_ record). The angle at end `1` is copied from the winding phase shift angle (field `ANG1` in the _Transformer Data_ record). The ratio at  end `2` is calculated in the same way as at end `1` but using the following fields (fields `WINDV2`, `NOMV1` in the _Transformer Data_ record) and the corresponding bus base base voltage at bus `J`  (field `BASKV` in the _Bus Data_ record). <br>
 Then a `tapChanger` at end `1` is defined according to the transformer control mode for automatic adjustments of the Winding tap or phase shift angle (field `COD` in the _Transformer Data_ record) by fixing one of the components of the complex ratio at end `1` and moving the other in each step using the number of tap positions available (field `NTP1` in the _Transformer Data_ record) and the upper and lower limits (fields `RMA1`, `RMI1` in the _Transformer Data_ record). <br>
-Finally, the `tapChanger` is adjusted twice, after fixing an ideal ratio at end `2` by moving the current ratio to end `1` and after moving the shunt admittance adding in this last case an step correction for each step of the `tapChanger` and the tap for which the (ratio, angle) is closer to the complex ratio at end `1` is assigned as `tapPosition`. <br>
+Finally, the `tapChanger` is adjusted twice, after fixing an ideal ratio at end `2` by moving the current ratio to end `1` and after moving the shunt admittance adding in this last case an step correction for each step of the `tapChanger`. The tap for which the (ratio, angle) is closer to the complex ratio at end `1` is assigned as `tapPosition`. <br>
 This current version does not consider the impedance correction table if this transformer impedance is to be a function of either off-nominal turns ratio or phase shift angle.
 
 If the `tapChanger` is a `ratioTapChanger` and the the transformer control mode (field `COD` in the _Transformer Data_ record) is `1` a voltage control with the following attributes is defined:
@@ -251,6 +251,7 @@ If the `tapChanger` is a `ratioTapChanger` and the the transformer control mode 
 - **TargetDeadband** defined as (`VMA` - `VMI`) * `vnom`.
 - **RegulatingTerminal** Regulating terminal assigned to the bus where voltage is controlled (field `CONT1` in the _Transformer Data_ record).
 - **RegulatingOn** defined as `true` if `TargetV` and `TargetDeadBand` are greater than `0.0`.
+
 If the PSS®E transformer is controlling the reactive power (field `COD` = `2` in the _Transformer Data_ record) the control is discarded as the current version of PowSyBl does not support reactive control for transformers.
 
 When the `tapChanger` is a `phaseTapChanger` and the the transformer control mode (field `COD` in the _Transformer Data_ record) is `3` an active power control with the following attributes is defined:
