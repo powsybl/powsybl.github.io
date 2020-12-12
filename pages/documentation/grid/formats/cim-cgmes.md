@@ -4,7 +4,18 @@ layout: default
 
 # CIM-CGMES
 
-The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS) based on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards. It was developed to meet necessary requirements for TSO data exchanges in the areas of system development and system operation.
+The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS) based on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards. It was developed to meet necessary requirements for TSO data exchanges in the areas of system development and system operation. In this scenario the agents generate their IGM (Individual Grid Model) and additionally it is necessary to have a boundary that describes the connection with other IGMs. The boundary set contains all boundary points necessary for a given grid model exchange. A boundary set can have different coverage depending on the requirements of the common grid model exchange. An individual grid model is described by a set of CIMXML files. Each file is associated to a profile and the most used are:
+- `EQ` is an input to power flow describing the network
+- `SSH` describe the power flow input parameters, e.g. injections and set point values.
+- `TP` describe the power flow busses and depends on the type of model. For Node Breaker (NB) model TP is an output from topology processing. For Bus Branch (BB) model TP is an input to power flow where the power flow busses are manually maintained.
+- `SV` describe the power flow solution, so it is an output from power flow.
+
+The boundary is described in the following CIMXML files:
+- `EQBD` contains all the equipment defined in the boundary. 
+- `TPBD` contains the topology information associated to the boundary.
+
+A CGMES model can be used in processes that are based on assembling Individual Grid Models (IGM) or into larger Common Grid Models (CGM). 
+As an IGM is incomplete the boundary should be assembled with it to become complete, then a power flow can be solved.
 
 * TOC
 {:toc}
@@ -15,6 +26,13 @@ Current supported version of CGMES is 2.4.15, that is based on CIM 16. We can no
 To learn more about CGMES files, read the complete [CMGES format specification](https://www.entsoe.eu/digital/common-information-model/#common-grid-model-exchange-specification-cgmes).
 
 ## Import
+
+The import module reads and converts a CGMES model to the PowSyBl grid model. The import process is performed in two steps:
+- Read input files.
+- Validate input data.
+- Convert input data into PowSyBl grid model.
+
+First, input CGMES data read from RDF/XML files is stored natively in a purpose specific database for RDF statements. In RDF, data is described making statements about resources in triplet expressions (subject, predicate, object). There are multiple open-source implementations of triplestore engines and load from RDF/XML files to the triplestore is highly optimized by these engines. The triplestore repository can be in memory  and it is easy to provide default data and complete missing information. Verifications can be made after all data has been loaded. If the validation succeeds the CGMES model is converted to a PowSyBl grid model.
 
 ### Inconsistency checks
 <span style="color: red">TODO</span>
