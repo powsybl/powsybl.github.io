@@ -38,6 +38,91 @@ First, input CGMES data read from RDF/XML files is stored natively in a purpose 
 <span style="color: red">TODO</span>
 
 ### From CGMES to IIDM
+
+The PowSyBl grid model establishes the substation as a required container of voltage levels and transformers (two and three windings and phase shifters). Voltage levels are the required container of the rest network components, except for the AC and DC transmission lines that 
+establish connections between substations and are associated directly to the network model. All buses at transformer ends should be kept at the same substation.
+
+The CGMES model does not guarantee these hierarchical constraints, so the first step in the conversion process is to identify all the transformers with ends in different substations and all the breakers and switches with ends in different voltage levels. All the voltage levels connected by breakers or switches should be mapped to a single voltage level in the PowSyBl grid model. The first CGMES voltage level, in alphabetical order, will be the representative voltage level associated to the PowSyBl voltage level. The same criterion is used also for substations, and the first CGMES substation will be the representative substation associated to the PowSyBl one. The joined voltage levels and substations information is used almost in every step steps of the conversion process and it is recorded in the `context` class that contains all the collateral information needed to convert from CGMES to PowSyBl and the more requested CGMES information as a `cache memory` allowing a fast access to these data in future requests. 
+
+The following sections describe in detail how each supported CGMES network component is converted to PowSyBl network model objects.
+
+#### Substation
+
+For each substation (considering only the representative substation if they are connected by transformers) in the CGMES model a new substation is created in the PowSyBl grid model with the following attributes:
+
+- `Id` The CGMES `Id` is copied.
+- `Name` The CGMES `name` attribute is copied.
+- `Country` It is obtained from the `regionName` attribute as first option, from `subRegionName` as second option. Otherwise is assigned to `null`.
+- `GeographicalTags` It is obtained from the `SubRegion` attribute.
+
+#### Voltage Level
+
+As in the substations, for each voltage level (considering only the representative voltage level if they are connected by switches) in the CGMES model a new voltage level is created in the PowSyBl grid model with the following attributes:
+- `Id` The CGMES `Id` is copied.
+- `Name` The CGMES `name` attribute is copied.
+- `NominalV` It is copied from the `nominalVoltage` property of the CGMES voltage level.
+- `TopologyKind` It will be `NODE_BREAKER` or `BUS_BREAKER` depending on the topology level specified in the CGMES grid model. Both options are possible.
+- `LowVoltageLimit` It is copied from the `lowVoltageLimit` property.
+- `HighVoltageLimit` It is copied from the `highVoltageLimit` property.
+
+#### ConnectivityNode / TopologicalBus
+
+If the CGMES model is a `node/breaker` model then the `connectivityNodes` are defined, and for each of them a `node` associated to the corresponding voltage level is created in the PowSyBl grid model. A `node` in the PowSyBl model is only an integer identifier that is unique by voltage level. If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional `busBarSection` is also created in the same voltage level. The attributes of the `busBarSection` are:
+- `Id` The `Id` of the CGMES `connectivityNode` is copied.
+- `Name` The `name` of the CGMES attribute of the `connectivityNode` is copied.
+- `Node` The integer PowSyBl node is copied.
+
+If the CGMES model is a `bus/breaker` model then the `topologicalNodes` are defined, and for each of them a `bus` is created in the PowSyBl grid model inside the corresponding voltage level container. The created `bus` has the following attributes:
+- `Id` The `Id` of the CGMES `topologicalNode` is copied.
+- `Name` The `name` of the CGMES `topologicalNode` is copied.
+- `V` The voltage of the `topologicalNode` is copied if it is valid (greater than `0`).
+- `Angle` The angle the `topologicalNode` is copied if the previous voltage is valid.
+
+In both cases, if the `connectivityNode` or the `topologicalNode` are located inside the boundary it is necessary to define previously a substation and a voltage level that will be used as the container to associate the PowSyBl `node` or `bus`.
+
+If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `false` and the CGMES model is a `node/breaker` model a `busBarSection` is created in the PowSyBl grid model for each `busBarSection` of the CGMES model. The attributes are:
+- `Id` The `Id` of the CGMES `busBarSection` is copied.
+- `Name` The `name` of the CGMES `busBarSection` is copied.
+- `Node` The integer PowSyBl node associated to the CGMES `busBarSection` is copied (It is the node associated to the first terminal connected to the `busBarSection`) .
+
+For each component in the PowSyBl grid model it is necessary to specify how it should be connected to the network. If the voltage level is built at node/breaker level, a `Node` is needed when adding the equipment to the model. If the model is specified at the bus/breaker level, then the `Bus` of the equipment must be specified. Using this information, the PowSyBl grid model creates a `Terminal` that will be used to manage the point of connection of the equipment to the network. Some equipments, like transformers, require two or three `Nodes` or `Buses`.
+
+In all the components of the PowSyBl grid model is obligatory to specify an `Id` (unique identifier) and optionally a human readable `Name`. As in this conversion process both attributes are copied directly from the same attributes of the corresponding CGMES network component they will be omitted in the following sections.
+
+<span style="color: red">TODO General aliases recorded in all network components</span> 
+
+#### EnergyConsumer
+
+Every `energyConsumer` component in the CGMES model creates a new `load` in the PowSyBl grid model associated to the corresponding voltage level. The attributes are:
+- `P0` One of these four values (`P` from the `stateVariablesPowerFlow`, `P` from the `steadyStateHypothesisPowerFlow`, `P` from the `pFixed` attribute of the CGMES equipment, or `NaN`) is copied according to the import options.
+- `Q0` One of these four values (`Q` from the `stateVariablesPowerFlow`, `Q` from the `steadyStateHypothesisPowerFlow`, `Q` from the `qFixed` attribute of the CGMES equipment, or `NaN`) is copied according to the import options.
+- `LoadType` It will be `FICTITIOUS` if the `Id` of the `energyConsumer` contains the pattern `fict`. Otherwise `UNDEFINED`.
+- `LoadDetail` Additional information added as an extension of the main network component class.
+
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is the first defined value of the sequence `stateVariablesPowerFlow`, `steadyStateHypothesisPowerFlow`, `Fixed` and `NaN`. Otherwise if it is `SSH` then the sequence will be `steadyStateHypothesisPowerFlow`, `stateVariablesPowerFlow`, `Fixed` and `NaN`.
+
+The `LoadDetail` depends  on the load Kind (property `type` of the CGMES `energyConsumer`). If the type of the `energyConsumer` is a conform load the following attributes are defined:
+- `withFixedActivePower` Always `0.0`.
+- `withFixedReactivePower` Always `0.0`.
+- `withVariableActivePower` The load `P0` attribute is copied.
+- `withVariableReactivePower` The load `Q0` attribute is copied.
+
+and when the type is a non-conform load the defined attributes are:
+- `withFixedActivePower` The load `P0` attribute is copied.
+- `withFixedReactivePower` The load `Q0` attribute is copied.
+- `withVariableActivePower` Always `0.0`.
+- `withVariableReactivePower` Always `0.0`.
+
+#### EnergySource
+
+For each `energySource` component in the CGMES model a new `load` in the PowSyBl grid model is associated to the corresponding voltage level. The attributes are:
+- `P0` One of these two values (`P` from the `stateVariablesPowerFlow` or `P` from the `steadyStateHypothesisPowerFlow`) is copied according to the import options.
+- `Q0` One of these tow values (`Q` from the `stateVariablesPowerFlow` or `Q` from the `steadyStateHypothesisPowerFlow`) is copied according to the import options.
+- `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
+
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow`. Otherwise if it is `SSH` will be copy from`steadyStateHypothesisPowerFlow`.
+
+
 <span style="color: red">TODO</span>
 
 ### Extensions
