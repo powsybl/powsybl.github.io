@@ -72,4 +72,7 @@ We only support for the moment balance type `PROPORTIONAL_TO_GENERATION_P_MAX` a
 
 ### Specific parameters
 
+**useBaseCaseVoltage**  
+The `useBaseCaseVoltage` property is an optional property that defines to init the voltages in case of DC flows computation. If this property is set to `true`, the voltages present in the initial network are used, otherwise an uniform voltage plan is computed.
+
 ### Configuration file example
