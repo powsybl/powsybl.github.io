@@ -122,6 +122,29 @@ For each `energySource` component in the CGMES model a new `load` in the PowSyBl
 
 If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow`. Otherwise if it is `SSH` will be copy from`steadyStateHypothesisPowerFlow`.
 
+#### EquivalentInjection
+
+The PowSyBl network component created by an `equivalentInjection` of the CGMES grid model can vary depending on where it is located, inside or outside the boundary. If the `equivalentInjection` is located outside the boundary a `generator` will be created. If it is inside and the import option `iidm.import.cgmes.convert-boundary` is `true` then the conversion process will import all the equipments inside the boundary and a `generator`, as in the previous case, will be created. Otherwise, if the `equivalentInjection` is regulating voltage and a dangling line is created at the boundary the regulating voltage data of the `equivalentInjection` will be transferred to the `danglingLine`.
+
+When a generator is created it is associated to the corresponding voltage level and has the following attributes:
+- `MinP` The property `minP` is copied if it is defined, otherwise `-Double.MAX_VALUE`.
+- `MinP` The property `maxP` is copied if it is defined, otherwise `Double.MAX_VALUE`.
+- `TargetP` The active power `P` from the `stateVariablesPowerFlow` or from the `steadyStateHypothesisPowerFlow` according with the import options and with the opposite sign as it is a target value.  `0.0` if both properties are not defined.
+- `TargetQ` The reactive power `Q` from the `stateVariablesPowerFlow` or from the `steadyStateHypothesisPowerFlow` according with the import options and with the opposite sign. `0.0` if both properties are not defined.
+- `TargetV` The `regulationTarget` property is copied if it is non zero. Otherwise the nominal voltage of the voltage level associated to the connected terminal of the `equivalentInjection` is assigned.
+- `VoltageRegulatorOn` It is assigned to `true` if both properties `regulationCapability` and `regulationStatus` are `true` and the terminal is connected.
+- `EnergySource` Fixed to `OTHER`.
+
+The PowSyBl grid model accepts one definition of limits, either `MinMaxReactiveLimits` or ReactiveCapabilityCurve. The first step is to define the points of the curve. At each point the active power value, the minimum reactive and the maximum reactive power value are specified by coping the value of the properties `xvalue`, `y1value` and `y2value` of the capability curve associated to the `curveId` recorded in the property `ReactiveCapabilityCurve`. After that a `MinMaxReactiveLimits` is created if there is only a point and a `ReactiveCapabilityCurve` in another case.
+
+The best way to determine the final topology at the boundary, it is to wait until the end of the conversion process. At this point all the CGMES network components connected to the boundary node have been recorded and will be possible to determine it. So if the `equivalentInjection` is not used to create a generator at this step of the conversion process it will be recorded as an equipment attached to the boundary node. See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary.
+
+#### Switches
+
+
+#### Boundary Topology
+
+The boundary topology.
 
 <span style="color: red">TODO</span>
 
