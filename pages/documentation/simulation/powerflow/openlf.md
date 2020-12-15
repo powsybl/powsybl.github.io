@@ -73,11 +73,11 @@ The right-hand-side \\(b\\) of the system satisfied:
 
 This linear system is resumed by:
 $$ J\theta = b $$
+The grid constraints system takes as variables the voltage angles.
 Note that the vector \\(b\\) of right-hand sides is linearly computed from the given injections and phase-shifting angles.
 
 To solve this system, we follow the classic approach of the LU matrices decomposition $$ J = LU $$.
-Hence matrices \\(L\\) and \\(U\\) are obtained, it is quite easy to solve the grid constraints linear system.
-The solution of this system gives the voltage angles corresponding to injections at each bus (minus the slack bus) and phase shifting angles.
+Hence by solving the system using LU decomposition, you can compute the voltage angles by giving as data the injections and the phase-shifting angles.
 
 ## Configuration
 To use PowSyBl OpenLoadFlow for all power flow computations, you have to configure the `load-flow` module in your configuration file:
