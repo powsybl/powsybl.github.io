@@ -33,7 +33,7 @@ TO DO
 The DC flows computing relies on several classical assumptions to build a model where the active power flowing through a line depends linearly from the voltage angles at its ends.
 In this simple model, reactive power flows and active power losses are totally neglected. The following assumptions are made to ease and speed the computations:
 - The voltage magnitude is equal to 1 per unit at each bus,
-- The conductance \\(G_{i,j}\\) of each line \\((i,j)\\) is neglected, only the susceptance \\(B_{i,j}\\) is considered,
+- The series conductance \\(G_{i,j}\\) of each line \\((i,j)\\) is neglected, only the series susceptance \\(B_{i,j}\\) is considered,
 - The voltage angle difference between two adjacent buses is considered as very small.
 
 Therefore, the power flows from bus \\(i\\) to bus \\(j\\) following the linear expression:
@@ -42,23 +42,23 @@ $$ P_{i,j} = \frac{\theta_i-\theta_j+A_{i,j}}{X_{i,j}} $$
 
 Where \\(X_{i,j}\\) is the reactance of the line \\((i,j)\\), \\(\theta_i\\) the voltage angle at bus \\(i\\) and \\(A_{i,j}\\) is the phase angle shifting on side \\(j\\).
 
-DC flows computing give a linear grid constraints system.
+DC flows computing gives a linear grid constraints system.
 The variables of the system are, for each bus, the voltage angle \\(\theta\\).
 The constraints of the system are the active power balance at each bus, except for the slack bus.
 The voltage angle at slack bus is set to zero.
 Therefore the linear system is composed of \\(N\\) variables and \\(N\\) constraints, where \\(N\\) is the number of buses in the network.
 
-The linear matrix \\(J\\) of this system satisfied:
+We introduce the linear matrix \\(J\\) of this system that satisfies:
 
 - If \\(i\\) is the slack bus:
 
 	$$J_{i,i} = 1$$
 - Else, let \\(v(i)\\) be the buses linked to \\(i\\) in the network graph:
 
-	$$J_{i,i} = \sum_{j \in v(i)} \frac{1}{X_{i,j}}.$$
+	$$J_{i,i} = \sum_{j \in v(i)} \frac{1}{X_{i,j}}$$
 
-	$$ \forall j \in v(i), \quad J_{i,j} = - \frac{1}{X_{i,j}}.$$
-- All other entries of \\(J\\) are zeroes.
+	$$ \forall j \in v(i), \quad J_{i,j} = - \frac{1}{X_{i,j}}$$
+- All other entries of \\(J\\) are zeros.
 
 The right-hand-side \\(b\\) of the system satisfied:
 
@@ -67,7 +67,7 @@ The right-hand-side \\(b\\) of the system satisfied:
 	$$b_{i} = 0$$
 - Else, let \\(v(i)\\) be the buses linked to \\(i\\) in the network graph:
 
-	$$b_{i} = P_i - \sum_{j \in v(i)} \frac{A_{i,j}}{X_{i,j}}.$$
+	$$b_{i} = P_i - \sum_{j \in v(i)} \frac{A_{i,j}}{X_{i,j}}$$
 	
 	Where \\(P_i\\) is the injection at bus \\(i\\).
 
@@ -75,7 +75,7 @@ This linear system is resumed by:
 $$ J\theta = b $$
 Note that the vector \\(b\\) of right-hand sides is linearly computed from the given injections and phase-shifting angles.
 
-To solve this system, the classic technic is to use the LU matrices decomposition $$ J = LU $$.
+To solve this system, we follow the classic approach of the LU matrices decomposition $$ J = LU $$.
 Hence matrices \\(L\\) and \\(U\\) are obtained, it is quite easy to solve the grid constraints linear system.
 The solution of this system gives the voltage angles corresponding to injections at each bus (minus the slack bus) and phase shifting angles.
 
