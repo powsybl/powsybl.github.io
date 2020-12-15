@@ -87,9 +87,7 @@ If the import option `iidm.import.cgmes.create-busbar-section-for-every-connecti
 
 For each component in the PowSyBl grid model it is necessary to specify how it should be connected to the network. If the voltage level is built at node/breaker level, a `Node` is needed when adding the equipment to the model. If the model is specified at the bus/breaker level, then the `Bus` of the equipment must be specified. Using this information, the PowSyBl grid model creates a `Terminal` that will be used to manage the point of connection of the equipment to the network. Some equipments, like transformers, require two or three `Nodes` or `Buses`.
 
-In all the components of the PowSyBl grid model is obligatory to specify an `Id` (unique identifier) and optionally a human readable `Name`. As in this conversion process both attributes are copied directly from the same attributes of the corresponding CGMES network component they will be omitted in the following sections.
-
-<span style="color: red">TODO General aliases recorded in all network components</span> 
+In all the components of the PowSyBl grid model is obligatory to specify an `Id` (unique identifier) and optionally a human readable `Name`. As in this conversion process both attributes are copied directly from the same attributes of the corresponding CGMES network component they will be omitted in the following sections. Also, it is omitted that all the CGMES terminal identifiers used to manage the connection of the equipment to the rest of the network are recorded as aliases of the network component.
 
 #### EnergyConsumer
 
