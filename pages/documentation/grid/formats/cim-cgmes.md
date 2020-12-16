@@ -7,7 +7,7 @@ layout: default
 The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS) based on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards. It was developed to meet necessary requirements for TSO data exchanges in the areas of system development and system operation. In this scenario the agents generate their IGM (Individual Grid Model) and additionally it is necessary to have a boundary that describes the connection with other IGMs. The boundary set contains all boundary points necessary for a given grid model exchange. A boundary set can have different coverage depending on the requirements of the common grid model exchange. An individual grid model is described by a set of CIMXML files. Each file is associated to a profile and the most used are:
 - `EQ` is an input to power flow describing the network
 - `SSH` describe the power flow input parameters, e.g. injections and set point values.
-- `TP` describe the power flow busses and depends on the type of model. For Node Breaker (NB) model TP is an output from topology processing. For Bus Branch (BB) model TP is an input to power flow where the power flow busses are manually maintained.
+- `TP` describe the power flow buses and depends on the type of model. For Node Breaker (NB) model TP is an output from topology processing. For Bus Branch (BB) model TP is an input to power flow where the power flow buses are manually maintained.
 - `SV` describe the power flow solution, so it is an output from power flow.
 
 The boundary is described in the following CIMXML files:
