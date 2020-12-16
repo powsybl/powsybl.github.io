@@ -124,7 +124,7 @@ If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` i
 
 The PowSyBl network component created by an `equivalentInjection` of the CGMES grid model can vary depending on where it is located, inside or outside the boundary. If the `equivalentInjection` is located outside the boundary a `generator` will be created. If it is inside and the import option `iidm.import.cgmes.convert-boundary` is `true` then the conversion process will import all the equipments inside the boundary and a `generator`, as in the previous case, will be created. Otherwise, if the `equivalentInjection` is regulating voltage and a dangling line is created at the boundary the regulating voltage data of the `equivalentInjection` will be transferred to the `danglingLine`.
 
-When a generator is created it is associated to the corresponding voltage level and has the following attributes:
+When a generator is created, it is associated to the corresponding voltage level and has the following attributes:
 - `MinP` The `minP` property is copied if it is defined, otherwise `-Double.MAX_VALUE`.
 - `MinP` The `maxP` property is copied if it is defined, otherwise `Double.MAX_VALUE`.
 - `TargetP` The active power `P` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign as it is a target value.  `0.0` if both profiles are not defined.
@@ -135,9 +135,9 @@ When a generator is created it is associated to the corresponding voltage level 
 
 The regulating terminal is not defined so the voltage control will be always local.
 
-The PowSyBl grid model accepts one definition of limits, either `MinMaxReactiveLimits` or ReactiveCapabilityCurve. The first step is to define the points of the curve. At each point the active power value, the minimum reactive and the maximum reactive power value are specified by copying the value of the `xvalue`, `y1value` and `y2value` properties associated to the capability curve  recorded in the `ReactiveCapabilityCurve` property. After that `MinMaxReactiveLimits` is created if there is only a point and `ReactiveCapabilityCurve` in another case.
+The PowSyBl grid model accepts one definition of limits, either `MinMaxReactiveLimits` or ReactiveCapabilityCurve. The first step is to define the points of the curve. At each point the active power, the minimum reactive and the maximum reactive power values are specified by copying the value of the `xvalue`, `y1value` and `y2value` properties associated to the capability curve  recorded in the `ReactiveCapabilityCurve` property. After that `MinMaxReactiveLimits` is created if there is only one point and `ReactiveCapabilityCurve` in another case.
 
-The best way to determine the final topology at the boundary, it is to wait until the end of the conversion process. At this point all the CGMES network components connected to the boundary node have been recorded and will be possible to determine it. So if the `equivalentInjection` is not used to create a generator at this step of the conversion process it will be recorded as an equipment attached to the boundary node. See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary.
+The best way to determine the final topology at the boundary, it is to wait until the end of the conversion process. At this point all the CGMES network components connected to the boundary node have been analyzed and will be possible to determine it using all the information. So if the `equivalentInjection` is not used to create a generator at this step of the conversion process it will be recorded as an equipment attached to the boundary node. See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary.
 
 #### ExternalNetworkInjection
 
@@ -148,9 +148,9 @@ For each `externalNetworkInjection` a generator is created in the PowSyBl grid m
 - `TargetQ` The reactive power `Q` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign. `0.0` if both profiles are not defined.
 - `EnergySource` Fixed to `OTHER`.
 
-As in the `equivalentInjection` a set of reactive power limits is defined (`MinMaxReactiveLimits` or `ReactiveCapabilityCurve`) by copying the value of the `xvalue`, `y1value` and `y2value` properties associated to the capability curve recorded in the in the `ReactiveCapabilityCurve` property.
+As in the `equivalentInjection` a set of reactive power limits is defined (`MinMaxReactiveLimits` or `ReactiveCapabilityCurve`) by copying the value of the `xvalue`, `y1value` and `y2value` properties associated to the capability curve recorded in the `ReactiveCapabilityCurve` property.
 
-The rest of the `regulatingControl` attributes are assigned at the end of the conversion process as the control could be remote and the `regulatingTerminal` could not be defined at this step. The control attributes are: 
+The rest of the `regulatingControl` attributes are assigned at the end of the conversion process as the control could be remote and the `regulatingTerminal` could not be defined at the current step. The control attributes are: 
 - `RegulatingTerminal` It is copied from the terminal associated to the `Terminal` property of the `regulatingControl`. If is not valid then the terminal associated to the created generator is used by forcing the control to local. 
 - `TargetV` The `TargetValue` property of the `regulatingControl` is copied if it is not zero or not `NaN`. Otherwise the nominal voltage of the associated voltage level is copied.
 - `VoltageRegulatorOn` To be `true` both properties, the `enabled` of the `regulatingControl` and the `controlEnabled` of the `externalNetworkInjection` must be `true`.
@@ -176,8 +176,8 @@ The shunt model is specified by the `type` property of the shunt compensator. Th
  The `regulatingControl` attributes are assigned at the end of the conversion process and are:
  - `TargetV` It is copied from the `targetValue` property of the `regulatingControl`.
  - `TargetDeadband` It is copied from the `targetDeadband` property of the `regulatingControl`.
- - `RegulatingTerminal` Terminal where voltage should be controlled. It is defined as the terminal associated to the `Terminal` property of the regulatingControl data if it is valid. Otherwise the terminal associated to the created shunt is used by forcing the control to local.
- - `VoltageRegulatorOn` To be `true`, both the `enabled` property of the `regulatingControl` and the `controlEnabled` property of the shunt compensator must be `true` and `TargetV` greater than zero.
+ - `RegulatingTerminal` Terminal where voltage should be controlled. It is defined as the terminal associated to the `Terminal` property of the `regulatingControl` if it is valid. Otherwise the terminal associated to the created shunt is used by forcing the control to local.
+ - `VoltageRegulatorOn` To be `true` both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` property of the shunt compensator must be `true` and also `TargetV` greater than zero.
 
 If the `regulatingControl` data is not well defined then a local `regulatingControl` is created where `TargetV` is the nominal voltage associated to the shunt compensator and `TargetDeadband` is fixed to `0.0`.
   
