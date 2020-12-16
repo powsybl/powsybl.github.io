@@ -7,7 +7,7 @@ layout: default
 The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS) based on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards. It was developed to meet necessary requirements for TSO data exchanges in the areas of system development and system operation. In this scenario the agents generate their IGM (Individual Grid Model) and additionally it is necessary to have a boundary that describes the connection with other IGMs. The boundary set contains all boundary points necessary for a given grid model exchange. A boundary set can have different coverage depending on the requirements of the common grid model exchange. An individual grid model is described by a set of CIMXML files. Each file is associated to a profile and the most used are:
 - `EQ` is an input to power flow describing the network
 - `SSH` describe the power flow input parameters, e.g. injections and set point values.
-- `TP` describe the power flow busses and depends on the type of model. For Node Breaker (NB) model TP is an output from topology processing. For Bus Branch (BB) model TP is an input to power flow where the power flow busses are manually maintained.
+- `TP` describe the power flow buses and depends on the type of model. For Node Breaker (NB) model TP is an output from topology processing. For Bus Branch (BB) model TP is an input to power flow where the power flow buses are manually maintained.
 - `SV` describe the power flow solution, so it is an output from power flow.
 
 The boundary is described in the following CIMXML files:
@@ -27,12 +27,12 @@ To learn more about CGMES files, read the complete [CMGES format specification](
 
 ## Import
 
-The import module reads and converts a CGMES model to the PowSyBl grid model. The import process is performed in two steps:
+The import module reads and converts a CGMES model to the PowSyBl grid model. The import process is performed in three steps:
 - Read input files.
 - Validate input data.
 - Convert input data into PowSyBl grid model.
 
-First, input CGMES data read from RDF/XML files is stored natively in a purpose specific database for RDF statements. In RDF, data is described making statements about resources in triplet expressions (subject, predicate, object). There are multiple open-source implementations of triplestore engines and load from RDF/XML files to the triplestore is highly optimized by these engines. The triplestore repository can be in memory  and it is easy to provide default data and complete missing information. Verifications can be made after all data has been loaded. If the validation succeeds the CGMES model is converted to a PowSyBl grid model.
+First, input CGMES data read from RDF/XML files is stored natively in a purpose specific database for RDF statements. In RDF, data is described making statements about resources in triplet expressions (subject, predicate, object). There are multiple open-source implementations of triplestore engines and load from RDF/XML files to the triplestore is highly optimized by these engines. The triplestore repository can be in memory  and it is easy to provide default data and complete missing information. Verifications are made after all data has been loaded. If the validation succeeds the CGMES model is converted to a PowSyBl grid model.
 
 ### Inconsistency checks
 <span style="color: red">TODO</span>
@@ -42,7 +42,7 @@ First, input CGMES data read from RDF/XML files is stored natively in a purpose 
 The PowSyBl grid model establishes the substation as a required container of voltage levels and transformers (two and three windings and phase shifters). Voltage levels are the required container of the rest network components, except for the AC and DC transmission lines that 
 establish connections between substations and are associated directly to the network model. All buses at transformer ends should be kept at the same substation.
 
-The CGMES model does not guarantee these hierarchical constraints, so the first step in the conversion process is to identify all the transformers with ends in different substations and all the breakers and switches with ends in different voltage levels. All the voltage levels connected by breakers or switches should be mapped to a single voltage level in the PowSyBl grid model. The first CGMES voltage level, in alphabetical order, will be the representative voltage level associated to the PowSyBl voltage level. The same criterion is used also for substations, and the first CGMES substation will be the representative substation associated to the PowSyBl one. The joined voltage levels and substations information is used almost in every step steps of the conversion process and it is recorded in the `context` class that contains all the collateral information needed to convert from CGMES to PowSyBl and the more requested CGMES information as a `cache memory` allowing a fast access to these data in future requests. 
+The CGMES model does not guarantee these hierarchical constraints, so the first step in the conversion process, is to identify all the transformers with ends in different substations and all the breakers and switches with ends in different voltage levels. All the voltage levels connected by breakers or switches should be mapped to a single voltage level in the PowSyBl grid model. The first CGMES voltage level, in alphabetical order, will be the representative voltage level associated to the PowSyBl voltage level. The same criterion is used for substations, and the first CGMES substation will be the representative substation associated to the PowSyBl one. The joined voltage levels and substations information is used almost in every step of the conversion process and it is recorded in the `context` class that contains all the collateral information needed to convert from CGMES to PowSyBl and the more requested CGMES information as a `cache memory` allowing a fast access to these data in future requests. 
 
 The following sections describe in detail how each supported CGMES network component is converted to PowSyBl network model objects.
 
@@ -92,8 +92,8 @@ In all the components of the PowSyBl grid model is obligatory to specify an `Id`
 #### EnergyConsumer
 
 Every `energyConsumer` component in the CGMES model creates a new `load` in the PowSyBl grid model associated to the corresponding voltage level. The attributes are:
-- `P0` One of these four values (`P` from the `stateVariablesPowerFlow`, `P` from the `steadyStateHypothesisPowerFlow`, `P` from the `pFixed` property of the CGMES equipment, or `NaN`) is copied according to the import options.
-- `Q0` One of these four values (`Q` from the `stateVariablesPowerFlow`, `Q` from the `steadyStateHypothesisPowerFlow`, `Q` from the `qFixed` property of the CGMES equipment, or `NaN`) is copied according to the import options.
+- `P0` One of these four values (`P` from the `stateVariablesPowerFlow` profile, `P` from the `steadyStateHypothesisPowerFlow` profile, `P` from the `pFixed` property of the CGMES equipment, or `NaN`) is copied according to the import options.
+- `Q0` One of these four values (`Q` from the `stateVariablesPowerFlow` profile, `Q` from the `steadyStateHypothesisPowerFlow` profile, `Q` from the `qFixed` property of the CGMES equipment, or `NaN`) is copied according to the import options.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energyConsumer` contains the pattern `fict`. Otherwise `UNDEFINED`.
 - `LoadDetail` Additional information added as an extension of the main network component class.
 
@@ -113,12 +113,12 @@ and when the type is a non-conform load the defined attributes are:
 
 #### EnergySource
 
-For each `energySource` component in the CGMES model a new `load` in the PowSyBl grid model is associated to the corresponding voltage level. The attributes are:
-- `P0` One of these two values (`P` from the `stateVariablesPowerFlow` or `P` from the `steadyStateHypothesisPowerFlow`) is copied according to the import options.
-- `Q0` One of these tow values (`Q` from the `stateVariablesPowerFlow` or `Q` from the `steadyStateHypothesisPowerFlow`) is copied according to the import options.
+For each `energySource` component in the CGMES model a new `load` in the PowSyBl grid model is created and associated to the corresponding voltage level. The attributes are:
+- `P0` One of these two values (`P` from the `stateVariablesPowerFlow` profile or `P` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
+- `Q0` One of these tow values (`Q` from the `stateVariablesPowerFlow` profile or `Q` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
 
-If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow`. Otherwise if it is `SSH` will be copy from`steadyStateHypothesisPowerFlow`.
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. Otherwise if it is `SSH` will be copy from`steadyStateHypothesisPowerFlow` profile.
 
 #### EquivalentInjection
 
