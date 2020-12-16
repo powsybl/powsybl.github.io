@@ -160,7 +160,7 @@ At the current CGMES import version only voltage control is supported in generat
 
 #### Shunt Compensator
 
-There is a one-to-one correspondence between CGMES and PowSyBl shuntCompensators. For each component of the CGMES model a new one is created in the PowSyBl grid model associated to the corresponding voltage level. The first step is to specify the `SectionCount`, then the shunt model that can be a linear model or a non-linear model and finally the `regulatingControl` attributes.
+There is a one-to-one correspondence between CGMES and PowSyBl `shuntCompensators`. For each component of the CGMES model a new one is created in the PowSyBl grid model associated to the corresponding voltage level. The first step is to specify the `SectionCount`, then the shunt model that can be a linear model or a non-linear model and finally the `regulatingControl` attributes.
 
 The `SectionCount` attribute is specify by the `SVsections` property taken from the `stateVariablesPowerFlow` profile or from the  `SSHsections` property of the `steadyStateHypothesisPowerFlow` profile according with the import option `iidm.import.cgmes.profile-used-for-initial-state-values`. If both properties are not defined then the value of the `normalSections` property of the CGMES shunt compensator is used.
 
@@ -182,6 +182,27 @@ The shunt model is specified by the `type` property of the shunt compensator. Th
 If the `regulatingControl` data is not well defined then a local `regulatingControl` is created where `TargetV` is the nominal voltage associated to the shunt compensator and `TargetDeadband` is fixed to `0.0`.
   
 #### Equivalent Shunt
+
+Every `equivalentShunt` of the CGMES model creates a new shunt compensator in the PowSyBl grid model. This new equipment is attached to the corresponding voltage level. The `SectionCount` attribute is defined as `1` if the `equivalentShunt` is connected and as `0` if it is disconnected. A linear model is specified where the `BPerSection` attribute is copied from the `b` property of the `equivalentShunt` and the `MaximumSectionCount` is fixed to `1`. It is a fixed shunt compensator, without control capability.
+
+#### Static VAR Compensator
+
+For each `staticVARcompensator` of the CGMES model a new `staticVARcompensator` is created and attached to a voltage level in the PowSyBl model. The attributes of the staticVARcompensator are:
+- `Bmin` The inverse of the `inductiveRating` property of the CGMES `staticVARcompensator`.
+- `Bmax` The inverse of the `capacitiveRating` property of the CGMES `staticVARcompensator`.
+
+The droop or current compensation (must be positive) is copied from the `slope`property and is recorded as an extension attached to the `staticVARcompensator` object.
+
+The `regulatingControl` attributes, assigned at the end of the conversion process, are:
+- `VoltageSetpoint` The `targetValue` property of the `regulatingControl` is copied.
+- `ReactivePowerSetpoint` The `targetValue` property of the `regulatingControl` is copied.
+- `RegulatingTerminal` Terminal where the voltage or reactive power should be controlled. It is defined as the terminal associated to the `Terminal` property of the `regulatingControl` if it is valid. Otherwise the terminal associated to the `staticVARcompensator` is used by forcing the control to local.
+- `RegulationMode` Three possible status `VOLTAGE`, `REACTIVE_POWER` and `OFF`. The current status is defined in the `mode` property of the `regulatingControl` and it is only assigned if  both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` of the `staticVARcompensator` are `true`. 
+
+A default `regulatingControl` is defined using the `voltageSetPoint`, `q`, and `controlMode` properties of the CGMES `staticVARcompensator` when only the `controlEnabled` of the `staticVARcompensator` is `true`. In that case the control will be local.
+
+#### Asynchronous Machine
+
 
 #### Boundary Topology
 
