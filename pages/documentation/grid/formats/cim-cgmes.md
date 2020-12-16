@@ -51,15 +51,15 @@ The following sections describe in detail how each supported CGMES network compo
 For each substation (considering only the representative substation if they are connected by transformers) in the CGMES model a new substation is created in the PowSyBl grid model with the following attributes:
 
 - `Id` The CGMES `Id` is copied.
-- `Name` The CGMES `name` attribute is copied.
-- `Country` It is obtained from the `regionName` attribute as first option, from `subRegionName` as second option. Otherwise is assigned to `null`.
-- `GeographicalTags` It is obtained from the `SubRegion` attribute.
+- `Name` The CGMES `name` property is copied.
+- `Country` It is obtained from the `regionName` property as first option, from `subRegionName` as second option. Otherwise is assigned to `null`.
+- `GeographicalTags` It is obtained from the `SubRegion` property.
 
 #### Voltage Level
 
 As in the substations, for each voltage level (considering only the representative voltage level if they are connected by switches) in the CGMES model a new voltage level is created in the PowSyBl grid model with the following attributes:
 - `Id` The CGMES `Id` is copied.
-- `Name` The CGMES `name` attribute is copied.
+- `Name` The CGMES `name` property is copied.
 - `NominalV` It is copied from the `nominalVoltage` property of the CGMES voltage level.
 - `TopologyKind` It will be `NODE_BREAKER` or `BUS_BREAKER` depending on the topology level specified in the CGMES grid model. Both options are possible.
 - `LowVoltageLimit` It is copied from the `lowVoltageLimit` property.
@@ -69,7 +69,7 @@ As in the substations, for each voltage level (considering only the representati
 
 If the CGMES model is a `node/breaker` model then the `connectivityNodes` are defined, and for each of them a `node` associated to the corresponding voltage level is created in the PowSyBl grid model. A `node` in the PowSyBl model is only an integer identifier that is unique by voltage level. If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional `busBarSection` is also created in the same voltage level. The attributes of the `busBarSection` are:
 - `Id` The `Id` of the CGMES `connectivityNode` is copied.
-- `Name` The `name` of the CGMES attribute of the `connectivityNode` is copied.
+- `Name` The `name` of the CGMES property of the `connectivityNode` is copied.
 - `Node` The integer PowSyBl node is copied.
 
 If the CGMES model is a `bus/breaker` model then the `topologicalNodes` are defined, and for each of them a `bus` is created in the PowSyBl grid model inside the corresponding voltage level container. The created `bus` has the following attributes:
@@ -87,13 +87,13 @@ If the import option `iidm.import.cgmes.create-busbar-section-for-every-connecti
 
 For each component in the PowSyBl grid model it is necessary to specify how it should be connected to the network. If the voltage level is built at node/breaker level, a `Node` is needed when adding the equipment to the model. If the model is specified at the bus/breaker level, then the `Bus` of the equipment must be specified. Using this information, the PowSyBl grid model creates a `Terminal` that will be used to manage the point of connection of the equipment to the network. Some equipments, like transformers, require two or three `Nodes` or `Buses`.
 
-In all the components of the PowSyBl grid model is obligatory to specify an `Id` (unique identifier) and optionally a human readable `Name`. As in this conversion process both attributes are copied directly from the same attributes of the corresponding CGMES network component they will be omitted in the following sections. Also, it is omitted that all the CGMES terminal identifiers used to manage the connection of the equipment to the rest of the network are recorded as aliases of the network component.
+In all the components of the PowSyBl grid model is obligatory to specify an `Id` (unique identifier) and optionally a human readable `Name`. As in this conversion process both attributes are copied directly from the same properties of the corresponding CGMES network component they will be omitted in the following sections. Also, it is omitted that all the CGMES terminal identifiers used to manage the connection of the equipment to the rest of the network are recorded as aliases of the network component.
 
 #### EnergyConsumer
 
 Every `energyConsumer` component in the CGMES model creates a new `load` in the PowSyBl grid model associated to the corresponding voltage level. The attributes are:
-- `P0` One of these four values (`P` from the `stateVariablesPowerFlow`, `P` from the `steadyStateHypothesisPowerFlow`, `P` from the `pFixed` attribute of the CGMES equipment, or `NaN`) is copied according to the import options.
-- `Q0` One of these four values (`Q` from the `stateVariablesPowerFlow`, `Q` from the `steadyStateHypothesisPowerFlow`, `Q` from the `qFixed` attribute of the CGMES equipment, or `NaN`) is copied according to the import options.
+- `P0` One of these four values (`P` from the `stateVariablesPowerFlow`, `P` from the `steadyStateHypothesisPowerFlow`, `P` from the `pFixed` property of the CGMES equipment, or `NaN`) is copied according to the import options.
+- `Q0` One of these four values (`Q` from the `stateVariablesPowerFlow`, `Q` from the `steadyStateHypothesisPowerFlow`, `Q` from the `qFixed` property of the CGMES equipment, or `NaN`) is copied according to the import options.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energyConsumer` contains the pattern `fict`. Otherwise `UNDEFINED`.
 - `LoadDetail` Additional information added as an extension of the main network component class.
 
@@ -102,12 +102,12 @@ If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` i
 The `LoadDetail` depends  on the load Kind (property `type` of the CGMES `energyConsumer`). If the type of the `energyConsumer` is a conform load the following attributes are defined:
 - `withFixedActivePower` Always `0.0`.
 - `withFixedReactivePower` Always `0.0`.
-- `withVariableActivePower` The load `P0` attribute is copied.
-- `withVariableReactivePower` The load `Q0` attribute is copied.
+- `withVariableActivePower` The load `P0` property is copied.
+- `withVariableReactivePower` The load `Q0` property is copied.
 
 and when the type is a non-conform load the defined attributes are:
-- `withFixedActivePower` The load `P0` attribute is copied.
-- `withFixedReactivePower` The load `Q0` attribute is copied.
+- `withFixedActivePower` The load `P0` property is copied.
+- `withFixedReactivePower` The load `Q0` property is copied.
 - `withVariableActivePower` Always `0.0`.
 - `withVariableReactivePower` Always `0.0`.
 
