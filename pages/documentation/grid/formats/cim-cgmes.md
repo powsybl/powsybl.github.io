@@ -118,7 +118,7 @@ For each `energySource` component in the CGMES model a new `load` in the PowSyBl
 - `Q0` One of these tow values (`Q` from the `stateVariablesPowerFlow` profile or `Q` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
 
-If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. If it is `SSH` will be copy from`steadyStateHypothesisPowerFlow` profile.
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. If it is `SSH` will be copy from the `steadyStateHypothesisPowerFlow` profile.
 
 #### EquivalentInjection
 
