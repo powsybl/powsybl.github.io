@@ -37,7 +37,7 @@ $$
 
 Then, we retrieve the sensitivity with $$\theta$$ calculating:
 
-$$ s_{b,kl} = \frac{\theta_k-\theta_l}{X_{k,l}} $$
+$$ s_{i,kl} = \frac{\theta_k-\theta_l}{X_{k,l}} $$
 
 To get the sensitivity from phase-shifting angle in a given branch to a given branch, we compute the right-hand side $$b$$ corresponding to an increase of $$1°$$ for the phase-shifting angle at this branch and 0 elsewhere. The LU decomposition gives the matrices $$L$$ and $$U$$ in order to compute the vector $$\theta$$. Then it is easy to retrieve the active power flow in the branch.
 
@@ -73,6 +73,47 @@ $$
 We only support for the moment balance type `PROPORTIONAL_TO_GENERATION_P_MAX` and `PROPORTIONAL_TO_LOAD`.
 
 ### Contingencies management
+
+The contingency management needs to compute sensitivity coefficients for post-contingency states of the network, that is to say,
+states of the network after some outages have occured.
+Those outages consist in the loss of different branches. 
+It is possible to compute a sensitivity analysis on a post-contingency state of the network using the sensitivities computed on the base network.
+Hence, the same $$LU$$ decomposition is used both for the base network and for the post-contingency one, saving many computational time.
+
+#### N-1 case
+Let us start with the most classic case, where a single branch was lost by the network.
+ 
+Let $$s_{b,ij,mk}$$ be the sensitivity of an increase of $$1MW$$ at bus $$b$$ on branch $$(i,j)$$ when the branch $$(m,k)$$ has been disconnected from the network.
+We want to compute this sensitivity.
+
+Let $$b^1$$ be the right-hand side vector corresponding with an increase of $$1MW$$ at bus $$b$$.
+
+Let $$b^2$$ be the right-hand side vector corresponding with an increase of $$1MW$$ at bus $$m$$ plus a decrease of $$1MW$$ at bus $$k$$.
+
+Let $$\theta^1$$ be the vector of voltage angles obtained solving the network contraints system on the base network with right-hand side $$b^1$$.
+
+Let $$\theta^2$$ be the vector of voltage angles obtained solving the network contraints system on the base network with right-hand side $$b^2$$.
+Notice that $$\theta^1$$ and $$\theta^2$$ are built using the same $$LU$$ decomposition of the constraints matrix $$J$$.
+
+Let $$s_{b,ij}$$ be the sensitivity of an increase of $$1MW$$ at bus $$b$$ on branch $$(i,j)$$ on the base network, we recall that:
+
+$$
+s_{b,ij} = \frac{\theta^1_i-\theta^1_j}{X_{i,j}}
+$$
+
+Let $$s_{mk,ij}$$ be the sensitivity of an increase of $$1MW$$ at bus $$m$$ plus a decrease of $$1MW$$ at bus $$k$$, on the base network.
+This can be easily computed with the formula:
+
+$$
+s_{mk,ij} = \frac{\theta^2_i-\theta^2_j}{X_{i,j}}
+$$
+
+Then, The post contingency sensitivity $$s_{b,ij,mk}$$ satisfied:
+
+$$
+s_{b,ij,mk} = s_{b,ij} + \frac{\theta^1_m-\theta^1_k}{X_{m,k} - (\theta^2_m-\theta^2_k)}s_{mk,ij}
+$$
+
 
 ## Configuration
 
