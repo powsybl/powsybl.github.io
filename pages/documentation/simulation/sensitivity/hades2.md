@@ -60,7 +60,7 @@ improve performances, since the time spent to exchange output data between Hades
 be significant when large numbers of sensitivity values are present in the output.
 
 
-**Unsupported parameters**:
+**Unsupported parameters**
 - `equationTypePst` may be set to `ANGLE_SHIFT_EQ` or `FLOW_EQ`, depending on whether the user wants to compute the sensitivity to angle shift modification, or flow modification, respectively. However, at the moment the flow modification sensitivity cannot be computed since the corresponding factor does not exist.
 - `computeInitialLoadflow` should have the effect to enable or disable the initial loadflow computation
 before sensitivity values are calculated, but it doesn't seem to have any effect.
