@@ -118,7 +118,7 @@ For each `energySource` component in the CGMES model a new `load` in the PowSyBl
 - `Q0` One of these tow values (`Q` from the `stateVariablesPowerFlow` profile or `Q` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
 
-If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. Otherwise if it is `SSH` will be copy from`steadyStateHypothesisPowerFlow` profile.
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. If it is `SSH` will be copy from`steadyStateHypothesisPowerFlow` profile.
 
 #### EquivalentInjection
 
@@ -202,6 +202,13 @@ The `regulatingControl` attributes, assigned at the end of the conversion proces
 A default `regulatingControl` is defined using the `voltageSetPoint`, `q`, and `controlMode` properties of the CGMES `staticVARcompensator` when only the `controlEnabled` of the `staticVARcompensator` is `true`. In that case the control will be local.
 
 #### Asynchronous Machine
+
+Each `asynchronousMachine` component of the CGMES model creates a new load in the PowSyBl grid model that is attached to a voltage level. The attributes are:
+- `P0` One of these two values (`P` from the `stateVariablesPowerFlow` profile or `P` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
+- `Q0` One of these tow values (`Q` from the `stateVariablesPowerFlow` profile or `Q` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
+- `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
+
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. Otherwise if it is `SSH` will be copy from the `steadyStateHypothesisPowerFlow` profile.
 
 
 #### Boundary Topology
