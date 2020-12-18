@@ -40,7 +40,7 @@ Therefore, the power flows from bus $$i$$ to bus $$j$$ following the linear expr
 
 $$ P_{i,j} = \frac{\theta_i-\theta_j+A_{i,j}}{X_{i,j}} $$
 
-Where $$X_{i,j}$$ is the reactance of the line $$(i,j)$$, $$\theta_i$$ the voltage angle at bus $$i$$ and $$A_{i,j}$$ is the phase angle shifting on side $$j$$.
+Where $$X_{i,j}$$ is the serial reactance of the line $$(i,j)$$, $$\theta_i$$ the voltage angle at bus $$i$$ and $$A_{i,j}$$ is the phase angle shifting on side $$j$$.
 
 DC flows computing gives a linear grid constraints system.
 The variables of the system are, for each bus, the voltage angle $$\theta$$.

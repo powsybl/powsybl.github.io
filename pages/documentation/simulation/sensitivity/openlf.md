@@ -78,7 +78,7 @@ The contingency management needs to compute sensitivity coefficients for post-co
 states of the network after some outages have occured.
 Those outages consist in the loss of different branches. 
 It is possible to compute a sensitivity analysis on a post-contingency state of the network using the sensitivities computed on the base network.
-Hence, the same $$LU$$ decomposition is used both for the base network and for the post-contingency one, saving many computational time.
+Hence, the same LU decomposition is used both for the base network and for the post-contingency one, saving many computational time.
 
 #### N-1 case
 Let us start with the most classic case, where a single branch was lost by the network.
@@ -93,7 +93,7 @@ Let $$b^2$$ be the right-hand side vector corresponding with an increase of $$1M
 Let $$\theta^1$$ be the vector of voltage angles obtained solving the network contraints system on the base network with right-hand side $$b^1$$.
 
 Let $$\theta^2$$ be the vector of voltage angles obtained solving the network contraints system on the base network with right-hand side $$b^2$$.
-Notice that $$\theta^1$$ and $$\theta^2$$ are built using the same $$LU$$ decomposition of the constraints matrix $$J$$.
+Notice that $$\theta^1$$ and $$\theta^2$$ are built using the same LU decomposition of the constraints matrix $$J$$.
 
 Let $$s_{b,ij}$$ be the sensitivity of an increase of $$1MW$$ at bus $$b$$ on branch $$(i,j)$$ on the base network, we recall that:
 
