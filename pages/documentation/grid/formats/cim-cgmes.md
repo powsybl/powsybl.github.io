@@ -126,7 +126,7 @@ The PowSyBl network component created by an `equivalentInjection` of the CGMES g
 
 When a generator is created, it is associated to the corresponding voltage level and has the following attributes:
 - `MinP` The `minP` property is copied if it is defined, otherwise `-Double.MAX_VALUE`.
-- `MinP` The `maxP` property is copied if it is defined, otherwise `Double.MAX_VALUE`.
+- `MaxP` The `maxP` property is copied if it is defined, otherwise `Double.MAX_VALUE`.
 - `TargetP` The active power `P` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign as it is a target value.  `0.0` if both profiles are not defined.
 - `TargetQ` The reactive power `Q` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign. `0.0` if both profiles are not defined.
 - `TargetV` The `regulationTarget` property is copied if it is not zero. Otherwise the nominal voltage associated to the connected terminal of the `equivalentInjection` is assigned.
@@ -150,13 +150,7 @@ For each `externalNetworkInjection` a generator is created in the PowSyBl grid m
 
 As in the `equivalentInjection` a set of reactive power limits is defined (`MinMaxReactiveLimits` or `ReactiveCapabilityCurve`) by copying the value of the `xvalue`, `y1value` and `y2value` properties associated to the capability curve recorded in the `ReactiveCapabilityCurve` property.
 
-The rest of the `regulatingControl` attributes are assigned at the end of the conversion process as the control could be remote and the `regulatingTerminal` could not be defined at the current step. The control attributes are: 
-- `RegulatingTerminal` It is copied from the terminal associated to the `Terminal` property of the `regulatingControl`. If is not valid then the terminal associated to the created generator is used by forcing the control to local. 
-- `TargetV` The `TargetValue` property of the `regulatingControl` is copied if it is not zero or not `NaN`. Otherwise the nominal voltage of the associated voltage level is copied.
-- `VoltageRegulatorOn` To be `true` both properties, the `enabled` of the `regulatingControl` and the `controlEnabled` of the `externalNetworkInjection` must be `true`.
-
-At the current CGMES import version only voltage control is supported in generators and the percent of the coordinated reactive control, `qPercent` property, is recorded as an extension class of the generator.
-
+The `regulatingControl` attributes are assigned at the end of the conversion process as the control could be remote and the `regulatingTerminal` could not be defined at the current step. See [Regulating Control For Generators](#regulating-control-for-generators)
 
 #### Shunt Compensator
 
@@ -173,13 +167,7 @@ The shunt model is specified by the `type` property of the shunt compensator. Th
  - `G` Total shunt conductance. It is calculated by accumulating the `g` of each previous point associated to the non-linear model of the CGMES shunt. 
  - `B` Total shunt susceptance. It is calculated by accumulating the `b` of each previous point associated to the non-linear model of the CGMES shunt.
  
- The `regulatingControl` attributes are assigned at the end of the conversion process and are:
- - `TargetV` It is copied from the `targetValue` property of the `regulatingControl`.
- - `TargetDeadband` It is copied from the `targetDeadband` property of the `regulatingControl`.
- - `RegulatingTerminal` Terminal where voltage should be controlled. It is defined as the terminal associated to the `Terminal` property of the `regulatingControl` if it is valid. Otherwise the terminal associated to the created shunt is used by forcing the control to local.
- - `VoltageRegulatorOn` To be `true` both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` property of the shunt compensator must be `true` and also `TargetV` greater than zero.
-
-If the `regulatingControl` data is not well defined then a local `regulatingControl` is created where `TargetV` is the nominal voltage associated to the shunt compensator and `TargetDeadband` is fixed to `0.0`.
+The regulating attributes of the shunt compensator are defined at the end of the conversion process. See [Regulating Control For Shunt Compensators](#regulating-control-for-shunt-compensators)
   
 #### Equivalent Shunt
 
@@ -193,13 +181,7 @@ For each `staticVARcompensator` of the CGMES model a new `staticVARcompensator` 
 
 The droop or current compensation (must be positive) is copied from the `slope`property and is recorded as an extension attached to the `staticVARcompensator` object.
 
-The `regulatingControl` attributes, assigned at the end of the conversion process, are:
-- `VoltageSetpoint` The `targetValue` property of the `regulatingControl` is copied.
-- `ReactivePowerSetpoint` The `targetValue` property of the `regulatingControl` is copied.
-- `RegulatingTerminal` Terminal where the voltage or reactive power should be controlled. It is defined as the terminal associated to the `Terminal` property of the `regulatingControl` if it is valid. Otherwise the terminal associated to the `staticVARcompensator` is used by forcing the control to local.
-- `RegulationMode` Three possible status `VOLTAGE`, `REACTIVE_POWER` and `OFF`. The current status is defined in the `mode` property of the `regulatingControl` and it is only assigned if  both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` of the `staticVARcompensator` are `true`. 
-
-A default `regulatingControl` is defined using the `voltageSetPoint`, `q`, and `controlMode` properties of the CGMES `staticVARcompensator` when only the `controlEnabled` of the `staticVARcompensator` is `true`. In that case the control will be local.
+The regulating attributes of the `staticVARcompensator` are defined at the end of the conversion process. See [Regulating Control For static VAR compensators](#regulating-control-for-static-var-compensators)
 
 #### Asynchronous Machine
 
@@ -210,10 +192,110 @@ Each `asynchronousMachine` component of the CGMES model creates a new load in th
 
 If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. Otherwise if it is `SSH` will be copy from the `steadyStateHypothesisPowerFlow` profile.
 
+#### Synchronous Machine
+
+Each `synchronousMachine` of the CGMES model creates a new generator in the PowSyBl grid model attached to the voltage level container with the following attributes:
+- `MinP` The `minP` property is copied if it is defined, otherwise `-Double.MAX_VALUE`.
+- `MaxP` The `maxP` property is copied if it is defined, otherwise `Double.MAX_VALUE`.
+- `TargetP` The active power `P` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign as it is a target value.  `0.0` if both profiles are not defined.
+- `TargetQ` The reactive power `Q` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign. `0.0` if both profiles are not defined.
+- `EnergySource` It is obtained after processing the `generatingUnitType` property.
+- `RatedS` The value of the `ratedS` property is copied.
+
+A set of reactive power limits is defined (`MinMaxReactiveLimits` or `ReactiveCapabilityCurve`) by copying the value of the `xvalue`, `y1value` and `y2value` properties associated to the capability curve recorded in the `ReactiveCapabilityCurve` property.
+
+The generator is added as slack terminal if the `referencePriority` property is greater than `0.0` and if the `normalPF` property is defined then a new extension is added at the generator for recording the participation factor when distributed slack is enabled:
+- `withParticipate` Fixed to `true`.
+- `withDroop` The `normalPF` property is copied.
+
+The regulating attributes of the generator are defined at the end of the conversion process. See [Regulating Control For Generators](#regulating-control-for-generators)
+
+#### Switches
+
+When one of the ends of the `Switch` is connected to the boundary See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary. In the rest of the cases the `Switch` is converted to a switch in the PowSyBl grid model.
+
+The new switch in the PowSyBl model is attached to a voltage level and if the model is defined at node/breaker level its attributes are:
+- `Kind` It is obtained by analyzing the `type` property of the CGMES `Switch`. (could be `BREAKER`, `DISCONNECTOR` or `LOAD_BREAK_SWITCH`).
+
+If the model is defined at bus/breaker model the switch is created with default attributes.
+
+At both levels of topology the open status of the switch (true or false) is obtained from the first defined value of this sequence (`open` property from the CGMES `Switch`, `normalOpen` property of the CGMES `Switch`, `false`).
+       
+
+#### AC Line Segments
+
+
+When one of the ends of the `ACLineSegment` is connected to the boundary See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary. In the rest of the cases the `ACLineSegment` is converted to a Line or a switch. 
+
+In most of the cases the `ACLineSegment` is converted to a Line. Then a new Line in the PowSyBl grid model is created and attached to the network container with the following attributes:
+- `R` The `r` property value is copied.
+- `X` The `x` property value is copied.
+- `G1` The half of the `gch` property value is copied.
+- `B1` The half of the `bch` property value is copied.
+- `G2` The half of the `gch` property value is copied.
+- `B2` The half of the `bch` property value is copied.
+
+When the `ACLineSegment` is a zero impedance line inside the voltage level a new switch is created and attached to the corresponding voltage level in the PowSyBl grid model. If the model is defined at node/breaker level, then the switch will have the following attributes: 
+- `Kind` Fixed to `BREAKER`.
+- `Fictitious` Fixed to `true`.
+
+If the model is defined at bus/breaker model only the `Fictitious` attribute will be set to  `true`
+In both cases the switch is considered closed if both of the terminal ends are connected.
+
+#### Equivalent Branch
+
+Each `equivalentBranch` in the CGMES model creates a new line in the powSyBl grid model. The line is attached to the network container and has the following attributes:
+- `R` The `r` property value of the CGMES `equivalentBranch` is copied.
+- `X` The `x` property value of the CGMES `equivalentBranch` is copied.
+- `G1` Fixed to `0.0`.
+- `B1` Fixed to `0.0`.
+- `G2` Fixed to `0.0`.
+- `B2` Fixed to `0.0`.
+ 
+It is possible to define an impedance at each end of the `equivalentBranch` in the CGMES model, `r` and `x` properties define the impedance at end `1` and `r21` and `x21` properties define it at end `2`. The current version of PowSyBl only supports lines with identical impedance at both ends. At the conversion process the impedance is copied from end `1`, `r` and `x` properties.
+
+#### Series Compensator
+
+Each `seriesCompensator` in the CGMES model creates a new line in the powSyBl grid model. The line is attached to the network container and has the following attributes:
+- `R` The `r` property value of the CGMES `seriesCompensator` is copied.
+- `X` The `x` property value of the CGMES `seriesCompensator` is copied.
+- `G1` Fixed to `0.0`.
+- `B1` Fixed to `0.0`.
+- `G2` Fixed to `0.0`.
+- `B2` Fixed to `0.0`.
 
 #### Boundary Topology
 
 The boundary topology.
+
+#### Regulating Control For Generators
+
+The regulating control information is defined at the end of the conversion process, after all network components have been specified. The attributes added to the generator are:
+- `RegulatingTerminal` It is copied from the terminal associated to the `Terminal` property of the `regulatingControl`. If is not valid then the terminal associated to the created generator is used by forcing the control to local. 
+- `TargetV` The `TargetValue` property of the `regulatingControl` is copied if it is not zero or not `NaN`. Otherwise the nominal voltage of the associated voltage level is copied.
+- `VoltageRegulatorOn` To be `true` both properties, the `enabled` of the `regulatingControl` and the `controlEnabled` of the CGMES network component must be `true`.
+
+At the current CGMES import version only voltage control is supported in generators and the percent of the coordinated reactive control, `qPercent` property, is recorded as an extension class of the generator.
+
+#### Regulating Control For Static VAR Compensators
+
+The `regulatingControl` attributes added to `staticVARcompensators` are:
+- `VoltageSetpoint` The `targetValue` property of the `regulatingControl` is copied.
+- `ReactivePowerSetpoint` The `targetValue` property of the `regulatingControl` is copied.
+- `RegulatingTerminal` Terminal where the voltage or reactive power should be controlled. It is defined as the terminal associated to the `Terminal` property of the `regulatingControl` if it is valid. Otherwise the terminal associated to the `staticVARcompensator` is used by forcing the control to local.
+- `RegulationMode` Three possible status `VOLTAGE`, `REACTIVE_POWER` and `OFF`. The current status is defined in the `mode` property of the `regulatingControl` and it is only assigned if  both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` of the CGMES network component are `true`. 
+
+A default `regulatingControl` is defined using the `voltageSetPoint`, `q`, and `controlMode` properties of the CGMES network component when only the `controlEnabled` is `true`. In that case the control will be local.
+
+#### Regulating Control For Shunt Compensators
+
+The `regulatingControl` attributes added to shunt compensators are:
+ - `TargetV` It is copied from the `targetValue` property of the `regulatingControl`.
+ - `TargetDeadband` It is copied from the `targetDeadband` property of the `regulatingControl`.
+ - `RegulatingTerminal` Terminal where voltage should be controlled. It is defined as the terminal associated to the `Terminal` property of the `regulatingControl` if it is valid. Otherwise the terminal associated to the created shunt is used by forcing the control to local.
+ - `VoltageRegulatorOn` To be `true` both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` property of the CGMES network component must be `true` and also `TargetV` greater than zero.
+
+If the `regulatingControl` data is not well defined then a local `regulatingControl` is created where `TargetV` is the nominal voltage associated to the shunt compensator and `TargetDeadband` is fixed to `0.0`.
 
 <span style="color: red">TODO</span>
 
