@@ -80,22 +80,22 @@ The contingency management consists in calculating the sensitivity values for po
 
 The most frequent contingency is the loss of a single branch.
  
-Let's introduce $$s_{b,ij,mk}$$ the sensitivity of an increase of 1MW at bus $$b$$ on branch $$(i,j)$$ where the branch $$(m,k)$$ represents the outage.
+Let's introduce $$s_{b,ij,mk}$$ the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ where the branch $$(m,k)$$ represents the outage.
 We want to compute this sensitivity.
 
-We call $$b^1$$ the right-hand side vector corresponding with an increase of 1MW at bus $$b$$. We call $$\theta^1$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^1$$.
+We call $$b^1$$ the right-hand side vector corresponding with an increase of 1 MW at bus $$b$$. We call $$\theta^1$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^1$$.
 
-We call $$b^2$$ be the right-hand side vector corresponding with an increase of 1MW at bus $$m$$ and a decrease of 1MW at bus $$k$$. We call $$\theta^2$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^2$$.
+We call $$b^2$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$m$$ and a decrease of 1 MW at bus $$k$$. We call $$\theta^2$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^2$$.
 
 Note that both $$\theta^1$$ and $$\theta^2$$ are built using the same LU decomposition of the constraints matrix $$J$$.
 
-Let $$s_{b,ij}$$ be the sensitivity of an increase of 1MW at bus $$b$$ on branch $$(i,j)$$ on the pre-contingency network, we recall that:
+Let $$s_{b,ij}$$ be the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ on the pre-contingency network, we recall that:
 
 $$
 s_{b,ij} = \frac{\theta^1_i-\theta^1_j}{X_{i,j}}
 $$
 
-Let $$s_{mk,ij}$$ be the sensitivity of an increase of 1MW at bus $$m$$ and a decrease of 1MW at bus $$k$$, on the pre-contingency network.
+Let $$s_{mk,ij}$$ be the sensitivity of an increase of 1 MW at bus $$m$$ and a decrease of 1 MW at bus $$k$$, on the pre-contingency network.
 It can be easily computed through the formula:
 
 $$
