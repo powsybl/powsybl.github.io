@@ -104,7 +104,7 @@ In that case, the remaining active power mismatch remains on the selected slack 
 
 **voltageRemoteControl**  
 The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
-The default value is `false`.
+The default value is `true`.
 
 **slackBusSelectorType**  
 The `slackBusSelectorType` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
@@ -148,10 +148,7 @@ If `balanceType` equals to `PROPORTIONAL_TO_CONFORM_LOAD`, the power factor rema
 The default value for `loadPowerFactorConstant` property is `false`.
 
 **dcUseTransformerRatio**  
-The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the flow equations during DC approximation. The default value of this parameter is `false`.
-
-**updateFlows**  
-The `updateFlows` property is an optional property that defines if flows have to be updated after a DC load flows computation.
+The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the flow equations during DC approximation. The default value of this parameter is `true`.
 
 ### Configuration file example
 See below an extract of a config file that could help:
