@@ -10,6 +10,78 @@ PowSyBl OpenLoadFlow is an open-source power flow implementation in Java provide
 * TOC
 {:toc}
 
+## Grid modelling
+
+OpenLoadFlow computes power flows from IIDM grid model in bus/view topology. From the view, a very simple network, composed of only buses and branches is created. In the graph vision, we rely on a $$\Pi$$ model for branches (lines, transformers, dangling lines, etc.):
+
+- $$R$$ and $$X$$ are respectively the real part (resistance) and the imaginary part (reactance) of the complex impedance ;  
+- $$G_1$$ and $$G_2$$ are the real parts (conductance) on respectively side 1 and side 2 of the branch ;
+- $$B_1$$ and $$B_2$$ are the imaginary parts (susceptance) on respectively side 1 and side 2 of the branch ;
+- $$A_1$$ is the angle shifting on side 1, before the series impedance. For classical branches, the default value is zero ;
+- $$R_1$$ is the ratio of voltages between side 2 and side 1, before the series impedance. For classical branches, the default value is $$1$$.
+
+As the $$\Pi$$ model is created from IIDM grid modelling that locates its ratio and phase tap changers in side 1, $$A_2$$ and $$R_2$$ are always equal to zero and $$1$$. In case of a branch with voltage or phase control, the $$\Pi$$ model becomes an array. See below our model:
+
+![Pi model](img/pi-model.svg){: width="50%" .center-image}
+
+### AC flows computing
+
+TO DO
+
+### DC flows computing
+
+The DC flows computing relies on several classical assumptions to build a model where the active power flowing through a line depends linearly from the voltage angles at its ends.
+In this simple model, reactive power flows and active power losses are totally neglected. The following assumptions are made to ease and speed the computations:
+- The voltage magnitude is equal to $$1 per unit$$ at each bus,
+- The series conductance $$G_{i,j}$$ of each line $$(i,j)$$ is neglected, only the series susceptance $$B_{i,j}$$ is considered,
+- The voltage angle difference between two adjacent buses is considered as very small.
+
+Therefore, the power flows from bus $$i$$ to bus $$j$$ following the linear expression:
+
+$$ P_{i,j} = \frac{\theta_i-\theta_j+A_{i,j}}{X_{i,j}} $$
+
+Where $$X_{i,j}$$ is the serial reactance of the line $$(i,j)$$, $$\theta_i$$ the voltage angle at bus $$i$$ and $$A_{i,j}$$ is the phase angle shifting on side $$j$$.
+
+DC flows computing gives a linear grid constraints system.
+The variables of the system are, for each bus, the voltage angle $$\theta$$.
+The constraints of the system are the active power balance at each bus, except for the slack bus.
+The voltage angle at slack bus is set to zero.
+Therefore the linear system is composed of $$N$$ variables and $$N$$ constraints, where $$N$$ is the number of buses in the network.
+
+We introduce the linear matrix $$J$$ of this system that satisfies:
+
+$$
+\begin{align}
+\texttt{If}~i~\text{is the slack bus}:&\\
+&J_{i,i} = 1\\
+\texttt{Else},~\text{let}~v(i)~\text{be the buses linked to}~i~\text{in the network graph}:&\\
+&J_{i,i} = \sum_{j \in v(i)} \frac{1}{X_{i,j}}\\
+&\forall j \in v(i), \quad J_{i,j} = - \frac{1}{X_{i,j}}\\
+\text{All other entries of}~J~\text{are zeros}.&
+\end{align}
+$$
+
+The right-hand-side $$b$$ of the system satisfied:
+
+$$
+\begin{align}
+\texttt{If}~i~\text{is the slack bus}:&\\
+&b_{i} = 0\\
+\texttt{Else},~\text{let}~v(i)~\text{be the buses linked to}~i~\text{in the network graph}:&\\
+&b_{i} = P_i - \sum_{j \in v(i)} \frac{A_{i,j}}{X_{i,j}}\\
+\end{align}
+$$
+
+Where $$P_i$$ is the injection at bus $$i$$.
+
+This linear system is resumed by:
+$$ J\theta = b $$
+The grid constraints system takes as variables the voltage angles.
+Note that the vector $$b$$ of right-hand sides is linearly computed from the given injections and phase-shifting angles.
+
+To solve this system, we follow the classic approach of the LU matrices decomposition $$ J = LU $$.
+Hence by solving the system using LU decomposition, you can compute the voltage angles by giving as data the injections and the phase-shifting angles.
+
 ## Configuration
 To use PowSyBl OpenLoadFlow for all power flow computations, you have to configure the `load-flow` module in your configuration file:
 ```yaml
@@ -74,6 +146,12 @@ If `balanceType` equals to `PROPORTIONAL_TO_LOAD`, the power factor remains cons
 If `balanceType` equals to `PROPORTIONAL_TO_CONFORM_LOAD`, the power factor remains constant scaling only the variable parts. Thus, we fully rely on [load detail extension](../../grid/model/extensions.md#load-detail).
 
 The default value for `loadPowerFactorConstant` property is `false`.
+
+**dcUseTransformerRatio**  
+The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the flow equations during DC approximation. The default value of this parameter is `false`.
+
+**updateFlows**  
+The `updateFlows` property is an optional property that defines if flows have to be updated after a DC load flows computation.
 
 ### Configuration file example
 See below an extract of a config file that could help:
