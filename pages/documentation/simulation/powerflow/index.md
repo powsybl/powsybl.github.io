@@ -236,19 +236,19 @@ The `distributedSlack` property is an optional property that defines if the acti
 
 **balanceType**  
 The `balanceType` property is an optional property that defines, if `distributedSlack` parameter is set to true, how to manage the distribution. Several algorithms are supported. All algorithms follow the same scheme: only some elements are participating in the slack distribution, with a given participation factor. Three options are available:
-- If using `PROPORTIONAL_TO_GENERATION_P_MAX` then the participating elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension]().
-- If using `PROPORTIONAL_TO_GENERATION_P` then the participating elements are the generators. The participation factor is computed using the active power set point $$TargetP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension]().
+- If using `PROPORTIONAL_TO_GENERATION_P_MAX` then the participating elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension](../../grid/model/extensions.md#active-power-control).
+- If using `PROPORTIONAL_TO_GENERATION_P` then the participating elements are the generators. The participation factor is computed using the active power set point $$TargetP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension](../../grid/model/extensions.md#active-power-control).
 - If using `PROPORTIONAL_TO_LOAD` then the participating elements are the loads. The participation factor is computed using the active power $$P0$$.
 - If using `PROPORTIONAL_TO_CONFORM_LOAD` then the participating elements are the loads which have a conform active power part. The participation factor is computed using the [load detail extension](), which specifies the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, the whole $$P0$$ is considered as a variable.
 
 This default value is `PROPORTIONAL_TO_GENERATION_P_MAX`.
 
 **readSlackBus**  
-The `readSlackBus` is an optional property that defines if the slack bus has to be selected in the network through the [slack terminal extension]().
+The `readSlackBus` is an optional property that defines if the slack bus has to be selected in the network through the [slack terminal extension](../../grid/model/extensions.md#slack-terminal).
 The default value is `false`.
 
 **writeSlackBus**   
-The `writeSlackBus` is an optional property that says if the slack bus has to be written in the network using the [slack terminal extension]() after a load flow computation.
+The `writeSlackBus` is an optional property that says if the slack bus has to be written in the network using the [slack terminal extension](../../grid/model/extensions.md#slack-terminal) after a load flow computation.
 The default value is `false`.
 
 **noGeneratorReactiveLimits**  
@@ -275,11 +275,10 @@ The default values of all the optional properties are read from the [load-flow-d
 
 ### Specific parameters
 Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
-- [PowSyBl OpenLoadFlow parameters](openlf.md#parameters)
+- [PowSyBl OpenLoadFlow](openlf.md#parameters)
 - [Hades2](hades2.md#specific-parameters)
 - [DynaFlow](dynaflow.md#specific-parameters)
 
-The complete list of available parameters for the Dynaflow load flow is available [here](dynaflow.md).
 ## Going further
 To go further about the power flow with PowSyBl, check the following pages:
 - [Run a power flow through an iTools command](../../user/itools/loadflow.md): Learn how to perform a power flow calculation from the command line
