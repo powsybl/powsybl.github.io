@@ -264,15 +264,54 @@ Each `seriesCompensator` in the CGMES model creates a new line in the powSyBl gr
 - `G2` Fixed to `0.0`.
 - `B2` Fixed to `0.0`.
 
+#### Transformer Ends
+
+
+
+<span style="color: red">TODO</span>
+
 #### Boundary Topology
 
-The boundary topology.
+The conversion process at the boundary depends on the boundary topology. The following configurations are supported:
+- Only one line. A dangling line is created.
+- Only one switch. A dangling line with zero impedance is created.
+- Two lines. Depending on the configuration a TieLine is created or both lines are merged and replaced by the equivalent line.
+- One line and one switch. The switch is converted into a zero impedance line and then depending on the configuration, a TieLine is created or both lines are merged and replaced by the equivalent line.
+
+
+If there is one line at the boundary then a dangling line is created and attached to the voltage level associated to the model side node with the following attributes:
+- `R` The `r` property value of the CGMES line is copied.
+- `X` The `x` property value of the CGMES line is copied.
+- `G` The `gch` property value of the CGMES line is copied.
+- `B` The `bch` property value of the CGMES line is copied.
+- `UcteXnodeCode` The ucteXnode associated to the boundary node is copied.
+- `P0` The active power injection at the boundary node from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options.
+- `Q0` The reactive power injection at the boundary node from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options.
+
+If the equivalent injection associated to the boundary node is regulating voltage then all the regulating properties are mapped over the dangling line as a virtual generator. The attributes of the virtual generator are:
+- `MinP` Fixed to `-Double.MAX_VALUE`.
+- `MaxP` Fixed to `Double.MAX_VALUE`.
+- `TargetP` The active power `P` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign as it is a target value.  `0.0` if both profiles are not defined.
+- `TargetQ` The active power `q` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign as it is a target value.  `0.0` if both profiles are not defined.
+- `TargetV` The `regulationTarget` property of the equivalent injection is copied if it is not zero. Otherwise the nominal voltage of the associated voltage level is copied.
+- `VoltageRegulationOn` Fixed to `true`.
+
+Finally, the active and reactive flow is assigned to the terminal associated to the model side node of the dangling line. The flow can be taken directly from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options. It can be propagated from the boundary node if the dangling line has zero impedance or in the last case, can be calculated using the power injection and the voltage at the boundary side and the impedance and shunt admittance of the dangling line.
+
+If there is one switch at the boundary then a dangling line with zero impedance is created. All the previous criteria are valid and the only differences are that the `R`, `X`, `G` and `B` attributes of the new dangling line are fixed to zero.
+
+If there is two lines at the boundary then a tie line is created if the import property `iidm.import.cgmes.merge-boundaries-using-tie-lines` is `true`. Otherwise if the import property is `false` an equivalent line by merging both lines is created.
+
+The created TieLine is attached to the network model and the attributes of the two half lines of the TieLine are copied from the properties of the two lines at the boundary.
+
+If there is one switch and one line at the boundary then a zero impedance line is created as a first step an then the previous procedure is followed.
+
 
 #### Regulating Control For Generators
 
 The regulating control information is defined at the end of the conversion process, after all network components have been specified. The attributes added to the generator are:
 - `RegulatingTerminal` It is copied from the terminal associated to the `Terminal` property of the `regulatingControl`. If is not valid then the terminal associated to the created generator is used by forcing the control to local. 
-- `TargetV` The `TargetValue` property of the `regulatingControl` is copied if it is not zero or not `NaN`. Otherwise the nominal voltage of the associated voltage level is copied.
+- `TargetV` The `TargetValue` property of the `regulatingControl` is copied if it is not zero and not `NaN`. Otherwise the nominal voltage of the associated voltage level is copied.
 - `VoltageRegulatorOn` To be `true` both properties, the `enabled` of the `regulatingControl` and the `controlEnabled` of the CGMES network component must be `true`.
 
 At the current CGMES import version only voltage control is supported in generators and the percent of the coordinated reactive control, `qPercent` property, is recorded as an extension class of the generator.
