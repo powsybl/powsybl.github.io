@@ -281,7 +281,7 @@ When a three winding transformer is modeled the two winding transformer steps sh
 
 #### Slack bus
 
-The buses defined as slack terminal are the buses with type code  `1` (field `IDE` in the _Bus Data_ record).
+The buses defined as slack terminal are the buses with type code  `3` (field `IDE` in the _Bus Data_ record).
 
 ### Export
 
