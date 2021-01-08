@@ -98,8 +98,24 @@ Parameters for the import can be defined in the configuration file in the [impor
 The `psse.import.ignore-base-voltage` property is an optional property that defines if the importer should ignore the base voltage information present in the PSS®E file. The default value is `false`.
 
 ### Inconsistency checks
--<span style="color: red">TODO</span>
 
+After reading the PSS®E model and uploading it to memory, a validation of the model is performed. Only the PSS®E data blocks used in the conversion process are validated. The rest of the data blocks remain unchanged for a later export process.
+
+The _Case Identification_ is the first data block to be validated. In this data block the system MVA base and the system base frequency (`SBASE` and `BASFRQ` fields) must be greater than `0.0`.
+
+In the _Bus Data_ block the bus number (`I` field) must be an unique integer number from 1 to 999997 and the bus base voltage (`BASKV` field) should be greater or equal to `0.0`. The _Load Data_ and the _FixedShunt Data_ blocks share the same validations. In both blocks the bus number (`I` field) should be a valid bus previously defined in the  _Bus Data_ block and the alphanumeric identifier (`ID`) must guarantee to distinguish among multiple network components at the same bus.
+
+At the _Generator Data_ block, additionally to the previous bus number and alphanumeric identifier validations, the maximum generator reactive power (`QT` field) must be greater than the minimum generator reactive power (`QB` field), the maximum generator active power (`PT` field) must be grater than the minimum generator active power (`PB` field) and the bus number for which voltage is to be regulated (`IREG` field), if it is specified, must be a valid bus previously defined in the  _Bus Data_ block. Finally, if the voltage regulating control is `on` the voltage setpoint (`VS` field) must be greater than `0.0`. 
+
+In the _NonTransformerBranch Data_ block the buses defined at both ends (`I` and `J` fields) must be previously defined at the _Bus Data_ block and it is not allowed to have branches between the same buses with the same branch circuit identifier (`CKT` field). The branch reactance (`X` field) should be a non-zero value.
+
+In the _Transformer Data_ block, both two-winding and three-winding transformers are specified. In the two-winding transformers the two buses (`I` and `J` fields) must be defined at the the _Bus Data_ block. Transformer between the same buses must be distinguished using the transformer circuit identifier (`CKT` field). The reactance (`X1-2` field) should be a non-zero value and the ratio (`WINDV1` field) must be greater than `0.0`. The winding 1 to 2 three-phase base MVA of the transformer (`SBASE1-2` field) must be greater than `0.0` if it is used for the adjustment of the impedance and magnetizing admittance depending on the configuration codes (`CZ` and `CM` fields). The same inconsistency check is applied to the nominal (rated) winding voltage base (`NOMV1` field) if it is used depending on the magnetizing and the winding configuration codes (`CM` and `CW` fields). Finally, the regulating control bus (`CONT1` field) must be defined in the  _Bus Data_ block and the upper limits should be greater than the lower  (`RMA1`, `RMA1` and `VMA1`, `VMA1` fields).
+
+All the previous inconsistency checks are extended to the three-winding transformers considering that in that case the transformer is connecting three buses and the checks should be applied for each of the three windings of the transformer.
+ 
+In the version 33 only one switched shunt can be defined by bus. The version 35 supports more than one switched shunt by bus using the alphanumeric identifier. In both versions it is checked that the bus (`I` field) is well defined in the  _Bus Data_ block and that there are not duplicated identifiers at the same bus (`Id` field). The bus number for which voltage is to be regulated (`SWREM` field in version 33 and `SWREG` field in version 35) must also be defined in the _Bus Data_ block if the regulating control is `on` and the voltage setpoint limits, upper and lower (`VSWHI` and `VSWLO` fields), must be greater than 0.0 and consistent. 
+
+ 
 ### Conversion
 
 A PSS®E file specifies a Bus/Branch network model where typically there is a bus for each voltage level inside a substation and where substation objects are not explicitly defined. Breakers and switches were traditionally modeled as zero impedance lines with special identifiers. Since version 35 PSS®E supports explicit definition of substation data and switching devices at both system and substation level. However, this information is optional and may not be present in the case.
