@@ -114,6 +114,52 @@ $$
 s_{b,ij,mk} = s_{b,ij} + \frac{\theta^1_m-\theta^1_k}{X_{m,k} - (\theta^2_m-\theta^2_k)}s_{mk,ij}
 $$
 
+#### N-k case
+For the N-k case, the incident causes several outages on the network.
+As for the N-1 case, an outage is the loss of a network line (this includes the special case of the loss of a transformer).
+ 
+Let $$s_{b,ij,I}$$ be the sensitivity of an increase of $$1MW$$ at bus $$b$$ on branch $$(i,j)$$ when the incident $$I$$ occurs.
+Incident $$I$$ corresponds to the loss of the $$k$$ branches $$(m_1,n_1), \cdots, (m_k,n_k)$$.
+We want to compute this sensitivity.
+
+Let $$b^1$$ be the right-hand side vector corresponding with an increase of $$1MW$$ at bus $$b$$.
+
+Let $$b^{p+1}$$ be the right-hand side vector corresponding with an increase of $$1MW$$ at bus $$m_p$$ plus a decrease of $$1MW$$ at bus $$n_p$$.
+
+Let $$\theta^p$$ be the vector of voltage angles obtained solving the network contraints system on the base network with right-hand side $$b^p$$.
+
+The post contingency sensitivity $$s_{b,ij,I}$$ satisfied:
+
+$$
+s_{b,ij,I} = s_{b,ij} + \sum_{p} \alpha_p s_{m_pn_p,ij}
+$$
+
+Where:
+
+$$
+s_{m_pn_p,ij} = \frac{\theta^{p+1}_i-\theta^{p+1}_j}{X_{i,j}}
+$$
+
+The vector of coefficients $$\alpha$$ is computed as the solution of a linear system of size $$k$$:
+
+$$
+Mx = c
+$$
+
+Where $$M$$ is the $$k \times k$$ matrix defined by:
+
+$$
+\begin{align}
+M_{p,q} =& -(\theta^{q+1}_{m_p} - \theta^{q+1}_{n_p}) & \texttt{If}~p \neq q,\\
+M_{p,q} =& X_{m_p,n_p} - (\theta^{p+1}_{m_p} - \theta^{p+1}_{n_p})& \texttt{else}.
+\end{align}
+$$
+
+And $$c$$ the vector of size $$k$$ defined by:
+
+$$
+c_p = \theta^1_{m_p} - \theta^1_{n_p}
+$$
 
 ## Configuration
 
