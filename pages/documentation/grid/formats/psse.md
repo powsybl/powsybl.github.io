@@ -214,7 +214,7 @@ Every _Generator Data_ single line record represents one generator. Multiple gen
 - **MaxQ** Maximum generator reactive power. It is copied from PSS®E field `QT`.
 - **TargetV** Voltage setpoint defined as `VS` * `vnom`, where `VS` is the regulated voltage (field `VS` in the _Generator Data_ record) and `vnom` is the nominal voltage of the corresponding voltage level.
 - **RegulatingTerminal** Regulating terminal assigned to the bus where voltage is controlled by this generator (field `IREG` in the _Generator Data_ record if it is not `0`. Otherwise field `I` in the _Generator Data_ record).
-- **VoltageRegulatorOn** defined as `true` if the type code of the associated bus is `2` or `3` (field `IDE` in the _Bus Data_ record) and `TargetV` is greater than `0.0` and `MaxQ` is bigger than `MinQ`.
+- **VoltageRegulatorOn** defined as `true` if the type code of the associated bus is `2` or `3` (field `IDE` in the _Bus Data_ record) and `TargetV` is greater than `0.0` and `MaxQ` is greater than `MinQ`.
 
 The generator is connected to the ConnectableBus if generator status (field `STAT` in the _Generator Data_ record) is `1` (In-service).
 
