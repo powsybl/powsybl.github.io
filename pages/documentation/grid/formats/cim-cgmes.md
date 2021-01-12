@@ -266,7 +266,76 @@ Each `seriesCompensator` in the CGMES model creates a new line in the powSyBl gr
 
 #### Transformer Ends
 
+A two-winding transformer end is defined in the CGMES model as two power transformer ends. Each power transformer end supports one transmission impedance, one magnetizing admittance and one `tapChanger` (`ratioTapChanger` or `phaseTapChanger`). The same two-winding transformer in CGMES can be modeled in different ways depending on the attributes assigned to each power transformer end. In the PowSyBl model the two-winding transformer model includes the transmission impedance, a `ratioTapChanger` and/or a `phaseTapChanger` always located at the end `1` and the magnetizing admittance between the `tapChanger` and the transmission impedance.
 
+Each two-winding transformer in the CGMES model, defined as two power transformer ends, is converter to a new two-winding transformer in the PowSyBl model that is attached to the corresponding substation. The conversion process is structured in three steps. In the first step all the information coming a the two power transformers ends is collected and organized. In the second step this information is interpreted and mapped to a general two-winding transformer model that supports all the possible ways to model a two-winding transformer using power transformer ends. Finally, in the third step the general two-winding transformer model is converted to the PowSyBl two-winding transformer model. The general and the PowSyBl transformer model obtained as result of the conversion process are equivalent electrical models for almost all the two-winding transformers defined in the CGMES network models, but in some models it is possible to find some transformers that can not be exactly modeled using the PowSyBl model. In these cases, the PowSyBl transformer model is an approximation of the real model.
+
+![TwoWindingsTransformerModel](img/cim-cgmes/two-windings-transformer-model.svg){: width="100%" .center-image}
+
+In the first step the following information is collected from the two power transformer ends:
+- `TransmissionImpedance` as the addition of the transmission impedance of each power transformer end.
+- An at each of the transformer, end1 and end2:
+	- `MagnetizingAdmittance`. Complex zero value is assigned if it is not defined.
+	- `RatioTapChanger`. Null is assigned if it is not defined.
+	- `PhaseTapChanger`. Null is assigned if it is not defined.
+	- `RatedU`. The rated voltage, always is defined.
+
+The `RatioTapChanger` and the `PhaseTapChanger` are always expressed in the PowSyBl model as a table so it is necessary to convert the `tapChangers` of the power transformer ends to a table if they are not defined as tabular. This conversion process supports the conversion to a table of tabular and linear `ratioTapChangers` and tabular, linear, symmetrical and asymmetrical `phaseTapChangers`.
+
+In the second step, the data collected in the previous step is mapped to a more general two-winding transformer model. This model supports a transmission impedance  and a `ratioTapChanger` and `phaseTapChanger` at each end. Magnetizing admittance can be defined at both ends, allows to specify the end of the structural ratio and the rated voltage at both ends. There are different alternatives to map the collected data into the general model. After analyzing all the available CGMES network models a set of predefined alternatives have been suggested and considered. Only one of them is active, the default alternative. In the current version the most used alternative in CGMES network models is considered the default alternative. In the default alternative:
+
+- `RatioTapChanger` and `PhaseTapChanger` are considered at the end where they are defined. If they are defined at power transformer end1 then are considered at the end1 of the general model. If they are defined at the end2 then are assigned to end2 and finally, if `tapChangers` are defined in both power transformer ends then the general model will have tapChanger in both ends.
+- Magnetizing admittance follows the same criterion as `tapChangers`.
+- `StructuralRatio` is defined at then end2 if the impedance transmission is defined at the power transformer end1 and it is defined at the end1 if the impedance transmission is defined at the end2.
+
+The rated voltage must be defined in both power transformers ends and it is mapped at the corresponding end of the general model regardless of the considered alternative.
+
+In the third and last step, the general transformer model is converted to the final PowSyBl two-winding transformer model. To do this process the following procedures are needed:
+- If there is a `RatioTapChanger` defined at the end2 is moved to the end1.
+- If there is a `PhaseTapChanger` defined at the end2 is moved to the end1.
+- If the `StructuralRatio` is defined at the end2 is moved to the end1.
+- If there is a magnetizing admittance at the end2 then this admittance is added to the magnetizing admittance of the end1. This is an approximation.
+- After moving the `RatioTapChanger` of the end2 if there are two `RatioTapChangers` at the end1 it is necessary to combine both to get only one. The combine procedure does a Cartesian product of two tapChangers getting as result a new tapChanger with steps1 x steps2 steps. As the combined tapChanger is not so useful for analysis and it is not possible to map back to the original one, before combining them, one of the tapChangers is fixed to only one the step, the current step.
+- If there are two `PhaseTapChangers` at the end1, then both will be combined to get only one.
+
+Before combining two `tapChagers` a priority ranking is established and the `tapChanger` with lower priority is fixed at the current tap position and the `tapChanger` with higher priority is preserved. The lowest priority is assigned to `tapChanger` with only one step, then are considered `tapChanger` with several steps without regulating control and finally the highest priority is assigned to `tapChanger` with regulating control. If both `tapChangers` have the same priority then the `tapChanger` associated to the power transformer end1 is preserved.
+
+When the structural ratio is moved from end2 to end1 a correction is applied to the transmission impedance and magnetizing admittance modifying the initial values but when the `tapChanger` is moved then the transmission impedance and magnetizing admittance are not modified and the corrections are managed as step corrections of the tapChanger expressed as percentage deviation of the nominal value.
+
+After all these procedures the following attributes are defined in the two-winding transformer created in the PowSyBl model:
+- `R` The sum of the resistances of both power transformer ends corrected if the structural ratio has been moved from end2 to end1.
+- `X` The sum of the reactances of both power transformer ends corrected if the structural ratio has been moved from end2 to end1.
+- `G` The sum of the conductances of both power transformer ends corrected if the structural ratio has been moved from end2 to end1.
+- `B` The sum of the susceptances of both power transformer ends corrected if the structural ratio has been moved from end2 to end1.
+- `RatioTapChanger` The ratioTapChanger obtained as result of the previous process. Could be null.
+- `PhaseTapChanger` The paseTapChanger obtained as result of the previous. Could be null
+- `RatedU1` The rated voltage of the power transformer end1.
+- `RatedU2` The rated voltage of the power transformer end2.
+
+The regulating attributes of the two-winding transformer are defined at the end of the conversion process. See [Regulating Control For Transformers.](#regulating-control-for-transformers) 
+ 
+Each three-winding transformer in the CGMES model, defined as three power transformer ends, is converted to a new three-winding transformer in the PowSyBl model that is attached to the corresponding substation. To do this the two-winding transformer procedures are also applied here. The first step is then to collect the information of the three power transformer ends. For each end the collected data is:
+
+- `TransmissionImpedance` The transmission impedance of the corresponding power transformer end.
+- `MagnetizingAdmittance`. The magnetizing admittance of the corresponding power transformer end. Complex zero value is assigned if it is not defined.
+- `RatioTapChanger`. The `RatioTapChanger` of the corresponding power transformer end. Null is assigned if it is not defined.
+- `PhaseTapChanger`. The `PhaseTapChanger` of the corresponding power transformer end. Null is assigned if it is not defined.
+- `RatedU`. The rated voltage of the corresponding power transformer end.
+
+The second step is to map this information to the general three-winding transformer model. This model can be envisioned as three general two-winding transformer models connected to the star bus, a fictitious bus where is necessary to defined the rated voltage (`ratedU0` attribute). The map process is done according with the default alternative. In this alternative:
+- `RatioTapChanger` and `PhaseTapChanger` are mapped at the network side.
+- The `MagnetizingAdmittance` is also mapped at the network side.
+- The structural ratio is considered at the star bus side of the general three-winding transformer model.
+
+As the three-winding transformer model in PowSyBl can also be represented as three two-winding transformers connected to the star bus to convert the general three-winding transformer model to the model in PowSyBl it is only necessary to apply the previous convert process to each two-winding transformer. However, it is important to point out that in this situation the combine procedure will not act as there is no way to define two `ratioTapChangers` or `phaseTapChangers` in the same leg. 
+
+Additionally to the attributes of the three two-winding transformers the rated voltage of the star bus must be defined. In the default alternative it is assigned to the rated voltage of the power transformer end1.
+
+The regulating attributes of the three-winding transformer are defined at the end of the conversion process. See [Regulating Control For Transformers.](#regulating-control-for-transformers) 
+
+![ThreeWindingsTransformerModel](img/cim-cgmes/three-windings-transformer-model.svg){: width="100%" .center-image}
+
+#### DC network components
 
 <span style="color: red">TODO</span>
 
@@ -336,7 +405,12 @@ The `regulatingControl` attributes added to shunt compensators are:
 
 If the `regulatingControl` data is not well defined then a local `regulatingControl` is created where `TargetV` is the nominal voltage associated to the shunt compensator and `TargetDeadband` is fixed to `0.0`.
 
+#### Regulating Control For Transformers
+
 <span style="color: red">TODO</span>
+
+<span style="color: red">TODO</span>
+
 
 ### Extensions
 <span style="color: red">TODO</span>
