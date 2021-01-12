@@ -297,7 +297,19 @@ When a three winding transformer is modeled the two winding transformer steps sh
 - The three winding transformer is modeled in PowSyBl as three two winding transformers connected to an fictitious node defined with a nominal base voltage and rated voltage of `1.0` (star configuration). <br>
 - In PSS®E the between windings transmission impedances `Z1-2`, `Z2-3` and `Z3-1` that are specified (these impedances are generally supplied on a transformer data sheet or test report) and the transmission impedances `Z1`, `Z2` and `Z3` of the  star network equivalent model are related according to the following expressions:
 
-![ThreeWindingTransformerImpedanceConversion](img/psse/three-windings-transformer-impedance-conversion.svg){: width="50%" .center-image}
+    `Z1-2 = Z1 + Z2`
+
+    `Z2-3 = Z2 + Z3`
+
+    `Z3-1 = Z3 + Z1`
+
+    So:
+
+    `Z1 = 0.5 * (Z1-2 + Z3-1 - Z2-3)`
+
+    `Z2 = 0.5 * (Z1-2 + Z2-3 - Z3-1)`
+
+    `Z3 = 0.5 * (Z2-3 + Z3-1 - Z1-2)`
 
 - All the shunt admittance of the three winding transformer in the PSS®E model is assigned to the winding `1`. There is not shunt admittance at windings `2` and `3`.
 - Each winding can have a complex ratio and a `ratioTapChanger` or `phaseTapChanger` with its corresponding control, always at end `1`. The current PowSyBl version only supports one enabled control by three winding transformer so if there is more than one enabled only the first (winding `1`, winding `2`, winding `3`) is kept enabled, the rest are automatically disabled.
