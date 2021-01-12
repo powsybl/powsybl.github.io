@@ -234,9 +234,9 @@ In PSS®E each ac transmission line is represented as a non-transformer branch r
 - **G2** Conductance of the line shunt at the bus `2` defined as (`GJ` * `sbase`) / ( `vnom2` * `vnom2`) where `GJ` is the conductance at the bus `2` (field `GJ` in the _Non-Transformer Branch Data_ record).
 - **B2** Susceptance defined as (( `0.5` * `B` + `BJ` ) * `sbase`) / ( `vnom2` * `vnom2`) where `B` is the total branch charging susceptance (field `B` in the _Non-Transformer Branch Data_ record) and `BJ` is the susceptance at the bus `2` (field `BJ` in the _Non-Transformer Branch Data_ record).
 
-The line is connected at both ends if the branch status (field `ST` in the _Non-Transformer Branch Data_ record) is `1` (In-service)
+The line is connected at both ends if the branch status (field `ST` in the _Non-Transformer Branch Data_ record) is `1` (In-service).
 
-A set of current permanent limits is defined as `1000.0` * `rateMva` / (`sqrt(3.0)` * `vnom1`) at the end `1` and `1000.0` * `rateMva` / (`sqrt(3.0)` * `vnom2`) at the end `2` where `rateMva` is the first rating of the branch (field `RATEA` in version 33 of the _Non-Transformer Branch Data_ record and field `RATE1` in version 35) and `vnom1` and `vnom2` are the nominal voltage of the associated voltage levels.
+A set of current permanent limits is defined as `1000.0` * `rateMva` / (`sqrt(3.0)` * `vnom1`) at the end `1` and `1000.0` * `rateMva` / (`sqrt(3.0)` * `vnom2`) at the end `2` where `rateMva` is the first rating of the branch (field `RATEA` in version 33 of the _Non-Transformer Branch Data_ record and field `RATE1` in version 35) and `vnom1` and `vnom2` are the nominal voltages of the associated voltage levels.
 
 
 #### _Transformer Data_
