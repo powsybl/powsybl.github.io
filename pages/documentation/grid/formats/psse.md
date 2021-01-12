@@ -158,27 +158,11 @@ The shunt compensator is connected to the ConnectableBus if fixed shunt status (
 
 In the PSS®E version 33 only one switched shunt element can be defined at each bus. Version 35 allows multiple switched shunts at the same bus, adding an alphanumeric switched shunt identifier.
 
-A switched shunt device may be a mix of reactors and capacitors; it is divided in blocks and steps: a block contains `n` steps of the same admittance. The steps and blocks can be adjusted to regulate a given magnitude: a voltage at a bus, the  or a . There are two methods for defining how a switched shunt steps and blocks should be adjusted to keep the controlled magnitude between limits; the method chosen is determined by the field `ADJM` in the _Switched Shunt Data_ record. If `ADJM` is `0` steps and blocks are switched on in input order, and switched off in reverse output order. If `ADJM` is `1`, steps and blocks are switched on and off such that the next highest (or lowest, as appropriate) total admittance is achieved.
+A switched shunt device may be a mix of reactors and capacitors; it is divided in blocks and steps: a block contains `n` steps of the same admittance. The steps and blocks can be adjusted to regulate a given magnitude: a voltage at a bus, a reactive power output or an admittance. Only voltage regulation is considered when mapping this equipment to PowSyBl.
 
-=== Current conversion does this ===
+There are two methods for defining how a switched shunt steps and blocks should be adjusted to keep the controlled magnitude between limits; the method chosen is determined by the field `ADJM` in the _Switched Shunt Data_ record. If `ADJM` is `0` steps and blocks are switched on in input order, and switched off in reverse output order. If `ADJM` is `1`, steps and blocks are switched on and off such that the next highest (or lowest, as appropriate) total admittance is achieved.
 
-  * No regulation data is mapped to PowSyBl shunt compensator.
-  * If `BINIT` is != 0.0, one separate shunt with linear model and 1 section is added for every block defined in PSS@E.
-  * Each separate shunt of exactly 1 section has the same admittance: `BINIT`.
-  * Neither the steps `NI` nor the admittance `BI` are used for building the shunt compensator related to block `I`.
-  * ??? This conversion is BAD ???
-
-=== (Fixed?) conversion ===
-
-xxx Doubts:
-  * We only consider voltage regulation ...
-  * What happens with shunts that regulate reactive power ? do we map them to a non-linear shunt compensator ?
-  * Are we ignoring continuous adjustment flag (we simply define the sections from blocks/steps, the pf engine would decide what to do) ?
-  * No information about continuous adjustment is put in the PowSyBl model
-
-Each switched shunt record defines a PowSyBl shunt compensator with a non-linear model.
-
-The PowSyBl shunt compensator is associated with its corresponding voltage level and has the following attributes:
+Each switched shunt record defines a PowSyBl shunt compensator with a non-linear model with the following attributes:
 
 - **Id** according to the pattern `<n>-SwSH<m>` where `n` represents the PSS®E bus number (field `I` in the _Switched Shunt Data_ record) and `m` is the PSS®E alphanumeric shunt identifier (field `ID` in version 35 of the _Switched Shunt Data_ record, forced to `"1"` when importing version 33 data).
 - **ConnectableBus** PowSyBl bus identifier assigned to the PSS®E bus number (field `I` in the _Switched Shunt Data_ record).
@@ -190,15 +174,32 @@ The PowSyBl shunt compensator is associated with its corresponding voltage level
 
 The shunt compensator is connected to the ConnectableBus if switched shunt status (field `STAT` in the _Switched Shunt Data_ record) is `1` (In-service).
 
-The sections of the PowSyBl shunt compensator non-linear model are defined according to the adjustment method of the PSS®E switched shunt.
+The sections of the PowSyBl shunt compensator non-linear model are defined according to the adjustment method of the PSS®E switched shunt. In the PowSyBl model, the susceptance at each section is the accumulated susceptance obtained if the section and all previous ones are connected.
 
-In the non-linear model a set of sections can be defined, each section has two attributes:
+The attributes of each section in the PowSyBl shunt compensator non-linear model are defined as:
 - **Section G** Positive sequence shunt (charging) conductance of this section. Always `0.0`.
 - **Section B** Positive sequence shunt (charging) susceptance of this section. It is defined as `B` / (`vnom` *`vnom`), where `B` is the reactive component of shunt admittance to ground, entered in Mvar at one per unit voltage assigned to this section and `vnom` is the nominal voltage of the corresponding voltage level.
 
 When the adjustment method `ADJM`is `0`, the behaviour of the switched shunt can be mapped directly to the shunt compensator non-linear model with sections based on the switched shunt blocks/steps and its order in the PSS@E input record. A section is assigned to each step of the reactor and capacitor shunt blocks by accumulating the admittance of the corresponding steps that are in-service. Only the in-service switched shunt blocks are considered (field `SI` in version 35 of the _Switched Shunt Data_ record, always in-service in version 33). A section with 0.0 susceptance is added between sections assigned to reactor and capacitor blocks.
 
-If the adjustment method `ADJM` is `1`, the reactor and capacitor blocks can be specified at any order, and all the switching combinations are considered in PSS®E. Current version does not support building a separate section for each switching combination. To map the PSS@E shunt blocks/steps into PowSyBl sections, first reactor and capacitor blocks are increasingly ordered by the susceptance increment (field `BI` in the _Switched Shunt Data_ record) and then sections are created like in the previous adjustment considering that both blocks are switched on in sorted order.
+If the adjustment method `ADJM` is `1`, the reactor and capacitor blocks can be specified at any order, and all the switching combinations are considered in PSS®E. Current conversion does not support building a separate section for each switching combination. To map the PSS@E shunt blocks/steps into PowSyBl sections, first the reactor and capacitor blocks are increasingly ordered by susceptance (field `BI` in the _Switched Shunt Data_ record) and then sections are created like in the previous adjustment considering that blocks are switched on following the sorted order.
+
+=== XXX Current conversion does this ===
+
+  * No regulation data is mapped to PowSyBl shunt compensator.
+  * If `BINIT` is != 0.0, one separate shunt with linear model and 1 section is added for every block defined in PSS@E.
+  * Each separate shunt of exactly 1 section has the same admittance: `BINIT`.
+  * Neither the steps `NI` nor the admittance `BI` are used for building the shunt compensator related to block `I`.
+  * ??? This conversion is BAD ???
+
+=== XXX (Fixed?) conversion doubts ===
+
+  * What is documented is what we will have when conversion is merged ?
+  * We only consider voltage regulation.
+  * What happens with shunts that regulate reactive power ? do we map them to a non-linear shunt compensator ?
+  * Are we ignoring continuous adjustment flag (we simply define the sections from blocks/steps, the pf engine would decide what to do) ?
+  * No information about continuous adjustment is put in the PowSyBl model
+
 
 #### _Generator Data_
 
