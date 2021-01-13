@@ -172,7 +172,7 @@ Each switched shunt record defines a PowSyBl shunt compensator with a non-linear
 - **SectionCount** Defined as the section count (section index + 1) where section `B` is closer to the initial switched shunt admittance (field `BINIT` in the _Switched Shunt Data_ record).
 - **TargetV** Voltage setpoint defined as `0.5` * (`VSWLO` + `VSWHI`) * `vnom`, where `VSWLO` is the controlled voltage lower limit (field `VSWLO` in the _Switched Shunt Data_ record) and `VSWHI` is the controlled voltage upper limit (field `VSWHI` in the _Switched Shunt Data_ record).
 - **TargetDeadband** defined as (`VSWHI` - `VSWLO`) * `vnom`.
-- **RegulatingTerminal** Regulating terminal assigned to the bus where voltage is controlled by this switched shunt (field `SWREM` in the _Switched Shunt Data_ record if it is not `0`. Otherwise field `I` in the _Switched Shunt Data_ record).
+- **RegulatingTerminal** Regulating terminal assigned to the bus where voltage is controlled by this switched shunt (field `SWREM` in version 33 or field `SWREG` in version 35, both in the _Switched Shunt Data_ record if they are not `0`. Otherwise field `I` in the _Switched Shunt Data_ record).
 - **VoltageRegulatorOn** defined as `true` if the control mode is not `0` (field `MODSW` in the _Switched Shunt Data_ record) and `TargetV` is greater than `0.0`.
 
 The shunt compensator is connected to the ConnectableBus if switched shunt status (field `STAT` in the _Switched Shunt Data_ record) is `1` (In-service).
