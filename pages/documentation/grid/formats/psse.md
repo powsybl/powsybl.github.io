@@ -281,7 +281,8 @@ A set of current operational limits is defined for the two winding transformer a
 When a three winding transformer is modeled the two winding transformer steps should be followed for each leg of the transformer taking into account the following considerations:
 - The **Id** is defined according to the pattern `T-<n>-<m>-<o>-<p>` where `n` represents the PSS®E bus `1` number (field `I` in the _Transformer Data_ record), `m` represents the bus `2` number (field `J` in the _Transformer Data_ record), `o` represents the bus `3` number (field `K` in the _Transformer Data_ record) and `p` is the circuit identifier (field `CKT` in the _Transformer Data_ record).
 - The three winding transformer is modeled in PowSyBl as three two winding transformers connected to an fictitious node defined with a nominal base voltage and rated voltage of `1.0` (star configuration). <br>
-- In PSS®E the between windings transmission impedances `Z1-2`, `Z2-3` and `Z3-1` that are specified (these impedances are generally supplied on a transformer data sheet or test report) and the transmission impedances `Z1`, `Z2` and `Z3` of the  star network equivalent model are related according to the following expressions:
+- In PSS®E the between windings transmission impedances `Z1-2`, `Z2-3` and `Z3-1` are specified in the input file. These impedances are generally supplied on a transformer data sheet or test report. The transmission impedances `Z1`, `Z2` and `Z3` of the  star network equivalent model are related to them according to the following expressions (see [Modeling of Three-Winding Voltage Regulating Transformers for
+Positive Sequence Load Flow Analysis in PSS®E](https://static.dc.siemens.com/datapool/us/SmartGrid/docs/pti/2010July/PDFS/Modeling%20of%20Three%20Winding%20Voltage%20Regulating%20Transformers.pdf)):
 
     `Z1-2 = Z1 + Z2`
 
