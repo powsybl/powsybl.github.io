@@ -179,25 +179,32 @@ If the two components of the sensitivity are not in the same connected part, the
 In the non probable case where both components lies in the same connected part which is not the part containing the slack bus,
 OpenLoadFlow will assign the $$\text{NaN}$$ value to the sensitivity. 
 
-##### N-1
+##### Loss of connexity management in N-1 case
 The N-1 case where connectivity is lost is quite simple.
 Sensitivities computed on the N network are valid for the N-1 network as long as they concern components
 in the connected part of the N-1 network containing the slack bus.
 
-##### N-k
+##### Loss of connexity management in N-k case
 If the post contingency network of a N-k study is not connected, it can be divided into several largest connected parts.
-Let $$p$$ be the number of those parts.
+Let $$t$$ be the number of those parts.
 
-Obviously: $$p \leq k+1$$
+Obviously: $$t \leq k+1$$
 
 One of this part contains the slack bus and should be the largest.
 All sensitivities involving only components in this part can be computed.
 To do this, one must put back some disconnected lines to the network to obtain a connected network.
-OpenLoadFlow seek to find $$p-1$$ lines to put back such as a connected network is obtained.
-This provides a N-k+p-1 connected network.
+OpenLoadFlow seek to find $$t-1$$ lines to put back such as a connected network is obtained.
+This provides a N-k+t-1 connected network.
 
-We know that sensitivities computed on the N-k+p-1 network are valid for the N-k network as long as they concern components
+We know that sensitivities computed on the N-k+t-1 network are valid for the N-k network as long as they concern components
 in the connected part of the N-k network containing the slack bus.
+
+##### How to detect a loss of connectivity
+It might be quite time consuming to assess the connectivity of the N-k network using classic graph theory tools.
+Here we propose another way to detect a loss of connectivity in the N-k network that is used in OpenLoadFlow.
+If the N-k network is connected (which is a realistic assessment for real world computations),
+we need to compute the $$\theta^p$$ vectors as described in the N-k case section.
+Hence, our method uses those vectors as tools to detect a loss of connectivity.
 
 ## Configuration
 
