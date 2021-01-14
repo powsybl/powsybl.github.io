@@ -161,6 +161,44 @@ $$
 c_p = \theta^1_{m_p} - \theta^1_{n_p}
 $$
 
+#### Special case: loss of network connectivity
+It is possible that the matrix $$M$$ of the N-k case is not inversible.
+In the N-1 case it happens when the factor $$X_{m,k} - (\theta^2_m-\theta^2_k)$$ equals $$0$$.
+In this special case, above computations cannot be performed and used to assess post contingency sensitivities.
+This special case arrives when the N-k network is non connected.
+However, it is possible to get sensitivity values for components in the largest connected part of the N-k network containing the slack bus.
+
+In realistic cases of post contingency sensitivity value computations, the post contingency network might be non connected,
+but the original network should only have lost tiny portions and those should not contain the slack bus.
+Therefore, the part of the post contingency network containing the slack bus is only a little smaller than the original network,
+and most of the sensitivities can be computed.
+
+Following sections explain how to compute sensitivity from an injection, or a phase shifting angle, at a bus, or a line,
+on a given line. Both components must be in the connected part of the slack bus in the post contingency network.
+If the two components of the sensitivity are not in the same connected part, the sensitivity trivially equals $$0$$.
+In the non probable case where both components lies in the same connected part which is not the part containing the slack bus,
+OpenLoadFlow will assign the $$\text{NaN}$$ value to the sensitivity. 
+
+##### N-1
+The N-1 case where connectivity is lost is quite simple.
+Sensitivities computed on the N network are valid for the N-1 network as long as they concern components
+in the connected part of the N-1 network containing the slack bus.
+
+##### N-k
+If the post contingency network of a N-k study is not connected, it can be divided into several largest connected parts.
+Let $$p$$ be the number of those parts.
+
+Obviously: $$p \leq k+1$$
+
+One of this part contains the slack bus and should be the largest.
+All sensitivities involving only components in this part can be computed.
+To do this, one must put back some disconnected lines to the network to obtain a connected network.
+OpenLoadFlow seek to find $$p-1$$ lines to put back such as a connected network is obtained.
+This provides a N-k+p-1 connected network.
+
+We know that sensitivities computed on the N-k+p-1 network are valid for the N-k network as long as they concern components
+in the connected part of the N-k network containing the slack bus.
+
 ## Configuration
 
 ### Specific parameters
