@@ -407,7 +407,27 @@ If the `regulatingControl` data is not well defined then a local `regulatingCont
 
 #### Regulating Control For Transformers
 
-<span style="color: red">TODO</span>
+In two-winding transformers a regulating control can be associated to the `ratioTapChanger` and another one to the `phaseTapChanger` but in the current version only one can be active. If both are active the regulating control associated to the `ratioTapChanger` is deactivated. 
+
+In `ratioTapChangers` only voltage control is supported and the `regulatingControl` attributes added are:
+ - `TargetV` It is copied from the `targetValue` property of the `regulatingControl`.
+ - `TargetDeadband` It is copied from the `targetDeadband` property of the `regulatingControl`.
+ - `RegulatingTerminal` Terminal where voltage should be controlled. It is defined as the terminal associated to the `Terminal` property of the `regulatingControl` if it is valid. Otherwise the regulating control attributes are not assigned.
+ - `Regulating` To be `true` both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` property of the CGMES `ratioTapChanger` must be `true` and also `TargetV` greater than zero.
+
+In `phaseTapChangers` current flow and active power controls are supported and the `regulatingControl` attributes added are:
+ - `RegulatingValue` It is copied from the `targetValue` property of the `regulatingControl`.
+ - `TargetDeadband` It is copied from the `targetDeadband` property of the `regulatingControl`.
+ - `RegulatingMode` Could be `CURRENT_LIMITER` or `ACTIVE_POWER_CONTROL`.
+ - `Regulating` To be `true` both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` property of the CGMES `phaseTapChanger` must be `true`.
+
+In three-winding transformers a regulating control can be associated to the `ratioTapChanger` and `phaseTapChanger` of each winding. As the maximum number of regulating controls is six, in the current version, only one must be active. If more than one is active, only the first according with the following ranking is preserved active. The rest are deactivated. The ranking is:
+- `PhaseTapChanger` of winding 1.
+- `RatioTapChanger` of winding 1.
+- `PhaseTapChanger` of winding 2.
+- `RatioTapChanger` of winding 2.
+- `PhaseTapChanger` of winding 3.
+- `RatioTapChanger` of winding 3.
 
 <span style="color: red">TODO</span>
 
