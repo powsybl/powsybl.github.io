@@ -206,6 +206,23 @@ If the N-k network is connected (which is a realistic assessment for real world 
 we need to compute the $$\theta^p$$ vectors as described in the N-k case section.
 Hence, our method uses those vectors as tools to detect a loss of connectivity.
 
+First, we define and compute:
+
+$$
+\forall p \in \{1,\dots,k\}, \quad \sigma_p = \sum_{q \in \{1,\dots,k\}} \left|\frac{\theta^{p+1}_{m_q}-\theta^{p+1}_{n_q}}{X_{m_q,n_q}}\right|
+$$
+
+If there exists $$p \in \{1,\dots,k\}$$ such as $$\sigma_p \geq 1$$, then, may be there is a loss of connectivity in the N-k network.
+Else, there is no loss of connectivity in the N-k network.
+
+OpenLoadFlow computes sequentially the $$\sigma_p$$ coefficients and, as soon as one of them is found greater or equal to $$1$$,
+stops the process and go back to classic graph theory tools to assess
+if there is a loss of connectivity by computing the set of larger connected parts in the N-k network.
+
+Since in a general case there is no loss of connectivity and the $$\sigma_p$$ coefficients are lesser than 1,
+the process is run to its end.
+But it is fast and efficient specially for N-1 case, where if $$\sigma_1$$ is equal to $$1$$, then the N-1 network is proven disconnected.  
+
 ## Configuration
 
 ### Specific parameters
