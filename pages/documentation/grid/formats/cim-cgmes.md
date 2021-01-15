@@ -337,6 +337,55 @@ The regulating attributes of the three-winding transformer are defined at the en
 
 #### DC network components
 
+The DC network components of the CGMES network model cannot be converted directly to DC network components in the PowSyBl network model. It is necessary to handle all the DC network components of the CGMES model together to determine the existing DC configurations in the network model. Once the generic DC configurations are determined, each DC configuration of the CGMES model has a predefined conversion to a DC configuration in the PowSyBl model.
+
+The DC network components considered in the CGMES model are:
+- acDcConverters
+- DcLineSegments
+
+and the DC network components created in the PowSyBl model are:
+- LccConverterStation
+- VscConverterStation
+- HvdcLine
+
+The current version supports the generic DC configurations showed in the next image:
+
+![GenericDcConfigurations](img/cim-cgmes/generic-dc-configurations.svg){: width="100%" .center-image}
+
+In the image, for each generic configuration of the CGMES network model, the configuration generated in the PowSyBl network model is also indicated together with the relationship between the resistances of the DC lines. The resistance in the PowsyBl model is labeled as iidm.
+
+The first step to determine the generic DC configurations of the CGMES network model is to identify the Dc islands. A Dc island is defined as all the connected Dc network components including the border Ac layer. Each Dc island generates a Dc configuration. The next step maps the Dc Islands with the predefined Dc configurations. All the network components included in Dc islands that do not map are discarded after generating a warning message. To do the mapping each Dc island is split into Dc island ends, defining a Dc island end as a set of connected components of the Dc island without considering `DcLineSegments` as possible connectors. Then for each Dc island end the converters and adjacent DcLineSegments are identified and merged with the converters and DcLineSegments of the other Dc island end. Finally, this merged information is analyzed to determine the predefined Dc configuration associated to it.
+
+Once the generic Dc configuration has been determined next step is to create the PowSyBl Dc network components:
+- In the first configuration the conversion process creates two converters and a `HvdcLine` with the same resistance as the CGMES `DcLineSegment` (property `r`). If the resistance of the `DcLineSegment` the resistance of the `DcLineSegment` will be fixed to `0.1`.
+- In the second configuration the conversion process creates four converters and two `HvdcLine` each of them with the same resistance as the CGMES `DcLineSegment`.
+- In the third configuration the conversion process creates two converters and only one `HvdcLine` with the equivalent resistance of the two parallel `DcLineSegments`.
+
+Each created `HvdcLine` is included in the network container and has the following attributes:
+- `R` Resistance calculated according with the predefined configuration. 
+- `NominalV`. Computed using the properties `ratedUdc` of the two associated CGMES converters. The `ratedUdc` value of the converter at the end1 is assigned if it is a non-zero value, otherwise the `ratedUdc` value of the converter at the end2 will be assigned.
+- `ActivePowerSetpoint` Computed depending on the side where the rectifier is located and using the active power at the ends and the active losses at the Dc poles.
+- `MaxP` There is not `maxP` property in the CGMES model so a value is computed depending on the side of the rectifier and the Ac active power at both ends. The selected Ac active power is scaled by the factor `1.2`.
+- `ConverterMode` Indicates which side is the rectifier and which is the inverter. Computed using the `operatingMode` and `targetPpcc` properties in the LCC converters and only the `targetPpcc` in the VSC converters.
+- `ConverterStationId1` Id of the converter 1.
+- `ConverterStationId2` Id of the converter 2.
+
+Additionally to the `HvdcLine` the converters of both sides must be defined. The PowSyBl network model supports two types of converters, the LCC and VSC converters. The type of converter is determined by using the property `type` of the converter and converter1 and converter2 should have identical type.
+
+Each created LCC converter is attached to the corresponding voltage level and has the following attributes:
+- `LossFactor` Computed depending in which side is the rectifier and using the Ac active power of both converters and the active losses of both Dc poles. It is expressed as a percentage.
+- `PowerFactor` Fixed to `0.8`.
+
+Each created VSC converter is also attached to the corresponding voltage level and has the following attributes:
+- `LossFactor` Computed as in the LCC converter.
+- `VoltageRegulatorOn` The type of control is determined using the property `qPccControl` of the converter. If the control is regulating voltage then the attribute `VoltageRegulatorOn` if fixed to `true` otherwise will be `false`.
+- `VoltageSetpoint`  The voltage setpoint is copied from the `targetUpcc` property only when the `VoltageRegulatorOn` is `true`.
+- `ReactivePowerSetpoint` The reactive power setpoint is the opposite value of the `targetQpcc` property and is only assigned when the `VoltageRegulatorOn` is `false`.
+
+Finally, the conversion process generates a warning report with all the CGMES `acDcConverters` and `DcLineSegment` not included in the PowSyBl network model.
+
+#### SV Injections
+
 <span style="color: red">TODO</span>
 
 #### Boundary Topology
