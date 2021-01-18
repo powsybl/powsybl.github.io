@@ -120,6 +120,15 @@ For each `energySource` component in the CGMES model a new `load` in the PowSyBl
 
 If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. If it is `SSH` will be copy from the `steadyStateHypothesisPowerFlow` profile.
 
+#### SV Injections
+
+For each `SVInjection` in the CGMES network model a new `load` in the PowSyBl grid model is created and associated to the corresponding voltage level. The attributes are:
+
+- `P0` The value of the property `pInjection` it is copied.
+- `Q0` The value of the property `qInjection` it is copied. If the property is not defined `0.0` is assigned.
+- `LoadType` Fixed to `FICTITIOUS`.
+- `Fictitious` Fixed to `true`.
+
 #### EquivalentInjection
 
 The PowSyBl network component created by an `equivalentInjection` of the CGMES grid model can vary depending on where it is located, inside or outside the boundary. If the `equivalentInjection` is located outside the boundary a `generator` will be created. If it is inside and the import option `iidm.import.cgmes.convert-boundary` is `true` then the conversion process will import all the equipments inside the boundary and a `generator`, as in the previous case, will be created. Otherwise, if the `equivalentInjection` is regulating voltage and a dangling line is created at the boundary the regulating voltage data of the `equivalentInjection` will be transferred to the `danglingLine`.
@@ -152,6 +161,33 @@ As in the `equivalentInjection` a set of reactive power limits is defined (`MinM
 
 The `regulatingControl` attributes are assigned at the end of the conversion process as the control could be remote and the `regulatingTerminal` could not be defined at the current step. See [Regulating Control For Generators](#regulating-control-for-generators)
 
+#### Asynchronous Machine
+
+Each `asynchronousMachine` component of the CGMES model creates a new load in the PowSyBl grid model that is attached to a voltage level. The attributes are:
+- `P0` One of these two values (`P` from the `stateVariablesPowerFlow` profile or `P` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
+- `Q0` One of these tow values (`Q` from the `stateVariablesPowerFlow` profile or `Q` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
+- `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
+
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. Otherwise if it is `SSH` will be copy from the `steadyStateHypothesisPowerFlow` profile.
+
+#### Synchronous Machine
+
+Each `synchronousMachine` of the CGMES model creates a new generator in the PowSyBl grid model attached to the voltage level container with the following attributes:
+- `MinP` The `minP` property is copied if it is defined, otherwise `-Double.MAX_VALUE`.
+- `MaxP` The `maxP` property is copied if it is defined, otherwise `Double.MAX_VALUE`.
+- `TargetP` The active power `P` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign as it is a target value.  `0.0` if both profiles are not defined.
+- `TargetQ` The reactive power `Q` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign. `0.0` if both profiles are not defined.
+- `EnergySource` It is obtained after processing the `generatingUnitType` property.
+- `RatedS` The value of the `ratedS` property is copied.
+
+A set of reactive power limits is defined (`MinMaxReactiveLimits` or `ReactiveCapabilityCurve`) by copying the value of the `xvalue`, `y1value` and `y2value` properties associated to the capability curve recorded in the `ReactiveCapabilityCurve` property.
+
+The generator is added as slack terminal if the `referencePriority` property is greater than `0.0` and if the `normalPF` property is defined then a new extension is added at the generator for recording the participation factor when distributed slack is enabled:
+- `withParticipate` Fixed to `true`.
+- `withDroop` The `normalPF` property is copied.
+
+The regulating attributes of the generator are defined at the end of the conversion process. See [Regulating Control For Generators](#regulating-control-for-generators)
+
 #### Shunt Compensator
 
 There is a one-to-one correspondence between CGMES and PowSyBl `shuntCompensators`. For each component of the CGMES model a new one is created in the PowSyBl grid model associated to the corresponding voltage level. The first step is to specify the `SectionCount`, then the shunt model that can be a linear model or a non-linear model and finally the `regulatingControl` attributes.
@@ -183,33 +219,6 @@ The droop or current compensation (must be positive) is copied from the `slope`p
 
 The regulating attributes of the `staticVARcompensator` are defined at the end of the conversion process. See [Regulating Control For static VAR compensators](#regulating-control-for-static-var-compensators)
 
-#### Asynchronous Machine
-
-Each `asynchronousMachine` component of the CGMES model creates a new load in the PowSyBl grid model that is attached to a voltage level. The attributes are:
-- `P0` One of these two values (`P` from the `stateVariablesPowerFlow` profile or `P` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
-- `Q0` One of these tow values (`Q` from the `stateVariablesPowerFlow` profile or `Q` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
-- `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
-
-If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. Otherwise if it is `SSH` will be copy from the `steadyStateHypothesisPowerFlow` profile.
-
-#### Synchronous Machine
-
-Each `synchronousMachine` of the CGMES model creates a new generator in the PowSyBl grid model attached to the voltage level container with the following attributes:
-- `MinP` The `minP` property is copied if it is defined, otherwise `-Double.MAX_VALUE`.
-- `MaxP` The `maxP` property is copied if it is defined, otherwise `Double.MAX_VALUE`.
-- `TargetP` The active power `P` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign as it is a target value.  `0.0` if both profiles are not defined.
-- `TargetQ` The reactive power `Q` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign. `0.0` if both profiles are not defined.
-- `EnergySource` It is obtained after processing the `generatingUnitType` property.
-- `RatedS` The value of the `ratedS` property is copied.
-
-A set of reactive power limits is defined (`MinMaxReactiveLimits` or `ReactiveCapabilityCurve`) by copying the value of the `xvalue`, `y1value` and `y2value` properties associated to the capability curve recorded in the `ReactiveCapabilityCurve` property.
-
-The generator is added as slack terminal if the `referencePriority` property is greater than `0.0` and if the `normalPF` property is defined then a new extension is added at the generator for recording the participation factor when distributed slack is enabled:
-- `withParticipate` Fixed to `true`.
-- `withDroop` The `normalPF` property is copied.
-
-The regulating attributes of the generator are defined at the end of the conversion process. See [Regulating Control For Generators](#regulating-control-for-generators)
-
 #### Switches
 
 When one of the ends of the `Switch` is connected to the boundary See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary. In the rest of the cases the `Switch` is converted to a switch in the PowSyBl grid model.
@@ -221,9 +230,7 @@ If the model is defined at bus/breaker model the switch is created with default 
 
 At both levels of topology the open status of the switch (true or false) is obtained from the first defined value of this sequence (`open` property from the CGMES `Switch`, `normalOpen` property of the CGMES `Switch`, `false`).
        
-
 #### AC Line Segments
-
 
 When one of the ends of the `ACLineSegment` is connected to the boundary See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary. In the rest of the cases the `ACLineSegment` is converted to a Line or a switch. 
 
@@ -384,10 +391,6 @@ Each created VSC converter is also attached to the corresponding voltage level a
 
 Finally, the conversion process generates a warning report with all the CGMES `acDcConverters` and `DcLineSegment` not included in the PowSyBl network model.
 
-#### SV Injections
-
-<span style="color: red">TODO</span>
-
 #### Boundary Topology
 
 The conversion process at the boundary depends on the boundary topology. The following configurations are supported:
@@ -477,6 +480,16 @@ In three-winding transformers a regulating control can be associated to the `rat
 - `RatioTapChanger` of winding 2.
 - `PhaseTapChanger` of winding 3.
 - `RatioTapChanger` of winding 3.
+
+#### Operational Limits
+
+The PowSyBl network model supports operational limits in some network components. Voltage limits can be associated to each voltage level container. Loading limits, permanent admissible transmission loading and temporary admissible transmission loading limits can be attached to each end of branches, two-winding transformers, three-winding transformers and danglingLines. The type of the limits, permanent or temporary, is defined in the `limitType` and `operationalLimitTypeNameLoading` properties of the of the operational limit component. Loading limits can be expressed as current limits, active power limits or apparent power limits depending on the property `OperationalLimitSubclass` of the operational limit component of the CGMES model.
+
+In the CGMES model high and low voltage limits (`highvoltage` and `lowvoltage` properties) can be defined and associated to `terminalId` or `equipmentId`, so more than one limit can be defined for the same voltage level. Using the `terminalId` or `equipmentId` the corresponding voltage level of the PowSyBl network model is obtained and the lowest high voltage limit and the highest low voltage limited is assigned to it.
+
+In the branches of the CGMES model the loading limits can be specified in the branch associated to the `equipmentId` or in the ends associated to the each `terminalId`. If the loading limit is associated to the `equipmentId` then is assigned to both ends of the line. In two-winding transformers, three-winding transformers and danglingLines the limits are assigned to the end corresponding with the `terminalId` were are defined in the CGMES model.
+
+The more restrictive loading limits is assigned if there are more than one loading limit defined by end. In the permanent admissible transmission loading limits only the limit value is assigned, whereas in the temporary admissible transmission loading limits the value and the acceptable duration, expressed in seconds, are assigned. Only the temporary limits defined with the value `high` or `absoluteValue` in the `direction` property are considered. Multiple different temporary admissible transmission loading limits may apply for a particular end of an equipment.
 
 <span style="color: red">TODO</span>
 
