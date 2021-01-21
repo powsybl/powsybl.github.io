@@ -237,3 +237,8 @@ In this case each coefficient is multiplied by the same factor.
 The `useBaseCaseVoltage` property is an optional property that defines to init the voltages in case of DC flows computation. If this property is set to `true`, the voltages present in the initial network are used, otherwise an uniform voltage plan is computed.
 
 ### Configuration file example
+
+
+## User Story
+An user story about using OpenLoadFlow to compute and use sensitivity values is explained in:
+- [Sensitivity User Story](user_story_sensitivity.md)
