@@ -18,6 +18,29 @@ To launch a metrix simulation, you need :
 - (optional) [contingency script](#contingency-dsl)
 - (optional) [remedial action list](#remedial-actions)
 
+## Module configuration
+
+The module must be configured with following properties (only a few are required) :
+```yaml
+metrix:
+    home-dir: "<PATH_TO_METRIX_INSTALLATION_DIRECTORY>" # required
+
+    iidm-export-version: "1.5" # default to latest available version
+    constant-loss-factor: false # enable constant loss factor
+    chunk-size: 10 # size of the batch processed by Metrix
+    result-limit: 10000 # max allowed output count
+    debug: false # enable debug mode
+    log-level: 2 # metrix log level, available values : 0 (trace), 1 (debug), 2 (info), 3 (warn), 4 (error), 5 (critical)
+    debug-log-level: 0 # metrix log level when debug mode is enabled, available values : 0 (trace), 1 (debug), 2 (info), 3 (warn), 4 (error), 5 (critical)
+
+mapping-default-parameters:
+    tolerance-threshold: 0.0001f
+
+metrix-default-parameters:
+    computation-type: LF # default computation type    
+    loss-factor: 0f # default loss factor value
+    nominal-u: 100 # default nominal U
+```
 
 ## Configuration DSL
 
