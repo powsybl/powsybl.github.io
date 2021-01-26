@@ -9,12 +9,12 @@ layout: default
 
 ## Introduction
 
-To launch a metrix simulation, you need : 
+To launch a Metrix simulation, you need : 
 - the mapping requirements :
     - an iidm situation case
     - a timeserie store (csv)
-    - a mapping groovy script using the [mapping dsl](mapping.md#mapping-dsl)
-- a metrix configuration script using the [metrix configuration dsl](#configuration-dsl) 
+    - a mapping groovy script using the [mapping DSL](mapping.md#mapping-dsl)
+- a Metrix configuration script using the [Metrix configuration DSL](#configuration-dsl) 
 - (optional) [contingency script](#contingency-dsl)
 - (optional) [remedial action list](#remedial-actions)
 
@@ -30,8 +30,8 @@ metrix:
     chunk-size: 10 # size of the batch processed by Metrix
     result-limit: 10000 # max allowed output count
     debug: false # enable debug mode
-    log-level: 2 # metrix log level, available values : 0 (trace), 1 (debug), 2 (info), 3 (warn), 4 (error), 5 (critical)
-    debug-log-level: 0 # metrix log level when debug mode is enabled, available values : 0 (trace), 1 (debug), 2 (info), 3 (warn), 4 (error), 5 (critical)
+    log-level: 2 # Metrix log level, available values: 0 (trace), 1 (debug), 2 (info), 3 (warn), 4 (error), 5 (critical)
+    debug-log-level: 0 # Metrix log level when debug mode is enabled, available values: 0 (trace), 1 (debug), 2 (info), 3 (warn), 4 (error), 5 (critical)
 
 mapping-default-parameters:
     tolerance-threshold: 0.0001f
@@ -44,16 +44,16 @@ metrix-default-parameters:
 
 ## Configuration DSL
 
-As many of the powsybl tools scripts, this DSL is based on the groovy language. It is used to describe the general configuration
-of the solver and indicate which network items are to be monitored and controlled.
+As many of Powsybl tools scripts, this DSL is based on the groovy language. It describes the general configuration
+of the solver and indicates which network items have to be monitored and controlled.
 
 ### General parameters
 
 There is a lot of tunable parameters that will be briefly describe inline. Yet the most important one is the `computationType` which
-determine which kind of computation will be operated :
-- LF : the LOAD FLOW mode is a basic network flow simulation, production and consumption is fixed and Metrix returns the flow on the lines of the network.
-- OPF_WITHOUT_REDISPATCHING : in this mode, Metrix is allowed to use some actions (topological actions, use of pst, hvdc) to minimize constraints.
-- OPF : in OPTIMAL POWER FLOW, Metrix will leverage all available actions (that of the previous mode + generator and load dispatching) to minimize constraints at best cost. If no solution is found, the program will exit with error code 1. 
+determines which kind of computation will be operated:
+- LF : the LOAD FLOW mode is a basic network flow simulation, production and consumption are fixed and Metrix simulator returns the flow on the lines of the network.
+- OPF_WITHOUT_REDISPATCHING : in this mode, Metrix simulator is allowed to use some actions (topological actions, use of phase tap changers, HVDC lines) to minimize constraints.
+- OPF : in OPTIMAL POWER FLOW, Metrix simulator will leverage all available actions (that of the previous mode + generator and load dispatching) to minimize constraints at best cost. If no solution is found, the program will exit with error code 1. 
 
 All parmaters are optional :
 ```groovy
@@ -99,17 +99,14 @@ Note that to use a negative value, you must surround it with parenthesis, eg: `m
 
 ### Monitored branches and observed branches
 
-There is a separation between "monitored branches" where Metrix will take action to enforce threshold limits and the "observed branches" where we only want the resulting flow values. 
-In the LF (Load Flow) mode, there is no difference between monitored components and observed components. 
+There is a distinction between "monitored branches" where Metrix will take action to enforce threshold limits and the "observed branches" where we only want the resulting flow values. Note that in the LF (Load Flow) mode, there is no difference between monitored elements and observed elements. 
 
-To indicate that a component should be "monitored" we have to define thresholds in MW. It can be a time series name (originating from the mapping script provided) or an fixed value (constant time series).
-The `branchRatingsBaseCase` parameter will contain the threshold for the basecase (network N), the `branchRatingsBeforeCurative` and `branchRatingsOnContingency` parameters will contain the threshold to be used after a contingency (N-k) respectively before and after remedial actions. 
-Threshold can be defined with a direction constraint with default being the origin -> end direction (the opposite direction is specified with the same parameter name followed by `EndOr`). Origin is the node corresponding to `voltageLevelId1` in the iidm case file.  
+To indicate that a element should be "monitored" we have to define thresholds in MW. It can be a time series name (originating from the mapping script provided) or an fixed value (constant time series). The `branchRatingsBaseCase` parameter will contain the threshold for the base case (also called network N), the `branchRatingsBeforeCurative` and `branchRatingsOnContingency` parameters will contain the threshold to be used after for the post-contingency state (also called network N-k) respectively before and after remedial actions. Threshold can be defined with a direction constraint with default being the origin -> end direction (the opposite direction is specified with the same parameter name followed by `EndOr`). Origin is the node corresponding to `voltageLevelId1` in the IIDM case file.  
 
-The syntax to define monitored/observed components is :
+The syntax to define monitored/observed elements (called `component` below) is :
 
 ```groovy
-branch('component_id') { // component_id is the string id of the component as found in the iidm network case file
+branch('component_id') { // component_id is the string id of the element as found in the IIDM network case file
    baseCaseFlowResults true // true if we want to "observe" the component
    maxThreatFlowResults true // true to have the maximum contingency threat and related flow result 
    contingencyFlowResults 'a', 'b'// contingency list for which we want the flow result
@@ -128,13 +125,11 @@ branch('component_id') { // component_id is the string id of the component as fo
 }
 ```
 
-Note that monitored branches (when `branchRatingsXXX` is specified) automatically provides resulting flows (when `baseCaseFlowResults` is true).
-If no branch is monitored, then Metrix does not compute anything beside balance adjustment phase.
-HVDC lines cannot be monitored. Flows for HVDC lines in AC emulation mode are always provided, alongside their optimized tuning. 
+Note that monitored branches (when `branchRatingsXXX` is specified) automatically provides resulting flows (when `baseCaseFlowResults` is true). If no branch is monitored, then Metrix does not compute anything beside balance adjustment phase. HVDC lines cannot be monitored. Flows for HVDC lines in AC emulation mode are always provided, alongside their optimized tuning. 
 
 #### Examples
 
-To monitor branches on basecase and N-k with a threshold of 100MW :
+To monitor branches on base case and on post-contingency states with a threshold of 100MW :
 ```groovy
 branchList=[
 'A.NOUL61FLEAC',
@@ -171,7 +166,7 @@ for (branchId in monitoredBranchList) {
 }
 ```
 
-To gather the flow result of every 400KV lines and transformers in basecase and N-k:
+To gather the flow result of every 400KV lines and transformers in base case and in post-contingency states:
 ```groovy
 for (l in network.branches) {
   if (l.terminal1.voltageLevel.nominalV >= 380 || l.terminal2.voltageLevel.nominalV >= 380) {
@@ -211,7 +206,7 @@ for (lig in branchList) {
 }
 ```
 
-To define the list of contingencies where threshold might be differents :
+To define the list of contingencies where threshold might be different:
 ```groovy
 contingencies {
   specificContingencies 'a', 'b', 'c' // Contingency list where special threshold will be applied
@@ -229,17 +224,13 @@ branch("line") {
 
 ### Generators
 
-We can define generators which Metrix can change the target :
+We can define generators whose target can be changed by Metrix:
 - In the adequacy phase to match the production and load
 - In remedial actions to comply with the defined monitored branch thresholds (only in OPF mode)
 
-For this to happen, we must define ramp up/down costs. Metrix will then choose the cheapest generator to resolve the constraints. 
-There should be at least two generators for Metrix to be able to lower and increase production in order to respect power balance. 
-If no generator is configured to be managed by Metrix, then all generators are implicitly managed with zero cost.\
-Note that Metrix will take into account the Pmin and Pmax values of generators (which can be modified in the mapping script).
-In the same way than most parameters, the value can be a fixed integer/float or a time series name.    
+For this to happen, we must define ramp up/down costs. Metrix will then choose the cheapest generator to resolve the constraints. There should be at least two generators for Metrix to be able to decrease or increase production in order to respect power balance. If no generator is configured to be managed by Metrix, then all generators are implicitly managed with zero cost. Note that Metrix will take into account the Pmin and Pmax values of generators (which can be modified in the mapping script). In the same way than most parameters, the value can be a fixed integer/float or a time series name.    
 
-The syntax to define a managed generator is :
+The syntax to define a managed generator is:
 
 ```groovy
 generator(id) { // id of the generator which will be managed by Metrix 
@@ -251,20 +242,18 @@ generator(id) { // id of the generator which will be managed by Metrix
 }
 ```
 
-Note that if at least one generator is managed, then only defined generators will be managed to match adequacy. 
-In some cases, it could result in a program failure (return code -1) where constraints cannot be resolved in OPF mode.
-Also :
-- Generators used for the adequacy phase are not necessarily the same used in redispatching. If `onContingency` isn't defined but `redispatchingCost` is, then the generator will be used only in preventive actions. For the generator to be fully used on preventive and curative remedial action, both of these parameters must be defined.
+Note that if at least one generator is managed, then only defined generators will be managed to match adequacy.  In some cases, it could result in a program failure (return code -1) where constraints cannot be resolved in OPF mode. Also:
+- Generators used for the adequacy phase are not necessarily the same used for redispatching phase. If `onContingency` isn't defined but `redispatchingCost` is, then the generator will be used only in preventive actions. For the generator to be fully used on preventive and curative remedial action, both of these parameters must be defined.
 - Cost must always be defined for both directions. If we want to prevent a generator to ramp up or down, we can set a high prohibitive cost.
-- Rules that take into account Pmax and Pmin are :
+- Rules that take into account Pmax and Pmin are:
     - if the targetP is out of bounds (targetP > Pmax or targetP < Pmin) then targetP is adjusted the closest bound. This can happen when `ignore-limits` is set in the mapping script or the tool parameter.
-    - during the adequacy phase, les Pmax constraints are enforced but Pmin are temporarly set to 0. It results that a (only one at most) generator can have a targetP out of its lower bound (0 < targetP < Pmin).
+    - during the adequacy phase, les Pmax constraints are enforced but Pmin are temporary set to 0. It results that a (only one at most) generator can have a targetP out of its lower bound (0 < targetP < Pmin).
     - in the redispatching phase, generators with Pmin<targetP<Pmax are enforced between their bounds. If a group have an initial targetP below Pmin, the constraints will be initialTargetP < targetP < Pmax.
-- In theory, the down cost of generators is negative. We should be careful not to create opportunities that would interfere with the planned production. For instance if a generator delivering at Pmin with a up cost of 15€ whereas another generator has it down cost at -25€, event in the absence of constraints, Metrix will choose to ramp up the first low cost generator and decrease the output of the second one. Beside entering fine grained realistic costs, to remedy to this issue, we could make sure that no down cost are higher (in absolute value) then up cost. We can do that using `adequacyCostOffset` and `redispatchingCostOffset` global parameters that will translate cost (we could take the maximum offset between all up and down cost for instance). This option will preserve the original values in the Metrix results though.
+- In theory, the down cost of generators is negative. We should be careful not to create opportunities that would interfere with the planned production. For instance if a generator delivering at Pmin with a up cost of 15€ whereas another generator has it down cost at -25€, even in the absence of constraints, Metrix will choose to ramp up the first low cost generator and decrease the output of the second one. Beside entering fine grained realistic costs, to remedy to this issue, we could make sure that no down cost are higher (in absolute value) than up cost. We can do that using `adequacyCostOffset` and `redispatchingCostOffset` global parameters that will translate cost (we could take the maximum offset between all up and down costs for instance). This option will preserve the original values in the Metrix results.
 
 #### Examples
 
-To allow the slack generator to ramp : 
+To allow the slack generator to ramp: 
 ```groovy
 generator('slack_generator') {
   adequacyDownCosts 0
@@ -274,7 +263,7 @@ generator('slack_generator') {
 }
 ```
 
-To allow generators to ramp depending on zone or type (provided this properties exists in iidm source file):
+To allow generators to ramp depending on zone or type (if these properties exists in IIDM source file):
 ```groovy
 for (g in network.generators) {
         if (g.terminal.voltageLevel.substation.regionDI=='04' & g.genreCvg=="TAC") {
@@ -288,12 +277,9 @@ for (g in network.generators) {
 
 ### Loads
 
-Similarly to generators, loads can be adjusted in the OPF simulation (preventive and curative), yet only in decrease.
-The cost in preventive action is fixed (default 13000€/MWh) and can be modified in the global parameters with the keyword `lossOfLoadCost`. 
-Yet we can also override this value for specific loads. The specified cost will automatically be weighted with the contingency probability (default : 10^-3).  
-We also can limit the max percentage of load shedding (in preventive and curative mode).
+Similarly to generators, loads can be adjusted in the OPF simulation (in preventive and curative mode), but only as a decrease. The cost in preventive action is fixed (default 13000€/MWh) and can be modified in the global parameters with the keyword `lossOfLoadCost`. We can also override this value for specific loads. The specified cost will automatically be weighted with the contingency probability (default : 10^-3). We can also limit the max percentage of load shedding (in preventive and curative mode).
 
-Here is the corresponding syntax :
+Here is the corresponding syntax:
 ```groovy
 load(load_id) {
     preventiveSheddingPercentage 20 // shedding max percentage for preventive actions 
@@ -304,11 +290,11 @@ load(load_id) {
 }
 ```
 
-Note that, like generators, if no load is configured then all loads can be used with 100% shedding capabilities.
+Note that, as generators, if no load is configured then all loads can be used with 100% shedding capabilities.
 
 ### Phase-shifting transformer
 
-Phase shifting transformers can be controlled with the following syntax (default mode is fixed) :
+Phase shifting transformers can be controlled with the following syntax (default mode is fixed tap):
 
 ```groovy
 phaseShifter(id) {
@@ -319,16 +305,16 @@ phaseShifter(id) {
 }
 ```
 
-Control types :
-- `FIXED_ANGLE_CONTROL` : (Default) the original phase tap is fixed
-- `OPTIMIZED_ANGLE_CONTROL` : can shift to different phase tap to solve constraints
-- `CONTROL_OFF` : the transformer is deactivated (phase shift is equal to 0)
+Control types:
+- `FIXED_ANGLE_CONTROL`: (default) the original phase tap is fixed
+- `OPTIMIZED_ANGLE_CONTROL`: can shift to different phase tap to solve constraints
+- `CONTROL_OFF`: the transformer is deactivated (phase shift is equal to 0)
 
-Note that while the optimization will use phase in a continuous range, metrix will then find the closest phase tap in the results.
+Note that while the optimization will use phase in a continuous range, Metrix will then find the closest phase tap in the results.
 
 ### HVDC
 
-For HVDC the syntax is similar to that of the PST :
+For HVDC line, the syntax is similar to those of PST:
 ```groovy
 hvdc(id) {
   controlType X // control type (see available values below)
@@ -336,9 +322,9 @@ hvdc(id) {
 }
 ```
 
-Control types : 
-- `OPTIMIZED` : can optimize the p0 target in adequacy phase and preventive (and curative if contingencies were defined)  
-- `FIXED` : the target p0 is fixed
+Control types: 
+- `OPTIMIZED`: can optimize the p0 target in adequacy phase and preventive (and curative if contingencies were defined)  
+- `FIXED`: the target p0 is fixed
 
 ### Monitored sections
 
@@ -355,22 +341,19 @@ sectionMonitoring(id) { // Nom de la section
 
 ## Contingency DSL
 
-Contingencies are specified in an other configuration file. They can represent the loss of one or several network components.
-Every contingency will be simulated.
+Contingencies are specified in an other configuration file. They can represent the loss of one or several network equipments. Every contingency will be simulated.
 
-To define a contingency :
+To define a contingency:
 ```groovy
 contingency (id) { // name of the contingency
-equipments id1,id2...} // component ids that will be put out of order
+equipments id1,id2...} // elements ids that will be put out of order
 ```
 
-Note that to propagate a contingency defined on branches without breaker, the global option `propagateBranchTripping` can be used to propagate the contingency on connected branches.\
-Contingencies that breaks the network connection are ignored unless `outagesBreakingConnexity` global parameter is set to true. In this case, metrix will try to reach adequacy using all loads and generators equally and the results will show the cut off equipments.
-HVDC can be tripped off only within a synchronized network.
+Note that to propagate a contingency defined on branches without breaker, the global option `propagateBranchTripping` can be used to propagate the contingency on connected branches. Contingencies that breaks the network connectivity are ignored unless `outagesBreakingConnexity` global parameter is set to true. In this case, Metrix will try to reach adequacy using all loads and generators equally and the results will show the cut off equipments. HVDC lines can be tripped off only in a synchronized network.
 
 ### Examples
 
-To define a list of contingency for some component list :
+To define a list of contingency for a list of components:
 ```groovy
 components=[
   'A.NOUL61FLEAC',
@@ -384,7 +367,7 @@ for (component in components) {
 }
 ```
 
-and for multiple components :
+and for multiple components:
 ```groovy
 map_dual_contingencies = [
   "defaut_dbl1":['ouvrage1_id', 'ouvrage2_id'],
@@ -396,7 +379,7 @@ map_dual_contingencies.each {name, components ->
 }
 ```
 
-To simulate every single contingency on the 400kV network :
+To simulate every single contingency on the 400kV network:
 ```groovy
 for (l in network.lines) {
   if (l.terminal1.voltageLevel.nominalV >= 380) {
@@ -405,21 +388,19 @@ for (l in network.lines) {
 }
 ```
 
-
 ## Remedial actions
 
-Only defined topological remedial action can be used by Metrix. They are defined per contingency in an third file with the following syntax.\
-On the first line is the keyword `NB` followed by the number of remedial actions defined, eg :
+Only defined topological remedial actions can be used by Metrix. They are defined per contingency in an third file with the following syntax. On the first line is the keyword `NB` followed by the number of remedial actions defined, eg:
 ```text
 NB;5;
 ```
-Then each line will define a remedial action with :
+Then each line will define a remedial action with:
 ```text
 CONTINGENCY_NAME;ACTIONS_COUNT;EQUIPMENT1_ACTION;...;
 ```
-where "EQUIPMENT1_ACTION" being the id of a branch or bus coupling. The default action is to open the related breakers. To close a line the `+` sign must be preppended to the branch id.
+where "EQUIPMENT1_ACTION" being the id of a branch or bus coupling. The default action is to open the related breakers. To close a line the `+` sign must be prepended to the branch id.
 
-Remedial action can be limited to specific branch constraints with :
+Remedial action can be limited to specific branch constraints with:
 ```text
 CONTINGENCY_NAME | BRANCH_CONSTRAINT_1 | ... ;ACTIONS_COUNT;EQUIPMENT1_ACTION;...;
 ```
@@ -439,14 +420,13 @@ FS.BIS1 FSSV.O1 1;2;FS.BIS1_FS.BIS1_DJ_OMN;FSSV.O1_FSSV.O1_DJ_OMN;
 FS.BIS1 FSSV.O1 1;1;FS.BIS1 FSSV.O1 2;
 ```
 
-Using a lot of remedial action will increase the simulation duration, especially with numerous alternative for a same contingency. The option `analogousRemedialActionDetection` may detect equivalent remedial actions and speed up the process. They will be indicated in logs.
+Using a lot of remedial actions will increase the simulation duration, especially with numerous alternatives for a same contingency. The option `analogousRemedialActionDetection` may detect equivalent remedial actions and speed up the process. They will be indicated in logs.
 
 ## Binding constraints
 
-Lastly, we can define binding constraints between some variables so to force them to vary along. 
-Each item of the binding constraint set will then vary proportionnaly to a reference variable. 
+Lastly, we can define binding constraints between some variables so to force them to vary along. Each item of the binding constraint set will then vary proportionally to a reference variable. 
 
-For generators, the syntax is :
+For generators, the syntax is:
 ```groovy
 generatorsGroup("name of the set") {
   filter { generator.id == ... } // filter generators
@@ -454,14 +434,14 @@ generatorsGroup("name of the set") {
 }
 ```
 
-For loads, the only reference variable is the initial load :
+For loads, the only reference variable is the initial load:
 ```groovy
 loadsGroup("name of the sed") {
   filter { load.id == ... } // filter loads
 }
 ```
 
-Note that when one of the item in the set reach its limit (eg. its pmax), no further variation can be made on other items. 
+Note that if one of the item in the set reach its limit (eg. its pmax), no further variation can be made on other items. 
 
 ## Outputs
 
