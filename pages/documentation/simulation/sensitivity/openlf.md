@@ -72,7 +72,7 @@ $$
 
 We only support for the moment balance type `PROPORTIONAL_TO_GENERATION_P_MAX` and `PROPORTIONAL_TO_LOAD`.
 
-### Contingencies management
+### Contingency management
 
 The contingency management needs to compute sensitivity coefficients for post-contingency states of the network, that is to say,
 states of the network after some outages have occured.

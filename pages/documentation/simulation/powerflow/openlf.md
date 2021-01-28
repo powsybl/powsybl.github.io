@@ -104,7 +104,7 @@ In that case, the remaining active power mismatch remains on the selected slack 
 
 **voltageRemoteControl**  
 The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
-The default value is `false`.
+The default value is `true`.
 
 **slackBusSelectorType**  
 The `slackBusSelectorType` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:

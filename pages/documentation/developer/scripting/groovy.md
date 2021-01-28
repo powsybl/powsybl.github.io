@@ -12,9 +12,6 @@ The first way to use Groovy scripts is to use the [iTools run-script](../../user
 
 It's possible to extend this DSL with user-friendly functions by writing [extensions]().
 
-## powsyblsh
-`powsyblsh` is a script for Linux, provided with a [iTools distribution](../../user/index.md#installation-from-binaries) that run the interactive command line [Groovy Shell](). At start-up, it loads the classes of jars found in the `share/java` folder of the iTools distribution. You should consider this option during implementation phase. Once your script is ready for production, run it with the [iTools run-script](../../user/itools/run-script.md) command.
-
 ## Example
 This small example shows how to load a case file and run a power simulation in Groovy:
 ```groovy
