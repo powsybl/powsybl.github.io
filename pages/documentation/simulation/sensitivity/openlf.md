@@ -104,7 +104,7 @@ $$
 s_{mk,ij} = \frac{\theta^2_i-\theta^2_j}{X_{i,j}}
 $$
 
-Then, The post contingency sensitivity $$s_{b,ij,mk}$$ satisfied:
+Then, The post contingency sensitivity $$s_{b,ij,mk}$$ satisfies:
 
 $$
 s_{b,ij,mk} = s_{b,ij} + \frac{\theta^1_m-\theta^1_k}{X_{m,k} - (\theta^2_m-\theta^2_k)}s_{mk,ij}
