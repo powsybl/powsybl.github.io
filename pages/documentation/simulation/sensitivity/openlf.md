@@ -22,7 +22,7 @@ This could be done in a set of branches given by the user.
 
 ### Sensitivities on the base network 
 
-Injection increases could be either an active power increase of a generator $$targetP$$ or an active power increase of a load $$P0$$. To get the impact of an injection increase in a given bus into a given branch, we compute the right-hand side $$b$$ corresponding to an injection of 1 MW at this bus and $$0 MW$$ elsewhere. The LU decomposition gives the matrices $$L$$ and $$U$$ in order to compute the vector $$\theta$$. Then it is easy to retrieve the active power flow in the branch.
+Injection increases could be either an active power increase of a generator $$targetP$$ or an active power increase of a load $$P0$$. To get the impact of an injection increase in a given bus into a given branch, we compute the right-hand side $$b$$ corresponding to an injection of 1 MW at this bus and 0 MW elsewhere. The LU decomposition gives the matrices $$L$$ and $$U$$ in order to compute the vector $$\theta$$. Then it is easy to retrieve the active power flow in the branch.
 
 For example, to get the sensitivity from injection increase in bus $$i$$ to branch $$(k,l)$$, we compute $$b$$ satisfying:
 
@@ -79,26 +79,26 @@ The contingency management consists in calculating the sensitivity values for po
 #### N-1 case
 Let us start with the most classic case, where a single branch was lost by the network.
  
-Let $$s_{b,ij,mk}$$ be the sensitivity of an increase of 1MW at bus $$b$$ on branch $$(i,j)$$ when the branch $$(m,k)$$ has been disconnected from the network.
+Let $$s_{b,ij,mk}$$ be the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ where the branch $$(m,k)$$ has been disconnected from the network.
 We want to compute this sensitivity.
 
-Let $$b^1$$ be the right-hand side vector corresponding with an increase of 1MW at bus $$b$$.
+Let $$b^1$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$b$$.
 
-Let $$b^2$$ be the right-hand side vector corresponding with an increase of 1MW at bus $$m$$ plus a decrease of 1MW at bus $$k$$.
+Let $$b^2$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$m$$ plus a decrease of 1 MW at bus $$k$$.
 
-Let $$\theta^1$$ be the vector of voltage angles obtained solving the network contraints system on the base network with right-hand side $$b^1$$.
+Let $$\theta^1$$ be the vector of voltage angles obtained solving the network contraints system on the pre-contingency network with right-hand side $$b^1$$.
 
-Let $$\theta^2$$ be the vector of voltage angles obtained solving the network contraints system on the base network with right-hand side $$b^2$$.
+Let $$\theta^2$$ be the vector of voltage angles obtained solving the network contraints system on the pre-contingency network with right-hand side $$b^2$$.
 Notice that $$\theta^1$$ and $$\theta^2$$ are built using the same LU decomposition of the constraints matrix $$J$$.
 
-Let $$s_{b,ij}$$ be the sensitivity of an increase of 1MW at bus $$b$$ on branch $$(i,j)$$ on the base network, we recall that:
+Let $$s_{b,ij}$$ be the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ on the pre-contingency network, we recall that:
 
 $$
 s_{b,ij} = \frac{\theta^1_i-\theta^1_j}{X_{i,j}}
 $$
 
-Let $$s_{mk,ij}$$ be the sensitivity of an increase of 1MW at bus $$m$$ plus a decrease of 1MW at bus $$k$$, on the base network.
-This can be easily computed with the formula:
+Let $$s_{mk,ij}$$ be the sensitivity of an increase of 1 MW at bus $$m$$ plus a decrease of 1 MW at bus $$k$$, on the pre-contingency network.
+It can be easily computed through the formula:
 
 $$
 s_{mk,ij} = \frac{\theta^2_i-\theta^2_j}{X_{i,j}}
@@ -114,17 +114,17 @@ $$
 For the N-k case, the incident causes several outages on the network.
 As for the N-1 case, an outage is the loss of a network line (this includes the special case of the loss of a transformer).
  
-Let $$s_{b,ij,I}$$ be the sensitivity of an increase of 1MW at bus $$b$$ on branch $$(i,j)$$ when the incident $$I$$ occurs.
+Let $$s_{b,ij,I}$$ be the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ when the incident $$I$$ occurs.
 Incident $$I$$ corresponds to the loss of the $$k$$ branches $$(m_1,n_1), \cdots, (m_k,n_k)$$.
 We want to compute this sensitivity.
 
-Let $$b^1$$ be the right-hand side vector corresponding with an increase of 1MW at bus $$b$$.
+Let $$b^1$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$b$$.
 
-Let $$b^{p+1}$$ be the right-hand side vector corresponding with an increase of 1MW at bus $$m_p$$ plus a decrease of 1MW at bus $$n_p$$.
+Let $$b^{p+1}$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$m_p$$ plus a decrease of 1 MW at bus $$n_p$$.
 
-Let $$\theta^p$$ be the vector of voltage angles obtained solving the network contraints system on the base network with right-hand side $$b^p$$.
+Let $$\theta^p$$ be the vector of voltage angles obtained solving the network contraints system on the pre-contingency network with right-hand side $$b^p$$.
 
-The post contingency sensitivity $$s_{b,ij,I}$$ satisfied:
+The post contingency sensitivity $$s_{b,ij,I}$$ satisfies:
 
 $$
 s_{b,ij,I} = s_{b,ij} + \sum_{p} \alpha_p s_{m_pn_p,ij}
