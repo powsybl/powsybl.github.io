@@ -17,7 +17,7 @@ Give a summary view about **Open Load Flow** and its integration with **powsybl-
 
 [Grid model known as ITesla Internal Data Model](https://www.powsybl.org/pages/documentation/grid/model/)
 
-## Involved classes when running loadflow with itools
+## Classes used when running loadflow with itools
 
 | Maven&nbsp;dependency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Usage |
 | -------------------------- | - |
@@ -35,12 +35,13 @@ This is the **Network.java** object (from **powsybl-iidm-api** dependency) loade
 
 ## Load flow basics
 1. creation of sub-network list from network loaded from xiidm file,
-2. creation of an equation system for each sub-network : we have to valuate V and θ for each of nodes (= buses),
+2. creation of an equation system for each sub-network : we have to valuate V and θ for each nodes (= buses),
 3. first run of Newton Raphson method. If iteration count exceed maximum, process is terminated with an MAX_ITERATION_REACHED error, 
-4. ajust reactive power on nodes,
-5. loop over OuterLoop in order to adjust network parameters like active and reactive power on generators and loads. In each OuterLoop, if sub-network is UNSTABLE, it runs again Newton Raphson method (exit process if MAX_ITERATION_REACHED), 
-6. loop over OuterLoop until reaching stability over network,
-7. if all calls to Newton Raphson method succeeded with CONVERGED, process is fully completed with CONVERGED and iteration count as resume.
+4. ajust reactive power on nodes by evaluating Q equation on each node,
+5. loop over OuterLoops in order to adjust active and reactive power on generators and loads, switch between PV to PQ bus if limits exceeded, ... In each OuterLoop, if sub-network is UNSTABLE, it runs again Newton Raphson method (exit process if MAX_ITERATION_REACHED), 
+6. loop over OuterLoops until reaching network stability,
+7. if all calls to Newton Raphson method succeeded with CONVERGED, process is fully completed with CONVERGED and iteration count as resume,
+8. network in xiidm file is finally updated with computation results : V and θ from buses, P and Q from generatos, svc, shunt and branches.
 
 ### Equations
 The network is described by the 2N equations Pi and Qi. In each node of the network, these equations involve four quantities: the modulus Vi and the phase θi of the voltage, the active powers Pi and reactive Qi.
@@ -142,5 +143,7 @@ A variable is defined by:
 #### ReactiveLimitsOuterLoop
 
 #### DistributedSlackOuterLoop
+##### GenerationActionPowerDistributionStep
+##### LoadActivePowerDistributionStep
 
 #### TransformerVoltageControlOuterLoop
