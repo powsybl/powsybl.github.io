@@ -76,20 +76,18 @@ We only support for the moment balance type `PROPORTIONAL_TO_GENERATION_P_MAX` a
 
 The contingency management consists in calculating the sensitivity values for post-contingency states of the network. A post-contingency state of the network is the state of the network after an outage (most of the time, the loss of a line). In the particular case of DC flows approximation, the post-contingency sensitivity values can be computed using the pre-contingency sensitivity values and some flow transfer factors. Thus, the same LU decomposition is used both for the pre-contingency analysis and for the post-contingency analysis.
 
-#### N-1 case
-Let us start with the most classic case, where a single branch was lost by the network.
+#### Loss of a single branch
+
+The most frequent event in the network is the loss of a single branch (including the loss of a transformer with or without tap changer).
  
-Let $$s_{b,ij,mk}$$ be the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ where the branch $$(m,k)$$ has been disconnected from the network.
+Let's introduce $$s_{b,ij,mk}$$ the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ where the branch $$(m,k)$$ represents the outage.
 We want to compute this sensitivity.
 
-Let $$b^1$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$b$$.
+We call $$b^1$$ the right-hand side vector corresponding to an increase of 1 MW at bus $$b$$. We call $$\theta^1$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^1$$.
 
-Let $$b^2$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$m$$ plus a decrease of 1 MW at bus $$k$$.
+We call $$b^2$$ be the right-hand side vector corresponding to an increase of 1 MW at bus $$m$$ and a decrease of 1 MW at bus $$k$$. We call $$\theta^2$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^2$$.
 
-Let $$\theta^1$$ be the vector of voltage angles obtained solving the network contraints system on the pre-contingency network with right-hand side $$b^1$$.
-
-Let $$\theta^2$$ be the vector of voltage angles obtained solving the network contraints system on the pre-contingency network with right-hand side $$b^2$$.
-Notice that $$\theta^1$$ and $$\theta^2$$ are built using the same LU decomposition of the constraints matrix $$J$$.
+Note that both $$\theta^1$$ and $$\theta^2$$ are built using the same LU decomposition of the constraints matrix $$J$$.
 
 Let $$s_{b,ij}$$ be the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ on the pre-contingency network, we recall that:
 
@@ -97,67 +95,64 @@ $$
 s_{b,ij} = \frac{\theta^1_i-\theta^1_j}{X_{i,j}}
 $$
 
-Let $$s_{mk,ij}$$ be the sensitivity of an increase of 1 MW at bus $$m$$ plus a decrease of 1 MW at bus $$k$$, on the pre-contingency network.
-It can be easily computed through the formula:
+Let $$s_{mk,ij}$$ be the sensitivity of an increase of 1 MW at bus $$m$$ and a decrease of 1 MW at bus $$k$$, on the pre-contingency network.
+It can be easily computed through the formula, valid for all buses:
 
 $$
 s_{mk,ij} = \frac{\theta^2_i-\theta^2_j}{X_{i,j}}
 $$
 
-Then, The post contingency sensitivity $$s_{b,ij,mk}$$ satisfies:
+Then, the post-contingency sensitivity $$s_{b,ij,mk}$$ satisfies:
 
 $$
 s_{b,ij,mk} = s_{b,ij} + \frac{\theta^1_m-\theta^1_k}{X_{m,k} - (\theta^2_m-\theta^2_k)}s_{mk,ij}
 $$
 
-#### N-k case
-For the N-k case, the incident causes several outages on the network.
-As for the N-1 case, an outage is the loss of a network line (this includes the special case of the loss of a transformer).
+#### Loss of more than one branch
+
+Sometimes, an event in the network causes the loss of several buses and branches. Connected to these lost buses, we can have generators or loads.
  
-Let $$s_{b,ij,I}$$ be the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ when the incident $$I$$ occurs.
-Incident $$I$$ corresponds to the loss of the $$k$$ branches $$(m_1,n_1), \cdots, (m_k,n_k)$$.
-We want to compute this sensitivity.
+Let's introduce $$s_{b,ij,E}$$ the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ when the event $$E$$ occurs. The event $$E$$ corresponds to the loss of the $$k$$ branches indexed by $$(m_1,k_1), \cdots, (m_n,k_n)$$. We want to compute this sensitivity.
 
-Let $$b^1$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$b$$.
+We call $$b^1$$ the right-hand side vector corresponding to an increase of 1 MW at bus $$b$$. We call $$\theta^1$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^1$$.
 
-Let $$b^{p+1}$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$m_p$$ plus a decrease of 1 MW at bus $$n_p$$.
+We call $$b^{p+1}$$ be the right-hand side vector corresponding to an increase of 1 MW at bus $$m_p$$ and a decrease of 1 MW at bus $$k_p$$. We call $$\theta^p$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^{p+1}$$.
 
-Let $$\theta^p$$ be the vector of voltage angles obtained solving the network contraints system on the pre-contingency network with right-hand side $$b^p$$.
-
-The post contingency sensitivity $$s_{b,ij,I}$$ satisfies:
+Then, the post-contingency sensitivity $$s_{b,ij,E}$$ satisfies:
 
 $$
-s_{b,ij,I} = s_{b,ij} + \sum_{p} \alpha_p s_{m_pn_p,ij}
+s_{b,ij,E} = s_{b,ij} + \sum_{p} \alpha_p s_{m_pk_p,ij}
 $$
 
-Where:
+Where, valid for all buses:
 
 $$
-s_{m_pn_p,ij} = \frac{\theta^{p+1}_i-\theta^{p+1}_j}{X_{i,j}}
+s_{m_pk_p,ij} = \frac{\theta^{p+1}_i-\theta^{p+1}_j}{X_{i,j}}
 $$
 
-The vector of coefficients $$\alpha$$ is computed as the solution of a linear system of size $$k$$:
+The vector of coefficients $$\alpha$$ is computed as the solution of a linear system of size $$n$$:
 
 $$
 Mx = c
 $$
 
-Where $$M$$ is the $$k \times k$$ matrix defined by:
+Where $$M$$ is the $$n \times n$$ matrix defined by:
 
 $$
 \begin{align}
-M_{p,q} =& -(\theta^{q+1}_{m_p} - \theta^{q+1}_{n_p}) & \texttt{If}~p \neq q,\\
-M_{p,q} =& X_{m_p,n_p} - (\theta^{p+1}_{m_p} - \theta^{p+1}_{n_p})& \texttt{else}.
+M_{p,q} =& -(\theta^{q+1}_{m_p} - \theta^{q+1}_{k_p}) & \texttt{if}~p \neq q,\\
+M_{p,q} =& X_{m_p,k_p} - (\theta^{p+1}_{m_p} - \theta^{p+1}_{k_p})& \texttt{else}.
 \end{align}
 $$
 
-And $$c$$ the vector of size $$k$$ defined by:
+And $$c$$ the vector of size $$n$$ defined by:
 
 $$
-c_p = \theta^1_{m_p} - \theta^1_{n_p}
+c_p = \theta^1_{m_p} - \theta^1_{k_p}
 $$
 
 #### Special case: loss of network connectivity
+
 It is possible that the matrix $$M$$ of the N-k case is not inversible.
 In the N-1 case it happens when the factor $$X_{m,k} - (\theta^2_m-\theta^2_k)$$ equals $$0$$.
 In this special case, above computations cannot be performed and used to assess post contingency sensitivities.
@@ -175,12 +170,12 @@ If the two components of the sensitivity are not in the same connected part, the
 In the non probable case where both components lies in the same connected part which is not the part containing the slack bus,
 OpenLoadFlow will assign the $$\text{NaN}$$ value to the sensitivity. 
 
-##### Loss of connexity management in N-1 case
+##### Loss of connectivity management in N-1 case
 The N-1 case where connectivity is lost is quite simple.
 Sensitivities computed on the N network are valid for the N-1 network as long as they concern components
 in the connected part of the N-1 network containing the slack bus.
 
-##### Loss of connexity management in N-k case
+##### Loss of connectivity management in N-k case
 If the post contingency network of a N-k study is not connected, it can be divided into several largest connected parts.
 Let $$t$$ be the number of those parts.
 
@@ -228,8 +223,5 @@ In this case each coefficient is multiplied by the same factor.
 ## Configuration
 
 ### Specific parameters
-
-**useBaseCaseVoltage**  
-The `useBaseCaseVoltage` property is an optional property that defines to init the voltages in case of DC flows computation. If this property is set to `true`, the voltages present in the initial network are used, otherwise an uniform voltage plan is computed.
 
 ### Configuration file example
