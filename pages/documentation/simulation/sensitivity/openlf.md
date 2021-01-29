@@ -151,74 +151,42 @@ $$
 c_p = \theta^1_{m_p} - \theta^1_{k_p}
 $$
 
-#### Special case: loss of network connectivity
+#### Loss of network connectivity management
 
-It is possible that the matrix $$M$$ of the N-k case is not inversible.
-In the N-1 case it happens when the factor $$X_{m,k} - (\theta^2_m-\theta^2_k)$$ equals $$0$$.
-In this special case, above computations cannot be performed and used to assess post contingency sensitivities.
-This special case arrives when the N-k network is non connected.
-However, it is possible to get sensitivity values for components in the largest connected part of the N-k network containing the slack bus.
+An event can create one or more new synchronous component. In case of the loss of a single branch (when n = 1), it means, mathematically, that the factor $$X_{m,k} - (\theta^2_m-\theta^2_k)$$ equals to $$0$$. In case of the loss of more than one branch (when n > 1), it means, mathematically, that the matrix $$M$$ previously defines is not invertible. In that special configuration, previously described coefficients $$\alpha$$ cannot be computed and used to assess post-contingency sensitivities. Most of the time, the secondary networks are out of voltage, but it is still possible to get the sensitivity values in the largest network containing the slack bus. In real world, it is like the initial network has lost small parts that not contain the slack bus. Thus, the sensitivity values can still be computed.
+ 
+A sensitivity involves two equipments in the network: a load or a generator, etc. connected to a bus, or a phase tap changer and a monitored branch. These two equipments should be in the same connected component. If the two equipments are not in the same connected component, the sensitivity trivially equals to $$0$$. In the configuration where both equipments are in the same secondary connected component, which does not contain slack bus, we have arbitrary decided to assign the $$\text{NaN}$$ value to the sensitivity.
 
-In realistic cases of post contingency sensitivity value computations, the post contingency network might be non connected,
-but the original network should only have lost tiny portions and those should not contain the slack bus.
-Therefore, the part of the post contingency network containing the slack bus is only a little smaller than the original network,
-and most of the sensitivities can be computed.
+##### Loss of connectivity by a single branch
 
-Following sections explain how to compute sensitivity from an injection, or a phase shifting angle, at a bus, or a line,
-on a given line. Both components must be in the connected part of the slack bus in the post contingency network.
-If the two components of the sensitivity are not in the same connected part, the sensitivity trivially equals $$0$$.
-In the non probable case where both components lies in the same connected part which is not the part containing the slack bus,
-OpenLoadFlow will assign the $$\text{NaN}$$ value to the sensitivity. 
+This case is quite simple to support. Sensitivities computed on the base network are still valid for the post-contingency network as long as they refer to equipments in the connected component containing the slack bus.
 
-##### Loss of connectivity management in N-1 case
-The N-1 case where connectivity is lost is quite simple.
-Sensitivities computed on the N network are valid for the N-1 network as long as they concern components
-in the connected part of the N-1 network containing the slack bus.
+##### Loss of connectivity by more than one branch
 
-##### Loss of connectivity management in N-k case
-If the post contingency network of a N-k study is not connected, it can be divided into several largest connected parts.
-Let $$t$$ be the number of those parts.
+A post-contingency network can be divided into several largest connected components. Let's introduce $$t$$ be the number of those components.
 
-Obviously: $$t \leq k+1$$
+Obviously: $$t \leq n+1$$
 
-One of this part contains the slack bus and should be the largest.
-All sensitivities involving only components in this part can be computed.
-To do this, one must put back some disconnected lines to the network to obtain a connected network.
-OpenLoadFlow seek to find $$t-1$$ lines to put back such as a connected network is obtained.
-This provides a N-k+t-1 connected network.
+One of this component contains the slack bus and should be the largest. Only sensitivities involving equipments of that component can be computed. A easy way to compute them is to connect lines that have been disconnected during the contingency. More precisely, we have find $$t-1$$ lines to reconnect in order to obtain an single connected component without creating any loop. It does not modify the sensitivities, but it creates an invertible problem.
 
-We know that sensitivities computed on the N-k+t-1 network are valid for the N-k network as long as they concern components
-in the connected part of the N-k network containing the slack bus.
+##### How to detect a loss of connectivity?
 
-##### How to detect a loss of connectivity
-It might be quite time consuming to assess the connectivity of the N-k network using classic graph theory tools.
-Here we propose another way to detect a loss of connectivity in the N-k network that is used in OpenLoadFlow.
-If the N-k network is connected (which is a realistic assessment for real world computations),
-we need to compute the $$\theta^p$$ vectors as described in the N-k case section.
-Hence, our method uses those vectors as tools to detect a loss of connectivity.
+It might be quite time consuming to assess the connectivity of the post-contingency network using classic graph theory tools. Here we propose another way to detect a loss of connectivity in the post-contingency network. We need to compute the $$\theta^p$$ vectors as described in the section describing the loss of more than one branch. Our method uses those vectors to detect a loss of connectivity.
 
 First, we define and compute:
 
 $$
-\forall p \in \{1,\dots,k\}, \quad \sigma_p = \sum_{q \in \{1,\dots,k\}} \left|\frac{\theta^{p+1}_{m_q}-\theta^{p+1}_{n_q}}{X_{m_q,n_q}}\right|
+\forall p \in \{1,\dots,n\}, \quad \sigma_p = \sum_{q \in \{1,\dots,n\}} \left|\frac{\theta^{p+1}_{m_q}-\theta^{p+1}_{k_q}}{X_{m_q,k_q}}\right|
 $$
 
-If there exists $$p \in \{1,\dots,k\}$$ such as $$\sigma_p \geq 1$$, then, may be there is a loss of connectivity in the N-k network.
-Else, there is no loss of connectivity in the N-k network.
+If we can find $$p \in \{1,\dots,n\}$$ such as $$\sigma_p \geq 1$$, then, there is probably a loss of connectivity in the post-contingency network. Else, we are sure that there is no connectivity loss in the post-contingency network.
 
-OpenLoadFlow computes sequentially the $$\sigma_p$$ coefficients and, as soon as one of them is found greater or equal to $$1$$,
-stops the process and go back to classic graph theory tools to assess
-if there is a loss of connectivity by computing the set of larger connected parts in the N-k network.
-
-Since in a general case there is no loss of connectivity and the $$\sigma_p$$ coefficients are lesser than 1,
-the process is run to its end.
-But it is fast and efficient specially for N-1 case, where if $$\sigma_1$$ is equal to $$1$$, then the N-1 network is proven disconnected.
+We compute sequentially the $$\sigma_p$$ coefficients and, as soon as one of them is found greater or equal to $$1$$, we stop the process and a classic graph analysis is performed. Most of the time, connectivity is not lost, especially when we loose a single branch ($$\sigma_1$$ is equal to $$1$$).
 
 ##### Slack distribution in case of connectivity loss
-In case of connectivity loss, units that are not connected to the main part containing the slack bus are removed from the list of participating units.
-Moreover, the participating coefficient of remaining units is increased such as their sum remains equal to one.
-In this case each coefficient is multiplied by the same factor.
 
+In case of connectivity loss, participating elements that are not connected to slack bus are removed from the list of initial participating elements.
+Then, the participating factor of remaining elements is increased such as their sum remains equal to one.
 
 ## Configuration
 
