@@ -163,11 +163,13 @@ This case is quite simple to support. Sensitivities computed on the base network
 
 ##### Loss of connectivity by more than one branch
 
-A post-contingency network can be divided into several largest connected components. Let's introduce $$t$$ be the number of those components.
+A post-contingency network can be divided into several largest connected components. Let's introduce $$t$$ the number of those components.
 
 Obviously: $$t \leq n+1$$
 
-One of this component contains the slack bus and should be the largest. Only sensitivities involving equipments of that component can be computed. A easy way to compute them is to connect lines that have been disconnected during the contingency. More precisely, we have find $$t-1$$ lines to reconnect in order to obtain an single connected component without creating any loop. It does not modify the sensitivities, but it creates an invertible problem.
+One of this component contains the slack bus and should be the largest. Only sensitivities involving equipments of that component can be computed. A easy way to compute them is to connect lines that have been disconnected during the contingency. More precisely, we have to find $$t-1$$ lines to reconnect in order to obtain a single connected component. As we reconnect exactly $$t-1$$ lines and obtain a connected network, we are assured that there are no loop in it.
+
+As the two equipments of the sensitivity lie in the largest connected component of the post-contingency network (containing the slack bus), no flow can pass throught the reconnected lines. Then, the sensitivities of the post-contingency network are equal to those of the connected network, where the matrix $$M$$ is invertible.
 
 ##### How to detect a loss of connectivity?
 
