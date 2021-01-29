@@ -112,16 +112,16 @@ $$
 
 Sometimes, an event in the network causes the loss of several buses and branches. Connected to these lost buses, we can have generators or loads.
  
-Let's introduce $$s_{b,ij,E}$$ the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ when the event $$E$$ occurs. The event $$E$$ corresponds to the loss of the $$k$$ branches indexed by $$(m_1,k_1), \cdots, (m_n,k_n)$$. We want to compute this sensitivity.
+Let's introduce $$s_{b,ij,E}$$ the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ when the event $$E$$ occurs. The event $$E$$ corresponds to the loss of the $$n$$ branches indexed by $$(m_1,k_1), \cdots, (m_n,k_n)$$. We want to compute this sensitivity.
 
 We call $$b^1$$ the right-hand side vector corresponding to an increase of 1 MW at bus $$b$$. We call $$\theta^1$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^1$$.
 
-We call $$b^{p+1}$$ be the right-hand side vector corresponding to an increase of 1 MW at bus $$m_p$$ and a decrease of 1 MW at bus $$k_p$$. We call $$\theta^p$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^{p+1}$$.
+We call $$b^{p+1}$$ be the right-hand side vector corresponding to an increase of 1 MW at bus $$m_p$$ and a decrease of 1 MW at bus $$k_p$$. We call $$\theta^{p+1}$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^{p+1}$$.
 
 Then, the post-contingency sensitivity $$s_{b,ij,E}$$ satisfies:
 
 $$
-s_{b,ij,E} = s_{b,ij} + \sum_{p} \alpha_p s_{m_pk_p,ij}
+s_{b,ij,E} = s_{b,ij} + \sum_{p=1}^n \alpha_p s_{m_pk_p,ij}
 $$
 
 Where, valid for all buses:
