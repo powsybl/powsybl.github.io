@@ -190,6 +190,15 @@ We compute sequentially the $$\sigma_p$$ coefficients and, as soon as one of the
 In case of connectivity loss, participating elements that are not connected to slack bus are removed from the list of initial participating elements.
 Then, the participating factor of remaining elements is increased such as their sum remains equal to one.
 
+#### Extension to reference flow computations
+
+All above technics used to compute sensitivities in a post-contingency network are applied to reference flow computations in a post-contingency network.
+
+In case of reference flow computations, the vector of right-hand side $$b_1$$ must be the injections at network buses. All other data or formula are unchanged. Beware that the system $$Mx = c$$ whose vector $$\alpha$$ is solution is modified when $$b_1$$ is modified, because right-hand side vector $$c$$ depends on $$\theta_1$$. However matrix $$M$$ only depends on which lines are disconnected by the outage.
+
+In case of an outage causing connectivity loss in the post-contingency network, reference flows can be computed only in the largest connected part containing the slack bus. To do so, the right-hand side injection vector $$b_1$$ is modified to take into account only injections in the largest connected part of the post-contingency network. To perform computations, the same technic of reconnecting some lines to obtain a connected network is used.
+
+
 ## Configuration
 
 ### Specific parameters
