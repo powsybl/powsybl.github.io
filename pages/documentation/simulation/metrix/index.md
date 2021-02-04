@@ -449,17 +449,14 @@ All outputs of Metrix are time series that will be stored in a single file.
 
 ### Simulation result
 
-La chronique ERROR_CODE renseigne sur le bon déroulement du calcul Metrix. Une valeur 0 indique que le calcul de cette variante s'est déroulé normalement.
-
-Toute autre valeur est le signe d'un problème :
-
-    Pas de solution : retour du solveur qui indique que le problème d'optimisation ne présente pas solution (cause possible : impossibilité de baisser un groupe ou de délester une charge)
-    Nombre maximum de contraintes atteint : le problème comporte trop de contraintes (ce genre d'erreur ne devrait pas arriver car ce nombre est très élevé)
-    Nombre maximum de micro-itérations atteint : le nombre maximum de micro-itération a été atteint avant la fin de la résolution. Ce n'est pas bon signe, mais il peut être augmenté (voir paramètres).
-    Variante ignorée: incohérence dans les données d'entrée de la variante (ex. Pconsigne non comprise entre Pmin et Pmax). Aucun calcul n'est effectué et Metrix passe à la variante suivante.  
+The time series ERROR_CODE reports the exit value of the metrix computation process, 0 being the standard ok.
+Any other value will hint toward one of the following issues :
+- 1 : No solution was found
+- 2 : The maximum number of constraints was reached
+- 3 : The maximum of micro iteration was reached (can be increased with global parameter `nbMaxIteration`)
+- 4 : Ignored variant (when input isn't consistent)  
 
 ### Global results
-Résultats généraux
 
 LOSSES : total losses (in MW) (for all synchonized zones)
 
@@ -488,15 +485,6 @@ outageLoad_branchId : load percentage for N-1 (the flow divided by the N-1 thres
 outageOverload_branchId : overload flow for N-1 (difference between flow and N-1 threshold if greater than threshold)
 
 overallOverload_branchID : sum of basecase and outage overload values
-
-Complément sur le calcul des pertes
-Metrix utilisant l'approximation du courant continu, la tension est considérée constante sur l'ensemble du réseau. Le calcul des pertes fourni Metrix est donc une approximation effectuée a posteriori sur la base des transits actifs obtenus en fin de calcul et en supposant que les transits réactifs sont nuls.
-Les pertes des quadripôles sont calculées à partir de leur puissance nominale Unom, en considérant cos(ϕ)=1, via la formule :
-Pertes = R * (Transit/Unom)2
-
-Note : pour utiliser une valeur de cos(ϕ) différente de 1, il suffit de diviser le résultat de pertes de Metrix par cos²(ϕ). 
-
-Pour les pertes des HVDC, se référer à la note "METRIX comment ça marche". 
 
 ### Load flow results
 
