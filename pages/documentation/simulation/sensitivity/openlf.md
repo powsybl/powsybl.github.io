@@ -16,7 +16,7 @@ The source code is hosted on [GitHub](https://github.com/powsybl/powsybl-open-lo
 
 A DC sensitivity analysis starts from the DC flows computing described in the [power flow section](../powerflow/openlf.md#dc-flows-computing). Simple sensitivity analyses are supported as:
 - How an injection increase of 1 MW will impact the flow of a branch ;
-- How a phase shifting of 1°  of a phase tap changer will impact the flow of a branch.
+- How a phase shifting of 1° of a phase tap changer will impact the flow of a branch.
 
 This could be done in a set of branches given by the user.
 
@@ -78,14 +78,14 @@ The contingency management consists in calculating the sensitivity values for po
 
 #### Loss of a single branch
 
-The most frequent contingency is the loss of a single branch.
+The most frequent event in the network is the loss of a single branch (including the loss of a transformer with or without tap changer).
  
 Let's introduce $$s_{b,ij,mk}$$ the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ where the branch $$(m,k)$$ represents the outage.
 We want to compute this sensitivity.
 
-We call $$b^1$$ the right-hand side vector corresponding with an increase of 1 MW at bus $$b$$. We call $$\theta^1$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^1$$.
+We call $$b^1$$ the right-hand side vector corresponding to an increase of 1 MW at bus $$b$$. We call $$\theta^1$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^1$$.
 
-We call $$b^2$$ be the right-hand side vector corresponding with an increase of 1 MW at bus $$m$$ and a decrease of 1 MW at bus $$k$$. We call $$\theta^2$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^2$$.
+We call $$b^2$$ be the right-hand side vector corresponding to an increase of 1 MW at bus $$m$$ and a decrease of 1 MW at bus $$k$$. We call $$\theta^2$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^2$$.
 
 Note that both $$\theta^1$$ and $$\theta^2$$ are built using the same LU decomposition of the constraints matrix $$J$$.
 
@@ -96,18 +96,107 @@ s_{b,ij} = \frac{\theta^1_i-\theta^1_j}{X_{i,j}}
 $$
 
 Let $$s_{mk,ij}$$ be the sensitivity of an increase of 1 MW at bus $$m$$ and a decrease of 1 MW at bus $$k$$, on the pre-contingency network.
-It can be easily computed through the formula:
+It can be easily computed through the formula, valid for all buses:
 
 $$
 s_{mk,ij} = \frac{\theta^2_i-\theta^2_j}{X_{i,j}}
 $$
 
-Then, The post-contingency sensitivity $$s_{b,ij,mk}$$ satisfies:
+Then, the post-contingency sensitivity $$s_{b,ij,mk}$$ satisfies:
 
 $$
 s_{b,ij,mk} = s_{b,ij} + \frac{\theta^1_m-\theta^1_k}{X_{m,k} - (\theta^2_m-\theta^2_k)}s_{mk,ij}
 $$
 
+#### Loss of more than one branch
+
+Sometimes, an event in the network causes the loss of several buses and branches. Connected to these lost buses, we can have generators or loads.
+ 
+Let's introduce $$s_{b,ij,E}$$ the sensitivity of an increase of 1 MW at bus $$b$$ on branch $$(i,j)$$ when the event $$E$$ occurs. The event $$E$$ corresponds to the loss of the $$n$$ branches indexed by $$(m_1,k_1), \cdots, (m_n,k_n)$$. We want to compute this sensitivity.
+
+We call $$b^1$$ the right-hand side vector corresponding to an increase of 1 MW at bus $$b$$. We call $$\theta^1$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^1$$.
+
+We call $$b^{p+1}$$ be the right-hand side vector corresponding to an increase of 1 MW at bus $$m_p$$ and a decrease of 1 MW at bus $$k_p$$. We call $$\theta^{p+1}$$ the state vector of voltage angles obtained by solving the equation system on the pre-contingency network that has as right-hand side $$b^{p+1}$$.
+
+Then, the post-contingency sensitivity $$s_{b,ij,E}$$ satisfies:
+
+$$
+s_{b,ij,E} = s_{b,ij} + \sum_{p=1}^n \alpha_p s_{m_pk_p,ij}
+$$
+
+Where, valid for all buses:
+
+$$
+s_{m_pk_p,ij} = \frac{\theta^{p+1}_i-\theta^{p+1}_j}{X_{i,j}}
+$$
+
+The vector of coefficients $$\alpha$$ is computed as the solution of a linear system of size $$n$$:
+
+$$
+Mx = c
+$$
+
+Where $$M$$ is the $$n \times n$$ matrix defined by:
+
+$$
+\begin{align}
+M_{p,q} =& -(\theta^{q+1}_{m_p} - \theta^{q+1}_{k_p}) & \texttt{if}~p \neq q,\\
+M_{p,q} =& X_{m_p,k_p} - (\theta^{p+1}_{m_p} - \theta^{p+1}_{k_p})& \texttt{else}.
+\end{align}
+$$
+
+And $$c$$ the vector of size $$n$$ defined by:
+
+$$
+c_p = \theta^1_{m_p} - \theta^1_{k_p}
+$$
+
+#### Loss of network connectivity management
+
+An event can create one or more new synchronous component. In case of the loss of a single branch (when n = 1), it means, mathematically, that the factor $$X_{m,k} - (\theta^2_m-\theta^2_k)$$ equals to $$0$$. In case of the loss of more than one branch (when n > 1), it means, mathematically, that the matrix $$M$$ previously defines is not invertible. In that special configuration, previously described coefficients $$\alpha$$ cannot be computed and used to assess post-contingency sensitivities. Most of the time, the secondary networks are out of voltage, but it is still possible to get the sensitivity values in the largest network containing the slack bus. In real world, it is like the initial network has lost small parts that not contain the slack bus. Thus, the sensitivity values can still be computed.
+ 
+A sensitivity involves two equipments in the network: a load or a generator, etc. connected to a bus, or a phase tap changer and a monitored branch. These two equipments should be in the same connected component. If the two equipments are not in the same connected component, the sensitivity trivially equals to $$0$$. In the configuration where both equipments are in the same secondary connected component, which does not contain slack bus, we have arbitrary decided to assign the $$\text{NaN}$$ value to the sensitivity.
+
+##### Loss of connectivity by a single branch
+
+This case is quite simple to support. Sensitivities computed on the base network are still valid for the post-contingency network as long as they refer to equipments in the connected component containing the slack bus.
+
+##### Loss of connectivity by more than one branch
+
+A post-contingency network can be divided into several largest connected components. Let's introduce $$t$$ the number of those components.
+
+Obviously: $$t \leq n+1$$
+
+One of this component contains the slack bus and should be the largest. Only sensitivities involving equipments of that component can be computed. A easy way to compute them is to connect lines that have been disconnected during the contingency. More precisely, we have to find $$t-1$$ lines to reconnect in order to obtain a single connected component. As we reconnect exactly $$t-1$$ lines and obtain a connected network, we are assured that there are no loop in it.
+
+As the two equipments of the sensitivity lie in the largest connected component of the post-contingency network (containing the slack bus), no flow can pass throught the reconnected lines. Then, the sensitivities of the post-contingency network are equal to those of the connected network, where the matrix $$M$$ is invertible.
+
+##### How to detect a loss of connectivity?
+
+It might be quite time consuming to assess the connectivity of the post-contingency network using classic graph theory tools. Here we propose another way to detect a loss of connectivity in the post-contingency network. We need to compute the $$\theta^p$$ vectors as described in the section describing the loss of more than one branch. Our method uses those vectors to detect a loss of connectivity.
+
+First, we define and compute:
+
+$$
+\forall p \in \{1,\dots,n\}, \quad \sigma_p = \sum_{q \in \{1,\dots,n\}} \left|\frac{\theta^{p+1}_{m_q}-\theta^{p+1}_{k_q}}{X_{m_q,k_q}}\right|
+$$
+
+If we can find $$p \in \{1,\dots,n\}$$ such as $$\sigma_p \geq 1$$, then, there is probably a loss of connectivity in the post-contingency network. Else, we are sure that there is no connectivity loss in the post-contingency network.
+
+We compute sequentially the $$\sigma_p$$ coefficients and, as soon as one of them is found greater or equal to $$1$$, we stop the process and a classic graph analysis is performed. Most of the time, connectivity is not lost, especially when we loose a single branch ($$\sigma_1$$ is equal to $$1$$).
+
+##### Slack distribution in case of connectivity loss
+
+In case of connectivity loss, participating elements that are not connected to slack bus are removed from the list of initial participating elements.
+Then, the participating factor of remaining elements is increased such as their sum remains equal to one.
+
+#### Extension to reference flow computations
+
+The methodology described below to access to sensitivity values in a post-contingency network can be applied to compute reference flows in the same post-contingency network.
+
+In that case, the vector of right-hand side $$b_1$$ is the injections at network buses. All other data or formula are unchanged. Beware that the system $$Mx = c$$ whose vector $$\alpha$$ is solution is modified when $$b_1$$ is modified, because right-hand side vector $$c$$ depends on $$\theta_1$$. However matrix $$M$$ only depends on which lines are disconnected by the outage.
+
+In case of an outage causing connectivity loss in the post-contingency network, reference flows can be computed only in the largest connected component containing the slack bus. In that case, the right-hand side injection vector $$b_1$$ is modified to take into account only injections in the largest connected part of the post-contingency network (all other injections are set to zero). The same methodology of reconnecting some lines to obtain a connected network is used too.
 
 ## Configuration
 
