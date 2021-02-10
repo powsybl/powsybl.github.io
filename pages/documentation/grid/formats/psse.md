@@ -227,7 +227,7 @@ A set of current permanent limits is defined as `1000.0` * `rateMva` / (`sqrt(3.
 
 #### _Transformer Data_
 
-The _Transformer Data_ block defines two windings and three windings transformers. Two windings transformers have four line records, while three winding transformers have five line records. A `0` value in the field `K` of the _Transformer Data_ record first line is used to indicate that is a two windings transformer, otherwise is considered a three windings transformer.
+The _Transformer Data_ block defines two windings and three windings transformers. Two windings transformers have four line records, while three windings transformers have five line records. A `0` value in the field `K` of the _Transformer Data_ record first line is used to indicate that is a two windings transformer, otherwise is considered a three windings transformer.
 
 PSS@E two windings transformer records are mapped to two windings transformers in the PowSyBl grid model. They are associated with corresponding voltage levels inside the same substation and defined with the following attributes:
 
@@ -249,7 +249,7 @@ The transformer is connected at both ends if the branch status (field `STAT` in 
 
 In PSS®E the transformer model allows to define a ratio and angle at the end `1` and only a fixed ratio at the end `2`. The transformer magnetizing admittance is modeled between the bus and the ratio of the end `1`. The PowSyBl grid model supports a ratioTapChanger and a phaseTapChanger at the end `1` and the magnetizing admittance is between the ratio and the transmission impedance. 
 
-![TwoWindingTransformerModels](img/psse/two-windings-transformer-model.svg){: width="100%" .center-image}
+![TwoWindingsTransformerModels](img/psse/two-windings-transformer-model.svg){: width="100%" .center-image}
 
 To express the PSS®E electric attributes of the transformer in the PowSyBl grid model the following conversions are performed:
 
@@ -302,7 +302,7 @@ Positive Sequence Load Flow Analysis in PSS®E](https://static.dc.siemens.com/da
 - Each winding can have a complex ratio and a `ratioTapChanger` or `phaseTapChanger` with its corresponding control, always at end `1`. The current PowSyBl version only supports one enabled control by three windings transformer so if there is more than one enabled only the first (winding `1`, winding `2`, winding `3`) is kept enabled, the rest are automatically disabled.
 - In three windings transformers the status attribute (field `STAT` in the _Transformer Data_ record) could be `0` that means all the windings disconnected, `1` for all windings connected, `2` for only the second winding disconnected, `3` for the third winding disconnected and `4` for the first winding disconnected.
 
-![ThreeWindingTransformerModels](img/psse/three-windings-transformer-model.svg){: width="100%" .center-image}
+![ThreeWindingsTransformerModels](img/psse/three-windings-transformer-model.svg){: width="100%" .center-image}
 
 #### Slack bus
 
