@@ -82,7 +82,7 @@ this parameter is `1`.
 
 **dcUseTransformerRatio**  
 The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the
-flow equations. The default value of this parameter is `false`.
+flow equations. The default value of this parameter is `true`. It used to be false until the version 2.15.0 of `hades2-integration`.
 
 **dcVoltageCoeff225**  
 The `dcVoltageCoeff225` property is an optional property that defines the multiplication factor of the nominal voltage
