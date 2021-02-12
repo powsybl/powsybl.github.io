@@ -3,7 +3,7 @@ layout: default
 ---
 
 # Create an iTools command in Java
-This tutorial shows you how to create a simple `iTools` command in Java.
+In this tutorial, you will learn how to create a simple `iTools` command in Java.
 
 The `iTools` script is designed to be easily extended with new commands that would be added to the set of
 available commands, providing users with new command line functionalities.
@@ -86,7 +86,7 @@ public class CountNetworkLinesTool implements Tool {
 }
 ```
 
-You have to declare the class as a service implementation, using the `@Autoservice` annotation. This will allow you to
+You have to declare the class as a service implementation, using the `@Autoservice` annotation. This allows you to
 have the new command automatically added to the list of available `iTools` commands, and to be able to run it (see last
 section).
 

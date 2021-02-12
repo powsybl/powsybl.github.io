@@ -3,8 +3,8 @@ layout: default
 ---
 
 # How to manage topological views?
-This example aims to create a substation with a node/breaker topology model and to visit it through the bus/breaker and the bus views.
-In a second time, we create the same substation with a bus/breaker topology model and we visit it through the bus/breaker and the bus views.
+This example aims first to create a substation with a node/breaker topology model and to visit it through the bus/breaker and the bus views.
+Then, we create the same substation with a bus/breaker topology model and we visit it through the bus/breaker and the bus views.
 The corresponding code is fully available in the [topology](https://github.com/powsybl/powsybl-tutorials) tutorial.
 
 
@@ -32,7 +32,7 @@ The next diagram shows how to map the substation topology to a graph.
 ## Bus/breaker view
 
 The following diagram shows the computed bus/breaker topology.
-Compared to the node/breaker topology, only the equipements (GN, LD, TR, LN) and the switches flagged as retained (BR3) remain in the network description.
+Compared to the node/breaker topology, only the equipments (GN, LD, TR, LN) and the switches flagged as retained (BR3) remain in the network description.
 The equipments are now connected through buses (B1, B2 and B3).
 
 ![Bus breaker graph](./img/topology/busBreakerTopology.svg){: width="50%" .center-image}
@@ -58,11 +58,11 @@ Bus: VL2_1
 
 ## Bus view
 
-The following diagram shows the computed bus topology. Compared to bus/breaker topology, there is no switches anymore. Only remains equipements (GN, TR, LN) connected through buses. LD is not connected.
+The following diagram shows the computed bus topology. Compared to bus/breaker topology, there is no switches anymore. There remains only equipments (GN, TR, LN) connected through buses. LD is not connected.
 
 ![Bus graph](./img/topology/busTopology.svg){: width="50%" .center-image}
 
-We can switch to a bus view on substation voltage level VL1. VL1 contains 1 bus in the bus view. This bus connects all the equipements of voltage level VL1. Here are the corresponding prints in the tutorial:
+We can switch to a bus view on substation voltage level VL1. VL1 contains 1 bus in the bus view. This bus connects all the equipments of voltage level VL1. Here are the corresponding prints in the tutorial:
 
 ````
 Bus:VL1_1
@@ -77,7 +77,8 @@ Bus:VL2_1
 Note that creating a substation with a bus/breaker topology model is easier.
 Instead of creating VL1 and VL3 with a node/breaker topology model, we can directly create them in a simpler bus/breaker topology model.
 It can be very useful when data source only contains bus/branch data link in UCTE-DEF or in CIM-CGMES format sometimes.
-Warning: in that case the node/breaker view status on voltage level VL1 and VL2 is N/A (not available).
+Beware: in that case the node/breaker view status on voltage level VL1 and VL2 is N/A (not available).
+
 Here are the corresponding prints in the tutorial. Note that the load LD is not printed in that case:
 
 ````
