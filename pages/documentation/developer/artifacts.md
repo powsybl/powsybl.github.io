@@ -330,29 +330,26 @@ This module provides a maven plugin to [create a standalone distribution based o
 
 ## Single line diagram
 
-**single-line-diagram-view-app**  
-This module provides a demo app to view diagrams of substations and voltage levels of network files.
-
-**single-line-diagram-core**  
-This module enables to generate svg images of voltage levels and substations.
-
-**single-line-diagram-view**  
-This module provides a javafx component to display interactive network diagrams.
-
-**single-line-diagram-cgmes-layout**  
-This module should be used to create svgs from the CIM-CGMES DL (Diagram Layout) profile.
-
-**single-line-diagram-color**  
-This module is used to define colors from a `base-voltages.yml` file.
-
-**single-line-diagram-iidm-extensions**  
-This module defines extensions to attach diagram information to networks.
-
 **single-line-diagram-cgmes-dl-iidm-extensions**  
 This module gathers the network core model extensions for CIM-CGMES networks.
 
 **single-line-diagram-cgmes-dl-conversion**  
 This module is used to convert the CIM-CGMES DL profile to the network core model extensions.
+
+**single-line-diagram-cgmes-layout**  
+This module should be used to create svgs from the CIM-CGMES DL (Diagram Layout) profile.
+
+**single-line-diagram-force-layout**  
+This module provides a layout for substation diagrams based on the [Force Atlas 2](https://github.com/gephi/gephi/wiki/Force-Atlas-2) algorithm.
+
+**single-line-diagram-iidm-extensions**  
+This module defines extensions to attach diagram information to networks.
+
+**single-line-diagram-view**  
+This module provides a javafx component to display interactive network diagrams.
+
+**single-line-diagram-view-app**  
+This module provides a demo app to view diagrams of substations and voltage levels of network files.
 
 ## Grid Study Environment (Deprecated)
 The following artifacts are part of a generic desktop application you can easily customize with plugins.
