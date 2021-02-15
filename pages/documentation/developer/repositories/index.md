@@ -49,8 +49,8 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) provides modules to run optimal power load flow on multi case configured network.
 
-**Reviewers:** [pl-buiquang](https://github.com/pl-buiquang), [geofjamg](https://github.com/geofjamg)
-**Committers:** [pl-buiquang](https://github.com/pl-buiquang), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
+**Reviewers:** [marifunf](https://github.com/marifunf), [berthaultval](https://github.com/berthaultval), [pl-buiquang](https://github.com/pl-buiquang)
+**Committers:** [berthaultval](https://github.com/berthaultval), [MioRtia](https://github.com/MioRtia)
 
 ## Microservices
 
@@ -113,8 +113,8 @@ This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) provides a C++ implementation of optimal power load flow.
 
-**Reviewers:** [pl-buiquang](https://github.com/pl-buiquang), [geofjamg](https://github.com/geofjamg)
-**Committers:** [pl-buiquang](https://github.com/pl-buiquang), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
+**Reviewers:** [bongrainmat](https://github.com/bongrainmat), [berthaultval](https://github.com/berthaultval), [pl-buiquang](https://github.com/pl-buiquang)
+**Committers:** [berthaultval](https://github.com/berthaultval), [MioRtia](https://github.com/MioRtia)
 
 ## Development
 
