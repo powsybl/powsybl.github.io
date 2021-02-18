@@ -43,7 +43,11 @@ mapToLoads {...}
 mapToHvdcLines {...}
 mapToBoundaryLines {...}
 mapToBreakers {...}
-mapToPsts {...}
+mapToTransformers {...}
+mapToPhaseTapChangers {...}
+mapToRatioTapChangers {...}
+mapToLccConverterStations {...}
+mapToVscConverterStations {...}
 ```
 
 the general syntax is: 
@@ -69,14 +73,18 @@ Note that if the same time series (referred by its name) is used in multiple map
 #### Variable
 
 The `variable` allows to specify which network element attribute will be overwritten by its mapped time series value.
-It is an optional variable which values depends on the element type (default is in bold) :
+It is an optional variable (except for transformers) which values depends on the element type (default is in bold) :
 
 - mapToGenerators : **targetP**, minP, maxP, targetQ
 - mapToLoads : **p0**, fixedActivePower, variableActivePower, q0, fixedReactivePower, variableReactivePower
 - mapToHvdcLines : **activePowerSetpoint**, minP, maxP
 - mapToBoundaryLines : **p0**
 - mapToBreakers : **open** (with 1 corresponding to a closed switch and 0 to open)
-- mapToPsts: **currentTap**
+- mapToTransformers : ratedU1, ratedU2
+- mapToPhaseTapChangers : **phaseTapPosition**, regulationMode
+- mapToRatioTapChangers : **ratioTapPosition**, loadTapChangingCapabilities, regulating, targetV
+- mapToLccConverterStations : **powerFactor**
+- mapToVscConverterStations : **voltageSetpoint**, voltageRegulatorOn, reactivePowerSetpoint
 
 For the loads, it is forbidden to map `p0` and in the same time `fixedActivePower` or `variableActivePower`, as theses variables are linked (`p0 = Pfixed + Pvar`). It is restricted to prevent incoherent mapping. If only `fixedActivePower` or `variableActivePower` is mapped, then the value of the other unmapped one will be set to 0 by default. 
 
@@ -215,7 +223,7 @@ mapToBreakers {
 
 Mapping on Phase Tap Shifters:
 ```groovy
-mapToPsts {
+mapToPhaseTapChangers {
     timeSeriesName 'N1_TD'
     filter {'TD_1'} 
 }
