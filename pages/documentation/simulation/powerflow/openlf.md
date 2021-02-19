@@ -26,7 +26,33 @@ As the $$\Pi$$ model is created from IIDM grid modelling that locates its ratio 
 
 ### AC flows computing
 
-TO DO
+AC flows computing in OpenLoadFLow relies on solving a non linear squared equations system, where unknown are voltage magnitude and phase angle at each bus of the network, implying that there are $$2N$$ unknown where $$N$$ is the number of buses. There are two equations per network bus, resulting in $$2N$$ equations. The nature of these $$2$$ equations depends on the type of the bus:
+- PQ-bus: active and reactive balance are fixed at the bus,
+- PV-bus: active balance and voltage magnitude are fixed at the bus.
+
+Moreover, at the slack bus, the active balance equation is removed and replaced by an equation fixing the voltage phase angle at 0.
+
+Let $$v_i$$ be the unknown voltage magnitude at bus $$i$$. Let $$\theta_i$$ be the unknown voltage phase angle at bus $$i$$. Equation fixing voltage magnitude to a reference is simply writen $$v_i = V^{ref}_i$$. Equation fixing voltage phase angle at slack bus $$i$$ is: $$\phi_i = 0$$
+
+To build the active and reactive balance equations, OpenLoadFlow first expresses active and reactive power flowing from a bus to another throught a line:
+
+$$p_{i,j}= R_{i,j}^iv_i(G_{i,j}^iR_{i,j}^iv_i + Y_{i,j}R_{i,j}^iv_i\text{sin}(\Xi_{i,j}) - Y_{i,j}R_{i,j}^jv_j\text{sin}(\theta_{i,j})).$$
+
+$$q_{i,j}= R_{i,j}^iv_i(-B_{i,j}^iR_{i,j}^iv_i + Y_{i,j}R_{i,j}^iv_i\text{cos}(\Xi_{i,j}) - Y_{i,j}R_{i,j}^jv_j\text{cos}(\theta_{i,j})).$$
+
+Where $$Y_{i,j}$$ is the magnitude of the line complex admitance $$\frac{1}{R_{i,j}+jX_{i,j}}$$, and $$\Xi_{i,j}$$ such that: $$R_{i,j}+jX_{i,j} = \frac{1}{Y_{i,j}}e^{j(\frac{\pi}{2}-\Xi_{i,j})}$$. $$\theta_{i,j}$$ satisfies: $$\theta_{i,j}= \Xi_{i,j} - A_{i,j}^i + A_{i,j}^j - \phi_i + \phi_j.$$
+
+Beware that $$p_{i,j}$$ is the power at the exit of bus $$i$$.
+
+Therefore, active and reactive balance equations are expressed as:
+
+$$ P_i^{in} = \sum_{j \in v(i)} p_{i,j}.$$
+
+$$ Q_i^{in} = \sum_{j \in v(i)} q_{i,j}.$$
+
+Where $$v(i)$$ is the set of buses linked to $$i$$ in the network graph.
+
+Solving this non-linear equations system is done using the Newton-Raphson method. At each iteration, the local jacobian matrix $$J(v,\phi)$$ of the system is computed and a linear system based on this matrix is solved using its LU decomposition. 
 
 ### DC flows computing
 
