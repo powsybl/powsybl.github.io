@@ -27,7 +27,7 @@ The next diagram shows how to map the substation topology to a graph.
 - Transformer TR is connected to node 8 of voltage level 400 KV and node 3 of voltage level 225 KV.
 - Plain edges represent closed switches.
 - Dashed edges represent open switches.
-- Green edges will disappear during the bus/breaker topology computation whereas pink edges (like 3<->4 in this case) will be retained, whatever their state (see switches).
+- Green edges will disappear during the bus/breaker topology computation whereas pink edges (like 3<->4 in this case) will be retained, whatever their state open or closed.
 
 ## Bus/breaker view
 
