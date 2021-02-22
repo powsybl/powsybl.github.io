@@ -12,6 +12,135 @@ The source code is hosted on [GitHub](https://github.com/powsybl/powsybl-open-lo
 * TOC
 {:toc}
 
+## AC sensitivity analysis
+
+An AC sensitivity analysis starts from the AC flows computing described in the [power flow section](../powerflow/openlf.md#ac-flows-computing). Simple sensitivity analyses are supported as:
+- How an active injection increase of 1 MW will impact the flow of a branch ;
+- How an active injection increase of 1 MW will impact the current of a branch ;
+- How a phase shifting of 1° of a phase tap changer will impact the flow of a branch ;
+- How a phase shifting of 1° of a phase tap changer will impact the current of a branch.
+
+This could be done in a set of branches given by the user.
+
+Every sensitivity computation is done using the following formula:
+
+$$ S_{\eta,p}(v,\phi) = g_p^T(v,\phi) + G_{v,\phi}(v,\phi)^TJ(v,\phi)^{-1}f_p(v,\phi). $$
+
+Where:
+- $$\eta$$ is the list of values measured by the sensitivity (i.e. flow on line or current on line) ;
+- $$p$$ is the parameter whose variation is studied by the sensitivity ;
+- $$S_{\eta,p}(v,\phi)$$ is a row-vector of sensitivities on values $$\eta$$ according to variation of parameter $$p$$, at the point $$(v,\phi)$$ ;
+- $$g_p(v,\phi)$$ is the gradient of sensitivities according to the parameter $$p$$, at the point $$(v,\phi)$$ ;
+- $$G_{v,\phi}(v,\phi)$$ is the matrix whose each column is the gradient of a sensitivity according to state variables $$v$$ and $$\phi$$, at the point $$(v,\phi)$$ ;
+- $$J(v,\phi)$$ is the jacobian matrix of power flow equations system at the point $$(v,\phi)$$ ;
+- $$f_p(v,\phi)$$ is the gradient of power flow equations according to the parameter $$p$$, at the point $$(v,\phi)$$.
+
+Giving a list of sensitivities $$\eta$$ and a parameter $$p$$, an AC sensitivity analysis is done with following steps:
+1. Extract from a power flow computation state variables $$(v,\phi)$$ ;
+2. Compute vector $$f_p(v,\phi)$$ ;
+3. Compute jacobian matrix $$J(v,\phi)$$ ;
+4. Compute the LU decomposition of the jacobian ;
+5. Compute $$J(v,\phi)^{-1}f_p(v,\phi)$$ with the LU decomposition ;
+6. Compute $$G_{v,\phi}(v,\phi)$$ ;
+7. Compute $$g_p(v,\phi)$$ ;
+8. Compute $$S_{\eta,p}(v,\phi)$$ using the formula.
+
+Following sections detail how $$f_p(v,\phi)$$, $$G_{v,\phi}(v,\phi)$$ and $$g_p(v,\phi)$$ are computed.
+
+### Computation of vector $$f_p(v,\phi)$$
+
+Vector $$f_p(v,\phi)$$ is the gradient of power flow equations according to the parameter $$p$$, at the point $$(v,\phi)$$. Its computation depends on if $$p$$ is the active injection at a bus, or the phase shifting angle of a phase tap changer.
+
+#### Case 1: $$p$$ is the active injection at bus $$i$$
+
+$$
+\begin{align}
+\texttt{If}~k~\texttt{is the coordinate of the active power flow balance at bus}~i:& \quad f_p(v,\phi)_k = 1,\\
+\texttt{Else}:& \quad f_p(v,\phi)_k = 0.
+\end{align}
+$$
+
+#### Case 2: $$p$$ is the phase shifting angle of the phase tap changer on side $$i$$ of line $$(i,j)$$
+
+$$
+\begin{align}
+\texttt{Let}~\alpha &= -R_{i,j}^iv_iY_{i,j}R_{i,j}^jv_j\text{cos}(\theta_{i,j})\frac{\pi}{180},\\
+\texttt{Let}~\beta &= R_{i,j}^iv_iY_{i,j}R_{i,j}^jv_j\text{sin}(\theta_{i,j})\frac{\pi}{180}.
+\end{align}
+$$
+
+$$
+\begin{align}
+\texttt{If}~k~\texttt{is the coordinate of the active power flow balance at bus}~i:& \quad (f_p(v,\phi))_k = \alpha,\\
+\texttt{If}~k~\texttt{is the coordinate of the active power flow balance at bus}~j:& \quad (f_p(v,\phi))_k = -\alpha,\\
+\texttt{If}~k~\texttt{is the coordinate of the reactive power flow balance at bus}~i~\texttt{which is PQ}:& \quad (f_p(v,\phi))_k = \beta,\\
+\texttt{If}~k~\texttt{is the coordinate of the reactive power flow balance at bus}~j~\texttt{which is PQ}:& \quad (f_p(v,\phi))_k = -\beta,\\
+\texttt{Else}:& \quad (f_p(v,\phi))_k = 0.
+\end{align}
+$$
+
+### Computation of matrix $$G_{v,\phi}(v,\phi)$$
+
+Matrix $$G_{v,\phi}(v,\phi)$$ is the matrix whose each column is the gradient of a sensitivity according to state variables $$v$$ and $$\phi$$, at the point $$(v,\phi)$$. It is computed column by column. The computation of column $$l$$ depends on if it is relative to the sensitivity of the power or the current flowing from $$i$$ to $$j$$.
+
+#### Case 1: Column $$l$$ is relative to the sensitivity of the power flowing from $$i$$ to $$j$$
+
+$$
+\begin{align}
+\texttt{Let}~\frac{dp_{i,j}}{dv_i} &= R_{i,j}^i(2G_{i,j}R_{i,j}^iv_i + 2Y_{i,j}R_{i,j}^iv_i\text{sin}(\Xi_{i,j}) - Y_{i,j}R_{i,j}^jv_j\text{sin}(\theta_{i,j})),\\
+\texttt{Let}~\frac{dp_{i,j}}{dv_j} &= - R_{i,j}^iv_iY_{i,j}R_{i,j}^j\text{sin}(\theta_{i,j}),\\
+\texttt{Let}~\frac{dp_{i,j}}{d\phi_i} &= - R_{i,j}^iv_iY_{i,j}R_{i,j}^jv_j\text{cos}(\theta_{i,j}).
+\end{align}
+$$
+
+$$
+\begin{align}
+\texttt{If}~k~\texttt{is the coordinate of the voltage magnitude at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{dp_{i,j}}{dv_i},\\
+\texttt{If}~k~\texttt{is the coordinate of the voltage magnitude at bus}~j:& \quad (G_{v,\phi})_{k,l} = \frac{dp_{i,j}}{dv_j},\\
+\texttt{If}~k~\texttt{is the coordinate of the voltage angle at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{dp_{i,j}}{d\phi_i},\\
+\texttt{If}~k~\texttt{is the coordinate of the voltage angle at bus}~j:& \quad (G_{v,\phi})_{k,l} = -\frac{dp_{i,j}}{d\phi_i},\\
+\texttt{Else}:& \quad (G_{v,\phi})_{k,l} = 0.
+\end{align}
+$$
+
+#### Case 2: Column $$l$$ is relative to the sensitivity of the current flowing from $$i$$ to $$j$$
+
+$$
+\begin{align}
+\texttt{Let}~w_i &= R_{i,j}^iv_i, \\
+\texttt{Let}~w_j &= Y_{i,j}R_{i,j}^jv_j, \\
+\texttt{Let}~x_{i,i} &= G_{i,j}^2 + B_{i,j}^2 + Y_{i,j}^2 + 2G_{i,j}Y_{i,j}\text{sin}(\Xi_{i,j}) - 2B_{i,j}Y_{i,j}\text{cos}(\Xi_{i,j}), \\
+\texttt{Let}~x_{i,j} &= - G_{i,j}\texttt{sin}(\theta) - Y_{i,j}\texttt{sin}(\Xi)\texttt{sin}(\theta) + B_{i,j}\texttt{cos}(\theta) - Y_{i,j}\texttt{cos}(\Xi)\texttt{cos}(\theta), \\
+\texttt{Let}~z &= (R_{i,j}^i)^2(w_i^2x_{i,i} + w_j^2 + 2w_iw_jx_{i,j}), \\
+\texttt{Let}~\frac{dz}{dv_i} &= (R_{i,j}^i)^2(2R_{i,j}^iw_ix_{i,i} + 2R_{i,j}^iw_jx_{i,j}), \\
+\texttt{Let}~\frac{dz}{dv_j} &= (R_{i,j}^i)^2(2Y_{i,j}R_{i,j}^jw_j + 2Y_{i,j}R_{i,j}^jw_ix_{i,j}), \\
+\texttt{Let}~\frac{dx_{i,j}}{d\phi_i} &= G_{i,j}\texttt{cos}(\theta) + Y_{i,j}\texttt{sin}(\Xi)\texttt{cos}(\theta) + B_{i,j}\texttt{sin}(\theta) - Y_{i,j}\texttt{cos}(\Xi)\texttt{sin}(\theta), \\
+\texttt{Let}~\frac{dz}{d\phi_i} &= 2(R_{i,j}^i)^2w_iw_j\frac{dx_{i,j}}{d\phi_i}.
+\end{align}
+$$
+
+$$
+\begin{align}
+\texttt{If}~k~\texttt{is the coordinate of the voltage magnitude at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{dv_i},\\
+\texttt{If}~k~\texttt{is the coordinate of the voltage magnitude at bus}~j:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{dv_j},\\
+\texttt{If}~k~\texttt{is the coordinate of the voltage angle at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{d\phi_i},\\
+\texttt{If}~k~\texttt{is the coordinate of the voltage angle at bus}~j:& \quad (G_{v,\phi})_{k,l} = -\frac{1000}{2\sqrt{3z}}\frac{dz}{d\phi_i},\\
+\texttt{Else}:& \quad (G_{v,\phi})_{k,l} = 0.
+\end{align}
+$$
+
+### Computation of vector $$g_p(v,\phi)$$
+
+Vector $$g_p(v,\phi)$$ is the gradient of sensitivities according to the parameter $$p$$, at the point $$(v,\phi)$$. Its computation depends first on if $$p$$ is the active injection at a bus, or the phase shifting angle of a phase tap changer, and second if the sensitivity is the power or the current flowing throught a line $$(i,j)$$.
+
+In the case where parameter $$p$$ is an injection, vector $$g_p(v,\phi)$$ is equals to zero.
+
+In the case where parameter $$p$$ is the phase shifting angle of a phase tap changer, a component of $$g_p(v,\phi)$$ is non zero if and only if it is relative to a sensitivity on the very line $$(i,j)$$ where lies the phase tap changer. In this case, the value of the component is given by:
+- $$R_{i,j}^iv_iY_{i,j}R_{i,j}^jv_j\texttt{cos}(\theta)\frac{\pi}{180}$$, if the sensitivity is on the power flow ;
+- $$\frac{1000}{2\sqrt{3z}}\frac{dz}{dv_i}\frac{\pi}{180}$$, if the sensitivity is on the current flow.
+
+Note that the two formulas above are valid when the phase tap changer is on side $$i$$ of the watched line $$(i,j)$$. The opposite values are taken when the device is on side $$j$$ of the line.
+
 ## DC sensitivity analysis
 
 A DC sensitivity analysis starts from the DC flows computing described in the [power flow section](../powerflow/openlf.md#dc-flows-computing). Simple sensitivity analyses are supported as:
