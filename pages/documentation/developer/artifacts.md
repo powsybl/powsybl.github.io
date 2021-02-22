@@ -78,13 +78,33 @@ This module provides a tool to anonymize identifier of a CIM-CGMES file.
 
 #### IEEE-CDF
 
-The following artifacts provide the support of the [IEEE-CDF](../grid/formats/ieee-cdf.md) format.
+The following artifacts provide the support for the [IEEE-CDF](../grid/formats/ieee-cdf.md) format.
 
 **powsybl-ieee-cdf-model**  
 This module provides classes to model the network regarding the IEEE-CDF format.
 
 **powsybl-ieee-cdf-converter**  
-This module provides an implementation of the converter API to allow a user to load/save a network from/to a IEEE-CDF file.
+This module provides an implementation of the converter API to allow a user to load/save a network from/to an IEEE-CDF file.
+
+#### PSS/E
+
+The following artifacts provide the support for the [PSSE/E](../grid/formats/psse.md) format.
+
+**powsybl-psse-model**  
+This module provides classes to model the network regarding the PSSE format.
+
+**powsybl-psse-converter**        
+This module provides an implementation of the converter API to allow a user to load/save a network from/to a PSSE file.
+
+#### MatPower
+
+The following artifacts provide the support for the [MatPower](../grid/formats/matpower.md) format.
+
+**powsybl-matpower-model**  
+This module provides classes to model the network regarding the MatPower format.
+
+**powsybl-matpower-converter**        
+This module provides an implementation of the converter API to allow a user to load/save a network from/to a MatPower file.
 
 #### AMPL
 
@@ -103,11 +123,14 @@ This module provides an alternative way to merge several networks, keeping the u
 **powsybl-iidm-reducer**  
 This module provides classes to extract a sub area of a network.
 
-**powsybl-iidm-util**  
-This module provides additional features around the network.
-
 **powsybl-iidm-test**  
 This module provides factories to create simple networks.
+
+**powsybl-iidm-tck**  
+This module provides a test compatibility kit to validate an IIDM implementation regarding the requirements of the API.
+
+**powsybl-iidm-util** *(Deprecated since v3.9.0)*  
+This module provides additional features around the network. We removed this module in v3.9.0 and move its content in the `powsybl-iidm-api` module.
 
 ## Simulators
 
@@ -164,6 +187,12 @@ This module has been replaced by `powsybl-sensitivity-analysis-api` since powsyb
 
 **powsybl-dynamic-simulation-api**  
 This module provides a common API for [time domain simulation](../simulation/timedomain/index.md). You have to implement this API to use your own simulator through PowSyBl.
+
+**powsybl-dynamic-simulation-dsl**  
+This module provides an API to implement a DSL for dynamic simulation inputs, such as the curves, the dynamic model or events mapping.
+
+**powsybl-dynamic-simulation-tool**  
+This module provides an [iTools](../user/itools/dynamic-simulation.md) command to run time-domain simulation.
 
 **powsybl-simulation-api**  
 This module provides a legacy API for time domain simulation. This module is not maintained anymore and will be replaced by the **powsybl-dynamic-simulation-api**.
@@ -309,29 +338,26 @@ This module provides a maven plugin to [create a standalone distribution based o
 
 ## Single line diagram
 
-**single-line-diagram-view-app**  
-This module provides a demo app to view diagrams of substations and voltage levels of network files.
-
-**single-line-diagram-core**  
-This module enables to generate svg images of voltage levels and substations.
-
-**single-line-diagram-view**  
-This module provides a javafx component to display interactive network diagrams.
-
-**single-line-diagram-cgmes-layout**  
-This module should be used to create svgs from the CIM-CGMES DL (Diagram Layout) profile.
-
-**single-line-diagram-color**  
-This module is used to define colors from a `base-voltages.yml` file.
-
-**single-line-diagram-iidm-extensions**  
-This module defines extensions to attach diagram information to networks.
-
 **single-line-diagram-cgmes-dl-iidm-extensions**  
 This module gathers the network core model extensions for CIM-CGMES networks.
 
 **single-line-diagram-cgmes-dl-conversion**  
 This module is used to convert the CIM-CGMES DL profile to the network core model extensions.
+
+**single-line-diagram-cgmes-layout**  
+This module should be used to create svgs from the CIM-CGMES DL (Diagram Layout) profile.
+
+**single-line-diagram-force-layout**  
+This module provides a layout for substation diagrams based on the [Force Atlas 2](https://github.com/gephi/gephi/wiki/Force-Atlas-2) algorithm.
+
+**single-line-diagram-iidm-extensions**  
+This module defines extensions to attach diagram information to networks.
+
+**single-line-diagram-view**  
+This module provides a javafx component to display interactive network diagrams.
+
+**single-line-diagram-view-app**  
+This module provides a demo app to view diagrams of substations and voltage levels of network files.
 
 ## Grid Study Environment (Deprecated)
 The following artifacts are part of a generic desktop application you can easily customize with plugins.
