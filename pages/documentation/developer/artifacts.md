@@ -197,10 +197,10 @@ This module provides an [iTools](../user/itools/dynamic-simulation.md) command t
 **powsybl-simulation-api**  
 This module provides a legacy API for time domain simulation. This module is not maintained anymore and will be replaced by the **powsybl-dynamic-simulation-api**.
 
-### Multi case optimal power load flow (metrix)
+### Optimal power load flow on network variants (Metrix)
 
 **powsybl-metrix-mapping**
-This module provides the [mapping DSL](../simulation/metrix/mapping.md) to generate multi case mapping configuration. 
+This module provides the [mapping DSL](../simulation/metrix/mapping.md) to generate multi cases mapping configuration. 
 
 **powsybl-metrix-integration**
 This module provides an API to run [metrix simulator](../simulation/metrix/index.md) optimal power load flow.

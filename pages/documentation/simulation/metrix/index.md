@@ -9,10 +9,10 @@ layout: default
 
 ## Introduction
 
-To launch a Metrix simulation, you need : 
-- the mapping requirements :
-    - an iidm situation case
-    - a timeserie store (csv)
+To launch a Metrix simulation, you need: 
+- the mapping requirements:
+    - a network in IIDM format
+    - a time series store (csv)
     - a mapping groovy script using the [mapping DSL](mapping.md#mapping-dsl)
 - a Metrix configuration script using the [Metrix configuration DSL](#configuration-dsl) 
 - (optional) [contingency script](#contingency-dsl)
@@ -20,7 +20,7 @@ To launch a Metrix simulation, you need :
 
 ## Module configuration
 
-The module must be configured with following properties (only a few are required) :
+The module must be configured with following properties (only a few are required):
 ```yaml
 metrix:
     home-dir: "<PATH_TO_METRIX_INSTALLATION_DIRECTORY>" # required
@@ -44,18 +44,17 @@ metrix-default-parameters:
 
 ## Configuration DSL
 
-As many of Powsybl tools scripts, this DSL is based on the groovy language. It describes the general configuration
-of the solver and indicates which network items have to be monitored and controlled.
+As many of Powsybl tools scripts, this DSL is based on the groovy language. It describes the general configuration of the solver and indicates which network elements have to be monitored and controlled.
 
 ### General parameters
 
 There is a lot of tunable parameters that will be briefly describe inline. Yet the most important one is the `computationType` which
 determines which kind of computation will be operated:
-- LF : the LOAD FLOW mode is a basic network flow simulation, production and consumption are fixed and Metrix simulator returns the flow on the lines of the network.
-- OPF_WITHOUT_REDISPATCHING : in this mode, Metrix simulator is allowed to use some actions (topological actions, use of phase tap changers, HVDC lines) to minimize constraints.
-- OPF : in OPTIMAL POWER FLOW, Metrix simulator will leverage all available actions (that of the previous mode + generator and load dispatching) to minimize constraints at best cost. If no solution is found, the program will exit with error code 1. 
+- `LF` the LOAD FLOW mode is a basic network flow simulation, production and consumption are fixed and Metrix simulator returns the flow on the lines of the network.
+- `OPF_WITHOUT_REDISPATCHING` in this mode, Metrix simulator is allowed to use some actions (topological actions, use of phase tap changers, HVDC lines) to minimize constraints.
+- `OPF` in OPTIMAL POWER FLOW mode, Metrix simulator will leverage all available actions (that of the previous mode plus generator and load dispatching) to minimize constraints at best cost. If no solution is found, the program will exit with error code 1. 
 
-All parmaters are optional :
+All parameters are optional:
 ```groovy
 parameters {
   adequacyCostOffset // (0) permet de définir une translation des coûts de tous les groupes dans la phase d'équilibrage pour éviter les fausses opportunités (valeur par défaut : 0)
@@ -84,7 +83,7 @@ parameters {
 }
 ```
 
-Since there is default value for each parameters, only useful parameters can be filled in. For instance :
+Since there is default value for each parameters, only useful parameters can be filled in. For instance:
 ```
 parameters {
   computationType OPF_WITHOUT_REDISPATCHING  
@@ -99,14 +98,14 @@ Note that to use a negative value, you must surround it with parenthesis, eg: `m
 
 ### Monitored branches and observed branches
 
-There is a distinction between "monitored branches" where Metrix will take action to enforce threshold limits and the "observed branches" where we only want the resulting flow values. Note that in the LF (Load Flow) mode, there is no difference between monitored elements and observed elements. 
+There is a distinction between _monitored branches_ where Metrix will take action to enforce threshold limits and the _observed branches_ where we only want the resulting flow values. Note that in the LF (Load Flow) mode, there is no difference between monitored elements and observed elements. 
 
-To indicate that a element should be "monitored" we have to define thresholds in MW. It can be a time series name (originating from the mapping script provided) or an fixed value (constant time series). The `branchRatingsBaseCase` parameter will contain the threshold for the base case (also called network N), the `branchRatingsBeforeCurative` and `branchRatingsOnContingency` parameters will contain the threshold to be used after for the post-contingency state (also called network N-k) respectively before and after remedial actions. Threshold can be defined with a direction constraint with default being the origin -> end direction (the opposite direction is specified with the same parameter name followed by `EndOr`). Origin is the node corresponding to `voltageLevelId1` in the IIDM case file.  
+To indicate that a element should be _monitored_ we have to define thresholds in MW. It can be a time series name (defined in the mapping script provided) or an fixed value (constant time series). The `branchRatingsBaseCase` parameter will contain the threshold for the base case (also called network N), the `branchRatingsBeforeCurative` and `branchRatingsOnContingency` parameters will contain the threshold to be used for the post-contingency state (also called network N-k) respectively before and after remedial actions. Threshold can be defined with a direction constraint with default being the origin to end direction (the opposite direction is specified with the same parameter name followed by `EndOr`). Origin is the node corresponding to `voltageLevelId1` in the network file.  
 
 The syntax to define monitored/observed elements (called `component` below) is :
 
 ```groovy
-branch('component_id') { // component_id is the string id of the element as found in the IIDM network case file
+branch('component_id') { // component_id is the string id of the element as found in the IIDM network file
    baseCaseFlowResults true // true if we want to "observe" the component
    maxThreatFlowResults true // true to have the maximum contingency threat and related flow result 
    contingencyFlowResults 'a', 'b'// contingency list for which we want the flow result
@@ -118,8 +117,8 @@ branch('component_id') { // component_id is the string id of the element as foun
    branchRatingsOnSpecificContingency 100 // to "monitor" the branch in N-k with specified contingencies list, can be a fixed value or a named time series (here in the example, a fixed value)
    branchRatingsBeforeCurativeOnSpecificContingency 100 // to "monitor" the branch in N-k before remedial actions with specified contingencies list, can be a fixed value or a named time series (here in the example, a fixed value)
    contingencyDetailedMarginalVariations 'a', 'b'// contingency list for which we want the marginal variation flow result
-   branchAnalysisRatingsBaseCase 'tsName' // to "observe" a branch in basecase with a threshold for postprocessing results
-   branchAnalysisRatingsBaseCaseEndOr 'tsName' // to "observe" a branch in basecase with a threshold in direction End->Origin
+   branchAnalysisRatingsBaseCase 'tsName' // to "observe" a branch in base case with a threshold for postprocessing results
+   branchAnalysisRatingsBaseCaseEndOr 'tsName' // to "observe" a branch in base case with a threshold in direction End->Origin
    branchAnalysisRatingsOnContingency 'tsName' // to "observe" a branch in N-1 with a threshold
    branchAnalysisRatingsOnContingencyEndOr 'tsName' // to "observe" a branch in N-1 with a threshold in direction End->Origin
 }
@@ -129,7 +128,7 @@ Note that monitored branches (when `branchRatingsXXX` is specified) automaticall
 
 #### Examples
 
-To monitor branches on base case and on post-contingency states with a threshold of 100MW :
+To monitor branches on base case and on post-contingency states with a threshold of 100 MW:
 ```groovy
 branchList=[
 'A.NOUL61FLEAC',
@@ -166,7 +165,7 @@ for (branchId in monitoredBranchList) {
 }
 ```
 
-To gather the flow result of every 400KV lines and transformers in base case and in post-contingency states:
+To gather the flow result of every 400 kV lines and transformers in base case and in post-contingency states:
 ```groovy
 for (l in network.branches) {
   if (l.terminal1.voltageLevel.nominalV >= 380 || l.terminal2.voltageLevel.nominalV >= 380) {
@@ -178,7 +177,7 @@ for (l in network.branches) {
 }
 ```
 
-or with more checks :
+or with more checks:
 
 ```groovy
 branchList=[
@@ -228,7 +227,7 @@ We can define generators whose target can be changed by Metrix:
 - In the adequacy phase to match the production and load
 - In remedial actions to comply with the defined monitored branch thresholds (only in OPF mode)
 
-For this to happen, we must define ramp up/down costs. Metrix will then choose the cheapest generator to resolve the constraints. There should be at least two generators for Metrix to be able to decrease or increase production in order to respect power balance. If no generator is configured to be managed by Metrix, then all generators are implicitly managed with zero cost. Note that Metrix will take into account the Pmin and Pmax values of generators (which can be modified in the mapping script). In the same way than most parameters, the value can be a fixed integer/float or a time series name.    
+For this to happen, we must define ramp up/down costs. Metrix will then choose the cheapest generator to resolve the constraints. There should be at least two generators for Metrix to be able to decrease or increase production in order to respect active power balance. If no generator is configured to be managed by Metrix, then all generators are implicitly managed with zero cost. Note that Metrix will take into account the Pmin and Pmax values of generators (which can be modified through the mapping script). In the same way than most parameters, the value can be a fixed integer/float or a time series name.    
 
 The syntax to define a managed generator is:
 
@@ -242,14 +241,14 @@ generator(id) { // id of the generator which will be managed by Metrix
 }
 ```
 
-Note that if at least one generator is managed, then only defined generators will be managed to match adequacy.  In some cases, it could result in a program failure (return code -1) where constraints cannot be resolved in OPF mode. Also:
-- Generators used for the adequacy phase are not necessarily the same used for redispatching phase. If `onContingency` isn't defined but `redispatchingCost` is, then the generator will be used only in preventive actions. For the generator to be fully used on preventive and curative remedial action, both of these parameters must be defined.
+Note that if at least one generator is managed, then only defined generators will be managed to match adequacy. In some cases, it could result in a program failure (return code -1) where constraints cannot be resolved in OPF mode. Also:
+- Generators used for the adequacy phase are not necessarily the same used for the redispatching phase. If `onContingency` isn't defined but `redispatchingCost` is, then the generator will be used only in preventive actions. For the generator to be fully used for preventive and curative remedial action, both of these parameters must be defined.
 - Cost must always be defined for both directions. If we want to prevent a generator to ramp up or down, we can set a high prohibitive cost.
 - Rules that take into account Pmax and Pmin are:
-    - if the targetP is out of bounds (targetP > Pmax or targetP < Pmin) then targetP is adjusted the closest bound. This can happen when `ignore-limits` is set in the mapping script or the tool parameter.
-    - during the adequacy phase, les Pmax constraints are enforced but Pmin are temporary set to 0. It results that a (only one at most) generator can have a targetP out of its lower bound (0 < targetP < Pmin).
-    - in the redispatching phase, generators with Pmin<targetP<Pmax are enforced between their bounds. If a group have an initial targetP below Pmin, the constraints will be initialTargetP < targetP < Pmax.
-- In theory, the down cost of generators is negative. We should be careful not to create opportunities that would interfere with the planned production. For instance if a generator delivering at Pmin with a up cost of 15€ whereas another generator has it down cost at -25€, even in the absence of constraints, Metrix will choose to ramp up the first low cost generator and decrease the output of the second one. Beside entering fine grained realistic costs, to remedy to this issue, we could make sure that no down cost are higher (in absolute value) than up cost. We can do that using `adequacyCostOffset` and `redispatchingCostOffset` global parameters that will translate cost (we could take the maximum offset between all up and down costs for instance). This option will preserve the original values in the Metrix results.
+    - if the targetP is out of bounds (targetP > Pmax or targetP < Pmin) then targetP is adjusted to the closest bound. This can happen when `ignore-limits` is set in the mapping script or the tool parameter.
+    - during the adequacy phase, the Pmax constraints are enforced but Pmin are temporary set to 0. It results that a (only one at most) generator can have a targetP out of its lower bound (0 < targetP < Pmin).
+    - in the redispatching phase, generators with Pmin < targetP < Pmax are enforced between their bounds. If a group have an initial targetP below Pmin, the constraints will be initialTargetP < targetP < Pmax.
+- In theory, the down cost of generators is negative. We should be careful not to create opportunities that would interfere with the planned production. For instance if a generator delivering at Pmin with a up cost of 15 € whereas another generator has it down cost at -25 €, even in the absence of constraints, Metrix will choose to ramp up the first low cost generator and decrease the output of the second one. Beside entering fine grained realistic costs, to remedy to this issue, we could make sure that no down cost are higher (in absolute value) than up cost. We can do that using `adequacyCostOffset` and `redispatchingCostOffset` global parameters that will translate cost (we could take the maximum offset between all up and down costs for instance). This option will preserve the original values in the Metrix results.
 
 #### Examples
 
@@ -263,7 +262,7 @@ generator('slack_generator') {
 }
 ```
 
-To allow generators to ramp depending on zone or type (if these properties exists in IIDM source file):
+To allow generators to ramp depending on zone or type (if these properties exists in IIDM network file):
 ```groovy
 for (g in network.generators) {
         if (g.terminal.voltageLevel.substation.regionDI=='04' & g.genreCvg=="TAC") {
@@ -277,7 +276,7 @@ for (g in network.generators) {
 
 ### Loads
 
-Similarly to generators, loads can be adjusted in the OPF simulation (in preventive and curative mode), but only as a decrease. The cost in preventive action is fixed (default 13000€/MWh) and can be modified in the global parameters with the keyword `lossOfLoadCost`. We can also override this value for specific loads. The specified cost will automatically be weighted with the contingency probability (default : 10^-3). We can also limit the max percentage of load shedding (in preventive and curative mode).
+Similarly to generators, loads can be adjusted in the OPF simulation (in preventive and curative mode), but only as a decrease. The cost in preventive action is fixed (default 13000 €/MWh) and can be modified in the global parameters with the keyword `lossOfLoadCost`. We can also override this value for specific loads. The specified cost will automatically be weighted with the contingency probability (default : 10^-3). We can also limit the maximum percentage of load shedding (in preventive and curative mode).
 
 Here is the corresponding syntax:
 ```groovy
@@ -290,7 +289,7 @@ load(load_id) {
 }
 ```
 
-Note that, as generators, if no load is configured then all loads can be used with 100% shedding capabilities.
+Note that, as generators, if no load is configured then all loads can be used with 100 % shedding capabilities.
 
 ### Phase-shifting transformer
 
@@ -314,7 +313,7 @@ Note that while the optimization will use phase in a continuous range, Metrix wi
 
 ### HVDC
 
-For HVDC line, the syntax is similar to those of PST:
+For HVDC line, the syntax is similar to phase tap changers one:
 ```groovy
 hvdc(id) {
   controlType X // control type (see available values below)
@@ -328,7 +327,7 @@ Control types:
 
 ### Monitored sections
 
-It is possible to monitor a constraint on a weighted sum of a set of branch flows :
+It is possible to monitor a constraint on a weighted sum of a set of branch flows:
 
 ```groovy
 sectionMonitoring(id) { // Nom de la section
@@ -379,7 +378,7 @@ map_dual_contingencies.each {name, components ->
 }
 ```
 
-To simulate every single contingency on the 400kV network:
+To simulate every single contingency on the 400 kV network:
 ```groovy
 for (l in network.lines) {
   if (l.terminal1.voltageLevel.nominalV >= 380) {
@@ -398,17 +397,15 @@ Then each line will define a remedial action with:
 ```text
 CONTINGENCY_NAME;ACTIONS_COUNT;EQUIPMENT1_ACTION;...;
 ```
-where "EQUIPMENT1_ACTION" being the id of a branch or bus coupling. The default action is to open the related breakers. To close a line the `+` sign must be prepended to the branch id.
+where ```EQUIPMENT1_ACTION``` being the id of a branch or bus coupling. The default action is to open the related breakers. To close a line the `+` sign must be prepended to the branch id.
 
 Remedial action can be limited to specific branch constraints with:
 ```text
 CONTINGENCY_NAME | BRANCH_CONSTRAINT_1 | ... ;ACTIONS_COUNT;EQUIPMENT1_ACTION;...;
 ```
-where "BRANCH_CONSTRAINT_1" should be the id of a [monitored component](#monitored-branches-and-observed-branches) (`onBranchRatingContingencies`).
+where ```BRANCH_CONSTRAINT_1``` should be the id of a [monitored component](#monitored-branches-and-observed-branches) (`onBranchRatingContingencies`).
    
-Note that Metrix won't combine multiple defined remedial actions set, each line is tried independently.\
-These topological actions may be combined with generators/loads/pst/... optimizations.
-If several actions are equivalents, the first defined one will be used.\
+Note that Metrix won't combine multiple defined remedial actions set, each line is tried independently.These topological actions may be combined with generators/loads/phase tap changers/... optimizations. If several actions are equivalents, the first defined one will be used.
 
 ### Example
 
@@ -424,7 +421,7 @@ Using a lot of remedial actions will increase the simulation duration, especiall
 
 ## Binding constraints
 
-Lastly, we can define binding constraints between some variables so to force them to vary along. Each item of the binding constraint set will then vary proportionally to a reference variable. 
+Finally, we can define binding constraints between some variables so to force them to vary along. Each item of the binding constraint set will then vary proportionally to a reference variable. 
 
 For generators, the syntax is:
 ```groovy
@@ -441,7 +438,7 @@ loadsGroup("name of the sed") {
 }
 ```
 
-Note that if one of the item in the set reach its limit (eg. its pmax), no further variation can be made on other items. 
+Note that if one of the item in the set reach its limit (eg. its Pmax), no further variation can be made on other items. 
 
 ## Outputs
 
@@ -449,7 +446,7 @@ All outputs of Metrix are time series that will be stored in a single file.
 
 ### Simulation result
 
-The time series ERROR_CODE reports the exit value of the metrix computation process, 0 being the standard ok.
+The time series ```ERROR_CODE``` reports the exit value of the Metrix computation process, 0 being the standard OK.
 Any other value will hint toward one of the following issues :
 - 1 : No solution was found
 - 2 : The maximum number of constraints was reached
@@ -458,123 +455,123 @@ Any other value will hint toward one of the following issues :
 
 ### Global results
 
-LOSSES : total losses (in MW) (for all synchonized zones)
+```LOSSES``` total losses (in MW) (for all synchronous components)
 
-LOSSES_country : total losses per country (in MW) (only available if option `lossDetailPerCountry` is enabled)
+```LOSSES_country``` total losses per country (in MW) (only available if option `lossDetailPerCountry` is enabled)
 
-LOSSES_hvdc : total losses for HVDC (in MW) (only available if option `lossDetailPerCountry` is enabled)
+```LOSSES_hvdc``` total losses for HVDC (in MW) (only available if option `lossDetailPerCountry` is enabled)
 
-OVERLOAD_BASECASE : sum of threshold overage on monitored components in base case (en MW)
+```OVERLOAD_BASECASE``` sum of threshold overage on monitored components in base case (en MW)
 
-OVERLOAD_OUTAGES : sum of threshold overage on monitored components for all defined contingencies (en MW)
+```OVERLOAD_OUTAGES``` sum of threshold overage on monitored components for all defined contingencies (en MW)
 
-GEN_COST : total cost of generator redispatching in preventive actions
+```GEN_COST``` total cost of generator redispatching in preventive actions
 
-GEN_CUR_COST : total cost of generator redispatching in curative actions
+```GEN_CUR_COST``` total cost of generator redispatching in curative actions
 
-LOAD_COST : total cost of preventive load shedding
+```LOAD_COST``` total cost of preventive load shedding
 
-LOAD_CUR_COST : total cost of curative load shedding
+```LOAD_CUR_COST``` total cost of curative load shedding
 
-basecaseLoad_branchId : load percentage (the flow divided by the threshold) 
+```basecaseLoad_branchId``` load percentage (the flow divided by the threshold) 
 
-basecaseOverload_branchId : overload flow (difference between flow and threshold if greater than threshold)
+```basecaseOverload_branchId``` overload flow (difference between flow and threshold if greater than threshold)
 
-outageLoad_branchId : load percentage for N-1 (the flow divided by the N-1 threshold)
+```outageLoad_branchId``` load percentage for N-1 (the flow divided by the N-1 threshold)
 
-outageOverload_branchId : overload flow for N-1 (difference between flow and N-1 threshold if greater than threshold)
+```outageOverload_branchId``` overload flow for N-1 (difference between flow and N-1 threshold if greater than threshold)
 
-overallOverload_branchID : sum of basecase and outage overload values
+```overallOverload_branchID``` sum of base case and outage overload values
 
 ### Load flow results
 
-FLOW_branchId : flow in basecase (in MW)
+```FLOW_branchId``` flow in base case (in MW)
 
-FLOW_branchId_contingencyId : flow for a specific contingency outage (when using the option `contingencyFlowResults` )
+```FLOW_branchId_contingencyId``` flow for a specific contingency outage (when using the option `contingencyFlowResults`)
 
-MAX_THREAT_index_FLOW_branchId : (index-th) maximum flow (in MW) on branch after contingencies (default only index 1 is returned but may be increased using option `nbMaxThreat`)
+```MAX_THREAT_index_FLOW_branchId``` (index-th) maximum flow (in MW) on branch after contingencies (default only index 1 is returned but may be increased using option `nbMaxThreat`)
 
-MAX_THREAT_index_NAME_branchId : id of the contingency that caused the maximum flow for specified index (see previous result time series)
+```MAX_THREAT_index_NAME_branchId``` id of the contingency that caused the maximum flow for specified index (see previous result time series)
 
-MAX_TMP_THREAT_FLOW_branchId : maximum flow on branch after contingency and before remedial action (if option `preCurativeResults` is enabled).
+```MAX_TMP_THREAT_FLOW_branchId``` maximum flow on branch after contingency and before remedial action (if option `preCurativeResults` is enabled)
 
-MAX_TMP_THREAT_NAME_branchId : id of the contingency that caused the maximum flow after contingency and before remedial action (see previous result time series)
+```MAX_TMP_THREAT_NAME_branchId``` id of the contingency that caused the maximum flow after contingency and before remedial action (see previous result time series)
 
 ### Adequacy results
 
-INIT_BAL_AREA_X : initial difference between load and production (in MW) for synchronous zone X before adequacy phase
+```INIT_BAL_AREA_X``` initial difference between load and production (in MW) for synchronous zone X before adequacy phase
 
-With option `withAdequacyResults` :
+With option `withAdequacyResults`:
 
-INIT_BAL_GEN_generator : if not nul, the MW adjustement for the generator in the adequacy phase
+```INIT_BAL_GEN_generator``` if not nul, the MW adjustement for the generator in the adequacy phase
 
-INIT_BAL_LOAD_node : if not nul, load shedding for node (en MW) in the adequacy phase
+```INIT_BAL_LOAD_node``` if not nul, load shedding for node (en MW) in the adequacy phase
 
 With option `outagesBreakingConnexity` or `remedialActionsBreakingConnexity`:
 
-LOST_LOAD_contingencyId : total load loss (in MW) when network connexity is broken
+```LOST_LOAD_contingencyId``` total load loss (in MW) when network connectivity is broken
 
-LOST_LOAD_BEFORE_CURATIVE_contingencyId : total load loss (in MW) when network connexity is broken (before remedial actions)
+```LOST_LOAD_BEFORE_CURATIVE_contingencyId``` total load loss (in MW) when network connectivity is broken (before remedial actions)
 
-LOST_GEN_contingencyId : total production loss (in MW) when network connexity is broken
+```LOST_GEN_contingencyId``` total production loss (in MW) when network connectivity is broken
 
 ### Preventive actions results
 
-PST_pstId : angle value for phase shift if different of initial value
+```PST_pstId``` angle value for phase shift if different of initial value
 
-PST_TAP : phase shifting tap if different of initial value
+```PST_TAP``` phase shifting tap if different of initial value
 
-HVDC_hvdcId : p0 value (in MW) for the HVDC if different of initial value
+```HVDC_hvdcId``` p0 value (in MW) for the HVDC if different of initial value
 
-GEN_VOL_DOWN_genType : total volume (in MW) of decreased production for generator of type genType
+```GEN_VOL_DOWN_genType``` total volume (in MW) of decreased production for generator of type genType
 
-GEN_VOL_UP_genType : total volume (in MW) of increased production for generator of type genType
+```GEN_VOL_UP_genType``` total volume (in MW) of increased production for generator of type genType
 
-GEN_genId : variation of targetP for a generator in preventive actions (in MW) (if not nul and if option `withRedispatchingResults` is enabled)
+```GEN_genId``` variation of targetP for a generator in preventive actions (in MW) (if not nul and if option `withRedispatchingResults` is enabled)
 
-LOAD_loadId : shedding volume (in MW) for a load in remedial actions
+```LOAD_loadId``` shedding volume (in MW) for a load in remedial actions
 
 ### Curative actions results
 
-PST_CUR_pstId_contingencyId : angle value for phase shift if different of preventive action value
+```PST_CUR_pstId_contingencyId``` angle value for phase shift if different of preventive action value
 
-PST_CUR_TAP : phase shifting tap for the curative angle value (previous time series)
+```PST_CUR_TAP``` phase shifting tap for the curative angle value (previous time series)
 
-HVDC_CUR_hvdc_contingencyId : p0 value (in MW) for the HVDC if different of initial value
+```HVDC_CUR_hvdc_contingencyId``` p0 value (in MW) for the HVDC if different of initial value
 
-GEN_CUR_VOL_DOWN_genType : total volume (in MW) of decreased production on the maximal threat contingency for generator of type genType 
+```GEN_CUR_VOL_DOWN_genType``` total volume (in MW) of decreased production on the maximal threat contingency for generator of type genType 
 
-GEN_CUR_VOL_UP_genType : total volume (in MW) of increased production on the maximal threat contingency for generator of type genType 
+```GEN_CUR_VOL_UP_genType``` total volume (in MW) of increased production on the maximal threat contingency for generator of type genType 
 
-GEN_CUR_generator_contingencyId : variation of production (in MW) for the generator under the specified contingency (if different of the preventive value and if option `withRedispatchingResults` is enabled)
+```GEN_CUR_generator_contingencyId``` variation of production (in MW) for the generator under the specified contingency (if different of the preventive value and if option `withRedispatchingResults` is enabled)
 
-LOAD_CUR_load_contingencyId : shedding volume (in MW) of a load  under the specified contingency (if different of the preventive value)
+```LOAD_CUR_load_contingencyId``` shedding volume (in MW) of a load  under the specified contingency (if different of the preventive value)
 
-TOPOLOGY_contingencyId : topological remedial action chosen for the specified contingency
+```TOPOLOGY_contingencyId``` topological remedial action chosen for the specified contingency
 
 ### Marginal variation results
 
 The following results will be produced when option `marginalVariationsOnBranches` is enabled.
 
-MV_branchId : theoretical effect on the cost function if the threshold were to be increase of 1 MW on the branch.
+```MV_branchId``` theoretical effect on the cost function if the threshold were to be increase of 1 MW on the branch
 
-MV_branchId_contingencyId : theoretical effect on the cost function if the threshold were to be increase of 1 MW on the branch under contingency.
+```MV_branchId_contingencyId``` theoretical effect on the cost function if the threshold were to be increase of 1 MW on the branch under contingency
 
-With option `contingencyDetailedMarginalVariations` :
+With option `contingencyDetailedMarginalVariations`:
 
-MV_POW_branchId_equipmentId : load variation on generator or load "equipmentId" to obtain a 1 MW increase on branch.
+```MV_POW_branchId_equipmentId``` load variation on generator or load _equipmentId_ to obtain a 1 MW increase on branch
 
-MV_POW_branchId_contingencyId_equipmentId : load variation on generator or load "equipmentId" to obtain a 1 MW increase on branch after contingency.
+```MV_POW_branchId_contingencyId_equipmentId``` load variation on generator or load _equipmentId_ to obtain a 1 MW increase on branch after contingency
 
-MV_COST_branchId_equipmentId : cost variation on generator or load "equipmentId" to obtain a 1 MW increase on branch.
+```MV_COST_branchId_equipmentId``` cost variation on generator or load _equipmentId_ to obtain a 1 MW increase on branch
 
-MV_COST_branchId_contingencyId_equipmentId : cost variation on generator or load "equipmentId" to obtain a 1 MW increase on branch after contingency.
+```MV_COST_branchId_contingencyId_equipmentId``` cost variation on generator or load _equipmentId_ to obtain a 1 MW increase on branch after contingency
 
 ### Binding constraints results
 
-GEN_setId : sum of variations on the binding constraint set (in MW).
+```GEN_setId``` sum of variations on the binding constraint set (in MW)
 
-LOAD_setId : sum of load shedding variations on the binding constraint set (in MW).
+```LOAD_setId``` sum of load shedding variations on the binding constraint set (in MW)
 
 
 
