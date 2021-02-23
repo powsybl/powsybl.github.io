@@ -9,19 +9,18 @@ layout: default
 
 ## Introduction
 
-A mapping configuration is made of 3 objects : 
+A mapping configuration is made of 3 objects: 
 - an IIDM network
 - a time series store (in csv format)
 - a mapping groovy script using the [mapping DSL](#mapping-dsl) described below
 
-The mapping process is mainly used through Metrix simulator but it may be executed separatly in order to check its intermediate results.
+The mapping process is mainly used through Metrix simulator but it may be executed separately in order to check its intermediate results.
 
-With only required options, the mapping does not produce any output. In adding option `--mapping-synthesis-dir`, it will output a [synthesis](#synthesis) of the mapping, allowing you to check the consistency of the produced multi case. If you want to go deeper in the mapping process, the option `--check-equipment-time-series` will produce the full time series mapping. Lastly, the option `--network-output-dir` will output the network case with mapped values for the steps requested.
-
+With only required options, the mapping does not produce any output. In adding option `--mapping-synthesis-dir`, it will output a [synthesis](#synthesis) of the mapping, allowing you to check the consistency of the produced multi cases. If you want to go deeper in the mapping process, the option `--check-equipment-time-series` will produce the full time series mapping. Lastly, the option `--network-output-dir` will output the network case with mapped values for the steps requested.
 
 ## Mapping DSL
 
-The purpose of the mapping is to map time serie values to network elements. As it is a groovy script, it can create composite time series or to modify the network.
+The purpose of the mapping is to map time series values on network elements. As it is a groovy script, it can create composite time series or modify the network.
 
 ### General parameters
 
@@ -68,23 +67,23 @@ Note that for the `mapToBreakers` function, the `variable` and `distributionKey`
 
 With the `timeSeriesName` variable you can map any time series by referring to its name. The available time series must exist in the input data set or be created within the groovy script. For more details about time series management, refer to the [time series description](../../data/timeseries.md).
 
-Note that if the same time series (referred by its name) is used in multiple mapToXXX of same type, the mapping behavior will be as if it was applied once on the group of elements selected by these mapToXXX instructions. For instance, if we map a constant time series of value 100, to a generator A and in another mapTo, to a generator B, then, with the default distributionKey, it will map the value 50 to each generator.
+Note that if the same time series (referred by its name) is used in multiple `mapToXXX` of same type, the mapping behavior will be as if it was applied once on the group of elements selected by these `mapToXXX` instructions. For instance, if we map a constant time series of value 100, to a generator A and in another mapTo, to a generator B, then, with the default distributionKey, it will map the value 50 to each generator.
 
 #### Variable
 
 The `variable` allows to specify which network element attribute will be overwritten by its mapped time series value.
 It is an optional variable (except for transformers) which values depends on the element type (default is in bold) :
 
-- mapToGenerators : **targetP**, minP, maxP, targetQ
-- mapToLoads : **p0**, fixedActivePower, variableActivePower, q0, fixedReactivePower, variableReactivePower
-- mapToHvdcLines : **activePowerSetpoint**, minP, maxP
-- mapToBoundaryLines : **p0**
-- mapToBreakers : **open** (with 1 corresponding to a closed switch and 0 to open)
-- mapToTransformers : ratedU1, ratedU2
-- mapToPhaseTapChangers : **phaseTapPosition**, regulationMode
-- mapToRatioTapChangers : **ratioTapPosition**, loadTapChangingCapabilities, regulating, targetV
-- mapToLccConverterStations : **powerFactor**
-- mapToVscConverterStations : **voltageSetpoint**, voltageRegulatorOn, reactivePowerSetpoint
+- `mapToGenerators` **targetP**, minP, maxP, targetQ
+- `mapToLoads` **p0**, fixedActivePower, variableActivePower, q0, fixedReactivePower, variableReactivePower
+- `mapToHvdcLines` **activePowerSetpoint**, minP, maxP
+- `mapToBoundaryLines` **p0**
+- `mapToBreakers` **open** (with 1 corresponding to a closed switch and 0 to open)
+- `mapToTransformers` ratedU1, ratedU2
+- `mapToPhaseTapChangers` **phaseTapPosition**, regulationMode
+- `mapToRatioTapChangers` **ratioTapPosition**, loadTapChangingCapabilities, regulating, targetV
+- `mapToLccConverterStations` **powerFactor**
+- `mapToVscConverterStations` **voltageSetpoint**, voltageRegulatorOn, reactivePowerSetpoint
 
 For the loads, it is forbidden to map `p0` and in the same time `fixedActivePower` or `variableActivePower`, as theses variables are linked (`p0 = Pfixed + Pvar`). It is restricted to prevent incoherent mapping. If only `fixedActivePower` or `variableActivePower` is mapped, then the value of the other unmapped one will be set to 0 by default. 
 
@@ -128,15 +127,13 @@ filter {generator.terminal.busView.bus?.inMainConnectedComponent}
 
 #### Distribution key
 
-The distribution key `distributionKey` allows to set a distribution weight for each selected item. Its content is a
-groovy statement returning either a time series name or an integer. The value is then normalized so that the sum for
-the current mapToXXX filter is equal to 1. The additional variable accessible from the groovy statement is the same as the one found in the [filter](#filter) : the equipment variable (which name depends on the mapTo type).
+The distribution key `distributionKey` allows to set a distribution weight for each selected item. Its content is a groovy statement returning either a time series name or an integer. The value is then normalized so that the sum for the current mapToXXX filter is equal to 1. The additional variable accessible from the groovy statement is the same as the one found in the [filter](#filter): the equipment variable (which name depends on the mapTo type).
 
 Note that the `mapToBreakers` function does not support a distribution key as the mapped value will be either 1 or 0 (close/open) and will be applied to all filtered breakers.
 
 Please look at the following examples:
 
-To create a distribution key relative to the Pmax of each group :
+To create a distribution key relative to the Pmax of each group:
 ```groovy
 mapToGenerators {
     ...
@@ -149,7 +146,7 @@ To create a distribution key relative to the power target:
 distributionKey {generator.targetP}
 ```
 
-To create a distribution key defined by time series (assuming we have or created the time series SO_G1_key and SO_G2_key) :
+To create a distribution key defined by time series (assuming we have or created the time series SO_G1_key and SO_G2_key):
 ```groovy
 mapToGenerators {
     timeSeriesName 'SO_G' 
@@ -159,7 +156,7 @@ mapToGenerators {
 }
 ```
 
-To create a distribution key relative to the base load :
+To create a distribution key relative to the base load:
 ```groovy
 mapToLoads {
     ...
@@ -169,7 +166,7 @@ mapToLoads {
 
 ### Unmapping
 
-We use that if we want to "unmap" items in order to keep their original static value. The main purpose (aside unmapping previously mapped items due to too broad filter maybe) is to prevent the selected items to appear in the "not mapped" section in the mapping synthesis that we will see later.
+We use that if we want to `unmap` items in order to keep their original static value. The main purpose (aside unmapping previously mapped items due to too broad filter maybe) is to prevent the selected items to appear in the `not mapped` section in the mapping synthesis that we will see later.
 ```groovy
 unmappedXXX { // unmappedGenerators, unmappedLoads, …
    filter { … } // same usage as a normale mapToXXX
@@ -229,7 +226,7 @@ mapToPhaseTapChangers {
 }
 ```
 
-With added properties in IIDM we can, using the groovy language, map multiple configurations :
+With added properties in IIDM we can, using the groovy language, map multiple configurations:
 ```groovy
 for (area in ['05', '08', '09', '13', '14', '17', '24', '25', '28']) {
     // on définit des couples "AA" / "BB" pour mapper pour chaque zone, les chroniques contenant "AA" sur les générateurs de la zone de type "BB"

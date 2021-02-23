@@ -47,7 +47,7 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg)](https://github.com/powsybl/powsybl-metrix/releases/)
-This [repository](https://github.com/powsybl/powsybl-metrix) provides modules to run optimal power load flow on multi case configured network.
+This [repository](https://github.com/powsybl/powsybl-metrix) provides modules provides modules to run optimal power load flow on several network variants. Variants are generated through time series mapping on a base case.
 
 **Reviewers:** [marifunf](https://github.com/marifunf), [berthaultval](https://github.com/berthaultval), [pl-buiquang](https://github.com/pl-buiquang)
 **Committers:** [berthaultval](https://github.com/berthaultval), [MioRtia](https://github.com/MioRtia)
