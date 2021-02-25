@@ -147,10 +147,14 @@ The load consumes 600 MW and the generator produces 606.5 MW.
 
 ![Initial simple network](./img/loadflow/Network_Simple_Initial.svg){: width="50%" .center-image}
 
+First, create a logger outside of your main method. We will use it to display information about the objects we handle.
+```java
+private static final Logger LOG = LoggerFactory.getLogger(LoadflowTutorial.class);
+```
+
 <img src="./img/loadflow/File.svg" alt="" style="vertical-align: bottom"/>
 The network is modeled in [IIDM](../../grid/formats/xiidm.md), which is the internal model of Powsybl. This model can be serialized in a XML format for experimental purposes.
 ```java
-
 final String iidmFileName = "eurostag-tutorial1-lf.xml";
 final InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStream(iidmFileName);
 ```
@@ -167,27 +171,27 @@ In this tutorial it is composed of two substations. Each substation has two volt
 levels and one two-windings transformer.
 ```java
 for (Substation substation : network.getSubstations()) {
-    System.out.println("Substation " + substation.getNameOrId());
-    System.out.println("Voltage levels :");
+    LOG.info("Substation " + substation.getNameOrId());
+    LOG.info("Voltage levels :");
     for (VoltageLevel voltageLevel : substation.getVoltageLevels()) {
-        System.out.println(" > " + voltageLevel.getNominalV());
+        LOG.info(" > " + voltageLevel.getNominalV());
     }
-    System.out.println("Two windings transformers :");
+    LOG.info("Two windings transformers :");
     for (TwoWindingsTransformer twoWindingsTransfo : substation.getTwoWindingsTransformers()) {
-        System.out.println(" > " + twoWindingsTransfo.getNameOrId());
+        LOG.info(" > " + twoWindingsTransfo.getNameOrId());
     }
-    System.out.println("Three windings transformers :");
+    LOG.info("Three windings transformers :");
     for (ThreeWindingsTransformer threeWindingsTransfo : substation.getThreeWindingsTransformers()) {
-        System.out.println(" > " + threeWindingsTransfo.getNameOrId());
+        LOG.info(" > " + threeWindingsTransfo.getNameOrId());
     }
 }
 ```
 There are two lines in the network.
 ```java
 for (Line line : network.getLines()) {
-    System.out.println("Line : " + line.getNameOrId());
-    System.out.println(" > Terminal 1 power : " + line.getTerminal1().getP());
-    System.out.println(" > Terminal 2 power : " + line.getTerminal2().getP());
+    LOG.info("Line : " + line.getNameOrId());
+    LOG.info(" > Terminal 1 power : " + line.getTerminal1().getP());
+    LOG.info(" > Terminal 2 power : " + line.getTerminal2().getP());
 }
 ```
 
@@ -256,8 +260,8 @@ for (Bus bus : network.getBusView().getBuses()) {
     network.getVariantManager().setWorkingVariant(variantId);
     angle = bus.getAngle();
     v = bus.getV();
-    System.out.println("Angle difference   : " + (angle - oldAngle));
-    System.out.println("Tension difference : " + (v - oldV));
+    LOG.info("Angle difference   : " + (angle - oldAngle));
+    LOG.info("Tension difference : " + (v - oldV));
 }
 ```
 
@@ -289,9 +293,9 @@ LoadFlow.run(network);
 Let's analyze the results. First we make some simple prints in the terminal: 
 ```java
 for (Line l : network.getLines()) {
-    System.out.println("Line: " + l.getName());
-    System.out.println("Line: " + l.getTerminal1().getP());
-    System.out.println("Line: " + l.getTerminal2().getP());
+    LOG.info("Line: " + l.getName());
+    LOG.info("Line: " + l.getTerminal1().getP());
+    LOG.info("Line: " + l.getTerminal2().getP());
 }
 ```
 
@@ -300,12 +304,12 @@ Here we'll also show how to define a visitor object, that may be used to loop ov
 final DefaultTopologyVisitor visitor = new DefaultTopologyVisitor() {
     @Override
     public void visitGenerator(Generator generator) {
-        System.out.println("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
+        LOG.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
     }
 
     @Override
     public void visitLoad(Load load) {
-        System.out.println("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
+        LOG.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
     }
 };
 for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
