@@ -70,7 +70,7 @@ First, in the `pom.xml`, add the following lines in the `<properties>` section t
 When you'll have created the `LoadflowTutorial` class and its main function, you'll then be able to
 execute your code through:
 ```
-$> mvn clean package exec:java
+$> mvn clean package exec:exec
 ```
 
 Also, configure the pom file so as to use a configuration file taken in the classpath, instead of the one
