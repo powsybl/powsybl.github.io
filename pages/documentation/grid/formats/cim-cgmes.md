@@ -8,7 +8,7 @@ The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an I
 
 In CGMES an electric power system model is described by data grouped in different subsets (profiles) and exchanged as CIM/XML files, with each file associated to a given profile. The profiles considered in PowSyBl are:
 - `EQ`. Equipment. Contains data that describes the equipment present in the network and its physical characteristics.
-- `SSH`. Steady State Hypothesis. Required input parameters to perform power flow analysis, e.g. energy injections and consumptions and setpoint values for regulating controls.
+- `SSH`. Steady State Hypothesis. Required input parameters to perform power flow analysis; e.g., energy injections and consumptions and setpoint values for regulating controls.
 - `TP`. Topology. Describe how the equipment is electrically connected. Contains the definition of power flow buses.
 - `SV`. State Variables. Contains all the information required to describe a steady-state power flow solution over the network.
 - `EQBD`. Equipment Boundary. Contains definitions of the equipment in the boundary.
@@ -57,15 +57,15 @@ In PowSyBl, a `Node` can have zero or one Terminal. In CGMES, the `ConnectivityN
 
 ### Identity of model components
 
-Almost all the components of the PowSyBl grid model require a unique identifier `Id`, and may optionally have a human readable `Name`. Whenever possible, these attributes will be directly copied from original CGMES attributes.
+Almost all the components of the PowSyBl grid model require a unique identifier `Id` and may optionally have a human readable `Name`. Whenever possible, these attributes will be directly copied from original CGMES attributes.
 
-Terminals are used by CGMES and PowSyBl to define the points of connection of the equipment to the network. CGMES terminals have unique identifiers. PowSyBl does not allow Terminals to have an associated identifier. Information about original CGMES terminal identifiers are stored in each PowSyBl object using aliases.
+Terminals are used by CGMES and PowSyBl to define the points of connection of the equipment to the network. CGMES terminals have unique identifiers. PowSyBl does not allow Terminals to have an associated identifier. Information about original CGMES terminal identifiers is stored in each PowSyBl object using aliases.
 
 ### Equipment containers: substations and voltage levels
 
 The PowSyBl grid model establishes the substation as a required container of voltage levels and transformers (two and three windings transformers and phase shifters). Voltage levels are the required container of the rest network components, except for the AC and DC transmission lines that establish connections between substations and are associated directly to the network model. All buses at transformer ends should be kept at the same substation.
 
-The CGMES model does not guarantee these hierarchical constraints, so the first step in the conversion process is to identify all the transformers with ends in different substations and all the breakers and switches with ends in different voltage levels. All the voltage levels connected by breakers or switches should be mapped to a single voltage level in the PowSyBl grid model. The first CGMES voltage level, in alphabetical order, will be the representative voltage level associated to the PowSyBl voltage level. The same criterion is used for substations, and the first CGMES substation will be the representative substation associated to the PowSyBl one. The joined voltage levels and substations information is used almost in every step of the the mapping between CGMES and PowSyBl models, and it is recorded in the `Context` conversion class, that keeps data throughout the overall conversion process.
+The CGMES model does not guarantee these hierarchical constraints, so the first step in the conversion process is to identify all the transformers with ends in different substations and all the breakers and switches with ends in different voltage levels. All the voltage levels connected by breakers or switches should be mapped to a single voltage level in the PowSyBl grid model. The first CGMES voltage level, in alphabetical order, will be the representative voltage level associated to the PowSyBl voltage level. The same criterion is used for substations, and the first CGMES substation will be the representative substation associated to the PowSyBl one. The joined voltage levels and substations information is used almost in every step of the mapping between CGMES and PowSyBl models, and it is recorded in the `Context` conversion class, that keeps data throughout the overall conversion process.
 
 ### Conversion from CGMES to PowSyBl grid model
 
@@ -74,7 +74,7 @@ The following sections describe in detail how each supported CGMES network compo
 #### Substation
 
 For each substation (considering only the representative substation if they are connected by transformers) in the CGMES model a new substation is created in the PowSyBl grid model with the following attributes:
-- `Country`. It is obtained from the `regionName` property as first option, from `subRegionName` as second option. Otherwise is assigned to `null`.
+- `Country`. It is obtained from the `regionName` property as first option, from `subRegionName` as second option. Otherwise, is assigned to `null`.
 - `GeographicalTags`. It is obtained from the `SubRegion` property.
 
 #### VoltageLevel
@@ -89,7 +89,7 @@ As in the substations, for each voltage level (considering only the representati
 
 If the CGMES model is a node/breaker model then `ConnectivityNode` objects are present in the CGMES input files, and for each of them a new `Node` is created in the corresponding PowSyBl voltage level. A `Node` in the PowSyBl model is an integer identifier that is unique by voltage level.
 
-If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional `BusBarSection` is also created in the same voltage level. This option is used to debug the conversion and facilitate the comparison of the topology present in the CGMES input files and the topology computed by PowSyBl. The attributes of the `BusBarSection` are:
+If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional Busbar section is also created in the same voltage level. This option is used to debug the conversion and facilitate the comparison of the topology present in the CGMES input files and the topology computed by PowSyBl. The attributes of the Busbar section are:
 - Identity attributes `Id` and `Name` are copied from the `ConnectivityNode`.
 - `Node`. The same `Node` assigned to the mapped `ConnectivityNode`.
 
@@ -115,7 +115,7 @@ Every `EnergyConsumer` object in the CGMES model creates a new `Load` in PowSyBl
 - `LoadType`. It will be `FICTITIOUS` if the `Id` of the `energyConsumer` contains the pattern `fict`. Otherwise `UNDEFINED`.
 - `LoadDetail`. Additional information about conform and non-conform loads is added as an extension of the `Load` object.
 
-If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SSH` (the default) the active and reactive power of the load are the first defined values present in the sequence `SSH` (`EnergyConsumer.p/q`), `SV` (`SvPowerFlow.p/q` given at EnergyConsumer terminal), `EQ` (`EnergyConsumer.pFixed/qFixed`). Otherwise if it is `SV` then the sequence used will be `SV`, `SSH`, `EQ`. If no values can be obtained from CGMES, `P0` and `Q0` will be set to `NaN`.
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SSH` (the default) the active and reactive power of the load are the first defined values present in the sequence `SSH` (`EnergyConsumer.p/q`), `SV` (`SvPowerFlow.p/q` given at EnergyConsumer terminal), `EQ` (`EnergyConsumer.pFixed/qFixed`). Otherwise, if it is `SV` then the sequence used will be `SV`, `SSH`, `EQ`. If no values can be obtained from CGMES, `P0` and `Q0` will be set to `NaN`.
 
 The `LoadDetail` extension attributes depend on the `type` property of the CGMES `EnergyConsumer`. For a conform load:
 - `withFixedActivePower` is always `0`.
@@ -134,10 +134,10 @@ When the type is a non-conform load:
 A CGMES EnergySource is a generic equivalent for an energy supplier, with the injection given using load sign convention.
 
 For each `EnergySource` object in the CGMES model a new PowSyBl `Load` is created, with attributes:
-- `P0`, `Q0` set from `SSH` or `SV`values depending on import options.
+- `P0`, `Q0` set from `SSH` or `SV` values depending on import options.
 - `LoadType`. It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
 
-If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SSH` (the default) the active and reactive power of the load are copied from the `SSH` values (`EnergySource.activePower/reactivePower`). If it is `SV` the will be assigned from the values seen in `SvPowerFlow.p/q` object associated to the EnergySource terminal.
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SSH` (the default) the active and reactive power of the load are copied from the `SSH` values (`EnergySource.activePower/reactivePower`). If it is `SV` they will be assigned from the values seen in `SvPowerFlow.p/q` object associated to the EnergySource terminal.
 
 #### SvInjection
 
@@ -159,11 +159,9 @@ If the `EquivalentInjection` is at the boundary its regulating voltage data will
 The PowSyBl generator attributes:
 - `MinP`/`MaxP` are copied from CGMES `minP`/`maxP` if defined, otherwise they are set to `-Double.MAX_VALUE`/`Double.MAX_VALUE`.
 - `TargetP`/`TargetQ` are set from `SSH` or `SV` values depending on the import option. CGMES values for `p`/`q` are given with load sign convention, so a change in sign is applied when copying them to `TargetP`/`TargetQ`.
-- `TargetV`. The `regulationTarget` property is copied if it is not zero. Otherwise the nominal voltage associated to the connected terminal of the `equivalentInjection` is assigned. For CGMES Equivalent Injections the voltage regulation is allowed only at the point of connection.
+- `TargetV`. The `regulationTarget` property is copied if it is not zero. Otherwise, the nominal voltage associated to the connected terminal of the `equivalentInjection` is assigned. For CGMES Equivalent Injections the voltage regulation is allowed only at the point of connection.
 - `VoltageRegulatorOn`. It is assigned to `true` if both properties, `regulationCapability` and `regulationStatus` are `true` and the terminal is connected.
 - `EnergySource` is set to `OTHER`.
-
-
 
 =========== TODO(Luma) Documentation reviewed until this point, and moved to a separate branch to make a PR
 
