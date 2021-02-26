@@ -4,149 +4,175 @@ layout: default
 
 # CIM-CGMES
 
-The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS) based on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards. It was developed to meet necessary requirements for TSO data exchanges in the areas of system development and system operation. In this scenario the agents generate their IGM (Individual Grid Model) and additionally it is necessary to have a boundary that describes the connection with other IGMs. The boundary set contains all boundary points necessary for a given grid model exchange. A boundary set can have different coverage depending on the requirements of the common grid model exchange. An individual grid model is described by a set of CIMXML files. Each file is associated to a profile and the most used are:
-- `EQ` is an input to power flow describing the network
-- `SSH` describe the power flow input parameters, e.g. injections and set point values.
-- `TP` describe the power flow buses and depends on the type of model. For Node Breaker (NB) model TP is an output from topology processing. For Bus Branch (BB) model TP is an input to power flow where the power flow buses are manually maintained.
-- `SV` describe the power flow solution, so it is an output from power flow.
+The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS 61970-600-1, TS 61970-600-2) based on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards. It was developed to meet necessary requirements for TSO data exchanges in the areas of system development and system operation. In this scenario the agents (the Modelling Authorities) generate their Individual Grid Models (IGM) that can be assembled to build broader Common Grid Models (CGM). Boundaries between IGMs are well defined: the boundary data is shared between the modelling agents and contain all boundary points required for a given grid model exchange.
 
-The boundary is described in the following CIMXML files:
-- `EQBD` contains all the equipment defined in the boundary. 
-- `TPBD` contains the topology information associated to the boundary.
+In CGMES an electric power system model is described by data grouped in different subsets (profiles) and exchanged as CIM/XML files, with each file associated to a given profile. The profiles considered in PowSyBl are:
+- `EQ`. Equipment. Contains data that describes the equipment present in the network and its physical characteristics.
+- `SSH`. Steady State Hypothesis. Required input parameters to perform power flow analysis, e.g. energy injections and consumptions and setpoint values for regulating controls.
+- `TP`. Topology. Describe how the equipment is electrically connected. Contains the definition of power flow buses.
+- `SV`. State Variables. Contains all the information required to describe a steady-state power flow solution over the network.
+- `EQBD`. Equipment Boundary. Contains definitions of the equipment in the boundary.
+- `TPBD`. Topology Boundary. Topology information associated to the boundary.
 
-A CGMES model can be used in processes that are based on assembling Individual Grid Models (IGM) or into larger Common Grid Models (CGM). 
-As an IGM is incomplete the boundary should be assembled with it to become complete, then a power flow can be solved.
+CGMES model connectivity can be defined at two different levels of detail:
+
+Node/breaker. This is the level of detail required for Operation. The `EQ` contains Connectivity Nodes where the conducting equipment are attached through its Terminals. All switching devices (breakers, disconnectors, ...) are modelled. The contents of the `TP` file must be the result of the topology processing over the graph defined by connectivity nodes and switching devices, taking into account its open/closed status.
+
+Bus/branch. No Connectivity Nodes are present in the `EQ` file. The association of every equipment to a bus is defined directly in the `TP` file, that must be provided.
 
 * TOC
 {:toc}
 
 ## Format specification
-Current supported version of CGMES is 2.4.15, that is based on CIM 16. We can note that this importer is also compatible with CIM 14.
 
-To learn more about CGMES files, read the complete [CMGES format specification](https://www.entsoe.eu/digital/common-information-model/#common-grid-model-exchange-specification-cgmes).
+Current supported version of CGMES is 2.4.15. To learn more about the standard, read the documents in the [Common Grid Model Exchange Standard (CGMES) Library](https://www.entsoe.eu/digital/cim/cim-for-grid-models-exchange/).
 
 ## Import
 
-The import module reads and converts a CGMES model to the PowSyBl grid model. The import process is performed in three steps:
+The import module reads and converts a CGMES model to the PowSyBl grid model. The import process is performed in two steps:
 - Read input files.
-- Validate input data.
-- Convert input data into PowSyBl grid model.
+- Convert CGMES data to PowSyBl grid model.
 
-First, input CGMES data read from RDF/XML files is stored natively in a purpose specific database for RDF statements. In RDF, data is described making statements about resources in triplet expressions (subject, predicate, object). There are multiple open-source implementations of triplestore engines and load from RDF/XML files to the triplestore is highly optimized by these engines. The triplestore repository can be in memory  and it is easy to provide default data and complete missing information. Verifications are made after all data has been loaded. If the validation succeeds the CGMES model is converted to a PowSyBl grid model.
+The data in input CIM/XML files uses RDF (Resource Description Framework) syntax. In RDF, data is described making statements about resources using triplet expressions: (subject, predicate, object).
 
-### Inconsistency checks
-<span style="color: red">TODO</span>
+Input CGMES data read from CIM/XML files is stored natively in a purpose specific database for RDF statements (a Triplestore). There are multiple open-source implementations of Triplestore engines that could be easily plugged in PowSyBl. The default Triplestore engine used by PowSyBl CGMES Importer is [RDF4J](https://rdf4j.org/). Loading from RDF/XML files to the triplestore is highly optimized by these engines. Furthermore, the Triplestore repository can be configured to use an in-memory store, allowing faster access to data.
 
-### From CGMES to IIDM
+To describe the conversion from CGMES to PowSyBl we first introduce some generic considerations about the level of detail of the model (node/breaker or bus/branch), the identity of the components and equipment containment in substations and voltage levels. After that, the conversion for every CGMES relevant class is explained. Consistency checks and validations performed during the conversion are mentioned in the corresponding sections.
 
-The PowSyBl grid model establishes the substation as a required container of voltage levels and transformers (two and three windings and phase shifters). Voltage levels are the required container of the rest network components, except for the AC and DC transmission lines that 
-establish connections between substations and are associated directly to the network model. All buses at transformer ends should be kept at the same substation.
+### Levels of detail: node/breaker and bus/branch
 
-The CGMES model does not guarantee these hierarchical constraints, so the first step in the conversion process, is to identify all the transformers with ends in different substations and all the breakers and switches with ends in different voltage levels. All the voltage levels connected by breakers or switches should be mapped to a single voltage level in the PowSyBl grid model. The first CGMES voltage level, in alphabetical order, will be the representative voltage level associated to the PowSyBl voltage level. The same criterion is used for substations, and the first CGMES substation will be the representative substation associated to the PowSyBl one. The joined voltage levels and substations information is used almost in every step of the conversion process and it is recorded in the `context` class that contains all the collateral information needed to convert from CGMES to PowSyBl and the more requested CGMES information as a `cache memory` allowing a fast access to these data in future requests. 
+CGMES models defined at node/breaker level of detail will be mapped to PowSyBl node/breaker topology level. CGMES models defined at bus/branch level will be mapped to PowSyBl bus/breaker topology level.
+
+For each component in the PowSyBl grid model it is necessary to specify how it should be connected to the network.
+
+If the model is specified at the bus/breaker level, a `Bus` must be specified for the equipment.
+
+If the voltage level is built at node/breaker level, a `Node` must be specified when adding the equipment to PowSyBl. The conversion will create a different `Node` in PowSyBl for each equipment connection.
+
+Using the `Node` or `Bus` information, PowSyBl creates a `Terminal` that will be used to manage the point of connection of the equipment to the network.
+
+Some equipment, like Switches, Lines or Transformers, have more than one point of connection to the Network.
+
+In PowSyBl, a `Node` can have zero or one Terminal. In CGMES, the `ConnectivityNode` objects may have more than one associated Terminals. To be able to represent this in PowSyBl, the conversion process will automatically create internal connections between the PowSyBl nodes that represent equipment connections and the nodes created to map CGMES `ConnectivityNode` objects.
+
+### Identity of model components
+
+Almost all the components of the PowSyBl grid model require a unique identifier `Id`, and may optionally have a human readable `Name`. Whenever possible, these attributes will be directly copied from original CGMES attributes.
+
+Terminals are used by CGMES and PowSyBl to define the points of connection of the equipment to the network. CGMES terminals have unique identifiers. PowSyBl does not allow Terminals to have an associated identifier. Information about original CGMES terminal identifiers are stored in each PowSyBl object using aliases.
+
+### Equipment containers: substations and voltage levels
+
+The PowSyBl grid model establishes the substation as a required container of voltage levels and transformers (two and three windings transformers and phase shifters). Voltage levels are the required container of the rest network components, except for the AC and DC transmission lines that establish connections between substations and are associated directly to the network model. All buses at transformer ends should be kept at the same substation.
+
+The CGMES model does not guarantee these hierarchical constraints, so the first step in the conversion process is to identify all the transformers with ends in different substations and all the breakers and switches with ends in different voltage levels. All the voltage levels connected by breakers or switches should be mapped to a single voltage level in the PowSyBl grid model. The first CGMES voltage level, in alphabetical order, will be the representative voltage level associated to the PowSyBl voltage level. The same criterion is used for substations, and the first CGMES substation will be the representative substation associated to the PowSyBl one. The joined voltage levels and substations information is used almost in every step of the the mapping between CGMES and PowSyBl models, and it is recorded in the `Context` conversion class, that keeps data throughout the overall conversion process.
+
+### Conversion from CGMES to PowSyBl grid model
 
 The following sections describe in detail how each supported CGMES network component is converted to PowSyBl network model objects.
 
 #### Substation
 
 For each substation (considering only the representative substation if they are connected by transformers) in the CGMES model a new substation is created in the PowSyBl grid model with the following attributes:
+- `Country`. It is obtained from the `regionName` property as first option, from `subRegionName` as second option. Otherwise is assigned to `null`.
+- `GeographicalTags`. It is obtained from the `SubRegion` property.
 
-- `Id` The CGMES `Id` is copied.
-- `Name` The CGMES `name` property is copied.
-- `Country` It is obtained from the `regionName` property as first option, from `subRegionName` as second option. Otherwise is assigned to `null`.
-- `GeographicalTags` It is obtained from the `SubRegion` property.
-
-#### Voltage Level
+#### VoltageLevel
 
 As in the substations, for each voltage level (considering only the representative voltage level if they are connected by switches) in the CGMES model a new voltage level is created in the PowSyBl grid model with the following attributes:
-- `Id` The CGMES `Id` is copied.
-- `Name` The CGMES `name` property is copied.
-- `NominalV` It is copied from the `nominalVoltage` property of the CGMES voltage level.
-- `TopologyKind` It will be `NODE_BREAKER` or `BUS_BREAKER` depending on the topology level specified in the CGMES grid model. Both options are possible.
-- `LowVoltageLimit` It is copied from the `lowVoltageLimit` property.
-- `HighVoltageLimit` It is copied from the `highVoltageLimit` property.
+- `NominalV`. It is copied from the `nominalVoltage` property of the CGMES voltage level.
+- `TopologyKind`. It will be `NODE_BREAKER` or `BUS_BREAKER` depending on the level of detail of the CGMES grid model.
+- `LowVoltageLimit`. It is copied from the `lowVoltageLimit` property.
+- `HighVoltageLimit`. It is copied from the `highVoltageLimit` property.
 
-#### ConnectivityNode / TopologicalBus
+#### ConnectivityNode
 
-If the CGMES model is a `node/breaker` model then the `connectivityNodes` are defined, and for each of them a `node` associated to the corresponding voltage level is created in the PowSyBl grid model. A `node` in the PowSyBl model is only an integer identifier that is unique by voltage level. If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional `busBarSection` is also created in the same voltage level. The attributes of the `busBarSection` are:
-- `Id` The `Id` of the CGMES `connectivityNode` is copied.
-- `Name` The `name` of the CGMES property of the `connectivityNode` is copied.
-- `Node` The integer PowSyBl node is copied.
+If the CGMES model is a node/breaker model then `ConnectivityNode` objects are present in the CGMES input files, and for each of them a new `Node` is created in the corresponding PowSyBl voltage level. A `Node` in the PowSyBl model is an integer identifier that is unique by voltage level.
 
-If the CGMES model is a `bus/breaker` model then the `topologicalNodes` are defined, and for each of them a `bus` is created in the PowSyBl grid model inside the corresponding voltage level container. The created `bus` has the following attributes:
-- `Id` The `Id` of the CGMES `topologicalNode` is copied.
-- `Name` The `name` of the CGMES `topologicalNode` is copied.
-- `V` The voltage of the `topologicalNode` is copied if it is valid (greater than `0`).
-- `Angle` The angle the `topologicalNode` is copied if the previous voltage is valid.
+If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional `BusBarSection` is also created in the same voltage level. This option is used to debug the conversion and facilitate the comparison of the topology present in the CGMES input files and the topology computed by PowSyBl. The attributes of the `BusBarSection` are:
+- Identity attributes `Id` and `Name` are copied from the `ConnectivityNode`.
+- `Node`. The same `Node` assigned to the mapped `ConnectivityNode`.
 
-In both cases, if the `connectivityNode` or the `topologicalNode` are located inside the boundary it is necessary to define previously a substation and a voltage level that will be used as the container to associate the PowSyBl `node` or `bus`.
+#### TopologicalNode
 
-If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `false` and the CGMES model is a `node/breaker` model a `busBarSection` is created in the PowSyBl grid model for each `busBarSection` of the CGMES model. The attributes are:
-- `Id` The `Id` of the CGMES `busBarSection` is copied.
-- `Name` The `name` of the CGMES `busBarSection` is copied.
-- `Node` The integer PowSyBl node associated to the CGMES `busBarSection` is copied (It is the node associated to the first terminal connected to the `busBarSection`) .
+If the CGMES model is defined at bus/branch detail, then CGMES `TopologicalNode` objects are used in the conversion, and for each of them a `Bus` is created in the PowSyBl grid model inside the corresponding voltage level container, at the PowSyBl bus/breaker topology level. The created `Bus` has the following attributes:
+- Identity attributes `Id` and `Name` are copied from the `TopologicalNode`.
+- `V` The voltage of the `TopologicalNode` is copied if it is valid (greater than `0`).
+- `Angle` The angle the `TopologicalNode` is copied if the previous voltage is valid.
 
-For each component in the PowSyBl grid model it is necessary to specify how it should be connected to the network. If the voltage level is built at node/breaker level, a `Node` is needed when adding the equipment to the model. If the model is specified at the bus/breaker level, then the `Bus` of the equipment must be specified. Using this information, the PowSyBl grid model creates a `Terminal` that will be used to manage the point of connection of the equipment to the network. Some equipments, like transformers, require two or three `Nodes` or `Buses`.
+#### BusbarSection
 
-In all the components of the PowSyBl grid model is obligatory to specify an `Id` (unique identifier) and optionally a human readable `Name`. As in this conversion process both attributes are copied directly from the same properties of the corresponding CGMES network component they will be omitted in the following sections. Also, it is omitted that all the CGMES terminal identifiers used to manage the connection of the equipment to the rest of the network are recorded as aliases of the network component.
+Busbar sections can be created in PowSyBl grid model only at node/breaker level.
+
+CGMES Busbar sections are mapped to PowSyBl Busbar sections only if CGMES is node/breaker and the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is set to `false`. In this case, a `BusbarSection` is created in the PowSyBl grid model for each `BusbarSection` of the CGMES model, with the attributes:
+- Identity attributes `Id` and `Name` are copied from the CGMES `BusbarSection`.
+- `Node`. A new `Node` in the corresponding voltage level.
 
 #### EnergyConsumer
 
-Every `energyConsumer` component in the CGMES model creates a new `load` in the PowSyBl grid model associated to the corresponding voltage level. The attributes are:
-- `P0` One of these four values (`P` from the `stateVariablesPowerFlow` profile, `P` from the `steadyStateHypothesisPowerFlow` profile, `P` from the `pFixed` property of the CGMES equipment, or `NaN`) is copied according to the import options.
-- `Q0` One of these four values (`Q` from the `stateVariablesPowerFlow` profile, `Q` from the `steadyStateHypothesisPowerFlow` profile, `Q` from the `qFixed` property of the CGMES equipment, or `NaN`) is copied according to the import options.
-- `LoadType` It will be `FICTITIOUS` if the `Id` of the `energyConsumer` contains the pattern `fict`. Otherwise `UNDEFINED`.
-- `LoadDetail` Additional information added as an extension of the main network component class.
+Every `EnergyConsumer` object in the CGMES model creates a new `Load` in PowSyBl. The attributes are:
+- `P0`, `Q0` are set from CGMES values taken from `SSH`, `SV`, or `EQ` data depending on the import options.
+- `LoadType`. It will be `FICTITIOUS` if the `Id` of the `energyConsumer` contains the pattern `fict`. Otherwise `UNDEFINED`.
+- `LoadDetail`. Additional information about conform and non-conform loads is added as an extension of the `Load` object.
 
-If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is the first defined value of the sequence `stateVariablesPowerFlow`, `steadyStateHypothesisPowerFlow`, `Fixed` and `NaN`. Otherwise if it is `SSH` then the sequence will be `steadyStateHypothesisPowerFlow`, `stateVariablesPowerFlow`, `Fixed` and `NaN`.
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SSH` (the default) the active and reactive power of the load are the first defined values present in the sequence `SSH` (`EnergyConsumer.p/q`), `SV` (`SvPowerFlow.p/q` given at EnergyConsumer terminal), `EQ` (`EnergyConsumer.pFixed/qFixed`). Otherwise if it is `SV` then the sequence used will be `SV`, `SSH`, `EQ`. If no values can be obtained from CGMES, `P0` and `Q0` will be set to `NaN`.
 
-The `LoadDetail` depends  on the load Kind (`type` property of the CGMES `energyConsumer`). If the type of the `energyConsumer` is a conform load the following attributes are defined:
-- `withFixedActivePower` Always `0.0`.
-- `withFixedReactivePower` Always `0.0`.
-- `withVariableActivePower` The load `P0` property is copied.
-- `withVariableReactivePower` The load `Q0` property is copied.
+The `LoadDetail` extension attributes depend on the `type` property of the CGMES `EnergyConsumer`. For a conform load:
+- `withFixedActivePower` is always `0`.
+- `withFixedReactivePower` is always `0`.
+- `withVariableActivePower` is set to the Load `P0`.
+- `withVariableReactivePower` is set to the Load `Q0`.
 
-and when the type is a non-conform load the defined attributes are:
-- `withFixedActivePower` The load `P0` property is copied.
-- `withFixedReactivePower` The load `Q0` property is copied.
-- `withVariableActivePower` Always `0.0`.
-- `withVariableReactivePower` Always `0.0`.
+When the type is a non-conform load:
+- `withFixedActivePower` is set to the Load `P0`.
+- `withFixedReactivePower` is set to the Load `Q0`.
+- `withVariableActivePower` is set to `0`.
+- `withVariableReactivePower` is set to `0`.
 
 #### EnergySource
 
-For each `energySource` component in the CGMES model a new `load` in the PowSyBl grid model is created and associated to the corresponding voltage level. The attributes are:
-- `P0` One of these two values (`P` from the `stateVariablesPowerFlow` profile or `P` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
-- `Q0` One of these tow values (`Q` from the `stateVariablesPowerFlow` profile or `Q` from the `steadyStateHypothesisPowerFlow` profile) is copied according to the import options.
-- `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
+A CGMES EnergySource is a generic equivalent for an energy supplier, with the injection given using load sign convention.
 
-If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SV` the active and reactive power of the load is copied from the `stateVariablesPowerFlow` profile. If it is `SSH` will be copy from the `steadyStateHypothesisPowerFlow` profile.
+For each `EnergySource` object in the CGMES model a new PowSyBl `Load` is created, with attributes:
+- `P0`, `Q0` set from `SSH` or `SV`values depending on import options.
+- `LoadType`. It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
 
-#### SV Injections
+If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SSH` (the default) the active and reactive power of the load are copied from the `SSH` values (`EnergySource.activePower/reactivePower`). If it is `SV` the will be assigned from the values seen in `SvPowerFlow.p/q` object associated to the EnergySource terminal.
 
-For each `SVInjection` in the CGMES network model a new `load` in the PowSyBl grid model is created and associated to the corresponding voltage level. The attributes are:
+#### SvInjection
 
-- `P0` The value of the property `pInjection` it is copied.
-- `Q0` The value of the property `qInjection` it is copied. If the property is not defined `0.0` is assigned.
-- `LoadType` Fixed to `FICTITIOUS`.
-- `Fictitious` Fixed to `true`.
+CMES uses `SvInjection` objects to report mismatches on calculated buses: they record the calculated bus injection minus the sum of the terminal flows. According to the documentation, the values will thus follow generator sign convention: positive sign means injection into the bus. But all the reference cases used for development follow load sign convention to report these mismatches.
+
+For each `SvInjection` in the CGMES network model a new PowSyBl `Load` with attributes:
+- `P0`, `Q0` are set from `SvInjection.pInjection/qInjection`.
+- `LoadType` is always set to `FICTITIOUS`.
+- `Fictitious` is set to `true`.
 
 #### EquivalentInjection
 
-The PowSyBl network component created by an `equivalentInjection` of the CGMES grid model can vary depending on where it is located, inside or outside the boundary. If the `equivalentInjection` is located outside the boundary a `generator` will be created. If it is inside and the import option `iidm.import.cgmes.convert-boundary` is `true` then the conversion process will import all the equipments inside the boundary and a `generator`, as in the previous case, will be created. Otherwise, if the `equivalentInjection` is regulating voltage and a dangling line is created at the boundary the regulating voltage data of the `equivalentInjection` will be transferred to the `danglingLine`.
+The mapping of a CGMES `EquivalentInjection` depends on its location relative to the boundary.
 
-When a generator is created, it is associated to the corresponding voltage level and has the following attributes:
-- `MinP` The `minP` property is copied if it is defined, otherwise `-Double.MAX_VALUE`.
-- `MaxP` The `maxP` property is copied if it is defined, otherwise `Double.MAX_VALUE`.
-- `TargetP` The active power `P` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign as it is a target value.  `0.0` if both profiles are not defined.
-- `TargetQ` The reactive power `Q` from the `stateVariablesPowerFlow` profile or from the `steadyStateHypothesisPowerFlow` profile according with the import options and with the opposite sign. `0.0` if both profiles are not defined.
-- `TargetV` The `regulationTarget` property is copied if it is not zero. Otherwise the nominal voltage associated to the connected terminal of the `equivalentInjection` is assigned.
-- `VoltageRegulatorOn` It is assigned to `true` if both properties, `regulationCapability` and `regulationStatus` are `true` and the terminal is connected.
-- `EnergySource` Fixed to `OTHER`.
+If the `EquivalentInjection` is outside the boundary it will be mapped to a PowSyBl `Generator`.
 
-The regulating terminal is not defined so the voltage control will be always local.
+If the `EquivalentInjection` is at the boundary its regulating voltage data will be mapped to the generation data inside the PowSyBl `DanglingLine` created at the boundary point and its values for `P`, `Q` will be used to define the DanglingLine `P0`, `Q0`.
+
+The PowSyBl generator attributes:
+- `MinP`/`MaxP` are copied from CGMES `minP`/`maxP` if defined, otherwise they are set to `-Double.MAX_VALUE`/`Double.MAX_VALUE`.
+- `TargetP`/`TargetQ` are set from `SSH` or `SV` values depending on the import option. CGMES values for `p`/`q` are given with load sign convention, so a change in sign is applied when copying them to `TargetP`/`TargetQ`.
+- `TargetV`. The `regulationTarget` property is copied if it is not zero. Otherwise the nominal voltage associated to the connected terminal of the `equivalentInjection` is assigned. For CGMES Equivalent Injections the voltage regulation is allowed only at the point of connection.
+- `VoltageRegulatorOn`. It is assigned to `true` if both properties, `regulationCapability` and `regulationStatus` are `true` and the terminal is connected.
+- `EnergySource` is set to `OTHER`.
+
+
+
+=========== TODO(Luma) Documentation reviewed until this point, and moved to a separate branch to make a PR
+
+=========== TODO(Luma) create a section about reactive limits and reference it from here and from SynchronousMachine conversion ...
 
 The PowSyBl grid model accepts one definition of limits, either `MinMaxReactiveLimits` or ReactiveCapabilityCurve. The first step is to define the points of the curve. At each point the active power, the minimum reactive and the maximum reactive power values are specified by copying the value of the `xvalue`, `y1value` and `y2value` properties associated to the capability curve  recorded in the `ReactiveCapabilityCurve` property. After that `MinMaxReactiveLimits` is created if there is only one point and `ReactiveCapabilityCurve` in another case.
 
 The best way to determine the final topology at the boundary, it is to wait until the end of the conversion process. At this point all the CGMES network components connected to the boundary node have been analyzed and will be possible to determine it using all the information. So if the `equivalentInjection` is not used to create a generator at this step of the conversion process it will be recorded as an equipment attached to the boundary node. See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary.
+
 
 #### ExternalNetworkInjection
 
@@ -198,13 +224,13 @@ The shunt model is specified by the `type` property of the shunt compensator. Th
  - `GPerSection` Positive sequence shunt (charging) conductance per section. It is copied from the `gPerSection` property.
  - `BPerSection` Positive sequence shunt (charging) susceptance per section. It is copied from the `bPerSection` property and if it is zero is fixed to `Double.MIN_VALUE`
  - `MaximumSectionCount` It is copied from the `maximumSections` property of the CGMES shunt compensator.
- 
+
  The non-linear model is defined by a sorted set of sections where each section accumulates the conductance and susceptance of the previous ones. The attributes by section are:
- - `G` Total shunt conductance. It is calculated by accumulating the `g` of each previous point associated to the non-linear model of the CGMES shunt. 
+ - `G` Total shunt conductance. It is calculated by accumulating the `g` of each previous point associated to the non-linear model of the CGMES shunt.
  - `B` Total shunt susceptance. It is calculated by accumulating the `b` of each previous point associated to the non-linear model of the CGMES shunt.
- 
+
 The regulating attributes of the shunt compensator are defined at the end of the conversion process. See [Regulating Control For Shunt Compensators](#regulating-control-for-shunt-compensators)
-  
+
 #### Equivalent Shunt
 
 Every `equivalentShunt` of the CGMES model creates a new shunt compensator in the PowSyBl grid model. This new equipment is attached to the corresponding voltage level. The `SectionCount` attribute is defined as `1` if the `equivalentShunt` is connected and as `0` if it is disconnected. A linear model is specified where the `BPerSection` attribute is copied from the `b` property of the `equivalentShunt` and the `MaximumSectionCount` is fixed to `1`. It is a fixed shunt compensator, without control capability.
@@ -229,10 +255,10 @@ The new switch in the PowSyBl model is attached to a voltage level and if the mo
 If the model is defined at bus/breaker model the switch is created with default attributes.
 
 At both levels of topology the open status of the switch (true or false) is obtained from the first defined value of this sequence (`open` property from the CGMES `Switch`, `normalOpen` property of the CGMES `Switch`, `false`).
-       
+
 #### AC Line Segments
 
-When one of the ends of the `ACLineSegment` is connected to the boundary See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary. In the rest of the cases the `ACLineSegment` is converted to a Line or a switch. 
+When one of the ends of the `ACLineSegment` is connected to the boundary See [Boundary Topology](#boundary-topology) to know  the final topology at the boundary. In the rest of the cases the `ACLineSegment` is converted to a Line or a switch.
 
 In most of the cases the `ACLineSegment` is converted to a Line. Then a new Line in the PowSyBl grid model is created and attached to the network container with the following attributes:
 - `R` The `r` property value is copied.
@@ -242,7 +268,7 @@ In most of the cases the `ACLineSegment` is converted to a Line. Then a new Line
 - `G2` The half of the `gch` property value is copied.
 - `B2` The half of the `bch` property value is copied.
 
-When the `ACLineSegment` is a zero impedance line inside the voltage level a new switch is created and attached to the corresponding voltage level in the PowSyBl grid model. If the model is defined at node/breaker level, then the switch will have the following attributes: 
+When the `ACLineSegment` is a zero impedance line inside the voltage level a new switch is created and attached to the corresponding voltage level in the PowSyBl grid model. If the model is defined at node/breaker level, then the switch will have the following attributes:
 - `Kind` Fixed to `BREAKER`.
 - `Fictitious` Fixed to `true`.
 
@@ -258,7 +284,7 @@ Each `equivalentBranch` in the CGMES model creates a new line in the powSyBl gri
 - `B1` Fixed to `0.0`.
 - `G2` Fixed to `0.0`.
 - `B2` Fixed to `0.0`.
- 
+
 It is possible to define an impedance at each end of the `equivalentBranch` in the CGMES model, `r` and `x` properties define the impedance at end `1` and `r21` and `x21` properties define it at end `2`. The current version of PowSyBl only supports lines with identical impedance at both ends. At the conversion process the impedance is copied from end `1`, `r` and `x` properties.
 
 #### Series Compensator
@@ -319,8 +345,8 @@ After all these procedures the following attributes are defined in the two-windi
 - `RatedU1` The rated voltage of the power transformer end1.
 - `RatedU2` The rated voltage of the power transformer end2.
 
-The regulating attributes of the two-winding transformer are defined at the end of the conversion process. See [Regulating Control For Transformers.](#regulating-control-for-transformers) 
- 
+The regulating attributes of the two-winding transformer are defined at the end of the conversion process. See [Regulating Control For Transformers.](#regulating-control-for-transformers)
+
 Each three-winding transformer in the CGMES model, defined as three power transformer ends, is converted to a new three-winding transformer in the PowSyBl model that is attached to the corresponding substation. To do this the two-winding transformer procedures are also applied here. The first step is then to collect the information of the three power transformer ends. For each end the collected data is:
 
 - `TransmissionImpedance` The transmission impedance of the corresponding power transformer end.
@@ -334,11 +360,11 @@ The second step is to map this information to the general three-winding transfor
 - The `MagnetizingAdmittance` is also mapped at the network side.
 - The structural ratio is considered at the star bus side of the general three-winding transformer model.
 
-As the three-winding transformer model in PowSyBl can also be represented as three two-winding transformers connected to the star bus to convert the general three-winding transformer model to the model in PowSyBl it is only necessary to apply the previous convert process to each two-winding transformer. However, it is important to point out that in this situation the combine procedure will not act as there is no way to define two `ratioTapChangers` or `phaseTapChangers` in the same leg. 
+As the three-winding transformer model in PowSyBl can also be represented as three two-winding transformers connected to the star bus to convert the general three-winding transformer model to the model in PowSyBl it is only necessary to apply the previous convert process to each two-winding transformer. However, it is important to point out that in this situation the combine procedure will not act as there is no way to define two `ratioTapChangers` or `phaseTapChangers` in the same leg.
 
 Additionally to the attributes of the three two-winding transformers the rated voltage of the star bus must be defined. In the default alternative it is assigned to the rated voltage of the power transformer end1.
 
-The regulating attributes of the three-winding transformer are defined at the end of the conversion process. See [Regulating Control For Transformers.](#regulating-control-for-transformers) 
+The regulating attributes of the three-winding transformer are defined at the end of the conversion process. See [Regulating Control For Transformers.](#regulating-control-for-transformers)
 
 ![ThreeWindingsTransformerModel](img/cim-cgmes/three-windings-transformer-model.svg){: width="100%" .center-image}
 
@@ -369,7 +395,7 @@ Once the generic Dc configuration has been determined next step is to create the
 - In the third configuration the conversion process creates two converters and only one `HvdcLine` with the equivalent resistance of the two parallel `DcLineSegments`.
 
 Each created `HvdcLine` is included in the network container and has the following attributes:
-- `R` Resistance calculated according with the predefined configuration. 
+- `R` Resistance calculated according with the predefined configuration.
 - `NominalV`. Computed using the properties `ratedUdc` of the two associated CGMES converters. The `ratedUdc` value of the converter at the end1 is assigned if it is a non-zero value, otherwise the `ratedUdc` value of the converter at the end2 will be assigned.
 - `ActivePowerSetpoint` Computed depending on the side where the rectifier is located and using the active power at the ends and the active losses at the Dc poles.
 - `MaxP` There is not `maxP` property in the CGMES model so a value is computed depending on the side of the rectifier and the Ac active power at both ends. The selected Ac active power is scaled by the factor `1.2`.
@@ -431,7 +457,7 @@ If there is one switch and one line at the boundary then a zero impedance line i
 #### Regulating Control For Generators
 
 The regulating control information is defined at the end of the conversion process, after all network components have been specified. The attributes added to the generator are:
-- `RegulatingTerminal` It is copied from the terminal associated to the `Terminal` property of the `regulatingControl`. If is not valid then the terminal associated to the created generator is used by forcing the control to local. 
+- `RegulatingTerminal` It is copied from the terminal associated to the `Terminal` property of the `regulatingControl`. If is not valid then the terminal associated to the created generator is used by forcing the control to local.
 - `TargetV` The `TargetValue` property of the `regulatingControl` is copied if it is not zero and not `NaN`. Otherwise the nominal voltage of the associated voltage level is copied.
 - `VoltageRegulatorOn` To be `true` both properties, the `enabled` of the `regulatingControl` and the `controlEnabled` of the CGMES network component must be `true`.
 
@@ -443,7 +469,7 @@ The `regulatingControl` attributes added to `staticVARcompensators` are:
 - `VoltageSetpoint` The `targetValue` property of the `regulatingControl` is copied.
 - `ReactivePowerSetpoint` The `targetValue` property of the `regulatingControl` is copied.
 - `RegulatingTerminal` Terminal where the voltage or reactive power should be controlled. It is defined as the terminal associated to the `Terminal` property of the `regulatingControl` if it is valid. Otherwise the terminal associated to the `staticVARcompensator` is used by forcing the control to local.
-- `RegulationMode` Three possible status `VOLTAGE`, `REACTIVE_POWER` and `OFF`. The current status is defined in the `mode` property of the `regulatingControl` and it is only assigned if  both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` of the CGMES network component are `true`. 
+- `RegulationMode` Three possible status `VOLTAGE`, `REACTIVE_POWER` and `OFF`. The current status is defined in the `mode` property of the `regulatingControl` and it is only assigned if  both properties, the `enabled` property of the `regulatingControl` and the `controlEnabled` of the CGMES network component are `true`.
 
 A default `regulatingControl` is defined using the `voltageSetPoint`, `q`, and `controlMode` properties of the CGMES network component when only the `controlEnabled` is `true`. In that case the control will be local.
 
@@ -459,7 +485,7 @@ If the `regulatingControl` data is not well defined then a local `regulatingCont
 
 #### Regulating Control For Transformers
 
-In two-winding transformers a regulating control can be associated to the `ratioTapChanger` and another one to the `phaseTapChanger` but in the current version only one can be active. If both are active the regulating control associated to the `ratioTapChanger` is deactivated. 
+In two-winding transformers a regulating control can be associated to the `ratioTapChanger` and another one to the `phaseTapChanger` but in the current version only one can be active. If both are active the regulating control associated to the `ratioTapChanger` is deactivated.
 
 In `ratioTapChangers` only voltage control is supported and the `regulatingControl` attributes added are:
  - `TargetV` It is copied from the `targetValue` property of the `regulatingControl`.
@@ -493,7 +519,6 @@ The more restrictive loading limits is assigned if there are more than one loadi
 
 <span style="color: red">TODO</span>
 
-
 ### Extensions
 <span style="color: red">TODO</span>
 
@@ -519,7 +544,7 @@ The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` proper
 
 **iidm.import.cgmes.ensure-id-alias-unicity**
 The `iidm.import.cgmes.ensure-id-alias-unicity` property is an optional property that defines if IDs and aliases' unicity is ensured during CGMES import. If it is set to `true`, identical CGMES IDs will be modified to be unique.
-If it is set to `false`, identical CGMES IDs will throw an exception. Its default value is `false`. 
+If it is set to `false`, identical CGMES IDs will throw an exception. Its default value is `false`.
 
 **iidm.import.cgmes.post-processors**
 The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which are to be activated after import. By default, it is an empty list.
@@ -568,5 +593,5 @@ The `storeCgmesModelAsNetworkExtension` property is deprecated since v2.4.0. Use
 <span style="color: red">TODO</span>
 
 ## Examples
-Have a look to the [CGMES sample files](https://docstore.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/TestConfigurations_packageCASv2.0.zip)
+Have a look to the [CGMES sample files](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/TestConfigurations_packageCASv2.0.zip)
 from ENTSO-E Test Configurations for Conformity Assessment Scheme v2.0.
