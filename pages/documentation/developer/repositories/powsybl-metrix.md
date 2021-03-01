@@ -1,7 +1,7 @@
 # powsybl-metrix [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg)](https://github.com/powsybl/powsybl-metrix/releases/)
 The PowSyBl Metrix [repository](https://github.com/powsybl/powsybl-metrix) provides modules to run optimal power load flow on several network variants. Variants are generated through time series mapping on a base case.
 
-**Reviewers:** [berthaultval](https://github.com/berthaultval), [bongrainmat](https://github.com/bongrainmat), [marifunf](https://github.com/marifunf), [pl-buiquang](https://github.com/pl-buiquang)
+**Reviewers:** [berthaultval](https://github.com/berthaultval), [marifunf](https://github.com/marifunf), [pl-buiquang](https://github.com/pl-buiquang)  
 **Committers:** [berthaultval](https://github.com/berthaultval), [MioRtia](https://github.com/MioRtia)
 
 ## Features
