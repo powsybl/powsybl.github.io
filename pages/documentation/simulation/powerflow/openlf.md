@@ -176,6 +176,12 @@ The default value for `loadPowerFactorConstant` property is `false`.
 **dcUseTransformerRatio**  
 The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the flow equations during DC approximation. The default value of this parameter is `true`.
 
+**plausibleActivePowerLimit**  
+The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for slack distribution (`balanceType` equals to `PROPORTIONAL_TO_GENERATION_P_MAX`). The default value is $10000 MW$.
+
+**addRatioToLinesWithDifferentNominalVoltageAtBothEnds**  
+The `addRatioToLinesWithDifferentNominalVoltageAtBothEnds` property is an optional property used for lines that are connected to two voltage level with different nominal voltages. If this property equals `true`, a structural ratio is taken into account to ease the convergence. The default value if `false`.  
+
 ### Configuration file example
 See below an extract of a config file that could help:
 

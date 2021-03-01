@@ -113,7 +113,7 @@ This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) provides a C++ implementation of optimal power load flow.
 
-**Reviewers:** [bongrainmat](https://github.com/bongrainmat), [berthaultval](https://github.com/berthaultval), [pl-buiquang](https://github.com/pl-buiquang)
+**Reviewers:** [berthaultval](https://github.com/berthaultval), [marifunf](https://github.com/marifunf), [pl-buiquang](https://github.com/pl-buiquang)
 **Committers:** [berthaultval](https://github.com/berthaultval), [MioRtia](https://github.com/MioRtia)
 
 ## Development
