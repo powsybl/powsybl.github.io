@@ -195,7 +195,7 @@ This module provides an API to implement a DSL for dynamic simulation inputs, su
 This module provides an [iTools](../user/itools/dynamic-simulation.md) command to run time-domain simulation.
 
 **powsybl-simulation-api**  *(Removed since v4.0.1)*
-This module provides a legacy API for time domain simulation. We removed this module in 4.0.1 ; `powsybl-dynamic-simulation-api` should be used instead.
+This module provides a legacy API for time domain simulation. We removed this module in 4.0.1 ; **powsybl-dynamic-simulation-api** should be used instead.
 
 ### Optimal power load flow on network variants (Metrix)
 
