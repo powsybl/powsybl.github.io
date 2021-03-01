@@ -18,9 +18,9 @@ OpenLoadFlow computes power flows from IIDM grid model in bus/view topology. Fro
 - $$G_1$$ and $$G_2$$ are the real parts (conductance) on respectively side 1 and side 2 of the branch ;
 - $$B_1$$ and $$B_2$$ are the imaginary parts (susceptance) on respectively side 1 and side 2 of the branch ;
 - $$A_1$$ is the angle shifting on side 1, before the series impedance. For classical branches, the default value is zero ;
-- $$R_1$$ is the ratio of voltages between side 2 and side 1, before the series impedance. For classical branches, the default value is $$1$$.
+- $$\rho_1$$ is the ratio of voltages between side 2 and side 1, before the series impedance. For classical branches, the default value is $$1$$.
 
-As the $$\Pi$$ model is created from IIDM grid modelling that locates its ratio and phase tap changers in side 1, $$A_2$$ and $$R_2$$ are always equal to zero and $$1$$. In case of a branch with voltage or phase control, the $$\Pi$$ model becomes an array. See below our model:
+As the $$\Pi$$ model is created from IIDM grid modelling that locates its ratio and phase tap changers in side 1, $$A_2$$ and $$\rho_2$$ are always equal to zero and $$1$$. In case of a branch with voltage or phase control, the $$\Pi$$ model becomes an array. See below our model:
 
 ![Pi model](img/pi-model.svg){: width="50%" .center-image}
 
@@ -36,11 +36,11 @@ Let $$v_i$$ be the unknown voltage magnitude at bus $$i$$. Let $$\theta_i$$ be t
 
 To build the active and reactive balance equations, OpenLoadFlow first expresses active and reactive power flowing from a bus to another throught a line:
 
-$$p_{i,j}= R_{i,j}^iv_i(G_{i,j}^iR_{i,j}^iv_i + Y_{i,j}R_{i,j}^iv_i\text{sin}(\Xi_{i,j}) - Y_{i,j}R_{i,j}^jv_j\text{sin}(\theta_{i,j})).$$
+$$p_{i,j}= \rho_iv_i(G_i\rho_iv_i + Y\rho_iv_i\text{sin}(\Xi) - Y\rho_jv_j\text{sin}(\theta)).$$
 
-$$q_{i,j}= R_{i,j}^iv_i(-B_{i,j}^iR_{i,j}^iv_i + Y_{i,j}R_{i,j}^iv_i\text{cos}(\Xi_{i,j}) - Y_{i,j}R_{i,j}^jv_j\text{cos}(\theta_{i,j})).$$
+$$q_{i,j}= \rho_iv_i(-B_i\rho_iv_i + Y\rho_iv_i\text{cos}(\Xi) - Y\rho_jv_j\text{cos}(\theta)).$$
 
-Where $$Y_{i,j}$$ is the magnitude of the line complex admitance $$\frac{1}{R_{i,j}+jX_{i,j}}$$, and $$\Xi_{i,j}$$ such that: $$R_{i,j}+jX_{i,j} = \frac{1}{Y_{i,j}}e^{j(\frac{\pi}{2}-\Xi_{i,j})}$$. $$\theta_{i,j}$$ satisfies: $$\theta_{i,j}= \Xi_{i,j} - A_{i,j}^i + A_{i,j}^j - \phi_i + \phi_j.$$
+Where $$Y$$ is the magnitude of the line complex admitance $$\frac{1}{R+jX}$$, and $$\Xi$$ such that: $$R+jX = \frac{1}{Y}e^{j(\frac{\pi}{2}-\Xi)}$$. $$\theta$$ satisfies: $$\theta= \Xi - A_i + A_j - \phi_i + \phi_j.$$
 
 Beware that $$p_{i,j}$$ is the power at the exit of bus $$i$$.
 
