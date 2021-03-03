@@ -170,7 +170,7 @@ Obviously: $$t \leq n+1$$
 
 One of this component contains the slack bus and should be the largest. Only sensitivities involving equipments of that component can be computed. A easy way to compute them is to connect lines that have been disconnected during the contingency. More precisely, we have to find $$t-1$$ lines to reconnect in order to obtain a single connected component. As we reconnect exactly $$t-1$$ lines and obtain a connected network, we are assured that there are no loop in it.
 
-As the two equipments of the sensitivity lie in the largest connected component of the post-contingency network (containing the slack bus), no flow can pass throught the reconnected lines. Then, the sensitivities of the post-contingency network are equal to those of the connected network, where the matrix $$M$$ is invertible.
+As the two equipments of the sensitivity lie in the largest connected component of the post-contingency network (containing the slack bus), no flow can pass through the reconnected lines. Then, the sensitivities of the post-contingency network are equal to those of the connected network, where the matrix $$M$$ is invertible.
 
 ##### How to detect a loss of connectivity?
 
@@ -212,10 +212,10 @@ This could be done in a set of branches given by the user.
 
 Every sensitivity computation is done using the following formula:
 
-$$ S_{\eta,p}(v,\phi) = g_p^T(v,\phi) + G_{v,\phi}(v,\phi)^TJ(v,\phi)^{-1}f_p(v,\phi). $$
+$$ S_{\eta,p}(v,\phi) = g_p^T(v,\phi) + G_{v,\phi}(v,\phi)^TJ(v,\phi)^{-1}f_p(v,\phi)$$
 
-Where:
-- $$\eta$$ is the list of values measured by the sensitivity (i.e. flow on line or current on line) ;
+where:
+- $$\eta$$ is the list of values measured by the sensitivity (i.e. flow on a line or current on a line) ;
 - $$p$$ is the parameter whose variation is studied by the sensitivity ;
 - $$S_{\eta,p}(v,\phi)$$ is a row-vector of sensitivities on values $$\eta$$ according to variation of parameter $$p$$, at the point $$(v,\phi)$$ ;
 - $$g_p(v,\phi)$$ is the gradient of sensitivities according to the parameter $$p$$, at the point $$(v,\phi)$$ ;
@@ -223,7 +223,7 @@ Where:
 - $$J(v,\phi)$$ is the jacobian matrix of power flow equations system at the point $$(v,\phi)$$ ;
 - $$f_p(v,\phi)$$ is the gradient of power flow equations according to the parameter $$p$$, at the point $$(v,\phi)$$.
 
-Giving a list of sensitivities $$\eta$$ and a parameter $$p$$, an AC sensitivity analysis is done with following steps:
+Giving a list of sensitivities $$\eta$$ and a parameter $$p$$, an AC sensitivity analysis is done following the steps:
 1. Extract from a power flow computation state variables $$(v,\phi)$$ ;
 2. Compute vector $$f_p(v,\phi)$$ ;
 3. Compute jacobian matrix $$J(v,\phi)$$ ;
@@ -237,128 +237,134 @@ Following sections detail how $$f_p(v,\phi)$$, $$G_{v,\phi}(v,\phi)$$ and $$g_p(
 
 ### Computation of vector $$f_p(v,\phi)$$
 
-Vector $$f_p(v,\phi)$$ is the gradient of power flow equations according to the parameter $$p$$, at the point $$(v,\phi)$$. Its computation depends on if $$p$$ is the active injection at a bus, or the phase shifting angle of a phase tap changer.
+Vector $$f_p(v,\phi)$$ is the gradient of power flow equations according to the parameter $$p$$, at the point $$(v,\phi)$$. Its computation depends on if $$p$$ is the active injection at a bus or the phase shift of a phase tap changer.
 
 #### Case 1: $$p$$ is the active injection at bus $$i$$
 
-In this case, all entries of vector $$f_p(v,\phi)$$ equal zero, except one which corresponds to the active power flow balance equation at bus $$i$$:
+In this case, all entries of vector $$f_p(v,\phi)$$ are equal to zero, except one which corresponds to the active power flow balance equation at bus $$i$$:
 
 $$
 \begin{align}
-\texttt{If}~k~\texttt{is the active power flow balance at bus}~i:& \quad (f_p(v,\phi))_k = 1,\\
+\texttt{if}~k~\texttt{is the active power flow balance at bus}~i:& \quad (f_p(v,\phi))_k = 1,\\
 \\
-\texttt{Else}:& \quad (f_p(v,\phi))_k = 0.
+\texttt{else}:& \quad (f_p(v,\phi))_k = 0.
 \end{align}
 $$
 
-#### Case 2: $$p$$ is the phase shifting angle of the phase tap changer on side $$i$$ of line $$(i,j)$$
+#### Case 2: $$p$$ is the phase shift of the phase tap changer on side $$i$$ of line $$(i,j)$$
 
-In this case, all entries of vector $$f_p(v,\phi)$$ equal zero, except following ones:
-- active power flow balance eqaution at both buses $$i$$ and $$j$$,
-- reactive power flow balance equation at bus $$i$$, only if it is a PQ-bus,
-- reactive power flow balance equation at bus $$j$$, only if it is a PQ-bus.
+In this case, all entries of vector $$f_p(v,\phi)$$ are equal to zero, except the following ones:
+- active power flow balance equation at both buses $$i$$ and $$j$$,
+- reactive power flow balance equation at bus $$i$$, only if it is a PQ bus,
+- reactive power flow balance equation at bus $$j$$, only if it is a PQ bus.
 
 $$
 \begin{align}
-\texttt{Let}~\alpha &= -\rho_iv_iY\rho_jv_j\text{cos}(\theta)\frac{\pi}{180},\\
+\texttt{let}~\alpha &= -\rho_iv_iY\rho_jv_j\text{cos}(\theta)\frac{\pi}{180},\\
 \\
-\texttt{Let}~\beta &= \rho_iv_iY\rho_jv_j\text{sin}(\theta)\frac{\pi}{180}.
+\texttt{let}~\beta &= \rho_iv_iY\rho_jv_j\text{sin}(\theta)\frac{\pi}{180}.
 \end{align}
 $$
 
 $$
 \begin{align}
-\texttt{If}~k~\texttt{is the active power flow balance at bus}~i:& \quad (f_p(v,\phi))_k = \alpha,\\
+\texttt{if}~k~\texttt{is the active power flow balance at bus}~i:& \quad (f_p(v,\phi))_k = \alpha,\\
 \\
-\texttt{If}~k~\texttt{is the active power flow balance at bus}~j:& \quad (f_p(v,\phi))_k = -\alpha,\\
+\texttt{if}~k~\texttt{is the active power flow balance at bus}~j:& \quad (f_p(v,\phi))_k = -\alpha,\\
 \\
-\texttt{If}~k~\texttt{is the reactive power flow balance at bus}~i~\texttt{which is PQ}:& \quad (f_p(v,\phi))_k = \beta,\\
+\texttt{if}~k~\texttt{is the reactive power flow balance at bus}~i:& \quad (f_p(v,\phi))_k = \beta,\\
 \\
-\texttt{If}~k~\texttt{is the reactive power flow balance at bus}~j~\texttt{which is PQ}:& \quad (f_p(v,\phi))_k = -\beta,\\
+\texttt{if}~k~\texttt{is the reactive power flow balance at bus}~j:& \quad (f_p(v,\phi))_k = -\beta,\\
 \\
-\texttt{Else}:& \quad (f_p(v,\phi))_k = 0.
+\texttt{else}:& \quad (f_p(v,\phi))_k = 0.
 \end{align}
 $$
 
 ### Computation of matrix $$G_{v,\phi}(v,\phi)$$
 
-Matrix $$G_{v,\phi}(v,\phi)$$ is the matrix whose each column is the gradient of a sensitivity according to state variables $$v$$ and $$\phi$$, at the point $$(v,\phi)$$. It is computed column by column. The computation of column $$l$$ depends on if it is relative to the sensitivity of the power or the current flowing from $$i$$ to $$j$$.
+The matrix $$G_{v,\phi}(v,\phi)$$ is the matrix which column is the gradient of a sensitivity according to state variables $$v$$ and $$\phi$$, at the point $$(v,\phi)$$. It is computed column by column. The computation of column $$l$$ depends on if it is relative to the sensitivity of the power or the current flowing from $$i$$ to $$j$$.
 
 #### Case 1: Column $$l$$ is relative to the sensitivity of the power flowing from $$i$$ to $$j$$
 
-In this case, all entries of column $$l$$ of $$G_{v,\phi}(v,\phi)$$ equal zero, except four which correspond to the voltage magnitudes and angles at both buses $$i$$ and $$j$$:
+In this case, all entries of column $$l$$ of $$G_{v,\phi}(v,\phi)$$ are equal to zero, except for those corresponding to the voltage magnitudes and angles at both buses $$i$$ and $$j$$. Let's introduce the three following derivatives:
 
 $$
 \begin{align}
-\texttt{Let}~\frac{dp}{dv_i} &= \rho_i(2G\rho_iv_i + 2Y\rho_iv_i\text{sin}(\Xi) - Y\rho_jv_j\text{sin}(\theta)),\\
+\frac{dp}{dv_i} &= \rho_i(2G\rho_iv_i + 2Y\rho_iv_i\text{sin}(\Xi) - Y\rho_jv_j\text{sin}(\theta))\\
 \\
-\texttt{Let}~\frac{dp}{dv_j} &= - \rho_iv_iY\rho_j\text{sin}(\theta),\\
+\frac{dp}{dv_j} &= - \rho_iv_iY\rho_j\text{sin}(\theta)\\
 \\
-\texttt{Let}~\frac{dp}{d\phi_i} &= - \rho_iv_iY\rho_jv_j\text{cos}(\theta).
+\frac{dp}{d\phi_i} &= - \rho_iv_iY\rho_jv_j\text{cos}(\theta)
 \end{align}
 $$
 
+Note that $$p$$ always corresponds to side 1 of the branch, it is an arbitrary choice. And note that $$\frac{dp}{d\phi_j}$$ equals to $$-\frac{dp}{d\phi_i}$$.
+
 $$
 \begin{align}
-\texttt{If}~k~\texttt{is the voltage magnitude at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{dp}{dv_i},\\
+\texttt{if}~k~\texttt{is the voltage magnitude at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{dp}{dv_i},\\
 \\
-\texttt{If}~k~\texttt{is the voltage magnitude at bus}~j:& \quad (G_{v,\phi})_{k,l} = \frac{dp}{dv_j},\\
+\texttt{if}~k~\texttt{is the voltage magnitude at bus}~j:& \quad (G_{v,\phi})_{k,l} = \frac{dp}{dv_j},\\
 \\
-\texttt{If}~k~\texttt{is the voltage angle at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{dp}{d\phi_i},\\
+\texttt{if}~k~\texttt{is the voltage angle at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{dp}{d\phi_i},\\
 \\
-\texttt{If}~k~\texttt{is the voltage angle at bus}~j:& \quad (G_{v,\phi})_{k,l} = -\frac{dp}{d\phi_i},\\
+\texttt{if}~k~\texttt{is the voltage angle at bus}~j:& \quad (G_{v,\phi})_{k,l} = -\frac{dp}{d\phi_i},\\
 \\
-\texttt{Else}:& \quad (G_{v,\phi})_{k,l} = 0.
+\texttt{else}:& \quad (G_{v,\phi})_{k,l} = 0.
 \end{align}
 $$
 
 #### Case 2: Column $$l$$ is relative to the sensitivity of the current flowing from $$i$$ to $$j$$
 
-Like previous case, all entries of column $$l$$ of $$G_{v,\phi}(v,\phi)$$ equal zero, except four which correspond to the voltage magnitudes and angles at both buses $$i$$ and $$j$$:
+Like previous case, all entries of column $$l$$ of $$G_{v,\phi}(v,\phi)$$ equal zero, except four which correspond to the voltage magnitudes and angles at both buses $$i$$ and $$j$$. Let's introduce $$z$$ such as:
 
 $$
 \begin{align}
-\texttt{Let}~w_i &= \rho_iv_i, \\
+w_i &= \rho_iv_i \\
+w_j &= Y\rho_jv_j \\
+x_{i,i} &= G_i^2 + B_i^2 + Y^2 + 2G_iY\text{sin}(\Xi) - 2B_iY\text{cos}(\Xi) \\
+x_{i,j} &= - G_i\texttt{sin}(\theta) - Y\texttt{sin}(\Xi)\texttt{sin}(\theta) + B_i\texttt{cos}(\theta) - Y\texttt{cos}(\Xi)\texttt{cos}(\theta) \\
 \\
-\texttt{Let}~w_j &= Y\rho_jv_j, \\
-\\
-\texttt{Let}~x_{i,i} &= G_i^2 + B_i^2 + Y^2 + 2G_iY\text{sin}(\Xi) - 2B_iY\text{cos}(\Xi), \\
-\\
-\texttt{Let}~x_{i,j} &= - G_i\texttt{sin}(\theta) - Y\texttt{sin}(\Xi)\texttt{sin}(\theta) + B_i\texttt{cos}(\theta) - Y\texttt{cos}(\Xi)\texttt{cos}(\theta), \\
-\\
-\texttt{Let}~z &= (\rho_i)^2(w_i^2x_{i,i} + w_j^2 + 2w_iw_jx_{i,j}), \\
-\\
-\texttt{Let}~\frac{dz}{dv_i} &= (\rho_i)^2(2\rho_iw_ix_{i,i} + 2\rho_iw_jx_{i,j}), \\
-\\
-\texttt{Let}~\frac{dz}{dv_j} &= (\rho_i)^2(2Y\rho_jw_j + 2Y\rho_jw_ix_{i,j}), \\
-\\
-\texttt{Let}~\frac{dx_{i,j}}{d\phi_i} &= G_i\texttt{cos}(\theta) + Y\texttt{sin}(\Xi)\texttt{cos}(\theta) + B_i\texttt{sin}(\theta) - Y\texttt{cos}(\Xi)\texttt{sin}(\theta), \\
-\\
-\texttt{Let}~\frac{dz}{d\phi_i} &= 2(\rho_i)^2w_iw_j\frac{dx_{i,j}}{d\phi_i}.
+z &= (\rho_i)^2(w_i^2x_{i,i} + w_j^2 + 2w_iw_jx_{i,j}) \\
 \end{align}
 $$
 
+Which derivatives are the following ones:
+
 $$
 \begin{align}
-\texttt{If}~k~\texttt{is the voltage magnitude at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{dv_i},\\
+\frac{dz}{dv_i} &= (\rho_i)^2(2\rho_iw_ix_{i,i} + 2\rho_iw_jx_{i,j}) \\
 \\
-\texttt{If}~k~\texttt{is the voltage magnitude at bus}~j:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{dv_j},\\
+\frac{dz}{dv_j} &= (\rho_i)^2(2Y\rho_jw_j + 2Y\rho_jw_ix_{i,j}) \\
 \\
-\texttt{If}~k~\texttt{is the voltage angle at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{d\phi_i},\\
+\frac{dz}{d\phi_i} &= 2(\rho_i)^2w_iw_j\frac{dx_{i,j}}{d\phi_i} \\
+\texttt{with}~& \frac{dx_{i,j}}{d\phi_i} = G_i\texttt{cos}(\theta) + Y\texttt{sin}(\Xi)\texttt{cos}(\theta) + B_i\texttt{sin}(\theta) - Y\texttt{cos}(\Xi)\texttt{sin}(\theta) \\
+\end{align}
+$$
+
+We obtain:
+
+$$
+\begin{align}
+\texttt{if}~k~\texttt{is the voltage magnitude at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{dv_i},\\
 \\
-\texttt{If}~k~\texttt{is the voltage angle at bus}~j:& \quad (G_{v,\phi})_{k,l} = -\frac{1000}{2\sqrt{3z}}\frac{dz}{d\phi_i},\\
+\texttt{if}~k~\texttt{is the voltage magnitude at bus}~j:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{dv_j},\\
 \\
-\texttt{Else}:& \quad (G_{v,\phi})_{k,l} = 0.
+\texttt{if}~k~\texttt{is the voltage angle at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{d\phi_i},\\
+\\
+\texttt{if}~k~\texttt{is the voltage angle at bus}~j:& \quad (G_{v,\phi})_{k,l} = -\frac{1000}{2\sqrt{3z}}\frac{dz}{d\phi_i},\\
+\\
+\texttt{else}:& \quad (G_{v,\phi})_{k,l} = 0.
 \end{align}
 $$
 
 ### Computation of vector $$g_p(v,\phi)$$
 
-Vector $$g_p(v,\phi)$$ is the gradient of sensitivities according to the parameter $$p$$, at the point $$(v,\phi)$$. Its computation depends first on if $$p$$ is the active injection at a bus, or the phase shifting angle of a phase tap changer, and second if the sensitivity is the power or the current flowing throught a line $$(i,j)$$.
+Vector $$g_p(v,\phi)$$ is the gradient of the sensitivities according to the parameter $$p$$, at the point $$(v,\phi)$$. First, its computation depends on if $$p$$ is the active injection at a bus or the phase shift of a phase tap changer. Secondly it depends on if the sensitivity function is the power or the current flowing through a line $$(i,j)$$.
 
-In the case where parameter $$p$$ is an injection, vector $$g_p(v,\phi)$$ equals zero.
+In the case of an injection as parameter $$p$$, vector $$g_p(v,\phi)$$ equals zero.
 
-In the case where parameter $$p$$ is the phase shifting angle of a phase tap changer, a component of $$g_p(v,\phi)$$ is non zero if and only if it is relative to a sensitivity on the very line $$(i,j)$$ where lies the phase tap changer. In this case, the value of the component is given by:
+In the case of a phase shift of a phase tap changer as parameter $$p$$, a component of $$g_p(v,\phi)$$ is non zero if and only if it is relative to a sensitivity on the branch $$(i,j)$$ where lies the phase tap changer. In this case, the value of the component is given by:
 
 $$
 \begin{align}
@@ -368,13 +374,13 @@ $$
 \end{align}
 $$
 
-Note that the two formulas above are valid when the phase tap changer is on side $$i$$ of the watched line $$(i,j)$$. The opposite values are taken when the device is on side $$j$$ of the line.
+Note that the two formulas above are valid when the phase tap changer is on side $$i$$ of the monitored line $$(i,j)$$. The opposite values are taken when the equipment is on side $$j$$ of the line.
 
 ### Sensitivities in case of slack distribution
 
-Computations of sensitivities in case of a slack distribution work in the same way as in the DC model (see above).
+Computations of sensitivities in case of a slack distribution work in the same way as in the [DC sensitivity analysis](#sensitivities-in-case-of-slack-distribution).
 
-Let's introduce the list of participating units $$(g \in U)$$ and their respective participation factor $$(r^c_g)$$. We recall the formula:
+Let's introduce the list of participating elements $$(g \in U)$$ and their respective participation factor $$(r^c_g)$$. We recall the formula:
 
 $$
 S_{\eta,p}^c = S_{\eta,p} - \sum_{g \in U} r^c_g S_{\eta,g}.
@@ -382,8 +388,7 @@ $$
 
 ### Contingency management
 
-Contrary to DC model, see above, computations of sensitivities in case of contingencies are performed in the AC model by restarting the sequence of computations on the post-contingency network.
-
+Contrary to [DC sensitivity analysis](#contingency-management), computations of sensitivities in case of contingencies are performed by restarting the sequence of computations based on the equation system of the post-contingency network and not more on the equation system of the pre-contingency network.
 
 ## Configuration
 

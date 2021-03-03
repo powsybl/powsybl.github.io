@@ -32,25 +32,25 @@ AC flows computing in OpenLoadFLow relies on solving a non linear squared equati
 
 Moreover, at the slack bus, the active balance equation is removed and replaced by an equation fixing the voltage phase angle at 0.
 
-Let $$v_i$$ be the unknown voltage magnitude at bus $$i$$. Let $$\theta_i$$ be the unknown voltage phase angle at bus $$i$$. Equation fixing voltage magnitude to a reference is simply writen $$v_i = V^{ref}_i$$. Equation fixing voltage phase angle at slack bus $$i$$ is: $$\phi_i = 0$$
+Let $$v_i$$ be the unknown voltage magnitude at bus $$i$$. Let $$\theta_i$$ be the unknown voltage phase angle at bus $$i$$. Equation fixing voltage magnitude to a reference (also called target) is simply written $$v_i = V^{ref}_i$$. Equation fixing voltage phase angle at slack bus $$i$$ is: $$\phi_i = 0$$
 
-To build the active and reactive balance equations, OpenLoadFlow first expresses active and reactive power flowing from a bus to another throught a line:
+To build the active and reactive balance equations, OpenLoadFlow first expresses active and reactive power flowing from a bus to another through a line:
 
-$$p_{i,j}= \rho_iv_i(G_i\rho_iv_i + Y\rho_iv_i\text{sin}(\Xi) - Y\rho_jv_j\text{sin}(\theta)).$$
+$$p_{i,j}= \rho_iv_i(G_i\rho_iv_i + Y\rho_iv_i\text{sin}(\Xi) - Y\rho_jv_j\text{sin}(\theta))$$
 
-$$q_{i,j}= \rho_iv_i(-B_i\rho_iv_i + Y\rho_iv_i\text{cos}(\Xi) - Y\rho_jv_j\text{cos}(\theta)).$$
+$$q_{i,j}= \rho_iv_i(-B_i\rho_iv_i + Y\rho_iv_i\text{cos}(\Xi) - Y\rho_jv_j\text{cos}(\theta))$$
 
-Where $$Y$$ is the magnitude of the line complex admitance $$\frac{1}{R+jX}$$, and $$\Xi$$ such that: $$R+jX = \frac{1}{Y}e^{j(\frac{\pi}{2}-\Xi)}$$. $$\theta$$ satisfies: $$\theta= \Xi - A_i + A_j - \phi_i + \phi_j.$$
+Where $$Y$$ is the magnitude of the line complex admittance $$\frac{1}{R+jX}$$, and $$\Xi$$ such that: $$R+jX = \frac{1}{Y}e^{j(\frac{\pi}{2}-\Xi)}$$. $$\theta$$ satisfies: $$\theta= \Xi - A_i + A_j - \phi_i + \phi_j.$$
 
 Beware that $$p_{i,j}$$ is the power at the exit of bus $$i$$.
 
 Therefore, active and reactive balance equations are expressed as:
 
-$$ P_i^{in} = \sum_{j \in v(i)} p_{i,j}.$$
+$$ P_i^{in} = \sum_{j \in v(i)} p_{i,j}$$
 
-$$ Q_i^{in} = \sum_{j \in v(i)} q_{i,j}.$$
+$$ Q_i^{in} = \sum_{j \in v(i)} q_{i,j}$$
 
-Where $$v(i)$$ is the set of buses linked to $$i$$ in the network graph.
+where $$v(i)$$ is the set of buses linked to $$i$$ in the network graph.
 
 Solving this non-linear equations system is done using the Newton-Raphson method. At each iteration, the local jacobian matrix $$J(v,\phi)$$ of the system is computed and a linear system based on this matrix is solved using its LU decomposition. 
 
