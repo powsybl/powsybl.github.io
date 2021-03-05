@@ -390,6 +390,19 @@ $$
 
 Contrary to [DC sensitivity analysis](#contingency-management), computations of sensitivities in case of contingencies are performed by restarting the sequence of computations based on the equation system of the post-contingency network and not more on the equation system of the pre-contingency network.
 
+### Sensitivities according to voltage magnitude
+
+OpenLoadFlow allows to compute the sensitivity from the voltage magnitude at a PV-bus to the voltage magnitude at a PQ-bus. This is done using the same formula as for other sensitivities:
+
+$$ S_{\eta,p}(v,\phi) = g_p^T(v,\phi) + G_{v,\phi}(v,\phi)^TJ(v,\phi)^{-1}f_p(v,\phi). $$
+
+Where:
+- $$\eta$$ is the voltage magnitude at a PQ-bus named $$i$$,
+- $$p$$ is the voltage magnitude at a PV-bus named $$b$$,
+- $$f_p(v,\phi)$$ is a vector composed of null entries except for one which equals $$1$$ and is relative to the voltage magnitude at PV-bus $$b$$,
+- $$G_{v,\phi}(v,\phi)$$ is a vector composed of null entries except for one which equals $$1$$ and is relative to the voltage magnitude at PQ-bus $$i$$,
+- $$g_p(v,\phi)$$ is null.
+
 ## Configuration
 
 ### Specific parameters
