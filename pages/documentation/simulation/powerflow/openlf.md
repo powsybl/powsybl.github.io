@@ -18,15 +18,41 @@ OpenLoadFlow computes power flows from IIDM grid model in bus/view topology. Fro
 - $$G_1$$ and $$G_2$$ are the real parts (conductance) on respectively side 1 and side 2 of the branch ;
 - $$B_1$$ and $$B_2$$ are the imaginary parts (susceptance) on respectively side 1 and side 2 of the branch ;
 - $$A_1$$ is the angle shifting on side 1, before the series impedance. For classical branches, the default value is zero ;
-- $$R_1$$ is the ratio of voltages between side 2 and side 1, before the series impedance. For classical branches, the default value is $$1$$.
+- $$\rho_1$$ is the ratio of voltages between side 2 and side 1, before the series impedance. For classical branches, the default value is $$1$$.
 
-As the $$\Pi$$ model is created from IIDM grid modelling that locates its ratio and phase tap changers in side 1, $$A_2$$ and $$R_2$$ are always equal to zero and $$1$$. In case of a branch with voltage or phase control, the $$\Pi$$ model becomes an array. See below our model:
+As the $$\Pi$$ model is created from IIDM grid modelling that locates its ratio and phase tap changers in side 1, $$A_2$$ and $$\rho_2$$ are always equal to zero and $$1$$. In case of a branch with voltage or phase control, the $$\Pi$$ model becomes an array. See below our model:
 
 ![Pi model](img/pi-model.svg){: width="50%" .center-image}
 
 ### AC flows computing
 
-TO DO
+AC flows computing in OpenLoadFLow relies on solving a non linear squared equations system, where unknown are voltage magnitude and phase angle at each bus of the network, implying that there are $$2N$$ unknown where $$N$$ is the number of buses. There are two equations per network bus, resulting in $$2N$$ equations. The nature of these $$2$$ equations depends on the type of the bus:
+- PQ-bus: active and reactive balance are fixed at the bus,
+- PV-bus: active balance and voltage magnitude are fixed at the bus.
+
+Moreover, at the slack bus, the active balance equation is removed and replaced by an equation fixing the voltage phase angle at 0.
+
+Let $$v_i$$ be the unknown voltage magnitude at bus $$i$$. Let $$\theta_i$$ be the unknown voltage phase angle at bus $$i$$. Equation fixing voltage magnitude to a reference (also called target) is simply written $$v_i = V^{ref}_i$$. Equation fixing voltage phase angle at slack bus $$i$$ is: $$\phi_i = 0$$
+
+To build the active and reactive balance equations, OpenLoadFlow first expresses active and reactive power flowing from a bus to another through a line:
+
+$$p_{i,j}= \rho_iv_i(G_i\rho_iv_i + Y\rho_iv_i\text{sin}(\Xi) - Y\rho_jv_j\text{sin}(\theta))$$
+
+$$q_{i,j}= \rho_iv_i(-B_i\rho_iv_i + Y\rho_iv_i\text{cos}(\Xi) - Y\rho_jv_j\text{cos}(\theta))$$
+
+Where $$Y$$ is the magnitude of the line complex admittance $$\frac{1}{R+jX}$$, and $$\Xi$$ such that: $$R+jX = \frac{1}{Y}e^{j(\frac{\pi}{2}-\Xi)}$$. $$\theta$$ satisfies: $$\theta= \Xi - A_i + A_j - \phi_i + \phi_j.$$
+
+Beware that $$p_{i,j}$$ is the power at the exit of bus $$i$$.
+
+Therefore, active and reactive balance equations are expressed as:
+
+$$ P_i^{in} = \sum_{j \in v(i)} p_{i,j}$$
+
+$$ Q_i^{in} = \sum_{j \in v(i)} q_{i,j}$$
+
+where $$v(i)$$ is the set of buses linked to $$i$$ in the network graph.
+
+Solving this non-linear equations system is done using the Newton-Raphson method. At each iteration, the local jacobian matrix $$J(v,\phi)$$ of the system is computed and a linear system based on this matrix is solved using its LU decomposition. 
 
 ### DC flows computing
 
