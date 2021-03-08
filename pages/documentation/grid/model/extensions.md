@@ -146,3 +146,7 @@ transformer.newExtension(ThreeWindingsTransformerPhaseAngleClock.class)
 ```
 
 The extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
+
+## CGMES model
+
+This extension is used to store the CGMES model created from the CGMES conversion. This extension is attached to a [network](index.md#network).
