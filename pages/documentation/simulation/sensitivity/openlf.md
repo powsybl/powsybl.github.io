@@ -316,7 +316,7 @@ $$
 
 #### Case 2: Column $$l$$ is relative to the sensitivity of the current flowing from $$i$$ to $$j$$
 
-Like previous case, all entries of column $$l$$ of $$G_{v,\phi}(v,\phi)$$ equal zero, except four which correspond to the voltage magnitudes and angles at both buses $$i$$ and $$j$$. Let's introduce $$Re(I)$$ and $$Im(I)$$ respectively the real and imaginary part of the complex current flowing from $$i$$ to $$j$$:
+As previous case, all entries of column $$l$$ of $$G_{v,\phi}(v,\phi)$$ equal zero, except these corresponding to the voltage magnitudes and angles at both buses $$i$$ and $$j$$. Let's introduce $$Re(I)$$ and $$Im(I)$$ respectively the real and imaginary parts of the complex current flowing from $$i$$ to $$j$$:
 
 $$
 \begin{align}
@@ -346,7 +346,7 @@ $$
 \\
 \frac{dRe(I)}{d\phi_i} &= N_f \rho_i w_i (-G_i \text{sin}(\phi_i) - B_i \text{cos}(\phi_i) + Y \text{cos}(\Xi + \phi_i)), \\
 \\
-\frac{dRe(I)}{d\phi_j} &= -N_f \rho_i w_j \text{cos}(\gamma)), \\
+\frac{dRe(I)}{d\phi_j} &= -N_f \rho_i w_j \text{cos}(\gamma), \\
 \\
 \frac{dIm(I)}{dv_i} &= N_f \rho_i^2 (G_i \text{sin}(\phi_i) + B_i \text{cos}(\phi_i) - Y \text{cos}(\Xi + \phi_i)), \\
 \\
@@ -354,7 +354,7 @@ $$
 \\
 \frac{dIm(I)}{d\phi_i} &= N_f \rho_i w_i (G_i \text{cos}(\phi_i) - B_i \text{sin}(\phi_i) + Y \text{sin}(\Xi + \phi_i)), \\
 \\
-\frac{dIm(I)}{d\phi_j} &= -N_f \rho_i w_j \text{sin}(\gamma)).
+\frac{dIm(I)}{d\phi_j} &= -N_f \rho_i w_j \text{sin}(\gamma).
 \end{align}
 $$
 
