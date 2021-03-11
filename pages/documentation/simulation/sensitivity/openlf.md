@@ -415,8 +415,8 @@ $$ S_{\eta,p}(v,\phi) = g_p^T(v,\phi) + G_{v,\phi}(v,\phi)^TJ(v,\phi)^{-1}f_p(v,
 Where:
 - $$\eta$$ is the voltage magnitude at a PQ-bus named $$i$$,
 - $$p$$ is the voltage magnitude at a PV-bus named $$b$$,
-- $$f_p(v,\phi)$$ is a vector composed of null entries except for one which equals $$1$$ and is relative to the voltage magnitude at PV-bus $$b$$,
-- $$G_{v,\phi}(v,\phi)$$ is a vector composed of null entries except for one which equals $$1$$ and is relative to the voltage magnitude at PQ-bus $$i$$,
+- $$f_p(v,\phi)$$ is a vector composed of null entries except for the one relative to the voltage magnitude at PV-bus $$b$$, that equals $$1$$,
+- $$G_{v,\phi}(v,\phi)$$ is a vector composed of null entries except for the one relative to the voltage magnitude at PQ-bus $$i$$, that equals $$1$$,
 - $$g_p(v,\phi)$$ is null.
 
 ## Configuration
