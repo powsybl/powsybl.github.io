@@ -316,16 +316,23 @@ $$
 
 #### Case 2: Column $$l$$ is relative to the sensitivity of the current flowing from $$i$$ to $$j$$
 
-Like previous case, all entries of column $$l$$ of $$G_{v,\phi}(v,\phi)$$ equal zero, except four which correspond to the voltage magnitudes and angles at both buses $$i$$ and $$j$$. Let's introduce $$z$$ such as:
+As previous case, all entries of column $$l$$ of $$G_{v,\phi}(v,\phi)$$ equal zero, except these corresponding to the voltage magnitudes and angles at both buses $$i$$ and $$j$$. Let's introduce $$Re(I)$$ and $$Im(I)$$ respectively the real and imaginary parts of the complex current flowing from $$i$$ to $$j$$:
 
 $$
 \begin{align}
-w_i &= \rho_iv_i \\
-w_j &= Y\rho_jv_j \\
-x_{i,i} &= G_i^2 + B_i^2 + Y^2 + 2G_iY\text{sin}(\Xi) - 2B_iY\text{cos}(\Xi) \\
-x_{i,j} &= - G_i\texttt{sin}(\theta) - Y\texttt{sin}(\Xi)\texttt{sin}(\theta) + B_i\texttt{cos}(\theta) - Y\texttt{cos}(\Xi)\texttt{cos}(\theta) \\
+N_f &= \frac{1000}{\sqrt{3}}, \\
 \\
-z &= (\rho_i)^2(w_i^2x_{i,i} + w_j^2 + 2w_iw_jx_{i,j}) \\
+w_i &= \rho_iv_i, \\
+\\
+w_j &= Y\rho_jv_j, \\
+\\
+\gamma &= \Xi - A_i + A_j + \phi_j, \\
+\\
+Re(I) &= N_f \rho_i (w_i (G_i \text{cos}(\phi_i) - B_i \text{sin}(\phi_i) + Y \text{sin}(\Xi + \phi_i)) - w_j \text{sin}(\gamma)), \\
+\\
+Im(I) &= N_f \rho_i (w_i (G_i \text{sin}(\phi_i) + B_i \text{cos}(\phi_i) - Y \text{cos}(\Xi + \phi_i)) + w_j \text{cos}(\gamma)), \\
+\\
+|I| &= \sqrt{Re(I)^2 + Im(I)^2}.
 \end{align}
 $$
 
@@ -333,12 +340,21 @@ Which derivatives are the following ones:
 
 $$
 \begin{align}
-\frac{dz}{dv_i} &= (\rho_i)^2(2\rho_iw_ix_{i,i} + 2\rho_iw_jx_{i,j}) \\
+\frac{dRe(I)}{dv_i} &= N_f \rho_i^2 (G_i \text{cos}(\phi_i) - B_i \text{sin}(\phi_i) + Y \text{sin}(\Xi + \phi_i)), \\
 \\
-\frac{dz}{dv_j} &= (\rho_i)^2(2Y\rho_jw_j + 2Y\rho_jw_ix_{i,j}) \\
+\frac{dRe(I)}{dv_j} &= - N_f \rho_i Y \rho_j \text{sin}(\gamma), \\
 \\
-\frac{dz}{d\phi_i} &= 2(\rho_i)^2w_iw_j\frac{dx_{i,j}}{d\phi_i} \\
-\texttt{with}~& \frac{dx_{i,j}}{d\phi_i} = G_i\texttt{cos}(\theta) + Y\texttt{sin}(\Xi)\texttt{cos}(\theta) + B_i\texttt{sin}(\theta) - Y\texttt{cos}(\Xi)\texttt{sin}(\theta) \\
+\frac{dRe(I)}{d\phi_i} &= N_f \rho_i w_i (-G_i \text{sin}(\phi_i) - B_i \text{cos}(\phi_i) + Y \text{cos}(\Xi + \phi_i)), \\
+\\
+\frac{dRe(I)}{d\phi_j} &= -N_f \rho_i w_j \text{cos}(\gamma), \\
+\\
+\frac{dIm(I)}{dv_i} &= N_f \rho_i^2 (G_i \text{sin}(\phi_i) + B_i \text{cos}(\phi_i) - Y \text{cos}(\Xi + \phi_i)), \\
+\\
+\frac{dIm(I)}{dv_j} &= N_f \rho_i Y \rho_j \text{cos}(\gamma), \\
+\\
+\frac{dIm(I)}{d\phi_i} &= N_f \rho_i w_i (G_i \text{cos}(\phi_i) - B_i \text{sin}(\phi_i) + Y \text{sin}(\Xi + \phi_i)), \\
+\\
+\frac{dIm(I)}{d\phi_j} &= -N_f \rho_i w_j \text{sin}(\gamma).
 \end{align}
 $$
 
@@ -346,13 +362,13 @@ We obtain:
 
 $$
 \begin{align}
-\texttt{if}~k~\texttt{is the voltage magnitude at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{dv_i},\\
+\texttt{if}~k~\texttt{is the voltage magnitude at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{Re(I)\frac{dRe(I)}{dv_i} + Im(I)\frac{dIm(I)}{dv_i}}{|I|},\\
 \\
-\texttt{if}~k~\texttt{is the voltage magnitude at bus}~j:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{dv_j},\\
+\texttt{if}~k~\texttt{is the voltage magnitude at bus}~j:& \quad (G_{v,\phi})_{k,l} = \frac{Re(I)\frac{dRe(I)}{dv_j} + Im(I)\frac{dIm(I)}{dv_j}}{|I|},\\
 \\
-\texttt{if}~k~\texttt{is the voltage angle at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{1000}{2\sqrt{3z}}\frac{dz}{d\phi_i},\\
+\texttt{if}~k~\texttt{is the voltage angle at bus}~i:& \quad (G_{v,\phi})_{k,l} = \frac{Re(I)\frac{dRe(I)}{d\phi_i} + Im(I)\frac{dIm(I)}{d\phi_i}}{|I|},\\
 \\
-\texttt{if}~k~\texttt{is the voltage angle at bus}~j:& \quad (G_{v,\phi})_{k,l} = -\frac{1000}{2\sqrt{3z}}\frac{dz}{d\phi_i},\\
+\texttt{if}~k~\texttt{is the voltage angle at bus}~j:& \quad (G_{v,\phi})_{k,l} = \frac{Re(I)\frac{dRe(I)}{d\phi_j} + Im(I)\frac{dIm(I)}{d\phi_j}}{|I|},\\
 \\
 \texttt{else}:& \quad (G_{v,\phi})_{k,l} = 0.
 \end{align}
@@ -368,9 +384,9 @@ In the case of a phase shift of a phase tap changer as parameter $$p$$, a compon
 
 $$
 \begin{align}
-\rho_iv_iY\rho_jv_j\texttt{cos}(\theta)\frac{\pi}{180},&~\texttt{if the sensitivity is on the power flow},\\
+\rho_iv_iY\rho_jv_j\texttt{cos}(\theta)\frac{\pi}{180},& \quad\texttt{if the sensitivity is on the power flow},\\
 \\
-\frac{1000}{2\sqrt{3z}}\frac{dz}{dv_i}\frac{\pi}{180},&~\texttt{if the sensitivity is on the current flow}.
+-\frac{Re(I)\frac{dRe(I)}{d\phi_j} + Im(I)\frac{dIm(I)}{d\phi_j}}{|I|}\frac{\pi}{180},& \quad\texttt{if the sensitivity is on the current flow}.
 \end{align}
 $$
 
