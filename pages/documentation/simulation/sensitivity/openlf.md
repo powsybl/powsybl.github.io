@@ -201,11 +201,10 @@ In case of an outage causing connectivity loss in the post-contingency network, 
 
 #### Return codes in case of uncomputable sensitivities
 
-In case an user submits a senstivity computation which is not possible to perform, OpenLoadFlow provides different return codes which are listed below:
-- User requests a sensitivity involving a variable or a function which does not exist in the network: An error is thrown, OpenLoadFlow terminates.
-- User requests a sensitivity from a variable which does not belong to the main principal component of the network after a connectivity loss: A warning is displayed and the sensitivity is not computed.
-- User requests a sensitivity on a function which does not belong to the main principal component of the network after a connectivity loss: The sensitivity is equal to $$0$$. Note that if both variable and function do not belong to the main principal component, the priority is given to the variable, that is a warning is displayed and the sensitivity is not computed.
-
+If an user asks for a sensitivity computation which is not possible to perform, OpenLoadFlow provides different return codes which are listed below:
+- If the user requests a sensitivity involving a variable or a function which does not exist in the network: an error is thrown, OpenLoadFlow terminates.
+- If the user requests a sensitivity involving a variable which does not belong to the main connected component after a connectivity loss: a warning is displayed and the sensitivity is not computed.
+- If the user requests a sensitivity involving a function which does not belong to the main connected component of after a connectivity loss: the sensitivity is equal to $$0$$. Note that if both variable and function do not belong to the main connected component (where we have the slack bus), the priority is given to the variable: a warning is displayed and the sensitivity is not computed.
 
 
 ## AC sensitivity analysis
