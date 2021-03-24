@@ -156,7 +156,7 @@ $$
 
 An event can create one or more new synchronous component. In case of the loss of a single branch (when n = 1), it means, mathematically, that the factor $$X_{m,k} - (\theta^2_m-\theta^2_k)$$ equals to $$0$$. In case of the loss of more than one branch (when n > 1), it means, mathematically, that the matrix $$M$$ previously defines is not invertible. In that special configuration, previously described coefficients $$\alpha$$ cannot be computed and used to assess post-contingency sensitivities. Most of the time, the secondary networks are out of voltage, but it is still possible to get the sensitivity values in the largest network containing the slack bus. In real world, it is like the initial network has lost small parts that not contain the slack bus. Thus, the sensitivity values can still be computed.
  
-A sensitivity involves two equipments in the network: a load or a generator, etc. connected to a bus, or a phase tap changer and a monitored branch. These two equipments should be in the same connected component. If the two equipments are not in the same connected component, the sensitivity trivially equals to $$0$$. In the configuration where both equipments are in the same secondary connected component, which does not contain slack bus, we have arbitrary decided to assign the $$\text{NaN}$$ value to the sensitivity.
+A sensitivity involves two equipments in the network: a load or a generator, etc. connected to a bus, or a phase tap changer and a monitored branch. These two equipments should be in the same connected component. 
 
 ##### Loss of connectivity by a single branch
 
@@ -198,6 +198,13 @@ The methodology described below to access to sensitivity values in a post-contin
 In that case, the vector of right-hand side $$b_1$$ is the injections at network buses. All other data or formula are unchanged. Beware that the system $$Mx = c$$ whose vector $$\alpha$$ is solution is modified when $$b_1$$ is modified, because right-hand side vector $$c$$ depends on $$\theta_1$$. However matrix $$M$$ only depends on which lines are disconnected by the outage.
 
 In case of an outage causing connectivity loss in the post-contingency network, reference flows can be computed only in the largest connected component containing the slack bus. In that case, the right-hand side injection vector $$b_1$$ is modified to take into account only injections in the largest connected part of the post-contingency network (all other injections are set to zero). The same methodology of reconnecting some lines to obtain a connected network is used too.
+
+#### Return codes in case of uncomputable sensitivities
+
+If an user asks for a sensitivity computation which is not possible to perform, OpenLoadFlow provides different return codes which are listed below:
+- If the user requests a sensitivity involving a variable or a function which does not exist in the network: an error is thrown, OpenLoadFlow terminates.
+- If the user requests a sensitivity involving a variable which does not belong to the main connected component after a connectivity loss: a warning is displayed and the sensitivity is not computed.
+- If the user requests a sensitivity involving a function which does not belong to the main connected component of after a connectivity loss: the sensitivity is equal to $$0$$. Note that if both variable and function do not belong to the main connected component (where we have the slack bus), the priority is given to the variable: a warning is displayed and the sensitivity is not computed.
 
 
 ## AC sensitivity analysis
@@ -405,6 +412,19 @@ $$
 ### Contingency management
 
 Contrary to [DC sensitivity analysis](#contingency-management), computations of sensitivities in case of contingencies are performed by restarting the sequence of computations based on the equation system of the post-contingency network and not more on the equation system of the pre-contingency network.
+
+### Sensitivity involving voltage magnitudes (expected soon)
+
+OpenLoadFlow allows to compute the sensitivity from an increase of voltage magnitude at a PV-bus to the voltage magnitude at a PQ-bus. This is done using the same formula previously introduced:
+
+$$ S_{\eta,p}(v,\phi) = g_p^T(v,\phi) + G_{v,\phi}(v,\phi)^TJ(v,\phi)^{-1}f_p(v,\phi). $$
+
+Where:
+- $$\eta$$ is the voltage magnitude at a PQ-bus named $$i$$,
+- $$p$$ is the voltage magnitude at a PV-bus named $$b$$,
+- $$f_p(v,\phi)$$ is a vector composed of null entries except for the one relative to the voltage magnitude at PV-bus $$b$$, that equals $$1$$,
+- $$G_{v,\phi}(v,\phi)$$ is a vector composed of null entries except for the one relative to the voltage magnitude at PQ-bus $$i$$, that equals $$1$$,
+- $$g_p(v,\phi)$$ is null.
 
 ## Configuration
 
