@@ -132,7 +132,9 @@ The [Active Power Control](extensions.md#active-power-control) participation and
 
 A load is a passive equipment representing a delivery point that consumes active and reactive power.
 
+<!---
 <span style="color:red"> TODO: add a sketch where the sign convention is indicated.</span>
+-->
 
 **Characteristics**
 
@@ -159,7 +161,9 @@ In IIDM, loads comprise the following metadata:
 
 A battery on the electric grid is an energy storage device that is either capable of capturing energy from the grid or of injecting it into the grid. The electric energy on the grid side is thus transformed into chemical energy on the battery side and vice versa. The power flow is bidirectional and it is controlled via a power electronic converter.
 
+<!---
 <span style="color:red"> TODO: add a sketch.</span>
+--> 
 
 **Characteristics**
 
@@ -184,9 +188,13 @@ A dangling line is thus a passive or active component that aggregates a line chu
 The active and reactive power setpoints are fixed: the injection represents the power flow that would occur through the connection, were the other
 network fully described.
 
-<span style="color:red"> TODO: add a sketch with the sign convention.</span>
-<span style="color:red"> TODO: add a link to the Merging documentation.</span>
-<span style="color:red"> TODO: update the documentation according to Anne's developments.</span>
+![Dangling line model](img/index/danglingLine.svg){: width="50%" .center-image}
+
+A generation part, at boundary side can also be modeled, with a constant active power injection and a constant reactive power injection if the generation part of the dangling line is out of voltage regulation or a voltage target if the regulation is enabled. This fictitious generator can only regulate voltage locally: the regulating terminal can not be set, it is necessary the boundary side of the dangling line. Limits are modeled through $$MinP$$ and $$MaxP$$ for active power limits and through [reactive limits](#reactive-limits). This generation part is optional. The generation part of the dangling line follows the classical generator sign convention.
+
+Resulting flows at the dangling line terminal all follow the same passive-sign convention, either for the injection part or for the generation part.
+
+Dangling lines are key objects for merging networks. Merging will be described soon [here](../features/merging.md). 
 
 **Characteristics**
 
@@ -194,10 +202,22 @@ network fully described.
 | --------- | ---- | ----------- |
 | $$P0$$ | MW | The active power setpoint |
 | $$Q0$$ | MVar | The reactive power setpoint |
-| $$R$$ | $$\Omega\$$ | The series resistance |
-| $$X$$ | $$\Omega\$$ | The series reactance |
+| $$R$$ | $$\Omega$$ | The series resistance |
+| $$X$$ | $$\Omega$$ | The series reactance |
 | $$G$$ | S | The shunt conductance |
 | $$B$$ | S | The shunt susceptance |
+
+Optional: 
+
+| Attribute | Unit | Description |
+| --------- | ---- | ----------- |
+| $$MinP$$ | MW | Minimum generation part active power output |
+| $$MaxP$$ | MW | Maximum generation part active power output |
+| $$ReactiveLimits$$ | MVar | Operational limits of the generation part (P/Q/V diagram) |
+| $$TargetP$$ | MW | The active power target |
+| $$TargetQ$$ | MVAr | The reactive power target |
+| $$TargetV$$ | kV | The voltage target |
+| $$VoltageRegulatorOn$$ |  | True if the generation part regulates voltage |
 
 **Specifications**
 
@@ -216,9 +236,12 @@ page to learn more about this format. This code is actually related to ENTSOE, n
 ### Shunt Compensator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ShuntCompensator.html)
 
+<!---
 <span style="color:red"> TODO: add a description.</span>
 <span style="color:red"> TODO: add a sketch with the sign convention.</span>
 <span style="color:red"> TODO: explain that there are two shunt models: linear and non-linear.</span>
+-->
+
 Shunt compensators follow a passive-sign convention:
   - Flow out from bus has positive sign.
   - Consumptions are positive.
@@ -233,7 +256,9 @@ Shunt compensators follow a passive-sign convention:
 | $$TargetV$$ | kV | The voltage target |
 | $$TargetDeadband$$ | kV | The deadband used to avoid excessive update of controls |
 
+<!---
 <span style="color:red"> TODO: redo the Table and specifications to be up to date with Miora's work.</span>
+--> 
 
 **Specifications**
 
@@ -336,8 +361,8 @@ $$
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
-| $$R$$ | $$\Omega\$$ | The series resistance |
-| $$X$$ | $$\Omega\$$ | The series reactance |
+| $$R$$ | $$\Omega$$ | The series resistance |
+| $$X$$ | $$\Omega$$ | The series reactance |
 | $$G1$$ | S | The first side shunt conductance |
 | $$B1$$ | S | The first side shunt susceptance |
 | $$G2$$ | S | The second side shunt conductance |
@@ -366,14 +391,16 @@ $$G2$$ (resp. $$B2$$) is equal to the sum of the second half line's $$G1$$ and $
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
-| $$R$$ | $$\Omega\$$ | The series resistance |
-| $$X$$ | $$\Omega\$$ | The series reactance |
+| $$R$$ | $$\Omega$$ | The series resistance |
+| $$X$$ | $$\Omega$$ | The series reactance |
 | $$G1$$ | S | The first side shunt conductance |
 | $$B1$$ | S | The first side shunt susceptance |
 | $$G2$$ | S | The second side shunt conductance |
 | $$B2$$ | S | The second side shunt susceptance |
 
+<!---
 <span style="color:red"> TODO: describe xnodeP and xnodeQ in the java doc and here with a sentence.</span>
+-->
 
 #### Transformers
 
@@ -458,8 +485,6 @@ For each leg, the network bus is at side 1 and the star bus is at side 2.
 | --------- | ---- | ----------- |
 | $$RatedU0$$ | kV | The rated voltage at the star bus |
 
-<span style="color:red"> TODO: place RatedU0 on the sketch.</span>
-
 **Specifications**
 
 - A [ratio tap changer](#ratio-tap-changer) and/or a [phase tap changer](#phase-tap-changer) can be associated to all three sides of a three windings power transformer.
@@ -475,8 +500,8 @@ Only one tap changer (either ratio or phase tap changer) is allowed to be regula
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
-| $$R$$ | $$\Omega\$$ | The nominal series resistance specified at the voltage of the leg |
-| $$X$$ | $$\Omega\$$ | The nominal series reactance specified at the voltage of the leg |
+| $$R$$ | $$\Omega$$ | The nominal series resistance specified at the voltage of the leg |
+| $$X$$ | $$\Omega$$ | The nominal series reactance specified at the voltage of the leg |
 | $$G$$ | S | The nominal magnetizing conductance specified at the voltage of the leg |
 | $$B$$ | S | The nominal magnetizing susceptance specified at the voltage of the leg |
 | $$RatedU$$ | kV | The rated voltage |
@@ -497,7 +522,7 @@ An HVDC line is connected to the DC side of two HVDC converter stations, either 
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
-| $$R$$ | $$\Omega\$$ | The resistance of the HVDC line |
+| $$R$$ | $$\Omega$$ | The resistance of the HVDC line |
 | $$NominalV$$ | kV | The nominal voltage |
 | $$ActivePowerSetpoint$$ | MW | The active power setpoint |
 | $$MaxP$$ | MW | The maximum active power |
@@ -575,20 +600,27 @@ A VSC converter station is made with switching devices that can be turned both o
 
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/BusbarSection.html)<br>
 A busbar section is a non impedant element used in a node/breaker substation topology to connect equipment.
+
+<!---
 <span style="color:red"> TODO</span>
+--> 
 
 ### Breaker/Switch
 
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Switch.html)<br>
 
+<!---
 <span style="color:red"> TODO</span>
+-->
 
 ### Internal Connection
 
 **Internal connection**  
 An internal connection is a non-impedant connection between two components in a voltage level.
 
+<!--
 <span style="color:red"> TODO</span>
+-->
 
 ## Additional network models
 
@@ -615,14 +647,18 @@ In between the defined points of the curve, the reactive power limits are comput
 Some equipment have operational limits regarding the current value, corresponding to the equipment's physical limitations (related to heating).
 The current limits may be set in IIDM for [lines](#line),
 [dangling lines](#dangling-line), [two windings transformers](#two-windings-transformer) and [three windings transformers](#three-windings-transformer).
-Current limits are defined by at most one permanent limit and/or any number of temporary limits.
+Current limits are defined by at most one permanent limit and any number of temporary limits (zero or more).
 The permanent limit sets the current value (in `A`) under which the equipment can safely
 be operated for any duration.
 The temporary limits can be used to define higher current limitations corresponding
 to specific operational durations.
 A temporary limit thus has an **acceptable duration**.
 The component on which the current limits are applied can safely remain
-between the preceding limit (it could be another temporary limit or a permanent limit) and this limit for a duration up to the acceptable duration.
+between the preceding limit (it could be another temporary limit or a permanent limit) and this limit for a duration up to the acceptable duration. Please look at this scheme to fully understand the modelling:
+
+![Current limits model](img/index/currentLimits.svg){: width="50%" .center-image}
+
+Note that, following this modelling, the last temporary limit (the higher one in value) should be infinite with an acceptable duration different than zero.
 
 ### Phase tap changer
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/PhaseTapChanger.html)
@@ -643,7 +679,9 @@ A phase tap changer is described by a set of tap positions (or steps) within whi
 
 The phase tap changer can always switch tap positions while loaded, which is not the case of the ratio tap changer described below.
 
+<!---
 <span style="color:red"> TODO: check what happens when setting `isRegulating` to true and `FIXED_TAP` as regulating mode</span>
+-->
 
 Each step of a phase tap changer has the following attributes:
 
@@ -686,4 +724,6 @@ Each step of a ratio tap changer has the following attributes:
 
 ## Going further
 
+<!---
 <span style="color:red"> TODO: create a tutorial showing how to create the FourSubstationsNodeBreakerFactory network of the tests.</span>
+-->
