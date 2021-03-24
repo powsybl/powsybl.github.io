@@ -155,14 +155,14 @@ private static final Logger LOG = LoggerFactory.getLogger(LoadflowTutorial.class
 <img src="./img/loadflow/File.svg" alt="" style="vertical-align: bottom"/>
 The network is modeled in [IIDM](../../grid/formats/xiidm.md), which is the internal model of Powsybl. This model can be serialized in a XML format for experimental purposes.
 ```java
-final String iidmFileName = "eurostag-tutorial1-lf.xml";
-final InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStream(iidmFileName);
+final String networkFileName = "eurostag-tutorial1-lf.xml";
+final InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStream(networkFileName);
 ```
 <br />
 <img src="./img/loadflow/Import.svg" alt="" style="vertical-align: bottom"/>
 The file is imported through a gateway that converts the file to an in-memory model.
 ```java
-Network network = Importers.loadNetwork(iidmFileName, is);
+Network network = Importers.loadNetwork(networkFileName, is);;
 ```
 <br />
 
@@ -171,18 +171,18 @@ In this tutorial it is composed of two substations. Each substation has two volt
 levels and one two-windings transformer.
 ```java
 for (Substation substation : network.getSubstations()) {
-    LOG.info("Substation " + substation.getNameOrId());
-    LOG.info("Voltage levels :");
+    LOGGER.info("Substation " + substation.getNameOrId());
+    LOGGER.info("Voltage levels:");
     for (VoltageLevel voltageLevel : substation.getVoltageLevels()) {
-        LOG.info(" > " + voltageLevel.getNominalV());
+        LOGGER.info("Voltage level: " + voltageLevel.getId() + " " + voltageLevel.getNominalV() + "kV");
     }
-    LOG.info("Two windings transformers :");
-    for (TwoWindingsTransformer twoWindingsTransfo : substation.getTwoWindingsTransformers()) {
-        LOG.info(" > " + twoWindingsTransfo.getNameOrId());
+    LOGGER.info("Two windings transformers:");
+    for (TwoWindingsTransformer t2wt : substation.getTwoWindingsTransformers()) {
+        LOGGER.info("Two winding transformer: " + t2wt.getNameOrId());
     }
-    LOG.info("Three windings transformers :");
-    for (ThreeWindingsTransformer threeWindingsTransfo : substation.getThreeWindingsTransformers()) {
-        LOG.info(" > " + threeWindingsTransfo.getNameOrId());
+    LOGGER.info("Three windings transformers:");
+    for (ThreeWindingsTransformer t3wt : substation.getThreeWindingsTransformers()) {
+        LOGGER.info("Three winding transformer: " + t3wt.getNameOrId());
     }
 }
 ```
@@ -198,10 +198,7 @@ for (Line line : network.getLines()) {
 ## Run a power flow calculation
 
 <img src="./img/loadflow/Compute_LF.svg" alt="" style="vertical-align: bottom"/>
-Then, flows are computed with a load flow simulator. In this tutorial, we use OpenLoadflow, which is open-source software. For more details, please visit this [page]()
-
-
-In this tutorial, we use Hades2, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://github.com/powsybl/powsybl-open-loadflow) to learn about it.
+Then, flows are computed with a load flow simulator. In this tutorial, we use the OpenLoadflow implementation, which is open-source software, natilevly based on the Powsybl network grid model. For more details, please visit the [documentation](../../simulation/powerflow/openlf.md) to learn more about it. 
 
 A loadflow is run on a variant of the network. 
 A network variant is close to a state vector and gathers variables such as 
@@ -239,9 +236,10 @@ load-flow-default-parameters:
   voltageInitMode: DC_VALUES
   transformerVoltageControlOn: false
   twtSplitShuntAdmittance: true
+  dc: false
 
 open-loadflow-default-parameters:
-  dc: true
+  lowImpedanceBranchMode: REPLACE_BY_ZERO_IMPEDANCE_LINE
 ```
 
 ## Output the results in the terminal
@@ -299,7 +297,7 @@ for (Line l : network.getLines()) {
 }
 ```
 
-Here we'll also show how to define a visitor object, that may be used to loop over equipments. We'll use it to print the energy sources and the loads of the network. Visitors are usually used to access the network equipments efficiently, and modify their properties for instance. Here we just print some data about the Generators and Loads.
+Here we will also show how to define a visitor object, that may be used to loop over equipments. We will use it to print the energy sources and the loads of the network. Visitors are usually used to access the network equipments efficiently, and modify their properties for instance. Here we just print some data about generators and loads.
 ```java
 final DefaultTopologyVisitor visitor = new DefaultTopologyVisitor() {
     @Override
@@ -320,7 +318,7 @@ The power now flows only through the line `NHV1_NHV2_2`, as expected.
 
 ## Summary
 We have learnt how to write Java code to run power flows. 
-We've shown how to load a network file, how to create and use network variants, and how to set the load flow parameters. We've also seen how to output the results in the terminal.
+We have shown how to load a network file, how to create and use network variants, and how to set the load flow parameters. We've also seen how to output the results in the terminal.
 
 ## Going further
 The following links could also be useful:
