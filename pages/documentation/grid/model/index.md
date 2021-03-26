@@ -241,7 +241,7 @@ page to learn more about this format. This code is actually related to ENTSOE, n
 -->
 
 A shunt compensator represents a shunt capacitor or reactor or a set of switchable banks of shunt capacitors or reactors in the network. A section of a shunt compensator
-is an indivitual capacitor or reactor: if its reactive power (Q) is negative, it is a capacitor; if it is positive, it is a reactor.
+is an individual capacitor or reactor: if its reactive power (Q) is negative, it is a capacitor; if it is positive, it is a reactor.
 
 There are two models of shunt compensators in IIDM: linear shunt compensators and non-linear shunt compensators.
 
@@ -272,6 +272,8 @@ Shunt compensators follow a passive-sign convention:
 | $$bPerSection$$ | S | The Positive sequence shunt (charging) susceptance per section |
 | $$gPerSection$$ | S | The Positive sequence shunt (charging) conductance per section |
 
+We expect $$bPerSection$$ to be a non zero value. The disconnected status of the linear shunt compensator can be modeled by setting the $$SectionCount$$ attribute to zero.
+
 - For Non Linear Shunt Compensators
 
 | Attribute | Unit | Description |
@@ -284,6 +286,8 @@ Shunt compensators follow a passive-sign convention:
 | --------- | ---- |------------ |
 | $$B$$ | S | The Positive sequence shunt (charging) susceptance of the section |
 | $$G$$ | S | The Positive sequence shunt (charging) conductance of the section |
+
+$$B$$ and $$G$$ attributes can be equal zero, but the disconnected status of the non linear shunt compensator can be modeled by setting the $$SectionCount$$ attribute to zero. The section which $$SectionCount$$ equal to $$1$$ is the first effective section, and it would be more efficient to affect it a non zero susceptance.   
 
 **Specifications**
 
