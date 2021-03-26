@@ -237,10 +237,16 @@ page to learn more about this format. This code is actually related to ENTSOE, n
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ShuntCompensator.html)
 
 <!---
-<span style="color:red"> TODO: add a description.</span>
 <span style="color:red"> TODO: add a sketch with the sign convention.</span>
-<span style="color:red"> TODO: explain that there are two shunt models: linear and non-linear.</span>
 -->
+
+A shunt compensator represents a shunt capacitor or reactor or a set of switchable banks of shunt capacitors or reactors in the network. A section of a shunt compensator
+is an indivitual capacitor or reactor: if its reactive power (Q) is negative, it is a capacitor; if it is positive, it is a reactor.
+
+There are two models of shunt compensators in IIDM: linear shunt compensators and non-linear shunt compensators.
+
+A linear shunt compensator has banks or sections with equal admittance values.
+A non-linear shunt compensator has banks or sections with different admittance values.
 
 Shunt compensators follow a passive-sign convention:
   - Flow out from bus has positive sign.
@@ -250,15 +256,34 @@ Shunt compensators follow a passive-sign convention:
 
 | Attribute | Unit | Description |
 | --------- | ---- |------------ |
-| $$bPerSection$$ | S | The Positive sequence shunt (charging) susceptance per section |
 | $$MaximumSectionCount$$ | - | The maximum number of sections that may be switched on |
-| $$CurrentSectionCount$$ | - | The current number of section that may be switched on |
+| $$SectionCount$$ | - | The current number of sections that are switched on |
+| $$B$$ | S | The susceptance of the shunt compensator in its current state |
+| $$G$$ | S | The conductance of the shunt compensator in its current state |
 | $$TargetV$$ | kV | The voltage target |
 | $$TargetDeadband$$ | kV | The deadband used to avoid excessive update of controls |
+| $$RegulatingTerminal$$ | - | Associated node or bus for which voltage is to be regulated |
+| $$VoltageRegulatorOn$$ | - | True if the shunt compensator regulates voltage |
 
-<!---
-<span style="color:red"> TODO: redo the Table and specifications to be up to date with Miora's work.</span>
---> 
+- For Linear Shunt Compensators
+
+| Attribute | Unit | Description |
+| --------- | ---- |------------ |
+| $$bPerSection$$ | S | The Positive sequence shunt (charging) susceptance per section |
+| $$gPerSection$$ | S | The Positive sequence shunt (charging) conductance per section |
+
+- For Non Linear Shunt Compensators
+
+| Attribute | Unit | Description |
+| --------- | ---- |------------ |
+| $$Sections$$ | [Section](#Section) | The Partition of all the shunt compensator's sections |
+
+#### Section
+
+| Attribute | Unit | Description |
+| --------- | ---- |------------ |
+| $$B$$ | S | The Positive sequence shunt (charging) susceptance of the section |
+| $$G$$ | S | The Positive sequence shunt (charging) conductance of the section |
 
 **Specifications**
 
