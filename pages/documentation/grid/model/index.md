@@ -571,6 +571,30 @@ An HVDC line is connected to the DC side of two HVDC converter stations, either 
 An HVDC converter station converts electric power from high voltage alternating current (AC) to high-voltage direct current (HVDC), or vice versa.
 Electronic converters for HVDC are divided into two main categories: line-commutated converters (LCC) and voltage-sourced converters (VSC).
 
+**Characteristics**
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| HvdcType | `HvdcType` | - | yes | - | The HVDC type |
+| LossFactor | float | % | yes | - | The loss factor |
+
+The LossFactor should be greater than 0.
+
+**Specifications**  
+
+The HVDC type, `LCC` or `VSC`, determines if the Converter Station is a LCC Converter Station or a VSC Converter Station.
+
+The positive loss factor `LossFactor` is used to model the losses during the conversion. In case of:
+- A rectifier operation (conversion from AC to DC), we have
+$$
+\frac{P_{DC}}{P_{AC}} = 1 - \frac{LossFactor}{100}
+$$
+- An inverter operation (conversion from DC to AC), we have
+$$
+\frac{P_{AC}}{P_{DC}} = 1 - \frac{LossFactor}{100}
+$$
+Note that at the terminal on the AC side, $$Q$$ is always positive: the converter station always consumes reactive power.
+
 ##### LCC Converter Station
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/LccConverterStation.html)
 
@@ -586,15 +610,7 @@ An LCC converter station is made with electronic switches that can only be turne
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
-| $$PowerFactor$$ | - | Ratio between the active power $$P$$ and the apparent power $$S$$. |
-
-**Specifications**
-
-- The power factor is equal to
-$$
-\dfrac{P}{\sqrt{P^{2} + Q^{2}}}
-$$
-and should be between -1 and 1. Note that at the terminal on the AC side, $$Q$$ is always positive: the converter station always consumes reactive power.
+| $$PowerFactor$$ | % | Ratio between the active power $$P$$ and the apparent power $$S$$. |
 
 ##### VSC Converter Station
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VscConverterStation.html)
@@ -613,6 +629,7 @@ A VSC converter station is made with switching devices that can be turned both o
 | --------- | ---- | ----------- |
 | $$VoltageSetpoint$$ | kV | The voltage setpoint for regulation |
 | $$ReactivePowerSetpoint$$ | MVar | The reactive power setpoint for regulation |
+| $$PowerFactor$$ | % | Ratio between the active power $$P$$ and the apparent power $$S$$. |
 
 **Specifications**
 
