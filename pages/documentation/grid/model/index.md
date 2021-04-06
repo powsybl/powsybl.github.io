@@ -702,8 +702,7 @@ between the preceding limit (it could be another temporary limit or a permanent 
 
 ![Current limits model](img/index/currentLimits.svg){: width="50%" .center-image}
 
-Note that, following this modelling, the last temporary limit (the higher one in value) should be infinite with an acceptable duration 
-different from zero.
+Note that, following this modelling, in general the last temporary limit (the higher one in value) should be infinite with an acceptable duration different from zero, except for tripping current modeling where the last temporary limit is infinite with an acceptable duration equal to zero.
 
 ### Phase tap changer
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/PhaseTapChanger.html)
