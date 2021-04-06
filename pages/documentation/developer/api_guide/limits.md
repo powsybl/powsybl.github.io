@@ -23,7 +23,7 @@ CurrentLimits currentLimits = network.getDanglingLine("DL").newCurrentLimits()
 ![Current limits scheme_example1](img/limits/currentLimitsExample1.svg){: width="50%" .center-image}
 
 ### Second example
-This seond example creates a `CurrentLimits` instance containing one permanent limit and three temporary limits, one of them having an infinite limit value.
+This second example creates a `CurrentLimits` instance containing one permanent limit and three temporary limits, one of them having an infinite limit value.
 ```java
 CurrentLimits currentLimits = network.getDanglingLine("DL").newCurrentLimits()
     .setPermanentLimit(700.0)
