@@ -634,9 +634,7 @@ A VSC converter station is made with switching devices that can be turned both o
 **Specifications**
 
 - The voltage setpoint (in kV) is required if the voltage regulator is on for the VSC station.
-- The reactive power setpoint (in MVar) is required if the voltage regulator is off for the VSC station.
-    - A positive value of $$ReactivePowerSetpoint$$ means an injection into the bus, thus a negative value at the corresponding terminal (which is in passive-sign convention).
-<span style="color:red"> TODO: check the sign convention</span>
+- The reactive power setpoint (in MVar) is required if the voltage regulator is off for the VSC station. A positive value of $$ReactivePowerSetpoint$$ means an injection into the bus, thus a negative value at the corresponding terminal (which is in passive-sign convention).
 - A set of reactive limits can be associated to a VSC converter station. All the reactive limits modelings available in the library are described [here](reactiveLimits.md).
 
 **Metadata**
