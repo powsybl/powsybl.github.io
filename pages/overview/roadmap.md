@@ -13,7 +13,7 @@ layout: default
 
 ## Demonstrator
 
-We have started to create a [web-based demonstrator](https://demo.powsybl.org/study-app/) packaged as docker images to show the world what PowSyBl is. It is available for everyone to experiment, with some great features:
+The GridSuite project has started to create a [web-based demonstrator](https://demo.gridsuite.org/study-app/) packaged as docker images to show the world what PowSyBl is. It is available for everyone to experiment, with some great features:
 
 - Import networks (we are working on TSOs part of the European network)
 - Display networks on a map using CIM-CGMES Geographical Location (GL) profile
