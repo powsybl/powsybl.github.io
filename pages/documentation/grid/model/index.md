@@ -338,7 +338,7 @@ In IIDM the static VAR compensator also comprises some metadata:
     - `VOLTAGE`
     - `REACTIVE_POWER`
     - `OFF`
-Note that it is different than the generators' regulation definition, which is only done through a boolean.
+Note that it is different from the generators' regulation definition, which is only done through a boolean.
 - The regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
 
 **Available extensions**
@@ -704,7 +704,8 @@ between the preceding limit (it could be another temporary limit or a permanent 
 
 ![Current limits model](img/index/currentLimits.svg){: width="50%" .center-image}
 
-Note that, following this modelling, the last temporary limit (the higher one in value) should be infinite with an acceptable duration different than zero.
+Note that, following this modelling, the last temporary limit (the higher one in value) should be infinite with an acceptable duration 
+different from zero.
 
 ### Phase tap changer
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/PhaseTapChanger.html)
