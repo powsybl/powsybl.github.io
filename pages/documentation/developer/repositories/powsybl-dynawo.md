@@ -2,7 +2,8 @@
 The PowSyBl Dynawo [repository](https://github.com/powsybl/powsybl-dynawo) provides an implementation of the dynamic simulation API for the [Dyna&omega;o](https://dynawo.github.io/) time domain simulation tool.
 
 **Reviewers:** [agnesLeroy](https://github.com/agnesLeroy), [mathbagu](https://github.com/mathbagu), [zamarrenolm](https://github.com/zamarrenolm)  
-**Committers** [mathbagu](https://github.com/mathbagu)
+**Committers:** [mathbagu](https://github.com/mathbagu)  
+**Release:** [MioRtia](https://github.com/MioRtia)
 
 ## Features
 
