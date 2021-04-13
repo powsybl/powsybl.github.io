@@ -11,7 +11,6 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
      - several layout algorithms to generate the diagrams
      - many layout parameters to adjust the rendering
      - use your own component library or modify the existing
-- small demo app to display the diagrams (note that this app is mainly for debug purposes and therefore is not included in the release)
 - extensions to force positions in the diagram 
 
 ## Getting started
