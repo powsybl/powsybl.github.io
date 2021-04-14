@@ -54,6 +54,37 @@ where $$v(i)$$ is the set of buses linked to $$i$$ in the network graph.
 
 Solving this non-linear equations system is done using the Newton-Raphson method. At each iteration, the local jacobian matrix $$J(v,\phi)$$ of the system is computed and a linear system based on this matrix is solved using its LU decomposition. 
 
+#### Other regulation modes
+
+PQ-bus and PV-bus types allow to model local voltage magnitude control or local reactive power output control. Other types of control can be modeled in OpenLoadFLow:
+- Remote voltage control,
+- Remote reactive power control,
+- U+$$\lambda$$Q local or remote control.
+
+##### Remote voltage control
+
+When a bus $$b_1$$ applies a remote voltage control on another bus $$b_2$$, bus $$b_2$$ must be originally a PQ-bus. Bus $$b_1$$ is treated as a P-bus, that is, only active balance is fixed at bus $$b_1$$. Bus $$b_2$$ becomes a PQV-bus, where the voltage magnitude is fixed at a value defined by the control. To resume:
+- At bus $$b_1$$:
+    - $$P_{b_1}^{in} = \sum_{j \in v(b_1)} p_{b_1,j}$$.
+- At bus $$b_2$$:
+    - $$P_{b_2}^{in} = \sum_{j \in v(b_2)} p_{b_2,j}$$.
+    - $$Q_{b_2}^{in} = \sum_{j \in v(b_2)} q_{b_2,j}$$.
+    - $$v_{b_2} = V^{rctrl}_{b_1}$$.
+    
+##### Remote reactive power control
+
+When a bus $$b_1$$ applies a remote reactive power control on a line $$(i,j)$$, bus $$b_1$$ is treated as a P-bus, that is, only active balance is fixed at bus $$b_1$$. The reactive power flowing at side i on line $$(i,j)$$ is fixed by the control. To resume:
+- At bus $$b_1$$:
+    - $$P_{b_1}^{in} = \sum_{j \in v(b_1)} p_{b_1,j}$$.
+- At line $$(i,j)$$:
+    - $$q_{i,j} = Q^{rctrl}_{b_1}$$.
+    
+##### U+$$\lambda$$Q local or remote control
+
+A bus $$b_1$$ can applied an U+$$\lambda$$Q control. Both voltage and reactive power control can be local or remote, giving four different cases.
+
+###### U local and Q local
+
 ### DC flows computing
 
 The DC flows computing relies on several classical assumptions to build a model where the active power flowing through a line depends linearly from the voltage angles at its ends.
