@@ -206,6 +206,9 @@ If an user asks for a sensitivity computation which is not possible to perform, 
 - If the user requests a sensitivity involving a variable which does not belong to the main connected component after a connectivity loss: a warning is displayed and the sensitivity is not computed.
 - If the user requests a sensitivity involving a function which does not belong to the main connected component of after a connectivity loss: the sensitivity is equal to $$0$$. Note that if both variable and function do not belong to the main connected component (where we have the slack bus), the priority is given to the variable: a warning is displayed and the sensitivity is not computed.
 
+#### Developer documentation
+
+The DC sensitivity analysis contains several performances optimization, that leads to a code quite hard to follow. So, we have decided to detail here the main method, called `analyse` to ease maintainability. This completes the functional documentation. Please visit this [developer documentation page](openlf-sensi-dc-developer.md) if you want to go deeper in the code. 
 
 ## AC sensitivity analysis
 
