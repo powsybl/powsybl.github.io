@@ -58,22 +58,24 @@ applications on top of the framework.
 ## Java libraries
 The PowSyBl project contains of a set of Java libraries that cover all the abovementioned features:
 
-- [Core](../documentation/developer/repositories/powsybl-core.md): provides the core features of the PowSyBl framework such as the grid modelling, 
-the support of several data exchange format ([CGMES](../documentation/grid/formats/cim-cgmes.md), [UCTE](../documentation/grid/formats/ucte-def.md)...), computation APIs ([power flow](../documentation/simulation/powerflow), [security analysis](../documentation/simulation/securityanalysis), [sensitivity analysis](../documentation/simulation/sensitivity), [dynamic simulation](../documentation/simulation/timedomain), etc.).
-
-- [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power
-flow simulation.
-
-- [Dynawo](../documentation/developer/repositories/powsybl-dynawo.md): a library based on the open source [Dynawo](https://github.com/dynawo/) software for time domain simulation.
-
 - [Application File System](../documentation/developer/repositories/powsybl-afs.md): a library to handle study files.
-
-- [High Performance Computing](../documentation/developer/repositories/powsybl-hpc.md): a library to facilitate high performance computing
-with PowSyBl.
 
 - [Balances adjustments](../documentation/developer/repositories/powsybl-balances-adjustment.md): 
 balances adjustment is a process that consists in acting on 
 specified injections to ensure given balance on specific network areas.
+
+- [Core](../documentation/developer/repositories/powsybl-core.md): provides the core features of the PowSyBl framework such as the grid modelling, 
+the support of several data exchange format ([CGMES](../documentation/grid/formats/cim-cgmes.md), [UCTE](../documentation/grid/formats/ucte-def.md)...), computation APIs ([power flow](../documentation/simulation/powerflow), [security analysis](../documentation/simulation/securityanalysis), [sensitivity analysis](../documentation/simulation/sensitivity), [dynamic simulation](../documentation/simulation/timedomain), etc.).
+
+- [Dynawo](../documentation/developer/repositories/powsybl-dynawo.md): a library based on the open source [Dynawo](https://github.com/dynawo/) software for time domain simulation.
+
+- [High Performance Computing](../documentation/developer/repositories/powsybl-hpc.md): a library to facilitate high performance computing
+with PowSyBl.
+
+- [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power
+flow simulation.
+
+- [Network Hypothesis](): provides component to model network hypotheses.
 
 - <span style="color: red">PowSyBl GSE</span> (archived): a library to make it easier to 
 write desktop applications based on PowSyBl. This repository is archived. The Grid Study Environment (GSE) project
@@ -143,3 +145,7 @@ PowSyBl provides a repository containing all the necessary code to go through it
 
 The [PowSyBl incubator](https://github.com/powsybl/powsybl-incubator) repository contains
 all the experimental code corresponding to ongoing work that is not stabilized yet.
+
+## Developer tools
+
+The [Powsybl dev tools](https://github.com/powsybl/powsybl-dev-tools) repository contains tools to be used for debug purposes.

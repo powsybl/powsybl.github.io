@@ -132,6 +132,11 @@ This module provides a test compatibility kit to validate an IIDM implementation
 **powsybl-iidm-util** *(Removed since v4.0.0)*
 This module provides additional features around the network. We removed this module in v4.0.0 and move its content in the `powsybl-iidm-api` module.
 
+### Network hypothesis
+
+**powsybl-network-hypothesis**
+This module provides components in order to model network hypotheses.
+
 ## Simulators
 
 ### Power flow
@@ -204,6 +209,11 @@ This module provides the [mapping DSL](../simulation/metrix/mapping.md) to gener
 
 **powsybl-metrix-integration**
 This module provides an API to run [metrix simulator](../simulation/metrix/index.md) optimal power load flow.
+
+## Balances computation
+
+**powsybl-balances-adjustment**
+This module provides components in order to launch a balance computation.
 
 ## Configuration management
 The following artifacts define how PowSyBl features access to the [user configuration](../user/configuration/index.md).
