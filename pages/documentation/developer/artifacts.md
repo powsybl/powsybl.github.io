@@ -135,7 +135,7 @@ This module provides additional features around the network. We removed this mod
 ### Network hypothesis
 
 **powsybl-network-hypothesis**
-This module provides components in order to model network hypotheses. Basic hypothesis are modification tasks, available in **powsybl-core**. More complex modification tasks are implemented here.
+This module provides components in order to model network hypotheses. Basic hypothesis are modification tasks, available in `powsybl-core`. More complex modification tasks are implemented here.
 
 ## Simulators
 
@@ -200,7 +200,7 @@ This module provides an API to implement a DSL for dynamic simulation inputs, su
 This module provides an [iTools](../user/itools/dynamic-simulation.md) command to run time-domain simulation.
 
 **powsybl-simulation-api**  *(Removed since v4.1.0)*
-This module provides a legacy API for time domain simulation. We removed this module in 4.1.0 ; **powsybl-dynamic-simulation-api** should be used instead.
+This module provides a legacy API for time domain simulation. We removed this module in 4.1.0 ; `powsybl-dynamic-simulation-api` should be used instead.
 
 ### Optimal power load flow on network variants (Metrix)
 

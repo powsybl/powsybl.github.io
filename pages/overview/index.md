@@ -73,9 +73,9 @@ with PowSyBl.
 
 - [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power flow simulations (load flows, security analysis, sensitivity analysis).
 
-- [Network Hypothesis](): provides component to model network hypotheses.
+- Network Hypothesis: provides component to model network hypotheses.
 
-- <span style="color: red">PowSyBl GSE</span> (archived): a library to make it easier to 
+- PowSyBl GSE (archived): a library to make it easier to 
 write desktop applications based on PowSyBl. This repository is archived. The Grid Study Environment (GSE) project
 aimed at helping developers to write desktop applications based on PowSyBl, through a JavaFX user interface.
 
