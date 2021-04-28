@@ -132,6 +132,11 @@ This module provides a test compatibility kit to validate an IIDM implementation
 **powsybl-iidm-util** *(Removed since v4.0.0)*
 This module provides additional features around the network. We removed this module in v4.0.0 and move its content in the `powsybl-iidm-api` module.
 
+### Network hypothesis
+
+**powsybl-network-hypothesis**
+This module provides components in order to model network hypotheses. Basic hypothesis are modification tasks, available in `powsybl-core`. More complex modification tasks are implemented here.
+
 ## Simulators
 
 ### Power flow
@@ -195,7 +200,7 @@ This module provides an API to implement a DSL for dynamic simulation inputs, su
 This module provides an [iTools](../user/itools/dynamic-simulation.md) command to run time-domain simulation.
 
 **powsybl-simulation-api**  *(Removed since v4.1.0)*
-This module provides a legacy API for time domain simulation. We removed this module in 4.1.0 ; **powsybl-dynamic-simulation-api** should be used instead.
+This module provides a legacy API for time domain simulation. We removed this module in 4.1.0 ; `powsybl-dynamic-simulation-api` should be used instead.
 
 ### Optimal power load flow on network variants (Metrix)
 
@@ -204,6 +209,11 @@ This module provides the [mapping DSL](../simulation/metrix/mapping.md) to gener
 
 **powsybl-metrix-integration**
 This module provides an API to run [metrix simulator](../simulation/metrix/index.md) optimal power load flow.
+
+## Balances computation
+
+**powsybl-balances-adjustment**
+This module provides components in order to run a active power balances adjustment computation over several network areas.
 
 ## Configuration management
 The following artifacts define how PowSyBl features access to the [user configuration](../user/configuration/index.md).
