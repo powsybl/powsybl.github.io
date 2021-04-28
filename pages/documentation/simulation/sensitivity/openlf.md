@@ -199,14 +199,14 @@ In that case, the vector of right-hand side $$b_1$$ is the injections at network
 
 In case of an outage causing connectivity loss in the post-contingency network, reference flows can be computed only in the largest connected component containing the slack bus. In that case, the right-hand side injection vector $$b_1$$ is modified to take into account only injections in the largest connected part of the post-contingency network (all other injections are set to zero). The same methodology of reconnecting some lines to obtain a connected network is used too.
 
-#### Return codes in case of uncomputable sensitivities
+### Return codes in case of uncomputable sensitivities
 
 If an user asks for a sensitivity computation which is not possible to perform, OpenLoadFlow provides different return codes which are listed below:
 - If the user requests a sensitivity involving a variable or a function which does not exist in the network: an error is thrown, OpenLoadFlow terminates.
 - If the user requests a sensitivity involving a variable which does not belong to the main connected component after a connectivity loss: a warning is displayed and the sensitivity is not computed.
 - If the user requests a sensitivity involving a function which does not belong to the main connected component of after a connectivity loss: the sensitivity is equal to $$0$$. Note that if both variable and function do not belong to the main connected component (where we have the slack bus), the priority is given to the variable: a warning is displayed and the sensitivity is not computed.
 
-#### Developer documentation
+### Developer documentation
 
 The DC sensitivity analysis contains several performances optimization, that leads to a code quite hard to follow. So, we have decided to detail here the main method, called `analyse` to ease maintainability. This completes the functional documentation. Please visit this [developer documentation page](openlf-sensi-dc-developer.md) if you want to go deeper in the code. 
 
