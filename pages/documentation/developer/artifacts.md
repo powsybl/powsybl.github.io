@@ -135,7 +135,7 @@ This module provides additional features around the network. We removed this mod
 ### Network hypothesis
 
 **powsybl-network-hypothesis**
-This module provides components in order to model network hypotheses.
+This module provides components in order to model network hypotheses. Basic hypothesis are modification tasks, available in **powsybl-core**. More complex modification tasks are implemented here.
 
 ## Simulators
 
@@ -213,7 +213,7 @@ This module provides an API to run [metrix simulator](../simulation/metrix/index
 ## Balances computation
 
 **powsybl-balances-adjustment**
-This module provides components in order to launch a balance computation.
+This module provides components in order to run a active power balances adjustment computation over several network areas.
 
 ## Configuration management
 The following artifacts define how PowSyBl features access to the [user configuration](../user/configuration/index.md).

@@ -60,8 +60,7 @@ The PowSyBl project contains of a set of Java libraries that cover all the above
 
 - [Application File System](../documentation/developer/repositories/powsybl-afs.md): a library to handle study files.
 
-- [Balances adjustments](../documentation/developer/repositories/powsybl-balances-adjustment.md): 
-balances adjustment is a process that consists in acting on 
+- [Balances adjustments](../documentation/developer/repositories/powsybl-balances-adjustment.md): balances adjustment is a process that consists in acting on 
 specified injections to ensure given balance on specific network areas.
 
 - [Core](../documentation/developer/repositories/powsybl-core.md): provides the core features of the PowSyBl framework such as the grid modelling, 
@@ -72,8 +71,7 @@ the support of several data exchange format ([CGMES](../documentation/grid/forma
 - [High Performance Computing](../documentation/developer/repositories/powsybl-hpc.md): a library to facilitate high performance computing
 with PowSyBl.
 
-- [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power
-flow simulation.
+- [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power flow simulations (load flows, security analysis, sensitivity analysis).
 
 - [Network Hypothesis](): provides component to model network hypotheses.
 
