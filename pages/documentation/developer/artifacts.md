@@ -353,11 +353,10 @@ This module provides a layout for substation diagrams based on the [Force Atlas 
 **single-line-diagram-iidm-extensions**  
 This module defines extensions to attach diagram information to networks.
 
-**single-line-diagram-view**  
-This module provides a javafx component to display interactive network diagrams.
+## Development tools
 
-**single-line-diagram-view-app**  
-This module provides a demo app to view diagrams of substations and voltage levels of network files.
+**powsybl-single-line-diagram-viewer**  
+This module provides a demo app for debug purpose, which allows viewing and interacting with substations and voltage levels diagrams of network files.
 
 ## Grid Study Environment (Deprecated)
 The following artifacts are part of a generic desktop application you can easily customize with plugins.
