@@ -1,12 +1,25 @@
 # pypowsybl
-The PyPowSyBl project gives access to PowSyBl framework to Python developers. This Python integration relies on [JPype](https://github.com/jpype-project/jpype). This is not a **native** implementation of PowSyBl features: internally a JVM is started to run the java code, and the Python code access to the Java objects through JNI.
+The PyPowSyBl project gives access to PowSyBl framework to Python developers. This Python integration relies on GraalVM to compile Java code to a native library.
 
-**Reviewers:** [mathbagu](https://github.com/mathbagu), [sylvlecl](https://github.com/sylvlecl)  
-**Committers:** [mathbagu](https://github.com/mathbagu), [sylvlecl](https://github.com/sylvlecl)
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)  
+**Committers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)
 
 ## Features
-- Load and save case file (Supported formats are: [XIIDM](../../grid/formats/xiidm.md))
-- Run power flows with [PowSyBl OpenLoadFlow](../../simulation/powerflow/openlf.md)
+
+The available features are:  
+
+**Grid modelling**      
+- We can create an empty network ;
+- We can load a network from a file. The supported formats are available with line ```python pp.network.get_import_formats() ``` and are for the moment `CGMES`, `MATPOWER`, `IEEE-CDF`, `PSS/E`, `UCTE` and `XIIDM`.
+- We can save a network to a file. The supported formats are 
+- We can create and update network elements with a [Pandas](https://pandas.pydata.org/) data frame.  
+  
+**Simulation**      
+- We can run a AC load flow with [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation ;
+- We can run a DC load flow with [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation ; 
+- We can run an AC sensitivity analysis with [OpenLoadFlow](../../simulation/sensitivity/openlf.md#ac-sensitivity-analysis) implementation ;
+- We can run a DC sensitivity analysis with [OpenLoadFlow](../../simulation/sensitivity/openlf.md#dc-sensitivity-analysis) implementation ;
+- We can run an AC post-contingency analysis with OpenLoadFlow, note that the DC security analysis based on OpenLoadFlow is not yet supported.
 
 ## Getting started
 
