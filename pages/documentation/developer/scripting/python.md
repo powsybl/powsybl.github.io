@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Python scripting
+# Python scripting <img src="./img/python-logo.png" alt="" style="vertical-align: bottom" height="40"/>
 
 The PyPowSyBl project gives access to PowSyBl framework to Python developers. This Python integration relies on GraalVM to compile Java code to a native library.
 

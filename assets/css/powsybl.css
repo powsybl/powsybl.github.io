@@ -38,6 +38,21 @@ a[href=""] {
     color: #fd495c;
 }
 
+/* Calls to action */
+a.call-to-action {
+    display: block;
+    width: 140px;
+    line-height: 50px;
+    background: #dbedf9;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+}
+a.call-to-action:hover {
+    background: #3698db;
+}
+
 /* Icons */
 img.doc-icon {
     width: 64px;
