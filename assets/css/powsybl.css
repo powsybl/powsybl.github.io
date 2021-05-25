@@ -51,6 +51,7 @@ a.call-to-action {
 }
 a.call-to-action:hover {
     background: #013764;
+    color: white;
 }
 
 /* Icons */
