@@ -50,7 +50,7 @@ a.call-to-action {
     border-radius: 10px;
 }
 a.call-to-action:hover {
-    background: #3698db;
+    background: #013764;
 }
 
 /* Icons */
@@ -66,7 +66,7 @@ text-align: center;
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  background: #3498db;
+  background: #013764;
   line-height: 1;
     font-size: 36px;
     color: #fff
