@@ -67,22 +67,9 @@ default value of this parameter is `-1`.
 **bilanPV**  
 The `bilanPV` property is an optional property that defines if the slack bus should be a voltage controlled bus. The default value of this parameter is `false`.  
 
-**computedConnectedComponentNumber**  
-The `computedConnectedComponentNumber` property is an optional property that defines the number of the connected
-components to simulate. If `computedConnectedComponentNumber` is 0, the calculation is done on all the calculable connected components.
-The default value of this parameter is `1`.
-
-**countriesToBalance**  
-The `countriesToBalance` property is an optional property that defines the list of [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
-country codes used for unbalance redistribution. If this parameter is not set, there is no redistribution.
-
 **dcCosphi**  
 The `dcCosphi` property is an optional property that defines the `cos(φ)` used during simulation. The default value of
 this parameter is `1`.
-
-**dcUseTransformerRatio**  
-The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the
-flow equations. The default value of this parameter is `true`. It used to be false until the version 2.15.0 of `hades2-integration`.
 
 **dcVoltageCoeff225**  
 The `dcVoltageCoeff225` property is an optional property that defines the multiplication factor of the nominal voltage
@@ -190,7 +177,6 @@ this parameter is `false`.
 Then, you need to configure the load flow calculation itself. For example:
 ```yaml
 hades2-default-parameters:
-    computedConnectedComponentNumber: 0
     remoteVoltageGenerators: true
     svcRegulationOn: true
     maxRealisticVoltage: 120

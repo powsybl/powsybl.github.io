@@ -196,22 +196,30 @@ load-flow-default-parameters:
     specificCompatibility: true
     dc: false
     balanceType: PROPORTIONAL_TO_LOAD
+    countriesToBalance:
+      - FR
+      - BE
+    connectedComponentMode : MAIN
 ```
 
 The parameters may also be overridden with a JSON file, in which case the configuration will look like:
 ```json
 {
-  "version" : "1.4",
+  "version" : "1.5",
   "voltageInitMode" : "PREVIOUS_VALUES",
   "transformerVoltageControlOn" : true,
   "phaseShifterRegulationOn" : false,
   "noGeneratorReactiveLimits" : true,
-  "specificCompatibility" : false,
+  "twtSplitShuntAdmittance" : false,
+  "simulShunt" : false,
+  "readSlackBus" : false,
+  "writeSlackBus" : false,
   "dc" : false,
-  "balanceType" : "PROPORTIONAL_TO_LOAD",
-  "extensions" : {
-    ...
-  }
+  "distributedSlack" : true,
+  "balanceType" : "PROPORTIONAL_TO_GENERATION_P_MAX",
+  "dcUseTransformerRatio" : true,
+  "countriesToBalance" : [ ],
+  "connectedComponentMode" : "MAIN"
 }
 ```
 
@@ -243,6 +251,10 @@ The `balanceType` property is an optional property that defines, if `distributed
 
 This default value is `PROPORTIONAL_TO_GENERATION_P_MAX`.
 
+**countriesToBalance**  
+The `countriesToBalance` property is an optional property that defines the list of [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
+country which participating elements are used for slack distribution. If the slack is distributed but this parameter is not set, the slack distribution is performed over all countries involved in the network.  
+
 **readSlackBus**  
 The `readSlackBus` is an optional property that defines if the slack bus has to be selected in the network through the [slack terminal extension](../../grid/model/extensions.md#slack-terminal).
 The default value is `false`.
@@ -269,6 +281,13 @@ The default value is `false`.
 
 **dc**  
 The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is `false`.
+
+**dcUseTransformerRatio**  
+The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the
+flow equations in a DC power flow. The default value of this parameter is `true`.
+
+**connectedComponentMode**  
+The `connectedComponentMode` property is an optional property that defines if the power flow has to be computed over all connected component (choose `ALL` mode) or just on the main connected component (choose `MAIN` mode). The default value of this parameter is `MAIN`.  
 
 ### Default parameters
 The default values of all the optional properties are read from the [load-flow-default-parameter](../../user/configuration/load-flow-default-parameters.md) module, defined in the configuration file.
