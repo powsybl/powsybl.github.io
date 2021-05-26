@@ -40,18 +40,29 @@ a[href=""] {
 
 /* Calls to action */
 a.call-to-action {
-    display: block;
-    width: 140px;
-    line-height: 50px;
-    background: #dbedf9;
-    color: black;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 10px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 50px;
+  transition: 0.3s;
+  line-height: 1;
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+  margin-top: 6px;
 }
-a.call-to-action:hover {
-    background: #013764;
-    color: white;
+
+a.documentation.call-to-action {
+  color: #013764;
+  background: #dbedf9;
+}
+
+a.documentation.call-to-action:hover {
+  background: #013764;
+  color: #fff;
+  text-decoration: none;
 }
 
 /* Icons */
@@ -61,14 +72,14 @@ img.doc-icon {
 }
 
 .doc-icon i {
-   margin: 0 auto 20px auto;
-   padding-top: 12px;
-text-align: center;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  background: #013764;
-  line-height: 1;
+    margin: 0 auto 20px auto;
+    padding-top: 12px;
+    text-align: center;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #013764;
+    line-height: 1;
     font-size: 36px;
     color: #fff
 }
