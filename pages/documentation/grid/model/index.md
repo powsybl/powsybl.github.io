@@ -688,16 +688,16 @@ In between the defined points of the curve, the reactive power limits are comput
 ### Loading Limits
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/LoadingLimits.html)
 
-Some equipment have operational limits regarding the current value, corresponding to the equipment's physical limitations (related to heating).
+Some equipment have operational limits regarding the current, active power or apparent power value, corresponding to the equipment's physical limitations (related to heating).
 
 Loading limits can be declined into active power limits (in MW), apparent power limits (in kVA) and current limits (in A).
 They may be set for [lines](#line),
-[dangling lines](#dangling-line), [two windings transformers](#two-windings-transformer) and [three windings transformers](#three-windings-transformer).
+[dangling lines](#dangling-line), [two windings transformers](#two-windings-transformer) and [three windings transformers](#three-windings-transformer). The active power limits are in absolute value.
 
 Loading limits are defined by at most one permanent limit and any number of temporary limits (zero or more).
-The permanent limit sets the current absolute value under which the equipment can safely
+The permanent limit sets the current, active power or apparent power absolute value under which the equipment can safely
 be operated for any duration.
-The temporary limits can be used to define higher current limitations corresponding
+The temporary limits can be used to define higher current, active power or apparent power limitations corresponding
 to specific operational durations.
 A temporary limit thus has an **acceptable duration**.
 
