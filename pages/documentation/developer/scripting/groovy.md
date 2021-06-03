@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Groovy scripting
+# Groovy scripting <img src="./img/groovy-logo.png" alt="" style="vertical-align: bottom" height="45"/>
 [Apache Groovy](https://groovy-lang.org/) is an object-oriented programming language for the Java platform. This language is widely used in PowSyBl to implement domain specific languages such as the [contingency DSL](../../simulation/securityanalysis/contingency-dsl.md), the [action DSL](../../simulation/securityanalysis/action-dsl.md) or the DSLs for time-domain simulations. With Groovy, you have access to all features of the framework without any payload.
 
 ## iTools run-script

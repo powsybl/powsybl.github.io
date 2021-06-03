@@ -64,9 +64,6 @@ This module provides a common API to access to the CIM-CGMES from a triple store
 **powsybl-triple-store-impl-rdf4j**  
 This module provides SPARQL queries to access to a triple store based on [Eclipse RDF4J](https://rdf4j.org/).
 
-**powsybl-triple-store-impl-blazegraph**  
-This module provides SPARQL queries to access to a triple store based on [Blazegraph](https://blazegraph.com/).
-
 **powsybl-triple-store-impl-jena**  
 This module provides SPARQL queries to access to a triple store based on [Jena](https://jena.apache.org).
 
@@ -132,6 +129,11 @@ This module provides a test compatibility kit to validate an IIDM implementation
 **powsybl-iidm-util** *(Removed since v4.0.0)*
 This module provides additional features around the network. We removed this module in v4.0.0 and move its content in the `powsybl-iidm-api` module.
 
+### Network hypothesis
+
+**powsybl-network-hypothesis**
+This module provides components in order to model network hypotheses. Basic hypothesis are modification tasks, available in `powsybl-core`. More complex modification tasks are implemented here.
+
 ## Simulators
 
 ### Power flow
@@ -195,7 +197,7 @@ This module provides an API to implement a DSL for dynamic simulation inputs, su
 This module provides an [iTools](../user/itools/dynamic-simulation.md) command to run time-domain simulation.
 
 **powsybl-simulation-api**  *(Removed since v4.1.0)*
-This module provides a legacy API for time domain simulation. We removed this module in 4.1.0 ; **powsybl-dynamic-simulation-api** should be used instead.
+This module provides a legacy API for time domain simulation. We removed this module in 4.1.0 ; `powsybl-dynamic-simulation-api` should be used instead.
 
 ### Optimal power load flow on network variants (Metrix)
 
@@ -204,6 +206,11 @@ This module provides the [mapping DSL](../simulation/metrix/mapping.md) to gener
 
 **powsybl-metrix-integration**
 This module provides an API to run [metrix simulator](../simulation/metrix/index.md) optimal power load flow.
+
+## Balances computation
+
+**powsybl-balances-adjustment**
+This module provides components in order to run a active power balances adjustment computation over several network areas.
 
 ## Configuration management
 The following artifacts define how PowSyBl features access to the [user configuration](../user/configuration/index.md).
@@ -353,11 +360,10 @@ This module provides a layout for substation diagrams based on the [Force Atlas 
 **single-line-diagram-iidm-extensions**  
 This module defines extensions to attach diagram information to networks.
 
-**single-line-diagram-view**  
-This module provides a javafx component to display interactive network diagrams.
+## Development tools
 
-**single-line-diagram-view-app**  
-This module provides a demo app to view diagrams of substations and voltage levels of network files.
+**powsybl-single-line-diagram-viewer**  
+This module provides a demo app for debug purpose, which allows viewing and interacting with substations and voltage levels diagrams of network files.
 
 ## Grid Study Environment (Deprecated)
 The following artifacts are part of a generic desktop application you can easily customize with plugins.

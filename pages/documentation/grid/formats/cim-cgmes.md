@@ -4,7 +4,7 @@ layout: default
 
 # CIM-CGMES
 
-The CMGES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS 61970-600-1, TS 61970-600-2) based on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards. It was developed to meet necessary requirements for TSO data exchanges in the areas of system development and system operation. In this scenario the agents (the Modelling Authorities) generate their Individual Grid Models (IGM) that can be assembled to build broader Common Grid Models (CGM). Boundaries between IGMs are well defined: the boundary data is shared between the modelling agents and contain all boundary points required for a given grid model exchange.
+The CGMES (**C**ommon **G**rid **M**odel **E**xchange **S**pecification) is an IEC technical specification (TS 61970-600-1, TS 61970-600-2) based on the IEC CIM (**C**ommon **I**nformation **M**odel) family of standards. It was developed to meet necessary requirements for TSO data exchanges in the areas of system development and system operation. In this scenario the agents (the Modelling Authorities) generate their Individual Grid Models (IGM) that can be assembled to build broader Common Grid Models (CGM). Boundaries between IGMs are well defined: the boundary data is shared between the modelling agents and contain all boundary points required for a given grid model exchange.
 
 In CGMES an electric power system model is described by data grouped in different subsets (profiles) and exchanged as CIM/XML files, with each file associated to a given profile. The profiles considered in PowSyBl are:
 - `EQ` Equipment. Contains data that describes the equipment present in the network and its physical characteristics.
@@ -186,23 +186,26 @@ The `iidm.import.cgmes.convert-boundary` property is an optional property that d
 **iidm.import.cgmes.create-busbar-section-for-every-connectivity-node**  
 The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates an [IIDM Busbar Section](../model/index.md#busbar-section) for each CGMES connectivity node. Its default value is `false`.
 
-**iidm.import.cgmes.ensure-id-alias-unicity**
+**iidm.import.cgmes.ensure-id-alias-unicity**  
 The `iidm.import.cgmes.ensure-id-alias-unicity` property is an optional property that defines if IDs' and aliases' unicity is ensured during CGMES import. If it is set to `true`, identical CGMES IDs will be modified to be unique. If it is set to `false`, identical CGMES IDs will throw an exception. Its default value is `false`.
 
-**iidm.import.cgmes.post-processors**
+**iidm.import.cgmes.post-processors**  
 The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which will be activated after import. By default, it is an empty list.
 
 **iidm.import.cgmes.powsybl-triplestore**  
-The `iidm.import.cgmes.powsybl-triplestore` property is an optional property that defines which Triplestore implementation is used. PowSyBl supports the [RDF4J](#rdf4j), [Jena](#jena) and [Blazegraph](#blazegraph) Triplestore implementations. This property has `rdf4j` as default value.
+The `iidm.import.cgmes.powsybl-triplestore` property is an optional property that defines which Triplestore implementation is used. PowSyBl supports the [RDF4J](#rdf4j) and [Jena](#jena) Triplestore implementations. This property has `rdf4j` as default value.
 
-**iidm.import.cgmes.profile-used-for-initial-state-values**
+**iidm.import.cgmes.profile-used-for-initial-state-values**  
 The `iidm.import.cgmes.profile-used-for-initial-state-values` property is an optional property that defines which profile is used in priority for initial state values. It can be `SSH` or `SV`. Its default value is `SSH`.
 
 **iidm.import.cgmes.store-cgmes-model-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an optional property that defines if the CGMES model is stored in the imported IIDM network as an [extension](../model/extensions.md#cgmes-model). Its default value is `true`.
 
-**iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension**
+**iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension` property is an optional property that defines if the CGMES conversion context will be stored as an extension of the IIDM output network. Its default value is `false`.
+
+**iidm.import.cgmes.import-control-areas**  
+The `iidm.import.cgmes.import-control-areas` property is an optional property that defines if control areas must be imported or not. Its default value is `true`.
 
 #### Deprecated properties
 
@@ -230,9 +233,6 @@ The `storeCgmesModelAsNetworkExtension` property is deprecated since v2.4.0. Use
 <span style="color: red">TODO</span>
 
 ### Jena
-<span style="color: red">TODO</span>
-
-### Blazegraph
 <span style="color: red">TODO</span>
 
 ## Examples

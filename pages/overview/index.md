@@ -3,6 +3,16 @@ layout: default
 ---
 
 # Overview
+
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4795/badge)](https://bestpractices.coreinfrastructure.org/projects/4795)
+[![Actions Status](https://github.com/powsybl/powsybl-core/workflows/CI/badge.svg)](https://github.com/powsybl/powsybl-core/actions)
+[![Coverage Status](https://sonarcloud.io/api/project_badges/measure?project=com.powsybl%3Apowsybl-core&metric=coverage)](https://sonarcloud.io/component_measures?id=com.powsybl%3Apowsybl-core&metric=coverage)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=com.powsybl%3Apowsybl-core&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.powsybl%3Apowsybl-core)
+[![MPL-2.0 License](https://img.shields.io/badge/license-MPL_2.0-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
+[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/powsybl)
+[![Slack](https://img.shields.io/badge/slack-powsybl-blueviolet.svg?logo=slack)](https://powsybl.slack.com)
+[![Javadocs](https://www.javadoc.io/badge/com.powsybl/powsybl-core.svg?color=blue)](https://www.javadoc.io/doc/com.powsybl/powsybl-core)
+
 PowSyBl (<b>Pow</b>er <b>Sy</b>stem <b>Bl</b>ocks) is an open source framework written in Java,
 dedicated to electrical grid modelling and simulation, licensed under the [Mozilla Public License version 2.0](./license). 
 It is part of [LF Energy](https://www.lfenergy.org/), an open source foundation focused on the power systems sector, hosted within The Linux Foundation. 
@@ -58,24 +68,24 @@ applications on top of the framework.
 ## Java libraries
 The PowSyBl project contains of a set of Java libraries that cover all the abovementioned features:
 
+- [Application File System](../documentation/developer/repositories/powsybl-afs.md): a library to handle study files.
+
+- [Balances adjustments](../documentation/developer/repositories/powsybl-balances-adjustment.md): balances adjustment is a process that consists in acting on 
+specified injections to ensure given balance on specific network areas.
+
 - [Core](../documentation/developer/repositories/powsybl-core.md): provides the core features of the PowSyBl framework such as the grid modelling, 
 the support of several data exchange format ([CGMES](../documentation/grid/formats/cim-cgmes.md), [UCTE](../documentation/grid/formats/ucte-def.md)...), computation APIs ([power flow](../documentation/simulation/powerflow), [security analysis](../documentation/simulation/securityanalysis), [sensitivity analysis](../documentation/simulation/sensitivity), [dynamic simulation](../documentation/simulation/timedomain), etc.).
 
-- [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power
-flow simulation.
-
 - [Dynawo](../documentation/developer/repositories/powsybl-dynawo.md): a library based on the open source [Dynawo](https://github.com/dynawo/) software for time domain simulation.
-
-- [Application File System](../documentation/developer/repositories/powsybl-afs.md): a library to handle study files.
 
 - [High Performance Computing](../documentation/developer/repositories/powsybl-hpc.md): a library to facilitate high performance computing
 with PowSyBl.
 
-- [Balances adjustments](../documentation/developer/repositories/powsybl-balances-adjustment.md): 
-balances adjustment is a process that consists in acting on 
-specified injections to ensure given balance on specific network areas.
+- [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power flow simulations (load flows, security analysis, sensitivity analysis).
 
-- <span style="color: red">PowSyBl GSE</span> (archived): a library to make it easier to 
+- Network Hypothesis: provides component to model network hypotheses.
+
+- PowSyBl GSE (archived): a library to make it easier to 
 write desktop applications based on PowSyBl. This repository is archived. The Grid Study Environment (GSE) project
 aimed at helping developers to write desktop applications based on PowSyBl, through a JavaFX user interface.
 
@@ -143,3 +153,7 @@ PowSyBl provides a repository containing all the necessary code to go through it
 
 The [PowSyBl incubator](https://github.com/powsybl/powsybl-incubator) repository contains
 all the experimental code corresponding to ongoing work that is not stabilized yet.
+
+## Developer tools
+
+The [Powsybl dev tools](https://github.com/powsybl/powsybl-dev-tools) repository contains tools to be used for debug purposes.
