@@ -20,3 +20,6 @@ layout: default
 
 ## Single line diagram
 - [Create the Java code to display single line diagram](../api_guide/single-line-diagram/svg-writing.md): Learn how to create the Java code to generate diagram SVG
+
+## Downscaling
+- [Create the Java code to map hypothesis on a network](downscaling.md): Learn how to create the Java code to map study state hypothesis on a network

@@ -1,29 +1,27 @@
 ---
 layout: default
+latex: true
 ---
 
-# Write the Java code to perform downscaling
-This tutorial shows how you write Java code to perform **downscaling** : the mapping of numeric quantities on a set of nodes in a network. For instance, if you know the global power consumption of a given network, downscaling allows you to map it to each of its contained loads and know precisely their p0.
+# Write the Java code map study state hypothesis on a network
+This tutorial shows how to write Java code to perform downscaling of global data and map the results to an existing network. For instance, if you know the total amount of load consumption in a given network, downscaling allows you to find for each unitary load a new active power set point $$P0$$.
 
-In this tutorial, we will import networks in CGMES format, map timeseries representing their power generation to their generators and power consumption to their loads. This mapping will be performed using a mapping script in the powsybl DSL format. Then, we will output the results of this mapping in CSV files.
+In this tutorial, we will import networks in CIM-CGMES format and map time series representing, for each network, their global active power generation set point and their global active power consumption set point. This mapping on generators and on loads will be performed using a mapping script in a DSL format. Then, we will output the results in CSV files.
 
 * TOC
 {:toc}
 
 ## What will you build?
+Input data is quite simple and is stored in three files:
+- A folder containing zip archives for CIM-CGMES networks ;
+- A CSV file for time series ;
+- And a Groovy file for the DSL script.
 
-Workflow of this tutorial is quite simple : input data is stored in three files:
+These files are imported to load a set of networks, a time series store and a DSL loader. All of these objects are then used in the downscaling process to map time series on network elements. You will also note that output generation is performed at the same time as the mapping for better performances.
 
-- A folder containing zip archives for CGMES networks.
-- A CSV file for timeseries.
-- A Groovy file for the DSL script.
-
-These files are imported to load a set of networks, a timeseries store and a DSL loader. All of these objects are then used in the downscaling process to map timeseries on networks nodes. You will also note that output generation is performed at the same time as the mapping to allow for better performances.
-
-![](D:\projects\powsybl\powsybl.github.io\pages\documentation\developer\tutorials\img\downscaling\downscaling.png)
+![downscaling](./img/downscaling/downscaling.png){: width="50%" .center-image}
 
 ## What will you need?
-
 - About 1 hour
 - A favorite text editor or IDE
 - JDK 1.11 or later
@@ -31,16 +29,7 @@ These files are imported to load a set of networks, a timeseries store and a DSL
     - [IntelliJ IDEA](intellij.md)
 
 ## How to complete this tutorial?
-Like most tutorials, you can start from scratch and complete each step, or you can bypass basic setup steps that are already familiar to you. Either way, you end up with working code.
-
-To start from scratch, move on to [Create a new project](#create-a-new-project-from-scratch).
-
-To skip the basics, do the following:
-- Download and unzip the [source repository](https://github.com/powsybl/powsybl-tutorials), or clone it using Git: `git clone https://github.com/powsybl/powsybl-tutorials`.
-- Change directory to `downscaling/initial`
-- Jump ahead to [Configure the pom file](#configure-the-maven-pom-file)
-
-When you finish, you can check your results against the code in `loadflow/complete`.
+Please refer to the [load flow tutorial](loadflow.md#how-to-complete-this-tutorial) for this section.
 
 ## Create a new project from scratch
 Create a new Maven's `pom.xml` file in `downscaling/initial` with the following content:
@@ -58,31 +47,30 @@ Create a new Maven's `pom.xml` file in `downscaling/initial` with the following 
         <relativePath/>
     </parent>
 
-    <artifactId>powsybl-loadflow</artifactId>
+    <artifactId>powsybl-downscaling</artifactId>
+    <name>Downscaling</name>
 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>4.1.0-SNAPSHOT</powsybl.core.version>
+        <powsybl.core.version>4.2.0</powsybl.core.version>
     </properties>
 </project>
 ```
 
 ## Configure the maven pom file
-
-First, in the `pom.xml`, add the following lines in the `<properties>` section to make it possible to run the future main class through maven:
+In the `pom.xml`, add first the following lines in the `<properties>` section to make it possible to run the future main class through Maven:
 ```xml
 <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
 <exec.mainClass>powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
 ```
-When you'll have created the `LoadflowTutorial` class and its main function, you'll then be able to
-execute your code through:
+When you'll have created the `Downscaling` class and its main function, you'll then be able to execute your code through:
 
 ```
 $> mvn clean install exec:java
 ```
 
-Also, configure the pom file so as to use a configuration file taken in the classpath, instead of the one
+Also, configure the `pom.xml` file in order to use a configuration file taken in the classpath, instead of the one
 that is global to your system:
 
 ```xml
@@ -105,17 +93,16 @@ that is global to your system:
 </build>
 ```
 
-Now, we'll add a few **required** maven dependencies:
+Now, we'll add a few required maven dependencies:
 
 - `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration
-
 - `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j`.
 - `com.powsybl:powsybl-iidm-api` to work with networks.
-- `powsybl-iidm-converter-api`, `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j` to load CGMES networks.
-- `powsybl-time-series-api` to work with timeseries.
+- `powsybl-iidm-converter-api`, `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j` to load CIM-CGMES networks.
+- `powsybl-time-series-api` to work with time series.
 - `powsybl-metrix-mapping` and `powsybl-entsoe-util` to perform downscaling.
 
-**Note:** PowSyBl uses [slf4j](http://www.slf4j.org/) as a facade for various logging framework, but some APIs we use in PowSyBl use [log4j](https://logging.apache.org/log4j), which is not compatible with slf4j, making it necessary to create a bridge between the two logging system.
+Note: PowSyBl uses [slf4j](http://www.slf4j.org/) as a facade for various logging framework, but some APIs we use in PowSyBl use [log4j](https://logging.apache.org/log4j), which is not compatible with slf4j, making it necessary to create a bridge between the two logging system.
 
 Add the following dependencies to the `pom.xml` file:
 ```xml
@@ -163,6 +150,11 @@ Add the following dependencies to the `pom.xml` file:
             </exclusion>
         </exclusions>
     </dependency>
+    <dependency>
+        <groupId>com.powsybl</groupId>
+        <artifactId>powsybl-iidm-mergingview</artifactId>
+        <version>${powsybl.core.version}</version>
+    </dependency>
 
     <!-- Mapping -->
     <dependency>
@@ -181,11 +173,6 @@ Add the following dependencies to the `pom.xml` file:
         <artifactId>powsybl-entsoe-util</artifactId>
         <version>${powsybl.core.version}</version>
     </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-iidm-mergingview</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
 </dependencies>
 ```
 
@@ -198,14 +185,13 @@ Start the configuration by writing:
 metrix:
   ignoreEmptyFilter: true
 ```
-The `metrix` configuration namespace will allow you to setup mapping behavior. The `ignoreEmptyFilter` option allows to continue without crashing when a filter in the DSL script returns an empty result (more on this later).
+The `metrix` configuration namespace will allow you to set up mapping behavior. The `ignoreEmptyFilter` option allows to continue without crashing when a filter in the DSL script returns an empty result (more on this later).
 
-## Import the networks from CGMES archives
+## Import the networks from CIM-CGMES files
+In this tutorial, the provided networks are in CIM-CGMES format. Each one is loaded from a zip archive containing all its related data. We provide two example archives in the `downscaling/complete/src/main/resources/networks` directory. Both are open-source and adapted from CGMES conformity tests.
 
-In this tutorial, the provided networks are in the CGMES format. Each one of the networks is loaded from a Zip archive containing all its related data. We provided you with two example archives in the `downscaling/complete/src/main/resources/networks` directory. Both are open-source, theoretical networks.
-
-- `CGMES_smaller.zip` is the smaller archive theoretically representing Great Britain's network.
-- `CGMES_bigger.zip` is the bigger archive and theoretically represents France's network.
+- `CGMES_smaller.zip` is based on the Small Grid Base Case Test Configuration from CGMES Conformity Assessment, where we imagine that it represents Great Britain's network. The geographical information is just needed for the mapping.
+- `CGMES_bigger.zip` is based on the Real Grid Test Configuration from CGMES Conformity Assessment, where we imagine that it represents France's network. Here too, the geographical information is just needed for the mapping.
 
 First, create `Downscaling` class, with a main method and a logger.
 
@@ -230,12 +216,10 @@ public class Downscaling {
 ```
 
 ### Prepare the networks directory
-
-Create the `downscaling/initial/src/main/resources/networks` directory. You must deposit all the CGMES archives you want to manipulate inside.
+Create the `downscaling/initial/src/main/resources/networks` directory. You must deposit all the CIM-CGMES archives you want to manipulate inside.
 
 ### Write network import code
-
-Create a `Set<Network>` loaded with each zip file contained in the networks directory :
+Create a `Set<Network>` loaded from each zip file of the `networks` directory :
 
 ```java
 Set<Network> networks = new HashSet<>();
@@ -253,24 +237,22 @@ Files.walk(Paths.get(networksDir.toURI()))
     });
 ```
 
-Since we logged any error occurring with networks loading, you should be able to troubleshout import problems more easily.
+Since we have logged any error occurring during networks import, you should be able to understand problems more easily.
 
-## Import the timeseries from CSV file
+## Import the time series from CSV file
+We load time series from a simple CSV file. While other, more reliable and shareable formats are supported by Powsybl, the CSV format allows you to have a direct insight into the raw data you manipulate.
 
-We will load timeseries from a simple CSV file. While other, more reliable and shareable formats are supported by Powsybl, the CSV format allows you to have a direct insight into the raw data you manipulate.
+The `downscaling/complete/src/main/resources/ts-test.csv` file contains test time series data you can use to run this tutorial. You can copy it to  `downscaling/initial/src/main/resources`.
 
-The `downscaling/complete/src/main/resources/ts-test.csv` file contains test timeseries data you can use to run this tutorial. You can copy it to  `downscaling/initial/src/main/resources`.
+In the provided time series store, we use the time series names to map them to network equipments. The time series are identified by their names (column header in the CSV file):
 
-In the provided timeseries store, we will use the timeseries names to map them to networks equipments. The timeseries will be identified by their names (column header in the CSV file):
+- Generation time series: each time series has a named composed of its country code and its energy production type. For instance, French nuclear power is referenced by the `NUCLEAR_FR` time series.
+- Load time series: only one time series is needed to represent active power consumption in each country. For instance, British load consumption is referenced by `LOAD_GB` time series.
 
-- Production timeseries : Each timeseries has a named formed with its country code and its energy production type. For instance, french nuclear power will be referenced by the **NUCLEAR_FR** timeseries.
-- Consumption timeseries : Only one timeseries is needed to represent power consumption in each country. For instance, british power load will be referenced by **LOAD_GB** timeseries.
+If mapping process cannot find a time series for a given equipment, the code throws an error.
 
-If mapping process cannot find a timeseries for a given equipment, code will crash!
-
-### Write timeseries import code
-
-In Powsybl, timeseries are grouped and accessed in data-structures called `TimeSeriesStore`. Create an `InMemoryTimeSeriesStore` (timeseries data will be actually present directly in JVM memory) and populate it with the `ts-test.csv` file.
+### Write time series import code
+In Powsybl, time series are grouped and accessed in data-structures called `TimeSeriesStore`. Create an `InMemoryTimeSeriesStore` (time series data are actually present directly in JVM memory) and populate it with the `ts-test.csv` file.
 
 ```java
 final InMemoryTimeSeriesStore store = new InMemoryTimeSeriesStore();
@@ -280,8 +262,7 @@ store.importTimeSeries(reader);
 ```
 
 ## Load mapping DSL script
-
-Poswybl Metrix mapping defines a DSL in groovy language allowing to script actions to execute during Metrix operations. Please refer to  [mapping DSL documentation](../../simulation/simulation/metrix/mapping.md) for further information.
+Metrix integration mapping defines a DSL in groovy language that allows you to script actions that will be executed during Metrix execution. Please refer to  [mapping DSL documentation](../../simulation/simulation/metrix/mapping.md) for further information.
 
 A `TimeSeriesDslLoader` data structure needs to be built to load the DSL script:
 
@@ -294,10 +275,9 @@ try (Reader reader = Files.newBufferedReader(mappingFilePath)) {
 ```
 
 ### A look at the DSL loading script
-
 The DSL loading script is in groovy format. It will be executed by the mapping operation and its content defines what will be actually done.
 
-On top of groovy language, Powsybl-metrix defines a Domain Specific Language or DSL that allows you to quickly define operations relative to networks mapping. The script will be run once per network, here is its content script explained:
+On top of groovy language, Metrix integration defines a Domain Specific Language (or DSL) that allows you to quickly define operations relative to network's mapping. The script is run once per network, here is its content script explained:
 
 ```groovy
 import com.powsybl.iidm.network.EnergySource
@@ -310,7 +290,7 @@ for (eSource in EnergySource.values()) {
     // Run the mapToGenerators function : allows to visit all generators
     // and to define the specifics of the mapping operation to perform
     mapToGenerators {
-        timeSeriesName eSource.toString() + '_' + country.toString() // name of the timeseries to map
+        timeSeriesName eSource.toString() + '_' + country.toString() // name of the time series to map
         distributionKey { 
             generator.maxP // Distribution key : what value should be used to ponderate the global value repartition on generators
         }
@@ -330,17 +310,8 @@ mapToLoads {
 
 ```
 
- 
-
-
-
-
-
- 
-
- ## Perform mapping on each network
-
-Next, we will iterate over each network to map the matching timeseries on its generators and loads. The code to come will be comprised into the following loop:
+## Perform mapping on each network
+Next, we iterate over each network to map the matching time series on its generators and loads. The code is called into the following loop:
 
 ```java
 for (final Network network : networks) {
@@ -348,9 +319,8 @@ for (final Network network : networks) {
 }
 ```
 
-### Prepare timeseries to map
-
-We make the hypothesis that each network expands on one and only one country. Using this information (and the Powsybl IIDM API) we can prepare the names of all the timeseries in the storer that will be used in the mapping.
+### Prepare time series to be mapped
+We make the hypothesis that each network expands on one and only one country. Using this information in the network API, we can prepare the names of all the time series in the storer used for the mapping.
 
 ```java
 Country country = network.getCountries().iterator().next();
@@ -363,8 +333,7 @@ tsNames.add("LOAD_" + country.toString());
 ```
 
 ### Prepare mapping parameters
-
-Metrix mapping is highly parametrizable. Prepare inputs for the mapping execution :
+Metrix integration mapping is highly parameterizable. Prepare inputs for the mapping execution:
 
 ```java
 final MappingParameters mappingParameters = MappingParameters.load();
@@ -382,20 +351,18 @@ final TimeSeriesMapperParameters tsMappingParams = new TimeSeriesMapperParameter
     mappingParameters.getToleranceThreshold()
 );
 ```
-
-- Computation range defines all the versions of the timeseries that need to be mapped. In this tutorial, we only handle single-versioned timeseries.
-- Point range defines the number of timesteps that need to be mapped. Here, we use the whole horizon for all timeseries (provided timeseries have the same horizon). 
+- Computation range defines all the versions of the time series that need to be mapped. In this tutorial, we only handle `single-versioned` time series.
+- Point range defines the number of time steps that need to be mapped. Here, we use the whole horizon for all time series (provided time series have the same horizon). 
 - Mapping parameters object allows to load general mapping behavior parameters, from the `config.yml` file. 
 
-### Prepare output
-
+### Prepare outputs
 We would like to export output CSV files to an output directory. In this tutorial, we define output path as configurable by the main method caller (in main args).
 
 ```java
 final Path outputPath = Paths.get(args[0]);
 ```
 
-Each network downscaling will produce an output file and a log file, stored in a separate directory named after the network's country.
+Each network downscaling produce an output file and a log file, stored in a separate directory named after the network's country.
 
 ```java
 final Path networkOutputDir = outputPath.resolve(country.getName());
@@ -403,22 +370,20 @@ Files.createDirectories(networkOutputDir);
 ```
 
 ### Mapping observers
-
-Performing mapping will require to iterate over (visit) all network equipments.  Actually, this operation can be very expensive in processor time and we would prefer to perform it as little as possible. A naive approach would do the following :
+Performing mapping requires to visit all network equipments.  Actually, this operation can be very expensive in processor time and we prefer to perform it as little as possible. A naive approach would do the following steps:
 
 - Visit each equipment to map values on it.
 - Visit each equipment again to output the mapped value.
 
-Metrix mapping allows for a far better strategy, using the Observer pattern. Register observers in the mapping process, they will execute custom code each time a node gets visited. This way, network gets visited only once and all useful operations are performed at the same time.
+Metrix integration mapping allows for a far better strategy, using the Observer pattern. In the mapping process, observers execute custom code each time a equipment gets visited. This way, network is visited only once and all useful operations are performed at the same time.
 
-Here, we will use an `EquipmentTimeSeriesWriter` : writes a new line in a CSV output file each time an equipment gets mapped. Note that each timeseries version is mapped independently : an output file for each version (named `<version_name>.csv`) is created. In our case, only a `version_1.csv` file will be produced for each country.
+Here, we use an `EquipmentTimeSeriesWriter`: writes a new line in a CSV output file each time an equipment is mapped. Note that each time series version is mapped independently: an output file for each version (named `<version_name>.csv`) is created. In our case, only a `version_1.csv` file is produced for each country.
 
 ```java
 TimeSeriesMapperObserver equipmentWriter = new EquipmentTimeSeriesWriter(networkOutputDir);
 ```
 
- ### Execute mapping
-
+### Execute mapping
 Prepare mapping logs and perform actual mapping with a simple call:
 
 ```java
@@ -427,9 +392,8 @@ mapper.mapToNetwork(tsStore, tsMappingParams, Collections.singletonList(equipmen
 logger.writeCsv(networkOutputDir.resolve("mapping.log"));
 ```
 
- ## Going further : Output networks
-
-You can use another type of mapping observer to export the network in addition to the equipments mapped values.
+## Output new networks
+You can use another type of mapping observer to export the network in addition to the equipments' mapped values.
 
 We will export to a `network.xml` file in the country output directory. Both equipments values export and network export will be performed at the same time.
 
@@ -444,11 +408,7 @@ mapper.mapToNetwork(tsStore, tsMappingParams, observers);
 ```
 
 ## Summary
-
-We have learnt how to write Java code to run mapping in a downscaling context. 
-We've shown how to load network files in CGMES format, how to load local CSV timseries files, and how to define a mapping DSL script. We have defined what are mapping observers and how to use them to output mapping results in files.
+We have learnt how to write Java and Groovy code to run a mapping in a downscaling context. We've shown how to load network files in CIM-CGMES format, how to load local CSV time series files, and how to define a mapping DSL script. We have defined what are mapping observers and how to use them to output mapping results in files.
 
 ## Going further
-The following links could also be useful:
-- [Run a power flow through an iTools command](../../user/itools/loadflow.md): Learn how to perform a power flow calculation from the command line 
-- [Sensitivity analysis tutorial](./sensitivity-analysis.md): Learn how to write the Java code to perform sensitivity analyses
+Learn more about [Metrix simulator](../../simulation/metrix/index.md).
