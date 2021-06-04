@@ -2,32 +2,47 @@
 layout: default
 ---
 
-# Python scripting
+# Python scripting <img src="./img/python-logo.png" alt="" style="vertical-align: bottom" height="40"/>
 
-The [pypowsybl](../repositories/pypowsybl.md) provides a way to use all the features of PowSyBl in python scripts. This Python integration relies on the [JPype](https://www.py4j.org) project that provides full access to Java from Python. This is achieved not through re-implementing Python, as [Jython](https://www.jython.org/) has done, but rather through interfacing at the native level in both virtual machines.
+The PyPowSyBl project gives access to PowSyBl framework to Python developers. This Python integration relies on GraalVM to compile Java code to a native library.
 
-This shared memory based approach achieves decent computing performance, while providing the access to the entirety of CPython and Java libraries. For optimal performance, we recommend to use [Groovy scripts](groovy.md) or implement part of your script directly in Java.
+Please see below a short documentation of how to script in Python using PyPowSyBl, but please rely our up-to-date and automatic [PyPowSyBl’s user documentation](https://pypowsybl.readthedocs.io/en/latest/index.html) if you want to got deeper.
 
-To make it easier to write Python scripts that use PowSyBL, we also provide a small DSL to:
-- to load and save a case file
-- to easily run power flow simulations with [OpenLoadFlow](../../simulation/powerflow/openlf.md)
+# Features
+
+The available features are:  
+
+**Grid modelling**      
+- We can create an empty network ;
+- We can load a network from a file. The supported formats are for the moment `CGMES`, `MATPOWER`, `IEEE-CDF`, `PSS/E`, `UCTE` and `XIIDM`.
+- We can save a network to a file. The supported formats are for the moment `CGMES`, `UCTE`, and `XIIDM`.
+- We can create and update network elements with a [Pandas](https://pandas.pydata.org/) data frame.  
+  
+**Simulation**      
+- We can run a AC load flow with [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation ;
+- We can run a DC load flow with [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation ; 
+- We can run an AC sensitivity analysis with [OpenLoadFlow](../../simulation/sensitivity/openlf.md#ac-sensitivity-analysis) implementation, on the pre-contingency network and on the post-contingency networks ;
+- We can run a DC sensitivity analysis with [OpenLoadFlow](../../simulation/sensitivity/openlf.md#dc-sensitivity-analysis) implementation, on the pre-contingency network and on the post-contingency networks ;
+- We can run an AC post-contingency analysis with OpenLoadFlow, note that the DC security analysis based on OpenLoadFlow is not yet supported.
 
 ## Example
-This small example shows how to load a case file and run a power simulation in Python:
 ```python
-import jpype
-import jpype.imports
-
-from pypowsybl import Network, LoadFlow
+import pypowsybl as pp
 
 # Load a case file
-network = Network.load("eurostag-tutorial-example1.xml")
+n = pp.network.create_ieee14()
+results = pp.loadflow.run_ac(n)
+for result in results:
+    print(result)
 
 # Run a power flow with OpenLF implementation
-result = LoadFlow.run(network, implementation="OpenLoadFlow")
-print("Computation OK? {}".format(result.isOk()))
-print("Metrics: {}".format(result.getMetrics()))
+parameters = pp.loadflow.Parameters(distributed_slack=False)
+results = pp.loadflow.run_ac(n, parameters)
+
+# Print the network
+df = n.create_buses_data_frame()
+print(df)
 
 # Save the network
-Network.save(network, "eurostag-tutorial-example1-after-lf.xml", "XIIDM")
+n.dump('result.xiidm', 'XIIDM')
 ```

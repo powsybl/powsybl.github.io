@@ -685,22 +685,27 @@ With the reactive capability curve limits, the reactive power limitation depends
 The curve is defined as a set of points that associate, to each active power value, a minimum and maximum reactive power value.
 In between the defined points of the curve, the reactive power limits are computed through a linear interpolation.
 
-### Current limits
-[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/CurrentLimits.html)
+### Loading Limits
+[![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/LoadingLimits.html)
 
-Some equipment have operational limits regarding the current value, corresponding to the equipment's physical limitations (related to heating).
-The current limits may be set in IIDM for [lines](#line),
-[dangling lines](#dangling-line), [two windings transformers](#two-windings-transformer) and [three windings transformers](#three-windings-transformer).
-Current limits are defined by at most one permanent limit and any number of temporary limits (zero or more).
-The permanent limit sets the current value (in `A`) under which the equipment can safely
+Some equipment have operational limits regarding the current, active power or apparent power value, corresponding to the equipment's physical limitations (related to heating).
+
+Loading limits can be declined into active power limits (in MW), apparent power limits (in kVA) and current limits (in A).
+They may be set for [lines](#line),
+[dangling lines](#dangling-line), [two windings transformers](#two-windings-transformer) and [three windings transformers](#three-windings-transformer). The active power limits are in absolute value.
+
+Loading limits are defined by at most one permanent limit and any number of temporary limits (zero or more).
+The permanent limit sets the current, active power or apparent power absolute value under which the equipment can safely
 be operated for any duration.
-The temporary limits can be used to define higher current limitations corresponding
+The temporary limits can be used to define higher current, active power or apparent power limitations corresponding
 to specific operational durations.
 A temporary limit thus has an **acceptable duration**.
-The component on which the current limits are applied can safely remain
-between the preceding limit (it could be another temporary limit or a permanent limit) and this limit for a duration up to the acceptable duration. Please look at this scheme to fully understand the modelling:
 
-![Current limits model](img/index/currentLimits.svg){: width="50%" .center-image}
+The component on which the current limits are applied can safely remain
+between the preceding limit (it could be another temporary limit or a permanent limit) and this limit for a duration up to the acceptable duration.
+Please look at this scheme to fully understand the modelling (the following example shows current limits but this modelling is valid for all loading limits):
+
+![Loading limits model](img/index/currentLimits.svg){: width="50%" .center-image}
 
 Note that, following this modelling, in general the last temporary limit (the higher one in value) should be infinite with an acceptable duration different from zero, except for tripping current modeling where the last temporary limit is infinite with an acceptable duration equal to zero.
 

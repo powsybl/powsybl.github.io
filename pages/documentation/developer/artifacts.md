@@ -64,9 +64,6 @@ This module provides a common API to access to the CIM-CGMES from a triple store
 **powsybl-triple-store-impl-rdf4j**  
 This module provides SPARQL queries to access to a triple store based on [Eclipse RDF4J](https://rdf4j.org/).
 
-**powsybl-triple-store-impl-blazegraph**  
-This module provides SPARQL queries to access to a triple store based on [Blazegraph](https://blazegraph.com/).
-
 **powsybl-triple-store-impl-jena**  
 This module provides SPARQL queries to access to a triple store based on [Jena](https://jena.apache.org).
 
