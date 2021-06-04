@@ -56,34 +56,37 @@ Solving this non-linear equations system is done using the Newton-Raphson method
 
 #### Other regulation modes
 
-PQ-bus and PV-bus types allow to model local voltage magnitude control or local reactive power output control. Other types of control can be modeled in OpenLoadFLow:
-- Remote voltage control,
-- Remote reactive power control,
-- U+$$\lambda$$Q local or remote control.
+PQ-bus and PV-bus are used to model local voltage magnitude or local reactive power controls. Other controls are supported in OpenLoadFLow:
+- Remote voltage control for generators, static var compensators and two and three windings transformers with ratio tap changer. Control shared over several controllers buses is supported ;
+- Remote reactive power control for generators ;
+- For static var compensator with a voltage set point, the support of a voltage per reactive power control, also called slope, that modifies a bit the local voltage at connection bus. We only support a local control. 
 
 ##### Remote voltage control
 
-When a bus $$b_1$$ applies a remote voltage control on another bus $$b_2$$, bus $$b_2$$ must be originally a PQ-bus. Bus $$b_1$$ is treated as a P-bus, that is, only active balance is fixed at bus $$b_1$$. Bus $$b_2$$ becomes a PQV-bus, where the voltage magnitude is fixed at a value defined by the control. To resume:
-- At bus $$b_1$$:
+In our explanation, we have two buses. A generator or more is connected to bus $$b_1$$, that is called controller bus. The remote bus $$b_2$$, where voltage should reach the target, is called controlled bus. The bus $$b_1$$ is no longer a PQ-bus and becomes a P-bus: only active power balance is fixed for that bus. Bus $$b_2$$ becomes a PQV-bus, where the voltage magnitude is fixed at the value defined by the voltage control. To resume:
+- At controller bus $$b_1$$:
     - $$P_{b_1}^{in} = \sum_{j \in v(b_1)} p_{b_1,j}$$.
-- At bus $$b_2$$:
+- At controlled bus $$b_2$$:
     - $$P_{b_2}^{in} = \sum_{j \in v(b_2)} p_{b_2,j}$$.
     - $$Q_{b_2}^{in} = \sum_{j \in v(b_2)} q_{b_2,j}$$.
-    - $$v_{b_2} = V^{rctrl}_{b_1}$$.
+    - $$v_{b_2} = V^{c}_{b_1}$$.
     
 ##### Remote reactive power control
 
-When a bus $$b_1$$ applies a remote reactive power control on a line $$(i,j)$$, bus $$b_1$$ is treated as a P-bus, that is, only active balance is fixed at bus $$b_1$$. The reactive power flowing at side i on line $$(i,j)$$ is fixed by the control. To resume:
-- At bus $$b_1$$:
+A bus $$b_1$$ has, through a generator, a remote reactive power control on a branch $$(i,j)$$. This controller bus is treated as a P-bus: only active power balance is fixed for that bus. The reactive power flowing at side i on line $$(i,j)$$ is fixed by the control (it could be at side j too). To resume:
+- At controller bus $$b_1$$:
     - $$P_{b_1}^{in} = \sum_{j \in v(b_1)} p_{b_1,j}$$.
-- At line $$(i,j)$$:
-    - $$q_{i,j} = Q^{rctrl}_{b_1}$$.
+- At controlled branch $$(i,j)$$:
+    - $$q_{i,j} = Q^{c}_{b_1}$$.
     
-##### U+$$\lambda$$Q local or remote control
+##### Local voltage control for a static var compensator with a slope 
 
-A bus $$b_1$$ can applied an U+$$\lambda$$Q control. Both voltage and reactive power control can be local or remote, giving four different cases.
+We only support the simple case where:
+- Only one generator controlling voltage is connected to a bus. If other generators are present, they should have a local reactive power control ;
+- The control is local ;
+- No other generators from other controller buses are controlling the bus where the static var compensator is connected. Let's call it $$b_1$$.
 
-###### U local and Q local
+In that case only, the voltage at bus $$b_1$$ is equal to $$v(b_1) + slope * q_{svc}$$.  
 
 ### DC flows computing
 
