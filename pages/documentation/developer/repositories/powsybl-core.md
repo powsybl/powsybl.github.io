@@ -22,6 +22,9 @@ The PowSyBl Core [repository](https://github.com/powsybl/powsybl-core) provides 
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 4.2.0 | 2021-05-25 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v4.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/4.2.0/index.html) |
+| 4.1.2 | 2021-04-28 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v4.1.2) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/4.1.2/index.html) |
+| 4.1.1 | 2021-04-19 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v4.1.1) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/4.1.1/index.html) |
 | 4.1.0 | 2021-04-08 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v4.1.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/4.1.0/index.html) |
 | 4.0.1 | 2021-02-11 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v4.0.1) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/4.0.1/index.html) |
 | 4.0.0 | 2021-02-05 | [Release notes](https://github.com/powsybl/powsybl-core/releases/tag/v4.0.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-core/4.0.0/index.html) |

@@ -1,4 +1,4 @@
-# pypowsybl
+# pypowsybl [![GitHub release](https://img.shields.io/github/release/powsybl/pypowsybl.svg)](https://github.com/powsybl/pypowsybl/releases/)
 The PyPowSyBl project gives access to PowSyBl framework to Python developers. This Python integration relies on GraalVM to compile Java code to a native library.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)  
@@ -29,3 +29,5 @@ The available features are:
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 0.7.0 | 2021-04-13 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.6.0) | [readthedocs.io](https://pypowsybl.readthedocs.io/en/latest/) |
+| 0.6.0 | 2021-04-08 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.6.0) | - |
