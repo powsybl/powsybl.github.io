@@ -53,7 +53,7 @@ Create a new Maven's `pom.xml` file in `downscaling/initial` with the following 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>4.2.0</powsybl.core.version>
+        <powsybl.core.version>4.0.0</powsybl.core.version>
     </properties>
 </project>
 ```
@@ -67,7 +67,7 @@ In the `pom.xml`, add first the following lines in the `<properties>` section to
 When you'll have created the `Downscaling` class and its main function, you'll then be able to execute your code through:
 
 ```
-$> mvn clean install exec:java
+$> mvn clean install exec:java -Dexec.args="/tmp/"
 ```
 
 Also, configure the `pom.xml` file in order to use a configuration file taken in the classpath, instead of the one
@@ -100,7 +100,7 @@ Now, we'll add a few required maven dependencies:
 - `com.powsybl:powsybl-iidm-api` to work with networks.
 - `powsybl-iidm-converter-api`, `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j` to load CIM-CGMES networks.
 - `powsybl-time-series-api` to work with time series.
-- `powsybl-metrix-mapping` and `powsybl-entsoe-util` to perform downscaling.
+- `powsybl-metrix-mapping` to perform downscaling. Note that the repository [powsybl-metrix](https://github.com/powsybl/powsybl-metrix) has to be compiled locally as no release are available.
 
 Note: PowSyBl uses [slf4j](http://www.slf4j.org/) as a facade for various logging framework, but some APIs we use in PowSyBl use [log4j](https://logging.apache.org/log4j), which is not compatible with slf4j, making it necessary to create a bridge between the two logging system.
 
@@ -150,11 +150,6 @@ Add the following dependencies to the `pom.xml` file:
             </exclusion>
         </exclusions>
     </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-iidm-mergingview</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
 
     <!-- Mapping -->
     <dependency>
@@ -167,11 +162,6 @@ Add the following dependencies to the `pom.xml` file:
         <artifactId>powsybl-metrix-mapping</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <scope>compile</scope>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-entsoe-util</artifactId>
-        <version>${powsybl.core.version}</version>
     </dependency>
 </dependencies>
 ```
