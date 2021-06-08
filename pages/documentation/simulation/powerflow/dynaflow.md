@@ -11,7 +11,17 @@ DynaFlow is a new steady-state simulation tool that aims at calculating the stea
 
 ## Installation
 
-<span style="color: red">TODO: explain how to install DynaFlow</span>
+As of 12/04/2021, you will need to build DynaFlow from sources.
+
+As an illustration, on Linux, you will need to:
+ 1. Follow the build instructions for [dynawo](https://github.com/dynawo/dynawo) library
+ 2. Deploy it in order to get an installation directory with the correct layout :
+ ```shell
+ # in dynawo sources directory
+ $> ./myEnvDynawo.sh deploy
+ ```
+ 3. Follow the build instructions for [DynaFlow](https://github.com/dynawo/dynaflow-launcher)
+
 
 ## Configuration
 To use DynaFlow for all power flow computations, you have to configure the `load-flow` module in your configuration file:
