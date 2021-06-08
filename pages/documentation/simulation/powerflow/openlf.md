@@ -86,14 +86,11 @@ We only support the simple case where:
 - The control is local ;
 - No other generators from other controller buses are controlling the bus where the static var compensator is connected. Let's call it $$b_1$$.
 
-In that case only, the voltage at bus $$b_1$$ is equal to $$v(b_1) + slope * q_{svc}$$.  
+In that case only, the voltage equation at bus $$b_1$$ is replaced with:
 
-When a bus $$b_1$$ applies a remote reactive power control on a line $$(i,j)$$, bus $$b_1$$ is treated as a P-bus, that is, only active balance is fixed at bus $$b_1$$. The reactive power flowing at side i on line $$(i,j)$$ is fixed by the control. To resume:
-- At bus $$b_1$$:
-    - $$P_{b_1}^{in} = \sum_{j \in v(b_1)} p_{b_1,j}$$.
-- At line $$(i,j)$$:
-    - $$q_{i,j} = Q^{rctrl}_{b_1}$$.
+$$v_{b_1} + s \cdot q_{svc} = V^{c}_{b_1}$$
 
+Where $$s$$ is the slope of the static var compensator
 
 ### DC flows computing
 
