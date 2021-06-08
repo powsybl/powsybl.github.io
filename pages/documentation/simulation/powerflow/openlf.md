@@ -85,6 +85,13 @@ A bus $$b_1$$ can applied an U+$$\lambda$$Q control. Both voltage and reactive p
 
 ###### U local and Q local
 
+When a bus $$b_1$$ applies a remote reactive power control on a line $$(i,j)$$, bus $$b_1$$ is treated as a P-bus, that is, only active balance is fixed at bus $$b_1$$. The reactive power flowing at side i on line $$(i,j)$$ is fixed by the control. To resume:
+- At bus $$b_1$$:
+    - $$P_{b_1}^{in} = \sum_{j \in v(b_1)} p_{b_1,j}$$.
+- At line $$(i,j)$$:
+    - $$q_{i,j} = Q^{rctrl}_{b_1}$$.
+
+
 ### DC flows computing
 
 The DC flows computing relies on several classical assumptions to build a model where the active power flowing through a line depends linearly from the voltage angles at its ends.
