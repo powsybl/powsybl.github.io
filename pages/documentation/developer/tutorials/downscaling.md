@@ -3,7 +3,7 @@ layout: default
 latex: true
 ---
 
-# Write the Java code map study state hypothesis on a network
+# Write the Java code to map steady state hypothesis on a network
 This tutorial shows how to write Java code to perform downscaling of global data and map the results to an existing network. For instance, if you know the total amount of load consumption in a given network, downscaling allows you to find for each unitary load a new active power set point $$P0$$.
 
 In this tutorial, we will import networks in CIM-CGMES format and map time series representing, for each network, their global active power generation set point and their global active power consumption set point. This mapping on generators and on loads will be performed using a mapping script in a DSL format. Then, we will output the results in CSV files.
