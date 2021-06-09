@@ -90,7 +90,7 @@ In that case only, the voltage equation at bus $$b_1$$ is replaced with:
 
 $$v_{b_1} + s \cdot q_{svc} = V^{c}_{b_1}$$
 
-Where $$s$$ is the slope of the static var compensator
+Where $$s$$ is the slope of the static var compensator.
 
 ### DC flows computing
 
