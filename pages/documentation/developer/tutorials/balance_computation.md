@@ -555,7 +555,7 @@ private static CgmesExportContext createContext(MergingView mergingView, Map<Str
 ```
 
 ## Summary
-In this tutorial, you have learned how to import multiple CGMES IGMs, merge them and run a balance adjustment. 
+In this tutorial, you have learned how to import multiple CGMES IGMs and then run a loadflow on them. Your IGMs were then merged and a loadflow on the whole CGM was computed. Then you ran a balance adjustment and exported the SV result file. 
 
 ## Going further
 The following links can be also useful:
