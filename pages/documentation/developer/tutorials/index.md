@@ -23,3 +23,6 @@ layout: default
 
 ## Downscaling
 - [Create the Java code to map hypothesis on a network](downscaling.md): Learn how to create the Java code to map study state hypothesis on a network
+
+## Merging
+- [Create the Java code to perform merging and balance adjustment](balance_computation.md): Learn how to create the Java code to merge multiple IGMs and adjust the net positions of each merged area.
