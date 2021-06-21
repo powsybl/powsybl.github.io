@@ -54,6 +54,44 @@ where $$v(i)$$ is the set of buses linked to $$i$$ in the network graph.
 
 Solving this non-linear equations system is done using the Newton-Raphson method. At each iteration, the local jacobian matrix $$J(v,\phi)$$ of the system is computed and a linear system based on this matrix is solved using its LU decomposition. 
 
+#### Other regulation modes
+
+PQ-bus and PV-bus are used to model local voltage magnitude or local reactive power controls. Other controls are supported in OpenLoadFLow:
+- Remote voltage control for generators, static var compensators and two and three windings transformers with ratio tap changer. Control shared over several controllers buses is supported ;
+- Remote reactive power control for generators ;
+- For static var compensator with a voltage set point, the support of a voltage per reactive power control, also called slope, that modifies a bit the local voltage at connection bus. We only support a local control. 
+
+##### Remote voltage control
+
+In our explanation, we have two buses. A generator or more is connected to bus $$b_1$$, that is called controller bus. The remote bus $$b_2$$, where voltage should reach the target, is called controlled bus. The bus $$b_1$$ is no longer a PQ-bus and becomes a P-bus: only active power balance is fixed for that bus. Bus $$b_2$$ becomes a PQV-bus, where the voltage magnitude is fixed at the value defined by the voltage control. To resume:
+- At controller bus $$b_1$$:
+    - $$P_{b_1}^{in} = \sum_{j \in v(b_1)} p_{b_1,j}$$.
+- At controlled bus $$b_2$$:
+    - $$P_{b_2}^{in} = \sum_{j \in v(b_2)} p_{b_2,j}$$.
+    - $$Q_{b_2}^{in} = \sum_{j \in v(b_2)} q_{b_2,j}$$.
+    - $$v_{b_2} = V^{c}_{b_1}$$.
+    
+##### Remote reactive power control
+
+A bus $$b_1$$ has, through a generator, a remote reactive power control on a branch $$(i,j)$$. This controller bus is treated as a P-bus: only active power balance is fixed for that bus. The reactive power flowing at side i on line $$(i,j)$$ is fixed by the control (it could be at side j too). To resume:
+- At controller bus $$b_1$$:
+    - $$P_{b_1}^{in} = \sum_{j \in v(b_1)} p_{b_1,j}$$.
+- At controlled branch $$(i,j)$$:
+    - $$q_{i,j} = Q^{c}_{b_1}$$.
+    
+##### Local voltage control for a static var compensator with a slope 
+
+We only support the simple case where:
+- Only one generator controlling voltage is connected to a bus. If other generators are present, they should have a local reactive power control ;
+- The control is local ;
+- No other generators from other controller buses are controlling the bus where the static var compensator is connected. Let's call it $$b_1$$.
+
+In that case only, the voltage equation at bus $$b_1$$ is replaced with:
+
+$$v_{b_1} + s \cdot q_{svc} = V^{c}_{b_1}$$
+
+Where $$s$$ is the slope of the static var compensator.
+
 ### DC flows computing
 
 The DC flows computing relies on several classical assumptions to build a model where the active power flowing through a line depends linearly from the voltage angles at its ends.

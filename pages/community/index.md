@@ -22,7 +22,7 @@ Our [spectrum](https://spectrum.chat/powsybl) is another place to discuss or ask
 ### Slack
 ![Slack](img/index/slack-logo.png){: width="300" .center-image}
 
-We have recently moved to the [Powsybl Slack](https://powsybl.slack.com) organization for all chat.
+We have recently moved to the [Powsybl Slack](https://join.slack.com/t/powsybl/shared_invite/zt-rzvbuzjk-nxi0boim1RKPS5PjieI0rA) organization for all chat.
 
 ## Reporting bugs
 <p style="text-align:center">
