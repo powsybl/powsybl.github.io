@@ -3,18 +3,18 @@ layout: default
 latex: true
 ---
 
-# Write the Java code to perform merging and balance adjustment
+# Write the Java code to perform merging and balance adjustment of CGMES files
 
 This tutorial shows how to merge multiple IGMs from different TSOs and scale the resulting CGM according to actual market data. It implements the [European Merging Function](https://eepublicdownloads.entsoe.eu/clean-documents/Network%20codes%20documents/Implementation/cacm/cgmm/European_Merging_Function_Requirements_Specification.pdf) whose requirements can be found on the website of ENTSOE. 
-The forecast net positions of the IGMs are computed with the [Pan European Verification Function](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/schema/PEVF%20Implementation%20Guide_V1.0.pdf).
+The forecast net positions of the IGMs are computed through the [Pan European Verification Function](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/schema/PEVF%20Implementation%20Guide_V1.0.pdf).
 
 * TOC 
 {:toc}
 
 ## What will you build?
-First, your CGMES files will be imported and merged. There is an option to compute a power flow on the single IGMs before merging. Then a loadlfow will be run on the CGM.
+First, your individual CGMES files will be imported and merged. Optionally, you will be able to compute a power flow on each of the single IGMs before merging. Then a loadlfow will be run on the CGM.
 The loadflow simulator used in this tutorial is [OpenLoadFlow](../../simulation/powerflow/openlf.md).
-After the loadflow on the merged area, the net positions of each TSO perimeter will be computed. The algorithm used for the balance computation is in the `powsybl-balances-adjustment` API. The PEVF gives the expected net positions, and the balance adjustment is computed.
+After the loadflow on the merged area, the net positions of each TSO perimeter will be computed. The algorithm used for the balance computation is in the `powsybl-balances-adjustment` API. The PEVF file will be read and gives the expected net positions, and the balance adjustment is computed.
 Then the SV file of the CGM will be exported.
 
 ## What will you need?
@@ -31,10 +31,10 @@ To start from scratch, move on to [Create a new project](#create-a-new-project-f
 
 To skip the basics, do the following:
 - Download and unzip the source repository or clone it using Git.
-- Change directory to `merging-view/initial`
+- Change directory to `emf/initial`
 - Jump ahead to [Configure the pom file](#configure-the-maven-pom-file)
 
-For the input data, you will need to have:
+For the input data, you will need:
 - A folder containing your IGMs in CIM-CGMES format. Each IGM needs to be zipped with the EQ, TP, SSH and SV
 - A PEVF file corresponding to the AC net positions of the IGMs and the DC net position of the cross-border HVDC lines. It should not be zipped.
 - A folder containing the CGMES boundary files, EQBD and TPBD, unzipped as well.
@@ -223,47 +223,49 @@ balances-adjustment-validation-parameters:
 ```
 Here, the path to your PEVF file, the name and path to each IGM on a different line and the path to the directory where you want the SV file and log file to be saved have to be specified.
 
-## Create `BalancesAdjustmentValidationParameters` class to load parameters from the configuration file
+## Create `BalancesAdjustmentValidationParameters` class to load the parameters from the configuration file
 First, we create a java class called `BalancesAdjustmentValidationParameters` containing the parameters that we want to use, such as the paths of the IGMs, the path to the PEVF file and the output directory.
-All these parameters will be read from the configuration file. This class will also have a method to load the parameters from the configuration file. 
+All these parameters will be read from the configuration file that you created before. This class will have a method to load the parameters from the configuration file. 
 
 The IGM paths will be stored in a HashMap and the output directory and PEVF in Strings.
 You can also create the getter/setter associated with each variable. Then, you need create a method `load` that will read the input from the configuration file and store the data in each variable.
 If you have difficulties creating this class, you can check the result in `emf/complete`.
 
-Now with this class, we will be able to read the extra parameters from the `config.yml` file. 
+Now with this class, we are able to read the extra parameters from the `config.yml` file. 
 We will move on to create the `EmfTutorial` main class, that will perform the merging and balance computation.
 
 ## Create `EmfTutorial` class to run the computation
 
+In everything that follows, if you have difficulties creating the method, you can refer to the code in `emf/complete`.
+
 ### Set the loadflow parameters
-Once you have created the `EmfTutorial` class, just before the main method, define the variable `LOAD_FLOW_PARAMETERS`. 
-These parameters will be used in the loadflow preprocessing of the IGMs, in the loadflow calculation on the merged view and for the balance computation.
+Once you have created the `EmfTutorial` class, just before the main method, define the variable `LOAD_FLOW_PARAMETERS` of type `LoadFlowParameters`. 
+This variable will gather all the specific parameters to be used in the loadflow preprocessing of the IGMs, in the loadflow calculation on the merged view and for the balance computation.
 In this tutorial, we set the initial voltage value to the DC values, the balance type to proportional to the maximum active power target, the `ReadSlackBus` to true. 
 The tap changers regulation is also set to true, and the power flow must be computed over all connected components.
 These parameters are chosen to comply with the European merging function.
-For more information on the power flow parameters available, you can visit this [page](pages/documentation/simulation/powerflow/openlf.md).
+For more information on the power flow parameters available and how to implement them, you can visit this [page](pages/documentation/simulation/powerflow/openlf.md).
 
 ### Create parameters to add options to the calculation
-Then we define three parameters: a boolean indicating whether or not we want to perform the loadflow preprocessing on the IGMs, a boolean indicating whether we want to prepare the balance computation  or not and the name of the synchronous area will be hard coded to `10YEU-CONT-SYNC0`.
+Then we define three parameters: a boolean indicating whether or not we want to perform the loadflow preprocessing on the IGMs, a boolean indicating whether we want to prepare the balance computation  or not and the name of the synchronous area will be set to `10YEU-CONT-SYNC0`, representing Continental Europe.
 
 ### Import the CIM-CGMES IGMs
 Now we move to the main method.
-First, we create the `BalancesAdjustmentValidationParameters`, from the class you have created before, to read the paths to the IGMs, the PEVF and the output directory. 
-You can now start logging into the output directory by creating a method checking if the output directory exists and setting it as the output path.
+First, we create the `BalancesAdjustmentValidationParameters` variable, from the class you have created before, to read the paths to the IGMs, the PEVF and the output directory. 
+You can now start logging into the output directory by creating a specific `log` method taking the `validationParameters` as an argument and checking if the output directory exists or not to set it as the output path.
 
 ```java
 BalancesAdjustmentValidationParameters validationParameters = BalancesAdjustmentValidationParameters.load();
 log(validationParameters);
 ```
 Then we create a special method to import the IGMs outside the Main method. In this method, a HashMap of networks is created and for each IGM path in the validation parameters, the corresponding IGM is loaded through `Importers`. 
-We call this method in Main to import the networks through:
+We call this method in Main to import the networks with:
 ```java
 Map<String, Network> networks = importNetworks(validationParameters);
 ```
 
 ### Power flow on the IGMs
-Then we compute a power flow on the networks and select the valid ones, those for which the loadflow is successful. 
+Then we compute a power flow on the networks in order to select the valid ones, those for which the loadflow is successful. 
 We create a new method `loadflowPreProcessing`, that runs the loadflow via OpenLoadFlow and we add the corresponding code in the main method:
 ```java
 Map<String, Network> validNetworks = new HashMap<>(networks);
@@ -293,12 +295,12 @@ if (!PREPARE_BALANCE_COMPUTATION) {
 ```
 
 ### Balance computation
-Now we start the balance computation. Indeed, the PEVF input gives the forecast net position of each IGM that has been merged. As it it is market data, this net position is the one we should obtain after the lodflow, it is the target net position.
-However, after the loadflow, the net position of each IGM can be different from the target. The mismatch between what is expected and what is computed has to be balanced via a loop scaling the loads until each net position matches the target one.
-For that, we use the `powsybl-balances-adjustment` API. 
+Now we start the balance computation. The PEVF input gives the forecast net position of each IGM that has been merged. As it it is market data, this net position is the one we should obtain after the lodflow, it is the target net position.
+However, after the loadflow, the net position of each IGM can be different from the target. The mismatch between what is expected and what is computed has to be balanced via a loop scaling the loads inside the merged area until each net position matches the target one. 
+For that, we use the `powsybl-balances-adjustment` API. We also need to scale the net position with the rest of the synchronous area.
 
-First, we create the targets and the `scalables`. There will be `Loads` and `DanglingLines` that will be scaled as we want the balance to be computed both between the countries inside the merged area and with the outside of the CGM.
-We import the PEVF file as a `DataExchanges` object. The balances adjustment is done with constant power factor, the reactive power of the loads is adjusted as well.
+First, we create the targets and the `scalables`. `Loads` will be scaled inside the CGM area and `DanglingLines` outside of the CGM.
+We import the PEVF file as a `DataExchanges` object. The balances adjustment is done with constant power factor as the reactive power of the loads is adjusted as well.
 ```java
 List<BalanceComputationArea> balanceComputationAreas = new ArrayList<>();
 DataExchanges dataExchanges;
@@ -306,14 +308,25 @@ try (InputStream is = Files.newInputStream(Paths.get(validationParameters.getDat
     dataExchanges = DataExchangesXml.parse(is);
 }
 ```
-We now write a method that calculates the target net position and the actual net position after the loadflow and before the balance adjustment. To do that, you need first to retrieve the control area of each network. After that, you can retrieve the target AC net position from the PEVF file with the method `getNetPosition`. Then, you can create the scalables from a `NetworkAreaFactory` created based on the `ControlArea`.
-Once you have the scalables, you can calculate the AC net position of the TSO perimeter. For that, call the method `getNetPosition`. 
-You can specify whether you are preparing the balance computation or not. If you do, then for each network, a `BalanceComputationArea` is added to the list.
-Otherwise, the target and actual net position are printed.
+We now write two methods: `igmPreprocessing` and `prepareFictitiousArea`.
+The `igmPreprocessing` method calculates the target AC net position from the PEVF and the actual net position of the CGM after the loadflow and before the balance computation.
+To do that, for each network, you need first to retrieve the `CgmesControlArea`. After that, you can retrieve the target AC net position from the PEVF file with the method `getNetPosition` applied to `dataExchanges`. Then, you can create the scalables from a `NetworkAreaFactory` variable created based on the `CgmesControlArea` with the method `createFactory`  and `create` with the merging view as a parameter. The scalables are retrieved with the `createConformLoadScalable` method.
+You should then add the `BalanceComputationArea` obtained with the factory, scalable and target of any given network to a list of areas.
 
-We also need a method to create the scalable, and we also create a fictitious area representing the area outside the merged CGM for the adjustment. The method creates the dangling lines scalables first and the ficitiout CGMES control area through the method `CgmesBouncariesAreaFactory` and `create` based on the merging view. The AC net position can be calculated for the synchronous area from this object.
+The `prepareFictitiousArea` method will do the same but for the outside of the CGM. To do so, you need to retrieve the `DanglingLineScalable` of each TSO perimeter through the `CgmesControlArea` and create the fictitious CGMES control area as a `NetworkArea`. Then you can retrieve the AC net position from the PEVF and from this fictitious area. Then you can also add this created `BalanceComputationArea` to the list.
 
-Finally, we are create the `BalanceComputationParameters`, launch the balance computation and export the corresponding SV:
+In the main method, you can call these methods through:
+```java
+if (PREPARE_BALANCE_COMPUTATION) {
+    igmPreprocessing(mergingView, validNetworks, dataExchanges, balanceComputationAreas, validationParameters);
+    prepareFictitiousArea(mergingView, validNetworks, dataExchanges, balanceComputationAreas);
+} else {
+    igmPreprocessing(mergingView, validNetworks, dataExchanges, validationParameters);
+    prepareFictitiousArea(mergingView, validNetworks, dataExchanges);
+}
+```
+
+Finally, we create the `BalanceComputationParameters`, launch the balance computation and export the corresponding SV:
 ```java
 if (PREPARE_BALANCE_COMPUTATION) {
     // Create Balance computation parameters
@@ -344,7 +357,8 @@ if (PREPARE_BALANCE_COMPUTATION) {
 ```
 With the `createContext` method being a method creating a `CgmesExportContext` , then setting the scenario time and for each IGM from `networks` adding the topological nodes and dependencies.
 
-Now, if you run the code and check the output directory, you should get the logs of your merge and the SV.
+Now, if you run the code and check the output directory, you should get the logs and the SV.
+
 
 ## Summary
 In this tutorial, you have learned how to import multiple CIM-CGMES IGMs and then run a loadflow on them. Your IGMs were then merged and a loadflow on the whole CGM was computed. Then you ran a balance adjustment based on market data and exported the SV result file. 
