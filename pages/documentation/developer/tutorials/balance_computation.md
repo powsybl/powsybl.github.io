@@ -58,15 +58,26 @@ To start from scratch, you need to create a file called `pom.xml` in `emf/initia
     </parent>
 
     <artifactId>emf</artifactId>
+    <name>Emf</name>
 
-    <properties>
-        <maven.exec.version>1.6.0</maven.exec.version>
-        <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>4.2.0</powsybl.core.version>
-        <powsybl-open-loadflow.version>0.9.0</powsybl-open-loadflow.version>
-        <powsybl_ba.version>1.5.0</powsybl_ba.version>
-        <powsybl-entsoe.version>1.0.0</powsybl-entsoe.version>
-    </properties>
+  <properties>
+    <java.version>11</java.version>
+    <maven.exec.version>1.6.0</maven.exec.version>
+    <slf4j.version>1.7.22</slf4j.version>
+    <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
+    <exec.mainClass>powsybl.tutorials.emf.EmfTutorial</exec.mainClass>
+
+    <maven.javafx.version>8.8.3</maven.javafx.version>
+    <autoservice.version>1.0-rc2</autoservice.version>
+    <guava.version>20.0</guava.version>
+    <javacsv.version>2.0</javacsv.version>
+
+    <powsybl.core.version>4.2.0</powsybl.core.version>
+    <powsybl.rte-core.version>3.0.0</powsybl.rte-core.version>
+    <powsybl.olf.version>0.11.0-SNAPSHOT</powsybl.olf.version>
+    <powsybl.ba.version>1.6.0-SNAPSHOT</powsybl.ba.version>
+    <powsybl.entsoe.version>1.1.0-SNAPSHOT</powsybl.entsoe.version>
+  </properties>
 </project>
 ```
 This file is creating your project and setting the versions of the API that are used, as well as the properties and dependencies of the project.
@@ -85,22 +96,21 @@ $> mvn clean package exec:java
 You also need to configure the pom file in order to use a configuration file taken in the classpath, instead of the one
 that is global to your system:
 ```xml
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>1.6.0</version>
-            <configuration>
-                <systemProperties>
-                    <systemProperty>
-                        <key>powsybl.config.dirs</key>
-                        <value>${project.build.directory}/classes</value>
-                    </systemProperty>
-                </systemProperties>
-            </configuration>
-        </plugin>
-    </plugins>
+    <build>
+  <plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <configuration>
+        <executable>java</executable>
+        <arguments>
+          <argument>-Dpowsybl.config.dirs=${project.build.directory}/classes</argument>
+          <argument>-classpath</argument>
+          <argument>powsybl.tutorials.emf.EmfTutorial</argument>
+        </arguments>
+      </configuration>
+    </plugin>
+  </plugins>
 </build>
 ```
 Now, we add all the **required** maven dependencies:
@@ -118,75 +128,82 @@ Now, we add all the **required** maven dependencies:
 
 You can add the following dependencies to the `pom.xml` file, with their corresponding versions:
 ```xml
-<dependencies>
+    <dependencies>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-action-util</artifactId>
-    <version>${powsyblcore.version}</version>
+    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-balances-adjustment</artifactId>
-    <version>${powsyblba.version}</version>
+    <version>${powsybl.ba.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-cgmes-conversion</artifactId>
-    <version>${powsyblcore.version}</version>
+    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-cgmes-extensions</artifactId>
-    <version>${powsyblcore.version}</version>
+    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-commons</artifactId>
-    <version>${powsyblcore.version}</version>
+    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-converter-api</artifactId>
-    <version>${powsyblcore.version}</version>
+    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-mergingview</artifactId>
-    <version>${powsyblcore.version}</version>
+    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-open-loadflow</artifactId>
-    <version>${powsyblolf.version}</version>
+    <version>${powsybl.olf.version}</version>
   </dependency>
+
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-config-classic</artifactId>
-    <version>${powsyblcore.version}</version>
+    <version>${powsybl.core.version}</version>
     <scope>runtime</scope>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-impl</artifactId>
-    <version>${powsyblcore.version}</version>
+    <version>${powsybl.core.version}</version>
     <scope>runtime</scope>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
-    <version>${powsyblcore.version}</version>
+    <version>${powsybl.core.version}</version>
+  </dependency>
+  <dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>log4j-over-slf4j</artifactId>
+    <version>${slf4j.version}</version>
+    <scope>runtime</scope>
+  </dependency>
+  <dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.1.8</version>
+    <scope>runtime</scope>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-entsoe-cgmes-balances-adjustment</artifactId>
-    <version>${powsyblentsoe.version}</version>
+    <version>${powsybl.entsoe.version}</version>
     <scope>compile</scope>
-  </dependency>
-  <dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-simple</artifactId>
-    <version>${slf4j.version}</version>
-    <scope>runtime</scope>
   </dependency>
 </dependencies>
 ```
