@@ -25,4 +25,4 @@ layout: default
 - [Create the Java code to map hypothesis on a network](downscaling.md): Learn how to create the Java code to map study state hypothesis on a network
 
 ## Merging
-- [Create the Java code to perform merging and balance adjustment](balance_computation.md): Learn how to create the Java code to merge multiple IGMs and adjust the net positions of each merged area.
+- [Create the Java code to perform merging and balances adjustment](emf.md): Learn how to create the Java code to merge multiple CIM-CGMES based IGMs and adjust the AC net positions of each control area to met the targets. This tutorial follows the European Merging Function requirements.
