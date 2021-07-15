@@ -213,7 +213,7 @@ load-flow:
 The parameters for the import and export of CGMES files are, with the proper path to the folder containing the boundary files:
 ```yaml
 import-export-parameters-default-value:
-  iidm.import.cgmes.boundary-location: path-to-EQBD-TPBD
+  iidm.import.cgmes.boundary-location: path-EQBD-TPBD #complete with the path to your EQBD-TPBD files folder
   iidm.import.cgmes.profile-used-for-initial-state-values: SSH
   iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension: true
   iidm.export.xml.version: "1.5"
@@ -223,11 +223,11 @@ import-export-parameters-default-value:
 Then, you can add the path to your PEVF file, the name and path to each IGM on a different line (line beginning with `-`) and the path to the directory where you want the SV file and log file to be saved have to be specified.
 ```yaml
 balances-adjustment-validation-parameters:
-  data-exchanges-path: path-to-PEVF
+  data-exchanges-path: path-PEVF #complete with the path to your PEVF file
 
   igm-paths: 
-    - IGM1-name, path-to-IGM1
-    - IGM2-name, path-to-IGM2
+    - IGM1-name, path-to-IGM1 #complete with the name of your first IGM and the path to the zipfile
+    - IGM2-name, path-to-IGM2 #complete with the name of your second IGM and the path to the zipfile
     
   output-dir: path-to-directory
 ```
@@ -236,6 +236,7 @@ balances-adjustment-validation-parameters:
 First, we create a java class called `BalancesAdjustmentValidationParameters` containing the parameters that we want to use, such as the paths of the IGMs, the path to the PEVF file and the output directory. All these parameters are read from the configuration file created before. This class has a method to load the parameters from the configuration file. 
 
 The IGM paths are stored in a HashMap and the output directory and PEVF in Strings. You can also create the getter/setter associated with each variable. Then, you need create a method `load` that will read the inputs from the configuration file and store the data in each variable. If you have difficulties creating this class, you can check the result in `emf/complete`.
+If you want to learn more about the configuration file and how it is  handled by Powsybl, you can find more details [here](../../user/configuration/index.md).
 
 Now with this class, we are able to read the extra parameters from the `config.yml` file. We will move on to create the `EmfTutorial` main class, that will perform the merging and the balance computation.
 
