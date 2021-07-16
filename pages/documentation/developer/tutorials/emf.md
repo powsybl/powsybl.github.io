@@ -24,22 +24,17 @@ After the load flow performed on the merged area, the net positions of each cont
   - [IntelliJ IDEA](intellij.md)
   
 ## How to complete this tutorial?
-You can start from scratch and complete each step. Or you can bypass basic setup steps that you are already familiar with. Either way, you end up with a working code. To start from scratch, move on to [Create a new project](#create-a-new-project-from-scratch).
-
-To skip the basics, do the following:
-- Download and unzip the source repository or clone it using Git.
-- Change directory to `emf/initial`
-- Jump ahead to [Configure the pom file](#configure-the-maven-pom-file)
+You can start from scratch and complete each step. Or you can directly check the written code from the git repository and change the configuration to make it work on your data. Either way, you end up with a working code. To start from scratch, move on to [Create a new project](#create-a-new-project-from-scratch).
 
 For the input data, you need:
 - A folder containing your IGMs in CIM-CGMES format. Each IGM needs to be zipped with the EQ, TP, SSH and SV.
 - A PEVF file corresponding to the AC net positions of the IGMs and the DC net position of the cross-border HVDC lines. It should not be zipped.
 - A folder containing the CGMES boundary files, EQBD and TPBD, unzipped as well.
 
-When you are done with the tutorial, you can compare your code with the code in `emf/complete`.
+When you are done with the tutorial, you can compare your code with the code in the Github repository.
 
 ## Create a new project from scratch
-To start from scratch, you need to create a file called `pom.xml` in `emf/initial` with the following content:
+To start from scratch, you need to create a file called `pom.xml` in `emf` with the following content:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -48,35 +43,22 @@ To start from scratch, you need to create a file called `pom.xml` in `emf/initia
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-parent</artifactId>
-        <version>3</version>
-        <relativePath/>
+      <artifactId>powsybl-tutorials</artifactId>
+      <groupId>com.powsybl.tutorials</groupId>
+      <version>1.3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>emf</artifactId>
     <name>Emf</name>
-
-  <properties>
-    <java.version>11</java.version>
-    <maven.exec.version>1.6.0</maven.exec.version>
-    <slf4j.version>1.7.22</slf4j.version>
-    <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-    <exec.mainClass>powsybl.tutorials.emf.EmfTutorial</exec.mainClass>
-
-    <maven.javafx.version>8.8.3</maven.javafx.version>
-    <autoservice.version>1.0-rc2</autoservice.version>
-    <guava.version>20.0</guava.version>
-    <javacsv.version>2.0</javacsv.version>
-
-    <powsybl.core.version>4.2.0</powsybl.core.version>
-    <powsybl.olf.version>0.11.0</powsybl.olf.version>
-    <powsybl.ba.version>1.5.0</powsybl.ba.version>
-    <powsybl.entsoe.version>1.0.0</powsybl.entsoe.version>
-  </properties>
+    <version>1.3.0-SNAPSHOT</version>
+  
+    <properties>
+      <powsybl.ba.version>1.5.0</powsybl.ba.version>
+      <powsybl.entsoe.version>1.0.0</powsybl.entsoe.version>
+    </properties>
 </project>
 ```
-This file is creating your project and setting the versions of the API that are used, as well as the properties and dependencies of the project. Do not hesitate to upgrade versions to benefit from new features.
+This file is creating your project, linking it to the parent `pom.xml` of `powsybl-tutorials` and setting the versions of the specific APIs that are used, as well as the properties and dependencies of the project. Do not hesitate to upgrade versions to benefit from new features.
 
 ## Configure the maven pom file
 First, in the `pom.xml`, add the following lines in the `<properties>` section to make it possible to run the future main class through Maven:
@@ -90,18 +72,18 @@ $> mvn clean package exec:java
 ```
 You also need to configure the pom file in order to use a configuration file taken in the classpath, instead of the one that is global to your system:
 ```xml
-    <build>
+<build>
   <plugins>
     <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>exec-maven-plugin</artifactId>
       <configuration>
-        <executable>java</executable>
-        <arguments>
-          <argument>-Dpowsybl.config.dirs=${project.build.directory}/classes</argument>
-          <argument>-classpath</argument>
-          <argument>powsybl.tutorials.emf.EmfTutorial</argument>
-        </arguments>
+        <systemProperties>
+          <systemProperty>
+            <key>powsybl.config.dirs</key>
+            <value>${project.build.directory}/classes</value>
+          </systemProperty>
+        </systemProperties>
       </configuration>
     </plugin>
   </plugins>
@@ -122,7 +104,7 @@ Now, we add all the **required** maven dependencies:
 
 You can add the following dependencies to the `pom.xml` file, with their corresponding versions:
 ```xml
-    <dependencies>
+<dependencies>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-action-util</artifactId>
@@ -203,7 +185,7 @@ You can add the following dependencies to the `pom.xml` file, with their corresp
 ```
 
 ## Configure PowSyBl
-The configuration file for PowSyBl should be located in the folder `emf/initial/src/main/resources`. It gathers all the default configuration parameters about the load flow simulator, the parameters for the import/export of CGMES files, the path to the CGMES files, the path to the PEVF file, the output directory, etc.
+The configuration file for PowSyBl is located in the folder `emf/src/main/resources`. It gathers all the default configuration parameters about the load flow simulator, the parameters for the import/export of CGMES files, the path to the CGMES files, the path to the PEVF file, the output directory, etc.
 
 We need to configure PowSyBl to use the OpenLoadFlow implementation. To do that, you need to edit the `config.yml` file: 
 ```yaml
@@ -220,7 +202,7 @@ import-export-parameters-default-value:
   iidm.import.cgmes.ensure-id-alias-unicity: true
   iidm.import.cgmes.create-cgmes-export-mapping: true
 ```
-Then, you can add the path to your PEVF file, the name and path to each IGM on a different line (line beginning with `-`) and the path to the directory where you want the SV file and log file to be saved have to be specified.
+Then, you can add the path to your PEVF file, the name and path to each IGM on a different line (line beginning with `-`) and the path to the directory where you want the SV file and log file to be saved.
 ```yaml
 balances-adjustment-validation-parameters:
   data-exchanges-path: path-PEVF #complete with the path to your PEVF file
@@ -235,14 +217,14 @@ balances-adjustment-validation-parameters:
 ## Create `BalancesAdjustmentValidationParameters` class to load the parameters from the configuration file
 First, we create a java class called `BalancesAdjustmentValidationParameters` containing the parameters that we want to use, such as the paths of the IGMs, the path to the PEVF file and the output directory. All these parameters are read from the configuration file created before. This class has a method to load the parameters from the configuration file. 
 
-The IGM paths are stored in a HashMap and the output directory and PEVF in Strings. You can also create the getter/setter associated with each variable. Then, you need create a method `load` that will read the inputs from the configuration file and store the data in each variable. If you have difficulties creating this class, you can check the result in `emf/complete`.
+The IGM paths are stored in a HashMap and the output directory and PEVF in Strings. You can also create the getter/setter associated with each variable. Then, you need create a method `load` that will read the inputs from the configuration file and store the data in each variable. If you have difficulties creating this class, you can check the result `powsybl-tutorials/emf` from the Github repository.
 If you want to learn more about the configuration file and how it is  handled by Powsybl, you can find more details [here](../../user/configuration/index.md).
 
 Now with this class, we are able to read the extra parameters from the `config.yml` file. We will move on to create the `EmfTutorial` main class, that will perform the merging and the balance computation.
 
 ## Create `EmfTutorial` class to run the computation
 
-In everything that follows, if you have difficulties creating the method, you can refer to the code in `emf/complete`.
+In everything that follows, if you have difficulties creating the methods, you can refer to the code in `emf`, in the Github repository.
 
 ### Set the load flow parameters
 Once you have created the `EmfTutorial` class, just before the main method, define the variable `LOAD_FLOW_PARAMETERS` of type `LoadFlowParameters`. 
@@ -265,7 +247,7 @@ Map<String, Network> networks = importNetworks(validationParameters);
 ```
 
 ### Power flow on the IGMs
-Then we compute a power flow on the networks in order to have an idea tof he valid ones, those for which the load flow is successful. In case of non-convergence of the load flow on an IGM, it is preferable to relax the parameters (tap changer and shunt regulations can be switched off, the reactive power limits of generators can be violated). In our tutorial, we have decided to remove the IGM but it should be the final solution. We create a new method `loadflowPreProcessing`, that runs the load flow via OpenLoadFlow and we add the corresponding code in the main method:
+Then we compute a power flow on the networks in order to have an idea of the valid ones, those for which the load flow is successful. In case of non-convergence of the load flow on an IGM, it is preferable to relax the parameters (tap changer and shunt regulations can be switched off, the reactive power limits of generators can be violated). In our tutorial, we have decided to remove the IGM but it should be the final solution. We create a new method `loadflowPreProcessing`, that runs the load flow via OpenLoadFlow and we add the corresponding code in the main method:
 ```java
 Map<String, Network> validNetworks = new HashMap<>(networks);
 if (LOAD_FLOW_PREPROCESSING) {
