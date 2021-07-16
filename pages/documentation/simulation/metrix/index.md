@@ -57,7 +57,7 @@ determines which kind of computation will be operated:
 All parameters are optional:
 ```groovy
 parameters {
-  adequacyCostOffset // (0) permet de définir une translation des coûts de tous les groupes dans la phase d'équilibrage pour éviter les fausses opportunités (valeur par défaut : 0)
+  adequacyCostOffset // (0) : enable to define an identical cost change for all generators in the balancing step to avoid unrealistic opportunities
   analogousRemedialActionDetection // (false) detect similar topology remedial actions. Allow to improve the speed of the simulation but can hide non strictly equivalent remedial actions. 
   computationType // (LF) Simulation Mode : LF, OPF_WITHOUT_REDISPATCHING, OPF
   contingenciesProbability // (0.001) Contingency probability  
@@ -68,7 +68,7 @@ parameters {
   marginalVariationsOnBranches // (false) Output the marginal variation on branches
   marginalVariationsOnHvdc // (false) Output the marginal variation on HVDC
   maxSolverTime // (0) Max time allowed to solve one micro-iteration (0 is infinite)
-  nbMaxIteration // (30) Max number of micro-iterations per variation (valeur par défaut : 30)  
+  nbMaxIteration // (30) Max number of micro-iterations per variation
   nbMaxCurativeAction // (-1) Max number of remedial actions per contingency (-1 is infinite)
   nbThreatResults // (1) Number of N-k results to output  
   outagesBreakingConnexity // (false) : allow to simulate the outages that breaks network connectivity (automatically set to true if propagateBranchTripping is set)
@@ -76,10 +76,10 @@ parameters {
   preCurativeResults // (false) Use the threshold value before remedial actions (automatically activated if a threshold before action is filled in)
   propagateBranchTripping // (false) Propagate contingencies if no breaker is present
   pstCostPenality // (0.001) Penality cost of the PST usage
-  redispatchingCostOffset // (0) permet de définir une translation des coûts de tous les groupes dans la phase de redispatching pour éviter les fausses opportunités (valeur par défaut : 0) 
+  redispatchingCostOffset // (0) : enable to define an identical cost change for all generators in the redispatching step to avoid unrealistic opportunities
   remedialActionsBreakingConnexity // (false) Allow remedial actions to cut pockets  
-  withAdequacyResults // (false) Sortie des résultats de l'équilibrage offre-demande initial (valeur par défaut : false)
-  withRedispatchingResults // (false) Sortie des résultats détaillés du redispatching préventif et curatif (valeur par défaut : false)
+  withAdequacyResults // (false) Outputs for the initial balancing step
+  withRedispatchingResults // (false) Detailed outputs for the preventive and curative redispatching steps
 }
 ```
 
