@@ -13,10 +13,10 @@ The forecast net positions of the IGMs are computed through the [Pan European Ve
 
 ## What will you build?
 First, your individual CGMES files will be imported and merged. Optionally, you will be able to compute a power flow on each IGM before merging. Then a load flow will be run on the CGM. The load flow simulator used in this tutorial is [OpenLoadFlow](../../simulation/powerflow/openlf.md).
-After the load flow performed on the merged area, the net positions of each control area will be computed. The algorithm used for the balance computation is in the `powsybl-balances-adjustment` API. The PEVF (for Pan European Verification Function) file will be read and gives the expected AC net positions (DC net positions is not yet supported), and the balance adjustment is computed. Then the SV file of the CGM will be exported.
+After the load flow performed on the merged area, the net positions of each control area will be computed. The algorithm used for the balance computation is in the `powsybl-balances-adjustment` API. The PEVF (for Pan European Verification Function) file will be read and gives the expected AC net positions (DC net positions are not yet supported), and the balance adjustment is computed. Then the SV file of the CGM will be exported.
 
 ## What will you need?
-- About two hour
+- About two hours
 - A favourite text editor or IDE
 - JDK 1.11 or later
 - Some IGMs that you want to merge and the corresponding PEVF and CGMES boundary files (EQBD, TPBD) 
@@ -28,7 +28,7 @@ You can start from scratch and complete each step. Or you can directly check the
 
 For the input data, you need:
 - A folder containing your IGMs in CIM-CGMES format. Each IGM needs to be zipped with the EQ, TP, SSH and SV.
-- A PEVF file corresponding to the AC net positions of the IGMs and the DC net position of the cross-border HVDC lines. It should not be zipped.
+- A PEVF file corresponding to the AC net position of the IGMs and the DC net position of the cross-border HVDC lines. It should not be zipped.
 - A folder containing the CGMES boundary files, EQBD and TPBD, unzipped as well.
 
 When you are done with the tutorial, you can compare your code with the code in the Github repository.
@@ -92,7 +92,7 @@ You also need to configure the pom file in order to use a configuration file tak
 Now, we add all the **required** maven dependencies:
 - `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration.
 - `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j`.
-- `com.powsybl:powsybl-open-loadflow`: to provide an [implementation](../simulation/powerflow/openlf.md) for the load flow calculation.
+- `com.powsybl:powsybl-open-loadflow`: to provide an [implementation](../../simulation/powerflow/openlf.md) for the load flow calculation.
 - `com.powsybl:powsybl-iidm-impl`: to work with network core model API and in-memory implementation.
 - `com.powsybl:powsybl-action-util`: to provide a set of common actions such as scaling.
 - `com.powsybl:powsybl-balances-adjustment` and `com.powsybl:powsybl-entsoe-cgmes-balances-adjustment`: to provide an implementation to run an active power balance adjustment computation over several control areas. Through this API, it is possible to keep the power factor constant during the process by readjusting the reactive power as well (since version 1.6.0 indeed).
@@ -227,8 +227,8 @@ Now with this class, we are able to read the extra parameters from the `config.y
 In everything that follows, if you have difficulties creating the methods, you can refer to the code in `emf`, in the Github repository.
 
 ### Set the load flow parameters
-Once you have created the `EmfTutorial` class, just before the main method, define the variable `LOAD_FLOW_PARAMETERS` of type `LoadFlowParameters`. 
-This variable gathers all the parameters to be used in the load flow pre-processing of the IGMs, in the load flow calculation on the CGM and for the balance computation iterations. In this tutorial, we set the initial voltage value to the DC values, the balance type to proportional to the maximum active power target, the `ReadSlackBus` to true (the slack bus defined in each IGM). The tap changers regulation is also set to true (either for phase tap changers than for ratio tap changers), and the power flow must be computed over all connected components. These parameters are chosen to comply with the European merging function. For more information on the power flow parameters available and how to implement them, you can visit this [page](pages/documentation/simulation/powerflow/openlf.md). In case of non-convergence, these parameters can be relaxed.
+Once you have created the `EmfTutorial` class, just before the main method, define the variable `LOAD_FLOW_PARAMETERS` of type `LoadFlowParameters`.
+This variable gathers all the parameters to be used in the load flow pre-processing of the IGMs, in the load flow calculation on the CGM and for the balance computation iterations. In this tutorial, we set the initial angle values to angles computed through a DC power flow, the balance type to proportional to the maximum active power target of generators, the `ReadSlackBus` to true (the slack bus defined in each IGM). The tap changers regulation is also set to true (either for phase tap changers than for ratio tap changers), and the power flow must be computed over all connected components. These parameters are chosen to comply with the European merging function. For more information on the power flow parameters available and how to implement them, you can visit this [page](../../simulation/powerflow/openlf.md). In case of non-convergence, these parameters can be relaxed.
 
 ### Create parameters to add options to the calculation
 Then we define three parameters: a boolean indicating whether or not we want to perform the load flow pre-processing on the IGMs, a boolean indicating whether we want to prepare the balance computation or not and the name of the synchronous area, set to `10YEU-CONT-SYNC0`, representing Continental Europe.
@@ -247,7 +247,7 @@ Map<String, Network> networks = importNetworks(validationParameters);
 ```
 
 ### Power flow on the IGMs
-Then we compute a power flow on the networks in order to have an idea of the valid ones, those for which the load flow is successful. In case of non-convergence of the load flow on an IGM, it is preferable to relax the parameters (tap changer and shunt regulations can be switched off, the reactive power limits of generators can be violated). In our tutorial, we have decided to remove the IGM but it should be the final solution. We create a new method `loadflowPreProcessing`, that runs the load flow via OpenLoadFlow and we add the corresponding code in the main method:
+Then we compute a power flow on networks in order to have an idea of the valid ones, those for which the load flow is successful. In case of non-convergence of the load flow on an IGM, it is preferable to relax the parameters (tap changer and shunt regulations can be switched off, the reactive power limits of generators can be violated). In our tutorial, we have decided to remove the IGM but it should be the last solution. We create a new method `loadflowPreProcessing`, that runs the load flow via OpenLoadFlow and we add the corresponding code in the main method:
 ```java
 Map<String, Network> validNetworks = new HashMap<>(networks);
 if (LOAD_FLOW_PREPROCESSING) {
@@ -276,7 +276,7 @@ if (!PREPARE_BALANCE_COMPUTATION) {
 ```
 
 ### Balance computation
-Now we start the balance computation. The PEVF input gives the forecast AC net position of each IGM that has been merged. As it it is market data, this net position is the one we should obtain after the load flow, it is the target net position. However, after the load flow, the AC net position of each IGM can be different from the target. The mismatch between what is expected and what is computed has to be balanced via a loop scaling the loads inside the merged area until each net position matches the target one. For that, we use the `powsybl-balances-adjustment` API. In case of partial merge, we also need to scale the net position with the rest of the synchronous area.
+Now we start the balance computation. The PEVF input gives the forecast AC net position of each IGM that has been merged. As it is market data, this net position is the one we should obtain after the load flow, it is the target net position. However, after the load flow, the AC net position of each IGM can be different from the target. The mismatch between what is expected and what is computed has to be balanced via a loop scaling the loads inside the merged area until each net position matches the target one. For that, we use the `powsybl-balances-adjustment` API. In case of partial merge, we also need to scale the net position with the rest of the synchronous area.
 
 First, we create the targets and the `scalables`. `Loads` will be scaled inside the CGM area and `DanglingLines` outside of the CGM.
 We import the PEVF file as a `DataExchanges` object. The balances adjustment is done with constant power factor as the reactive power of the loads is adjusted as well (since version 1.6.0 indeed).
