@@ -66,22 +66,24 @@ a.documentation.call-to-action:hover {
 }
 
 /* Icons */
-img.doc-icon {
-    width: 64px;
-    height: 64px;
+.doc-icon {
+    margin: 0 15px auto auto;
+    width: 60px;
+    height: 60px;
 }
 
-.doc-icon i {
-    margin: 0 auto 20px auto;
+em.doc-icon {
     padding-top: 12px;
     text-align: center;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
     background: #013764;
     line-height: 1;
     font-size: 36px;
     color: #fff
+}
+
+.documentation_title:hover em.doc-icon {
+    background: #5faee3;
 }
 
 div.media-body {
