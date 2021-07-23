@@ -108,3 +108,102 @@ following code create a time series of 0 and 1 values:
 a = ts['dts'].time() < time('2018-01-01T00:00:01Z')
 ```
 
+## Aggregating time series
+
+It is possible to aggregate the requested data with aggregators and groupers from KairosDB. The available aggregators are described in the following table.  
+
+| Aggregation | Description | Key word |
+| --- | --- | --- |
+| Minimum | Returns the minimum value of the series | min |
+| Maximum | Returns the maximum value of the series | max |
+| Sum | Returns the sum of the values of the series | sum |
+| Average | Returns the average of the values of the series | avg |
+| Standard deviation | Returns the standard deviation of the series | dev |
+| Count | Returns the number of records of the series | count |
+| Last | Returns the last record of the series | last |
+| First | Returns the first record of the series | first |
+
+A time unit can be defined to specify a range over which the aggregation should apply. The time range available are:
+MILLISECONDS, "SECONDS","MINUTES", "HOURS", "DAYS", "WEEKS", "MONTHS" and "YEARS".
+
+The results can be grouped using groupers. There are two types of groupers: time and value.
+
+| Group by | Description | Key word |
+| --- | --- | --- |
+| Time | Groups the values by time units | time |
+| Value | Groups the values by data range | value |
+
+### Examples
+
+#### Aggregators
+We have a time series of 365 points all with a value of 1. It represents one data point per day, so we have data over one year.
+To get the sum aggregation per month, we will use the request as follows.
+```
+{
+"versionIds": 123
+"aggregators": [{"type":"sum", "timeUnit":"MONTHS", "quantity":1}],
+"groupers":[]
+}
+```
+The "quantity" parameters indicates how many of the time units we want to use for each group.
+Here, we are grouping by month, but we could use ```"quantity":6``` and we would be grouping by semesters.
+
+For this request the result will be:
+```
+{
+"dataType":"FetchQueryMixedResult",
+"data":[[31,28,31,30,31,30,31,31,30,31,30,31]]
+}
+```
+We get the sum for each month.
+
+You can find more information on aggregators in the [KairosDB documentation](https://kairosdb.github.io/docs/build/html/restapi/Aggregators.html).
+
+####Groupers
+Now, we will see how both aggregators and groupers can be used simultaneously.
+
+1. Grouping by time
+
+Let's say we have a time series containing four weeks of data, one data point per hour.
+We can get the average value for each day, and group the results by days (one group for mondays, one group for tuesdays, and so on...) with the following request.
+
+```
+{
+"versionIds": 123
+"aggregators": [{"type":"avg", "timeUnit":"DAYS", "quantity":1}],
+"groupers":[{"type":"time","timeValue":1,"timeUnit":"DAYS","timeCount":7}]
+}
+```
+The result will be:
+```
+{
+"dataType":"FetchQueryMixedResult",
+"data":[[10,65,32,84],[32,64,91,31],[45,65,12,98],[87,1,64,99],[21,44,57,52.5],[33,98,61,75],[71.5,72.5,54,8]]
+}
+```
+[10,65,32,84] is the group of the 4 average values of the 4 mondays in the sample, 
+[32,64,91,31] is the group of the 4 average values of the 4 tuesdays in the sample, and so on.
+
+You can find more information on groupers in the KairosDB documentation on [grouping by time](https://kairosdb.github.io/docs/build/html/restapi/TimeGrouping.html?highlight=groupers).
+
+2. Grouping by value
+
+Considering the same time series as the one in "Grouping by time" part, we can create groups based on a range value as described in the following request.
+
+```
+{
+"versionIds": 123
+"aggregators": [{"type":"avg", "timeUnit":"DAYS", "quantity":1}],
+"groupers":[{"type":"value","rangeValue":30}]" +
+}
+```
+This request will create groups as follows : [0,29],[30,59], etc.
+The result will be:
+```
+{
+"dataType":"FetchQueryMixedResult",
+"data":[[10,12,1,21],[32,32,31,44,57,45,52.5,33,54,8],[65,84,64,91,65,98,87,64,99,98,61,75,71.5,72.5]]
+}
+```
+
+You can find more information on groupers in the KairosDB documentation on [grouping by value](https://kairosdb.github.io/docs/build/html/restapi/ValueGrouping.html?highlight=groupers).
