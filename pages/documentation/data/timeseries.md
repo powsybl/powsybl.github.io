@@ -157,9 +157,20 @@ For this request the result will be:
 ```
 We get the sum for each month.
 
+Several aggregators can be used one after the other. We only need to add them in the "aggregators" variable.
+For instance, we can retrieve the average per week of the maximum values per day with:
+```
+{
+"versionIds": 123
+"aggregators": [{"type":"max", "timeUnit":"DAYS", "quantity":1}, {"type":"avg", "timeUnit":"WEEKS", "quantity":1}],
+"groupers":[]
+}
+```
+
 You can find more information on aggregators in the [KairosDB documentation](https://kairosdb.github.io/docs/build/html/restapi/Aggregators.html).
 
-####Groupers
+#### Groupers
+
 Now, we will see how both aggregators and groupers can be used simultaneously.
 
 1. Grouping by time
