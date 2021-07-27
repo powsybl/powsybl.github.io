@@ -53,8 +53,8 @@ To start from scratch, you need to create a file called `pom.xml` in `emf` with 
     <version>1.3.0-SNAPSHOT</version>
   
     <properties>
-      <powsybl.ba.version>1.5.0</powsybl.ba.version>
-      <powsybl.entsoe.version>1.0.0</powsybl.entsoe.version>
+      <powsybl.ba.version>1.6.0</powsybl.ba.version>
+      <powsybl.entsoe.version>1.1.0</powsybl.entsoe.version>
     </properties>
 </project>
 ```
