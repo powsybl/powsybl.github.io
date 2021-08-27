@@ -82,6 +82,8 @@ Depending on object types the following sorting key has been chosen :
 - node1 then node2 for internal connections
 - the name for properties of an identifiable
 
+By default, the network components are not sorted.
+
 **iidm.export.xml.version**  
 The `iidm.export.xml.version` property is an optional property that defines the XIIDM version to use for the exported file. If the chosen version is not compatible with the network to write, an error occurs. This is typically the case when an attribute appeared in a version more recent than the target one, and its value is not the default one (importing back the file will lead to a different network). By default, the export is done in the more recent version that is supported.
 
