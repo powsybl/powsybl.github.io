@@ -1,5 +1,6 @@
 ---
 layout: default
+latex: true
 ---
 
 # Network extraction

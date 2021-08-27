@@ -43,8 +43,20 @@ This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provid
 ### [powsybl-single-line-diagram](powsybl-single-line-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-single-line-diagram.svg)](https://github.com/powsybl/powsybl-single-line-diagram/releases/)
 This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provides modules to generate single line diagrams.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
-**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
+**Reviewers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
+**Committers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
+
+### [powsybl-entsoe](powsybl-entsoe.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-entsoe.svg)](https://github.com/powsybl/powsybl-entsoe/releases/)
+This [repository](https://github.com/powsybl/powsybl-entsoe) provides components specific to ENTSO-E-orientated processes.
+
+**Reviewers:** [MioRtia](https://github.com/MioRtia), [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)
+**Committers:** [MioRtia](https://github.com/MioRtia),  [colinepiloquet](https://github.com/colinepiloquet)
+
+### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg)](https://github.com/powsybl/powsybl-metrix/releases/)
+This [repository](https://github.com/powsybl/powsybl-metrix) provides modules to run optimal power load flow on several network variants. Variants are generated through time series mapping on a base case.
+
+**Reviewers:** [marifunf](https://github.com/marifunf), [berthaultval](https://github.com/berthaultval), [pl-buiquang](https://github.com/pl-buiquang)
+**Committers:** [berthaultval](https://github.com/berthaultval), [MioRtia](https://github.com/MioRtia)
 
 ## Microservices
 
@@ -104,14 +116,20 @@ This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)
 **Committers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)
 
+### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg)](https://github.com/powsybl/powsybl-metrix/releases/)
+This [repository](https://github.com/powsybl/powsybl-metrix) provides a C++ implementation of optimal power load flow.
+
+**Reviewers:** [berthaultval](https://github.com/berthaultval), [marifunf](https://github.com/marifunf), [pl-buiquang](https://github.com/pl-buiquang)
+**Committers:** [berthaultval](https://github.com/berthaultval), [MioRtia](https://github.com/MioRtia)
+
 ## Development
 
-### [pypowsybl](pypowsybl.md)
+### [pypowsybl](pypowsybl.md) [![GitHub release](https://img.shields.io/github/release/powsybl/pypowsybl.svg)](https://github.com/powsybl/pypowsybl/releases/)
 
 This [repository](https://github.com/powsybl/pypowsybl) provides an integration of the PowSyBl framework for Python developers.
 
-**Reviewers:** [mathbagu](https://github.com/mathbagu), [sylvlecl](https://github.com/sylvlecl)
-**Committers:** [mathbagu](https://github.com/mathbagu), [sylvlecl](https://github.com/sylvlecl)
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)  
+**Committers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)
 
 ### powsybl-incubator
 This [repository](https://github.com/powsybl/powsybl-incubator) provides incubating modules that are not mature enough to be released.

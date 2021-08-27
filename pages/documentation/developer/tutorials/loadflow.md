@@ -10,17 +10,14 @@ This tutorial shows you how to write a Java code to perform load flow calculatio
 
 ## What will you build?
 
-The tutorial can be expressed in a short and easy workflow: all the input data is stored in an XIIDM file. This file is imported with the IIDM importer. Then, a load flow simulator is launched to get flows on all nodes. In this tutorial, the simulator is Hades2, but it could be an other load flow simulator, as long as the API contract is respected. A contingency is created and finally, the flows are computed again in order to get the final state.  
+The tutorial can be expressed in a short and easy workflow: all the input data is stored in an XIIDM file. This file is imported with the IIDM importer. Then, a load flow simulator is launched to get flows on all nodes. In this tutorial, the simulator is Open Loadflow, but it could be an other load flow simulator, as long as the API contract is respected. A contingency is created and finally, the flows are computed again in order to get the final state.  
 
 ![Workflow](./img/loadflow/Workflow.svg){: width="75%" .center-image}
 
 ## What will you need?
 - About 1/2 hour
 - A favorite text editor or IDE
-- JDK 1.8 or later
-- An installation of Hades2, a RTE load-flow tool available as a freeware
-    - Please visit the [Hades2 documentation](https://rte-france.github.io/hades2/index.html) to learn how to install Hades2 on your computer. The installation should take you 15 minutes at most. 
-    - Note that Hades2 only works on Linux and Windows at the moment.
+- JDK 1.11 or later
 - You can also import the code straight into your IDE:
     - [IntelliJ IDEA](intellij.md)
 
@@ -57,8 +54,8 @@ Create a new Maven's `pom.xml` file in `loadflow/initial` with the following con
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>3.7.1</powsybl.core.version>
-        <powsybl.rte-core.version>2.14.1</powsybl.rte-core.version>
+        <powsybl.core.version>4.0.1</powsybl.core.version>
+        <powsybl-open-loadflow.version>0.9.0</powsybl-open-loadflow.version>
     </properties>
 </project>
 ```
@@ -73,7 +70,7 @@ First, in the `pom.xml`, add the following lines in the `<properties>` section t
 When you'll have created the `LoadflowTutorial` class and its main function, you'll then be able to
 execute your code through:
 ```
-$> mvn clean package exec:java
+$> mvn clean package exec:exec
 ```
 
 Also, configure the pom file so as to use a configuration file taken in the classpath, instead of the one
@@ -84,6 +81,7 @@ that is global to your system:
         <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
             <configuration>
                 <systemProperties>
                     <systemProperty>
@@ -99,9 +97,9 @@ that is global to your system:
 
 Now, we'll add a few **required** maven dependencies:
 - `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration
-- `com.rte-france.powsybl:powsybl-hades2-integration`: to provide an implementation of the sensitivity analysis
-- `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j` 
-- `org.slf4j:log4j-over-slf4j`: to create a bridge between `log4j` and `slf4j` 
+- `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j`.
+- `com.powsybl:powsybl-open-loadflow` to provide an implementation for the loadflow calculation.
+- `com.powsybl:powsybl-iidm-impl` to load and work with networks.
 
 **Note:** PowSyBl uses [slf4j](http://www.slf4j.org/) as a facade for various logging framework, but some APIs we use in PowSyBl use [log4j](https://logging.apache.org/log4j), which is not compatible with slf4j, making it necessary to create a bridge between the two logging system.
 
@@ -109,21 +107,26 @@ Add the following dependencies to the `pom.xml` file:
 ```xml
 <dependencies>
     <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-config-classic</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.rte-france.powsybl</groupId>
-        <artifactId>powsybl-hades2-integration</artifactId>
-        <version>${powsybl.rte-core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-simple</artifactId>
-        <version>${slf4j.version}</version>
-        <scope>runtime</scope>
-    </dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-config-classic</artifactId>
+            <version>${powsybl.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-open-loadflow</artifactId>
+            <version>${powsybl-open-loadflow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-iidm-impl</artifactId>
+            <version>${powsybl.core.version}</version>
+        </dependency>
 </dependencies>
 ```
 
@@ -133,16 +136,9 @@ Edit the file named `config.yml` at the location `loadflow/initial/src/main/reso
 Start the configuration by writing:
 ```yaml
 load-flow:
-  default-impl-name: "Hades2"
+  default-impl-name: "OpenLoadFlow"
 ```
-In this way, PowSyBl will be set to use the Hades2 implementation for the power flow.
-
-Then, set the following Hades2 configuration parameters:
-```yaml
-hades2:
-    homeDir: <PATH_TO_HADES2>
-```
-where the path to Hades2 should point to your installation directory. It is something of the kind `<PATH_TO_ROOT_DIRECTORY/hades2-V6.6.0.1/>`, where the path to the root directory points to where you extracted the Hades2 distribution, and the version of Hades2 will vary depending on your installation.
+In this way, PowSyBl will be set to use the OpenLoadflow implementation for the power flow.
 
 ## Import the network from an XML IIDM file
 
@@ -151,16 +147,22 @@ The load consumes 600 MW and the generator produces 606.5 MW.
 
 ![Initial simple network](./img/loadflow/Network_Simple_Initial.svg){: width="50%" .center-image}
 
+First, create a logger outside of your main method. We will use it to display information about the objects we handle.
+```java
+private static final Logger LOG = LoggerFactory.getLogger(LoadflowTutorial.class);
+```
+
 <img src="./img/loadflow/File.svg" alt="" style="vertical-align: bottom"/>
 The network is modeled in [IIDM](../../grid/formats/xiidm.md), which is the internal model of Powsybl. This model can be serialized in a XML format for experimental purposes.
 ```java
-File file = new File("/path/to/file/eurostag-tutorial1-lf.xml");
+final String networkFileName = "eurostag-tutorial1-lf.xml";
+final InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStream(networkFileName);
 ```
 <br />
 <img src="./img/loadflow/Import.svg" alt="" style="vertical-align: bottom"/>
-The file is imported through a gateway that converts the file in an in-memory model.
+The file is imported through a gateway that converts the file to an in-memory model.
 ```java
-Network network = Importers.loadNetwork(file.toString());
+Network network = Importers.loadNetwork(networkFileName, is);;
 ```
 <br />
 
@@ -169,27 +171,34 @@ In this tutorial it is composed of two substations. Each substation has two volt
 levels and one two-windings transformer.
 ```java
 for (Substation substation : network.getSubstations()) {
-  System.out.println("Substation " + substation.getName());
-  System.out.println("Voltage levels: " + substation.getVoltageLevels());
-  System.out.println("Two windings transformers: "
-      + substation.getTwoWindingsTransformers());
-  System.out.println("Three windings transformers: "
-      + substation.getThreeWindingsTransformers());
+    LOGGER.info("Substation " + substation.getNameOrId());
+    LOGGER.info("Voltage levels:");
+    for (VoltageLevel voltageLevel : substation.getVoltageLevels()) {
+        LOGGER.info("Voltage level: " + voltageLevel.getId() + " " + voltageLevel.getNominalV() + "kV");
+    }
+    LOGGER.info("Two windings transformers:");
+    for (TwoWindingsTransformer t2wt : substation.getTwoWindingsTransformers()) {
+        LOGGER.info("Two winding transformer: " + t2wt.getNameOrId());
+    }
+    LOGGER.info("Three windings transformers:");
+    for (ThreeWindingsTransformer t3wt : substation.getThreeWindingsTransformers()) {
+        LOGGER.info("Three winding transformer: " + t3wt.getNameOrId());
+    }
 }
 ```
 There are two lines in the network.
 ```java
-for (Line l : network.getLines()) {
-  System.out.println("Line: " + l.getName());
-  System.out.println("Line: " + l.getTerminal1().getP());
-  System.out.println("Line: " + l.getTerminal2().getP());
+for (Line line : network.getLines()) {
+    LOG.info("Line : " + line.getNameOrId());
+    LOG.info(" > Terminal 1 power : " + line.getTerminal1().getP());
+    LOG.info(" > Terminal 2 power : " + line.getTerminal2().getP());
 }
 ```
 
 ## Run a power flow calculation
 
 <img src="./img/loadflow/Compute_LF.svg" alt="" style="vertical-align: bottom"/>
-Then, flows are computed with a load flow simulator. In this tutorial, we use Hades2, which is closed source software, but available under a freeware license for experimental purposes. For more details, please visit this [page](https://rte-france.github.io/hades2/features/loadflow.html) to learn about Hades2.
+Then, flows are computed with a load flow simulator. In this tutorial, we use the OpenLoadflow implementation, which is open-source software, natilevly based on the Powsybl network grid model. For more details, please visit the [documentation](../../simulation/powerflow/openlf.md) to learn more about it. 
 
 A loadflow is run on a variant of the network. 
 A network variant is close to a state vector and gathers variables such as 
@@ -199,11 +208,11 @@ Defining the variant specifically is actually optional.
 If it is not the case, the computation will be run on the default initial variant created by PowSyBl by default.
 Let us first define the variant:
 ```java
-network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID,
-        "loadflowVariant");
-network.getVariantManager().setWorkingVariant("loadflowVariant");
+final String variantId = "loadflowVariant";
+network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID, variantId);
+network.getVariantManager().setWorkingVariant(variantId);
 ```
-Here we have copied the initial variant and set the new variant as the one to be used.
+Here we have saved the initial variant and set the new variant as the one to be used.
 
 In order to run the load flow calculation, we also need to define the set of parameters to be used.
 The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here, angles are set to zero and voltages are set to one per unit. 
@@ -224,12 +233,13 @@ LoadFlow.run(network, loadflowParameters);
 You'll have to fill two configuration sections in the `config.yml` file, for example:
 ```yaml
 load-flow-default-parameters:
-    voltageInitMode: DC_VALUES
-    transformerVoltageControlOn: false
-    specificCompatibility: true 
+  voltageInitMode: DC_VALUES
+  transformerVoltageControlOn: false
+  twtSplitShuntAdmittance: true
+  dc: false
 
-hades2-default-parameters:
-    dcMode: true
+open-loadflow-default-parameters:
+  lowImpedanceBranchMode: REPLACE_BY_ZERO_IMPEDANCE_LINE
 ```
 
 ## Output the results in the terminal
@@ -239,17 +249,17 @@ Let us compare the voltages and angles before and after the calculation:
 ```java
 double angle;
 double v;
-double angleInitial;
-double vInitial;
+double oldAngle;
+double oldV;
 for (Bus bus : network.getBusView().getBuses()) {
     network.getVariantManager().setWorkingVariant(VariantManagerConstants.INITIAL_VARIANT_ID);
-    angleInitial = bus.getAngle();
-    vInitial = bus.getV();
-    network.getVariantManager().setWorkingVariant("loadflowVariant");
+    oldAngle = bus.getAngle();
+    oldV = bus.getV();
+    network.getVariantManager().setWorkingVariant(variantId);
     angle = bus.getAngle();
     v = bus.getV();
-    System.out.println("Angle difference: " + (angle - angleInitial));
-    System.out.println("Tension difference: " + (v - vInitial));
+    LOG.info("Angle difference   : " + (angle - oldAngle));
+    LOG.info("Tension difference : " + (v - oldV));
 }
 ```
 
@@ -267,76 +277,50 @@ network.getLine("NHV1_NHV2_1").getTerminal2().disconnect();
 ```
 <br />
 <img src="./img/loadflow/Compute_LF.svg" alt="" style="vertical-align: bottom"/>
-Once the continency is applied on the network, the post-contingency state of the network is computed through a loadflow in the same way as above.
+Once the contingency is applied on the network, the post-contingency state of the network is computed through a loadflow in the same way as above.
 
 A new load flow computes the flow on the lower line: it is now of 610.6 MW at its entrance and of 601 MW at its exit. The rest of the difference between load and generation represents the losses during the voltage transformation process.
 
 ```java
-network.getVariantManager().cloneVariant("loadflowVariant",
-        "contingencyLoadflowVariant");
-network.getVariantManager().setWorkingVariant("contingencyLoadflowVariant");
-LoadFlow.run(network, loadflowParameters);
+final String contingencyVariantId = "contingencyLoadflowVariant";
+network.getVariantManager().cloneVariant(variantId, contingencyVariantId);
+network.getVariantManager().setWorkingVariant(contingencyVariantId);
+LoadFlow.run(network);
 ```
 
 Let's analyze the results. First we make some simple prints in the terminal: 
 ```java
 for (Line l : network.getLines()) {
-    System.out.println("Line: " + l.getName());
-    System.out.println("Line: " + l.getTerminal1().getP());
-    System.out.println("Line: " + l.getTerminal2().getP());
+    LOG.info("Line: " + l.getName());
+    LOG.info("Line: " + l.getTerminal1().getP());
+    LOG.info("Line: " + l.getTerminal2().getP());
 }
 ```
 
-Here we'll also show how to define a visitor object, that may be used to loop over equipments. We'll use it to print the energy sources
-and the loads of the network. Visitors are usually used to access
-the network equipments efficiently, and modify their properties
-for instance. Here we just print some data about the Generators and Loads.
+Here we will also show how to define a visitor object, that may be used to loop over equipments. We will use it to print the energy sources and the loads of the network. Visitors are usually used to access the network equipments efficiently, and modify their properties for instance. Here we just print some data about generators and loads.
 ```java
-TopologyVisitor visitor = new DefaultTopologyVisitor() {
+final DefaultTopologyVisitor visitor = new DefaultTopologyVisitor() {
     @Override
     public void visitGenerator(Generator generator) {
-        System.out.println("Generator " + generator.getName() + ": "
-                + generator.getTerminal().getP() + " MW");
+        LOG.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
     }
 
     @Override
     public void visitLoad(Load load) {
-        System.out.println("Load " + load.getName() + ": "
-                + load.getTerminal().getP() + " MW");
+        LOG.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
     }
 };
-
-for (VoltageLevel vl : network.getVoltageLevels()) {
-    vl.visitEquipments(visitor);
+for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
+    voltageLevel.visitEquipments(visitor);
 }
-
 ```
 The power now flows only through the line `NHV1_NHV2_2`, as expected.
 
-## Check the files Hades2 generated for the calculation (optional)
-
-In order to be able to check what files Hades2 itself generated for the calculation, you can set the following configuration options in your config file:
-```yaml
-computation-local:
-    tmp-dir: /path/to/local/tmp
-    availableCore: 1
-
-hades2:
-    homeDir: /path/to/hades2
-    debug: true
-```
-where you can provide the path you wish for storing the temporary files generated by PowSyBl. By default, that path is set to </tmp> on Linux. Each PowSyBl run will generate a folder named `itesla_hades2_XXX` where `XXX` stands for random a series of numbers. In this folder, you will find several files:
-- `adn_in`
-- `adn_out`
-- log
-which can be useful to understand what happened during the Hades2 calculation in more details. The adn files contain the input and output network data, while the log files provide information about the run's behavior.
-
 ## Summary
 We have learnt how to write Java code to run power flows. 
-We've shown how to load a network fie, how to create and use network variants, and how to set the load flow parameters. We've also seen how to output the results in the terminal.
-Finally, we've also explained how to check what Hades2 itself generated during the calculation, which may be useful for debugging purposes.
+We have shown how to load a network file, how to create and use network variants, and how to set the load flow parameters. We've also seen how to output the results in the terminal.
 
 ## Going further
 The following links could also be useful:
 - [Run a power flow through an iTools command](../../user/itools/loadflow.md): Learn how to perform a power flow calculation from the command line 
-- [Sensitivity analysis tutorial](loadflow.md): Learn how to write the Java code to perform sensitivity analyses
+- [Sensitivity analysis tutorial](./sensitivity-analysis.md): Learn how to write the Java code to perform sensitivity analyses
