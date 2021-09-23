@@ -23,6 +23,7 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 2.4.0 | 2021-09-22 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.4.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.4.0/index.html) |
 | 2.3.0 | 2021-07-16 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.3.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.3.0/index.html) |
 | 2.2.0 | 2021-05-26 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.2.0/index.html) |
 | 2.1.0 | 2021-04-09 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.1.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.1.0/index.html) |
