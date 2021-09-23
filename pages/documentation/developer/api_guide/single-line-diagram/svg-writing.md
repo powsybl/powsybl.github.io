@@ -52,8 +52,8 @@ First of all, we need to add some Maven dependencies in our `pom.xml` file:
 </dependencies>
 
 <properties>
-    <powsybl.sld.version>1.8.0</powsybl.sld.version>
-    <powsybl.core.version>3.8.0</powsybl.core.version>
+    <powsybl.sld.version>2.4.0</powsybl.sld.version>
+    <powsybl.core.version>4.4.0</powsybl.core.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
 ```
@@ -71,13 +71,16 @@ For both examples, we need to initialize a few layout parameters before generati
 
 ```java
 // Instantiating the default style component library
-ComponentLibrary componentLibrary = new ResourcesComponentLibrary("/ConvergenceLibrary");
+ComponentLibrary componentLibrary = new ConvergenceComponentLibrary();
 
 // fully automatic layout
 VoltageLevelLayoutFactory voltageLevelLayoutFactory = new PositionVoltageLevelLayoutFactory(new PositionByClustering());
 
 // create default parameters for the SVG layout
-LayoutParameters layoutParameters = new LayoutParameters();
+// then activating height compaction and inclusion of CSS styles in the SVG 
+LayoutParameters layoutParameters = new LayoutParameters()
+    .setAdaptCellHeightToContent(true)
+    .setCssLocation(LayoutParameters.CssLocation.INSERTED_IN_SVG);
 
 // display line name instead of line ID
 boolean usename = true;
@@ -96,10 +99,10 @@ Network network = FictitiousSwitchFactory.create();
 We generate a `VoltageLevelDiagram` for voltage level `N` and then the corresponding SVG diagram file:
 ```java
 // create diagram for the voltage level N
-VoltageLevelDiagram voltageLevelDiagram = VoltageLevelDiagram.build(new NetworkGraphBuilder(network), "N", voltageLevelLayoutFactory, usename);
+VoltageLevelDiagram voltageLevelDiagramN = VoltageLevelDiagram.build(new NetworkGraphBuilder(network), "N", voltageLevelLayoutFactory, usename);
 
 // generate SVG
-voltageLevelDiagram.writeSvg(prefix
+voltageLevelDiagramN.writeSvg(prefix,
     new DefaultSVGWriter(componentLibrary, layoutParameters),
     new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
     new NominalVoltageDiagramStyleProvider(network),
@@ -108,16 +111,16 @@ voltageLevelDiagram.writeSvg(prefix
 
 We obtain the following SVG:
 
-![N_voltageLevel](img/svg-writing/example_n.svg)
+![N_voltageLevel](img/svg-writing/example_n.svg){: width="70%" .center-image}
 
 Similarly, we could generate a SVG for voltage level `C`:
  
 ```java
 // create diagram for the voltage level C
-VoltageLevelDiagram voltageLevelDiagram = VoltageLevelDiagram.build(new NetworkGraphBuilder(network), "C", voltageLevelLayoutFactory, usename);
+VoltageLevelDiagram voltageLevelDiagramC = VoltageLevelDiagram.build(new NetworkGraphBuilder(network), "C", voltageLevelLayoutFactory, usename);
 
 // generate SVG
-voltageLevelDiagram.writeSvg(prefix,
+voltageLevelDiagramC.writeSvg(prefix,
     new DefaultSVGWriter(componentLibrary, layoutParameters),
     new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
     new NominalVoltageDiagramStyleProvider(network),
@@ -126,18 +129,18 @@ voltageLevelDiagram.writeSvg(prefix,
  
 leading to the following diagram:
 
-![C_voltageLevel](img/svg-writing/example_c.svg)
+![C_voltageLevel](img/svg-writing/example_c.svg){: width="18%" .center-image}
 
 ### Generating the substation diagram
 In order to build the diagram for the whole substation, named `A`, containing both voltage levels displayed previously, we need to build the corresponding `SubstationDiagram`:
 ```java
 // create diagram for the substation A
-SubstationDiagram substationDiagram = SubstationDiagram.build(
+SubstationDiagram substationDiagramA = SubstationDiagram.build(
     new NetworkGraphBuilder(network), "A", new HorizontalSubstationLayoutFactory(),
     voltageLevelLayoutFactory, usename);
 
 // generate SVG
-substationDiagram.writeSvg(prefix,
+substationDiagramA.writeSvg(prefix,
     new DefaultSVGWriter(componentLibrary, layoutParameters),
     Paths.get("/tmp/a.svg"),
     new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
@@ -147,7 +150,7 @@ substationDiagram.writeSvg(prefix,
 
 We then obtain the following wider SVG file:
 
-![A_substation](img/svg-writing/example_sub_a.svg)
+![A_substation](img/svg-writing/example_sub_a.svg){: width="85%" .center-image}
 
 ## Diagrams from a CGMES file
 
@@ -167,10 +170,10 @@ Once the network is loaded, we can generate diagrams like in previous section.
 Here we generate a SVG for voltage level id _8bbd7e74-ae20-4dce-8780-c20f8e18c2e0 (named 110 in substation PP_Brussels):
 ```java
 // create diagram for the wanted voltage level
-VoltageLevelDiagram voltageLevelDiagram = VoltageLevelDiagram.build(new NetworkGraphBuilder(network), "_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", voltageLevelLayoutFactory, usename);
+VoltageLevelDiagram voltageLevelDiagramBrussels = VoltageLevelDiagram.build(new NetworkGraphBuilder(network), "_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", voltageLevelLayoutFactory, usename);
 
 // generate SVG
-voltageLevelDiagram.writeSvg(prefix,
+voltageLevelDiagramBrussels.writeSvg(prefix,
     new DefaultSVGWriter(componentLibrary, layoutParameters),
     new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
     new NominalVoltageDiagramStyleProvider(network),
@@ -179,7 +182,7 @@ voltageLevelDiagram.writeSvg(prefix,
 
 We obtain the following SVG:
 
-![Brussels_voltageLevel](img/svg-writing/example_Brussels_110.svg)
+![Brussels_voltageLevel](img/svg-writing/example_Brussels_110.svg){: width="40%" .center-image}
 
 ### Generating a substation diagram
 Similarly to voltage level diagrams, we can generate substation diagrams. 
@@ -188,17 +191,19 @@ To that end we need to build the corresponding `SubstationDiagram`:
 
 ```java
 // create diagram for the PP_Amsterdam substation (id _c49942d6-8b01-4b01-b5e8-f1180f84906c)
-SubstationDiagram substationDiagram = SubstationDiagram.build(
+SubstationDiagram substationDiagramAmsterdam = SubstationDiagram.build(
     new NetworkGraphBuilder(network), "_c49942d6-8b01-4b01-b5e8-f1180f84906c", new HorizontalSubstationLayoutFactory(),
     voltageLevelLayoutFactory, usename);
 
+// set the feeders label to be rotated to avoid overlapping (the names are quite long in this example)
+layoutParameters.setLabelDiagonal(true);
+
 // generate SVG
-substationDiagram.writeSvg(prefix,
+substationDiagramAmsterdam.writeSvg(prefix,
     new DefaultSVGWriter(componentLibrary, layoutParameters),
     Paths.get("/tmp/AmsterdamSubstation.svg"),
     new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
-    new NominalVoltageDiagramStyleProvider(network)
-);
+    new NominalVoltageDiagramStyleProvider(network));
 ```
 
 We then obtain the following SVG file representing the whole PP_Amsterdam substation with its three voltage levels:
