@@ -1,431 +1,284 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="285" height="630">
-    <style><![CDATA[
-.BUSBAR_SECTION {
-    stroke: rgb(0,0,0);
-    stroke-width: 3;
-}
+<svg viewBox="0 0 330.0 504.0" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        <![CDATA[
+.sld-up .sld-arrow-down {visibility: hidden}
+.sld-down .sld-arrow-up {visibility: hidden}
+.sld-closed .sld-sw-open {visibility: hidden}
+.sld-open .sld-sw-closed {visibility: hidden}
+.sld-hidden-node {visibility: hidden}
+polyline {fill: none}
+.sld-top-feeder .sld-label {dominant-baseline: auto}
+.sld-bottom-feeder .sld-label {dominant-baseline: hanging}
+.sld-arrow-p .sld-label {dominant-baseline: middle}
+.sld-arrow-q .sld-label {dominant-baseline: middle}
+.sld-constant-color {stroke: lightgrey}
+.sld-vl300to500 {stroke: #ff0000}
+.sld-vl180to300 {stroke: #228b22}
+.sld-vl120to180 {stroke: #01afaf}
+.sld-vl70to120 {stroke: #cc5500}
+.sld-vl50to70 {stroke: #a020f0}
+.sld-vl30to50 {stroke: #ff8290}
+.sld-vl0to30 {stroke: #abae28}.sld-feeder-disconnected {stroke: black}
+.sld-feeder-connected-disconnected {stroke-dasharray: 3,3}
+.sld-feeder-disconnected-connected {stroke: black; stroke-dasharray: 3,3}
+.sld-constant-color {fill: none}
+.sld-node.sld-constant-color {stroke: none; fill: black}
+.sld-breaker.sld-constant-color {stroke: blue; fill: white}
+.sld-disconnector.sld-constant-color {stroke: black}
+.sld-label {fill: black; stroke: none;}
+.sld-busbar-section {stroke-width: 3}
+.sld-breaker {stroke-width: 2; fill:white}
+.sld-disconnector {stroke-width: 3}
+.sld-bus-connection {stroke-width: 4}
+.sld-vsc {font-size: 7.43px}
+.sld-grid {stroke: #003700; stroke-dasharray: 1,10}
+.sld-arrow-p {fill:black}
+.sld-arrow-q {fill:blue}
+.sld-label {font: 8px "Verdana"}
+.sld-graph-label {font: 12px "Verdana"}
+.sld-flash {stroke: none; fill: black}
+.sld-lock {stroke: none; fill: black}
 
-.BREAKER {
-    stroke: rgb(0, 0, 255);
-    stroke-width: 2;
-    fill: rgb(255, 255, 255);
-}
-
-.DISCONNECTOR {
-    stroke: rgb(0, 0, 0);
-    stroke-width: 3
-}
-
-.GENERATOR {
-    stroke: rgb(0, 0, 255);
-    stroke-width: 1;
-    fill-opacity: 0;
-}
-
-.LOAD {
-    stroke: rgb(0, 0, 255);
-    stroke-width: 1;
-    fill-opacity: 0;
-}
-
-.LOAD_BREAK_SWITCH {
-    stroke: rgb(0, 0, 255);
-    stroke-width: 1;
-    fill: rgb(255, 255, 255);
-}
-
-.NODE {
-    stroke: rgb(0, 0, 0);
-    fill: rgb(0, 0, 0);
-    fill-opacity: 1;
-}
-
-.CAPACITOR {
-    stroke: rgb(0, 0, 255);
-    stroke-width: 1;
-    fill-opacity: 0;
-}
-
-.INDUCTOR {
-    stroke: rgb(0, 0, 255);
-    stroke-width: 1;
-    fill-opacity: 0;
-}
-
-.STATIC_VAR_COMPENSATOR {
-    stroke: rgb(0, 0, 255);
-}
-
-.TWO_WINDINGS_TRANSFORMER {
-    stroke: rgb(0, 0, 255);
-    fill-opacity: 0;
-}
-
-.THREE_WINDINGS_TRANSFORMER {
-    stroke: rgb(0, 0, 255);
-    fill-opacity: 0;
-}
-
-.VSC_CONVERTER_STATION {
-    stroke: rgb(0, 0, 255);
-    font-size: 7.4314661px;
-    line-height: 1.25;
-    font-family: sans-serif;
-    font-variant-ligatures: normal;
-    font-variant-caps: normal;
-    font-variant-numeric: normal;
-    font-feature-settings: normal;
-    text-align: start;
-    letter-spacing: 0px;
-    word-spacing: 0px;
-    writing-mode: lr-tb;
-    text-anchor: start;
-    stroke-miterlimit: 4;
-}
-
-.PHASE_SHIFT_TRANSFORMER {
-    stroke: rgb(0, 0, 255);
-    stroke-linecap: butt;
-    stroke-linejoin: miter;
-    stroke-miterlimit: 4;
-    stroke-width: 1;
-    fill-opacity: 0;
-}
-
-.wire {
-    stroke: rgb(200,0,0);
-    stroke-width: 1;
-    fill-opacity: 0;
-}
-
-.grid {
-    stroke: rgb(0,55,0);
-    stroke-width: 1;
-    stroke-dasharray: 1,10;
-}
-
-.component-label {
-    fill: black;
-    color: black;
-    stroke: none;
-    fill-opacity: 1;
-}
-
-.LINE {
-    stroke: rgb(0, 0, 255);
-    stroke-width: 1;
-    fill-opacity: 0;
-}
-.ARROW1__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_UP .arrow-up {stroke: black; fill: black; fill-opacity:1; visibility: visible;}.ARROW1__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW1__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_DOWN .arrow-down {stroke: black; fill: black; fill-opacity:1;  visibility: visible;}.ARROW1__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_UP .arrow-up {stroke: blue; fill: blue; fill-opacity:1; visibility: visible;}.ARROW2__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_DOWN .arrow-down {stroke: blue; fill: blue; fill-opacity:1;  visibility: visible;}.ARROW2__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.ARROW1__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_UP .arrow-up {stroke: black; fill: black; fill-opacity:1; visibility: visible;}.ARROW1__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW1__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_DOWN .arrow-down {stroke: black; fill: black; fill-opacity:1;  visibility: visible;}.ARROW1__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_UP .arrow-up {stroke: blue; fill: blue; fill-opacity:1; visibility: visible;}.ARROW2__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_DOWN .arrow-down {stroke: blue; fill: blue; fill-opacity:1;  visibility: visible;}.ARROW2__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.ARROW1__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_UP .arrow-up {stroke: black; fill: black; fill-opacity:1; visibility: visible;}.ARROW1__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW1__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_DOWN .arrow-down {stroke: black; fill: black; fill-opacity:1;  visibility: visible;}.ARROW1__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_UP .arrow-up {stroke: blue; fill: blue; fill-opacity:1; visibility: visible;}.ARROW2__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_DOWN .arrow-down {stroke: blue; fill: blue; fill-opacity:1;  visibility: visible;}.ARROW2__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.ARROW1__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_UP .arrow-up {stroke: black; fill: black; fill-opacity:1; visibility: visible;}.ARROW1__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW1__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_DOWN .arrow-down {stroke: black; fill: black; fill-opacity:1;  visibility: visible;}.ARROW1__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_UP .arrow-up {stroke: blue; fill: blue; fill-opacity:1; visibility: visible;}.ARROW2__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_DOWN .arrow-down {stroke: blue; fill: blue; fill-opacity:1;  visibility: visible;}.ARROW2__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.ARROW1__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_UP .arrow-up {stroke: black; fill: black; fill-opacity:1; visibility: visible;}.ARROW1__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW1__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_DOWN .arrow-down {stroke: black; fill: black; fill-opacity:1;  visibility: visible;}.ARROW1__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_UP .arrow-up {stroke: blue; fill: blue; fill-opacity:1; visibility: visible;}.ARROW2__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_UP .arrow-down { stroke-opacity:0; fill-opacity:0; visibility: hidden;}.ARROW2__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_DOWN .arrow-down {stroke: blue; fill: blue; fill-opacity:1;  visibility: visible;}.ARROW2__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_DOWN .arrow-up { stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac .open { visibility: hidden;}.id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac .closed { visibility: visible;}
-.id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557 .open { visibility: hidden;}.id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557 .closed { visibility: visible;}
-.id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4 .open { visibility: hidden;}.id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4 .closed { visibility: visible;}
-.id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fSwitch {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode1 {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2 {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafSwitch {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode1 {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2 {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfSwitch {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfNode {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fSwitch {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fNode {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fSwitch {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-.idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fNode {stroke-opacity:0; fill-opacity:0; visibility: hidden;}
-]]></style>
+]]>
+    </style>
     <g>
-        <g class="BUSBAR_SECTION id_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c" id="id_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c" transform="translate(30.0,310.0)">
-            <line fill="#cc5500" stroke="#cc5500" x1="0" x2="230.0" y1="0" y2="0"/>
-            <text class="component-label" font-family="Verdana" font-size="8" id="_364c9ca2-0d1d-4363-8f46-e586f8f66a8c_NW_LABEL" transform="rotate(0,0,0)" x="-5.0" y="-5.0">BE-Busbar_6</text>
+        <g class="sld-busbar-section sld-constant-color sld-vl70to120" id="id_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c" transform="translate(52.5,252.0)">
+            <line x1="0" x2="225.0" y1="0" y2="0"/>
+            <text class="sld-label" id="_364c9ca2-0d1d-4363-8f46-e586f8f66a8c_NW_LABEL" x="-5.0" y="-5.0">BE-Busbar_6</text>
         </g>
         <g class="cell idEXTERN_32_0" id="idEXTERN_32_0">
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode1" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode1" transform="translate(191.0,336.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2" transform="translate(191.0,524.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="LOAD id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" id="id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(187.0,585.5)">
-                <rect fill="#cc5500" height="9" stroke="#cc5500" width="16"/>
-                <line fill="#cc5500" stroke="#cc5500" x1="0" x2="16" y1="0" y2="9"/>
-                <line fill="#cc5500" stroke="#cc5500" x1="16" x2="0" y1="0" y2="9"/>
-                <text class="component-label" font-family="Verdana" font-size="8" id="_cb459405-cc14-4215-a45c-416789205904_S_LABEL" transform="rotate(0,0,0)" x="-5.0" y="22.0">BE-Load_1</text>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fSwitch">
-                <polyline points="195.0,310.0,195.0,310.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fSwitch_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode1">
-                <polyline points="195.0,310.0,195.0,340.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode1_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2">
-                <polyline points="195.0,340.0,195.0,528.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
-                <polyline points="195.0,528.0,195.0,585.5" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="ARROW2__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_UP" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW2" transform="matrix(1.0,0.0,-0.0,1.0,190.0,561.75)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW2_ARROW-arrow-up" transform="rotate(180.0,5.0,5.0)">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW2_ARROW-arrow-down" transform="rotate(180.0,5.0,5.0)">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">90   </text>
-            </g>
-            <g class="ARROW1__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_UP" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW1" transform="matrix(1.0,0.0,-0.0,1.0,190.0,541.75)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW1_ARROW-arrow-up" transform="rotate(180.0,5.0,5.0)">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fNode2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW1_ARROW-arrow-down" transform="rotate(180.0,5.0,5.0)">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">200  </text>
-            </g>
-            <g class="NODE id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fSwitch" id="id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904fSwitch" transform="translate(191.0,306.0)">
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_1" transform="translate(211.0,278.0)">
                 <circle cx="4" cy="4" r="4"/>
+            </g>
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_2" transform="translate(211.0,358.0)">
+                <circle cx="4" cy="4" r="4"/>
+            </g>
+            <g class="sld-load sld-bottom-feeder sld-constant-color sld-vl70to120" id="id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(207.0,419.5)">
+                <rect height="9" width="16"/>
+                <line x1="0" x2="16" y1="0" y2="9"/>
+                <line x1="16" x2="0" y1="0" y2="9"/>
+                <text class="sld-label" id="_cb459405-cc14-4215-a45c-416789205904_S_LABEL" x="-5.0" y="14.0">BE-Load_1</text>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
+                <polyline points="215.0,252.0,215.0,252.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_1">
+                <polyline points="215.0,256.0,215.0,282.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_1_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_2">
+                <polyline points="215.0,282.0,215.0,362.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
+                <polyline points="215.0,362.0,215.0,419.5"/>
+            </g>
+            <g class="sld-arrow-q sld-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW2" transform="translate(210.0,395.75)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10" transform="rotate(180.0,5.0,5.0)"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
+                <text class="sld-label" x="15.0" y="5.0">90</text>
+            </g>
+            <g class="sld-arrow-p sld-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW1" transform="translate(210.0,375.75)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10" transform="rotate(180.0,5.0,5.0)"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
+                <text class="sld-label" x="15.0" y="5.0">200</text>
+            </g>
+            <g class="sld-bus-connection sld-constant-color sld-vl70to120" id="idBUSCO_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(211.0,248.0)">
+                <circle cx="4" cy="4" r="2"/>
             </g>
         </g>
         <g class="cell idEXTERN_32_1" id="idEXTERN_32_1">
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode1" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode1" transform="translate(241.0,276.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2" transform="translate(241.0,88.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="CAPACITOR id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" id="id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(239.0,24.0)">
-                <line fill="#cc5500" stroke="#cc5500" x1="6" x2="6" y1="0" y2="4.5"/>
-                <line fill="#cc5500" stroke="#cc5500" x1="0" x2="12" y1="4.5" y2="4.5"/>
-                <line fill="#cc5500" stroke="#cc5500" x1="0" x2="12" y1="7.5" y2="7.5"/>
-                <line fill="#cc5500" stroke="#cc5500" x1="6" x2="6" y1="7.5" y2="12"/>
-                <text class="component-label" font-family="Verdana" font-size="8" id="_d771118f-36e9-4115-a128-cc3d9ce3e3da_N_LABEL" transform="rotate(0,0,0)" x="-5.0" y="-5.0">BE_S1</text>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafSwitch">
-                <polyline points="245.0,310.0,245.0,310.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafSwitch_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode1">
-                <polyline points="245.0,310.0,245.0,280.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode1_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2">
-                <polyline points="245.0,280.0,245.0,92.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
-                <polyline points="245.0,92.0,245.0,36.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="ARROW1__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_DOWN" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW1" transform="matrix(1.0,0.0,-0.0,1.0,240.0,49.0)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW1_ARROW-arrow-up">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW1_ARROW-arrow-down">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">0    </text>
-            </g>
-            <g class="ARROW2__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_DOWN" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW2" transform="matrix(1.0,0.0,-0.0,1.0,240.0,69.0)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW2_ARROW-arrow-up">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafNode2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW2_ARROW-arrow-down">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">-331 </text>
-            </g>
-            <g class="NODE id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafSwitch" id="id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3dafSwitch" transform="translate(241.0,306.0)">
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_1" transform="translate(261.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
+            </g>
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_2" transform="translate(261.0,138.0)">
+                <circle cx="4" cy="4" r="4"/>
+            </g>
+            <g class="sld-capacitor sld-top-feeder sld-constant-color sld-vl70to120" id="id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(259.0,74.0)">
+                <line x1="6" x2="6" y1="0" y2="4.5"/>
+                <line x1="0" x2="12" y1="4.5" y2="4.5"/>
+                <line x1="0" x2="12" y1="7.5" y2="7.5"/>
+                <line x1="6" x2="6" y1="7.5" y2="12"/>
+                <text class="sld-label" id="_d771118f-36e9-4115-a128-cc3d9ce3e3da_N_LABEL" x="-5.0" y="-5.0">BE_S1</text>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
+                <polyline points="265.0,252.0,265.0,252.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_1">
+                <polyline points="265.0,248.0,265.0,222.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_1_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_2">
+                <polyline points="265.0,222.0,265.0,142.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
+                <polyline points="265.0,142.0,265.0,86.0"/>
+            </g>
+            <g class="sld-arrow-p sld-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW1" transform="translate(260.0,99.0)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10"/>
+                <text class="sld-label" x="15.0" y="5.0">0</text>
+            </g>
+            <g class="sld-arrow-q sld-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW2" transform="translate(260.0,119.0)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10"/>
+                <text class="sld-label" x="15.0" y="5.0">-331</text>
+            </g>
+            <g class="sld-bus-connection sld-constant-color sld-vl70to120" id="idBUSCO_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(261.0,248.0)">
+                <circle cx="4" cy="4" r="2"/>
             </g>
         </g>
         <g class="cell idEXTERN_32_2" id="idEXTERN_32_2">
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfNode" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfNode" transform="translate(91.0,336.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif" transform="translate(91.0,524.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="PHASE_SHIFT_TRANSFORMER id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO" id="id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO" transform="translate(88.0,581.5)">
-                <circle cx="7" cy="12" fill="#cc5500" id="id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_TWO_WINDINGS_TRANSFORMER-WINDING1" r="5" stroke="#cc5500" transform="rotate(180.0,7.0,8.5)"/>
-                <g fill="#ff0000" id="id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_TWO_WINDINGS_TRANSFORMER-WINDING2" stroke="#ff0000" transform="rotate(180.0,7.0,8.5)">
-                    <circle cx="7" cy="7" r="5"/>
-                    <line x1="14" x2="0" y1="0" y2="14"/>
-                    <line x1="14" x2="11" y1="0" y2="0"/>
-                    <line x1="14" x2="14" y1="0" y2="3"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" id="_a708c3bc-465d-4fe7-b6ef-6fa6408a62b0_TWO_S_LABEL" transform="rotate(0,0,0)" x="-5.0" y="30.0">BE-TR2_1</text>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfSwitch">
-                <polyline points="95.0,310.0,95.0,310.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfSwitch_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfNode">
-                <polyline points="95.0,310.0,95.0,340.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfNode_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
-                <polyline points="95.0,340.0,95.0,424.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif">
-                <polyline points="95.0,444.0,95.0,528.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO">
-                <polyline points="95.0,528.0,95.0,581.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="ARROW2__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_DOWN" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW2" transform="matrix(1.0,0.0,-0.0,1.0,90.0,559.5)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW2_ARROW-arrow-up" transform="rotate(180.0,5.0,5.0)">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW2_ARROW-arrow-down" transform="rotate(180.0,5.0,5.0)">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">0    </text>
-            </g>
-            <g class="ARROW1__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_DOWN" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW1" transform="matrix(1.0,0.0,-0.0,1.0,90.0,539.5)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW1_ARROW-arrow-up" transform="rotate(180.0,5.0,5.0)">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWOFictif_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW1_ARROW-arrow-down" transform="rotate(180.0,5.0,5.0)">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">0    </text>
-            </g>
-            <g class="NODE id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfSwitch" id="id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00acfSwitch" transform="translate(91.0,306.0)">
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,278.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="BREAKER id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" id="id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(85.0,424.0)">
-                <g class="closed" id="id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_BREAKER-closed">
-                    <rect height="18" width="18" x="1" y="1"/>
-                    <line x1="10" x2="10" y1="5" y2="15"/>
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO" transform="translate(111.0,358.0)">
+                <circle cx="4" cy="4" r="4"/>
+            </g>
+            <g class="sld-pst sld-bottom-feeder sld-constant-color" id="id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO" transform="translate(108.0,415.5)">
+                <circle class="sld-vl70to120" cx="7" cy="12" r="5" transform="rotate(180.0,7.0,8.5)"/>
+                <g class="sld-vl300to500" transform="rotate(180.0,7.0,8.5)">
+                            
+                    <circle cx="7" cy="7" r="5"/>
+                            
+                    <line x1="14" x2="0" y1="0" y2="14"/>
+                            
+                    <line x1="14" x2="11" y1="0" y2="0"/>
+                            
+                    <line x1="14" x2="14" y1="0" y2="3"/>
+                        
                 </g>
-                <g class="open" id="id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_BREAKER-open">
-                    <rect height="18" width="18" x="1" y="1"/>
-                    <line x1="5" x2="15" y1="10" y2="10"/>
-                </g>
+                <text class="sld-label" id="_a708c3bc-465d-4fe7-b6ef-6fa6408a62b0_TWO_S_LABEL" x="-5.0" y="22.0">BE-TR2_1</text>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
+                <polyline points="115.0,252.0,115.0,252.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
+                <polyline points="115.0,256.0,115.0,282.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
+                <polyline points="115.0,282.0,115.0,312.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO">
+                <polyline points="115.0,332.0,115.0,362.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO">
+                <polyline points="115.0,362.0,115.0,415.0"/>
+            </g>
+            <g class="sld-arrow-q sld-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW2" transform="translate(110.0,393.5)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10" transform="rotate(180.0,5.0,5.0)"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
+                <text class="sld-label" x="15.0" y="5.0">0</text>
+            </g>
+            <g class="sld-arrow-p sld-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW1" transform="translate(110.0,373.5)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10" transform="rotate(180.0,5.0,5.0)"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
+                <text class="sld-label" x="15.0" y="5.0">0</text>
+            </g>
+            <g class="sld-bus-connection sld-constant-color sld-vl70to120" id="idBUSCO_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,248.0)">
+                <circle cx="4" cy="4" r="2"/>
+            </g>
+            <g class="sld-breaker sld-constant-color sld-closed sld-vl70to120" id="id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(105.0,312.0)">
+                <path class="sld-sw-closed" d="M1,1 V19 H19 V1z M10,5 V15"/>
+                <path class="sld-sw-open" d="M1,1 V19 H19 V1z M5,10 H15"/>
             </g>
         </g>
         <g class="cell idEXTERN_32_3" id="idEXTERN_32_3">
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fNode" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fNode" transform="translate(41.0,276.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif" transform="translate(41.0,88.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="PHASE_SHIFT_TRANSFORMER id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO" id="id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO" transform="translate(38.0,21.5)">
-                <circle cx="7" cy="12" fill="#cc5500" id="id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_TWO_WINDINGS_TRANSFORMER-WINDING1" r="5" stroke="#cc5500"/>
-                <g fill="#228b22" id="id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_TWO_WINDINGS_TRANSFORMER-WINDING2" stroke="#228b22">
-                    <circle cx="7" cy="7" r="5"/>
-                    <line x1="14" x2="0" y1="0" y2="14"/>
-                    <line x1="14" x2="11" y1="0" y2="0"/>
-                    <line x1="14" x2="14" y1="0" y2="3"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" id="_b94318f6-6d24-4f56-96b9-df2531ad6543_TWO_N_LABEL" transform="rotate(0,0,0)" x="-5.0" y="-5.0">BE-TR2_2</text>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fSwitch">
-                <polyline points="45.0,310.0,45.0,310.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fSwitch_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fNode">
-                <polyline points="45.0,310.0,45.0,280.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fNode_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
-                <polyline points="45.0,280.0,45.0,196.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif">
-                <polyline points="45.0,176.0,45.0,92.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO">
-                <polyline points="45.0,92.0,45.0,39.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="ARROW1__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_DOWN" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW1" transform="matrix(1.0,0.0,-0.0,1.0,40.0,50.5)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW1_ARROW-arrow-up">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW1_ARROW-arrow-down">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">0    </text>
-            </g>
-            <g class="ARROW2__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_DOWN" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW2" transform="matrix(1.0,0.0,-0.0,1.0,40.0,70.5)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW2_ARROW-arrow-up">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWOFictif_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW2_ARROW-arrow-down">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">0    </text>
-            </g>
-            <g class="NODE id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fSwitch" id="id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557fSwitch" transform="translate(41.0,306.0)">
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="BREAKER id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" id="id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(35.0,176.0)">
-                <g class="closed" id="id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_BREAKER-closed">
-                    <rect height="18" width="18" x="1" y="1"/>
-                    <line x1="10" x2="10" y1="5" y2="15"/>
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO" transform="translate(61.0,138.0)">
+                <circle cx="4" cy="4" r="4"/>
+            </g>
+            <g class="sld-pst sld-top-feeder sld-constant-color" id="id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO" transform="translate(58.0,71.5)">
+                <circle class="sld-vl70to120" cx="7" cy="12" r="5"/>
+                <g class="sld-vl180to300">
+                            
+                    <circle cx="7" cy="7" r="5"/>
+                            
+                    <line x1="14" x2="0" y1="0" y2="14"/>
+                            
+                    <line x1="14" x2="11" y1="0" y2="0"/>
+                            
+                    <line x1="14" x2="14" y1="0" y2="3"/>
+                        
                 </g>
-                <g class="open" id="id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_BREAKER-open">
-                    <rect height="18" width="18" x="1" y="1"/>
-                    <line x1="5" x2="15" y1="10" y2="10"/>
-                </g>
+                <text class="sld-label" id="_b94318f6-6d24-4f56-96b9-df2531ad6543_TWO_N_LABEL" x="-5.0" y="-5.0">BE-TR2_2</text>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
+                <polyline points="65.0,252.0,65.0,252.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
+                <polyline points="65.0,248.0,65.0,222.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
+                <polyline points="65.0,222.0,65.0,192.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO">
+                <polyline points="65.0,172.0,65.0,142.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO">
+                <polyline points="65.0,142.0,65.0,89.0"/>
+            </g>
+            <g class="sld-arrow-p sld-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW1" transform="translate(60.0,100.5)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10"/>
+                <text class="sld-label" x="15.0" y="5.0">0</text>
+            </g>
+            <g class="sld-arrow-q sld-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW2" transform="translate(60.0,120.5)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10"/>
+                <text class="sld-label" x="15.0" y="5.0">0</text>
+            </g>
+            <g class="sld-bus-connection sld-constant-color sld-vl70to120" id="idBUSCO_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,248.0)">
+                <circle cx="4" cy="4" r="2"/>
+            </g>
+            <g class="sld-breaker sld-constant-color sld-closed sld-vl70to120" id="id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(55.0,172.0)">
+                <path class="sld-sw-closed" d="M1,1 V19 H19 V1z M10,5 V15"/>
+                <path class="sld-sw-open" d="M1,1 V19 H19 V1z M5,10 H15"/>
             </g>
         </g>
         <g class="cell idEXTERN_32_4" id="idEXTERN_32_4">
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fNode" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fNode" transform="translate(141.0,276.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="NODE idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif" id="idFICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif" transform="translate(141.0,88.0)">
-                <circle cx="4" cy="4" fill="#cc5500" fill-opacity="0" r="4" stroke="#cc5500" stroke-opacity="0"/>
-            </g>
-            <g class="TWO_WINDINGS_TRANSFORMER id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE" id="id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE" transform="translate(140.0,22.5)">
-                <circle cx="5" cy="10" fill="#cc5500" id="id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_TWO_WINDINGS_TRANSFORMER-WINDING1" r="5" stroke="#cc5500"/>
-                <circle cx="5" cy="5" fill="#abae28" id="id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_TWO_WINDINGS_TRANSFORMER-WINDING2" r="5" stroke="#abae28"/>
-                <text class="component-label" font-family="Verdana" font-size="8" id="_e482b89a-fa84-4ea9-8e70-a83d44790957_ONE_N_LABEL" transform="rotate(0,0,0)" x="-5.0" y="-5.0">BE-TR2_3</text>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fSwitch">
-                <polyline points="145.0,310.0,145.0,310.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fSwitch_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fNode">
-                <polyline points="145.0,310.0,145.0,280.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fNode_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
-                <polyline points="145.0,280.0,145.0,196.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif">
-                <polyline points="145.0,176.0,145.0,92.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="wire" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE">
-                <polyline points="145.0,92.0,145.0,38.0" stroke="#cc5500" stroke-width="1"/>
-            </g>
-            <g class="ARROW1__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_DOWN" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW1" transform="matrix(1.0,0.0,-0.0,1.0,140.0,50.0)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW1_ARROW-arrow-up">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW1_ARROW-arrow-down">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">0    </text>
-            </g>
-            <g class="ARROW2__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_DOWN" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW2" transform="matrix(1.0,0.0,-0.0,1.0,140.0,70.0)">
-                <g class="arrow-up" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW2_ARROW-arrow-up">
-                    <polygon points="5,0 10,10 0,10"/>
-                </g>
-                <g class="arrow-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_FICT_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONEFictif_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW2_ARROW-arrow-down">
-                    <polygon points="0,0 10,0 5,10"/>
-                </g>
-                <text class="component-label" font-family="Verdana" font-size="8" textLength="25" transform="rotate(0,0,0)" x="15.0" xml:space="preserve" y="9.0">0    </text>
-            </g>
-            <g class="NODE id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fSwitch" id="id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4fSwitch" transform="translate(141.0,306.0)">
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="BREAKER id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" id="id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(135.0,176.0)">
-                <g class="closed" id="id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_BREAKER-closed">
-                    <rect height="18" width="18" x="1" y="1"/>
-                    <line x1="10" x2="10" y1="5" y2="15"/>
-                </g>
-                <g class="open" id="id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_BREAKER-open">
-                    <rect height="18" width="18" x="1" y="1"/>
-                    <line x1="5" x2="15" y1="10" y2="10"/>
-                </g>
+            <g class="sld-node sld-constant-color sld-hidden-node sld-vl70to120" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE" transform="translate(161.0,138.0)">
+                <circle cx="4" cy="4" r="4"/>
+            </g>
+            <g class="sld-two-wt sld-top-feeder sld-constant-color" id="id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE" transform="translate(160.0,72.5)">
+                <circle class="sld-vl70to120" cx="5" cy="10" r="5"/>
+                <circle class="sld-vl0to30" cx="5" cy="5" r="5"/>
+                <text class="sld-label" id="_e482b89a-fa84-4ea9-8e70-a83d44790957_ONE_N_LABEL" x="-5.0" y="-5.0">BE-TR2_3</text>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
+                <polyline points="165.0,252.0,165.0,252.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
+                <polyline points="165.0,248.0,165.0,222.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
+                <polyline points="165.0,222.0,165.0,192.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE">
+                <polyline points="165.0,172.0,165.0,142.0"/>
+            </g>
+            <g class="sld-wire sld-constant-color sld-vl70to120" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE">
+                <polyline points="165.0,142.0,165.0,88.0"/>
+            </g>
+            <g class="sld-arrow-p sld-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW1" transform="translate(160.0,100.0)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10"/>
+                <text class="sld-label" x="15.0" y="5.0">0</text>
+            </g>
+            <g class="sld-arrow-q sld-down" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW2" transform="translate(160.0,120.0)">
+                <polygon class="sld-arrow-down" points="0,0 10,0 5,10"/>
+                <polygon class="sld-arrow-up" points="5,0 10,10 0,10"/>
+                <text class="sld-label" x="15.0" y="5.0">0</text>
+            </g>
+            <g class="sld-bus-connection sld-constant-color sld-vl70to120" id="idBUSCO_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,248.0)">
+                <circle cx="4" cy="4" r="2"/>
+            </g>
+            <g class="sld-breaker sld-constant-color sld-closed sld-vl70to120" id="id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(155.0,172.0)">
+                <path class="sld-sw-closed" d="M1,1 V19 H19 V1z M10,5 V15"/>
+                <path class="sld-sw-open" d="M1,1 V19 H19 V1z M5,10 H15"/>
             </g>
         </g>
     </g>
