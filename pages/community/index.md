@@ -25,7 +25,7 @@ We use the [PowSyBl Slack](https://join.slack.com/t/powsybl/shared_invite/zt-rzv
   <img alt="Github logo" src="img/index/github-logo.png" width="130" /> 
 </p>
 
-If you encounter a problem with PowSyBl, the first places to ask for help are the user mailing list and the `#général` [slack channel](https://powsybl.slack.com/archives/C01SLQWPXF0).
+If you encounter a problem with PowSyBl, the first places to ask for help are the user mailing list and the `#issues` [slack channel](https://powsybl.slack.com/archives/C02CG8Q0TS6).
 
 If, after having asked for help, you suspect that you have found a bug in PowSyBl, you should report it by opening an issue in the appropriate [GitHub repository](../documentation/developer/repositories/index.md). Before creating a bug report, please **perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Apowsybl)** to see if the problem has already been reported. Prefer to add a comment to an existing issue instead of opening a new one to avoid duplication and make it more complex the triage of issues.
 
