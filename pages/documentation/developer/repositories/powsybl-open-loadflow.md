@@ -1,4 +1,4 @@
-# powsybl-open-loadflow [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-open-loadflow.svg)](https://github.com/powsybl/powsybl-open-loadflow/releases/)
+# powsybl-open-loadflow [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-open-loadflow.svg?sort=semver)](https://github.com/powsybl/powsybl-open-loadflow/releases/)
 The PowSyBl Open Load Flow [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an implementation of the LoadFlow API based on the [powsybl-math-native](powsybl-math-native.md) project.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [annetill](https://github.com/annetill)  

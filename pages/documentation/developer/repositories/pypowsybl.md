@@ -1,4 +1,4 @@
-# pypowsybl [![GitHub release](https://img.shields.io/github/release/powsybl/pypowsybl.svg)](https://github.com/powsybl/pypowsybl/releases/)
+# pypowsybl [![GitHub release](https://img.shields.io/github/release/powsybl/pypowsybl.svg?sort=semver)](https://github.com/powsybl/pypowsybl/releases/)
 The PyPowSyBl project gives access to PowSyBl framework to Python developers. This Python integration relies on GraalVM to compile Java code to a native library.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)  

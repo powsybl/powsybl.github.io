@@ -1,4 +1,4 @@
-# powsybl-hpc [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-hpc.svg)](https://github.com/powsybl/powsybl-hpc/releases/)
+# powsybl-hpc [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-hpc.svg?sort=semver)](https://github.com/powsybl/powsybl-hpc/releases/)
 The PowSyBl HPC (High Performance Computing) [repository](https://github.com/powsybl/powsybl-hpc) provides two implementations of the Computation API, to distribute the computation using [MPI](https://www.open-mpi.org) or [Slurm Workload Manager](https://slurm.schedmd.com).
 
 **Reviewers:** [sylvlecl](https://github.com/sylvlecl) (Slurm), [geofjamg](https://github.com/geofjamg) (MPI)  
