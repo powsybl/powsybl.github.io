@@ -46,7 +46,7 @@ This user story involves several features from the PowSyBl framework and some ot
   <img src="img/capacity_calculation_rsc/File.svg"/>
 </p>
 The studied network comes from a set of TSOs' networks. The TSOs' networks can be provided in a common TSO exchange format such as UCTE or CIM-CGMES formats. 
-The following lines of code come format from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrate this functionality.
+The following lines of code come format from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/main/cgmes) and illustrate this functionality.
 
 ```java
 File fileBe = new File("/path/to/file/MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip");
@@ -70,7 +70,7 @@ Network networkNl = Importers.loadNetwork(fileNl.toString());
 <p style="text-align:center">
   <img src="img/capacity_calculation_rsc/Network_merging.svg"/>
 </p>
-A topological merge of the TSOs' networks is done. The following lines of code come from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/master/cgmes) and illustrate this functionality.
+A topological merge of the TSOs' networks is done. The following lines of code come from [powsybl-tutorials](https://github.com/powsybl/powsybl-tutorials/tree/main/cgmes) and illustrate this functionality.
 
 ```java
 networkBe.merge(networkNl);

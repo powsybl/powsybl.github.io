@@ -4,7 +4,7 @@ layout: default
 
 # Roadmap
 ## Documentation
-- [Expected contributions](https://github.com/powsybl/powsybl.github.io/blob/master/pages/todo/expected-contributions.md) for next months
+- [Expected contributions](https://github.com/powsybl/powsybl.github.io/blob/main/pages/todo/expected-contributions.md) for next months
 - Improve our functional documentation
 - More and more user stories
 - More and more tutorials
@@ -65,7 +65,7 @@ The integration of [Dynawo](https://dynawo.github.io/) is working: feature avail
 -  Support of margin calculation: 2022.
 
 ### OpenLoadFlow
-Improving our open load flow used for tests, experimental and collaboration purposes. For more information, please read the [README file](https://github.com/powsybl/powsybl-open-loadflow/blob/master/README.md). We are still working on:
+Improving our open load flow used for tests, experimental and collaboration purposes. For more information, please read the [README file](https://github.com/powsybl/powsybl-open-loadflow/blob/main/README.md). We are still working on:
 - A faster security analysis: work in progress and expected before the end of 2021. 
 - Support of DC security analysis based on the DC sensitivity analysis implementation: work in progress.
 - Voltage control:

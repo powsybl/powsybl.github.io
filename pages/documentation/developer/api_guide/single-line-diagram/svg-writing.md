@@ -154,7 +154,7 @@ We then obtain the following wider SVG file:
 
 ## Diagrams from a CGMES file
 
-First of all, we need to download sample files from ENTSO-E [here](https://github.com/powsybl/powsybl-cgmes-conformity-assessments/raw/master/src/test/resources/TestConfigurations_packageCASv2.0.zip)
+First of all, we need to download sample files from ENTSO-E [here](https://github.com/powsybl/powsybl-cgmes-conformity-assessments/raw/main/src/test/resources/TestConfigurations_packageCASv2.0.zip)
 (these files correspond to the test configurations for Conformity Assessment Scheme v2.0).
 Inside the downloaded zip file, we will only consider the following file: 
 `CGMES_v2.4.15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip`, which is contained in `MicroGrid/Type4_T4` folder. 
