@@ -44,7 +44,7 @@ The following example creates a N-1 contingency for each line of the network. We
 ```groovy
 for (l in network.lines) {
     contingency(l.id) {
-        equipements l.id
+        equipments l.id
     }
 }
 ```

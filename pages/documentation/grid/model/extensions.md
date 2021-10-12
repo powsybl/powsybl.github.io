@@ -9,12 +9,35 @@ The grid model contains enough data to basically describe supported components a
 The extensions are a way to add additional structured data to an equipment to extend its features.
 The extensions can be attached to any objects of a network or to the network itself.
 
-Some extensions are mono-variant meaning the data are identical for all the variants of the network. However, some of them are multi-variants to allow a different value for each variant of the network. It's typically the case for the [LoadDetail]() extension that give the distribution of the constant part and the termo-sensitive part of a consumption. 
+Some extensions are mono-variant meaning the data are identical for all the variants of the network. However, some of them are multi-variants to allow a different value for each variant of the network. It's typically the case for the [LoadDetail](#load-detail) extension that give the distribution of the constant part and the termo-sensitive part of a consumption. 
 
 Note that some extensions provided by PowSyBl aren't supported in the [persistent implementation of IIDM](../../developer/repositories/powsybl-network-store.md).
 
 * TOC
 {:toc}
+
+## Load detail
+A load is described by its active power setpoint $$P0$$ and its reactive power setpoint $$Q0$$. This extension is used to detail :
+- In the total amount of active power what is fixed and what is time-dependant (also called variable). The time-dependant part can be adjusted for production equals consumption.
+- In the total amount of reactive power what is fixed and what is time-dependant (also called variable).
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| variableActivePower | double | MW | yes | - | The part of the active power setpoint that is considered variable |
+| fixedActivePower | double | MVar | yes | - | The part of the active power setpoint that is considered constant |
+| variableReactivePower | double | MW | yes | - | The part of the reactive power setpoint that is considered variable |
+| fixedReactivePower | double | MVar | yes | - | The part of the reactive power setpoint that is considered constant |
+
+Here is how to add an load detail extension to a load:
+```java
+load.newExtension(LoadDetailAdder.class)
+    .withVariableActivePower(40)
+    .withFixedActivePower(20)
+    .withVariableReactivePower(5)
+    .withFixedReactivePower(2)
+    .add();
+```
+
 
 ## Active power control
 This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled. This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
@@ -123,3 +146,7 @@ transformer.newExtension(ThreeWindingsTransformerPhaseAngleClock.class)
 ```
 
 The extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
+
+## CGMES model
+
+This extension is used to store the CGMES model created from the CGMES conversion. This extension is attached to a [network](index.md#network).

@@ -19,7 +19,7 @@ h2, h3, h4, h5 {
     margin-bottom: 1rem;
 }
 
-span.heading {
+a.heading {
     margin-top: -4rem;
     padding-top: 4rem;
 }
@@ -38,14 +38,56 @@ a[href=""] {
     color: #fd495c;
 }
 
-/* Icons */
-img.doc-icon {
-    width: 64px;
-    height: 64px;
+/* Calls to action */
+a.call-to-action {
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 50px;
+  transition: 0.3s;
+  line-height: 1;
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+  margin-top: 6px;
 }
 
-div.doc-icon {
-    margin-right: 2rem;
+a.documentation.call-to-action {
+  color: #013764;
+  background: #dbedf9;
+}
+
+a.documentation.call-to-action:hover {
+  background: #013764;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Icons */
+.doc-icon {
+    margin: 0 15px auto auto;
+    width: 60px;
+    height: 60px;
+}
+
+em.doc-icon {
+    padding-top: 12px;
+    text-align: center;
+    border-radius: 50%;
+    background: #013764;
+    line-height: 1;
+    font-size: 36px;
+    color: #fff
+}
+
+.documentation_title:hover em.doc-icon {
+    background: #5faee3;
+}
+
+div.media-body {
+    margin-left: 1rem;
 }
 
 .clients img {

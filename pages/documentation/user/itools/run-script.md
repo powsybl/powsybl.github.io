@@ -107,8 +107,8 @@ The following example shows how to load a network from a file, run a [power flow
 ```groovy
 import com.powsybl.loadflow.LoadFlowParameters.VoltageInitMode
 
-input_file = argv[1]
-output_file = argv[2]
+input_file = args[1]
+output_file = args[2]
 
 // Load a network file
 network = loadNetwork(input_file)
