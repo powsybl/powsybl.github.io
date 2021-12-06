@@ -1,43 +1,30 @@
-# powsybl-single-line-diagram [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-single-line-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-single-line-diagram/releases/)
-This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provides modules to generate single line diagrams.
+# powsybl-network-area-diagram [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-network-area-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-network-area-diagram/releases/)
+This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provides modules to generate diagrams of a network area.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst), [flo-dup](https://github.com/flo-dup)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst), [BenoitJeanson](https://github.com/BenoitJeanson), [flo-dup](https://github.com/flo-dup)  
-**Release:** [geofjamg](https://github.com/geofjamg), [flo-dup](https://github.com/flo-dup)
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [flo-dup](https://github.com/flo-dup)  
+**Committers:** [flo-dup](https://github.com/flo-dup)  
+**Release:** [flo-dup](https://github.com/flo-dup)
 
 ## Features
 
-- creation of single line diagrams for given voltage levels, substations or zones in SVG format, for both node/breaker and bus/breaker topologies
+![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="50%" .center-image}
+
+- generation of concise diagrams displaying the graph whose nodes are the network voltage levels, and whose edges are the lines and transformers between those voltage levels 
+- generation of diagrams of the whole network or of a part of the network, given a voltage level and a depth
+- graph layout default implementation using a basic force layout algorithm, taken from [springy](https://github.com/dhotson/springy)
 - diagrams customization
-     - several layout algorithms to generate the diagrams
-     - many layout parameters to adjust the rendering
-     - use your own component library or modify the existing
-- extensions to force positions in the diagram 
+     - use your own graph layout implementation
+     - use your own label provider to display custom directed values on the graph edges (default label provider displays the active power)
+     - use your own style provider to have a custom style for nodes and edges (default style provider gives the nodes and edges a class corresponding to their voltage level, and give disconnected lines a specific class)
+     - use custom layout parameters and svg rendering parameters
 
 ## Getting started
 
-- [SVG Writing](../api_guide/single-line-diagram_svg-writing.md) - Create single line diagrams from test networks
-- [SVG Layouts]() (*soon available*) - Change single line diagram default layout
+- [Guide 1]() - TODO
+
 
 ## Releases
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
-| 2.5.1 | 2021-11-19 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.5.1) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.5.1/index.html) |
-| 2.5.0 | 2021-11-10 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.5.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.5.0/index.html) |
-| 2.4.0 | 2021-09-22 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.4.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.4.0/index.html) |
-| 2.3.0 | 2021-07-16 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.3.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.3.0/index.html) |
-| 2.2.0 | 2021-05-26 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.2.0/index.html) |
-| 2.1.0 | 2021-04-09 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.1.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.1.0/index.html) |
-| 2.0.0 | 2021-02-09 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.0.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.0.0/index.html) |
-| 1.9.1 | 2021-04-02 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.9.1) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.9.1/index.html) |
-| 1.9.0 | 2021-01-29 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.9.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.9.0/index.html) |
-| 1.8.0 | 2020-12-02 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.8.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.8.0/index.html) |
-| 1.7.1 | 2020-10-15 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.7.1) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.7.1/index.html) |
-| 1.7.0 | 2020-10-15 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.7.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.7.0/index.html) |
-| 1.6.0 | 2020-09-09 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.6.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.6.0/index.html) |
-| 1.5.0 | 2020-08-04 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.5.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.5.0/index.html) |
-| 1.4.0 | 2020-06-17 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.4.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.4.0/index.html) |
-| 1.3.0 | 2020-05-03 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.3.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.3.0/index.html) |
-| 1.2.0 | 2020-02-28 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.2.0/index.html) |
-| 1.1.0 | 2019-12-13 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v1.1.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/1.1.0/index.html) |
+| 0.1.0 | 2021-12-03 | [Release notes](https://github.com/powsybl/powsybl-network-area-diagram/releases/tag/v0.1.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-network-area-diagram/0.1.0/index.html) |
