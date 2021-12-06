@@ -7,8 +7,6 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 
 ## Features
 
-![sld-example](./img/powsybl-single-line-diagram/diagram-example.png){: width="50%" .center-image}
-
 - creation of single line diagrams for given voltage levels, substations or zones in SVG format, for both node/breaker and bus/breaker topologies
 - diagrams customization
      - several layout algorithms to generate the diagrams
