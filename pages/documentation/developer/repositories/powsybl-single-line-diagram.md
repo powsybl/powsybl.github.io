@@ -5,10 +5,9 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst), [BenoitJeanson](https://github.com/BenoitJeanson), [flo-dup](https://github.com/flo-dup)  
 **Release:** [geofjamg](https://github.com/geofjamg), [flo-dup](https://github.com/flo-dup)
 
-## Features
-
 ![sld-example](./img/powsybl-single-line-diagram/diagram-example.png){: width="50%" .center-image}
 
+## Features
 - creation of single line diagrams for given voltage levels, substations or zones in SVG format, for both node/breaker and bus/breaker topologies
 - diagrams customization
      - several layout algorithms to generate the diagrams

@@ -5,10 +5,9 @@ This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provi
 **Committers:** [flo-dup](https://github.com/flo-dup)  
 **Release:** [flo-dup](https://github.com/flo-dup)
 
+![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="35%" .center-image}
+
 ## Features
-
-![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="50%" .center-image}
-
 - generation of concise diagrams displaying the graph whose nodes are the network voltage levels, and whose edges are the lines and transformers between those voltage levels 
 - generation of diagrams of the whole network or of a part of the network, given a voltage level and a depth
 - graph layout default implementation using a basic force layout algorithm, taken from [springy](https://github.com/dhotson/springy)
