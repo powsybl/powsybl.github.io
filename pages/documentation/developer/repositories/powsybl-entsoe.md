@@ -1,9 +1,9 @@
 # powsybl-entsoe [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-entsoe.svg?sort=semver)](https://github.com/powsybl/powsybl-entsoe/releases/)
 The PowSyBl ENTSO-E [repository](https://github.com/powsybl/powsybl-entsoe) provides components specific to ENTSO-E-orientated processes.
 
-**Reviewers:** [annetill](https://github.com/annetill), [MioRtia](https://github.com/MioRtia), [colinepiloquet](https://github.com/colinepiloquet)  
-**Committers:** [MioRtia](https://github.com/MioRtia),  [colinepiloquet](https://github.com/colinepiloquet)
-**Release:** [MioRtia](https://github.com/MioRtia)
+**Reviewers:** [annetill](https://github.com/annetill), [miovd](https://github.com/miovd), [colinepiloquet](https://github.com/colinepiloquet)  
+**Committers:** [miovd](https://github.com/miovd),  [colinepiloquet](https://github.com/colinepiloquet)
+**Release:** [miovd](https://github.com/miovd)
 
 ## Features
 

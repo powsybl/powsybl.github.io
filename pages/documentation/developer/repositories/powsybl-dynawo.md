@@ -3,7 +3,7 @@ The PowSyBl Dynawo [repository](https://github.com/powsybl/powsybl-dynawo) provi
 
 **Reviewers:** [agnesLeroy](https://github.com/agnesLeroy), [mathbagu](https://github.com/mathbagu), [zamarrenolm](https://github.com/zamarrenolm)  
 **Committers:** [mathbagu](https://github.com/mathbagu)  
-**Release:** [MioRtia](https://github.com/MioRtia)
+**Release:** [miovd](https://github.com/miovd)
 
 ## Features
 

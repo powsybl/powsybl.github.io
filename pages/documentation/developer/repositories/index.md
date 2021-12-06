@@ -7,8 +7,8 @@ This page shortly describes each repository of the [PowSyBl organization](https:
 ### [powsybl-core](powsybl-core.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-core.svg?sort=semver)](https://github.com/powsybl/powsybl-core/releases/)
 This [repository](https://github.com/powsybl/powsybl-core) provides the core feature of the PowSyBl framework such as the grid modelling, the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity analysis, dynamic simulation...).
 
-**Reviewers:** [annetill](https://github.com/annetill), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia), [zamarrenolm](https://github.com/zamarrenolm)
-**Committers:** [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
+**Reviewers:** [annetill](https://github.com/annetill), [mathbagu](https://github.com/mathbagu), [miovd](https://github.com/miovd), [zamarrenolm](https://github.com/zamarrenolm)
+**Committers:** [mathbagu](https://github.com/mathbagu), [miovd](https://github.com/miovd)
 
 ### [powsybl-open-loadflow](powsybl-open-loadflow.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-open-loadflow.svg?sort=semver)](https://github.com/powsybl/powsybl-open-loadflow/releases/)
 This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an implementation of the LoadFlow API based on the [powsybl-math-native](powsybl-math-native.md) project.
@@ -26,7 +26,7 @@ This [repository](https://github.com/powsybl/powsybl-dynawo) provides an impleme
 This [repository](https://github.com/powsybl/powsybl-afs) provides a standardized way to organize the data for a power system study, called AFS (**A**pplication **F**ile **S**ystem). It supports several storage system such as [MapDB](http://www.mapdb.org) or [Apache Cassandra](https://cassandra.apache.org). It is designed to be extensible using custom plugins to manage new types of data.
 
 **Reviewers:** [pl-buiquang](https://github.com/pl-buiquang), [geofjamg](https://github.com/geofjamg)
-**Committers:** [pl-buiquang](https://github.com/pl-buiquang), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
+**Committers:** [pl-buiquang](https://github.com/pl-buiquang), [mathbagu](https://github.com/mathbagu), [miovd](https://github.com/miovd)
 
 ### [powsybl-hpc](powsybl-hpc.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-hpc.svg?sort=semver)](https://github.com/powsybl/powsybl-hpc/releases/)
 This [repository](https://github.com/powsybl/powsybl-hpc) provides two implementations of the Computation API, to distribute the computation using [MPI](https://www.open-mpi.org) or [Slurm Workload Manager](https://slurm.schedmd.com).
@@ -49,14 +49,14 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 ### [powsybl-entsoe](powsybl-entsoe.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-entsoe.svg?sort=semver)](https://github.com/powsybl/powsybl-entsoe/releases/)
 This [repository](https://github.com/powsybl/powsybl-entsoe) provides components specific to ENTSO-E-orientated processes.
 
-**Reviewers:** [MioRtia](https://github.com/MioRtia), [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)
-**Committers:** [MioRtia](https://github.com/MioRtia),  [colinepiloquet](https://github.com/colinepiloquet)
+**Reviewers:** [miovd](https://github.com/miovd), [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)
+**Committers:** [miovd](https://github.com/miovd),  [colinepiloquet](https://github.com/colinepiloquet)
 
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg?sort=semver)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) provides modules to run optimal power load flow on several network variants. Variants are generated through time series mapping on a base case.
 
 **Reviewers:** [marifunf](https://github.com/marifunf), [berthaultval](https://github.com/berthaultval), [pl-buiquang](https://github.com/pl-buiquang)
-**Committers:** [berthaultval](https://github.com/berthaultval), [MioRtia](https://github.com/MioRtia)
+**Committers:** [berthaultval](https://github.com/berthaultval), [miovd](https://github.com/miovd)
 
 ## Microservices
 
@@ -120,7 +120,7 @@ This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++
 This [repository](https://github.com/powsybl/powsybl-metrix) provides a C++ implementation of optimal power load flow.
 
 **Reviewers:** [berthaultval](https://github.com/berthaultval), [marifunf](https://github.com/marifunf), [pl-buiquang](https://github.com/pl-buiquang)
-**Committers:** [berthaultval](https://github.com/berthaultval), [MioRtia](https://github.com/MioRtia)
+**Committers:** [berthaultval](https://github.com/berthaultval), [miovd](https://github.com/miovd)
 
 ## Development
 
