@@ -18,6 +18,7 @@ The PowSyBl Open Load Flow [repository](https://github.com/powsybl/powsybl-open-
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 0.14.0 | 2021-11-17 | [Release notes](https://github.com/powsybl/powsybl-open-loadflow/releases/tag/v0.14.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-open-loadflow/0.14.0/index.html) |
 | 0.13.0 | 2021-09-23 | [Release notes](https://github.com/powsybl/powsybl-open-loadflow/releases/tag/v0.13.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-open-loadflow/0.13.0/index.html) |
 | 0.12.0 | 2021-07-16 | [Release notes](https://github.com/powsybl/powsybl-open-loadflow/releases/tag/v0.12.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-open-loadflow/0.12.0/index.html) |
 | 0.11.0 | 2021-05-27 | [Release notes](https://github.com/powsybl/powsybl-open-loadflow/releases/tag/v0.11.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-open-loadflow/0.11.0/index.html) |
