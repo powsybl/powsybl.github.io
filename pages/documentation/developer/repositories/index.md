@@ -37,8 +37,8 @@ This [repository](https://github.com/powsybl/powsybl-hpc) provides two implement
 ### [powsybl-balances-adjustment](powsybl-balances-adjustment.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-balances-adjustment.svg?sort=semver)](https://github.com/powsybl/powsybl-balances-adjustment/releases/)
 This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provides a functional module to reach target net positions across networks, through an iterative process based on power flow computations and injections scaling.
 
-**Reviewers:** [murgeyseb](https://github.com/murgeyseb)
-**Committers:** [murgeyseb](https://github.com/murgeyseb)
+**Reviewers:** [phiedw](https://github.com/phiedw), [miovd](https://github.com/miovd)
+**Committers:** [phiedw](https://github.com/phiedw), [miovd](https://github.com/miovd)
 
 ### [powsybl-single-line-diagram](powsybl-single-line-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-single-line-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-single-line-diagram/releases/)
 This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provides modules to generate single line diagrams.
