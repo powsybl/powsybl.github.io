@@ -19,7 +19,7 @@ This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an 
 ### [powsybl-dynawo](powsybl-dynawo.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-dynawo.svg?sort=semver)](https://github.com/powsybl/powsybl-dynawo/releases/)
 This [repository](https://github.com/powsybl/powsybl-dynawo) provides an implementation of the dynamic simulation API for the [Dyna&omega;o](https://dynawo.github.io/) time domain simulation tool.
 
-**Reviewers:** [agnesLeroy](https://github.com/agnesLeroy), [mathbagu](https://github.com/mathbagu), [zamarrenolm](https://github.com/zamarrenolm)
+**Reviewers:** [mathbagu](https://github.com/mathbagu), [zamarrenolm](https://github.com/zamarrenolm)
 **Committers** [mathbagu](https://github.com/mathbagu)
 
 ### [powsybl-afs](powsybl-afs.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-afs.svg?sort=semver)](https://github.com/powsybl/powsybl-afs/releases/)
