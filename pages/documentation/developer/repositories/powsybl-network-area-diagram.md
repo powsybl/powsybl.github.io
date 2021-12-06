@@ -8,14 +8,14 @@ This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provi
 ![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="35%" .center-image}
 
 ## Features
-- generation of concise diagrams displaying the graph whose nodes are the network voltage levels, and whose edges are the lines and transformers between those voltage levels 
-- generation of diagrams of the whole network or of a part of the network, given a voltage level and a depth
-- graph layout default implementation using a basic force layout algorithm, taken from [springy](https://github.com/dhotson/springy)
-- diagrams customization
-     - use your own graph layout implementation
-     - use your own label provider to display custom directed values on the graph edges (default label provider displays the active power)
-     - use your own style provider to have a custom style for nodes and edges (default style provider gives the nodes and edges a class corresponding to their voltage level, and give disconnected lines a specific class)
-     - use custom layout parameters and svg rendering parameters
+- Generate concise diagrams displaying the graph whose nodes are the network voltage levels, and whose edges are the lines and transformers between those voltage levels. 
+- Generate diagrams of the whole network or of a part of the network, given a voltage level and a depth.
+- Graph layout default implementation using a basic force layout algorithm, taken from [springy](https://github.com/dhotson/springy)
+- Diagrams customization:
+     - use your own graph layout implementation,
+     - use your own label provider to display custom directed values on the graph edges (default label provider displays the active power),
+     - use your own style provider to have a custom style for nodes and edges (default style provider gives the nodes and edges a class corresponding to their voltage level, and give disconnected lines a specific class),
+     - use custom layout parameters and svg rendering parameters.
 
 ## Getting started
 
