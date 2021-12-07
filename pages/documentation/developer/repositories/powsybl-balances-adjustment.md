@@ -16,6 +16,7 @@ The PowSyBl Balances Adjustment [repository](https://github.com/powsybl/powsybl-
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 1.8.0 | 2021-11-18 | [Release notes](https://github.com/powsybl/powsybl-balances-adjustment/releases/tag/v1.8.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-balances-adjustment/1.8.0/index.html) |
 | 1.7.0 | 2021-09-23 | [Release notes](https://github.com/powsybl/powsybl-balances-adjustment/releases/tag/v1.7.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-balances-adjustment/1.7.0/index.html) |
 | 1.6.0 | 2021-07-19 | [Release notes](https://github.com/powsybl/powsybl-balances-adjustment/releases/tag/v1.6.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-balances-adjustment/1.6.0/index.html) |
 | 1.5.0 | 2021-05-27 | [Release notes](https://github.com/powsybl/powsybl-balances-adjustment/releases/tag/v1.5.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-balances-adjustment/1.5.0/index.html) |
