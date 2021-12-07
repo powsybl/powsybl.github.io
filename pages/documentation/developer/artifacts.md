@@ -351,7 +351,7 @@ This module provides a maven plugin to [create a standalone distribution based o
 This module enables to generate svg images of voltage levels and substations.
 
 **single-line-diagram-cgmes-dl-iidm-extensions**  
-This module gathers the network core model extensions of CIM-CGMES networks.
+This module gathers the network core model extensions for CIM-CGMES networks.
 
 **single-line-diagram-cgmes-dl-conversion**  
 This module is used to convert the CIM-CGMES DL profile to the network core model extensions.
