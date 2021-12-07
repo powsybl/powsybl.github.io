@@ -5,8 +5,9 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst), [BenoitJeanson](https://github.com/BenoitJeanson), [flo-dup](https://github.com/flo-dup)  
 **Release:** [geofjamg](https://github.com/geofjamg), [flo-dup](https://github.com/flo-dup)
 
-## Features
+![sld-example](./img/powsybl-single-line-diagram/diagram-example.png){: width="50%" .center-image}
 
+## Features
 - creation of single line diagrams for given voltage levels, substations or zones in SVG format, for both node/breaker and bus/breaker topologies
 - diagrams customization
      - several layout algorithms to generate the diagrams
@@ -23,6 +24,8 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 2.5.1 | 2021-11-19 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.5.1) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.5.1/index.html) |
+| 2.5.0 | 2021-11-10 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.5.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.5.0/index.html) |
 | 2.4.0 | 2021-09-22 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.4.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.4.0/index.html) |
 | 2.3.0 | 2021-07-16 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.3.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.3.0/index.html) |
 | 2.2.0 | 2021-05-26 | [Release notes](https://github.com/powsybl/powsybl-single-line-diagram/releases/tag/v2.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-single-line-diagram/2.2.0/index.html) |

@@ -17,6 +17,7 @@ The PowSyBl Dynawo [repository](https://github.com/powsybl/powsybl-dynawo) provi
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 1.5.0 | 2021-11-16 | [Release notes](https://github.com/powsybl/powsybl-dynawo/releases/tag/v1.5.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-dynawo/1.5.0/index.html) |
 | 1.4.0 | 2021-09-22 | [Release notes](https://github.com/powsybl/powsybl-dynawo/releases/tag/v1.4.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-dynawo/1.4.0/index.html) |
 | 1.3.0 | 2021-07-19 | [Release notes](https://github.com/powsybl/powsybl-dynawo/releases/tag/v1.3.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-dynawo/1.3.0/index.html) |
 | 1.2.0 | 2021-05-26 | [Release notes](https://github.com/powsybl/powsybl-dynawo/releases/tag/v1.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-dynawo/1.2.0/index.html) |

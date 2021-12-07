@@ -46,6 +46,12 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provid
 **Reviewers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 **Committers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
+### [powsybl-network-area-diagram](powsybl-network-area-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-network-area-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-network-area-diagram/releases/)
+This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provides modules to generate concise diagrams of the network.
+
+**Reviewers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg)
+**Committers:** [flo-dup](https://github.com/flo-dup)
+
 ### [powsybl-entsoe](powsybl-entsoe.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-entsoe.svg?sort=semver)](https://github.com/powsybl/powsybl-entsoe/releases/)
 This [repository](https://github.com/powsybl/powsybl-entsoe) provides components specific to ENTSO-E-orientated processes.
 
