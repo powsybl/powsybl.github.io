@@ -152,7 +152,7 @@ This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg?sort=semver)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) also provides a C++ implementation of optimal power load flow.
 
-**Reviewers:** [berthaultval](https://github.com/berthaultval), [marifunf](https://github.com/marifunf)
+**Reviewers:** [berthaultval](https://github.com/berthaultval), [marifunf](https://github.com/marifunf)  
 **Committers:** [berthaultval](https://github.com/berthaultval), [miovd](https://github.com/miovd)  
 
 ## Python libraries
@@ -194,23 +194,23 @@ This [repository](https://github.com/powsybl/powsybl-incubator) provides incubat
 ### .github
 This [repository](https://github.com/powsybl/.github) contains documents to explain how the PowSyBl organization works (code of conduct, maintainers, contributing) It also provides the templates for the issues, the pull requests. These documents are shared by all the repositories.
 
-**Reviewers:** [annetill](https://github.com/annetill)
+**Reviewers:** [annetill](https://github.com/annetill)  
 **Committers:** [annetill](https://github.com/annetill)
 
 ### powsybl.github.io
 This [repository](https://github.com/powsybl/powsybl.github.io) contains the source code of the PowSyBl's website.
 
-**Reviewers:** [annetill](https://github.com/annetill)
+**Reviewers:** [annetill](https://github.com/annetill)  
 **Committers:** all the [committers](../../../overview/governance.md#members)
 
 ### powsybl-tutorials
 This [repositories](https://github.com/powsybl/powsybl-tutorials) contains the source code of the different [tutorials](../tutorials/index.md) presented on this website.
 
-**Reviewers:** [annetill](https://github.com/annetill)
+**Reviewers:** [annetill](https://github.com/annetill)  
 **Committers:** all the [committers](../../../overview/governance.md#members)
 
 ### powsybl-distribution
 This [repositories](https://github.com/powsybl/powsybl-distribution) contains the source code to build a itools distribution in order to use many features developped in this organisation.  
 
-**Reviewers:** [annetill](https://github.com/annetill)
+**Reviewers:** [annetill](https://github.com/annetill)  
 **Committers:** all the [committers](../../../overview/governance.md#members)
