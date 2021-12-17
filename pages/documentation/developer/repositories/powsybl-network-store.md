@@ -3,9 +3,6 @@ The PowSyBl Network store [repository](https://github.com/powsybl/powsybl-networ
 typical microservice architecture. Instead of an in-memory implementation like in the PowSyBl core repository, this implementation is backed by a Cassandra database. The network model is stored in the database in a structured way 
 (one table per equipment type and with indexes), so that we can query only the needed data and ensure good performance for common operations. Examples of common operations are a simple switch position change (only a few values), a single line diagram rendering (substation wide data) or a loadflow run (network wide data). The REST interface exposed by this service is very low-level for performance reasons. In particular, the write operations do not prevent inconsistent modifications. Therefore, network data should usually be accessed from this service using the provided Java client (the one which implements the IIDM API) and not directly from the REST interface because the Java client is safe and prevents inconsistent modifications.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
-
 ## Features
 
 - a persistent IIDM implementation in a Cassandra database

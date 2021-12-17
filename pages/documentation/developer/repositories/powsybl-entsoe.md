@@ -1,13 +1,12 @@
 # powsybl-entsoe [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-entsoe.svg?sort=semver)](https://github.com/powsybl/powsybl-entsoe/releases/)
 The PowSyBl ENTSO-E [repository](https://github.com/powsybl/powsybl-entsoe) provides components specific to ENTSO-E-orientated processes.
 
-**Reviewers:** [annetill](https://github.com/annetill), [MioRtia](https://github.com/MioRtia), [colinepiloquet](https://github.com/colinepiloquet)  
-**Committers:** [MioRtia](https://github.com/MioRtia),  [colinepiloquet](https://github.com/colinepiloquet)
-**Release:** [MioRtia](https://github.com/MioRtia)
+## Features  
 
-## Features
-
-- TODO
+In this repository we have some features dedicated to European processes, such as:
+- A balances adjustment for CGMES-based processes, especially European Merging Function.
+- A Critical Network Element (CNE) exporter.
+- A Generation and Load Shit Keys (GLSK) importer, for UCT and CIM formats.
 
 ## Getting started
 

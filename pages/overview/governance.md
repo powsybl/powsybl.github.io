@@ -21,10 +21,11 @@ PowSyBl TSC voting members are:
 - Jon Harper (<https://github.com/jonenst>)
 - Geoffroy Jamgotchian (<https://github.com/geofjamg>)
 - Sylvain Leclerc (<https://github.com/sylvlecl>)
-- Sébastien Murgey (<https://github.com/murgeyseb>)
-- Miora Ralambotiana (<https://github.com/MioRtia>)
+- Miora Vedelago (<https://github.com/miovd>)
 - Anne Tilloy (<https://github.com/annetill>)
 - Luis Zamarreno (<https://github.com/zamarrenolm>)
+- Philippe Edwards (<https://github.com/phiedw>)
+- Florian Dupuy (<https://github.com/flo-dup>)
 
 ### Voting
 While the PowSyBl organization aims to operate as a consensus based community, a TSC vote may be required to move forward. The voting members of the TSC will vote on a one vote per voting member basis. The simple majority is needed to approve proposals. A good way to vote is to create a poll [here](https://lists.lfenergy.org/g/powsybl-tsc/addpoll).

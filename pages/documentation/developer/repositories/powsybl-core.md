@@ -1,9 +1,5 @@
 # powsybl-core [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-core.svg?sort=semver)](https://github.com/powsybl/powsybl-core/releases/)
-The PowSyBl Core [repository](https://github.com/powsybl/powsybl-core) provides the core features of the framework and a large set of APIs to import/export grid data or run various type of simulations (power flow, security analysis, sensitivity calculation, time domain simulation).
-
-**Reviewers:** [annetill](https://github.com/annetill), [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia), [zamarrenolm](https://github.com/zamarrenolm)  
-**Committers:** [mathbagu](https://github.com/mathbagu), [MioRtia](https://github.com/MioRtia)
-**Release:** [MioRtia](https://github.com/MioRtia)
+The PowSyBl Core [repository](https://github.com/powsybl/powsybl-core) provides the core features of the framework and a large set of APIs to import/export grid data or run various type of simulations (power flow, security analysis, sensitivity calculation, time domain simulation).  
 
 ## Features
 
