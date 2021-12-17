@@ -1,8 +1,5 @@
 # powsybl-balances-adjustment [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-balances-adjustment.svg?sort=semver)](https://github.com/powsybl/powsybl-balances-adjustment/releases/)
-The PowSyBl Balances Adjustment [repository](https://github.com/powsybl/powsybl-balances-adjustment) provides a functional module to reach target net positions across networks, through an iterative process based on power flow computations and injections scaling.
-
-**Reviewers:** [phiedw](https://github.com/phiedw), [miovd](https://github.com/miovd)  
-**Committers:** [phiedw](https://github.com/phiedw), [miovd](https://github.com/miovd)
+The PowSyBl Balances Adjustment [repository](https://github.com/powsybl/powsybl-balances-adjustment) provides a functional module to reach target net positions across networks, through an iterative process based on power flow computations and injections scaling.  
 
 ## Features
 

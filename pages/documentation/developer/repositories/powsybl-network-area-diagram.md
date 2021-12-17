@@ -1,10 +1,6 @@
 # powsybl-network-area-diagram [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-network-area-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-network-area-diagram/releases/)
 This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provides modules to generate diagrams of a network area.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [flo-dup](https://github.com/flo-dup)  
-**Committers:** [flo-dup](https://github.com/flo-dup)  
-**Release:** [flo-dup](https://github.com/flo-dup)
-
 ![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="35%" .center-image}
 
 ## Features

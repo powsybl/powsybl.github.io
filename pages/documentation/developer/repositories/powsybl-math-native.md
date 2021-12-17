@@ -1,8 +1,5 @@
 # powsybl-math-native [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-math-native.svg?sort=semver)](https://github.com/powsybl/powsybl-math-native/releases/)
-This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++ implementation of sparse matrix, based on the [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) project. These 64-bits libraries for Linux, Windows and MacOS are packaged as a Jar file and published on maven central.
-
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)
+This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++ implementation of sparse matrix, based on the [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) project. These 64-bits libraries for Linux, Windows and MacOS are packaged as a Jar file and published on maven central.  
 
 ## Features
 

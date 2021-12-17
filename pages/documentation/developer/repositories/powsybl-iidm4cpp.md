@@ -1,8 +1,5 @@
 # powsybl-iidm4cpp [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-iidm4cpp.svg?sort=semver)](https://github.com/powsybl/powsybl-iidm4cpp/releases/)
-This [repository](https://github.com/powsybl/powsybl-iidm4cpp) provides a C++ implementation of the IIDM grid model.
-
-**Reviewers:** [mathbagu](https://github.com/mathbagu)  
-**Committers:** [mathbagu](https://github.com/mathbagu)
+This [repository](https://github.com/powsybl/powsybl-iidm4cpp) provides a C++ implementation of the IIDM grid model.  
 
 ## Features
 

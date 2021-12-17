@@ -1,8 +1,5 @@
 # powsybl-afs [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-afs.svg?sort=semver)](https://github.com/powsybl/powsybl-afs/releases/)
-The PowSyBl AFS (**A**pplication **F**ile **S**ystem) [repository](https://github.com/powsybl/powsybl-afs) provides a standardized way to organize the data for a power system study. It supports several storage system such as [MapDB](http://www.mapdb.org) or [Apache Cassandra](https://cassandra.apache.org). It is designed to be extensible using custom plugins to manage new types of data.
-
-**Reviewers:** [berthaultval](https://github.com/berthaultval), [geofjamg](https://github.com/geofjamg)  
-**Committers:** [berthaultval](https://github.com/berthaultval), [mathbagu](https://github.com/mathbagu), [miovd](https://github.com/miovd)
+The PowSyBl AFS (**A**pplication **F**ile **S**ystem) [repository](https://github.com/powsybl/powsybl-afs) provides a standardized way to organize the data for a power system study. It supports several storage system such as [MapDB](http://www.mapdb.org) or [Apache Cassandra](https://cassandra.apache.org). It is designed to be extensible using custom plugins to manage new types of data.  
 
 ## Features
 
