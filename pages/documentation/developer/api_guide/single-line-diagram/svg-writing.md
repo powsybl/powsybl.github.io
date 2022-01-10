@@ -4,7 +4,10 @@ layout: default
 
 # Single Line Diagram - SVG Writing
 
-We are showing in this guide how to create some single line diagrams first from a test network, then from a [CGMES](../../../grid/formats/cim-cgmes.md) file.
+![Amsterdam_substation](img/svg-writing/example_AmsterdamSubstation.svg)
+
+We are showing in this guide how to create some single line diagrams, like the one above. 
+We first generate such a diagram from a test network, then from a [CGMES](../../../grid/formats/cim-cgmes.md) file.
 To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the central API of [powsybl-single-line-diagram](../../repositories/powsybl-single-line-diagram.md). 
 
 ## Prerequisites
