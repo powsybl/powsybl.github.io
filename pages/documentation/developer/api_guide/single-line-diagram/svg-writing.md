@@ -4,8 +4,8 @@ layout: default
 
 # Single Line Diagram - SVG Writing
 
-The `com.powsybl.sld.svg.DefaultSVGWriter` class of [powsybl-single-line-diagram](../../repositories/powsybl-single-line-diagram.md) is an implementation of the `SVGWriter` interface which allows to generate SVG files representing single line diagrams of a substation, a voltage level or a zone. 
 We are showing in this guide how to create some single line diagrams first from a test network, then from a [CGMES](../../../grid/formats/cim-cgmes.md) file.
+To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the central API of [powsybl-single-line-diagram](../../repositories/powsybl-single-line-diagram.md). 
 
 ## Prerequisites
 
@@ -123,12 +123,12 @@ Inside the downloaded zip file, we will only consider the following file:
 We first import this sample `Network` we are interested in:
 ```java
 String file = "/path/to/file/MicroGrid/Type4_T4/CGMES_v2.4.15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip";
-Network network = Importers.loadNetwork(Paths.get(file));
+Network network = Importers.loadNetwork(file);
 ```
 
 ### Generating a voltage level diagram
 Once the network is loaded, we can generate diagrams like in previous section.
-We first generate a SVG for the voltage level named `110` in substation `PP_Brussels` (corresponding id is `_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0`) 
+We first generate a SVG for the voltage level named `110` in substation `PP_Brussels` (corresponding id is `_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0`). 
 Note that, as the ids are not very human-readable, we customize the parameters to have the names displayed instead of the ids.
 Therefore, we use the slightly more complex interface `SingleLineDiagram.draw(network, id, path, parameters)`.
 
