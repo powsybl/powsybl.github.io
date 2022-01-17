@@ -13,6 +13,8 @@ This [repository](https://github.com/powsybl/powsybl-iidm4cpp) provides a C++ im
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 1.5.0 | 2022-01-10 | [Release notes](https://github.com/powsybl/powsybl-iidm4cpp/releases/tag/v1.5.0) | |
+| 1.4.0 | 2021-04-12 | [Release notes](https://github.com/powsybl/powsybl-iidm4cpp/releases/tag/v1.4.0) | |
 | 1.3.0 | 2021-01-16 | [Release notes](https://github.com/powsybl/powsybl-iidm4cpp/releases/tag/v1.3.0) | |
 | 1.2.1 | 2021-01-06 | [Release notes](https://github.com/powsybl/powsybl-iidm4cpp/releases/tag/v1.2.1) | |
 | 1.2.0 | 2020-09-09 | [Release notes](https://github.com/powsybl/powsybl-iidm4cpp/releases/tag/v1.2.0) | |
