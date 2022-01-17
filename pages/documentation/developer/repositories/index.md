@@ -71,7 +71,7 @@ This [repository](https://github.com/powsybl/powsybl-shortcircuits) allows analy
 **Reviewers:** [miovd](https://github.com/miovd), [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)    
 **Committers:** [miovd](https://github.com/miovd), [colinepiloquet](https://github.com/colinepiloquet)  
 
-### powsybl-network-hypothesis
+### powsybl-network-hypothesis [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-network-hypothesis.svg?sort=semver)](https://github.com/powsybl/powsybl-network-hypothesis/releases/)
 
 This [repository](https://github.com/powsybl/powsybl-network-hypothesis) allows to apply hypotheses on a network such as client connections, HVDC building from groups or loads, etc.  
 
