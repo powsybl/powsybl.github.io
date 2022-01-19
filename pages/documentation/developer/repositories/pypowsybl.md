@@ -6,17 +6,23 @@ The PyPowSyBl project gives access to PowSyBl framework to Python developers. Th
 The available features are:  
 
 **Grid modelling**      
-- We can create an empty network ;
+- We can create an empty network.
 - We can load a network from a file. The supported formats are for the moment `CGMES`, `MATPOWER`, `IEEE-CDF`, `PSS/E`, `UCTE` and `XIIDM`.
 - We can save a network to a file. The supported formats are for the moment `CGMES`, `UCTE`, and `XIIDM`.
 - We can create and update network elements with a [Pandas](https://pandas.pydata.org/) data frame.  
-  
+
+**Network Visualization**
+- We can create a single-line-diagram in SVG format from a substation or a voltage level.
+- We can create a network area diagram in SVG format, either for the full network or for a part of the network.
+- We can render these diagrams directly in the notebook if using a Jupyter notebook. 
+
 **Simulation**      
-- We can run a AC load flow with [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation ;
-- We can run a DC load flow with [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation ; 
-- We can run an AC sensitivity analysis with [OpenLoadFlow](../../simulation/sensitivity/openlf.md#ac-sensitivity-analysis) implementation, on the pre-contingency network and on the post-contingency networks ;
-- We can run a DC sensitivity analysis with [OpenLoadFlow](../../simulation/sensitivity/openlf.md#dc-sensitivity-analysis) implementation, , on the pre-contingency network and on the post-contingency networks ;
+- We can run a AC load flow with [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation.
+- We can run a DC load flow with [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation. 
+- We can run an AC sensitivity analysis with [OpenLoadFlow](../../simulation/sensitivity/openlf.md#ac-sensitivity-analysis) implementation, on the pre-contingency network and on the post-contingency networks.
+- We can run a DC sensitivity analysis with [OpenLoadFlow](../../simulation/sensitivity/openlf.md#dc-sensitivity-analysis) implementation, on the pre-contingency network and on the post-contingency networks.
 - We can run an AC post-contingency analysis with OpenLoadFlow, note that the DC security analysis based on OpenLoadFlow is not yet supported.
+- We can run a compliance check of computed values to loadflow equations. 
 
 ## Getting started
 
