@@ -6,7 +6,6 @@ The PyPowSyBl project gives access to PowSyBl framework to Python developers. Th
 The available features are:  
 
 **Grid modelling**      
-- We can create an empty network.
 - We can load a network from a file. The supported formats are for the moment `CGMES`, `MATPOWER`, `IEEE-CDF`, `PSS/E`, `UCTE` and `XIIDM`.
 - We can save a network to a file. The supported formats are for the moment `CGMES`, `UCTE`, and `XIIDM`.
 - We can create and update network elements with a [Pandas](https://pandas.pydata.org/) data frame.  
@@ -32,7 +31,7 @@ The available features are:
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
-| 0.12.0 | 2022-01-19 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.12.0) | [readthedocs.io](https://pypowsybl.readthedocs.io/en/latest/) |
+| 0.12.0 | 2022-01-19 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.12.0) | [readthedocs.io](https://pypowsybl.readthedocs.io/en/stable/) |
 | 0.11.0 | 2021-11-22 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.11.0) | - |
 | 0.10.0 | 2021-10-04 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.10.0) | - |
 | 0.9.0 | 2021-08-20 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.9.0) | - |
