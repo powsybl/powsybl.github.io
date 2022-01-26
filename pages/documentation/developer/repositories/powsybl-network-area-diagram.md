@@ -22,4 +22,5 @@ This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provi
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 0.2.0 | 2022-01-17 | [Release notes](https://github.com/powsybl/powsybl-network-area-diagram/releases/tag/v0.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-network-area-diagram/0.2.0/index.html) |
 | 0.1.0 | 2021-12-03 | [Release notes](https://github.com/powsybl/powsybl-network-area-diagram/releases/tag/v0.1.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-network-area-diagram/0.1.0/index.html) |
