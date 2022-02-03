@@ -131,7 +131,7 @@ Add the following dependencies to the `pom.xml` file:
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.1.8</version>
+        <version>1.2.9</version>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>

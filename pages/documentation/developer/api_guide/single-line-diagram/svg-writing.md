@@ -4,8 +4,11 @@ layout: default
 
 # Single Line Diagram - SVG Writing
 
-The `com.powsybl.sld.svg.DefaultSVGWriter` class of [powsybl-single-line-diagram](../../repositories/powsybl-single-line-diagram.md) is an implementation of the `SVGWriter` interface which allows to generate SVG files representing single line diagrams of a substation, a voltage level or a zone. 
-We are showing in this guide how to create some single line diagrams first from a test network, then from a [CGMES](../../../grid/formats/cim-cgmes.md) file.
+![Amsterdam_substation](img/svg-writing/example_AmsterdamSubstation.svg)
+
+We are showing in this guide how to create some single line diagrams, like the one above. 
+We first generate such a diagram from a test network, then from a [CGMES](../../../grid/formats/cim-cgmes.md) file.
+To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the central API of [powsybl-single-line-diagram](../../repositories/powsybl-single-line-diagram.md). 
 
 ## Prerequisites
 
@@ -52,8 +55,8 @@ First of all, we need to add some Maven dependencies in our `pom.xml` file:
 </dependencies>
 
 <properties>
-    <powsybl.sld.version>2.4.0</powsybl.sld.version>
-    <powsybl.core.version>4.4.0</powsybl.core.version>
+    <powsybl.sld.version>2.7.0</powsybl.sld.version>
+    <powsybl.core.version>4.6.0</powsybl.core.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
 ```
@@ -66,29 +69,6 @@ Here are some details about these dependencies (see also the [powsybl artifacts 
 - `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j`  are for importing a CGMES file,
 - `slf4j-simple` allows you to have simple logging capabilities.
 
-### Layout parameters
-For both examples, we need to initialize a few layout parameters before generating diagrams (see [SVG layouts guide]() (*soon available*) for more information):
-
-```java
-// Instantiating the default style component library
-ComponentLibrary componentLibrary = new ConvergenceComponentLibrary();
-
-// fully automatic layout
-VoltageLevelLayoutFactory voltageLevelLayoutFactory = new PositionVoltageLevelLayoutFactory(new PositionByClustering());
-
-// create default parameters for the SVG layout
-// then activating height compaction and inclusion of CSS styles in the SVG 
-LayoutParameters layoutParameters = new LayoutParameters()
-    .setAdaptCellHeightToContent(true)
-    .setCssLocation(LayoutParameters.CssLocation.INSERTED_IN_SVG);
-
-// display line name instead of line ID
-boolean usename = true;
-
-// prefix used for the IDs of all diagram components
-String prefix = "";
-```
-
 ## Diagrams from a test network
 We first create the node/breaker test `Network` we are interested in:
 ```java
@@ -96,17 +76,15 @@ Network network = FictitiousSwitchFactory.create();
 ```
 
 ### Generating a voltage level diagram
-We generate a `VoltageLevelDiagram` for voltage level `N` and then the corresponding SVG diagram file:
+We can generate the SVG diagram file for voltage level `N` with a single line of code:
 ```java
-// create diagram for the voltage level N
-VoltageLevelDiagram voltageLevelDiagramN = VoltageLevelDiagram.build(new NetworkGraphBuilder(network), "N", voltageLevelLayoutFactory, usename);
+SingleLineDiagram.draw(network, "N", "/tmp/n.svg");
+```
 
-// generate SVG
-voltageLevelDiagramN.writeSvg(prefix,
-    new DefaultSVGWriter(componentLibrary, layoutParameters),
-    new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
-    new NominalVoltageDiagramStyleProvider(network),
-    Paths.get("/tmp/n.svg"));
+Note that we could also use a method specific for voltage levels: 
+
+```java
+SingleLineDiagram.drawVoltageLevel(network, "N", "/tmp/n.svg");
 ```
 
 We obtain the following SVG:
@@ -116,15 +94,7 @@ We obtain the following SVG:
 Similarly, we could generate a SVG for voltage level `C`:
  
 ```java
-// create diagram for the voltage level C
-VoltageLevelDiagram voltageLevelDiagramC = VoltageLevelDiagram.build(new NetworkGraphBuilder(network), "C", voltageLevelLayoutFactory, usename);
-
-// generate SVG
-voltageLevelDiagramC.writeSvg(prefix,
-    new DefaultSVGWriter(componentLibrary, layoutParameters),
-    new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
-    new NominalVoltageDiagramStyleProvider(network),
-    Paths.get("/tmp/c.svg"));
+SingleLineDiagram.draw(network, "C", "/tmp/c.svg");
 ```
  
 leading to the following diagram:
@@ -132,23 +102,17 @@ leading to the following diagram:
 ![C_voltageLevel](img/svg-writing/example_c.svg){: width="18%" .center-image}
 
 ### Generating the substation diagram
-In order to build the diagram for the whole substation, named `A`, containing both voltage levels displayed previously, we need to build the corresponding `SubstationDiagram`:
+In order to build the diagram for the whole substation, named `A`, containing both voltage levels displayed previously, we may use the same interface:
 ```java
-// create diagram for the substation A
-SubstationDiagram substationDiagramA = SubstationDiagram.build(
-    new NetworkGraphBuilder(network), "A", new HorizontalSubstationLayoutFactory(),
-    voltageLevelLayoutFactory, usename);
-
-// generate SVG
-substationDiagramA.writeSvg(prefix,
-    new DefaultSVGWriter(componentLibrary, layoutParameters),
-    Paths.get("/tmp/a.svg"),
-    new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
-    new NominalVoltageDiagramStyleProvider(network)
-);
+SingleLineDiagram.draw(network, "A", "/tmp/a.svg");
 ```
 
-We then obtain the following wider SVG file:
+Similarly to before, there is also a method specific for substations which we could have used:
+```java
+SingleLineDiagram.drawSubstation(network, "A", "/tmp/a.svg");
+```
+
+In both cases, we obtain the following wider SVG file:
 
 ![A_substation](img/svg-writing/example_sub_a.svg){: width="85%" .center-image}
 
@@ -162,53 +126,43 @@ Inside the downloaded zip file, we will only consider the following file:
 We first import this sample `Network` we are interested in:
 ```java
 String file = "/path/to/file/MicroGrid/Type4_T4/CGMES_v2.4.15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip";
-Network network = Importers.loadNetwork(Paths.get(file));
+Network network = Importers.loadNetwork(file);
 ```
 
 ### Generating a voltage level diagram
 Once the network is loaded, we can generate diagrams like in previous section.
-Here we generate a SVG for voltage level id _8bbd7e74-ae20-4dce-8780-c20f8e18c2e0 (named 110 in substation PP_Brussels):
-```java
-// create diagram for the wanted voltage level
-VoltageLevelDiagram voltageLevelDiagramBrussels = VoltageLevelDiagram.build(new NetworkGraphBuilder(network), "_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", voltageLevelLayoutFactory, usename);
+We first generate a SVG for the voltage level named `110` in substation `PP_Brussels` (corresponding id is `_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0`). 
+Note that, as the ids are not very human-readable, we customize the parameters to have the names displayed instead of the ids.
+Therefore, we use the slightly more complex interface `SingleLineDiagram.draw(network, id, path, parameters)`.
 
-// generate SVG
-voltageLevelDiagramBrussels.writeSvg(prefix,
-    new DefaultSVGWriter(componentLibrary, layoutParameters),
-    new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
-    new NominalVoltageDiagramStyleProvider(network),
-    Paths.get("/tmp/Brussels110.svg"));
+```java
+// Use custom parameters to have the names displayed instead of the ids
+LayoutParameters layoutParameters = new LayoutParameters().setUseName(true);
+
+// Draw the diagram of voltage level 110 in substation PP_Brussels (id _8bbd7e74-ae20-4dce-8780-c20f8e18c2e0)
+SingleLineDiagram.draw(network, "_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.get("/tmp/Brussels110.svg"), layoutParameters);
 ```
 
 We obtain the following SVG:
 
-![Brussels_voltageLevel](img/svg-writing/example_Brussels_110.svg){: width="40%" .center-image}
+![Brussels_voltageLevel](img/svg-writing/example_Brussels110.svg){: width="40%" .center-image}
 
 ### Generating a substation diagram
 Similarly to voltage level diagrams, we can generate substation diagrams. 
-We generate the diagram for substation called PP_Amsterdam (id _c49942d6-8b01-4b01-b5e8-f1180f84906c), which is containing four voltage levels. 
-To that end we need to build the corresponding `SubstationDiagram`:
+We generate the SVG diagram for the substation called `PP_Amsterdam`, which is containing four voltage levels. 
+We customize a bit further the parameters: the feeder names in this substation are quite long, hence we rotate them to avoid overlapping.
 
 ```java
-// create diagram for the PP_Amsterdam substation (id _c49942d6-8b01-4b01-b5e8-f1180f84906c)
-SubstationDiagram substationDiagramAmsterdam = SubstationDiagram.build(
-    new NetworkGraphBuilder(network), "_c49942d6-8b01-4b01-b5e8-f1180f84906c", new HorizontalSubstationLayoutFactory(),
-    voltageLevelLayoutFactory, usename);
-
-// set the feeders label to be rotated to avoid overlapping (the names are quite long in this example)
+// Customize further the parameters to have the feeders label rotated, in order to avoid overlapping
 layoutParameters.setLabelDiagonal(true);
 
-// generate SVG
-substationDiagramAmsterdam.writeSvg(prefix,
-    new DefaultSVGWriter(componentLibrary, layoutParameters),
-    Paths.get("/tmp/AmsterdamSubstation.svg"),
-    new DefaultDiagramLabelProvider(network, componentLibrary, layoutParameters),
-    new NominalVoltageDiagramStyleProvider(network));
+// Draw the diagram of substation PP_Amsterdam (id _c49942d6-8b01-4b01-b5e8-f1180f84906c)
+SingleLineDiagram.draw(network, "_c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.get("/tmp/AmsterdamSubstation.svg"), layoutParameters);
 ```
 
 We then obtain the following SVG file representing the whole PP_Amsterdam substation with its three voltage levels:
 
-![Amsterdam_substation](img/svg-writing/example_Amsterdam_substation.svg)
+![Amsterdam_substation](img/svg-writing/example_AmsterdamSubstation.svg)
 
 That's it, you are now able to generate diagrams for substations and voltage levels! You can now try to change the default layout settings by reading the next guide [SVG Layouts]().
 
