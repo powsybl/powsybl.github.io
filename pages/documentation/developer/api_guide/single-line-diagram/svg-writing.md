@@ -114,7 +114,7 @@ SingleLineDiagram.drawSubstation(network, "A", "/tmp/a.svg");
 
 In both cases, we obtain the following wider SVG file:
 
-![A_substation](img/svg-writing/example_sub_a.svg){: width="85%" .center-image}
+![A_substation](img/svg-writing/example_a.svg){: width="85%" .center-image}
 
 ## Diagrams from a CGMES file
 
