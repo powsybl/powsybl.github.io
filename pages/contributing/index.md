@@ -55,7 +55,7 @@ Please give us as much details as you can on your needs or use cases filling the
 
 ## Contributing to the code or the documentation
 Before contributing to the project, please be sure to have read and understood the [code of conduct](https://www.lfenergy.org/about/code-of-conduct/) and the [license and the Developer Certificate of Origin](#license-and-developer-certificate-of-origin) paragraph. Before you start coding, you have to agree with the [maintainers](../documentation/developer/repositories/index.md) about the technical solution you will implement, to be sure it will be aligned with the project guidelines.
-If you are not part of the development team, please join our [Slack](https://join.slack.com/t/powsybl/shared_invite/zt-rzvbuzjk-nxi0boim1RKPS5PjieI0rA) and ask us on the `#first-contributors` channel to grant you developer rights in the PowSyBl organization.
+If you are not part of the development team, please join our [Slack](https://join.slack.com/t/powsybl/shared_invite/zt-rzvbuzjk-nxi0boim1RKPS5PjieI0rA) and ask us on the `#first-time-contributors` channel to grant you developer rights in the PowSyBl organization.
 Once you do, you will receive an invitation to the PowSyBl organization. Accept it and you will be able to clone the repository, create your own branch and commit your changes! 
 
 Once the development is done, you have to create a [pull request](https://help.github.com/en/articles/about-pull-requests):
