@@ -10,7 +10,7 @@ This project applies the [LF Energy Code of Conduct](https://www.lfenergy.org/ab
 ## License and Developer Certificate of Origin
 PowSyBl is an open source framework licensed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/). By contributing to PowSyBl, you accept and agree to the terms and conditions for your present and future contributions submitted to PowSyBl.
 
-The project also uses a mechansim known as a [Developer Certificate of Origin (DCO)](https://developercertificate.org/) to manage the process of ensuring that we are legally allowed to distribute all the code and assets for the project. A DCO is a legally binding statement that asserts that you are the creator of your contribution, and that you wish to allow PowSyBl to use your work.
+The project also uses a mechanism known as a [Developer Certificate of Origin (DCO)](https://developercertificate.org/) to manage the process of ensuring that we are legally allowed to distribute all the code and assets for the project. A DCO is a legally binding statement that asserts that you are the creator of your contribution, and that you wish to allow PowSyBl to use your work.
 
 Contributors sign-off that they adhere to these requirements by adding a `Signed-off-by` line to commit messages. All commits of all repositories of the PowSyBl community have to be signed-off like this:
 ```
@@ -24,7 +24,7 @@ You can write it manually but Git even has a -s command line option to append th
 $ git commit -s -m 'This is my commit message'
 ```
 
-Note that a check will be performed during the continuous integration, indicating whether or not commits in a Pull Request do not contain a valid `Signed-off-by` line.
+Note that a check will be performed during the continuous integration, indicating whether all commits in a Pull Request contain a valid `Signed-off-by` line.
 
 The `Signed-off-by` line at the end of the commit message can be written automatically. You just have to configure the `.gitconfig` file with the following alias:
 ```
@@ -36,22 +36,22 @@ Then, use the following command to commit your changes:
 $ git ci -m "This is my message"
 ```
 
-Note that most of IDEs can be configured in order to add a `Signed-off-by` line at the end of the commit message.
+Note that most IDEs can be configured in order to add a `Signed-off-by` line at the end of the commit message.
 
 ## Reporting Bugs
 If you encounter a problem with PowSyBl, the first places to ask for help are the [user mailing list](https://lists.lfenergy.org/g/powsybl) and the `#issues` [spectrum channel](https://spectrum.chat/powsybl/issues?tab=posts).
 
 If, after having asked for help, you suspect that you have found a bug in PowSyBl, you should report it by opening an issue in the appropriate [GitHub repository](../documentation/developer/repositories/index.md). Before creating a bug report, please **perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Apowsybl)** to see if the problem has already been reported. Prefer to add a comment to an existing issue instead of opening a new one to avoid duplications and make the triage of issues more complex.
 
-If there is no already existing issue for your problem, feel free to create a new issue. Please provide as much details as you can on your problem filling the issue template, and don't forget to indicate which version of PowSyBl you are running and on which environment.
+If there is no already existing issue for your problem, feel free to create a new issue. Please provide as many details as you can on your problem filling the issue template, and don't forget to indicate which version of PowSyBl you are running and on which environment.
 
 
 ## Suggesting Enhancements
-If you would be interested in a new feature to add in the PowSyBl framework, the first place to discuss about it are the [developers mailing list](https://lists.lfenergy.org/g/powsybl) or the `#proposal` [spectrum channel](https://spectrum.chat/powsybl/proposal?tab=posts).
+If you are interested in a new feature to add in the PowSyBl framework, the first place to discuss it are the [developers mailing list](https://lists.lfenergy.org/g/powsybl) or the `#proposal` [spectrum channel](https://spectrum.chat/powsybl/proposal?tab=posts).
 
 You can also track your proposal by filling an issue in the appropriate [GitHub repository](../documentation/developer/repositories/index.md). Before creating a feature request, please **perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Apowsybl)** to see if someone else has already asked for it. Prefer to complete an existing issue instead of opening a new one to avoid duplications and make the triage of issues more complex.
 
-Please give us as much details as you can on your needs or use cases filling the issue template to help the development team to fulfill your needs.
+Please give us as many details as you can on your needs or use cases filling the issue template to help the development team to fulfill your needs.
 
 ## Contributing to the code or the documentation
 Before contributing to the project, please be sure to have read and understood the [code of conduct](https://www.lfenergy.org/about/code-of-conduct/) and the [license and the Developer Certificate of Origin](#license-and-developer-certificate-of-origin) paragraph. Before you start coding, you have to agree with the [maintainers](../documentation/developer/repositories/index.md) about the technical solution you will implement, to be sure it will be aligned with the project guidelines.
