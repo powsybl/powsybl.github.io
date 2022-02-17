@@ -24,7 +24,7 @@ You can write it manually but Git even has a -s command line option to append th
 $ git commit -s -m 'This is my commit message'
 ```
 
-Note that a check will be performed during the continuous integration, indicating whether commits in a Pull Request do not contain a valid `Signed-off-by` line.
+Note that a check will be performed during the continuous integration, indicating whether all commits in a Pull Request contain a valid `Signed-off-by` line.
 
 The `Signed-off-by` line at the end of the commit message can be written automatically. You just have to configure the `.gitconfig` file with the following alias:
 ```
