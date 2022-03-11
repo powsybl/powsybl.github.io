@@ -13,8 +13,138 @@ Some extensions are mono-variant meaning the data are identical for all the vari
 
 Note that some extensions provided by PowSyBl aren't supported in the [persistent implementation of IIDM](../../developer/repositories/powsybl-network-store.md).
 
+Every extension is considered as serializable unless explicitly specified as non-serializable in XML-IIDM.
+
 * TOC
 {:toc}
+
+## Active power control
+This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled. This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| participate | boolean | - | yes | - | The participation status |
+| droop | double | None (repartition key) | yes | - | The participation factor |
+
+Here is how to add an active power control extension to a generator:
+```java
+generator.newExtension(ActivePowerControlAdder.class)
+    .withParticipate(true)
+    .withDroop(4)
+    .add();
+```
+
+The participation status and the participation factor are multi-variants: they can vary from one variant to another.
+
+This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
+
+## Branch observability
+
+<span style="color: red">TODO</span>
+
+## Branch status
+
+<span style="color: red">TODO</span>
+
+## Busbar section position
+
+<span style="color: red">TODO</span>
+
+## CGMES control areas
+
+<span style="color: red">TODO</span>
+
+## CGMES conversion context extension
+
+<span style="color: red">TODO</span>
+
+## CGMES dangling line boundary node
+
+<span style="color: red">TODO</span>
+
+## CGMES-IIDM mapping
+
+<span style="color: red">TODO</span>
+
+## CGMES line boundary node
+
+<span style="color: red">TODO</span>
+
+## CGMES model extension
+
+This extension is used to store the CGMES model created from the CGMES conversion on the network.
+It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not serializable.
+
+## CGMES Tap Changers
+
+<span style="color: red">TODO</span>
+
+## CGMES SSH metadata
+
+<span style="color: red">TODO</span>
+
+## CGMES SV metadata
+
+<span style="color: red">TODO</span>
+
+## CIM characteristics
+
+<span style="color: red">TODO</span>
+
+## Connectable position
+
+<span style="color: red">TODO</span>
+
+## Coordinated reactive control
+
+Some generators can be coordinated to control reactive power in a point of the network. This extension is used to configure the percent of reactive coordinated control that comes from a generator. This extension is attached to a [generator](index.md#generator).
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| QPercent | percent [0-100] | - | yes | - | The reactive control percent of participation |
+
+Here is how to add a coordinated reactive control extension to a generator:
+```java
+generator.newExtension(CoordinatedReactiveControlAdder.class)
+    .withQPercent(40)
+    .add();
+```
+
+Please note that the sum of the $$qPercent$$ values of the generators coordinating a same point of the network must be 100.
+
+This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
+
+## Discrete measurements
+
+<span style="color: red">TODO</span>
+
+## ENTSO-E area
+
+<span style="color: red">TODO</span>
+
+## HVDC angle droop active power control
+
+<span style="color: red">TODO</span>
+
+## HVDC operator active power range
+
+<span style="color: red">TODO</span>
+
+## Generator ENTSO-E category
+
+<span style="color: red">TODO</span>
+
+## Generator short-circuit
+
+<span style="color: red">TODO</span>
+
+## Identifiable short-circuit
+
+<span style="color: red">TODO</span>
+
+## Injection observability
+
+<span style="color: red">TODO</span>
 
 ## Load detail
 A load is described by its active power setpoint $$P0$$ and its reactive power setpoint $$Q0$$. This extension is used to detail :
@@ -38,42 +168,87 @@ load.newExtension(LoadDetailAdder.class)
     .add();
 ```
 
+All of this extension's attributes are multi-variants: they can vary from one variant to another.
 
-## Active power control
-This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled. This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
+This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
+
+## Measurements
+
+<span style="color: red">TODO</span>
+
+## Merged X-node
+
+<span style="color: red">TODO</span>
+
+## PSS/E conversion context extension
+
+<span style="color: red">TODO</span>
+
+## PSS/E model extension
+
+<span style="color: red">TODO</span>
+
+## Remote reactive power control
+
+<span style="color: red">TODO</span>
+
+## Slack terminal
+
+This extension is attached to a [voltage level](index.md#voltage-level) and is used to define the slack bus of a power flow calculation i.e. which bus will be used to balance the active and reactive power in load flow analysis. Use this extension before a computation to force the slack bus selection. You should enable default load flow parameter [`isReadSlackBus`](../../simulation/powerflow/index.md#available-parameters). Use this extension after a computation to attach to the network the slack bus that has been selected by the load flow engine (one by connected component). You should enable default load flow parameter [`isWriteSlackBus`](../../simulation/powerflow/index.md#available-parameters).
+
+The slack bus is defined through the terminal of a connectable that belongs to the bus. It is totally allowed to define a disconnected terminal as slack as the connectable could be reconnected during a grid study.
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
-| participate | boolean | - | yes | - | The participation status |
-| droop | double | None (repartition key) | yes | - | The participation factor |
+| Terminal | `Terminal` | - | yes | - | The slack terminal |
 
-Here is how to add an active power control extension to a generator:
-```java
-generator.newExtension(ActivePowerControlAdder.class)
-    .withParticipate(true)
-    .withDroop(4)
-    .add();
+ ```java
+SlackTerminal.attach(bus);
 ```
-The extension is provided by the `com.powsybl:powsybl-iidm-extensions` module. 
 
-## Coordinated reactive control
+This extension is provided by the `com.powsybl:powsybl-iidm-api` module.
 
-Some generators can be coordinated to control reactive power in a point of the network. This extension is used to configure the percent of reactive coordinated control that comes from a generator. This extension is attached to a [generator](index.md#generator).
+## Three-windings transformer phase angle clock
+
+This extension is used to model the Vector Group of a three windings transformer. The phase angle clock could be modeled at leg 2, leg 3 or both legs 2 and 3 and of a three windings transformer (network side). The voltage phase angle displacement is represented with clock hours. The valid values are `0` to `11`. This extension is attached to a [three windings transformer](index.md#three-windings-transformer).
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
-| QPercent | percent [0-100] | - | yes | - | The reactive control percent of participation |
+| PhaseAngleClockLeg2 | int [0-11] | hours | yes | - | The voltage phase angle displacement at leg 2 |
+| PhaseAngleClockLeg3 | int [0-11] | hours | yes | - | The voltage phase angle displacement at leg 3 |
 
-Here is how to add a coordinated reactive control extension to a generator:
 ```java
-generator.newExtension(CoordinatedReactiveControlAdder.class)
-    .withQPercent(40)
+transformer.newExtension(ThreeWindingsTransformerPhaseAngleClock.class)
+    .withPhaseAngleClockLeg2(10)
+    .withPhaseAngleClockLeg3(1)
     .add();
 ```
 
-Please note that the sum of the $$qPercent$$ values of the generators coordinating a same point of the network must be 100.
+This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
-The extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
+## Three-windings transformer to be estimated
+
+<span style="color: red">TODO</span>
+
+## Two-windings transformer phase angle clock
+
+This extension is used to model the Vector Group of a two windings transformer. The phase angle clock is modeled at side 2 of a two windings transformer. The voltage phase angle displacement is represented with clock hours. The valid values are 0 to 11. This extension is attached to a [two windings transformer](index.md#two-windings-transformer).
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| PhaseAngleClock | int [0-11] | hours | yes | - | The voltage phase angle displacement |
+
+```java
+transformer.newExtension(TwoWindingsTransformerPhaseAngleClockAdder.class)
+    .withPhaseAngleClock(3)
+    .add();
+```
+
+This extension is provided in the module `com.powsybl:powsybl-iidm-extensions`.
+
+## Two-windings transformer to be estimated
+
+<span style="color: red">TODO</span>
 
 ## Voltage per reactive power control
 
@@ -95,58 +270,8 @@ svc.newExtension(VoltagePerReactivePowerControlAdder.class)
     .add();
 ```
 
-The extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
+This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
-## Slack terminal
+## X-node
 
-This extension is attached to a [voltage level](index.md#voltage-level) and is used to define the slack bus of a power flow calculation. Use this extension before a computation to force the slack bus selection. You should enable default load flow parameter [`isReadSlackBus`](../../simulation/powerflow/index.md#available-parameters). Use this extension after a computation to attach to the network the slack bus that has been selected by the load flow engine (one by connected component). You should enable default load flow parameter [`isWriteSlackBus`](../../simulation/powerflow/index.md#available-parameters).
-
-The slack bus is defined through the terminal of a connectable that belongs to the bus. It is totally allowed to define a disconnected terminal as slack as the connectable could be reconnected during a grid study.
-
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Terminal | `Terminal` | - | yes | - | The slack terminal |
-
- ```java
-SlackTerminal.attach(bus);
-```
-
-The extension is provided by the `com.powsybl:powsybl-iidm-api` module.
-
-## Two windings transformer phase angle clock
-
-This extension is used to model the Vector Group of a two windings transformer. The phase angle clock is modeled at side 2 of a two windings transformer. The voltage phase angle displacement is represented with clock hours. The valid values are 0 to 11. This extension is attached to a [two windings transformer](index.md#two-windings-transformer).
-
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| PhaseAngleClock | int [0-11] | hours | yes | - | The voltage phase angle displacement |
-
-```java
-transformer.newExtension(TwoWindingsTransformerPhaseAngleClockAdder.class)
-    .withPhaseAngleClock(3)
-    .add();
-```
-
-The extension is provided in the module `com.powsybl:powsybl-iidm-extensions`.
-
-## Three windings transformer phase angle clock 
-
-This extension is used to model the Vector Group of a three windings transformer. The phase angle clock could be modeled at leg 2, leg 3 or both legs 2 and 3 and of a three windings transformer (network side). The voltage phase angle displacement is represented with clock hours. The valid values are `0` to `11`. This extension is attached to a [three windings transformer](index.md#three-windings-transformer).
-
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| PhaseAngleClockLeg2 | int [0-11] | hours | yes | - | The voltage phase angle displacement at leg 2 |
-| PhaseAngleClockLeg3 | int [0-11] | hours | yes | - | The voltage phase angle displacement at leg 3 |
-
-```java
-transformer.newExtension(ThreeWindingsTransformerPhaseAngleClock.class)
-    .withPhaseAngleClockLeg2(10)
-    .withPhaseAngleClockLeg3(1)
-    .add();
-```
-
-The extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
-
-## CGMES model
-
-This extension is used to store the CGMES model created from the CGMES conversion. This extension is attached to a [network](index.md#network).
+<span style="color: red">TODO</span>

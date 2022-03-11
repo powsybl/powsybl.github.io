@@ -45,6 +45,8 @@ To identify non-physical network components, one can use the fictitious property
 
 In the PowSyBl grid model, the Network contains [substations](#substation), which themselves contain [voltage levels](#voltage-level).
 
+**Characteristics**
+
 | Attribute | Description |
 | --------- | ----------- |
 | $$SourceFormat$$ | Source format of the imported network model |
@@ -53,10 +55,27 @@ In the PowSyBl grid model, the Network contains [substations](#substation), whic
 
 The `SourceFormat` attribute is a required attribute that indicates the origin of the network model automatically set by the [importers](../../index.html#grid-formats). If the case date and the forecast distance cannot be found in the case file, the network is considered as a snapshot: the case date is set to the current date, and the forecast distance is set to `0`.
 
+**Available extensions**
+
+- [CGMES Control Areas](extensions.md#cgmes-control-areas)
+- [CGMES-IIDM Mapping](extensions.md#cgmes-iidm-mapping)
+- [CGMES SSH Metadata](extensions.md#cgmes-ssh-metadata)
+- [CGMES SV Metadata](extensions.md#cgmes-sv-metadata)
+- [CIM Characteristics](extensions.md#cim-characteristics)
+
+*Non-serializable extensions*
+
+- [CGMES Conversion Context Extension](extensions.md#cgmes-conversion-context-extension)
+- [CGMES Model Extension](extensions.md#cgmes-model-extension)
+- [PSS/E Conversion Context Extension](extensions.md#psse-conversion-context-extension)
+- [PSS/E Model Extension](extensions.md#psse-model-extension)
+
 ### Substation
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Substation.html)
 
 A substation represents a specific geographical location with equipment grouped in one or several [voltage levels](#voltage-level).
+
+**Characteristics**
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -66,11 +85,17 @@ A substation represents a specific geographical location with equipment grouped 
 
 All three attributes are optional.
 
+**Available extensions**
+
+- [ENTSO-E Area](extensions.md#entso-e-area)
+
 ### Voltage Level
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VoltageLevel.html)
 
 A voltage level contains equipment with the same nominal voltage.
 Two voltage levels may be connected through lines (when they belong to different substations) or through transformers (they must be located within the same substation).
+
+**Characteristics**
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
@@ -78,6 +103,8 @@ Two voltage levels may be connected through lines (when they belong to different
 | $$LowVoltageLimit$$ | kV | Low voltage limit magnitude |
 | $$HighVoltageLimit$$ | kV | High voltage limit magnitude |
 | $$TopologyKind$$ |  | Level of connectivity detail |
+
+**Specifications**
 
 Only `NominalVoltage` and `TopologyKind` are required.
 
@@ -97,12 +124,18 @@ When defining the model, the user has to specify how the different equipment con
 
 **Available extensions**
 
-The [Slack Terminal](extensions.md#slack-terminal) extension defines the `Terminal` marking which bus will be used to balance the active and reactive power in load flow analysis.
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Slack Terminal](extensions.md#slack-terminal)
 
 ### Generator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Generator.html)
 
 A generator is an active equipment that injects active power, and injects or consumes reactive power. It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
+
+![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="40%" .center-image}
+
+**Characteristics**
 
 | Attribute | Unit | Description |
 | --------- | ---- | ----------- |
@@ -117,15 +150,24 @@ A generator is an active equipment that injects active power, and injects or con
 | $$VoltageRegulatorOn$$ |  | True if the generator regulates voltage |
 | $$EnergySource$$ |  | The energy source harnessed to turn the generator |
 
+**Specifications**
+
 The values `MinP`, `MaxP` and `TargetP` are required. The minimum active power output can not be greater than the maximum active power output. `TargetP` must be inside this active power limits. `RatedS` specifies the nameplate apparent power rating for the unit, it is optional and should be a positive value if it is defined. The [reactive limits](#reactive-limits) of the generator are optional, if they are not given the generator is considered with unlimited reactive power. Reactive limits can be given as a pair of [min/max values](#min-max-reactive-limits) or as a [reactive capability curve](#reactive-capability-curve).
 
 The `VoltageRegulatorOn` attribute is required. It voltage regulation is enabled, then `TargetV` and `RegulatingTerminal` must also be defined. If the voltage regulation is disabled, then `TargetQ` is required. `EnergySource` is optional, it can be: `HYDRO`, `NUCLEAR`, `WIND`, `THERMAL`, `SOLAR` or `OTHER`.
 
 Target values for generators (`TargetP` and `TargetQ`) follow the generator sign convention: a positive value means an injection into the bus. Positive values for `TargetP` and `TargetQ` mean negative values at the flow observed at the generator `Terminal`, as `Terminal` flow always follows load sign convention. The following diagram shows the sign convention of these quantities with an example.
 
-![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="40%" .center-image}
+**Available extensions**
 
-The [Active Power Control](extensions.md#active-power-control) participation and the percent of the reactive control that comes from this generator in a [Coordinated Reactive Control](extensions.md#coordinated-reactive-control) configuration are available as grid model extensions.
+- [Active Power Control](extensions.md#active-power-control)
+- [Coordinated Reactive Control](extensions.md#coordinated-reactive-control)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Generator ENTSO-E Category](extensions.md#generator-entso-e-category)
+- [Generator Short-Circuit](extensions.md#generator-short-circuit)
+- [Injection Observability](extensions.md#injection-observability)
+- [Measurements](extensions.md#measurements)
+- [Remote Reactive Power Control](extensions.md#remote-reactive-power-control)
 
 ### Load
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
@@ -156,6 +198,15 @@ In IIDM, loads comprise the following metadata:
     - `AUXILIARY`
     - `FICTITIOUS`
 
+**Available extensions**
+
+- [Connectable position](extensions.md#connectable-position)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Injection Observability](extensions.md#injection-observability)
+- [Load Detail](extensions.md#load-detail)
+- [Measurements](extensions.md#measurements)
+
 ### Battery
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Battery.html)
 
@@ -177,6 +228,11 @@ A battery on the electric grid is an energy storage device that is either capabl
 **Available extensions**
 
 - [Active Power Control](extensions.md#active-power-control)
+- [Connectable position](extensions.md#connectable-position)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Injection Observability](extensions.md#injection-observability)
+- [Measurements](extensions.md#measurements)
 
 ### Dangling line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/DanglingLine.html)
@@ -231,7 +287,13 @@ page to learn more about this format. This code is actually related to ENTSOE, n
 
 **Available extensions**
 
-- [Xnode]()
+- [CGMES Dangling Line Boundary Node](extensions.md#cgmes-dangling-line-boundary-node)
+- [Connectable position](extensions.md#connectable-position)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Injection Observability](extensions.md#injection-observability)
+- [Measurements](extensions.md#measurements)
+- [X-Node](extensions.md#x-node)
 
 ### Shunt Compensator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ShuntCompensator.html)
@@ -303,6 +365,14 @@ calculation or not, depending of what is wanted to be shown.
 - In case of a capacitor, the value for its Q will be negative.
 - In case of a reactor, the value for its Q will be positive.
 
+**Available extensions**
+
+- [Connectable position](extensions.md#connectable-position)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Injection Observability](extensions.md#injection-observability)
+- [Measurements](extensions.md#measurements)
+
 ### Static VAR Compensator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/StaticVarCompensator.html)
 
@@ -343,6 +413,11 @@ Note that it is different from the generators' regulation definition, which is o
 
 **Available extensions**
 
+- [Connectable position](extensions.md#connectable-position)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Injection Observability](extensions.md#injection-observability)
+- [Measurements](extensions.md#measurements)
 - [VoltagePerReactivePowerControl](extensions.md#voltage-per-reactive-power-control)
 
 ### Branches
@@ -403,7 +478,14 @@ $$
 
 **Available extensions**
 
-- [Merged Xnode]()
+- [Connectable position](extensions.md#connectable-position)
+- [Branch Observability](extensions.md#branch-observability)
+- [Branch Status](extensions.md#branch-status)
+- [CGMES Line Boundary Node](extensions.md#cgmes-line-boundary-node)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Measurements](extensions.md#measurements)
+- [Merged X-Node](extensions.md#merged-x-node)
 
 ##### Tie Line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TieLine.html)
@@ -492,7 +574,15 @@ $$
 
 **Available extensions**
 
-- [Phase Angle Clock](extensions.md#two-windings-transformer-phase-angle-clock)
+- [Branch Observability](extensions.md#branch-observability)
+- [Branch Status](extensions.md#branch-status)
+- [CGMES Tap Changers](extensions.md#cgmes-tap-changers)
+- [Connectable position](extensions.md#connectable-position)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Measurements](extensions.md#measurements)
+- [Two-windings Transformer Phase Angle Clock](extensions.md#two-windings-transformer-phase-angle-clock)
+- [Two-windings Transformer To Be Estimated](extensions.md#two-windings-transformer-to-be-estimated)
 
 ##### Three windings transformer
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ThreeWindingsTransformer.html)
@@ -521,7 +611,14 @@ Only one tap changer (either ratio or phase tap changer) is allowed to be regula
 
 **Available extensions**
 
-- [Phase Angle Clock](extensions.md#three-windings-transformer-phase-angle-clock)
+- [Branch Status](extensions.md#branch-status)
+- [CGMES Tap Changers](extensions.md#cgmes-tap-changers)
+- [Connectable position](extensions.md#connectable-position)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Measurements](extensions.md#measurements)
+- [Three-windings Transformer Phase Angle Clock](extensions.md#three-windings-transformer-phase-angle-clock)
+- [Three-windings Transformer To Be Estimated](extensions.md#three-windings-transformer-to-be-estimated)
 
 ##### Three windings transformer leg
 
@@ -565,6 +662,11 @@ An HVDC line is connected to the DC side of two HVDC converter stations, either 
   The flow sign is thus given by the type of the converter station: the power always flows from the rectifier converter station to the inverter converter station.
   At a terminal on the AC side, `P` and `Q` follow the passive sign convention. `P` is positive on the rectifier side. `P` is negative at the inverter side.
 - The active power setpoint and the maximum active power should always be positive values.
+
+**Available extensions**
+
+- [HVDC Angle Droop Active Power Control](extensions.md#hvdc-angle-droop-active-power-control)
+- [HVDC Operator Active Power Range](extensions.md#hvdc-operator-active-power-range)
 
 #### HVDC Converter Station
 
@@ -612,6 +714,10 @@ An LCC converter station is made with electronic switches that can only be turne
 | --------- | ---- | ----------- |
 | $$PowerFactor$$ | % | Ratio between the active power $$P$$ and the apparent power $$S$$. |
 
+**Available extensions**
+
+- [Connectable position](extensions.md#connectable-position)
+
 ##### VSC Converter Station
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VscConverterStation.html)
 
@@ -640,6 +746,10 @@ A VSC converter station is made with switching devices that can be turned both o
 **Metadata**
 - The participation to regulation (through a boolean)
 
+**Available extensions**
+
+- [Connectable position](extensions.md#connectable-position)
+
 ### Busbar Section
 
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/BusbarSection.html)<br>
@@ -647,7 +757,15 @@ A busbar section is a non impedant element used in a node/breaker substation top
 
 <!---
 <span style="color:red"> TODO</span>
---> 
+-->
+
+**Available extensions**
+
+- [Busbar Section Position](extensions.md#busbar-section-position)
+- [Discrete Measurements](extensions.md#discrete-measurements)
+- [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
+- [Injection Observability](extensions.md#injection-observability)
+- [Measurements](extensions.md#measurements)
 
 ### Breaker/Switch
 
@@ -656,6 +774,10 @@ A busbar section is a non impedant element used in a node/breaker substation top
 <!---
 <span style="color:red"> TODO</span>
 -->
+
+**Available extensions**
+
+- [Discrete Measurements](extensions.md#discrete-measurements)
 
 ### Internal Connection
 
