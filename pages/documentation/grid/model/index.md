@@ -40,6 +40,10 @@ Properties allow associating additional arbitrary data items under the general s
 
 To identify non-physical network components, one can use the fictitious property that is set to `false` by default.
 
+### Validation level
+
+<span style="color: red">TODO</span>
+
 ### Network
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
 

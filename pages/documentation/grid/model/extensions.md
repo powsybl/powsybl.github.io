@@ -40,7 +40,25 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Branch observability
 
-<span style="color: red">TODO</span>
+This extension models branches' flows' observability on both sides, obtained after a state estimation.
+
+| Attribute  | Type                  | Unit | Required | Default value | Description |
+|------------|-----------------------|------|---------| ------------- | ----------- |
+| quality P1 | ObservabilityQuality  | -    | no      | - | The participation status |
+| quality P2 | ObservabilityQuality  | -    | no      | - | The participation factor |
+| quality Q1 | ObservabilityQuality  | -    | no      | - | The participation factor |
+| quality Q2 | ObservabilityQuality  | -    | no      | - | The participation factor |
+
+**Observability quality**
+
+This extension contains the sub-object `ObservabilityQuality`.
+
+| Attribute          | Type      | Unit | Required | Default value | Description |
+|--------------------|-----------|------|----------| ------------- | ----------- |
+| standard deviation | double    | -    | yes      | - | The participation status |
+| redundant          | redundant | -    | yes      | - | The participation factor |
+
+This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Branch status
 
@@ -52,7 +70,26 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## CGMES control areas
 
-<span style="color: red">TODO</span>
+This extensions models all the control areas contained in the network as modeled in CGMES.
+
+| Attribute           | Type                           | Unit | Required | Default value | Description                  |
+|---------------------|--------------------------------|------|----------| ------------- |------------------------------|
+| CGMES control areas | `Collection<CgmesControlArea>` | -    | no       | - | The list of control areas in the network |
+
+** CGMES control area**
+
+| Attribute                        | Type       | Unit | Required | Default value | Description                                         |
+|----------------------------------|------------|------|----------| ------------- |-----------------------------------------------------|
+| ID                               | String     | -    | yes      | - | The control area's ID                               |
+| name                             | String     | -    | no       | - | The control area's name                             |
+| energy identification Code (EIC) | String     | -    | no       | - | The control area's EIC                              |
+| net interchange                  | double     | -    | no       | - | The control area's net interchange (at its borders) |
+| terminals                        | `Terminal` | -    | no       | - | Terminals at the border of the control area         |
+| boundaries                       | `Boundary` | -    | no       | - | Boundaries at the border of the control area        |
+
+It is possible to retrieve a control area by its ID. It is also possible to iterate through all control areas.
+
+This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
 ## CGMES conversion context extension
 
@@ -72,7 +109,7 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## CGMES model extension
 
-This extension is used to store the CGMES model created from the CGMES conversion on the network.
+This extension is used to store the CGMES model as retrieved from the triplestore (as a query catalog) on the network.
 It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not serializable.
 
 ## CGMES Tap Changers
