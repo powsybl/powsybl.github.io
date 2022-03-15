@@ -257,8 +257,8 @@ By default, the base name is the network's name if it exists, as a last resort, 
 
 **iidm.export.cgmes.cim-version**
 The `iidm.export.cgmes.cim-version` property is an optional property that defines the CIM version number in which the user wants the CGMES files to be exported.
-CIM version 14 and 16 are supported.
-If not defined, and the network has the extension `CimCharacteristics`, the CIM version will be the one indicated in the extension. If not, its default value is 16. 
+CIM version 14 and 16 are supported i.e. its valid values are `14` or `16`.
+If not defined, and the network has the extension `CimCharacteristics`, the CIM version will be the one indicated in the extension. If not, its default value is `16`.
 
 **iidm.export.cgmes.export-boundary-power-flows**
 The `iidm.export.cgmes.export-boundary-power-flows` property is an optional property that defines if power flows of boundary nodes are to be exported in the SV file or not.
