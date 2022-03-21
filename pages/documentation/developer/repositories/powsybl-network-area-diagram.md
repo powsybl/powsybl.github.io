@@ -5,7 +5,7 @@ This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provi
 
 ## Features
 - Generate concise diagrams displaying the graph whose nodes are the network voltage levels, and whose edges are the lines and transformers between those voltage levels. 
-- Generate diagrams of the whole network or of a part of the network, given a voltage level and a depth.
+- Generate diagrams of the whole network or of a part of the network, given a voltage level and a depth, or a list of voltage levels and a (unique) depth.
 - Graph layout default implementation using a basic force layout algorithm, taken from [springy](https://github.com/dhotson/springy)
 - Diagrams customization:
      - use your own graph layout implementation,
@@ -22,5 +22,6 @@ This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provi
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 0.3.0 | 2022-03-02 | [Release notes](https://github.com/powsybl/powsybl-network-area-diagram/releases/tag/v0.3.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-network-area-diagram/0.3.0/index.html) |
 | 0.2.0 | 2022-01-17 | [Release notes](https://github.com/powsybl/powsybl-network-area-diagram/releases/tag/v0.2.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-network-area-diagram/0.2.0/index.html) |
 | 0.1.0 | 2021-12-03 | [Release notes](https://github.com/powsybl/powsybl-network-area-diagram/releases/tag/v0.1.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-network-area-diagram/0.1.0/index.html) |
