@@ -1,7 +1,7 @@
 # powsybl-network-area-diagram [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-network-area-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-network-area-diagram/releases/)
 This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provides modules to generate diagrams of a network area.
 
-![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="35%" .center-image}
+![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="50%" .center-image}
 
 ## Features
 - Generate concise diagrams displaying the graph whose nodes are the network voltage levels, and whose edges are the lines and transformers between those voltage levels. 
