@@ -31,7 +31,8 @@ The available features are:
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
-| 0.12.0 | 2022-01-19 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.12.0) | [readthedocs.io](https://pypowsybl.readthedocs.io/en/stable/) |
+| 0.13.0 | 2022-03-10 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.13.0) | [readthedocs.io](https://pypowsybl.readthedocs.io/en/stable/) |
+| 0.12.0 | 2022-01-19 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.12.0) | - |
 | 0.11.0 | 2021-11-22 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.11.0) | - |
 | 0.10.0 | 2021-10-04 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.10.0) | - |
 | 0.9.0 | 2021-08-20 | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.9.0) | - |
