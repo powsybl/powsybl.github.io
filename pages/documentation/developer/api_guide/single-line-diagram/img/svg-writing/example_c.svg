@@ -150,9 +150,6 @@
                 <circle class="sld-vl180to300-1 sld-winding" cx="7" cy="5" r="5"/>
                 <text class="sld-label" id="CI_ONE_N_LABEL" x="-5.0" y="-5.0">CI_ONE</text>
             </g>
-            <g class="sld-wire sld-vl180to300-0" id="_95_C_95_D_95_F">
-                <polyline points="65.0,252.0,65.0,252.0"/>
-            </g>
             <g class="sld-wire sld-vl180to300-0" id="_95_C_95_F_95_INTERNAL_95_C_95_F">
                 <polyline points="65.0,252.0,65.0,222.0"/>
             </g>
@@ -165,12 +162,12 @@
             <g class="sld-wire sld-vl180to300-0" id="_95_C_95_INTERNAL_95_C_95_CI_95_ONE_95_CI_95_ONE">
                 <polyline points="65.0,142.0,65.0,87.5"/>
             </g>
-            <g class="sld-arrow-p sld-in" id="idCI_95_ONE_ARROW_ACTIVE" transform="translate(60.0,99.75)">
+            <g class="sld-arrow-p sld-in" id="idCI_95_ONE_ARROW_ACTIVE" transform="translate(60.0,102.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-arrow-q sld-in" id="idCI_95_ONE_ARROW_REACTIVE" transform="translate(60.0,119.75)">
+            <g class="sld-arrow-q sld-in" id="idCI_95_ONE_ARROW_REACTIVE" transform="translate(60.0,122.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
@@ -193,9 +190,6 @@
             </g>
             <g class="sld-bottom-feeder sld-vl180to300-0" id="idCJ_95_ONE" transform="translate(115.0,424.0)">
                 <text class="sld-label" id="CJ_ONE_S_LABEL" x="-5.0" y="5.0">CJ_ONE</text>
-            </g>
-            <g class="sld-wire sld-vl180to300-0" id="_95_C_95_D_95_H">
-                <polyline points="115.0,252.0,115.0,252.0"/>
             </g>
             <g class="sld-wire sld-vl180to300-0" id="_95_C_95_H_95_INTERNAL_95_C_95_H">
                 <polyline points="115.0,252.0,115.0,282.0"/>

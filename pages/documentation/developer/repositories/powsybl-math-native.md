@@ -13,6 +13,7 @@ This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++
 
 | Version | Release date | Release notes | API documentation |
 | ------- | ------------ | ------------- | ----------------- |
+| 1.1.0 | 2021-11-15 | [Release notes](https://github.com/powsybl/powsybl-math-native/releases/tag/v1.1.0) | - |
 | 1.0.4 | 2021-09-13 | [Release notes](https://github.com/powsybl/powsybl-math-native/releases/tag/v1.0.4) | - |
 | 1.0.3 | 2020-07-24 | [Release notes](https://github.com/powsybl/powsybl-math-native/releases/tag/v1.0.3) | - |
 | 1.0.2 | 2020-04-15 | [Release notes](https://github.com/powsybl/powsybl-math-native/releases/tag/v1.0.2) | - |
