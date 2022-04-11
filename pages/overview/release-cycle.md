@@ -32,7 +32,7 @@ For each released repository:
 - in case of breaking changes, a migration guide is written by one or several of the repository's developers
 - a communication on the LFE mailing list [powsybl-announce](https://lists.lfenergy.org/g/powsybl-announce/)
 is done by one of the repository's committers.
-- its latest version is updated in [powsybl-starter](https://github.com/powsybl/powsybl-starter) and on the [download page](../download/index.md)
+- its latest version is updated in [powsybl-starter](https://github.com/powsybl/powsybl-starter) and on the [repositories' pages](../documentation/developer/repositories/index.md)
 - **at users' request**, its latest version is updated in [powsybl-distribution](https://github.com/powsybl/powsybl-distribution)
 
 If at some point, you are interested in the release of one of our other repositories,
