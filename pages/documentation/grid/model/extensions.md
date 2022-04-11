@@ -42,21 +42,21 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 This extension models branches' flows' observability on both sides, obtained after a state estimation.
 
-| Attribute  | Type                  | Unit | Required | Default value | Description |
-|------------|-----------------------|------|---------| ------------- | ----------- |
-| quality P1 | ObservabilityQuality  | -    | no      | - | The participation status |
-| quality P2 | ObservabilityQuality  | -    | no      | - | The participation factor |
-| quality Q1 | ObservabilityQuality  | -    | no      | - | The participation factor |
-| quality Q2 | ObservabilityQuality  | -    | no      | - | The participation factor |
+| Attribute  | Type                  | Unit | Required | Default value | Description                                     |
+|------------|-----------------------|------|---------| ------------- |-------------------------------------------------|
+| quality P1 | ObservabilityQuality  | -    | no      | - | The observability of active power on side ONE   |
+| quality P2 | ObservabilityQuality  | -    | no      | - | The observability of active power on side TWO   |
+| quality Q1 | ObservabilityQuality  | -    | no      | - | The observability of reactive power on side ONE |
+| quality Q2 | ObservabilityQuality  | -    | no      | - | The observability of reactive power on side TWO |
 
 **Observability quality**
 
 This extension contains the sub-object `ObservabilityQuality`.
 
-| Attribute          | Type      | Unit | Required | Default value | Description |
-|--------------------|-----------|------|----------| ------------- | ----------- |
-| standard deviation | double    | -    | yes      | - | The participation status |
-| redundant          | redundant | -    | yes      | - | The participation factor |
+| Attribute          | Type      | Unit | Required | Default value | Description                                        |
+|--------------------|-----------|------|----------| ------------- |----------------------------------------------------|
+| standard deviation | double    | -    | yes      | - | The standard deviation                             |
+| redundant          | redundant | -    | yes      | - | Indicates if this value is confirmed by redundancy |
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
@@ -93,19 +93,38 @@ This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
 ## CGMES conversion context extension
 
-<span style="color: red">TODO</span>
+This extension is used to store the CGMES conversion context as built during the CGMES import.
+It contains the used configuration, the terminal mapping and the CGMES model.
+It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not serializable.
 
 ## CGMES dangling line boundary node
 
-<span style="color: red">TODO</span>
+This extension is used to add some CGMES characteristics to boundary dangling lines.
+
+
+| Attribute                             | Type    | Unit | Required | Default value | Description                                                                                          |
+|---------------------------------------|---------|------|----------|---------------|------------------------------------------------------------------------------------------------------|
+| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is an HVDC line or not (can be the case for AC emulation for example) |
+| line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                                                                 |
+
+This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
 ## CGMES-IIDM mapping
 
-<span style="color: red">TODO</span>
+This extension contains the mapping between IIDM buses and CGMES topological nodes and between IIDM voltage levels and CGMES base voltages.
+This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
 ## CGMES line boundary node
 
-<span style="color: red">TODO</span>
+This extension is used to add some CGMES characteristics to boundary lines.
+
+
+| Attribute                             | Type    | Unit | Required | Default value | Description                                                                                          |
+|---------------------------------------|---------|------|----------|---------------|------------------------------------------------------------------------------------------------------|
+| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is an HVDC line or not (can be the case for AC emulation for example) |
+| line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                                                                 |
+
+This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
 ## CGMES model extension
 
@@ -181,7 +200,23 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Injection observability
 
-<span style="color: red">TODO</span>
+This extension models injections' flows' observability, obtained after a state estimation.
+
+| Attribute | Type                  | Unit | Required | Default value | Description                         |
+|-----------|-----------------------|------|---------| ------------- |-------------------------------------|
+| quality P | ObservabilityQuality  | -    | no      | - | The observability of active power   |
+| quality Q | ObservabilityQuality  | -    | no      | - | The observability of reactive power |
+
+**Observability quality**
+
+This extension contains the sub-object `ObservabilityQuality`.
+
+| Attribute          | Type      | Unit | Required | Default value | Description                                       |
+|--------------------|-----------|------|----------| ------------- |---------------------------------------------------|
+| standard deviation | double    | -    | yes      | - | The standard deviation                            |
+| redundant          | redundant | -    | yes      | - | Indicates if the value is confirmed by redundancy |
+
+This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Load detail
 A load is described by its active power setpoint $$P0$$ and its reactive power setpoint $$Q0$$. This extension is used to detail :
