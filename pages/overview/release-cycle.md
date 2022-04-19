@@ -19,13 +19,13 @@ Our release train consists in the release of:
 - [powsybl-core and its sub-modules](https://github.com/powsybl/powsybl-core)
 - [powsybl-open-loadflow](https://github.com/powsybl/powsybl-open-loadflow)
 - [powsybl-single-line-diagram and its sub-modules](https://github.com/powsybl/powsybl-single-line-diagram)
+- [powsybl-network-area-diagram](https://github.com/powsybl/powsybl-network-area-diagram)
 - [powsybl-dynawo and its sub-modules](https://github.com/powsybl/powsybl-dynawo)
 - [pypowsybl](https://github.com/powsybl/pypowsybl)
 
 **At users' request**, these modules can also be released in the release train:
 - [powsybl-balances-adjustment](https://github.com/powsybl/powsybl-balances-adjustment)
 - [powsybl-entsoe and its sub-modules](https://github.com/powsybl/powsybl-entsoe)
-- [powsybl-network-area-diagram](https://github.com/powsybl/powsybl-network-area-diagram)
 
 For each released repository:
 - a release note is written by one of the repository's committer
@@ -33,7 +33,7 @@ For each released repository:
 - a communication on the LFE mailing list [powsybl-announce](https://lists.lfenergy.org/g/powsybl-announce/)
 is done by one of the repository's committers.
 - its latest version is updated in [powsybl-starter](https://github.com/powsybl/powsybl-starter) and on the [repositories' pages](../documentation/developer/repositories/index.md)
-- **at users' request**, its latest version is updated in [powsybl-distribution](https://github.com/powsybl/powsybl-distribution)
+- its latest version is updated in [powsybl-distribution](https://github.com/powsybl/powsybl-distribution)
 
 If at some point, you are interested in the release of one of our other repositories,
 don't hesitate to [contact us](../community/index.md#contact) to discuss it. We ensure the release of our most
