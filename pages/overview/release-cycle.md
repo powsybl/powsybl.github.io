@@ -37,6 +37,7 @@ For each released repository:
 is done by one of the repository's committers.
 - its latest version is updated in [powsybl-starter](https://github.com/powsybl/powsybl-starter) and on the [repositories' pages](../documentation/developer/repositories/index.md)
 - its latest version is updated in [powsybl-distribution](https://github.com/powsybl/powsybl-distribution)
+- its latest version is updated in [powsybl-integration-test](https://github.com/powsybl/powsybl-integration-test)
 
 If at some point, you are interested in the release of one of our other repositories,
 don't hesitate to [contact us](../community/index.md#contact) to discuss it. We ensure the release of our most
