@@ -21,6 +21,7 @@ Our release train consists in the release of:
 - [powsybl-single-line-diagram and its sub-modules](https://github.com/powsybl/powsybl-single-line-diagram)
 - [powsybl-network-area-diagram](https://github.com/powsybl/powsybl-network-area-diagram)
 - [powsybl-dynawo and its sub-modules](https://github.com/powsybl/powsybl-dynawo)
+- [powsybl-network-hypothesis](https://github.com/powsybl/powsybl-network-hypothesis)
 - [pypowsybl](https://github.com/powsybl/pypowsybl)
 
 **At users' request**, these modules can also be released in the release train:
