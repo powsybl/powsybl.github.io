@@ -6,6 +6,8 @@ layout: default
 
 A new release train of the framework occurs roughly every 6 to 8 weeks.
 
+*Start of next release train: 2022-06-15*
+
 In case of structural issues, corrective releases can also be published for some repositories.
 These corrective releases are motivated by users' demand so don't hesitate to [contact us](../community/index.md#contact).
 
@@ -41,3 +43,5 @@ don't hesitate to [contact us](../community/index.md#contact) to discuss it. We 
 used components but this check list can evolve as users' demand does.
 
 You can also participate in our [TSC meetings](https://lists.lfenergy.org/g/powsybl-tsc/) for your voice to be heard.
+
+After a release train is published, a new date for the next release train is fixed.
