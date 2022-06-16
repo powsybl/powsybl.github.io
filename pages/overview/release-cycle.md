@@ -30,11 +30,17 @@ Our release train consists in the release of:
 For each released repository:
 - a release note is written by one of the repository's committer
 - in case of breaking changes, a migration guide is written by one or several of the repository's developers
-- a communication on the LFE mailing list [powsybl-announce](https://lists.lfenergy.org/g/powsybl-announce/)
-is done by one of the repository's committers.
-- its latest version is updated in [powsybl-starter](https://github.com/powsybl/powsybl-starter) and on the [repositories' pages](../documentation/developer/repositories/index.md)
+- its latest version is updated on the [repositories' pages](../documentation/developer/repositories/index.md)
+- its latest version is updated in [powsybl-dependencies](https://github.com/powsybl/powsybl-dependencies)
+
+Once all the repositories have been released
+- [powsybl-dependencies](https://github.com/powsybl/powsybl-dependencies) is released
+- its latest version is updated in [powsybl-starter](https://github.com/powsybl/powsybl-starter)
 - its latest version is updated in [powsybl-distribution](https://github.com/powsybl/powsybl-distribution)
 - its latest version is updated in [powsybl-integration-test](https://github.com/powsybl/powsybl-integration-test)
+
+Then, a communication on the LFE mailing list [powsybl-announce](https://lists.lfenergy.org/g/powsybl-announce/)
+is done by one of PowSyBl's committers to announce the new release train.
 
 If at some point, you are interested in the release of one of our other repositories,
 don't hesitate to [contact us](../community/index.md#contact) to discuss it. We ensure the release of our most
