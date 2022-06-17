@@ -13,61 +13,26 @@ To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the 
 ## Prerequisites
 
 ### Maven dependencies
-First of all, we need to add some Maven dependencies in our `pom.xml` file:
+First of all, we need to add a Maven dependency in our `pom.xml` file:
 
 ```xml
 <dependencies>
     <dependency>
         <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-single-line-diagram-core</artifactId>
-        <version>${powsybl.sld.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-iidm-impl</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-iidm-test</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-config-test</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-cgmes-conversion</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-simple</artifactId>
-        <version>${slf4j.version}</version>
+        <artifactId>powsybl-starter</artifactId>
+        <version>1.2.0</version>
     </dependency>
 </dependencies>
-
-<properties>
-    <powsybl.sld.version>2.10.0</powsybl.sld.version>
-    <powsybl.core.version>4.8.0</powsybl.core.version>
-    <slf4j.version>1.7.22</slf4j.version>
-</properties>
 ```
 
-Here are some details about these dependencies (see also the [powsybl artifacts documentation page](../../artifacts.md)):
-- `powsybl-single-line-diagram-core` is the core module of single-line-diagram,
-- `powsybl-iidm-impl` is for the network model,
-- `powsybl-iidm-test` is for loading the test network,
-- `powsybl-config-test` is for loading the test configuration (see [configuration API guide](../configuration.md)),
-- `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j`  are for importing a CGMES file,
-- `slf4j-simple` allows you to have simple logging capabilities.
+For information, the powsybl-starter dependency contains itself a set of dependencies which cover the main use cases.
+We use it here for the sake of simplicity.
+This tutorial only needs a few of them in fact; here's the list if you want to know more precisely what's really needed:
+- `powsybl-single-line-diagram-core` for the core module of single-line-diagram,
+- `powsybl-iidm-impl` for the network model implementation,
+- `powsybl-iidm-test` for loading the test network,
+- `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j`  for importing a CGMES file,
+- `logback-classic` to have logging capabilities.
 
 ## Diagrams from a test network
 We first create the node/breaker test `Network` we are interested in:
@@ -131,7 +96,7 @@ Network network = Importers.loadNetwork(file);
 
 ### Generating a voltage level diagram
 Once the network is loaded, we can generate diagrams like in previous section.
-We first generate a SVG for the voltage level named `110` in substation `PP_Brussels` (corresponding id is `_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0`). 
+We first generate a SVG for the voltage level named `110` in substation `PP_Brussels` (corresponding id is `8bbd7e74-ae20-4dce-8780-c20f8e18c2e0`). 
 Note that, as the ids are not very human-readable, we customize the parameters to have the names displayed instead of the ids.
 Therefore, we use the slightly more complex interface `SingleLineDiagram.draw(network, id, path, parameters)`.
 
@@ -139,8 +104,8 @@ Therefore, we use the slightly more complex interface `SingleLineDiagram.draw(ne
 // Use custom parameters to have the names displayed instead of the ids
 LayoutParameters layoutParameters = new LayoutParameters().setUseName(true);
 
-// Draw the diagram of voltage level 110 in substation PP_Brussels (id _8bbd7e74-ae20-4dce-8780-c20f8e18c2e0)
-SingleLineDiagram.draw(network, "_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.get("/tmp/Brussels110.svg"), layoutParameters);
+// Draw the diagram of voltage level 110 in substation PP_Brussels (id 8bbd7e74-ae20-4dce-8780-c20f8e18c2e0)
+SingleLineDiagram.draw(network, "8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.get("/tmp/Brussels110.svg"), layoutParameters);
 ```
 
 We obtain the following SVG:
@@ -156,8 +121,8 @@ We customize a bit further the parameters: the feeder names in this substation a
 // Customize further the parameters to have the feeders label rotated, in order to avoid overlapping
 layoutParameters.setLabelDiagonal(true);
 
-// Draw the diagram of substation PP_Amsterdam (id _c49942d6-8b01-4b01-b5e8-f1180f84906c)
-SingleLineDiagram.draw(network, "_c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.get("/tmp/AmsterdamSubstation.svg"), layoutParameters);
+// Draw the diagram of substation PP_Amsterdam (id c49942d6-8b01-4b01-b5e8-f1180f84906c)
+SingleLineDiagram.draw(network, "c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.get("/tmp/AmsterdamSubstation.svg"), layoutParameters);
 ```
 
 We then obtain the following SVG file representing the whole PP_Amsterdam substation with its three voltage levels:
