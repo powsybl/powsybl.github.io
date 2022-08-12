@@ -189,23 +189,25 @@ The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` proper
 **iidm.import.cgmes.ensure-id-alias-unicity**  
 The `iidm.import.cgmes.ensure-id-alias-unicity` property is an optional property that defines if IDs' and aliases' unicity is ensured during CGMES import. If it is set to `true`, identical CGMES IDs will be modified to be unique. If it is set to `false`, identical CGMES IDs will throw an exception. Its default value is `false`.
 
+**iidm.import.cgmes.import-control-areas**  
+The `iidm.import.cgmes.import-control-areas` property is an optional property that defines if control areas must be imported or not. Its default value is `true`.
+
 **iidm.import.cgmes.post-processors**  
-The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which will be activated after import. By default, it is an empty list.
+The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which will be activated after import.
+By default, it is an empty list.
+One implementation of such a post-processor is available in PowSyBl in the [powsybl-single-line-diagram](../../developer/repositories/powsybl-single-line-diagram.md) repository, named [CgmesDLImportPostProcessor](#CgmesDLImportPostProcessor).
 
 **iidm.import.cgmes.powsybl-triplestore**  
 The `iidm.import.cgmes.powsybl-triplestore` property is an optional property that defines which Triplestore implementation is used. PowSyBl supports the [RDF4J](#rdf4j) and [Jena](#jena) Triplestore implementations. This property has `rdf4j` as default value.
 
-**iidm.import.cgmes.profile-used-for-initial-state-values**  
-The `iidm.import.cgmes.profile-used-for-initial-state-values` property is an optional property that defines which profile is used in priority for initial state values. It can be `SSH` or `SV`. Its default value is `SSH`.
+**iidm.import.cgmes.profile-for-initial-values-shunt-sections-tap-positions**
+The `iidm.import.cgmes.profile-for-initial-values-shunt-sections-tap-positions` property is an optional property that defines which CGMES profile is used to initialize tap positions and section counts. It can be `SSH` or `SV`. Its default value is `SSH`.
 
 **iidm.import.cgmes.store-cgmes-model-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an optional property that defines if the CGMES model is stored in the imported IIDM network as an [extension](../model/extensions.md#cgmes-model). Its default value is `true`.
 
 **iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension` property is an optional property that defines if the CGMES conversion context will be stored as an extension of the IIDM output network. Its default value is `false`.
-
-**iidm.import.cgmes.import-control-areas**  
-The `iidm.import.cgmes.import-control-areas` property is an optional property that defines if control areas must be imported or not. Its default value is `true`.
 
 #### Deprecated properties
 
@@ -218,6 +220,9 @@ The `convertBoundary` property is deprecated since v2.4.0. Use `iidm.import.cgme
 **createBusbarSectionForEveryConnectivityNode**  
 The `createBusbarSectionForEveryConnectivityNode` property is deprecated since v2.4.0. Use `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` instead.
 
+**iidm.import.cgmes.profile-used-for-initial-state-values**  
+The `iidm.import.cgmes.profile-used-for-initial-state-values` property is deprecated since v4.7.0. Use `iidm.import.cgmes.profile-for-initial-values-shunt-sections-tap-positions` instead.
+
 **powsyblTripleStore**  
 The `powsyblTripleStore` property is deprecated since v2.4.0. Use `iidm.import.cgmes.powsybl-triplestore` instead.
 
@@ -226,6 +231,46 @@ The `storeCgmesModelAsNetworkExtension` property is deprecated since v2.4.0. Use
 
 ## Export
 <span style="color: red">TODO</span>
+
+## CGMES post-processors
+
+### CgmesDLImportPostProcessor
+This post-processor loads the diagram layout (DL) profile contained in the CGMES file, if available, into the triplestore.
+The diagram layout profile contains the data which is necessary to represent a drawing of the diagram corresponding to the CGMES file.
+For instance, it contains the position of all equipments.
+ 
+This post-processor is enabled by adding the name `cgmesDLImport` to the list associated to `iidm.import.cgmes.post-processors` property.
+
+### Options
+
+These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../user/configuration/import-export-parameters-default-value.md) module.
+
+**iidm.export.cgmes.base-name**
+The `iidm.export.cgmes.base-name` property is an optional property that defines the base name of the exported files. Exported CGMES files' names will look like this:
+```yaml
+<base_name>_EQ.xml
+<base_name>_TP.xml
+<base_name>_SSH.xml
+<base_name>_SV.xml
+```
+By default, the base name is the network's name if it exists, as a last resort, the network's ID.
+
+**iidm.export.cgmes.cim-version**
+The `iidm.export.cgmes.cim-version` property is an optional property that defines the CIM version number in which the user wants the CGMES files to be exported.
+CIM version 14 and 16 are supported i.e. its valid values are `14` or `16`.
+If not defined, and the network has the extension `CimCharacteristics`, the CIM version will be the one indicated in the extension. If not, its default value is `16`.
+
+**iidm.export.cgmes.export-boundary-power-flows**
+The `iidm.export.cgmes.export-boundary-power-flows` property is an optional property that defines if power flows of boundary nodes are to be exported in the SV file or not.
+Its default value is `true`.
+
+**iidm.export.cgmes.export-power-flows-for-switches**
+The `iidm.export.cgmes.export-power-flows-for-switches` property is an optional property that defines if power flows of switches are exported in the SV file.
+Its default value is `false`.
+
+**iidm.export.cgmes.profiles**
+The `iidm.export.cgmes.profiles` property is an optional property that defines the exported CGMES profiles.
+By default, it is a full CGMES export: EQ, TP, SSH and SV are exported.
 
 ## Triple stores
 

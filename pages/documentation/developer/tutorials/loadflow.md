@@ -162,7 +162,7 @@ final InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStre
 <img src="./img/loadflow/Import.svg" alt="" style="vertical-align: bottom"/>
 The file is imported through a gateway that converts the file to an in-memory model.
 ```java
-Network network = Importers.loadNetwork(networkFileName, is);;
+Network network = Importers.loadNetwork(networkFileName, is);
 ```
 <br />
 
@@ -189,9 +189,9 @@ for (Substation substation : network.getSubstations()) {
 There are two lines in the network.
 ```java
 for (Line line : network.getLines()) {
-    LOG.info("Line : " + line.getNameOrId());
-    LOG.info(" > Terminal 1 power : " + line.getTerminal1().getP());
-    LOG.info(" > Terminal 2 power : " + line.getTerminal2().getP());
+    LOGGER.info("Line : " + line.getNameOrId());
+    LOGGER.info(" > Terminal 1 power : " + line.getTerminal1().getP());
+    LOGGER.info(" > Terminal 2 power : " + line.getTerminal2().getP());
 }
 ```
 
@@ -258,8 +258,8 @@ for (Bus bus : network.getBusView().getBuses()) {
     network.getVariantManager().setWorkingVariant(variantId);
     angle = bus.getAngle();
     v = bus.getV();
-    LOG.info("Angle difference   : " + (angle - oldAngle));
-    LOG.info("Tension difference : " + (v - oldV));
+    LOGGER.info("Angle difference   : " + (angle - oldAngle));
+    LOGGER.info("Tension difference : " + (v - oldV));
 }
 ```
 
@@ -291,9 +291,9 @@ LoadFlow.run(network);
 Let's analyze the results. First we make some simple prints in the terminal: 
 ```java
 for (Line l : network.getLines()) {
-    LOG.info("Line: " + l.getName());
-    LOG.info("Line: " + l.getTerminal1().getP());
-    LOG.info("Line: " + l.getTerminal2().getP());
+    LOGGER.info("Line: " + l.getName());
+    LOGGER.info("Line: " + l.getTerminal1().getP());
+    LOGGER.info("Line: " + l.getTerminal2().getP());
 }
 ```
 
@@ -302,12 +302,12 @@ Here we will also show how to define a visitor object, that may be used to loop 
 final DefaultTopologyVisitor visitor = new DefaultTopologyVisitor() {
     @Override
     public void visitGenerator(Generator generator) {
-        LOG.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
+        LOGGER.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
     }
 
     @Override
     public void visitLoad(Load load) {
-        LOG.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
+        LOGGER.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
     }
 };
 for (VoltageLevel voltageLevel : network.getVoltageLevels()) {

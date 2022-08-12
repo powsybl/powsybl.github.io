@@ -343,7 +343,12 @@ This module provides a [CLI tool](../user/itools/index.md) to run simulations.
 **powsybl-itools-packager-maven-plugin**  
 This module provides a maven plugin to [create a standalone distribution based on iTools](../developer/tutorials/itools-packager.md).
 
-## Single line diagram
+## Network visualization
+
+### Single line diagram
+
+**single-line-diagram-core**  
+This module enables to generate svg images of voltage levels and substations.
 
 **single-line-diagram-cgmes-dl-iidm-extensions**  
 This module gathers the network core model extensions for CIM-CGMES networks.
@@ -355,12 +360,17 @@ This module is used to convert the CIM-CGMES DL profile to the network core mode
 This module should be used to create svgs from the CIM-CGMES DL (Diagram Layout) profile.
 
 **single-line-diagram-force-layout**  
-This module provides a layout for substation diagrams based on the [Force Atlas 2](https://github.com/gephi/gephi/wiki/Force-Atlas-2) algorithm.
+This module provides a layout for substation diagrams based on a basic force layout algorithm.
 
 **single-line-diagram-iidm-extensions**  
 This module defines extensions to attach diagram information to networks.
 
-## Development tools
+### Network area diagram
+
+**network-area-diagram**  
+This module enables to generate svg images displaying a concise diagram of the network or part of the network.
+
+### Development tools
 
 **powsybl-single-line-diagram-viewer**  
 This module provides a demo app for debug purpose, which allows viewing and interacting with substations and voltage levels diagrams of network files.

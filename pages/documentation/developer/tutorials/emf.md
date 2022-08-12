@@ -172,7 +172,7 @@ You can add the following dependencies to the `pom.xml` file, with their corresp
   <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
-    <version>1.1.8</version>
+    <version>1.2.9</version>
     <scope>runtime</scope>
   </dependency>
   <dependency>
