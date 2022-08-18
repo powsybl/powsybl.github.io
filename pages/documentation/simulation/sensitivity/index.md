@@ -68,11 +68,12 @@ shall be calculated on the network at state N, but also after the application of
 The contingencies are provided in the same way than for the [security analysis]().
 This then constitutes a systematic sensitivity analysis.
 
-At the moment the only available sensitivity simulator officially compatible with PowSyBl is
-the one available through Hades2, an RTE freeware tool. In this case, the network is provided 
+Using Hades 2 as sensitivities computation simulator, the network is provided 
 only once in state N, and then all the calculations are done successively by modifying the Jacobian 
 matrix directly in the solver based on the contingencies input.
 The network is thus loaded only once, which improves performance.
+
+The same property is achieved using OpenLoadFlow ...
 
 ## Sensitivity analysis outputs
 
