@@ -17,7 +17,7 @@ impacts of internal and cross zonal exchange of power on the flows (and associat
 It is an important part of the cost sharing methodolgy for remedial actions costs sharing between TSOs.
 
 The aim of flow decomposition algorithm is to provide for each network element a decomposition of the active flow into different parts:
-- Allocated flow: flow due to electricity market exchanges. These includes import/export flows and transit flows.
+- Allocated flow: flow due to electricity market exchanges. This includes import/export flows and transit flows.
 - Internal flow: flow due to electricity exchange inside the network element's zone.
 - Loop flow: flow due to electricity exchange inside another zone.
 - PST flow: flow due to a shift commanded by the action of an active phase shifting transformer on the network.
@@ -99,10 +99,9 @@ The following matrices are calculated using [sensitivity analysis](../sensitivit
 - $$\mathrm{PTDF}$$ is the matrix of the sensitivity of the network element flow to each network injection shift, 
 - $$\mathrm{PSDF}$$ is the matrix of the sensitivity of the network element flow to each phase shift transformer tap angle change,
 
-
 ### Flow partitioning
 
-Based on previously calculated elements, flow partitioning can now be calculated as follow:
+Based on previously calculated elements, flow partitioning can now be calculated as follows:
 
 $$
 \begin{array}{l}
@@ -148,8 +147,9 @@ Current implementation of the algorithm only allows automatic generation of Coun
 The third input of the flow decomposition algorithm are the network elements of interest which flow is to be decomposed
 into the parts listed in introduction.
 
-Current implementation of the algorithm only allows automatic generation of network elements list as the set of all
-interconnections on the network (i.e. branches which have different country attribute in their source and destination substation).
+Current implementation of the algorithm allows two algorithm for automatic generation of network elements list :
+- Set of all interconnections on the network (i.e. branches which have different country attribute in their source and destination substation).
+- Set of all interconnections on the network with the addition of all branches that have a maximum zonal PTDF greater than 5%.
 
 ## Flow decomposition outputs
 
@@ -168,14 +168,15 @@ which network element is part of (interconnections are considered as part of no 
 
 ### Dedicated parameters
 
-| Name                        | Type    | Default value | Description                                                                                                                                                                                                                                                                                                    |
-|-----------------------------|---------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| save-intermediates          | boolean | false         | When set to true, intermediate results (PTDF matrix, PSDF matrix, etc) are saved in results object. Otherwise only keep flow parts for each XNECs.                                                                                                                                                             |
-| enable-losses-compensation  | boolean | false         | When set to true, adds losses compensation step of the algorithm. Otherwise, all losses will be compensated using chosen power flow compensation strategy.                                                                                                                                                     |
-| losses-compensation-epsilon | double  | 1e-5          | Threshold used in losses compensation step of the algorihm. If actual losses are below the given threshold on a branch, no injection is created in the network to compensate these losses. Used to avoid creating too many injections in the network. May have an impact in overall algorithm performance and memory usage. |
-| sensitivity-epsilon         | double  | 1e-5          | Threshold used when filling PTDF and PSDF matrices. If a sensitivity is below the given threshold, it is set to zero. Used to keep sparse matrices in the algorithm. May have an impact in overall algorithm performance and memory usage.                                                                     |
-| rescale-enabled             | boolean | false         | When set to true, rescaling step is done to ensure that the sum of all flow parts is equal to the AC reference flow.                                                                                                                                                                                           |
-
+| Name                                    | Type    | Default value                               | Description                                                                                                                                                                                                                                                                                                                 |
+|-----------------------------------------|---------|---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| save-intermediates                      | boolean | false                                       | When set to true, intermediate results (PTDF matrix, PSDF matrix, etc) are saved in results object. Otherwise only keep flow parts for each XNECs.                                                                                                                                                                          |
+| enable-losses-compensation              | boolean | false                                       | When set to true, adds losses compensation step of the algorithm. Otherwise, all losses will be compensated using chosen power flow compensation strategy.                                                                                                                                                                  |
+| losses-compensation-epsilon             | double  | 1e-5                                        | Threshold used in losses compensation step of the algorihm. If actual losses are below the given threshold on a branch, no injection is created in the network to compensate these losses. Used to avoid creating too many injections in the network. May have an impact in overall algorithm performance and memory usage. |
+| sensitivity-epsilon                     | double  | 1e-5                                        | Threshold used when filling PTDF and PSDF matrices. If a sensitivity is below the given threshold, it is set to zero. Used to keep sparse matrices in the algorithm. May have an impact in overall algorithm performance and memory usage.                                                                                  |
+| rescale-enabled                         | boolean | false                                       | When set to true, rescaling step is done to ensure that the sum of all flow parts is equal to the AC reference flow.                                                                                                                                                                                                        |
+| xnec-selection-strategy                 | enum    | XnecSelectionStrategy.ONLY_INTERCONNECTIONS | When set to ```XnecSelectionStrategy.ONLY_INTERCONNECTIONS```, the branches are only selected using the interconnection rule. When set to ```XnecSelectionStrategy.ZONE_TO_ZONE_PTDF_CRITERIA```, zonal PTDF are computed and used to select additional branches with 5% zone to zone rule.                                 |
+| dc-fallback-enabled-after-ac-divergence | boolean | true                                        | Defines the fallback bahavior after an AC divergence Use True to run DC loadflow if an AC loadflow diverges (default). Use False to throw an exception if an AC loadflow diverges.                                                                                                                                          |
 
 ### Impact of existing parameters
 
