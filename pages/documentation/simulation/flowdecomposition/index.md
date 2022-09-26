@@ -145,7 +145,8 @@ Current implementation of the algorithm only allows automatic generation of Coun
 ### Network elements
 
 The third input of the flow decomposition algorithm are the network elements of interest which flow is to be decomposed
-into the parts listed in introduction - called XNEC in the methodology.
+into the parts listed in introduction - called XNEC (cross-border relevant network element with contingency) in the flow
+decomposition methodology.
 
 Current implementation of the algorithm allows two algorithm for automatic generation of network elements list :
 - Set of all interconnections on the network (i.e. branches which have different country attribute in their source and destination substation).
