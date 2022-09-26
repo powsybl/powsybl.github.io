@@ -25,7 +25,7 @@ The aim of flow decomposition algorithm is to provide for each network element a
 
 > Current algorithm does not model HVDC flow yet.
 
-> This decomposition does not reflects the exact reality of how electric flows act on a real network, but it
+> This decomposition does not reflect the exact reality of how electric flows act on a real network, but it
 > is a useful approximation needed for some cross zonal coordination processes.
 
 ## Algorithm description
@@ -64,7 +64,7 @@ compensated at both sides proportionally to the resistance of each half line.
 
 ### Nodal Injections partitioning
 
-In order to distinguish internal/loopflows and allocated flows, the nodal injections in each zone must de decomposed in two parts:
+In order to distinguish internal/loop flows and allocated flows, the nodal injections in each zone must de decomposed in two parts:
 - Nodal injections for allocated flows
 - Nodal injections for loop flows and internal flows
 
@@ -72,7 +72,7 @@ This decomposition is based on GLSK (Generation and Load Shift Keys). It is an i
 for each zone of the study a list of injections and associated factor to be used to scale the zone to a given net position.
 
 By default, the algorithm uses so-called "Country GSK", which is an automatic GLSK that scales on all generators
-proportionally to their target power set-point.
+proportionally to their target power setpoint.
 
 Nodal injection decomposition is done as follows:
 
@@ -114,7 +114,7 @@ $$
 where:
 - $$\mathrm{F}_\mathrm{AF}$$ is the vector of the network element allocated flow, 
 - $$\mathrm{F}_\mathrm{LIF}$$ is the matrix of the network element loop flow or internal flow for each zone, 
-- $$\mathrm{F}_\mathrm{PST}$$ is the vector of the network element PST flow, 
+- $$\mathrm{F}_\mathrm{PST}$$ is the vector of the network element PST (phase shift transformer) flow, 
 - $$\mathrm{AM}$$ is the allocation matrix, which associates each injection to its zone. $$\mathrm{AM}_{ij}$$ = 1 if node i is in zone j, 0 otherwise, 
 - $$\mathrm{\Delta}_\mathrm{PST}$$ is the phase shift transformers angle vector,
 
@@ -145,7 +145,7 @@ Current implementation of the algorithm only allows automatic generation of Coun
 ### Network elements
 
 The third input of the flow decomposition algorithm are the network elements of interest which flow is to be decomposed
-into the parts listed in introduction.
+into the parts listed in introduction - called XNEC in the methodology.
 
 Current implementation of the algorithm allows two algorithm for automatic generation of network elements list :
 - Set of all interconnections on the network (i.e. branches which have different country attribute in their source and destination substation).
@@ -176,7 +176,7 @@ which network element is part of (interconnections are considered as part of no 
 | sensitivity-epsilon                     | double  | 1e-5                                        | Threshold used when filling PTDF and PSDF matrices. If a sensitivity is below the given threshold, it is set to zero. Used to keep sparse matrices in the algorithm. May have an impact in overall algorithm performance and memory usage.                                                                                  |
 | rescale-enabled                         | boolean | false                                       | When set to true, rescaling step is done to ensure that the sum of all flow parts is equal to the AC reference flow.                                                                                                                                                                                                        |
 | xnec-selection-strategy                 | enum    | XnecSelectionStrategy.ONLY_INTERCONNECTIONS | When set to ```XnecSelectionStrategy.ONLY_INTERCONNECTIONS```, the branches are only selected using the interconnection rule. When set to ```XnecSelectionStrategy.ZONE_TO_ZONE_PTDF_CRITERIA```, zonal PTDF are computed and used to select additional branches with 5% zone to zone rule.                                 |
-| dc-fallback-enabled-after-ac-divergence | boolean | true                                        | Defines the fallback bahavior after an AC divergence Use True to run DC loadflow if an AC loadflow diverges (default). Use False to throw an exception if an AC loadflow diverges.                                                                                                                                          |
+| dc-fallback-enabled-after-ac-divergence | boolean | true                                        | Defines the fallback behavior after an AC divergence Use True to run DC loadflow if an AC loadflow diverges (default). Use False to throw an exception if an AC loadflow diverges.                                                                                                                                          |
 
 ### Impact of existing parameters
 
