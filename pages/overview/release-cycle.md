@@ -6,7 +6,7 @@ layout: default
 
 A new release train of the framework occurs roughly every 6 to 8 weeks.
 
-*Start of next release train: 2022-06-15*
+*Start of next release train: 2022-11-09*
 
 In case of structural issues, corrective releases can also be published for some repositories.
 These corrective releases are motivated by users' demand so don't hesitate to [contact us](../community/index.md#contact).
