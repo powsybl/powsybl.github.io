@@ -6,7 +6,7 @@ layout: default
 
 Download a basic PowSyBl distribution to start using features such as running a loadflow or converting an electrical grid file from one format to another.
 
-PowSyBl distributions are functional on Windows and on Linux. It should also work on MacOS.
+PowSyBl distributions are functional on Windows, Linux and MacOS.
 
 To install this basic PowSyBl distribution on your local machine, go to our [installation guide](../documentation/user/index.md#installation-from-binaries).
 
