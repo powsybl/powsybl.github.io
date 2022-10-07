@@ -34,24 +34,38 @@ load-flow:
 
 **svcRegulationOn**  
 The `svcRegulationOn` is an optional boolean property that defines if SVCs (Static Var Compensator) take part
-in the voltage regulation. The default value of this parameter is `false`.
+in the voltage regulation.  
+The default value of this parameter is `false`.
 
 **shuntRegulationOn**  
-The `shuntRegulationOn` is an optional boolean property that defines if Shunts take part in the voltage regulation.
+The `shuntRegulationOn` is an optional boolean property that defines if Shunts take part in the voltage regulation.  
 The default value of this parameter is `false`.
 
 **automaticSlackBusOn**  
 The `automaticSlackbusOn` is an optional boolean property that defines if DynaFlow computes the slack bus
-(phase reference bus) by itself or if the slack bus is provided.
+(phase reference bus) by itself or if the slack bus is provided.  
 The default value of this parameter is `true`.
 
-**vscAsGenerators**
+**dsoVoltageLevel**  
+The `dsoVoltageLevel` is an optional double property that defines  
+The default value of this parameter is `45.0`.
+
+**chosenOutputs**  
+The `chosenOutputs` is an optinal array property that defines  
+The default value of this parameter is `[ "STEADYSTATE" ]`.
+
+**vscAsGenerators**  
 The `vscAsGenerators` is an optional boolean property that defines if VSCs (Voltage Source Converters)
-are modeled as generators. The default value of this parameter is `true`.
+are modeled as generators.  
+The default value of this parameter is `true`.
 
 **lccAsLoads**  
-The `lccAsLoads` is an optional boolean property that defines if LCCs (Line Commutated Converters) are modeled as loads.
+The `lccAsLoads` is an optional boolean property that defines if LCCs (Line Commutated Converters) are modeled as loads.  
 The default value of this parameter is `true`.
+
+**timeStep**  
+The `timeStep` is an optional parameter  
+The default value of this parameter is `2.6`.
 
 ### Generic parameters
 Furthermore, DynaFlow only supports two of the generic parameters:
@@ -68,8 +82,11 @@ dynaflow-default-parameters:
     svcRegulationOn: false
     shuntRegulationOn: false
     automaticSlackBusOn: false
-    vscAsGenerators: false
-    lccAsLoads: true
+    dsoVoltageLevel: 987.6,
+    chosenOutputs : [ "STEADYSTATE", "LOSTEQ", "TIMELINE", "CONSTRAINTS" ],
+    vscAsGenerators : true,
+    lccAsLoads : true,
+    timeStep : 2.6
 ```
 
 
@@ -85,8 +102,11 @@ Alternatively, you can provide parameters as a JSON file where supported
       "svcRegulationOn": true,
       "shuntRegulationOn": false,
       "automaticSlackBusOn": true,
-      "vscAsGenerators": false,
-      "lccAsLoads": true
+      "dsoVoltageLevel": 987.6,
+      "chosenOutputs" : [ "STEADYSTATE", "LOSTEQ", "TIMELINE", "CONSTRAINTS" ],
+      "vscAsGenerators" : true,
+      "lccAsLoads" : true,
+      "timeStep" : 2.6
     }
   }
 }
