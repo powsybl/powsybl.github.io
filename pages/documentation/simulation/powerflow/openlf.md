@@ -181,7 +181,7 @@ Note that if you want to choose the slack bus that is defined inside the network
 
 **slackBusesIds**  
 The `slackBusesIds` property is a required property if you choose `NAME` for property `slackBusSelectionMode`.
-It defines a prioritized list of buses or voltage levels to be chosen for slack bus selection (comma or semicolon separated).
+It defines a prioritized list of buses or voltage levels to be chosen for slack bus selection (as an array, or as a comma or semicolon separated string).
 
 **loadPowerFactorConstant**  
 The `loadPowerFactorConstant ` property is an optional boolean property. The default value is `false`. This property is used in the outer loop that distributes slack on loads if :
@@ -212,11 +212,12 @@ If `balanceType` equals to `PROPORTIONAL_TO_CONFORM_LOAD`, the power factor rema
 
 The default value for `loadPowerFactorConstant` property is `false`.
 
-**dcUseTransformerRatio**  
-The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the flow equations during DC approximation. The default value of this parameter is `true`.
-
 **plausibleActivePowerLimit**  
-The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for slack distribution (`balanceType` equals to `PROPORTIONAL_TO_GENERATION_P_MAX`). The default value is $$5000 MW$$.
+The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for:
+- slack distribution (if `balanceType` equals to `PROPORTIONAL_TO_GENERATION_P_MAX` or `PROPORTIONAL_TO_GENERATION_P`)
+- slack selection (if `slackBusSelectionMode` equals to `LARGEST_GENERATOR`)
+
+The default value is $$5000 MW$$.
 
 **addRatioToLinesWithDifferentNominalVoltageAtBothEnds**  
 The `addRatioToLinesWithDifferentNominalVoltageAtBothEnds` property is an optional property used for lines that are connected to two voltage level with different nominal voltages. If this property equals `true`, a structural ratio is taken into account. The default value of this parameter is `true`. This property should normally be left to its default value `true` to get correct load-flow results.
@@ -231,7 +232,7 @@ open-loadflow-default-parameters:
   throwsExceptionInCaseOfSlackDistributionFailure: false
   voltageRemoteControl: false
   slackBusSelectionMode: Name
-  nameSlackBusSelectorBusId: Bus3_0
+  slackBusesIds: Bus3_0,Bus5_0
   loadPowerFactorConstant: true
 ```
 
