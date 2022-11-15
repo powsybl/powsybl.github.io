@@ -192,11 +192,46 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Generator short-circuit
 
-<span style="color: red">TODO</span>
+This extension models the generators data used for short-circuit calculations. Depending on the type of short-circuit study to be 
+performed, either the transient or the subtransient reactance should be filled. The reactance of the step-up transformer should be
+filled if the generator has a transformer that is not directly modeled in the network.
+
+| Attribute              | Type | Unit | Required | Default value | Description                                                                       |
+|------------------------| ---- | ---- |----| ------------- |-----------------------------------------------------------------------------------|
+| directTransX (X'd)     | double | Ω | yes| - | Direct transient reactance of the generator                                       |
+| directSubtransX (X''d) | double | Ω | no | - | Direct subtransient reactance of the generator                                    |
+| stepUpTransformerX     | double | Ω | no | - | Reactance of the step-up transformer |
+
+This extension is provided in the  `com.powsybl:powsybl-iidm-extensions` module.
+
+To add this extension to a generator, the code to be used is:
+```java
+generator.newExtension(GeneratorShortCircuitAdder.class)
+    .withDirectTransX(20)
+    .withDirectSubtransX(14)
+    .withStepUpTransformerX(10)
+    .add();
+```
 
 ## Identifiable short-circuit
 
-<span style="color: red">TODO</span>
+This extension models the maximum and minimum short-circuit current admissible for any identifiable.
+
+| Attribute | Type   | Unit | Required | Default value | Description                    |
+|-----------|--------|------|----------| ------------- |--------------------------------|
+| ipMin     | double | A    | no       | - | The minimum admissible current |
+| ipMax     | double | A    | yes      | - | The maximum admissible current |
+
+This extension is provided in the  `com.powsybl:powsybl-iidm-extensions` module.
+
+To add this extension to a bus, for example, the code to be used is:
+```java
+bus.newExtension(IdentifiableShortCircuitAdder.class)
+    .withIpMin(3000)
+    .withIpMax(10000)
+    .add();
+```
+The code is similar for every identifiable.
 
 ## Injection observability
 
