@@ -128,6 +128,11 @@
 .sld-arrow-p {fill:black}
 .sld-arrow-q {fill:blue}
 .sld-frame {fill: var(--sld-background-color, transparent)}
+/* Stroke maroon for fictitious switch */
+.sld-breaker.sld-fictitious {stroke: maroon}
+.sld-disconnector.sld-fictitious {stroke: maroon}
+.sld-load-break-switch.sld-fictitious {stroke: maroon}
+.sld-busbar-section.sld-fictitious {stroke: var(--sld-vl-color, #c80000); stroke-width: 1}
 
 ]]>
     </style>
@@ -138,20 +143,17 @@
             <text class="sld-label" id="D_NW_LABEL" x="-5.0" y="-5.0">D</text>
         </g>
         <g class="cell idEXTERN_32_0" id="idEXTERN_32_0">
-            <g class="sld-node sld-hidden-node sld-vl180to300-0" id="idINTERNAL_95_C_95_F" transform="translate(61.0,218.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl180to300-0" id="idINTERNAL_95_C_95_F" transform="translate(61.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-vl180to300-0" id="idINTERNAL_95_C_95_CI_95_ONE" transform="translate(61.0,138.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl180to300-0" id="idINTERNAL_95_C_95_CI_95_ONE" transform="translate(61.0,138.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-pst sld-top-feeder" id="idCI_95_ONE" transform="translate(58.0,72.5)">
                 <path class="sld-pst-arrow" d="M14,0 0,14 M11,0 14,0 14,3"/>
                 <circle class="sld-vl180to300-0 sld-winding" cx="7" cy="10" r="5"/>
-                <circle class="sld-vl180to300-1 sld-winding" cx="7" cy="5" r="5"/>
+                <circle class="sld-vl180to300-0 sld-winding" cx="7" cy="5" r="5"/>
                 <text class="sld-label" id="CI_ONE_N_LABEL" x="-5.0" y="-5.0">CI_ONE</text>
-            </g>
-            <g class="sld-wire sld-vl180to300-0" id="_95_C_95_D_95_F">
-                <polyline points="65.0,252.0,65.0,252.0"/>
             </g>
             <g class="sld-wire sld-vl180to300-0" id="_95_C_95_F_95_INTERNAL_95_C_95_F">
                 <polyline points="65.0,252.0,65.0,222.0"/>
@@ -165,37 +167,34 @@
             <g class="sld-wire sld-vl180to300-0" id="_95_C_95_INTERNAL_95_C_95_CI_95_ONE_95_CI_95_ONE">
                 <polyline points="65.0,142.0,65.0,87.5"/>
             </g>
-            <g class="sld-arrow-p sld-in" id="idCI_95_ONE_ARROW_ACTIVE" transform="translate(60.0,99.75)">
+            <g class="sld-arrow-p sld-in" id="idCI_95_ONE_ARROW_ACTIVE" transform="translate(60.0,102.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-arrow-q sld-in" id="idCI_95_ONE_ARROW_REACTIVE" transform="translate(60.0,119.75)">
+            <g class="sld-arrow-q sld-in" id="idCI_95_ONE_ARROW_REACTIVE" transform="translate(60.0,122.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-disconnector sld-closed sld-vl180to300-0" id="idF" transform="translate(61.0,248.0)">
+            <g class="sld-disconnector sld-closed sld-fictitious sld-vl180to300-0" id="idF" transform="translate(61.0,248.0)">
                 <path class="sld-sw-closed" d="M0,0 8,8 M8,0 0,8"/>
                 <path class="sld-sw-open" d="M8,0 0,8"/>
             </g>
-            <g class="sld-breaker sld-closed sld-vl180to300-0" id="idJ" transform="translate(55.0,172.0)">
+            <g class="sld-breaker sld-closed sld-fictitious sld-vl180to300-0" id="idJ" transform="translate(55.0,172.0)">
                 <path class="sld-sw-closed" d="M1,1 V19 H19 V1z M10,5 V15"/>
                 <path class="sld-sw-open" d="M1,1 V19 H19 V1z M5,10 H15"/>
             </g>
         </g>
         <g class="cell idEXTERN_32_1" id="idEXTERN_32_1">
-            <g class="sld-node sld-hidden-node sld-vl180to300-0" id="idINTERNAL_95_C_95_H" transform="translate(111.0,278.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl180to300-0" id="idINTERNAL_95_C_95_H" transform="translate(111.0,278.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-vl180to300-0" id="idINTERNAL_95_C_95_CJ_95_ONE" transform="translate(111.0,358.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl180to300-0" id="idINTERNAL_95_C_95_CJ_95_ONE" transform="translate(111.0,358.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-bottom-feeder sld-vl180to300-0" id="idCJ_95_ONE" transform="translate(115.0,424.0)">
                 <text class="sld-label" id="CJ_ONE_S_LABEL" x="-5.0" y="5.0">CJ_ONE</text>
-            </g>
-            <g class="sld-wire sld-vl180to300-0" id="_95_C_95_D_95_H">
-                <polyline points="115.0,252.0,115.0,252.0"/>
             </g>
             <g class="sld-wire sld-vl180to300-0" id="_95_C_95_H_95_INTERNAL_95_C_95_H">
                 <polyline points="115.0,252.0,115.0,282.0"/>
@@ -219,11 +218,11 @@
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-disconnector sld-closed sld-vl180to300-0" id="idH" transform="translate(111.0,248.0)">
+            <g class="sld-disconnector sld-closed sld-fictitious sld-vl180to300-0" id="idH" transform="translate(111.0,248.0)">
                 <path class="sld-sw-closed" d="M0,0 8,8 M8,0 0,8"/>
                 <path class="sld-sw-open" d="M8,0 0,8"/>
             </g>
-            <g class="sld-breaker sld-closed sld-vl180to300-0" id="idL" transform="translate(105.0,312.0)">
+            <g class="sld-breaker sld-closed sld-fictitious sld-vl180to300-0" id="idL" transform="translate(105.0,312.0)">
                 <path class="sld-sw-closed" d="M1,1 V19 H19 V1z M10,5 V15"/>
                 <path class="sld-sw-open" d="M1,1 V19 H19 V1z M5,10 H15"/>
             </g>

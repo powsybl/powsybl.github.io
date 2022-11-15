@@ -128,6 +128,11 @@
 .sld-arrow-p {fill:black}
 .sld-arrow-q {fill:blue}
 .sld-frame {fill: var(--sld-background-color, transparent)}
+/* Stroke maroon for fictitious switch */
+.sld-breaker.sld-fictitious {stroke: maroon}
+.sld-disconnector.sld-fictitious {stroke: maroon}
+.sld-load-break-switch.sld-fictitious {stroke: maroon}
+.sld-busbar-section.sld-fictitious {stroke: var(--sld-vl-color, #c80000); stroke-width: 1}
 
 ]]>
     </style>
@@ -138,10 +143,10 @@
             <text class="sld-label" id="_364c9ca2-0d1d-4363-8f46-e586f8f66a8c_NW_LABEL" x="-5.0" y="-5.0">BE-Busbar_6</text>
         </g>
         <g class="cell idEXTERN_32_0" id="idEXTERN_32_0">
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_1" transform="translate(211.0,278.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_1" transform="translate(211.0,278.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_2" transform="translate(211.0,358.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_2" transform="translate(211.0,358.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-load sld-bottom-feeder sld-vl70to120-0" id="id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(207.0,419.5)">
@@ -149,9 +154,6 @@
                 <line x1="0" x2="16" y1="0" y2="9"/>
                 <line x1="16" x2="0" y1="0" y2="9"/>
                 <text class="sld-label" id="_cb459405-cc14-4215-a45c-416789205904_S_LABEL" x="-5.0" y="14.0">BE-Load_1</text>
-            </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
-                <polyline points="215.0,252.0,215.0,252.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_1">
                 <polyline points="215.0,256.0,215.0,282.0"/>
@@ -162,25 +164,25 @@
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_2_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
                 <polyline points="215.0,362.0,215.0,419.5"/>
             </g>
-            <g class="sld-arrow-q sld-out" id="id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW_REACTIVE" transform="translate(210.0,395.75)">
+            <g class="sld-arrow-q sld-out" id="id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW_REACTIVE" transform="translate(210.0,394.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10" transform="rotate(180.0,5.0,5.0)"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
                 <text class="sld-label" x="15.0" y="5.0">90</text>
             </g>
-            <g class="sld-arrow-p sld-out" id="id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW_ACTIVE" transform="translate(210.0,375.75)">
+            <g class="sld-arrow-p sld-out" id="id_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_ARROW_ACTIVE" transform="translate(210.0,374.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10" transform="rotate(180.0,5.0,5.0)"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
                 <text class="sld-label" x="15.0" y="5.0">200</text>
             </g>
-            <g class="sld-bus-connection sld-vl70to120-0" id="idBUSCO_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(211.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95__95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(211.0,248.0)">
                 <circle cx="4" cy="4" r="2"/>
             </g>
         </g>
         <g class="cell idEXTERN_32_1" id="idEXTERN_32_1">
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_1" transform="translate(261.0,218.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_1" transform="translate(261.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_2" transform="translate(261.0,138.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_2" transform="translate(261.0,138.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-capacitor sld-top-feeder sld-vl70to120-0" id="id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(259.0,74.0)">
@@ -189,9 +191,6 @@
                 <line x1="0" x2="12" y1="7.5" y2="7.5"/>
                 <line x1="6" x2="6" y1="7.5" y2="12"/>
                 <text class="sld-label" id="_d771118f-36e9-4115-a128-cc3d9ce3e3da_N_LABEL" x="-5.0" y="-5.0">BE_S1</text>
-            </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
-                <polyline points="265.0,252.0,265.0,252.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_1">
                 <polyline points="265.0,248.0,265.0,222.0"/>
@@ -202,25 +201,25 @@
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_2_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
                 <polyline points="265.0,142.0,265.0,86.0"/>
             </g>
-            <g class="sld-arrow-p sld-in" id="id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW_ACTIVE" transform="translate(260.0,99.0)">
+            <g class="sld-arrow-p sld-in" id="id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW_ACTIVE" transform="translate(260.0,101.0)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-arrow-q sld-in" id="id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW_REACTIVE" transform="translate(260.0,119.0)">
+            <g class="sld-arrow-q sld-in" id="id_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_ARROW_REACTIVE" transform="translate(260.0,121.0)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">-331</text>
             </g>
-            <g class="sld-bus-connection sld-vl70to120-0" id="idBUSCO_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(261.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95__95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(261.0,248.0)">
                 <circle cx="4" cy="4" r="2"/>
             </g>
         </g>
         <g class="cell idEXTERN_32_2" id="idEXTERN_32_2">
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,278.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,278.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO" transform="translate(111.0,358.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO" transform="translate(111.0,358.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-pst sld-bottom-feeder" id="id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO" transform="translate(108.0,416.5)">
@@ -228,9 +227,6 @@
                 <circle class="sld-vl70to120-0 sld-winding" cx="7" cy="10" r="5" transform="rotate(180.0,7.0,7.5)"/>
                 <circle class="sld-vl300to500-0 sld-winding" cx="7" cy="5" r="5" transform="rotate(180.0,7.0,7.5)"/>
                 <text class="sld-label" id="_a708c3bc-465d-4fe7-b6ef-6fa6408a62b0_TWO_S_LABEL" x="-5.0" y="20.0">BE-TR2_1</text>
-            </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
-                <polyline points="115.0,252.0,115.0,252.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
                 <polyline points="115.0,256.0,115.0,282.0"/>
@@ -244,17 +240,17 @@
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_95__95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO">
                 <polyline points="115.0,362.0,115.0,416.5"/>
             </g>
-            <g class="sld-arrow-q sld-in" id="id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW_REACTIVE" transform="translate(110.0,394.25)">
+            <g class="sld-arrow-q sld-in" id="id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW_REACTIVE" transform="translate(110.0,391.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10" transform="rotate(180.0,5.0,5.0)"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-arrow-p sld-in" id="id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW_ACTIVE" transform="translate(110.0,374.25)">
+            <g class="sld-arrow-p sld-in" id="id_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_ARROW_ACTIVE" transform="translate(110.0,371.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10" transform="rotate(180.0,5.0,5.0)"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-bus-connection sld-vl70to120-0" id="idBUSCO_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95__95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,248.0)">
                 <circle cx="4" cy="4" r="2"/>
             </g>
             <g class="sld-breaker sld-closed sld-vl70to120-0" id="id_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(105.0,312.0)">
@@ -263,10 +259,10 @@
             </g>
         </g>
         <g class="cell idEXTERN_32_3" id="idEXTERN_32_3">
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,218.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO" transform="translate(61.0,138.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO" transform="translate(61.0,138.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-pst sld-top-feeder" id="id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO" transform="translate(58.0,72.5)">
@@ -274,9 +270,6 @@
                 <circle class="sld-vl70to120-0 sld-winding" cx="7" cy="10" r="5"/>
                 <circle class="sld-vl180to300-0 sld-winding" cx="7" cy="5" r="5"/>
                 <text class="sld-label" id="_b94318f6-6d24-4f56-96b9-df2531ad6543_TWO_N_LABEL" x="-5.0" y="-5.0">BE-TR2_2</text>
-            </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
-                <polyline points="65.0,252.0,65.0,252.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
                 <polyline points="65.0,248.0,65.0,222.0"/>
@@ -290,17 +283,17 @@
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_95__95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO">
                 <polyline points="65.0,142.0,65.0,87.5"/>
             </g>
-            <g class="sld-arrow-p sld-in" id="id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW_ACTIVE" transform="translate(60.0,99.75)">
+            <g class="sld-arrow-p sld-in" id="id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW_ACTIVE" transform="translate(60.0,102.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-arrow-q sld-in" id="id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW_REACTIVE" transform="translate(60.0,119.75)">
+            <g class="sld-arrow-q sld-in" id="id_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_ARROW_REACTIVE" transform="translate(60.0,122.5)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-bus-connection sld-vl70to120-0" id="idBUSCO_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95__95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,248.0)">
                 <circle cx="4" cy="4" r="2"/>
             </g>
             <g class="sld-breaker sld-closed sld-vl70to120-0" id="id_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(55.0,172.0)">
@@ -309,19 +302,16 @@
             </g>
         </g>
         <g class="cell idEXTERN_32_4" id="idEXTERN_32_4">
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,218.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE" transform="translate(161.0,138.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE" transform="translate(161.0,138.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-two-wt sld-top-feeder" id="id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE" transform="translate(160.0,72.5)">
                 <circle class="sld-vl70to120-0 sld-winding" cx="5" cy="10" r="5"/>
                 <circle class="sld-vl0to30-0 sld-winding" cx="5" cy="5" r="5"/>
                 <text class="sld-label" id="_e482b89a-fa84-4ea9-8e70-a83d44790957_ONE_N_LABEL" x="-5.0" y="-5.0">BE-TR2_3</text>
-            </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_BUSCO_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
-                <polyline points="165.0,252.0,165.0,252.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
                 <polyline points="165.0,248.0,165.0,222.0"/>
@@ -335,17 +325,17 @@
             <g class="sld-wire sld-vl70to120-0" id="_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95__95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_95__95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE">
                 <polyline points="165.0,142.0,165.0,88.0"/>
             </g>
-            <g class="sld-arrow-p sld-in" id="id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW_ACTIVE" transform="translate(160.0,100.0)">
+            <g class="sld-arrow-p sld-in" id="id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW_ACTIVE" transform="translate(160.0,103.0)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-arrow-q sld-in" id="id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW_REACTIVE" transform="translate(160.0,120.0)">
+            <g class="sld-arrow-q sld-in" id="id_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_ARROW_REACTIVE" transform="translate(160.0,123.0)">
                 <polygon class="sld-arrow-in" points="0,0 10,0 5,10"/>
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">0</text>
             </g>
-            <g class="sld-bus-connection sld-vl70to120-0" id="idBUSCO_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95__95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,248.0)">
                 <circle cx="4" cy="4" r="2"/>
             </g>
             <g class="sld-breaker sld-closed sld-vl70to120-0" id="id_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(155.0,172.0)">
