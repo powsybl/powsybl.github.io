@@ -62,7 +62,6 @@ The `SourceFormat` attribute is a required attribute that indicates the origin o
 **Available extensions**
 
 - [CGMES Control Areas](extensions.md#cgmes-control-areas)
-- [CGMES-IIDM Mapping](extensions.md#cgmes-iidm-mapping)
 - [CGMES SSH Metadata](extensions.md#cgmes-ssh-metadata)
 - [CGMES SV Metadata](extensions.md#cgmes-sv-metadata)
 - [CIM Characteristics](extensions.md#cim-characteristics)

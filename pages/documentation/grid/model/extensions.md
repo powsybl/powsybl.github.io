@@ -109,11 +109,6 @@ This extension is used to add some CGMES characteristics to boundary dangling li
 
 This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
-## CGMES-IIDM mapping
-
-This extension contains the mapping between IIDM buses and CGMES topological nodes and between IIDM voltage levels and CGMES base voltages.
-This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
-
 ## CGMES line boundary node
 
 This extension is used to add some CGMES characteristics to boundary lines.
