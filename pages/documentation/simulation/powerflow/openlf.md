@@ -172,7 +172,7 @@ The default value is `true`.
 
 **slackBusSelectionMode**  
 The `slackBusSelectionMode` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
-- `FIRST` if you want to choose the first bus of all the network buses, identified by the [slack terminal extension](../../grid/model/extensions.md#slack-terminal).
+- `FIRST` if you want to choose the first bus of all the network buses.
 - `NAME` if you want to choose a specific bus as the slack bus. In that case, the `slackBusesIds` property has to be filled.
 - `MOST_MESHED` if you want to choose the most meshed bus among buses with the highest nominal voltage as the slack bus. This option is required for computation with several synchronous component.
 - `LARGEST_GENERATOR` if you want to choose the bus with the highest total generation capacity as the slack bus.
@@ -220,7 +220,7 @@ The `plausibleActivePowerLimit` property is an optional property that defines a 
 The default value is $$5000 MW$$.
 
 **addRatioToLinesWithDifferentNominalVoltageAtBothEnds**  
-The `addRatioToLinesWithDifferentNominalVoltageAtBothEnds` property is an optional property used for lines that are connected to two voltage level with different nominal voltages. If this property equals `true`, a structural ratio is taken into account. The default value of this parameter is `true`. This property should normally be left to its default value `true` to get correct load-flow results.
+The `addRatioToLinesWithDifferentNominalVoltageAtBothEnds` property is an optional property used for lines that are connected to two voltage level with different nominal voltages. If this property equals `true`, a structural ratio is taken into account. The default value of this parameter is `true`. This property should normally be left to its default value `true` to get correct load-flow results, and will be removed in a future release.
 
 ### Configuration file example
 See below an extract of a config file that could help:
