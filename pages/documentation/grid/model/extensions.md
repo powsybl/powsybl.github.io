@@ -9,7 +9,7 @@ The grid model contains enough data to basically describe supported components a
 The extensions are a way to add additional structured data to an equipment to extend its features.
 The extensions can be attached to any objects of a network or to the network itself.
 
-Some extensions are mono-variant meaning the data are identical for all the variants of the network. However, some of them are multi-variants to allow a different value for each variant of the network. It's typically the case for the [LoadDetail](#load-detail) extension that give the distribution of the constant part and the termo-sensitive part of a consumption. 
+Some extensions are mono-variant meaning the data are identical for all the variants of the network. However, some of them are multi-variants to allow a different value for each variant of the network. It's typically the case for the [LoadDetail](#load-detail) extension that give the distribution of the constant part and the thermo-sensitive part of a consumption. 
 
 Note that some extensions provided by PowSyBl aren't supported in the [persistent implementation of IIDM](../../developer/repositories/powsybl-network-store.md).
 
@@ -19,12 +19,12 @@ Every extension is considered as serializable unless explicitly specified as non
 {:toc}
 
 ## Active power control
-This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled. This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
+This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled (with balance type on generator `Pmax`). This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
 
 | Attribute | Type | Unit | Required | Default value | Description |
 | --------- | ---- | ---- | -------- | ------------- | ----------- |
 | participate | boolean | - | yes | - | The participation status |
-| droop | double | None (repartition key) | yes | - | The participation factor |
+| droop | double | None (repartition key) | yes | - | The participation factor equals Pmax / droop |
 
 Here is how to add an active power control extension to a generator:
 ```java
@@ -44,10 +44,10 @@ This extension models branches' flows' observability on both sides, obtained aft
 
 | Attribute  | Type                  | Unit | Required | Default value | Description                                     |
 |------------|-----------------------|------|---------| ------------- |-------------------------------------------------|
-| quality P1 | ObservabilityQuality  | -    | no      | - | The observability of active power on side ONE   |
-| quality P2 | ObservabilityQuality  | -    | no      | - | The observability of active power on side TWO   |
-| quality Q1 | ObservabilityQuality  | -    | no      | - | The observability of reactive power on side ONE |
-| quality Q2 | ObservabilityQuality  | -    | no      | - | The observability of reactive power on side TWO |
+| quality P1 | ObservabilityQuality  | MW    | no      | - | The observability quality of active power on side ONE   |
+| quality P2 | ObservabilityQuality  | MW    | no      | - | The observability quality of active power on side TWO   |
+| quality Q1 | ObservabilityQuality  | MVar    | no      | - | The observability quality of reactive power on side ONE |
+| quality Q2 | ObservabilityQuality  | MVar    | no      | - | The observability quality of reactive power on side TWO |
 
 **Observability quality**
 
@@ -55,34 +55,34 @@ This extension contains the sub-object `ObservabilityQuality`.
 
 | Attribute          | Type      | Unit | Required | Default value | Description                                        |
 |--------------------|-----------|------|----------| ------------- |----------------------------------------------------|
-| standard deviation | double    | -    | yes      | - | The standard deviation                             |
-| redundant          | redundant | -    | yes      | - | Indicates if this value is confirmed by redundancy |
+| standard deviation | double    | MW or MVar    | yes      | - | The standard deviation                             |
+| redundant          | redundant | boolean    | yes      | - | Indicates if this value is confirmed by redundancy |
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Branch status
 
-<span style="color: red">TODO</span>
+This extension models the status of a connectable. The status could be `IN_OPERATION`, `PLANNED_OUTAGE` or `FORCED_OUTAGE`.
 
 ## Busbar section position
 
-<span style="color: red">TODO</span>
+This extension gives positions information about a bus bar section. The `busBarIndex` gives the position of the bus bar section relatively to other bus bars. The `sectionIndex` gives the position of the bus bar section within the corresponding bus bar. Note that a bus bar is a set of bus bar sections. Hence, the sections of a same bus bar should have the same bus bar index. The bus bar indices induce an order of bus bars within the voltage level, which usually reflects the bus bars physical relative positions. Similarly, the section indices induce an order of sections of a same bus bar, which usually reflects their physical relative position.
 
-## CGMES control areas
+## CIM-CGMES control areas
 
-This extensions models all the control areas contained in the network as modeled in CGMES.
+This extensions models all the control areas contained in the network as modeled in CIM-CGMES.
 
 | Attribute           | Type                           | Unit | Required | Default value | Description                  |
 |---------------------|--------------------------------|------|----------| ------------- |------------------------------|
 | CGMES control areas | `Collection<CgmesControlArea>` | -    | no       | - | The list of control areas in the network |
 
-** CGMES control area**
+**CGMES control area**
 
 | Attribute                        | Type       | Unit | Required | Default value | Description                                         |
 |----------------------------------|------------|------|----------| ------------- |-----------------------------------------------------|
 | ID                               | String     | -    | yes      | - | The control area's ID                               |
 | name                             | String     | -    | no       | - | The control area's name                             |
-| energy identification Code (EIC) | String     | -    | no       | - | The control area's EIC                              |
+| Energy Identification Code (EIC) | String     | -    | no       | - | The control area's EIC                              |
 | net interchange                  | double     | -    | no       | - | The control area's net interchange (at its borders) |
 | terminals                        | `Terminal` | -    | no       | - | Terminals at the border of the control area         |
 | boundaries                       | `Boundary` | -    | no       | - | Boundaries at the border of the control area        |
@@ -91,50 +91,50 @@ It is possible to retrieve a control area by its ID. It is also possible to iter
 
 This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
-## CGMES conversion context extension
+## CIM-CGMES conversion context extension
 
-This extension is used to store the CGMES conversion context as built during the CGMES import.
-It contains the used configuration, the terminal mapping and the CGMES model.
+This extension is used to store the CIM-CGMES conversion context as built during the CIM-CGMES import.
+It contains the used configuration, the terminal mapping and the CIM-CGMES model.
 It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not serializable.
 
-## CGMES dangling line boundary node
+## CIM-CGMES dangling line boundary node
 
-This extension is used to add some CGMES characteristics to boundary dangling lines.
-
-
-| Attribute                             | Type    | Unit | Required | Default value | Description                                                                                          |
-|---------------------------------------|---------|------|----------|---------------|------------------------------------------------------------------------------------------------------|
-| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is an HVDC line or not (can be the case for AC emulation for example) |
-| line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                                                                 |
-
-This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
-
-## CGMES line boundary node
-
-This extension is used to add some CGMES characteristics to boundary lines.
+This extension is used to add some CIM-CGMES characteristics to dangling lines.
 
 
 | Attribute                             | Type    | Unit | Required | Default value | Description                                                                                          |
 |---------------------------------------|---------|------|----------|---------------|------------------------------------------------------------------------------------------------------|
-| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is an HVDC line or not (can be the case for AC emulation for example) |
-| line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                                                                 |
+| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
+| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists |                                                
 
 This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
-## CGMES model extension
+## CIM-CGMES line boundary node
+
+This extension is used to add some CIM-CGMES characteristics to boundary lines.
+
+
+| Attribute                             | Type    | Unit | Required | Default value | Description                                                                                          |
+|---------------------------------------|---------|------|----------|---------------|------------------------------------------------------------------------------------------------------|
+| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
+| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                                                                 |
+
+This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
+
+## CIM-CGMES model extension
 
 This extension is used to store the CGMES model as retrieved from the triplestore (as a query catalog) on the network.
 It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not serializable.
 
-## CGMES Tap Changers
+## CIM-CGMES Tap Changers
 
 <span style="color: red">TODO</span>
 
-## CGMES SSH metadata
+## CIM-CGMES SSH metadata
 
 <span style="color: red">TODO</span>
 
-## CGMES SV metadata
+## CIM-CGMES SV metadata
 
 <span style="color: red">TODO</span>
 
@@ -175,11 +175,18 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## HVDC angle droop active power control
 
-<span style="color: red">TODO</span>
+This is an extension dedicated to DC line in order to model AC emulation. For a VSC converter station operating in AC emulation, its active power setpoint is given by
+$$P = P0 + k~(ph1 - ph2)$$  
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| P0 | float | MW | yes | - | P0 in the equation |
+| droop | float | MW by degree | yes | - | k in the equation |
+| enabled | boolean | - | yes | - | if the AC emulation is active or not |
 
 ## HVDC operator active power range
 
-<span style="color: red">TODO</span>
+This extension enables to replace the operational limits of an DC line in AC emulation. In that case, the VSC converter stations min active power and max active power are not used. 
 
 ## Generator ENTSO-E category
 
@@ -234,8 +241,8 @@ This extension models injections' flows' observability, obtained after a state e
 
 | Attribute | Type                  | Unit | Required | Default value | Description                         |
 |-----------|-----------------------|------|---------| ------------- |-------------------------------------|
-| quality P | ObservabilityQuality  | -    | no      | - | The observability of active power   |
-| quality Q | ObservabilityQuality  | -    | no      | - | The observability of reactive power |
+| quality P | ObservabilityQuality  | MW    | no      | - | The observability quality of active power   |
+| quality Q | ObservabilityQuality  | MVar    | no      | - | The observability quality of reactive power |
 
 **Observability quality**
 
@@ -243,8 +250,8 @@ This extension contains the sub-object `ObservabilityQuality`.
 
 | Attribute          | Type      | Unit | Required | Default value | Description                                       |
 |--------------------|-----------|------|----------| ------------- |---------------------------------------------------|
-| standard deviation | double    | -    | yes      | - | The standard deviation                            |
-| redundant          | redundant | -    | yes      | - | Indicates if the value is confirmed by redundancy |
+| standard deviation | double    | MW or MVar    | yes      | - | The standard deviation                            |
+| redundant          | redundant | boolean    | yes      | - | Indicates if the value is confirmed by redundancy |
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
@@ -292,7 +299,13 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Remote reactive power control
 
-<span style="color: red">TODO</span>
+This extensions is used for generators with a remote reactive control.
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| enabled | boolean | - | yes | - | If the reactive remote control is activated of not |
+| targetQ | double | MVar | yes | - | The targetQ at remote regulating terminal |
+| regulatingTerminal | `Terminal` | - | yes | - | The regulating terminal |
 
 ## Slack terminal
 
