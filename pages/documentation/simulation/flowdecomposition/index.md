@@ -149,7 +149,7 @@ into the parts listed in introduction - called XNEC (cross-border relevant netwo
 decomposition methodology.
 
 Current implementation of the algorithm is based on a XnecProvider interface. This interface should provide XNECs in the 
-base case. Basic implementations of this interface are a available:
+base case. Basic implementations of this interface are available:
 - Set of all branches.
 - Set of branches selected by IDs.
 - Set of all interconnections on the network (i.e. branches which have different country attribute in their source and destination substation).
