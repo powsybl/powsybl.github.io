@@ -53,10 +53,10 @@ This extension models branches' flows' observability on both sides, obtained aft
 
 This extension contains the sub-object `ObservabilityQuality`.
 
-| Attribute          | Type      | Unit | Required | Default value | Description                                        |
-|--------------------|-----------|------|----------| ------------- |----------------------------------------------------|
-| standard deviation | double    | MW or MVar    | yes      | - | The standard deviation                             |
-| redundant          | redundant | boolean    | yes      | - | Indicates if this value is confirmed by redundancy |
+| Attribute          | Type   | Unit | Required | Default value | Description                                        |
+|--------------------|--------|---|----------| ------------- |----------------------------------------------------|
+| standard deviation | double | MW or MVar | yes      | - | The standard deviation                             |
+| redundant          | boolean | - | yes      | - | Indicates if this value is confirmed by redundancy |
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
@@ -248,10 +248,10 @@ This extension models injections' flows' observability, obtained after a state e
 
 This extension contains the sub-object `ObservabilityQuality`.
 
-| Attribute          | Type      | Unit | Required | Default value | Description                                       |
-|--------------------|-----------|------|----------| ------------- |---------------------------------------------------|
-| standard deviation | double    | MW or MVar    | yes      | - | The standard deviation                            |
-| redundant          | redundant | boolean    | yes      | - | Indicates if the value is confirmed by redundancy |
+| Attribute          | Type    | Unit | Required | Default value | Description                                       |
+|--------------------|---------|---|----------| ------------- |---------------------------------------------------|
+| standard deviation | double  | MW or MVar | yes      | - | The standard deviation                            |
+| redundant          | boolean | - | yes      | - | Indicates if the value is confirmed by redundancy |
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
