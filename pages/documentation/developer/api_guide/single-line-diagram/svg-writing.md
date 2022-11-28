@@ -55,8 +55,8 @@ First of all, we need to add some Maven dependencies in our `pom.xml` file:
 </dependencies>
 
 <properties>
-    <powsybl.sld.version>2.10.0</powsybl.sld.version>
-    <powsybl.core.version>4.8.0</powsybl.core.version>
+    <powsybl.sld.version>3.0.0</powsybl.sld.version>
+    <powsybl.core.version>5.0.0</powsybl.core.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
 ```
