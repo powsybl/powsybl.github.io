@@ -248,10 +248,10 @@ This extension models injections' flows' observability, obtained after a state e
 
 This extension contains the sub-object `ObservabilityQuality`.
 
-| Attribute          | Type    | Unit | Required | Default value | Description                                       |
-|--------------------|---------|---|----------| ------------- |---------------------------------------------------|
+| Attribute          | Type    | Unit       | Required | Default value | Description                                       |
+|--------------------|---------|------------|----------| ------------- |---------------------------------------------------|
 | standard deviation | double  | MW or MVar | yes      | - | The standard deviation                            |
-| redundant          | boolean | - | yes      | - | Indicates if the value is confirmed by redundancy |
+| redundant          | boolean | - R4       | yes      | - | Indicates if the value is confirmed by redundancy |
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
@@ -343,7 +343,33 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Three-windings transformer to be estimated
 
-<span style="color: red">TODO</span>
+This extension is used to indicate if a three-winding transformer tap changer is to be estimated during a state estimation, i.e. if its tap position should be an output of the state estimation.
+* A three-winding transformer has 3 ratio tap changers and/or 3 phase tap changers. Each tap changer can be estimated or not.
+* If a tap changer is not to be estimated, it should not be changed during a state estimation (its tap position is merely an input of the state estimation).
+
+| Attribute | Type | Unit | Required | Default value                      | Description |
+| --------- | ---- | ---- | -------- |------------------------------------| ----------- |
+| NAME      | String | - | yes | threeWindingsTransformerToBeEstimated | Name of the extension |
+
+Example of code to get the status of the n°1 phase tap changer:
+
+```java
+3wt.getExtension(ThreeWindingsTransformerToBeEstimated.class).shouldEstimatePhaseTapChanger1();
+```
+
+This extension is provided in the module `com.powsybl:powsybl-iidm-extensions`.
+
+When adding the extension, the ThreeWindingsTransformerToBeEstimatedAdder extension should be used.
+
+Example of code to add the extension:
+
+```java
+transformer.newExtension(ThreeWindingsTransformerToBeEstimatedAdder.class)
+        .withRatioTapChanger1Status(true)
+        .withPhaseTapChanger3Status(true)
+        .add();
+```
+
 
 ## Two-windings transformer phase angle clock
 
@@ -363,7 +389,34 @@ This extension is provided in the module `com.powsybl:powsybl-iidm-extensions`.
 
 ## Two-windings transformer to be estimated
 
-<span style="color: red">TODO</span>
+This extension is used to indicate if a two-winding transformer tap changer is to be estimated during a state estimation, i.e. if its tap position should be an output of the state estimation.
+* A two-winding transformer has a ratio tap changer and/or a phase tap changer. Each tap changer can be estimated or not.
+* If a tap changer is not to be estimated, it should not be changed during a state estimation (its tap position is merely an input of the state estimation).
+
+| Attribute | Type   | Unit | Required | Default value | Description           |
+|-----------|--------|------| -------- | ------------- |-----------------------|
+| NAME      | String | - | yes | twoWindingsTransformerToBeEstimated | Name of the extension |
+
+Example of code to get the status of the ratio tap changer:
+
+```java
+2wt.getExtension(TwoWindingsTransformerToBeEstimated.class).shouldEstimateRatioTapChanger();
+```
+
+This extension is provided in the module `com.powsybl:powsybl-iidm-extensions`.
+
+When adding the extension, the TwoWindingsTransformerToBeEstimatedAdder extension should be used.
+
+Example of code to add the extension:
+
+Example of code:
+
+```java
+transformer.newExtension(TwoWindingsTransformerToBeEstimatedAdder.class)
+        .withRatioTapChangerStatus(true)
+        .withPhaseTapChangerStatus(true)
+        .add();
+```
 
 ## Voltage per reactive power control
 
