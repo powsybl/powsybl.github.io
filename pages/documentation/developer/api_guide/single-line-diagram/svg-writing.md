@@ -118,15 +118,13 @@ In both cases, we obtain the following wider SVG file:
 
 ## Diagrams from a CGMES file
 
-First of all, we need to download sample files from ENTSO-E [here](https://github.com/powsybl/powsybl-cgmes-conformity-assessments/raw/main/src/test/resources/TestConfigurations_packageCASv2.0.zip)
-(these files correspond to the test configurations for Conformity Assessment Scheme v2.0).
-Inside the downloaded zip file, we will only consider the following file: 
-`CGMES_v2.4.15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip`, which is contained in `MicroGrid/Type4_T4` folder. 
+First of all, we need to download a sample file from ENTSO-E [here](https://github.com/powsybl/powsybl.github.io/pages/documentation/developer/api_guide/single-line-diagram/CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip)
+This file is named `CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip`.
 
 We first import this sample `Network` we are interested in:
 ```java
-String file = "/path/to/file/MicroGrid/Type4_T4/CGMES_v2.4.15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip";
-Network network = Importers.loadNetwork(file);
+String file = "/path/to/file/CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip";
+Network network = Network.read(Paths.get(file));
 ```
 
 ### Generating a voltage level diagram
@@ -140,7 +138,7 @@ Therefore, we use the slightly more complex interface `SingleLineDiagram.draw(ne
 LayoutParameters layoutParameters = new LayoutParameters().setUseName(true);
 
 // Draw the diagram of voltage level 110 in substation PP_Brussels (id _8bbd7e74-ae20-4dce-8780-c20f8e18c2e0)
-SingleLineDiagram.draw(network, "_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.get("/tmp/Brussels110.svg"), layoutParameters);
+SingleLineDiagram.draw(network, "8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.get("/tmp/Brussels110.svg"), layoutParameters);
 ```
 
 We obtain the following SVG:
@@ -157,7 +155,7 @@ We customize a bit further the parameters: the feeder names in this substation a
 layoutParameters.setLabelDiagonal(true);
 
 // Draw the diagram of substation PP_Amsterdam (id _c49942d6-8b01-4b01-b5e8-f1180f84906c)
-SingleLineDiagram.draw(network, "_c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.get("/tmp/AmsterdamSubstation.svg"), layoutParameters);
+SingleLineDiagram.draw(network, "c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.get("/tmp/AmsterdamSubstation.svg"), layoutParameters);
 ```
 
 We then obtain the following SVG file representing the whole PP_Amsterdam substation with its three voltage levels:
