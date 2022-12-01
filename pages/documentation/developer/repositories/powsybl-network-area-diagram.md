@@ -1,5 +1,5 @@
-# powsybl-network-area-diagram [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-network-area-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-network-area-diagram/releases/)
-This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provides modules to generate diagrams of a network area.
+# powsybl-network-area-diagram [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-diagram/releases/)
+This [repository](https://github.com/powsybl/powsybl-diagram/network-area-diagram) provides modules to generate diagrams of a network area.
 
 ![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="50%" .center-image}
 
@@ -20,8 +20,11 @@ This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provi
 
 ## Releases
 
+Please note that the 3.0.0 release is the first release since powsybl-network-area-diagram and powsybl-single-line diagram directories were merged into the powsybl-diagram directory.
+
 | Version | Release date | Release notes                                                                                | API documentation                                                                           | [powsybl-dependencies](https://github.com/powsybl/powsybl-dependencies) version |
 |---------|--------------|----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| 3.0.0   | 2022-11-18   | [Release notes](https://github.com/powsybl/powsybl-diagram/releases/tag/v3.0.0)              | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-diagram/3.0.0/index.html)              | 2022.0.0                                                                        |
 | 0.6.0   | 2022-09-15   | [Release notes](https://github.com/powsybl/powsybl-network-area-diagram/releases/tag/v0.6.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-network-area-diagram/0.6.0/index.html) | 1.3.0                                                                           |
 | 0.5.0   | 2022-06-15   | [Release notes](https://github.com/powsybl/powsybl-network-area-diagram/releases/tag/v0.5.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-network-area-diagram/0.5.0/index.html) | 1.2.0                                                                           |
 | 0.4.0   | 2022-04-20   | [Release notes](https://github.com/powsybl/powsybl-network-area-diagram/releases/tag/v0.4.0) | [Javadoc](https://javadoc.io/doc/com.powsybl/powsybl-network-area-diagram/0.4.0/index.html) | 1.1.0                                                                           |

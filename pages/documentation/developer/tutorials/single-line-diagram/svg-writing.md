@@ -65,7 +65,7 @@ Here are some details about these dependencies (see also the [powsybl artifacts 
 - `powsybl-single-line-diagram-core` is the core module of single-line-diagram,
 - `powsybl-iidm-impl` is for the network model,
 - `powsybl-iidm-test` is for loading the test network,
-- `powsybl-config-test` is for loading the test configuration (see [configuration API guide](../configuration.md)),
+- `powsybl-config-test` is for loading the test configuration (see [configuration API guide](../../api_guide/configuration.md)),
 - `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j`  are for importing a CGMES file,
 - `slf4j-simple` allows you to have simple logging capabilities.
 
@@ -118,7 +118,8 @@ In both cases, we obtain the following wider SVG file:
 
 ## Diagrams from a CGMES file
 
-First of all, we need to download a sample file from ENTSO-E [here](https://github.com/powsybl/powsybl.github.io/pages/documentation/developer/api_guide/single-line-diagram/CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip)
+First of all, we need to download a sample file from ENTSO-E [here](CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip)
+
 This file is named `CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip`.
 
 We first import this sample `Network` we are interested in:

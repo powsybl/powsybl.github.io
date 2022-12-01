@@ -1,0 +1,39 @@
+---
+layout: default
+---
+
+# Single Line Diagram - Customized node
+
+## Prerequisites
+
+Download and unzip the [source repository](https://github.com/powsybl/powsybl-tutorials), or clone it using Git: `git clone https://github.com/powsybl/powsybl-tutorials`.
+In the __sld-custom-node__ subdirectory, you will find a ready-to-run code along with its resources and pom file.
+
+## Maven dependencies
+
+First of all, some Maven dependencies are added in our `pom.xml` file:
+
+* powsybl-single-line-diagram-core (core module of single-line-diagram)
+* powsybl-iidm-api and powsybl-iidm-impl (manipulation of networks)
+* powsybl-config-classic (main way to configure PowSyBl)
+* slf4j-simple (simple logging capabilities)
+
+In order to get some more details about PowSyBl dependencies, please visit :
+* [Powsybl artifacts documentation page](../../artifacts.md)
+* [Configuration API guide](../../api_guide/configuration.md)
+
+## Creation of a test network
+
+A very simple Node/Breaker network is created through the function createNetwork().
+
+## Customized NetworkGraphBuilder and ResourcesComponentLibrary
+
+In the generated graph, the wind-powered generators are displayed with a chosen icon.
+
+## SVG writing
+
+The final SVG, including the customized icon for the wind turbine, is the following:
+![final_svg](img/sld.svg){: width="20%" .center-image}
+
+
+
