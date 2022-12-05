@@ -148,7 +148,10 @@ The third input of the flow decomposition algorithm are the network elements of 
 into the parts listed in introduction - called XNEC (cross-border relevant network element with contingency) in the flow
 decomposition methodology.
 
-Current implementation of the algorithm allows two algorithm for automatic generation of network elements list :
+Current implementation of the algorithm is based on a XnecProvider interface. This interface should provide XNECs in the 
+base case. Basic implementations of this interface are available:
+- Set of all branches.
+- Set of branches selected by IDs.
 - Set of all interconnections on the network (i.e. branches which have different country attribute in their source and destination substation).
 - Set of all interconnections on the network with the addition of all branches that have a maximum zonal PTDF greater than 5%.
 
@@ -156,7 +159,7 @@ Current implementation of the algorithm allows two algorithm for automatic gener
 
 ### Network element parts
 
-For each network element of interest, contains the following elements:
+For each network element of interest, flow decomposition outputs contain the following elements:
 - Reference flow : active power flow that is considered as the reference for the decomposition. It is actually equal
 to the sum of all the flow parts calculated by the algorithm.
 - Allocated flow : allocated flow part of the network element's flow.
@@ -165,19 +168,27 @@ which network element is part of (interconnections are considered as part of no 
 - Loop flows : map of the loop flow part of the network element's flow for each zone.
 - PST flow : PST flow part of the network element's flow.
 
+### Flow sign conventions
+
+On one hand, the reference flows are oriented from side 1 to side 2 of the associated IIDM branch. A positive reference flow implies
+a flow from side 1 to side 2, while a negative one means a flow from side 2 to side 1.
+
+On the other hand, all flow parts (allocated flow, internal flow, loop flows and PST flow) are oriented in the branch
+flow convention. A positive flow part tends to increase the absolute flow on the branch (i.e. a burdening flow), while a
+negative one tends to decrease the absolute flow on the branch (i.e. a relieving flow).
+
 ## Configuration
 
 ### Dedicated parameters
 
 | Name                                    | Type    | Default value                               | Description                                                                                                                                                                                                                                                                                                                 |
 |-----------------------------------------|---------|---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| save-intermediates                      | boolean | false                                       | When set to true, intermediate results (PTDF matrix, PSDF matrix, etc) are saved in results object. Otherwise only keep flow parts for each XNECs.                                                                                                                                                                          |
 | enable-losses-compensation              | boolean | false                                       | When set to true, adds losses compensation step of the algorithm. Otherwise, all losses will be compensated using chosen power flow compensation strategy.                                                                                                                                                                  |
 | losses-compensation-epsilon             | double  | 1e-5                                        | Threshold used in losses compensation step of the algorihm. If actual losses are below the given threshold on a branch, no injection is created in the network to compensate these losses. Used to avoid creating too many injections in the network. May have an impact in overall algorithm performance and memory usage. |
 | sensitivity-epsilon                     | double  | 1e-5                                        | Threshold used when filling PTDF and PSDF matrices. If a sensitivity is below the given threshold, it is set to zero. Used to keep sparse matrices in the algorithm. May have an impact in overall algorithm performance and memory usage.                                                                                  |
 | rescale-enabled                         | boolean | false                                       | When set to true, rescaling step is done to ensure that the sum of all flow parts is equal to the AC reference flow.                                                                                                                                                                                                        |
-| xnec-selection-strategy                 | enum    | XnecSelectionStrategy.ONLY_INTERCONNECTIONS | When set to ```XnecSelectionStrategy.ONLY_INTERCONNECTIONS```, the branches are only selected using the interconnection rule. When set to ```XnecSelectionStrategy.ZONE_TO_ZONE_PTDF_CRITERIA```, zonal PTDF are computed and used to select additional branches with 5% zone to zone rule.                                 |
 | dc-fallback-enabled-after-ac-divergence | boolean | true                                        | Defines the fallback behavior after an AC divergence Use True to run DC loadflow if an AC loadflow diverges (default). Use False to throw an exception if an AC loadflow diverges.                                                                                                                                          |
+| sensitivity-variable-batch-size         | int     | 15000                                       | When set to a lower value, this parameter will reduce memory usage, but it might increase computation time                                                                                                                                                                                                                  |
 
 ### Impact of existing parameters
 
