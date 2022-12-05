@@ -344,7 +344,7 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 ## Three-windings transformer to be estimated
 
 This extension is used to indicate if a three-winding transformer tap changer is to be estimated during a state estimation, i.e. if its tap position should be an output of the state estimation.
-* A three-winding transformer has 3 ratio tap changers and/or 3 phase tap changers. Each tap changer can be estimated or not.
+* The three-winding transformer model offers the possibility to have up to 3 ratio tap changers and up to 3 phase tap changers. Each tap changer can be estimated or not.
 * If a tap changer is not to be estimated, it should not be changed during a state estimation (its tap position is merely an input of the state estimation).
 
 | Attribute | Type | Unit | Required | Default value                      | Description |
@@ -366,7 +366,6 @@ Example of code to add the extension:
 ```java
 transformer.newExtension(ThreeWindingsTransformerToBeEstimatedAdder.class)
         .withRatioTapChanger1Status(true)
-        .withPhaseTapChanger3Status(true)
         .add();
 ```
 
@@ -413,7 +412,6 @@ Example of code:
 
 ```java
 transformer.newExtension(TwoWindingsTransformerToBeEstimatedAdder.class)
-        .withRatioTapChangerStatus(true)
         .withPhaseTapChangerStatus(true)
         .add();
 ```
