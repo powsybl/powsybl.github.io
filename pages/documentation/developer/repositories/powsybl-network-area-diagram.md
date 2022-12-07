@@ -1,26 +1,15 @@
-# powsybl-network-area-diagram [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-diagram/releases/)
-This [repository](https://github.com/powsybl/powsybl-diagram/network-area-diagram) provides modules to generate diagrams of a network area.
+# powsybl-network-area-diagram (ARCHIVED)
 
-![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="50%" .center-image}
+## Some history
+powsybl-network-area-diagram and powsybl-single-line-diagram have been merged into powsybl-diagram since the 3.0.0 release.
 
-## Features
-- Generate concise diagrams displaying the graph whose nodes are the network voltage levels, and whose edges are the lines and transformers between those voltage levels. 
-- Generate diagrams of the whole network or of a part of the network, given a voltage level and a depth, or a list of voltage levels and a (unique) depth.
-- Graph layout default implementation using a basic force layout algorithm, taken from [springy](https://github.com/dhotson/springy)
-- Diagrams customization:
-     - use your own graph layout implementation,
-     - use your own label provider to display custom directed values on the graph edges (default label provider displays the active power),
-     - use your own style provider to have a custom style for nodes and edges (default style provider gives the nodes and edges a class corresponding to their voltage level, and give disconnected lines a specific class),
-     - use custom layout parameters and svg rendering parameters.
+This page is kept to trace the releases of the previously independent powsybl-network-area-diagram repository.
 
-## Getting started
+***It will not be updated for releases coming after 3.0.0.***
 
-- [Guide 1]() - TODO
-
+In order to know more about network-area diagrams or to get the latest release, please visit the [powsybl-diagram](powsybl-diagram.md) page.
 
 ## Releases
-
-Please note that the 3.0.0 release is the first release since powsybl-network-area-diagram and powsybl-single-line diagram directories were merged into the powsybl-diagram directory.
 
 | Version | Release date | Release notes                                                                                | API documentation                                                                           | [powsybl-dependencies](https://github.com/powsybl/powsybl-dependencies) version |
 |---------|--------------|----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|

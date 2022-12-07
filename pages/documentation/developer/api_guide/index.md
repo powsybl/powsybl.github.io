@@ -28,6 +28,6 @@ This page describes the way the Java objects have been designed to effectively h
 - [AFS](afs.md)
 - [Time series](timeseries.md)
 
-## Single line diagram
+## Diagram
 - [SVG writing](svg-writing.md)
 - [SVG layouts]()

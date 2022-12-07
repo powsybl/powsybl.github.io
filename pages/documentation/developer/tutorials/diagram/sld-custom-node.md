@@ -28,7 +28,8 @@ A very simple Node/Breaker network is created through the function createNetwork
 
 ## Customized NetworkGraphBuilder and ResourcesComponentLibrary
 
-In the generated graph, the wind-powered generators are displayed with a chosen icon.
+A specific node in the powsybl-single-line-diagram underlying graph is used for all wind-powered generators. This is achieved by creating the graph through a custom NetworkGraphBuilder.
+In the generated graph, the wind-powered generators are then displayed with the chosen wind-turbine icon.
 
 ## SVG writing
 

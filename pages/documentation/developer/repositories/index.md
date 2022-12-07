@@ -29,7 +29,7 @@ This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provid
 **Committers:** [phiedw](https://github.com/phiedw), [miovd](https://github.com/miovd)  
 
 ### [powsybl-diagram](powsybl-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-diagram/releases/)
-This [repository](https://github.com/powsybl/powsybl-diagram) provides modules to generate single line diagrams and network area diagrams.
+This [repository](https://github.com/powsybl/powsybl-diagram) provides modules to generate single-line diagrams and network-area diagrams.
 
 **Reviewers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [BenoitJeanson](https://github.com/BenoitJeanson)    
 **Committers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [Luma](https://github.com/zamarrenolm)
