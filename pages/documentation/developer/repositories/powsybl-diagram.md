@@ -1,25 +1,27 @@
 # powsybl-diagram [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-diagram/releases/)
-The powsybl-diagram [repository](https://github.com/powsybl/powsybl-diagram) provides features to generate single-line diagrams and network-area diagrams.
+The powsybl-diagram [repository](https://github.com/powsybl/powsybl-diagram) provides features to generate single-line diagrams and network graph diagrams.
 
 ## Features
 
-### powsybl-single-line-diagram
-This [artifact](https://github.com/powsybl/powsybl-diagram/powsybl-single-line-diagram) provides features to generate customized single-line diagrams:
-- Creation of single-line diagrams for given voltage levels, substations or zones in SVG format, for both node/breaker and bus/breaker topologies;
+### Generating a PowSyBl single-line diagram
+The powsybl-single-line-diagram-core artifact provides features to generate customized single-line diagrams:
+- Creation of single-line diagrams for given voltage levels, substations or zones in SVG format, for both node/breaker and bus/breaker topologies:
+  - From an IIDM network: a graph is built from the input network and then written as a single-line diagram;
+  - By directly providing the underlying graph to the writer.
 - Diagram customization:
     - Several layout algorithms to generate the diagrams;
     - Many layout parameters to adjust the rendering;
     - Possible use of your own component library. Modification of the existing library is also an option;
-- Extensions to force positions in the diagram.
+
+Some extensions (to force positions in the diagram for instance) are available in other artifacts.
 
 ![sld-example](./img/powsybl-single-line-diagram/diagram-example.svg){: width="75%" .center-image}
 
 With the 3.0.0 version, powsybl-single-line-diagram has been merged with powsybl-network-area-diagram into powsybl-diagram.
 
 
-### powsybl-network-area-diagram
-
-This [artifact](https://github.com/powsybl/powsybl-diagram/powsybl-network-area-diagram) provides features to generate concise and customized diagrams of the network:
+### Generating a PowSyBl network-area diagram
+The powsybl-network-area-diagram artifact provides features to generate concise and customized diagrams of the network:
 - Display of the graph whose nodes are the network voltage levels, and whose edges are the lines and transformers between those voltage levels;
 - Generation of diagrams of the whole network or of part of the network, given a voltage level and a depth, or a list of voltage levels and a (unique) depth;
 - Graph layout default implementation using a basic force layout algorithm, taken from [springy](https://github.com/dhotson/springy)

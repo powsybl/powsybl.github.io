@@ -13,9 +13,18 @@ To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the 
 ## Prerequisites
 
 ### Maven dependencies
-First of all, we need to add some Maven dependencies in our `pom.xml` file:
 
-```xml
+First of all, we need some Maven dependencies.
+
+- If you want to get a quick start, please use the [powsybl-starter](https://github.com/powsybl/powsybl-starter) pom file.
+
+- If you want a "lean" pom file, you can create one from scratch, containing only the necessary dependencies:
+
+<details>
+<summary>Roll/unroll dependencies</summary>
+
+{% highlight xml %}
+
 <dependencies>
     <dependency>
         <groupId>com.powsybl</groupId>
@@ -30,11 +39,6 @@ First of all, we need to add some Maven dependencies in our `pom.xml` file:
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-iidm-test</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-config-test</artifactId>
         <version>${powsybl.core.version}</version>
     </dependency>
     <dependency>
@@ -59,15 +63,21 @@ First of all, we need to add some Maven dependencies in our `pom.xml` file:
     <powsybl.core.version>5.0.0</powsybl.core.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
-```
 
+{% endhighlight %}
+
+<div markdown="1">
 Here are some details about these dependencies (see also the [powsybl artifacts documentation page](../../artifacts.md)):
 - `powsybl-single-line-diagram-core` is the core module of single-line-diagram,
 - `powsybl-iidm-impl` is for the network model,
 - `powsybl-iidm-test` is for loading the test network,
-- `powsybl-config-test` is for loading the test configuration (see [configuration API guide](../../api_guide/configuration.md)),
-- `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j`  are for importing a CGMES file,
+- `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j` are used to import a CGMES file,
 - `slf4j-simple` allows you to have simple logging capabilities.
+</div>
+
+</details>
+
+
 
 ## Diagrams from a test network
 We first create the node/breaker test `Network` we are interested in:

@@ -15,7 +15,6 @@ First of all, some Maven dependencies are added in our `pom.xml` file:
 
 * powsybl-single-line-diagram-core (core module of single-line-diagram)
 * powsybl-iidm-api and powsybl-iidm-impl (manipulation of networks)
-* powsybl-config-classic (main way to configure PowSyBl)
 * slf4j-simple (simple logging capabilities)
 
 In order to get some more details about PowSyBl dependencies, please visit :
