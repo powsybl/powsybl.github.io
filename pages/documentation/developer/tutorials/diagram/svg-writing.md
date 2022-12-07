@@ -125,7 +125,7 @@ This file is named `CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Com
 We first import this sample `Network` we are interested in:
 ```java
 String file = "/path/to/file/CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip";
-Network network = Network.read(Paths.get(file));
+Network network = Network.read(file);
 ```
 
 ### Generating a voltage level diagram
