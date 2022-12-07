@@ -30,7 +30,7 @@ new NetworkAreaDiagram(network).draw(Path.of("/tmp/diagram.svg"));
 * Generate a network area diagram for the network `network`, with customized `SvgParameters` and `LayoutParameters`
 
 ```java
-SvgParameters svgParameters = new SvgParameters().setBusLegend(true);
+SvgParameters svgParameters = new SvgParameters().setFixedHeight(1000);
 LayoutParameters layoutParametersNad = new LayoutParameters().setSpringRepulsionFactorForceLayout(0.2);
 new NetworkAreaDiagram(network).draw(Path.of("/tmp/diagram2.svg"), svgParameters, layoutParametersNad);
 ```
