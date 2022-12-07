@@ -31,6 +31,6 @@ new NetworkAreaDiagram(network).draw(Path.of("/tmp/diagram.svg"));
 
 ```java
 SvgParameters svgParameters = new SvgParameters().setBusLegend(true);
-com.powsybl.nad.layout.LayoutParameters layoutParametersNad = new com.powsybl.nad.layout.LayoutParameters().setSpringRepulsionFactorForceLayout(0.5D);
+LayoutParameters layoutParametersNad = new LayoutParameters().setSpringRepulsionFactorForceLayout(0.2);
 new NetworkAreaDiagram(network).draw(Path.of("/tmp/diagram2.svg"), svgParameters, layoutParametersNad);
 ```
