@@ -13,7 +13,7 @@ The powsybl-single-line-diagram-core artifact provides features to generate cust
     - Many layout parameters to adjust the rendering;
     - Possible use of your own component library. Modification of the existing library is also an option;
 
-Some extensions (to force positions in the diagram for instance) are available in other artifacts.
+Some extensions are also available. You may check the powsybl-single-line-diagram-cgmes-iidm-extensions artifact to force positions in the diagram for instance.
 
 ![sld-example](./img/powsybl-single-line-diagram/diagram-example.svg){: width="75%" .center-image}
 
