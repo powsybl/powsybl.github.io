@@ -16,9 +16,17 @@ To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the 
 
 First of all, we need some Maven dependencies.
 
-- If you want to get a quick start, please use the [powsybl-starter](https://github.com/powsybl/powsybl-starter) pom file.
+- If you want to get a quick start, please add the [powsybl-starter](https://github.com/powsybl/powsybl-starter) dependency to your pom file:
 
-- If you want a "lean" pom file, you can create one from scratch, containing only the necessary dependencies:
+```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-starter</artifactId>
+    <version>2022.0.0</version>
+</dependency>
+```
+
+- If you only want to import the strictly needed dependencies for this tutorial, you can write a more detailed pom file:
 
 <details>
 <summary>Roll/unroll dependencies</summary>
@@ -69,8 +77,8 @@ First of all, we need some Maven dependencies.
 <div markdown="1">
 Here are some details about these dependencies (see also the [powsybl artifacts documentation page](../../artifacts.md)):
 - `powsybl-single-line-diagram-core` is the core module of single-line-diagram,
-- `powsybl-iidm-impl` is for the network model,
-- `powsybl-iidm-test` is for loading the test network,
+- `powsybl-iidm-impl` is used to deal with the network model,
+- `powsybl-iidm-test` is used to load the test network,
 - `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j` are used to import a CGMES file,
 - `slf4j-simple` allows you to have simple logging capabilities.
 </div>

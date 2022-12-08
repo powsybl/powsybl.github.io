@@ -33,7 +33,7 @@ The powsybl-network-area-diagram artifact provides features to generate concise 
 
 ![nad-example](./img/powsybl-network-area-diagram/diagram-example.png){: width="50%" .center-image}
 
-With the 3.0.0 version, powsybl-network-area-diagram has been merged with powsybl-single-line-diagram into powsybl-diagram.
+With the 3.0.0 version, powsybl-network-area-diagram has been merged into powsybl-single-line-diagram to form powsybl-diagram.
 Please have a look at the archived [powsybl-network-area-diagram](powsybl-network-area-diagram.md) page for further details on previous releases.
 
 
