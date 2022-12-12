@@ -159,7 +159,7 @@ base case. Basic implementations of this interface are available:
 
 ### Network element parts
 
-For each network element of interest, contains the following elements:
+For each network element of interest, flow decomposition outputs contain the following elements:
 - Reference flow : active power flow that is considered as the reference for the decomposition. It is actually equal
 to the sum of all the flow parts calculated by the algorithm.
 - Allocated flow : allocated flow part of the network element's flow.
@@ -167,6 +167,15 @@ to the sum of all the flow parts calculated by the algorithm.
 which network element is part of (interconnections are considered as part of no specific country, so will always have an internal flow to 0).
 - Loop flows : map of the loop flow part of the network element's flow for each zone.
 - PST flow : PST flow part of the network element's flow.
+
+### Flow sign conventions
+
+On one hand, the reference flows are oriented from side 1 to side 2 of the associated IIDM branch. A positive reference flow implies
+a flow from side 1 to side 2, while a negative one means a flow from side 2 to side 1.
+
+On the other hand, all flow parts (allocated flow, internal flow, loop flows and PST flow) are oriented in the branch
+flow convention. A positive flow part tends to increase the absolute flow on the branch (i.e. a burdening flow), while a
+negative one tends to decrease the absolute flow on the branch (i.e. a relieving flow).
 
 ## Configuration
 
