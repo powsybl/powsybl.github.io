@@ -18,8 +18,9 @@ layout: default
 ## Topology
 - [Manage bus/breaker and node/breaker topology](topology.md): Learn how to manipulate topological views of the network
 
-## Single line diagram
-- [Create the Java code to display single line diagram](../api_guide/single-line-diagram/svg-writing.md): Learn how to create the Java code to generate diagram SVG
+## Diagram
+- [Display a single-line diagram](diagram/svg-writing.md): Learn how to create the Java code to generate the svg file of a single-line diagram
+- [Display a single-line diagram with a customized node](diagram/sld-custom-node.md): Learn how to create the Java code to generate the svg file of a single-line diagram with a customized node
 
 ## Downscaling
 - [Create the Java code to map hypothesis on a network](downscaling.md): Learn how to create the Java code to map study state hypothesis on a network

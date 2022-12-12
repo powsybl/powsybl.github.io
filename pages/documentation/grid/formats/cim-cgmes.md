@@ -195,7 +195,7 @@ The `iidm.import.cgmes.import-control-areas` property is an optional property th
 **iidm.import.cgmes.post-processors**  
 The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which will be activated after import.
 By default, it is an empty list.
-One implementation of such a post-processor is available in PowSyBl in the [powsybl-single-line-diagram](../../developer/repositories/powsybl-single-line-diagram.md) repository, named [CgmesDLImportPostProcessor](#CgmesDLImportPostProcessor).
+One implementation of such a post-processor is available in PowSyBl in the [powsybl-diagram](../../developer/repositories/powsybl-diagram.md) repository, named [CgmesDLImportPostProcessor](#CgmesDLImportPostProcessor).
 
 **iidm.import.cgmes.powsybl-triplestore**  
 The `iidm.import.cgmes.powsybl-triplestore` property is an optional property that defines which Triplestore implementation is used. PowSyBl supports the [RDF4J](#rdf4j) and [Jena](#jena) Triplestore implementations. This property has `rdf4j` as default value.
