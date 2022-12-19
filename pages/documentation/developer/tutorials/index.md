@@ -21,6 +21,7 @@ layout: default
 ## Diagram
 - [Display a single-line diagram](diagram/svg-writing.md): Learn how to create the Java code to generate the svg file of a single-line diagram
 - [Display a single-line diagram with a customized node](diagram/sld-custom-node.md): Learn how to create the Java code to generate the svg file of a single-line diagram with a customized node
+- [Display a network-area diagram](diagram/nad-svg-writing.md): Learn how to create the Java code to generate the svg of a network-area diagram
 
 ## Downscaling
 - [Create the Java code to map hypothesis on a network](downscaling.md): Learn how to create the Java code to map study state hypothesis on a network
