@@ -28,17 +28,11 @@ This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provid
 **Reviewers:** [phiedw](https://github.com/phiedw), [miovd](https://github.com/miovd)   
 **Committers:** [phiedw](https://github.com/phiedw), [miovd](https://github.com/miovd)  
 
-### [powsybl-single-line-diagram](powsybl-single-line-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-single-line-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-single-line-diagram/releases/)
-This [repository](https://github.com/powsybl/powsybl-single-line-diagram) provides modules to generate single line diagrams.
+### [powsybl-diagram](powsybl-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-diagram/releases/)
+This [repository](https://github.com/powsybl/powsybl-diagram) provides modules to generate single-line diagrams and network graph diagrams.
 
 **Reviewers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [BenoitJeanson](https://github.com/BenoitJeanson)    
-**Committers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg)  
-
-### [powsybl-network-area-diagram](powsybl-network-area-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-network-area-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-network-area-diagram/releases/)
-This [repository](https://github.com/powsybl/powsybl-network-area-diagram) provides modules to generate concise diagrams of the network.
-
-**Reviewers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg)  
-**Committers:** [flo-dup](https://github.com/flo-dup)  
+**Committers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [Luma](https://github.com/zamarrenolm)
 
 ### [powsybl-entsoe](powsybl-entsoe.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-entsoe.svg?sort=semver)](https://github.com/powsybl/powsybl-entsoe/releases/)
 This [repository](https://github.com/powsybl/powsybl-entsoe) provides components specific to ENTSO-E-orientated processes.
