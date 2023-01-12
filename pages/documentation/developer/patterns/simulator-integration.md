@@ -37,7 +37,7 @@ These interfaces inherit from the `Versionable` and the `PlatformConfigNamedProv
 ## Implementation
 
 For each simulator, it is then necessary to implement the `getName`, `getVersion` and `run` methods.
-For example, for load flow simulations, some existing implementations are `OpenLoadFlowProvider` and `Hades2Provider`, and for time-domain simulations the `DynawoProvider` exists.
+For example, for load flow simulations, some existing implementations are `OpenLoadFlowProvider`, and for time-domain simulations the `DynawoProvider` exists.
 
 **Remarks**:
 
@@ -72,7 +72,7 @@ Besides the implementation choice for a specific simulator type, it may be neces
 - whether the simulations will be run in debug or release mode
 - etc.
 
-This should be done in a module named according to the `Provider` name. For example, `hades2` or `dynawo`.
+This should be done in a module named according to the `Provider` name. For example, `OpenLoadFlow` or `dynawo`.
 
 ### Simulation configuration
 
@@ -86,7 +86,7 @@ These parameters should be defined in modules named according to the simulation 
 
 #### Specific simulation parameters
 
-Finally, the parameters specific to an implementation can be done in a module usually named according to the following convention: `dynawo-default-parameters`, `hades2-default-parameters`, etc.
+Finally, the parameters specific to an implementation can be done in a module usually named according to the following convention: `dynawo-default-parameters`, `open-loadflow-default-parameters`, etc.
 
 <span style="color:red"> TODO: make a refactoring to remove the `default` from the module names.</span>
 
