@@ -26,7 +26,7 @@ As the $$\Pi$$ model is created from IIDM grid modelling that locates its ratio 
 
 ### AC flows computing
 
-AC flows computing in OpenLoadFLow relies on solving a non linear squared equations system, where unknown are voltage magnitude and phase angle at each bus of the network, implying that there are $$2N$$ unknown where $$N$$ is the number of buses. There are two equations per network bus, resulting in $$2N$$ equations. The nature of these $$2$$ equations depends on the type of the bus:
+AC flows computing in OpenLoadFLow relies on solving a system of non-linear squared equations, where unknown are voltage magnitude and phase angle at each bus of the network, implying that there are $$2N$$ unknown where $$N$$ is the number of buses. There are two equations per network bus, resulting in $$2N$$ equations. The nature of these $$2$$ equations depends on the type of the bus:
 - PQ-bus: active and reactive balance are fixed at the bus,
 - PV-bus: active balance and voltage magnitude are fixed at the bus.
 
@@ -94,7 +94,7 @@ Where $$s$$ is the slope of the static var compensator.
 
 ### DC flows computing
 
-The DC flows computing relies on several classical assumptions to build a model where the active power flowing through a line depends linearly from the voltage angles at its ends.
+The DC flows computing relies on several classical assumptions to build a model where the active power flowing through a line depends linearly on the voltage angles at its ends.
 In this simple model, reactive power flows and active power losses are totally neglected. The following assumptions are made to ease and speed the computations:
 - The voltage magnitude is equal to $$1 per unit$$ at each bus,
 - The series conductance $$G_{i,j}$$ of each line $$(i,j)$$ is neglected, only the series susceptance $$B_{i,j}$$ is considered,
@@ -110,7 +110,7 @@ DC flows computing gives a linear grid constraints system.
 The variables of the system are, for each bus, the voltage angle $$\theta$$.
 The constraints of the system are the active power balance at each bus, except for the slack bus.
 The voltage angle at slack bus is set to zero.
-Therefore the linear system is composed of $$N$$ variables and $$N$$ constraints, where $$N$$ is the number of buses in the network.
+Therefore, the linear system is composed of $$N$$ variables and $$N$$ constraints, where $$N$$ is the number of buses in the network.
 
 We introduce the linear matrix $$J$$ of this system that satisfies:
 
@@ -170,24 +170,25 @@ In that case, the remaining active power mismatch remains on the selected slack 
 The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
 The default value is `true`.
 
-**slackBusSelectorType**  
-The `slackBusSelectorType` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
-- `First` if you want to choose the first bus of all the network buses, identified by the [slack terminal extension](../../grid/model/extensions.md#slack-terminal).
-- `Name` if you want to choose a specific bus as the slack bus. In that case, the other `nameSlackBusSelectorBusId` property has to be filled.
-- `MostMeshed` if you want to choose the most meshed bus as the slack bus. This option is required for computation with several synchronous component.
+**slackBusSelectionMode**  
+The `slackBusSelectionMode` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
+- `FIRST` if you want to choose the first bus of all the network buses.
+- `NAME` if you want to choose a specific bus as the slack bus. In that case, the `slackBusesIds` property has to be filled.
+- `MOST_MESHED` if you want to choose the most meshed bus among buses with the highest nominal voltage as the slack bus. This option is required for computation with several synchronous component.
+- `LARGEST_GENERATOR` if you want to choose the bus with the highest total generation capacity as the slack bus.
 
 Note that if you want to choose the slack bus that is defined inside the network with a slackTerminal extension, you have to use the `LoadflowParameters`
 
-**nameSlackBusSelectorBusId**  
-The `nameSlackBusSelectorBusId` property is a required property if you choose `Name` for property `slackBusSelectorType`.
-It defines the bus chosen for slack distribution by its ID.
+**slackBusesIds**  
+The `slackBusesIds` property is a required property if you choose `NAME` for property `slackBusSelectionMode`.
+It defines a prioritized list of buses or voltage levels to be chosen for slack bus selection (as an array, or as a comma or semicolon separated string).
 
 **loadPowerFactorConstant**  
 The `loadPowerFactorConstant ` property is an optional boolean property. The default value is `false`. This property is used in the outer loop that distributes slack on loads if :
 - `distributedSlack` property is set to true in the [load flow default parameters](index.md#available-parameters),
 - `balanceType` property is set to `PROPORTIONAL_TO_LOAD` or `PROPORTIONAL_TO_CONFORM_LOAD` in the [load flow default parameters](index.md#available-parameters).
 
-If prerequisites fullfilled and `loadPowerFactorConstant` property is set to `true`, the distributed slack outer loop adjusts the load P value and adjusts also the load Q value in order to maintain the power factor as a constant value.
+If prerequisites fulfilled and `loadPowerFactorConstant` property is set to `true`, the distributed slack outer loop adjusts the load P value and adjusts also the load Q value in order to maintain the power factor as a constant value.
 At the end of the load flow calculation, $$P$$ and $$Q$$ at loads terminals are both updated. Note that the power factor of a load is given by this equation :
 
 $$
@@ -211,14 +212,15 @@ If `balanceType` equals to `PROPORTIONAL_TO_CONFORM_LOAD`, the power factor rema
 
 The default value for `loadPowerFactorConstant` property is `false`.
 
-**dcUseTransformerRatio**  
-The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the flow equations during DC approximation. The default value of this parameter is `true`.
-
 **plausibleActivePowerLimit**  
-The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for slack distribution (`balanceType` equals to `PROPORTIONAL_TO_GENERATION_P_MAX`). The default value is $10000 MW$.
+The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for:
+- slack distribution (if `balanceType` equals to `PROPORTIONAL_TO_GENERATION_P_MAX` or `PROPORTIONAL_TO_GENERATION_P`)
+- slack selection (if `slackBusSelectionMode` equals to `LARGEST_GENERATOR`)
+
+The default value is $$5000 MW$$.
 
 **addRatioToLinesWithDifferentNominalVoltageAtBothEnds**  
-The `addRatioToLinesWithDifferentNominalVoltageAtBothEnds` property is an optional property used for lines that are connected to two voltage level with different nominal voltages. If this property equals `true`, a structural ratio is taken into account to ease the convergence. The default value if `false`.  
+The `addRatioToLinesWithDifferentNominalVoltageAtBothEnds` property is an optional property used for lines that are connected to two voltage level with different nominal voltages. If this property equals `true`, a structural ratio is taken into account. The default value of this parameter is `true`. This property should normally be left to its default value `true` to get correct load-flow results, and will be removed in a future release.
 
 ### Configuration file example
 See below an extract of a config file that could help:
@@ -229,9 +231,9 @@ open-loadflow-default-parameters:
   distributedSlack: true
   throwsExceptionInCaseOfSlackDistributionFailure: false
   voltageRemoteControl: false
-  slackBusSelectorType: Name
-  nameSlackBusSelectorBusId: Bus3_0
-  remainsLoadPowerFactorConstant: true
+  slackBusSelectionMode: Name
+  slackBusesIds: Bus3_0,Bus5_0
+  loadPowerFactorConstant: true
 ```
 
 At the moment, overriding the parameters by a JSON file is not supported by OpenLoadFlow.

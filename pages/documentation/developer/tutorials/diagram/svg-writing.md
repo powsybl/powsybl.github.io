@@ -8,14 +8,31 @@ layout: default
 
 We are showing in this guide how to create some single line diagrams, like the one above. 
 We first generate such a diagram from a test network, then from a [CGMES](../../../grid/formats/cim-cgmes.md) file.
-To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the central API of [powsybl-single-line-diagram](../../repositories/powsybl-single-line-diagram.md). 
+To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the central API of [powsybl-single-line-diagram](../../repositories/powsybl-diagram.md). 
 
 ## Prerequisites
 
 ### Maven dependencies
-First of all, we need to add some Maven dependencies in our `pom.xml` file:
+
+First of all, we need some Maven dependencies.
+
+- If you want to get a quick start, please add the [powsybl-starter](https://github.com/powsybl/powsybl-starter) dependency to your pom file:
 
 ```xml
+<dependency>
+    <groupId>com.powsybl</groupId>
+    <artifactId>powsybl-starter</artifactId>
+    <version>2022.0.0</version>
+</dependency>
+```
+
+- If you only want to import the strictly needed dependencies for this tutorial, you can write a more detailed pom file:
+
+<details>
+<summary>Roll/unroll dependencies</summary>
+
+{% highlight xml %}
+
 <dependencies>
     <dependency>
         <groupId>com.powsybl</groupId>
@@ -30,11 +47,6 @@ First of all, we need to add some Maven dependencies in our `pom.xml` file:
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-iidm-test</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-config-test</artifactId>
         <version>${powsybl.core.version}</version>
     </dependency>
     <dependency>
@@ -55,19 +67,25 @@ First of all, we need to add some Maven dependencies in our `pom.xml` file:
 </dependencies>
 
 <properties>
-    <powsybl.sld.version>2.10.0</powsybl.sld.version>
-    <powsybl.core.version>4.8.0</powsybl.core.version>
+    <powsybl.sld.version>3.0.0</powsybl.sld.version>
+    <powsybl.core.version>5.0.0</powsybl.core.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
-```
 
+{% endhighlight %}
+
+<div markdown="1">
 Here are some details about these dependencies (see also the [powsybl artifacts documentation page](../../artifacts.md)):
 - `powsybl-single-line-diagram-core` is the core module of single-line-diagram,
-- `powsybl-iidm-impl` is for the network model,
-- `powsybl-iidm-test` is for loading the test network,
-- `powsybl-config-test` is for loading the test configuration (see [configuration API guide](../configuration.md)),
-- `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j`  are for importing a CGMES file,
+- `powsybl-iidm-impl` is used to deal with the network model,
+- `powsybl-iidm-test` is used to load the test network,
+- `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j` are used to import a CGMES file,
 - `slf4j-simple` allows you to have simple logging capabilities.
+</div>
+
+</details>
+
+
 
 ## Diagrams from a test network
 We first create the node/breaker test `Network` we are interested in:
@@ -118,15 +136,14 @@ In both cases, we obtain the following wider SVG file:
 
 ## Diagrams from a CGMES file
 
-First of all, we need to download sample files from ENTSO-E [here](https://github.com/powsybl/powsybl-cgmes-conformity-assessments/raw/main/src/test/resources/TestConfigurations_packageCASv2.0.zip)
-(these files correspond to the test configurations for Conformity Assessment Scheme v2.0).
-Inside the downloaded zip file, we will only consider the following file: 
-`CGMES_v2.4.15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip`, which is contained in `MicroGrid/Type4_T4` folder. 
+First of all, we need to download a sample file from ENTSO-E [here](CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip)
+
+This file is named `CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip`.
 
 We first import this sample `Network` we are interested in:
 ```java
-String file = "/path/to/file/MicroGrid/Type4_T4/CGMES_v2.4.15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip";
-Network network = Importers.loadNetwork(file);
+String file = "/path/to/file/CGMES_v2_4_15_MicroGridTestConfiguration_T4_Assembled_NB_Complete_v2.zip";
+Network network = Network.read(file);
 ```
 
 ### Generating a voltage level diagram
@@ -140,7 +157,7 @@ Therefore, we use the slightly more complex interface `SingleLineDiagram.draw(ne
 LayoutParameters layoutParameters = new LayoutParameters().setUseName(true);
 
 // Draw the diagram of voltage level 110 in substation PP_Brussels (id _8bbd7e74-ae20-4dce-8780-c20f8e18c2e0)
-SingleLineDiagram.draw(network, "_8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.get("/tmp/Brussels110.svg"), layoutParameters);
+SingleLineDiagram.draw(network, "8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.get("/tmp/Brussels110.svg"), layoutParameters);
 ```
 
 We obtain the following SVG:
@@ -157,7 +174,7 @@ We customize a bit further the parameters: the feeder names in this substation a
 layoutParameters.setLabelDiagonal(true);
 
 // Draw the diagram of substation PP_Amsterdam (id _c49942d6-8b01-4b01-b5e8-f1180f84906c)
-SingleLineDiagram.draw(network, "_c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.get("/tmp/AmsterdamSubstation.svg"), layoutParameters);
+SingleLineDiagram.draw(network, "c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.get("/tmp/AmsterdamSubstation.svg"), layoutParameters);
 ```
 
 We then obtain the following SVG file representing the whole PP_Amsterdam substation with its three voltage levels:
