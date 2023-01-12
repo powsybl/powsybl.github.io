@@ -251,7 +251,7 @@ This extension contains the sub-object `ObservabilityQuality`.
 | Attribute          | Type    | Unit       | Required | Default value | Description                                       |
 |--------------------|---------|------------|----------| ------------- |---------------------------------------------------|
 | standard deviation | double  | MW or MVar | yes      | - | The standard deviation                            |
-| redundant          | boolean | - R4       | yes      | - | Indicates if the value is confirmed by redundancy |
+| redundant          | boolean | -       | yes      | - | Indicates if the value is confirmed by redundancy |
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
