@@ -15,7 +15,8 @@ This page describes the way the Java objects have been designed to effectively h
   - [Operational limits](limits.md)
   - [Reactive limits](reactive-limits.md)
   - [Topology]()
-- [Grid extension]()
+  - [Validation level]()
+- [Grid extensions](../../grid/model/extensions.md)
 - [Merging]()
 - [Network extraction](extraction.md)
 
