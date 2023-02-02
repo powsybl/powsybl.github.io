@@ -54,7 +54,9 @@ To start from scratch, you need to create a file called `pom.xml` in `emf` with 
   
     <properties>
       <powsybl.ba.version>1.6.0</powsybl.ba.version>
-      <powsybl.entsoe.version>1.1.0</powsybl.entsoe.version>
+      <powsybl.entsoe.version>2.1.0</powsybl.entsoe.version>
+      <powsybl.core.version>5.1.0</powsybl.core.version>
+      <powsybl.olf.version>1.0.0</powsybl.olf.version>
     </properties>
 </project>
 ```

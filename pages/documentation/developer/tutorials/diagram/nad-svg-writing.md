@@ -19,7 +19,7 @@ First of all, we need some Maven dependencies.
 <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-starter</artifactId>
-    <version>2022.0.0</version>
+    <version>2023.0.0</version>
 </dependency>
 ```
 
@@ -54,8 +54,8 @@ First of all, we need some Maven dependencies.
 </dependencies>
 
 <properties>
-    <powsybl.nad.version>3.0.0</powsybl.nad.version>
-    <powsybl.core.version>5.0.0</powsybl.core.version>
+    <powsybl.nad.version>3.1.0</powsybl.nad.version>
+    <powsybl.core.version>5.1.0</powsybl.core.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
 

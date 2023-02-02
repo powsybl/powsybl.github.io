@@ -53,7 +53,7 @@ Create a new Maven's `pom.xml` file in `downscaling/initial` with the following 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>4.0.0</powsybl.core.version>
+        <powsybl.core.version>5.1.0</powsybl.core.version>
     </properties>
 </project>
 ```
