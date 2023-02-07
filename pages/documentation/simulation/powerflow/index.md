@@ -31,7 +31,6 @@ The power flow simulation outputs consists of:
 
 The following power flow implementations are supported:
 - [PowSyBl OpenLoadFlow](openlf.md)
-- [Hades2](hades2.md)
 - [Dynaflow](dynaflow.md)
 
 ## Configuration
@@ -43,7 +42,6 @@ load-flow:
 
 Each implementation is identified by its name, that may be unique in the classpath:
 - use "OpenLoadFlow" to use PowSyBl OpenLoadFlow
-- use "Hades2" to use RTE Hades2
 - use "DynaFlow" to use DynaFlow implementation
 
 ## Parameters
@@ -84,10 +82,6 @@ The parameters may also be overridden with a JSON file, in which case the config
 ```
 
 ### Available parameters
-
-**specificCompatibility**  
-The `specificCompatibility` property is an optional property that defines whether the load flow runs in legacy mode (implementation specific) or not.
-For example, Hades2 implementation uses this parameter to define whether the shunt admittance is split at each side of the serie impedance for lines. The default value is `false`.
 
 **twtSplitShuntAdmittance**  
 The `twtSplitShuntAdmittance` property is an optional property that defines whether the shunt admittance is split at each side of the serie impedance for transformers. The default value is `false`.
@@ -155,7 +149,6 @@ The default values of all the optional properties are read from the [load-flow-d
 ### Specific parameters
 Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
 - [PowSyBl OpenLoadFlow](openlf.md#parameters)
-- [Hades2](hades2.md#specific-parameters)
 - [DynaFlow](dynaflow.md#specific-parameters)
 
 ## Validation
