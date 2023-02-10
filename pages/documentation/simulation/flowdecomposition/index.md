@@ -38,7 +38,7 @@ Below is the concrete description of the algorithm implemented in PowSyBl.
 
 ### Net positions computation
 
-Countries' net position computation is done once for all on basecase using AC loadflow in the initial network, before any other alteration of the input.
+Countries' net position computation is done once for all on base case using AC loadflow in the initial network, before any other alteration of the input.
 
 The net position of a country is calculated as the sum of the mean leaving flow of all AC and HVDC line interconnections
 (losses are shared equally between both countries)
@@ -156,7 +156,7 @@ The third input of the flow decomposition algorithm are the network elements of 
 into the parts listed in introduction - called XNEC (cross-border relevant network element with contingency) in the flow
 decomposition methodology.
 
-Algorithm may handle different network elements in the decomposition for each network state (basecase or per contingency).
+Algorithm may handle different network elements in the decomposition for each network state (base case or per contingency).
 
 Current implementation of the algorithm is based on a XnecProvider interface. This interface should provide XNECs in the 
 base case. Basic implementations of this interface are available:
