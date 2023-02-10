@@ -20,7 +20,7 @@ usually published and available for testing and migration of dependent repositor
 Our release train consists in the release of:
 - [powsybl-core and its sub-modules](https://github.com/powsybl/powsybl-core)
 - [powsybl-open-loadflow](https://github.com/powsybl/powsybl-open-loadflow)
-- [powsybl-diagram and its sub-modules](https://github.com/powsybl/powsybl-single-line-diagram)
+- [powsybl-diagram and its sub-modules](https://github.com/powsybl/powsybl-diagram)
 - [powsybl-dynawo and its sub-modules](https://github.com/powsybl/powsybl-dynawo)
 - [pypowsybl](https://github.com/powsybl/pypowsybl)
 - [powsybl-balances-adjustment](https://github.com/powsybl/powsybl-balances-adjustment)
