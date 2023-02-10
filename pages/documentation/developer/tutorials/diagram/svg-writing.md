@@ -68,7 +68,7 @@ First of all, we need some Maven dependencies.
 
 <properties>
     <powsybl.sld.version>3.1.0</powsybl.sld.version>
-    <powsybl.core.version>5.1.0</powsybl.core.version>
+    <powsybl.core.version>5.1.1</powsybl.core.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
 

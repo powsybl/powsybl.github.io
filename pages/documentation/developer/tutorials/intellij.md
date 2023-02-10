@@ -37,4 +37,4 @@ IntelliJ IDEA will create a project with all the code from the guide ready to ru
 
 ## Creating a project from Scratch
 In case you’d like to start with an empty project and copy-and-paste your way through the tutorial, create a new Maven project in the `Project Wizard`:
-**TODO:** inserer une image
+**TODO:** add screenshot

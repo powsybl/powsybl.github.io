@@ -54,8 +54,8 @@ Create a new Maven's `pom.xml` file in `loadflow/initial` with the following con
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>4.0.1</powsybl.core.version>
-        <powsybl-open-loadflow.version>0.9.0</powsybl-open-loadflow.version>
+        <powsybl.core.version>5.1.1</powsybl.core.version>
+        <powsybl-open-loadflow.version>1.0.0</powsybl-open-loadflow.version>
     </properties>
 </project>
 ```
