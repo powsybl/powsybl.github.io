@@ -43,9 +43,10 @@ To start from scratch, you need to create a file called `pom.xml` in `emf` with 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-      <artifactId>powsybl-tutorials</artifactId>
-      <groupId>com.powsybl.tutorials</groupId>
-      <version>1.3.0-SNAPSHOT</version>
+      <groupId>com.powsybl</groupId>
+      <artifactId>powsybl-parent</artifactId>
+      <version>3</version>
+      <relativePath/>
     </parent>
 
     <artifactId>emf</artifactId>
@@ -53,10 +54,9 @@ To start from scratch, you need to create a file called `pom.xml` in `emf` with 
     <version>1.3.0-SNAPSHOT</version>
   
     <properties>
-      <powsybl.ba.version>1.6.0</powsybl.ba.version>
-      <powsybl.entsoe.version>2.1.0</powsybl.entsoe.version>
-      <powsybl.core.version>5.1.1</powsybl.core.version>
-      <powsybl.olf.version>1.0.0</powsybl.olf.version>
+      <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
+      <slf4j.version>1.7.22</slf4j.version>
+      <logback.version>1.2.9</logback.version>
     </properties>
 </project>
 ```
@@ -110,60 +110,49 @@ You can add the following dependencies to the `pom.xml` file, with their corresp
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-action-util</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-balances-adjustment</artifactId>
-    <version>${powsybl.ba.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-cgmes-conversion</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-cgmes-extensions</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-commons</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-api</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-mergingview</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-open-loadflow</artifactId>
-    <version>${powsybl.olf.version}</version>
   </dependency>
 
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-config-classic</artifactId>
-    <version>${powsybl.core.version}</version>
     <scope>runtime</scope>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-impl</artifactId>
-    <version>${powsybl.core.version}</version>
     <scope>runtime</scope>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>org.slf4j</groupId>
@@ -174,13 +163,12 @@ You can add the following dependencies to the `pom.xml` file, with their corresp
   <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
-    <version>1.2.9</version>
+    <version>${logback.version}</version>
     <scope>runtime</scope>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-entsoe-cgmes-balances-adjustment</artifactId>
-    <version>${powsybl.entsoe.version}</version>
     <scope>compile</scope>
   </dependency>
 </dependencies>

@@ -54,8 +54,7 @@ Create a new Maven's `pom.xml` file in `loadflow/initial` with the following con
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>5.1.1</powsybl.core.version>
-        <powsybl-open-loadflow.version>1.0.0</powsybl-open-loadflow.version>
+        <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
     </properties>
 </project>
 ```
@@ -105,11 +104,23 @@ Now, we'll add a few **required** maven dependencies:
 
 Add the following dependencies to the `pom.xml` file:
 ```xml
+
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.powsybl</groupId>
+      <artifactId>powsybl-dependencies</artifactId>
+      <version>${powsybl-dependencies.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
 <dependencies>
     <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-config-classic</artifactId>
-            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -120,12 +131,10 @@ Add the following dependencies to the `pom.xml` file:
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-open-loadflow</artifactId>
-            <version>${powsybl-open-loadflow.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsybl.core.version}</version>
         </dependency>
 </dependencies>
 ```
