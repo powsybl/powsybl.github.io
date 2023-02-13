@@ -140,7 +140,7 @@ The following example is a result of a security analysis with remedial action, e
 
 Different implementations are available to run security analyses:
 - [Load flow based](security-analysis-impl.md#load-flow-based-implementation): a security analysis implementation based on a power flow simulator 
-- [Hades2](security-analysis-impl.md#hades2): a security analysis provided by RTE as a freeware
+- [OpenLoadFlow]()
 
 For remedial actions simulation, only a [load flow based]() implementation is supported at the moment.
 
