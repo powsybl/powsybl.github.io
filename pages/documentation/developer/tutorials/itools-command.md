@@ -165,8 +165,7 @@ file to analyze. This option is required and has an argument named `FILE` to get
             .hasArg()
             .argName("FILE")
             .required()
-            .build());  
-
+            .build());
 ```
 Read the [commons-cli](https://www.javadoc.io/doc/commons-cli/commons-cli/) documentation page
 to learn more.
@@ -176,7 +175,6 @@ The `run` method is in charge of running your command, implementing your busines
 ```java
     @Override
     public void run(CommandLine line, ToolRunningContext context) {
-    
     }
 ```
 

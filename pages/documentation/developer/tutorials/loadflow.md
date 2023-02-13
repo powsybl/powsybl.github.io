@@ -104,7 +104,6 @@ Now, we'll add a few **required** maven dependencies:
 
 Add the following dependencies to the `pom.xml` file:
 ```xml
-
 <dependencyManagement>
   <dependencies>
     <dependency>
