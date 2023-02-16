@@ -5,11 +5,5 @@
 
 Please visit the [Linux Foundation website](https://events.linuxfoundation.org/lfenergysummit/) to get the latest news on the schedule!
 
-## OSS Lyon
-<span style="color: red">TODO</span>
-
-## CIM User Group
-<span style="color: red">TODO</span>
-
 ## Edinburgh
 The 2018 LF Energy summit took place in Edinburgh. Have a glance at some pictures of the event [here](https://events19.linuxfoundation.org/events/lfenergysummit2018/).
