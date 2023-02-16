@@ -25,7 +25,7 @@ This extension is used to configure the participation factor of the generator, t
 |----------------------|----------|------------------------|----------|---------------|----------------------------------------------|
 | participate          | boolean  | -                      | yes      | -             | The participation status                     |
 | droop                | double   | None (repartition key) | no       | -             | The participation factor equals Pmax / droop |
-| participation factor | double   | None (repartition key) | no       | -             | Defines the participation factor explictly   |
+| participation factor | double   | None (repartition key) | no       | -             | Defines the participation factor explicitly   |
 
 Here is how to add an active power control extension to a generator:
 ```java
