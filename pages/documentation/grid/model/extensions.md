@@ -19,13 +19,13 @@ Every extension is considered as serializable unless explicitly specified as non
 {:toc}
 
 ## Active power control
-This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled (with balance type on generator `Pmax`). This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
+This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled (with [balance type](../../simulation/powerflow/index.md#balanceType) on generator). This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
 
-| Attribute            | Type     | Unit                   | Required | Default value | Description                                                                                                                                                                      |
-|----------------------|----------|------------------------|----------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| participate          | boolean  | -                      | yes      | -             | The participation status                                                                                                                                                         |
-| droop                | double   | None (repartition key) | yes      | -             | The participation factor equals Pmax / droop                                                                                                                                     |
-| participation factor | double   | -                      | no       | -             | Defines the participation factor explictly. To be used with the `PROPORTIONAL_TO_GENERATION_PARTICIPATION_FACTOR` [balanceType](../../simulation/powerflow/index.md#balanceType) |
+| Attribute            | Type     | Unit                   | Required | Default value | Description                                  |
+|----------------------|----------|------------------------|----------|---------------|----------------------------------------------|
+| participate          | boolean  | -                      | yes      | -             | The participation status                     |
+| droop                | double   | None (repartition key) | no       | -             | The participation factor equals Pmax / droop |
+| participation factor | double   | None (repartition key) | no       | -             | Defines the participation factor explictly   |
 
 Here is how to add an active power control extension to a generator:
 ```java
