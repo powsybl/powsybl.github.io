@@ -29,18 +29,20 @@ The available features are:
 
 ## Releases
 
-| Version | Release date | Release notes                                                              | API documentation                                            |
-|---------|--------------|----------------------------------------------------------------------------|--------------------------------------------------------------|
+| Version | Release date | Release notes                                                              | API documentation                                             |
+|---------|--------------|----------------------------------------------------------------------------|---------------------------------------------------------------|
+| 0.20.0  | 2023-01-18   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.20.0) | -                                                             |
+| 0.19.0  | 2022-10-26   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.19.0) | -                                                             |
 | 0.18.0  | 2022-09-23   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.18.0) | [readthedocs.io](https://pypowsybl.readthedocs.io/en/stable/) |
-| 0.17.0  | 2022-08-12   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.17.0) | -                                                            |
-| 0.16.0  | 2022-05-31   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.16.0) | -                                                            |
-| 0.15.0  | 2022-04-28   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.15.0) | -                                                            |
-| 0.14.0  | 2022-03-23   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.14.0) | -                                                            |
-| 0.13.0  | 2022-03-10   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.13.0) | -                                                            |
-| 0.12.0  | 2022-01-19   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.12.0) | -                                                            |
-| 0.11.0  | 2021-11-22   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.11.0) | -                                                            |
-| 0.10.0  | 2021-10-04   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.10.0) | -                                                            |
-| 0.9.0   | 2021-08-20   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.9.0)  | -                                                            |
-| 0.8.0   | 2021-06-13   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.8.0)  | -                                                            |
-| 0.7.0   | 2021-04-13   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.7.0)  | -                                                            |
-| 0.6.0   | 2021-04-08   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.6.0)  | -                                                            |
+| 0.17.0  | 2022-08-12   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.17.0) | -                                                             |
+| 0.16.0  | 2022-05-31   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.16.0) | -                                                             |
+| 0.15.0  | 2022-04-28   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.15.0) | -                                                             |
+| 0.14.0  | 2022-03-23   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.14.0) | -                                                             |
+| 0.13.0  | 2022-03-10   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.13.0) | -                                                             |
+| 0.12.0  | 2022-01-19   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.12.0) | -                                                             |
+| 0.11.0  | 2021-11-22   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.11.0) | -                                                             |
+| 0.10.0  | 2021-10-04   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.10.0) | -                                                             |
+| 0.9.0   | 2021-08-20   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.9.0)  | -                                                             |
+| 0.8.0   | 2021-06-13   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.8.0)  | -                                                             |
+| 0.7.0   | 2021-04-13   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.7.0)  | -                                                             |
+| 0.6.0   | 2021-04-08   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.6.0)  | -                                                             |

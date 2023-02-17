@@ -43,9 +43,10 @@ To start from scratch, you need to create a file called `pom.xml` in `emf` with 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-      <artifactId>powsybl-tutorials</artifactId>
-      <groupId>com.powsybl.tutorials</groupId>
-      <version>1.3.0-SNAPSHOT</version>
+      <groupId>com.powsybl</groupId>
+      <artifactId>powsybl-parent</artifactId>
+      <version>3</version>
+      <relativePath/>
     </parent>
 
     <artifactId>emf</artifactId>
@@ -53,8 +54,9 @@ To start from scratch, you need to create a file called `pom.xml` in `emf` with 
     <version>1.3.0-SNAPSHOT</version>
   
     <properties>
-      <powsybl.ba.version>1.6.0</powsybl.ba.version>
-      <powsybl.entsoe.version>1.1.0</powsybl.entsoe.version>
+      <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
+      <slf4j.version>1.7.22</slf4j.version>
+      <logback.version>1.2.9</logback.version>
     </properties>
 </project>
 ```
@@ -96,7 +98,7 @@ Now, we add all the **required** maven dependencies:
 - `com.powsybl:powsybl-iidm-impl`: to work with network core model API and in-memory implementation.
 - `com.powsybl:powsybl-action-util`: to provide a set of common actions such as scaling.
 - `com.powsybl:powsybl-balances-adjustment` and `com.powsybl:powsybl-entsoe-cgmes-balances-adjustment`: to provide an implementation to run an active power balance adjustment computation over several control areas. Through this API, it is possible to keep the power factor constant during the process by readjusting the reactive power as well (since version 1.6.0 indeed).
-- `com.powsybl:powsybl-cgmes-conversion`, `com.powsybl:powsybl-triple-store-impl-rdf4j`, `com.powsybl:powsybl-cgmes-extensions`, `com.powsybl:powsybl-iidm-converter-api`: to import/export the CGMES files and convert them into the network core model.
+- `com.powsybl:powsybl-cgmes-conversion`, `com.powsybl:powsybl-triple-store-impl-rdf4j`, `com.powsybl:powsybl-cgmes-extensions`, `com.powsybl:powsybl-iidm-api`: to import/export the CGMES files and convert them into the network core model.
 - `com.powsybl:powsybl-commons`: to provide a lot of really basic and technical utilities used everywhere in PowSyBl such as XML or JSON helpers, configuration, exceptions...
 - `com.powsybl:powsybl-iidm-mergingview`: to provide a way to merge several networks, keeping the underlying networks unchanged.
 
@@ -108,60 +110,49 @@ You can add the following dependencies to the `pom.xml` file, with their corresp
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-action-util</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-balances-adjustment</artifactId>
-    <version>${powsybl.ba.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-cgmes-conversion</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-cgmes-extensions</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-commons</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-iidm-converter-api</artifactId>
-    <version>${powsybl.core.version}</version>
+    <artifactId>powsybl-iidm-api</artifactId>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-mergingview</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-open-loadflow</artifactId>
-    <version>${powsybl.olf.version}</version>
   </dependency>
 
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-config-classic</artifactId>
-    <version>${powsybl.core.version}</version>
     <scope>runtime</scope>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-impl</artifactId>
-    <version>${powsybl.core.version}</version>
     <scope>runtime</scope>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
-    <version>${powsybl.core.version}</version>
   </dependency>
   <dependency>
     <groupId>org.slf4j</groupId>
@@ -172,13 +163,12 @@ You can add the following dependencies to the `pom.xml` file, with their corresp
   <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
-    <version>1.2.9</version>
+    <version>${logback.version}</version>
     <scope>runtime</scope>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-entsoe-cgmes-balances-adjustment</artifactId>
-    <version>${powsybl.entsoe.version}</version>
     <scope>compile</scope>
   </dependency>
 </dependencies>
@@ -231,7 +221,7 @@ Once you have created the `EmfTutorial` class, just before the main method, defi
 This variable gathers all the parameters to be used in the load flow pre-processing of the IGMs, in the load flow calculation on the CGM and for the balance computation iterations. In this tutorial, we set the initial angle values to angles computed through a DC power flow, the balance type to proportional to the maximum active power target of generators, the `ReadSlackBus` to true (the slack bus defined in each IGM). The tap changers regulation is also set to true (either for phase tap changers than for ratio tap changers), and the power flow must be computed over all connected components. These parameters are chosen to comply with the European merging function. For more information on the power flow parameters available and how to implement them, you can visit this [page](../../simulation/powerflow/openlf.md). In case of non-convergence, these parameters can be relaxed.
 
 ### Create parameters to add options to the calculation
-Then we define three parameters: a boolean indicating whether or not we want to perform the load flow pre-processing on the IGMs, a boolean indicating whether we want to prepare the balance computation or not and the name of the synchronous area, set to `10YEU-CONT-SYNC0`, representing Continental Europe.
+Then we define three parameters: a boolean indicating whether we want to perform the load flow pre-processing on the IGMs, a boolean indicating whether we want to prepare the balance computation or not and the name of the synchronous area, set to `10YEU-CONT-SYNC0`, representing Continental Europe.
 
 ### Import the CIM-CGMES IGMs
 Now we move to the main method.
@@ -295,10 +285,10 @@ The `prepareFictitiousArea` method does the same but for the borders of the CGM.
 In the main method, you can call these methods through:
 ```java
 if (PREPARE_BALANCE_COMPUTATION) {
-    igmPreprocessing(mergingView, validNetworks, dataExchanges, balanceComputationAreas, validationParameters);
+    igmPreprocessing(mergingView, validNetworks, dataExchanges, balanceComputationAreas);
     prepareFictitiousArea(mergingView, validNetworks, dataExchanges, balanceComputationAreas);
 } else {
-    igmPreprocessing(mergingView, validNetworks, dataExchanges, validationParameters);
+    igmPreprocessing(mergingView, validNetworks, dataExchanges);
     prepareFictitiousArea(mergingView, validNetworks, dataExchanges);
 }
 ```
