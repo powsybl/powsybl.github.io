@@ -1,7 +1,7 @@
 # Events
 
 ## LF Energy summit
-[Rte](https://www.rte-france.com/en/home) has the pleasure to host the LFE Energy summit on June 1-2, 2023 in Paris.
+[Rte](https://www.rte-france.com/en/home) has the pleasure to host the LF Energy summit on June 1-2, 2023 in Paris.
 
 Please visit the [Linux Foundation website](https://events.linuxfoundation.org/lfenergysummit/) to get the latest news on the schedule!
 
