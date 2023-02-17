@@ -19,7 +19,7 @@ First of all, we need some Maven dependencies.
 <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-starter</artifactId>
-    <version>2022.0.0</version>
+    <version>2023.0.1</version>
 </dependency>
 ```
 
@@ -30,21 +30,30 @@ First of all, we need some Maven dependencies.
 
 {% highlight xml %}
 
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-dependencies</artifactId>
+            <version>${powsybl-dependencies.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
 <dependencies>
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-network-area-diagram</artifactId>
-        <version>${powsybl.nad.version}</version>
     </dependency>
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-iidm-impl</artifactId>
-        <version>${powsybl.core.version}</version>
     </dependency>
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-ieee-cdf-converter</artifactId>
-        <version>${powsybl.core.version}</version>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
@@ -54,8 +63,7 @@ First of all, we need some Maven dependencies.
 </dependencies>
 
 <properties>
-    <powsybl.nad.version>3.0.0</powsybl.nad.version>
-    <powsybl.core.version>5.0.0</powsybl.core.version>
+    <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
 

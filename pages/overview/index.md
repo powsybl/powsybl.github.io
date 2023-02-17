@@ -23,6 +23,7 @@ system simulation and analysis. For example, using PowSyBl one can create applic
 - handle a variety of formats, such as CGMES for European data exchanges
 - perform power flow simulations and security analyses on the network
 - perform dynamic simulations on the network
+- create visual representations of the network
 - etc.
 
 Another key characteristic of PowSyBl is its modular design, at the core of the open source approach.
@@ -44,7 +45,6 @@ The grid model can also be enhanced with [extensions]() that complete the equipm
 PowSyBl also provides [importers and exporters](../documentation/index.html#grid-formats) 
 for several common pan-european exchange formats (Entso-E CIM/CGMES, UCTE-DEF, etc.).
 
-
 PowSyBl as a library provides several APIs for power systems’ simulation and analysis 
 ([power flow computation](../documentation/simulation/powerflow/index.md), 
 [security analysis](../documentation/simulation/securityanalysis/index.md), 
@@ -54,6 +54,8 @@ These simulations can run either on a personal computer or on a server, but they
 also run on a supercomputer like in the iTesla project with the Curie supercomputer. 
 The separation of the simulation API and the implementations allows developers to 
 provide their own implementations if necessary, which makes the framework very flexible.
+
+PowSyBl enables users to display [network graph diagrams and single-line diagrams](https://github.com/powsybl/powsybl-diagram#readme) of a network in a highly customizable way.
 
 PowSyBl is also available as a [command line tool](../documentation/user/itools/index.md), for quick shot modelling and/or simulation.
 PowSyBl scripts may be written and executed thanks to the [dedicated Domain Specific Language](../documentation/user/itools/run-script.md) code included in the project.
@@ -82,6 +84,8 @@ the support of several data exchange format ([CGMES](../documentation/grid/forma
 with PowSyBl.
 
 - [Open loadflow](../documentation/developer/repositories/powsybl-open-loadflow.md): an open source library for power flow simulations (load flows, security analysis, sensitivity analysis).
+- 
+- [Powsybl-diagram](../documentation/developer/repositories/powsybl-diagram.md): a library to display higlhy customizable diagrams of a network.
 
 - Network Hypothesis: provides component to model network hypotheses.
 

@@ -32,9 +32,6 @@ This module provides extensions for equipments of the grid model used in ENTSO-E
 ### Grid conversion
 The following artifacts provide a common API to convert network files from one format to another. PowSyBl provides several implementations of this API to support common grid exchange formats.
 
-**powsybl-iidm-converter-api**  
-This module provides a common API that has to be implemented to support a new grid exchange format.
-
 #### IIDM-XML
 
 **powsybl-iidm-xml-converter**  
