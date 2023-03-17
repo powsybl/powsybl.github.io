@@ -143,8 +143,8 @@ In `FortescueFaultResult`, they are:
 
 | Attribute | Type             | Unit | Required | Default value | Description                                                                                |
 |-----------|------------------|------|----------|---------------|--------------------------------------------------------------------------------------------|
-| current   | `FortescueValue` | -    | yes      | -             | The magnitude and angle of the computed short circuit current detailed on the three phases |
-| voltage   | `FortescueValue` | -    | yes      | -             | The magnitude and angle of the computed short circuit voltage detailed on the three phases |
+| current   | `FortescueValue` | kA   | yes      | -             | The magnitude and angle of the computed short circuit current detailed on the three phases |
+| voltage   | `FortescueValue` | kV   | yes      | -             | The magnitude and angle of the computed short circuit voltage detailed on the three phases |
 
 
 **The status of the computation**
@@ -204,4 +204,4 @@ The attributes of `FortescueShortCircuitBusResult` are:
 | busId                   | String           | -    | yes      | -             | ID of the bus                                                            | 
 | initialVoltageMagnitude | double           | kV   | yes      | -             | Magnitude of the three phased voltage before the fault                   |
 | voltageDropProportional | double           | %    | yes      | -             | Voltage drop after the fault                                             |
-| voltage                 | `FortescueValue` | -    | yes      | -             | Magnitudes and angles of the voltage on the three phases after the fault |
+| voltage                 | `FortescueValue` | kV   | yes      | -             | Magnitudes and angles of the voltage on the three phases after the fault |
