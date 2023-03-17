@@ -6,7 +6,7 @@ layout: default
 
 A new release train of the framework occurs roughly every 6 to 8 weeks.
 
-*Start of next release train: 2022-11-09*
+*Start of next release train: 2023-03-14*
 
 In case of structural issues, corrective releases can also be published for some repositories.
 These corrective releases are motivated by users' demand so don't hesitate to [contact us](../community/index.md#contact).
@@ -20,8 +20,7 @@ usually published and available for testing and migration of dependent repositor
 Our release train consists in the release of:
 - [powsybl-core and its sub-modules](https://github.com/powsybl/powsybl-core)
 - [powsybl-open-loadflow](https://github.com/powsybl/powsybl-open-loadflow)
-- [powsybl-single-line-diagram and its sub-modules](https://github.com/powsybl/powsybl-single-line-diagram)
-- [powsybl-network-area-diagram](https://github.com/powsybl/powsybl-network-area-diagram)
+- [powsybl-diagram and its sub-modules](https://github.com/powsybl/powsybl-diagram)
 - [powsybl-dynawo and its sub-modules](https://github.com/powsybl/powsybl-dynawo)
 - [pypowsybl](https://github.com/powsybl/pypowsybl)
 - [powsybl-balances-adjustment](https://github.com/powsybl/powsybl-balances-adjustment)
