@@ -22,46 +22,47 @@ The parameters to be used for the short circuit calculation should be defined in
 
 ```yaml
 short-circuit-parameters:
-  with-voltage-map: false
+  with-voltage-result: false
   with-feeder-result: true
   with-limit-violations: true
   study-type: TRANSIENT
+  with-fortescue-result: false
   min-voltage-drop-proportional-threshold: 20
 ```
 
 Available parameters in the short circuit API are stored in `com.powsybl.shortcircuit.ShortCircuitParameters`. They are all optional.
 
-**withLimitViolations**
+**with-limit-violations**
 
 This property indicates whether limit violations should be returned after the computation. The violations that should be used are `LOW_SHORT_CIRCUIT_CURRENT` and `HIGH_SHORT_CIRCUIT_CURRENT`.
 It can be used to filter results where the computed short circuit current is too high or too low. The default value is true.
 
-**withFortescueResult**
+**with-fortescue-result**
 
 This property indicates if the computed results, like currents and voltages, should be returned only in three phased magnitude or detailed with magnitude and angle on each phase.
 According to this property, different classes to return results can be used. If it is set to false, the classes `com.powsybl.shortcircuit.MagnitudeFaultResult`, `com.powsybl.shortcircuit.MagnitudeFeederResult` and `com.powsybl.shortcircuit.MagnitudeShortCircuitBusResult` should be used.
 If the property is true, the classes `com.powsybl.shortcircuit.FortescueFaultResult`, `com.powsybl.shortcircuit.FortescueFeederResult` and `com.powsybl.shortcircuit.FortescueShortCircuitBusResult` should be used.
 The default value is true.
 
-**withFeederResult**
+**with-feeder-result**
 
 This property indicates if the contributions of each feeder to the short circuit current at the fault point should be computed. 
 If the property is set to true, the results can be stored in class `com.powsybl.shortcircuit.FeederResult`. 
 The default value is true.
 
-**studyType**
+**study-type**
 
 This property indicates the type of short circuit study. It can be:
 - `SUB_TRANSIENT`: it is the first stage of the short circuit, right when the fault happens. The subtransient reactance of generators will be used.
 - `TRANSIENT`: the second stage of the short circuit, before the system stabilize. The transient reactance of generators will be used.
 - `STEADY_STATE`: the last stage, once every transient effects are gone.
-The default value is `TRANSIENT`. The transient and subtransient reactance of the generators are stored in the [short circuit generator exension.](../../grid/model/extensions.md#generator-short-circuit)
+The default value is `TRANSIENT`. The transient and subtransient reactance of the generators are stored in the [short circuit generator extension.](../../grid/model/extensions.md#generator-short-circuit)
 
-**withVoltageResult**
+**with-voltage-result**
 
 This property indicates if the voltage map should be computed on every node of the network. The results, if this property is true, should be stored in class `com.powsybl.shortcircuit.ShortCircuitBusResult`. The default value is true.
 
-**minVoltageDropProportionalThreshold**
+**min-voltage-drop-proportional-threshold**
 
 This property indicates a threshold to filter the voltage results. Only the nodes where the voltage drop due to the short circuit is above this property should be kept. 
 The voltage drop is calculated as the ratio between the initial voltage magnitude on the node and the voltage magnitude after the fault. The default value is 0.
@@ -114,7 +115,7 @@ Optionally, it is possible to specify a list of `FaultParameters`. Each `FaultPa
 For more information on parameters, see above.
 
 ## Outputs
-The results of the short circuit analysis are stored in `com.powsybl.shortcircuit.ShortCircuitAnalysisResult`. This class gathers the results for every fault and they are accessible either by the ID of the fault or the ID of the element on which the fault is simulated.
+The results of the short circuit analysis are stored in `com.powsybl.shortcircuit.ShortCircuitAnalysisResult`. This class gathers the results for every fault, they are accessible either by the ID of the fault or the ID of the element on which the fault is simulated.
 For each fault, an object `com.powsybl.shortcircuit.FaultResult` is returned.
 
 Depending on the property `withFortescueResult`, the result returned should either be an instance of `com.powsybl.shortcircuit.MagnitudeFaultResult` or `com.powsybl.shortcircuit.FortescueFaultResult`.
