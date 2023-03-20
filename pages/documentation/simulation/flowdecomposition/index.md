@@ -21,9 +21,7 @@ The aim of flow decomposition algorithm is to provide for each network element a
 - Internal flow: flow due to electricity exchange inside the network element's zone.
 - Loop flow: flow due to electricity exchange inside another zone.
 - PST flow: flow due to a shift commanded by the action of an active phase shifting transformer on the network.
-- HVDC flow: flow due to a shift commanded by the action of an active HVDC line on the network.
-
-> Current algorithm does not model HVDC flow yet.
+- Xnode flow: flow due to all unmerged interconnections and HVDC connections modelled as dangling lines in IIDM.
 
 > This decomposition does not reflect the exact reality of how electric flows act on a real network, but it
 > is a useful approximation needed for some cross zonal coordination processes.
@@ -40,11 +38,10 @@ Below is the concrete description of the algorithm implemented in PowSyBl.
 
 ### Net positions computation
 
-Countries' net position computation is done using AC loadflow in the initial network, before any other alteration of the input.
+Countries' net position computation is done once for all on base case using AC loadflow in the initial network, before any other alteration of the input.
 
-The net position of a country is calculated as the sum of :
-- The injection of all dangling lines connected in the country
-- The mean leaving flow of all AC  and HVDC line interconnections (losses are shared equally between both countries)
+The net position of a country is calculated as the sum of the mean leaving flow of all AC and HVDC line interconnections
+(losses are shared equally between both countries)
 
 ### Losses compensation
 
@@ -67,6 +64,7 @@ compensated at both sides proportionally to the resistance of each half line.
 In order to distinguish internal/loop flows and allocated flows, the nodal injections in each zone must de decomposed in two parts:
 - Nodal injections for allocated flows
 - Nodal injections for loop flows and internal flows
+- Nodal injections for xnode flows
 
 This decomposition is based on GLSK (Generation and Load Shift Keys). It is an input of the process that provides,
 for each zone of the study a list of injections and associated factor to be used to scale the zone to a given net position.
@@ -79,12 +77,13 @@ Nodal injection decomposition is done as follows:
 $$
 \begin{array}{l}
 \mathrm{NI}_\mathrm{AF} = \mathrm{GLSK} \cdot \mathrm{NP} \\
-\mathrm{NI}_\mathrm{LIF} = \mathrm{NI} - \mathrm{NI}_\mathrm{AF}
+\mathrm{NI}_\mathrm{LIF} = \mathrm{NI} - \mathrm{NI}_\mathrm{AF} - \mathrm{NI}_\mathrm{X}
 \end{array}
 $$
 
 where:
-- $$\mathrm{NI}$$ is the vector of the network injections, 
+- $$\mathrm{NI}$$ is the vector of the network injections,
+- $$\mathrm{NI}_\mathrm{X}$$ is the vector of the network injections from dangling lines,
 - $$\mathrm{NI}_\mathrm{AF}$$ is the vector of allocated flow part of the network injections, 
 - $$\mathrm{NI}_\mathrm{LIF}$$ is the vector of loop flow and internal flow part of the network injections, 
 - $$\mathrm{NP}$$ is the vector of the zones' net position, 
@@ -107,14 +106,16 @@ $$
 \begin{array}{l}
 \mathrm{F}_\mathrm{AF} = \mathrm{PTDF} \cdot \mathrm{NI}_\mathrm{AF} \\
 \mathrm{F}_\mathrm{LIF} = \mathrm{PTDF} \cdot \mathrm{diag}(\mathrm{NI}_\mathrm{LIF}) \cdot \mathrm{AM} \\
-\mathrm{F}_\mathrm{PST} = \mathrm{PSDF} \cdot \mathrm{\Delta}_\mathrm{PST}
+\mathrm{F}_\mathrm{PST} = \mathrm{PSDF} \cdot \mathrm{\Delta}_\mathrm{PST} \\
+\mathrm{F}_\mathrm{X} = \mathrm{PTDF} \cdot \mathrm{NI}_\mathrm{X} \\
 \end{array}
 $$
 
 where:
 - $$\mathrm{F}_\mathrm{AF}$$ is the vector of the network element allocated flow, 
 - $$\mathrm{F}_\mathrm{LIF}$$ is the matrix of the network element loop flow or internal flow for each zone, 
-- $$\mathrm{F}_\mathrm{PST}$$ is the vector of the network element PST (phase shift transformer) flow, 
+- $$\mathrm{F}_\mathrm{PST}$$ is the vector of the network element PST (phase shift transformer) flow,
+- $$\mathrm{F}_\mathrm{X}$$ is the vector of the network element xnode flow,
 - $$\mathrm{AM}$$ is the allocation matrix, which associates each injection to its zone. $$\mathrm{AM}_{ij}$$ = 1 if node i is in zone j, 0 otherwise, 
 - $$\mathrm{\Delta}_\mathrm{PST}$$ is the phase shift transformers angle vector,
 
@@ -133,8 +134,15 @@ parts proportionally to their rectified linear unit ($$\mathrm{ReLU}(x) = \mathr
 
 ### Network
 
-The first input of the flow decomposition algorithm is a network. As this simulation uses power flow simulations for
-losses compensation, this network should converge.
+The first input of the flow decomposition algorithm is a network. As this simulation uses [power flow](../powerflow/index.md)
+simulations for losses compensation, this network should converge.
+
+Any available source can be used as a valid input for flow decomposition (including UCTE, CGMES, XIIDM).
+
+>Some limitations exist in the type of network devices handled in the algorithm :
+>- Flows on three windings transformers or HVDCs cannot be decomposed
+>- Three windings transformers and HVDC lines losses are not compensated in losses compensation step 
+>- Flows generated by HVDC which are not modeled with unmerged xnodes are not separated from loop flows
 
 ### GLSK
 
@@ -148,12 +156,16 @@ The third input of the flow decomposition algorithm are the network elements of 
 into the parts listed in introduction - called XNEC (cross-border relevant network element with contingency) in the flow
 decomposition methodology.
 
+Algorithm may handle different network elements in the decomposition for each network state (base case or per contingency).
+
 Current implementation of the algorithm is based on a XnecProvider interface. This interface should provide XNECs in the 
 base case. Basic implementations of this interface are available:
 - Set of all branches.
 - Set of branches selected by IDs.
 - Set of all interconnections on the network (i.e. branches which have different country attribute in their source and destination substation).
 - Set of all interconnections on the network with the addition of all branches that have a maximum zonal PTDF greater than 5%.
+
+Post contingency network elements can only be given to the algorithm using selection by IDs.
 
 ## Flow decomposition outputs
 
@@ -167,6 +179,7 @@ to the sum of all the flow parts calculated by the algorithm.
 which network element is part of (interconnections are considered as part of no specific country, so will always have an internal flow to 0).
 - Loop flows : map of the loop flow part of the network element's flow for each zone.
 - PST flow : PST flow part of the network element's flow.
+- Xnode flow : flow part due to all unmerged interconnections and HVDC connections modelled as dangling lines in IIDM.
 
 ### Flow sign conventions
 
@@ -192,4 +205,7 @@ negative one tends to decrease the absolute flow on the branch (i.e. a relieving
 
 ### Impact of existing parameters
 
-Flow decomposition algorithm relies on [load flow parameters](../powerflow/index.md) and [sensitivity analysis parameters](../sensitivity/index.md).
+Any implementation of load flow provider and sensitivity analysis provider can be used, as the entire algorithm only
+relies on common loadflow API and sensitivity analysis API.
+
+Thus, flow decomposition algorithm relies on [load flow parameters](../powerflow/index.md) and [sensitivity analysis parameters](../sensitivity/index.md).
