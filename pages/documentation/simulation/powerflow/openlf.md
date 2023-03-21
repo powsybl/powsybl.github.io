@@ -155,19 +155,33 @@ load-flow:
 
 ### Specific parameters
 
+**voltageInitModeOverride**  
+- `NONE`:
+- `VOLTAGE_MAGNITUDE`:
+- `FULL_VOLTAGE`:
+The default value is `NONE`.
+
 **lowImpedanceBranchMode**  
-The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines (when $$Z$$ is less than the $$10^{-8}$$ per-unit threshold).
+The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance branches (when $$Z$$ is less than the `lowImpedanceThreshold` per-unit threshold, see further below).
 Possible values are:
-- Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider a low impedance line has $$R$$ and $$X$$ equal to zero.
-- Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider a low impedance line with a small value equal to the previously given threshold.
+- Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider low impedance branches as zero impedance branches.
+- Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider low impedance branches with a value equal to the `lowImpedanceThreshold`.
+The default value is `REPLACE_BY_ZERO_IMPEDANCE_LINE`.
+
+**lowImpedanceThreshold**  
+The `lowImpedanceThreshold` property is an optional property that defines in per-unit the threshold used to identify low impedance branches (when $$Z$$ is less than the `lowImpedanceThreshold` per-unit threshold).
+The default value is $$10^{-8}$$.
 
 **throwsExceptionInCaseOfSlackDistributionFailure**  
 The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure.
 This could happen in small synchronous component without enough generators or loads to balance the mismatch.
 In that case, the remaining active power mismatch remains on the selected slack bus.
+The default value is `false`.
 
 **voltageRemoteControl**  
 The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
+If set to false, any existing voltage remote control is converted to a local control, rescaling the target voltage
+according to the nominal voltage ratio between the remote regulated bus and the equipment terminal bus.
 The default value is `true`.
 
 **slackBusSelectionMode**  
@@ -176,7 +190,7 @@ The `slackBusSelectionMode` property is an optional property that defines how to
 - `NAME` if you want to choose a specific bus as the slack bus. In that case, the `slackBusesIds` property has to be filled.
 - `MOST_MESHED` if you want to choose the most meshed bus among buses with the highest nominal voltage as the slack bus. This option is required for computation with several synchronous component.
 - `LARGEST_GENERATOR` if you want to choose the bus with the highest total generation capacity as the slack bus.
-
+The default value is `MOST_MESHED`.
 Note that if you want to choose the slack bus that is defined inside the network with a slackTerminal extension, you have to use the `LoadflowParameters`
 
 **slackBusesIds**  
@@ -214,13 +228,121 @@ The default value for `loadPowerFactorConstant` property is `false`.
 
 **plausibleActivePowerLimit**  
 The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for:
-- slack distribution (if `balanceType` equals to `PROPORTIONAL_TO_GENERATION_P_MAX` or `PROPORTIONAL_TO_GENERATION_P`)
+- slack distribution (if `balanceType` equals to any of the `PROPORTIONAL_TO_GENERATION_<any>` types)
 - slack selection (if `slackBusSelectionMode` equals to `LARGEST_GENERATOR`)
 
 The default value is $$5000 MW$$.
 
-**addRatioToLinesWithDifferentNominalVoltageAtBothEnds**  
-The `addRatioToLinesWithDifferentNominalVoltageAtBothEnds` property is an optional property used for lines that are connected to two voltage level with different nominal voltages. If this property equals `true`, a structural ratio is taken into account. The default value of this parameter is `true`. This property should normally be left to its default value `true` to get correct load-flow results, and will be removed in a future release.
+**slackBusPMaxMismatch**  
+The default value is $$1 MW$$.
+
+**voltagePerReactivePowerControl**  
+The default value is `false`.
+
+**reactivePowerRemoteControl**  
+The default value is `false`.
+
+**maxNewtonRaphsonIterations**  
+The default value is `15`.
+
+**maxOuterLoopIterations**  
+The default value is `20`.
+
+**newtonRaphsonStoppingCriteriaType**  
+- UNIFORM_CRITERIA:
+- PER_EQUATION_TYPE_CRITERIA:
+
+The default value is `UNIFORM_CRITERIA`.
+
+**newtonRaphsonConvEpsPerEq**  
+The default value is $$10^{-4}$$.
+
+**maxActivePowerMismatch**  
+The default value is $$10^{-2}$$.
+
+**maxReactivePowerMismatch**  
+The default value is $$10^{-2}$$.
+
+**maxVoltageMismatch**  
+The default value is $$10^{-4}$$.
+
+**maxAngleMismatch**  
+The default value is $$10^{-5}$$.
+
+**maxRatioMismatch**  
+The default value is $$10^{-5}$$.
+
+**maxSusceptanceMismatch**  
+The default value is $$10^{-4}$$.
+
+**transformerVoltageControlMode**  
+- WITH_GENERATOR_VOLTAGE_CONTROL:
+- AFTER_GENERATOR_VOLTAGE_CONTROL:
+- INCREMENTAL_VOLTAGE_CONTROL:
+
+The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
+
+**shuntVoltageControlMode**  
+- WITH_GENERATOR_VOLTAGE_CONTROL:
+- INCREMENTAL_VOLTAGE_CONTROL:
+
+The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
+
+**minPlausibleTargetVoltage**  
+The default value is `0.8`.
+
+**maxPlausibleTargetVoltage**  
+The default value is `1.2`.
+
+**minRealisticVoltage**  
+The default value is `0.5`.
+
+**maxRealisticVoltage**  
+The default value is `1.5`.
+
+**reactiveRangeCheckMode**  
+- MIN_MAX:
+- MAX: default
+- TARGET_P:
+
+The default value is `MAX`.
+
+**networkCacheEnabled**  
+The default value is `false`.
+
+**svcVoltageMonitoring**  
+The default value is `true`.
+
+**stateVectorScalingMode**  
+- NONE:
+- LINE_SEARCH:
+- MAX_VOLTAGE_CHANGE:
+
+The default value is `NONE`.
+
+**maxSlackBusCount**  
+The default value is `1`.
+
+**debugDir**  
+The default value is `null`.
+
+**incrementalTransformerVoltageControlOuterLoopMaxTapShift**  
+The default value is `3`.
+
+**secondaryVoltageControl**  
+The default value is `false`.
+
+**reactiveLimitsMaxPqPvSwitch**  
+The default value is `3`.
+
+**phaseShifterControlMode**  
+- CONTINUOUS_WITH_DISCRETISATION:
+- INCREMENTAL:
+
+The default value is `CONTINUOUS_WITH_DISCRETISATION`.
+
+**alwaysUpdateNetwork**  
+The default value is `false`.
 
 ### Configuration file example
 See below an extract of a config file that could help:

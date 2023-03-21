@@ -155,7 +155,7 @@ The `dcUseTransformerRatio` property is an optional property that defines if rat
 flow equations in a DC power flow. The default value of this parameter is `true`.
 
 **dcPowerFactor**  
-The `dcPowerFactor` property is an optional property that defines the power factor used for DC calculations. The default value is `1.0`.
+The `dcPowerFactor` property is an optional property that defines the power factor used to convert current limits into active power limits in DC calculations. The default value is `1.0`.
 
 ### Specific parameters
 Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
