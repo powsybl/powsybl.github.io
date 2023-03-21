@@ -49,49 +49,58 @@ Each implementation is identified by its name, that may be unique in the classpa
 Then, configure some generic parameters for all load flow implementations:
 ```yaml
 load-flow-default-parameters:
-    voltageInitMode: DC_VALUES
-    transformerVoltageControlOn: false
-    specificCompatibility: true
     dc: false
-    balanceType: PROPORTIONAL_TO_LOAD
+    voltageInitMode: UNIFORM_VALUES
+    distributedSlack: true
+    balanceType: PROPORTIONAL_TO_GENERATION_P_MAX
     countriesToBalance:
       - FR
       - BE
-    connectedComponentMode : MAIN
+    readSlackBus: false
+    writeSlackBus: false
+    useReactiveLimits: true
+    phaseShifterRegulationOn: false
+    transformerVoltageControlOn: false
+    shuntCompensatorVoltageControlOn: false
+    connectedComponentMode: MAIN
+    twtSplitShuntAdmittance: false
+    dcUseTransformerRatio: true
+    dcPowerFactor: 1.0
 ```
 
 The parameters may also be overridden with a JSON file, in which case the configuration will look like:
 ```json
 {
-  "version" : "1.5",
-  "voltageInitMode" : "PREVIOUS_VALUES",
-  "transformerVoltageControlOn" : true,
-  "phaseShifterRegulationOn" : false,
-  "noGeneratorReactiveLimits" : true,
-  "twtSplitShuntAdmittance" : false,
-  "simulShunt" : false,
-  "readSlackBus" : false,
-  "writeSlackBus" : false,
-  "dc" : false,
-  "distributedSlack" : true,
-  "balanceType" : "PROPORTIONAL_TO_GENERATION_P_MAX",
-  "dcUseTransformerRatio" : true,
-  "countriesToBalance" : [ ],
-  "connectedComponentMode" : "MAIN"
+  "version": "1.8",
+  "dc": false,
+  "voltageInitMode": "UNIFORM_VALUES",
+  "distributedSlack": true,
+  "balanceType": "PROPORTIONAL_TO_GENERATION_P_MAX",
+  "countriesToBalance": ["FR", "BE"],
+  "readSlackBus": false,
+  "writeSlackBus": false,
+  "useReactiveLimits": true,
+  "phaseShifterRegulationOn": false,
+  "transformerVoltageControlOn": false,
+  "shuntCompensatorVoltageControlOn": false,
+  "connectedComponentMode": "MAIN",
+  "twtSplitShuntAdmittance": false,
+  "dcUseTransformerRatio": true,
+  "dcPowerFactor": 1.0
 }
 ```
 
 ### Available parameters
 
-**twtSplitShuntAdmittance**  
-The `twtSplitShuntAdmittance` property is an optional property that defines whether the shunt admittance is split at each side of the serie impedance for transformers. The default value is `false`.
+**dc**  
+The `dc` property is an optional property that defines if you want to run an AC power flow (`false`) or a DC power flow (`true`). The default value is `false`.
 
 **voltageInitMode**  
 The `voltageInitMode` property is an optional property that defines the policy used by the load flow to initialize the
 voltage values. The default value for this property is `UNIFORM_VALUES`. The available values are:
 - `UNIFORM_VALUES`: $$v = 1pu$$, $$\theta = 0$$
 - `PREVIOUS_VALUES`: use previous computed value from the network
-- `DC_VALUES`: preprocessing to compute DC angles
+- `DC_VALUES`: $$v = 1pu$$, $$\theta$$ initialized using a DC load flow
 
 **distributedSlack**  
 The `distributedSlack` property is an optional property that defines if the active power mismatch is distributed over the network or not. The default value is `true`.
@@ -109,7 +118,7 @@ This default value is `PROPORTIONAL_TO_GENERATION_P_MAX`.
 
 **countriesToBalance**  
 The `countriesToBalance` property is an optional property that defines the list of [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
-country which participating elements are used for slack distribution. If the slack is distributed but this parameter is not set, the slack distribution is performed over all countries involved in the network.  
+country which participating elements are used for slack distribution. If the slack is distributed but this parameter is not set, the slack distribution is performed over all countries present in the network.  
 
 **readSlackBus**  
 The `readSlackBus` is an optional property that defines if the slack bus has to be selected in the network through the [slack terminal extension](../../grid/model/extensions.md#slack-terminal).
@@ -119,34 +128,34 @@ The default value is `false`.
 The `writeSlackBus` is an optional property that says if the slack bus has to be written in the network using the [slack terminal extension](../../grid/model/extensions.md#slack-terminal) after a load flow computation.
 The default value is `false`.
 
-**noGeneratorReactiveLimits**  
-The `noGeneratorReactiveLimits` property is an optional property that defines whether the load flow is allowed to find a setpoint value outside the reactive limits of a generator or not.
-The default value is `false`.
+**useReactiveLimits**  
+The `useReactiveLimits` property is an optional property that defines whether the load flow should take into account equipment's reactive limits. Applies to generators, batteries, SVCs, dangling lines, and HVDC VSCs.
+The default value is `true`.
 
 **phaseShifterRegulationOn**  
-The `phaseShifterRegulationOn` property is an optional property that defines whether the load flow is allowed to change taps of a phase tap changer or not.
+The `phaseShifterRegulationOn` property is an optional property that defines whether phase shifter regulation should be enabled in the load flow.
 The default value is `false`.
 
 **transformerVoltageControlOn**  
-The `transformerVoltageControlOn` property is an optional property that defines whether the load flow is allowed to change taps of a ratio tap changer or not.
+The `transformerVoltageControlOn` property is an optional property that defines whether transformer voltage regulation should be enabled in the load flow.
 The default value is `false`.
 
-**simulShunt**  
-The `simulShunt` property is an optional property that defines whether the load flow is allowed to change sections of a shunt compensator with multiple sections or not.
+**shuntCompensatorVoltageControlOn**  
+The `shuntCompensatorVoltageControlOn` property is an optional property that defines whether shunt compensator voltage regulation should be enabled in the load flow.
 The default value is `false`.
 
-**dc**  
-The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is `false`.
+**connectedComponentMode**  
+The `connectedComponentMode` property is an optional property that defines if the power flow has to be computed over all connected component (choose `ALL` mode) or just on the main connected component (choose `MAIN` mode). The default value of this parameter is `MAIN`.  
+
+**twtSplitShuntAdmittance**  
+The `twtSplitShuntAdmittance` property is an optional property that defines whether the shunt admittance is split at each side of the serie impedance for transformers. The default value is `false`.
 
 **dcUseTransformerRatio**  
 The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the
 flow equations in a DC power flow. The default value of this parameter is `true`.
 
-**connectedComponentMode**  
-The `connectedComponentMode` property is an optional property that defines if the power flow has to be computed over all connected component (choose `ALL` mode) or just on the main connected component (choose `MAIN` mode). The default value of this parameter is `MAIN`.  
-
-### Default parameters
-The default values of all the optional properties are read from the [load-flow-default-parameter](../../user/configuration/load-flow-default-parameters.md) module, defined in the configuration file.
+**dcPowerFactor**  
+The `dcPowerFactor` property is an optional property that defines the power factor used for DC calculations. The default value is `1.0`.
 
 ### Specific parameters
 Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
