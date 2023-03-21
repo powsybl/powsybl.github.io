@@ -234,6 +234,8 @@ The `plausibleActivePowerLimit` property is an optional property that defines a 
 The default value is $$5000 MW$$.
 
 **slackBusPMaxMismatch**  
+When slack distribution is enabled (`distributedSlack` set to `true` in LoadFlowParameters), this is the threshold below which slack power
+is considered to be distributed.
 The default value is $$1 MW$$.
 
 **voltagePerReactivePowerControl**  
@@ -243,67 +245,103 @@ The default value is `false`.
 The default value is `false`.
 
 **maxNewtonRaphsonIterations**  
+Maximum number of iterations for Newton-Raphson inner loop.  
 The default value is `15`.
 
 **maxOuterLoopIterations**  
+Maximum number of iterations for Newton-Raphson outer loop.  
 The default value is `20`.
 
 **newtonRaphsonStoppingCriteriaType**  
-- UNIFORM_CRITERIA:
-- PER_EQUATION_TYPE_CRITERIA:
+Stopping criteria for Newton-Raphson algorithm.
+- `UNIFORM_CRITERIA`: stop when all equation mismatches are below `newtonRaphsonConvEpsPerEq` threshold.
+- `PER_EQUATION_TYPE_CRITERIA`: stop when equation mismatches are below equation type specific thresholds:
+  - `maxActivePowerMismatch`
+  - `maxReactivePowerMismatch`
+  - `maxVoltageMismatch`
+  - `maxAngleMismatch`
+  - `maxRatioMismatch`
+  - `maxSusceptanceMismatch`
 
+See further below for specific thresholds documentation.  
 The default value is `UNIFORM_CRITERIA`.
 
 **newtonRaphsonConvEpsPerEq**  
+Used when newtonRaphsonStoppingCriteriaType is `UNIFORM_CRITERIA`.  
+Defines the threshold for all equation types, in per-unit 100MVA base.  
 The default value is $$10^{-4}$$.
 
 **maxActivePowerMismatch**  
-The default value is $$10^{-2}$$.
+Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
+Defines the threshold for active power equations, in MW.  
+The default value is $$10^{-2} MW$$.
 
 **maxReactivePowerMismatch**  
-The default value is $$10^{-2}$$.
+Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
+Defines the threshold for reactive power equations, in MVAr.  
+The default value is $$10^{-2} MVAr$$.
 
 **maxVoltageMismatch**  
+Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
+Defines the threshold for voltage equations, in per-unit.  
 The default value is $$10^{-4}$$.
 
 **maxAngleMismatch**  
+Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
+Defines the threshold for angle equations, in per-unit.  
 The default value is $$10^{-5}$$.
 
 **maxRatioMismatch**  
+Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
+Defines the threshold for ratio equations, in per-unit.  
 The default value is $$10^{-5}$$.
 
 **maxSusceptanceMismatch**  
+Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
+Defines the threshold for susceptance equations, in per-unit.  
 The default value is $$10^{-4}$$.
 
 **transformerVoltageControlMode**  
-- WITH_GENERATOR_VOLTAGE_CONTROL:
-- AFTER_GENERATOR_VOLTAGE_CONTROL:
-- INCREMENTAL_VOLTAGE_CONTROL:
+- `WITH_GENERATOR_VOLTAGE_CONTROL`:
+- `AFTER_GENERATOR_VOLTAGE_CONTROL`:
+- `INCREMENTAL_VOLTAGE_CONTROL`:
 
 The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 
 **shuntVoltageControlMode**  
-- WITH_GENERATOR_VOLTAGE_CONTROL:
-- INCREMENTAL_VOLTAGE_CONTROL:
+- `WITH_GENERATOR_VOLTAGE_CONTROL`:
+- `INCREMENTAL_VOLTAGE_CONTROL`:
 
 The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 
 **minPlausibleTargetVoltage**  
+Equipments with voltage regulation target voltage below this per-unit threshold
+are considered suspect and are discarded from regulation prior to load flow resolution.  
 The default value is `0.8`.
 
 **maxPlausibleTargetVoltage**  
+Equipments with voltage regulation target voltage above this per-unit threshold
+are considered suspect and are discarded from regulation prior to load flow resolution.  
 The default value is `1.2`.
 
 **minRealisticVoltage**  
+This parameter is used to identify if Newton-Raphson has converged to an unrealistic state.
+For any component where a bus voltage is solved below this per-unit threshold, the component solution is deemed unrealistic
+and its solution status is flagged as failed.
 The default value is `0.5`.
 
 **maxRealisticVoltage**  
+This parameter is used to identify if Newton-Raphson has converged to an unrealistic state.
+For any component where a bus voltage is solved above this per-unit threshold, the component solution is deemed unrealistic
+and its solution status is flagged as failed.
 The default value is `1.5`.
 
 **reactiveRangeCheckMode**  
-- MIN_MAX:
-- MAX: default
-- TARGET_P:
+- `MIN_MAX`:
+- `MAX`:
+- `TARGET_P`:
+
+The default value is `MAX`.
 
 The default value is `MAX`.
 
@@ -314,17 +352,17 @@ The default value is `false`.
 The default value is `true`.
 
 **stateVectorScalingMode**  
-- NONE:
-- LINE_SEARCH:
-- MAX_VOLTAGE_CHANGE:
+This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
+- `NONE`: no scaling is made
+- `LINE_SEARCH`: applies a line search
+- `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to maximum 0.1p.u. and 10degrees
 
 The default value is `NONE`.
 
 **maxSlackBusCount**  
+Number of slack buses to be selected. Setting a value above 1 can help convergence on very large networks with large initial imbalances, 
+where it might be difficult to find a single slack with sufficient branches connected and able to absorb or evacuate the slack power.  
 The default value is `1`.
-
-**debugDir**  
-The default value is `null`.
 
 **incrementalTransformerVoltageControlOuterLoopMaxTapShift**  
 The default value is `3`.
@@ -333,16 +371,22 @@ The default value is `3`.
 The default value is `false`.
 
 **reactiveLimitsMaxPqPvSwitch**  
+When `useReactiveLimits` is set to `true`, this parameters is used to limit the number of times an equipment performing voltage regulation
+is switching from and to PV or PQ type. After this number of PQ/PV type switch, the equipment will not change PV/PQ type anymore.  
 The default value is `3`.
 
 **phaseShifterControlMode**  
-- CONTINUOUS_WITH_DISCRETISATION:
-- INCREMENTAL:
+- `CONTINUOUS_WITH_DISCRETISATION`:
+- `INCREMENTAL`:
 
 The default value is `CONTINUOUS_WITH_DISCRETISATION`.
 
 **alwaysUpdateNetwork**  
+Update the iIDM network state even in case of non-convergence.  
 The default value is `false`.
+
+**debugDir**  
+The default value is `null`.
 
 ### Configuration file example
 See below an extract of a config file that could help:
