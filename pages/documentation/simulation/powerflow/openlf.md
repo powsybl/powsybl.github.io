@@ -156,9 +156,12 @@ load-flow:
 ### Specific parameters
 
 **voltageInitModeOverride**  
-- `NONE`:
-- `VOLTAGE_MAGNITUDE`:
-- `FULL_VOLTAGE`:
+Additional voltage init modes of PowSyBl OpenLoadFlow that are not present in `LoadFlowParameters` `voltageInitMode` parameter:
+- `NONE`: no override
+- `VOLTAGE_MAGNITUDE`: specific initializer to initialize voltages maginitudes $$v$$, leaving $$\theta=0$$. Proven useful for
+unusual input data with transformers rated voltages very far away from bus nominal voltages.
+- `FULL_VOLTAGE`: voltages maginitudes $$v$$ initialized using `VOLTAGE_MAGNITUDE` initializer, $$\theta$$ initialized using a DC load flow.
+
 The default value is `NONE`.
 
 **lowImpedanceBranchMode**  
@@ -239,9 +242,11 @@ is considered to be distributed.
 The default value is $$1 MW$$.
 
 **voltagePerReactivePowerControl**  
+Whether simulation of SVCs slope should be enabled (See `voltage per reactive power control` extension).  
 The default value is `false`.
 
 **reactivePowerRemoteControl**  
+Whether simulation of generators reactive power remote control should be enabled (See `remote reactive power control` extension).  
 The default value is `false`.
 
 **maxNewtonRaphsonIterations**  
@@ -343,18 +348,17 @@ The default value is `1.5`.
 
 The default value is `MAX`.
 
-The default value is `MAX`.
-
 **networkCacheEnabled**  
 The default value is `false`.
 
 **svcVoltageMonitoring**  
+Whether simulation of SVCs voltage monitoring should be enabled.  
 The default value is `true`.
 
 **stateVectorScalingMode**  
 This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
 - `NONE`: no scaling is made
-- `LINE_SEARCH`: applies a line search
+- `LINE_SEARCH`: applies a line search strategy
 - `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to maximum 0.1p.u. and 10degrees
 
 The default value is `NONE`.
@@ -386,7 +390,8 @@ Update the iIDM network state even in case of non-convergence.
 The default value is `false`.
 
 **debugDir**  
-The default value is `null`.
+Allows to dump debug files to a specific directory.  
+The default value is undefined (`null`), disabling any debug files writing.
 
 ### Configuration file example
 See below an extract of a config file that could help:
