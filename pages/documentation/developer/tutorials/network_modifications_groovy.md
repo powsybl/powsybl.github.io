@@ -1,10 +1,12 @@
-# Tutorial on how to use network modifications methods in Groovy
+# Tutorial on how to use network modification methods in Groovy
+
+This documentation refers to the tutorial 'groovy-modifications' available [here](https://github.com/powsybl/powsybl-tutorials/tree/main/groovy-modifications).
 
 In this tutorial, you will find three scripts explaining how to add a load and a line with the associated topology to a network and how to remove a load.
 
 The network element is added to the network and the switches are also created to connect the element
 to a given busbar section with a closed disconnector and a breaker. Open switches are also added to every parallel busbar sections.
-When removing an element, the element itself is removed as well as all the breakers and disconnectors.
+When removing an element, the element itself is removed as well as the associated breakers and disconnectors.
 
 Other similar functions are available to add every kind of injections and branches.
 
@@ -18,8 +20,8 @@ Before adding the load, the voltage level S1VL2 is:
 
 ![S1VL2](img/network_modifications_groovy/nb_network_s1vl2.png)
 
-The script is adding the load between the transformer TWT (order position 10) and the VSC converter station VSC1 (order position 20). For that, the order position is put to 15 when creating the modification.
-It is also possible to specify the direction of the load. Here it is not, so by default it is directed to the bottom.
+The script adds the load between the transformer TWT (order position 10) and the VSC converter station VSC1 (order position 20). For that, the order position is set to 15 when adding the load.
+It is also possible to specify the direction of the load. By default, it is directed to the bottom.
 
 The voltage level S1VL2 will look like that after applying the modification:
 
@@ -29,13 +31,13 @@ It is possible to create a builder with any kind of injection adder and thus cre
 
 Here are the options that must/can be filled:
 
-| Parameter              | Default value       | Description                                                                                                                                                                       |
-|------------------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| InjectionAdder         | /                   | The adder corresponding to the injection to be added. <br/>Should be created beforehand and contain all the required information.                                                 |
-| BusOrBusbarSectionId   | /                   | The ID of the busbar (node/breaker network) or of the bus (bus/breaker network) on which the injection should be connected.                                                       |
-| InjectionPositionOrder | /                   | Required in Node/Breaker. The order position of the injection to create the corresponding extension. <br/> The injection will be positioned accordingly on the busbar section.    |
-| InjectionFeederName    | Id of the injection | Only in Node/Breaker. An optional name to be put in the ConnectablePosition extension and that will be displayed on the diagrams.                                                 |
-| InjectionDirection     | BOTTOM              | Only in Node/Breaker. An optional direction to be put in the ConnectablePosition extension and that will correspond to the direction of the injection in the Single line diagram. |
+| Parameter              | Mandatory | Default value       | Description                                                                                                                                                                       |
+|------------------------|-----------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| InjectionAdder         | yes       | /                   | The adder corresponding to the injection to be added. <br/>Should be created beforehand and contain all the required information.                                                 |
+| BusOrBusbarSectionId   | yes       | /                   | The ID of the busbar (node/breaker network) or of the bus (bus/breaker network) on which the injection should be connected.                                                       |
+| InjectionPositionOrder | yes       | /                   | Required in Node/Breaker. The order position of the injection to create the corresponding extension. <br/> The injection will be positioned accordingly on the busbar section.    |
+| InjectionFeederName    | no        | Id of the injection | Only in Node/Breaker. An optional name to be put in the ConnectablePosition extension and that will be displayed on the diagrams.                                                 |
+| InjectionDirection     | no        | BOTTOM              | Only in Node/Breaker. An optional direction to be put in the ConnectablePosition extension and that will correspond to the direction of the injection in the single-line-diagram. |
 
 
 # CreateLineBay.groovy
@@ -61,17 +63,17 @@ The same method can be used to create a two-windings transformer on a network.
 
 Here are the options that must/can be filled:
 
-| Parameter             | Default value    | Description                                                                                                                                                                                                               |
-|-----------------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| BranchAdder           | /                | The adder corresponding to the branch to be added. <br/>Should be created beforehand and contain all the required information.                                                                                            |
-| BusOrBusbarSectionId1 | /                | The ID of the busbar (node/breaker network) or of the bus (bus/breaker network) on which the branch should be connected on side 1.                                                                                        |
-| BusOrBusbarSectionId2 | /                | The ID of the busbar (node/breaker network) or of the bus (bus/breaker network) on which the branch should be connected on side 1.                                                                                        |
-| PositionOrder1        | /                | Required in Node/Breaker. The order position of the branch on side 1 to create the corresponding extension. <br/> The branch will be positioned accordingly on the busbar section 1.                                      |
-| PositionOrder2        | /                | Required in Node/Breaker. The order position of the branch on side 2 to create the corresponding extension. <br/> The branch will be positioned accordingly on the busbar section 2.                                      |
-| FeederName1           | Id of the branch | Only in Node/Breaker. An optional name to be put in the ConnectablePosition extension for the side 1 and that will be displayed on the diagrams.                                                                          |
-| FeederName2           | Id of the branch | Only in Node/Breaker. An optional name to be put in the ConnectablePosition extension for the side 1 and that will be displayed on the diagrams.                                                                          |
-| Direction1            | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the Single line diagram. |
-| Direction2            | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the Single line diagram. |
+| Parameter             | Mandatory | Default value    | Description                                                                                                                                                                                                               |
+|-----------------------|-----------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| BranchAdder           | yes       | /                | The adder corresponding to the branch to be added. <br/>Should be created beforehand and contain all the required information.                                                                                            |
+| BusOrBusbarSectionId1 | yes       | /                | The ID of the busbar (node/breaker network) or of the bus (bus/breaker network) on which the branch should be connected on side 1.                                                                                        |
+| BusOrBusbarSectionId2 | yes       | /                | The ID of the busbar (node/breaker network) or of the bus (bus/breaker network) on which the branch should be connected on side 1.                                                                                        |
+| PositionOrder1        | yes       | /                | Required in Node/Breaker. The order position of the branch on side 1 to create the corresponding extension. <br/> The branch will be positioned accordingly on the busbar section 1.                                      |
+| PositionOrder2        | yes       | /                | Required in Node/Breaker. The order position of the branch on side 2 to create the corresponding extension. <br/> The branch will be positioned accordingly on the busbar section 2.                                      |
+| FeederName1           | no        | Id of the branch | Only in Node/Breaker. An optional name to be put in the ConnectablePosition extension for the side 1 and that will be displayed on the diagrams.                                                                          |
+| FeederName2           | no        | Id of the branch | Only in Node/Breaker. An optional name to be put in the ConnectablePosition extension for the side 1 and that will be displayed on the diagrams.                                                                          |
+| Direction1            | no        | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the single-line-diagram. |
+| Direction2            | no        | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the single-line-diagram. |
 
 # RemoveLoaBay.groovy
 
@@ -86,9 +88,9 @@ After the modification:
 
 ![](img/network_modifications_groovy/nb_network_without_ld2.png)
 
-In this method, the only parameter to give is the id of the connectable that we want to remove. It works for injection as well as branches. In this case, the branch and its topology is removed on both sides.
+In this method, the only parameter to give is the id of the connectable that we want to remove. It works for injections as well as branches. In this case, the branch and its topology are removed on both sides.
 
-The parameters that must be fill is:
+The parameter that must be fill is:
 
 | Parameter     | Default value    | Description                                                           |
 |---------------|------------------|-----------------------------------------------------------------------|
