@@ -90,69 +90,6 @@ layout: default
     </div>
 </div>
 
-<h1 id="developer-documentation">Developer documentation</h1>
-<p>This section is dedicated to the developer documentation. You'll find a description of all the repositories and artifacts
-    of the project, but also documentation about the framework itself and the way it has been designed, and a set of tutorials aimed
-    at helping developers get into the code.
-</p>
-<div class="row">
-    <!-- Repositories -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="media-body">
-                <h5>
-                    <a class="documentation_title" href="developer/repositories">
-                        <em class="doc-icon align-self-start bx bxs-book-bookmark"></em>Repositories
-                    </a>
-                </h5>
-                <div class="documentation_descr">This page lists the available repositories and their purpose.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Artifacts -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="media-body">
-                <h5>
-                    <a class="documentation_title" href="developer/artifacts.html">
-                        <em class="doc-icon align-self-start fa fa-cubes"></em>Artifacts
-                    </a>
-                </h5>
-                <div class="documentation_descr">This page lists the available artifacts and their use.</div>
-            </div>
-        </div>
-    </div>
-
-    <!--Patterns -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="media-body">
-                <h5>
-                    <a class="documentation_title" href="developer/patterns">
-                        <em class="doc-icon align-self-start bx bxs-shapes"></em>Patterns
-                    </a>
-                </h5>
-                <div class="documentation_descr">Describes some of the programming patterns used in PowSyBl.</div>
-            </div>
-        </div>
-    </div>
-
-    <!--API guide -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="media-body">
-                <h5>
-                    <a class="documentation_title" href="developer/api_guide">
-                        <em class="doc-icon align-self-start bx bxs-compass"></em>API guide
-                    </a>
-                </h5>
-                <div class="documentation_descr">Describes the PowSyBl Java API for the various PowSyBl features.</div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <h1 id="grid-model">Grid model</h1>
 <p> This section provides information about the way the network is modelled at the core of PowSyBl, i.e. in the IIDM internal format, and also
     how to manage network merging or extraction.
@@ -413,35 +350,50 @@ layout: default
     </div>
 </div>
 
-<h1 id="hpc">High Performance Computing</h1>
-<p>Grid simulation comes with a computational cost, and in this section we describe how to take advantage of the High Performance Computing capabilities of PowSyBl to reduce
-    computational times to a minimum.
+<h1 id="developer-documentation">Developer documentation</h1>
+<p>This section is dedicated to the developer documentation. You'll find a description of all the repositories and artifacts
+    of the project, but also documentation about the framework itself and the way it has been designed, and a set of tutorials aimed
+    at helping developers get into the code.
 </p>
 <div class="row">
-    <!-- Slurm -->
+    <!-- Repositories -->
     <div class="col-lg-4 col-sm-6 my-2">
         <div class="media documentation_item">
             <div class="media-body">
                 <h5>
-                    <a class="documentation_title" href="">
-                        <img class="doc-icon align-self-start" src="/assets/img/logos/slurm.svg" alt="">Slurm
+                    <a class="documentation_title" href="developer/repositories">
+                        <em class="doc-icon align-self-start bx bxs-book-bookmark"></em>Repositories
                     </a>
                 </h5>
-                <div class="documentation_descr">Use PowSyBl with the SLURM job scheduler</div>
+                <div class="documentation_descr">This page lists the available repositories and their purpose.</div>
             </div>
         </div>
     </div>
 
-    <!-- MPI -->
+    <!-- Artifacts -->
     <div class="col-lg-4 col-sm-6 my-2">
         <div class="media documentation_item">
             <div class="media-body">
                 <h5>
-                    <a class="documentation_title" href="">
-                        <img class="doc-icon" src="/assets/img/logos/openmpi.png" alt="">MPI
+                    <a class="documentation_title" href="developer/artifacts.html">
+                        <em class="doc-icon align-self-start fa fa-cubes"></em>Artifacts
                     </a>
                 </h5>
-                <div class="documentation_descr">Use MPI parallelism for PowSyBl-powered simulations</div>
+                <div class="documentation_descr">This page lists the available artifacts and their use.</div>
+            </div>
+        </div>
+    </div>
+
+    <!--API guide -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="developer/api_guide">
+                        <em class="doc-icon align-self-start bx bxs-compass"></em>API guide
+                    </a>
+                </h5>
+                <div class="documentation_descr">Describes the PowSyBl Java API for the various PowSyBl features.</div>
             </div>
         </div>
     </div>
@@ -477,27 +429,6 @@ layout: default
                     </a>
                 </h5>
                 <div class="documentation_descr">Get to know the comprehensive and flexible time series modeling of PowSyBl.</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<h1 id="microservices">Microservices</h1>
-<p>
-    Since PowSyBl is meant to make it easy to build state-of-the-art applications for grid modeling, it also comes
-    with a set of microservices. The aim is to make it easier to build web-based applications. Check them out below.
-</p>
-<div class="row">
-    <!-- Repositories -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="media-body">
-                <h5>
-                    <a class="documentation_title" href="microservices">
-                        <em class="doc-icon align-self-start bx bx-sitemap"></em>Architecture
-                    </a>
-                </h5>
-                <div class="documentation_descr">Get to know how the PowSyBl microservices are meant to be assembled.</div>
             </div>
         </div>
     </div>
