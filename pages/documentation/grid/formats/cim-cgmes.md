@@ -25,18 +25,31 @@ CGMES model connectivity can be defined at two different levels of detail:
 
 ## Format specification
 
-Current supported version of CGMES is 2.4.15. To learn more about the standard, read the documents in the [Common Grid Model Exchange Standard (CGMES) Library](https://www.entsoe.eu/digital/cim/cim-for-grid-models-exchange/).
+Current supported versions of CGMES are 2.4.15 and 3.0. To learn more about the standard, read the documents in the [Common Grid Model Exchange Standard (CGMES) Library](https://www.entsoe.eu/digital/cim/cim-for-grid-models-exchange/).
+
+## Triple store
+A triplestore or RDF store is a purpose-built database for the storage and retrieval of triples through semantic queries. A triple is a data
+entity composed of subject-predicate-object such as "Generator is in France", or in RDF/XML:
+```xml
+<rdf:description rdf:about="generator">
+  <generator:in>France</generator:in>
+</rdf:description>
+```
+
+Input CGMES data read from CIM/XML files is stored natively in a purpose specific database for RDF statements (a Triplestore). There are multiple open-source implementations of Triplestore engines that could be easily plugged in PowSyBl.
+The only supported Triplestore engine used by PowSyBl is [RDF4J](https://rdf4j.org/).
+Loading from RDF/XML files to the Triplestore is highly optimized by these engines. Furthermore, the Triplestore repository can be configured to use an in-memory store, allowing faster access to data.
+
+### In-memory Rdf4j
+<span style="color: red">TODO</span>
 
 ## Import
 
-The import module reads and converts a CGMES model to the PowSyBl grid model. The import process is performed in two steps:
-- Read input files.
-- Convert CGMES data to PowSyBl grid model.
+The CGMES importer reads and converts a CGMES model to the PowSyBl grid model. The import process is performed in two steps:
+- Read input files into a triplestore
+- Convert CGMES data retrieved by SPARQL requests from the created triplestore to PowSyBl grid model
 
 The data in input CIM/XML files uses RDF (Resource Description Framework) syntax. In RDF, data is described making statements about resources using triplet expressions: (subject, predicate, object).
-
-Input CGMES data read from CIM/XML files is stored natively in a purpose specific database for RDF statements (a Triplestore). There are multiple open-source implementations of Triplestore engines that could be easily plugged in PowSyBl. The default Triplestore engine used by PowSyBl CGMES Importer is [RDF4J](https://rdf4j.org/). Loading from RDF/XML files to the Triplestore is highly optimized by these engines. Furthermore, the Triplestore repository can be configured to use an in-memory store, allowing faster access to data.
-
 To describe the conversion from CGMES to PowSyBl we first introduce some generic considerations about the level of detail of the model (node/breaker or bus/branch), the identity of the equipments and equipment containment in substations and voltage levels. After that, the conversion for every CGMES relevant class is explained. Consistency checks and validations performed during the conversion are mentioned in the corresponding sections.
 
 ### Levels of detail: node/breaker and bus/branch
@@ -163,6 +176,36 @@ The PowSyBl generator attributes:
 - `VoltageRegulatorOn` It is assigned to `true` if both properties, `regulationCapability` and `regulationStatus` are `true` and the terminal is connected.
 - `EnergySource` is set to `OTHER`.
 
+#### ACLineSegment
+<span style="color: red">TODO</span>
+
+#### EquivalentBranch
+<span style="color: red">TODO</span>
+
+#### AsychronousMachine / SynchronousMachine
+<span style="color: red">TODO</span>
+
+#### EquivalentShunt
+<span style="color: red">TODO</span>
+
+#### ExternalNetworkInjection
+<span style="color: red">TODO</span>
+
+#### OperationalLimit
+<span style="color: red">TODO</span>
+
+#### SeriesCompensator
+<span style="color: red">TODO</span>
+
+#### Shunt
+<span style="color: red">TODO</span>
+
+#### StaticVarCompensator
+<span style="color: red">TODO</span>
+
+#### Switch
+<span style="color: red">TODO</span>
+
 ### Extensions
 <span style="color: red">TODO</span>
 
@@ -183,14 +226,46 @@ that defines if the CGMES importer inverts the sign of reactive power flows for 
 **iidm.import.cgmes.convert-boundary**  
 The `iidm.import.cgmes.convert-boundary` property is an optional property that defines if the CGMES importer imports equipments that are located inside the boundaries or not. Its default value is `false`.
 
+**iidm.import.cgmes.convert-sv-injections**
+The `iidm.import.cgmes.convert-sv-injections` property is an optional property that defines if SV injections are imported as loads. Its default value is `true`.
+
+**iidm.import.cgmes.create-active-power-control-extension**
+The `iidm.import.cgmes.create-active-power-control-extension` property is an optional property that defines if active power extensions are created for CGMES `normalPF` attribute.
+Its default value is `false`.
+
 **iidm.import.cgmes.create-busbar-section-for-every-connectivity-node**  
 The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates an [IIDM Busbar Section](../model/index.md#busbar-section) for each CGMES connectivity node. Its default value is `false`.
+
+**iidm.import.cgmes.create-fictitious-switches-for-disconnected-terminals-mode**
+The `iidm.import.cgmes.create-fictitious-switches-for-disconnected-terminals-mode` property is an optional property that defines if fictitious switches are created when terminals are described as disconnected in CGMES node-breaker networks.
+Three modes are available:
+- `ALWAYS`: fictitious switches are created at every disconnected terminal
+- `ALWAYS_EXCEPT_SWITCHES`: fictitious switches are created at every disconnected terminal that is not a switch terminal
+- `NEVER`: no fictitious switch is created at disconnected terminals
+Its default value is `ALWAYS`.
+
+**iidm.import.cgmes.decode-escaped-identifiers**
+The `iidm.import.cgmes.decode-escaped-identifiers` property is an optional property that defines if identifiers with characters escaped during the triplestore creation are decoded.
+Its default value is `true`.
 
 **iidm.import.cgmes.ensure-id-alias-unicity**  
 The `iidm.import.cgmes.ensure-id-alias-unicity` property is an optional property that defines if IDs' and aliases' unicity is ensured during CGMES import. If it is set to `true`, identical CGMES IDs will be modified to be unique. If it is set to `false`, identical CGMES IDs will throw an exception. Its default value is `false`.
 
+**iidm.import.cgmes.id-mapping-file-path**
+The `iidm.import.cgmes.id-mapping-file-path` property is an optional property that defines the path of the CSV file containing a mapping between IIDM identifiers and CGMES identifiers. By default, its value is `null`:
+ID-mapping CSV file is read only if it is in the imported compressed file.
+
 **iidm.import.cgmes.import-control-areas**  
 The `iidm.import.cgmes.import-control-areas` property is an optional property that defines if control areas must be imported or not. Its default value is `true`.
+
+**iidm.import.cgmes.naming-strategy**
+THe `iidm.import.cgmes.naming-strategy` property is an optional property that defines which kind of mapping is made between
+CGMES identifiers and IIDM identifiers.
+It can be:
+- `identity`: CGMES IDs are the same as IIDM IDs
+- `cgmes`: if CGMES IDs have associated IIDM IDs in a mapping file, IIDM ID is applied (CGMES ID is an alias). if CGMES IDs do not have associated IIDM IDs in a mapping file but are not compliant with CGMES requirements and correspond to an IIDM `Identifiable`, a new CGMES ID is created as an alias.
+- `cgmes-fix-all-invalid-ids`: if CGMES IDs have associated IIDM IDs in a mapping file, IIDM ID is applied (CGMES ID is an alias). if CGMES IDs do not have associated IIDM IDs in a mapping file but are not compliant with CGMES requirements, a new CGMES ID is created as an alias.
+  Its default value is `identity`.
 
 **iidm.import.cgmes.post-processors**  
 The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which will be activated after import.
@@ -203,34 +278,14 @@ The `iidm.import.cgmes.powsybl-triplestore` property is an optional property tha
 **iidm.import.cgmes.profile-for-initial-values-shunt-sections-tap-positions**
 The `iidm.import.cgmes.profile-for-initial-values-shunt-sections-tap-positions` property is an optional property that defines which CGMES profile is used to initialize tap positions and section counts. It can be `SSH` or `SV`. Its default value is `SSH`.
 
+**iidm.import.cgmes.source-for-iidm-id**
+The `iidm.import.cgmes.source-for-iidm-id` property is an optional property that defines if IIDM IDs must be the CGMES mRID or the CGMES rdfID. Its default value is `mRID`.
+
 **iidm.import.cgmes.store-cgmes-model-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an optional property that defines if the CGMES model is stored in the imported IIDM network as an [extension](../model/extensions.md#cgmes-model). Its default value is `true`.
 
 **iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension` property is an optional property that defines if the CGMES conversion context will be stored as an extension of the IIDM output network. Its default value is `false`.
-
-#### Deprecated properties
-
-**changeSignForShuntReactivePowerFlowInitialState**  
-The `changeSignForShuntReactivePowerFlowInitialState` property is deprecated since v2.4.0. Use `iidm.import.cgmes.change-sign-for-shunt-reactive-power-flow-initial-state` instead.
-
-**convertBoundary**  
-The `convertBoundary` property is deprecated since v2.4.0. Use `iidm.import.cgmes.convert-boundary` instead.
-
-**createBusbarSectionForEveryConnectivityNode**  
-The `createBusbarSectionForEveryConnectivityNode` property is deprecated since v2.4.0. Use `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` instead.
-
-**iidm.import.cgmes.profile-used-for-initial-state-values**  
-The `iidm.import.cgmes.profile-used-for-initial-state-values` property is deprecated since v4.7.0. Use `iidm.import.cgmes.profile-for-initial-values-shunt-sections-tap-positions` instead.
-
-**powsyblTripleStore**  
-The `powsyblTripleStore` property is deprecated since v2.4.0. Use `iidm.import.cgmes.powsybl-triplestore` instead.
-
-**storeCgmesModelAsNetworkExtension**  
-The `storeCgmesModelAsNetworkExtension` property is deprecated since v2.4.0. Use `iidm.import.cgmes.store-cgmes-model-as-network-extension` instead.
-
-## Export
-<span style="color: red">TODO</span>
 
 ## CGMES post-processors
 
@@ -238,8 +293,23 @@ The `storeCgmesModelAsNetworkExtension` property is deprecated since v2.4.0. Use
 This post-processor loads the diagram layout (DL) profile contained in the CGMES file, if available, into the triplestore.
 The diagram layout profile contains the data which is necessary to represent a drawing of the diagram corresponding to the CGMES file.
 For instance, it contains the position of all equipments.
- 
+
 This post-processor is enabled by adding the name `cgmesDLImport` to the list associated to `iidm.import.cgmes.post-processors` property.
+
+### CgmesMeasurementsPostProcessor
+<span style="color: red">TODO</span>
+
+### CgmesShortCircuitPostProcessor
+<span style="color: red">TODO</span>
+
+### EntsoeCategoryPostProcessor
+<span style="color: red">TODO</span>
+
+### PhaseAngleClock
+<span style="color: red">TODO</span>
+
+## Export
+<span style="color: red">TODO</span>
 
 ### Options
 
@@ -255,6 +325,14 @@ The `iidm.export.cgmes.base-name` property is an optional property that defines 
 ```
 By default, the base name is the network's name if it exists, as a last resort, the network's ID.
 
+**iidm.export.cgmes.boundary-eq-id**
+The `iidm.export.cgmes.boundary-eq-id` property is an optional property that defines the ID of the EQ-BD model if there is any.
+Its default value is `null`: we consider there is no EQ-BD model to consider.
+
+**iidm.export.cgmes.boundary-tp-id**
+The `iidm.export.cgmes.boundary-tp-id` property is an optional property that defines the ID of the TP-BD model if there is any.
+Its default value is `null`: we consider there is no TP-BD model to consider.
+
 **iidm.export.cgmes.cim-version**
 The `iidm.export.cgmes.cim-version` property is an optional property that defines the CIM version number in which the user wants the CGMES files to be exported.
 CIM version 14 and 16 are supported i.e. its valid values are `14` or `16`.
@@ -268,17 +346,17 @@ Its default value is `true`.
 The `iidm.export.cgmes.export-power-flows-for-switches` property is an optional property that defines if power flows of switches are exported in the SV file.
 Its default value is `false`.
 
+**idm.export.cgmes.naming-strategy**
+The `iidm.export.cgmes.naming-strategy` property is an optional property that defines which naming strategy is used.
+It can be:
+- `identity`: CGMES IDs are the same as IIDM IDs
+- `cgmes`: IDs of IIDM `Identifiables` are exported as CGMES IDs if they are not compliant with CGMES requirements 
+- `cgmes-fix-all-invalid-ids`: all IDs are exported as CGMES IDs if they are not compliant with CGMES requirements
+Its default value is `identity`.
+
 **iidm.export.cgmes.profiles**
 The `iidm.export.cgmes.profiles` property is an optional property that defines the exported CGMES profiles.
 By default, it is a full CGMES export: EQ, TP, SSH and SV are exported.
-
-## Triple stores
-
-### Rdf4j
-<span style="color: red">TODO</span>
-
-### Jena
-<span style="color: red">TODO</span>
 
 ## Examples
 Have a look to the [CGMES sample files](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/TestConfigurations_packageCASv2.0.zip)
