@@ -23,7 +23,6 @@ Our release train consists in the release of:
 - [powsybl-diagram and its sub-modules](https://github.com/powsybl/powsybl-diagram)
 - [powsybl-dynawo and its sub-modules](https://github.com/powsybl/powsybl-dynawo)
 - [pypowsybl](https://github.com/powsybl/pypowsybl)
-- [powsybl-balances-adjustment](https://github.com/powsybl/powsybl-balances-adjustment)
 - [powsybl-entsoe and its sub-modules](https://github.com/powsybl/powsybl-entsoe)
 
 For each released repository:
