@@ -54,8 +54,8 @@ The default value is true.
 
 This property indicates the type of short circuit study. It can be:
 - `SUB_TRANSIENT`: it is the first stage of the short circuit, right when the fault happens. The subtransient reactance of generators will be used.
-- `TRANSIENT`: the second stage of the short circuit, before the system stabilize. The transient reactance of generators will be used.
-- `STEADY_STATE`: the last stage, once every transient effects are gone.
+- `TRANSIENT`: the second stage of the short circuit, before the system stabilizes. The transient reactance of generators will be used.
+- `STEADY_STATE`: the last stage, once all transient effects are gone.
 The default value is `TRANSIENT`. The transient and subtransient reactance of the generators are stored in the [short circuit generator extension.](../../grid/model/extensions.md#generator-short-circuit)
 
 **with-voltage-result**
@@ -64,7 +64,7 @@ This property indicates if the voltage map should be computed on every node of t
 
 **min-voltage-drop-proportional-threshold**
 
-This property indicates a threshold to filter the voltage results. Only the nodes where the voltage drop due to the short circuit is above this property should be kept. 
+This property indicates a threshold to filter the voltage results. Only the nodes where the voltage drop due to the short circuit is above this property are be kept. 
 The voltage drop is calculated as the ratio between the initial voltage magnitude on the node and the voltage magnitude after the fault. The default value is 0.
 
 ### FaultParameters
@@ -75,7 +75,7 @@ A list of `FaultParameters` can be given as an input to the API with specific pa
 
 ## Inputs
 
-The API takes as input:
+The API takes as inputs:
 
 **A network**
 
@@ -95,7 +95,7 @@ The attributes to fill of a `BusFault` are:
 | r          | double         | $$\Omega$$ | no       | 0                       | The fault resistance to ground                                                                          |
 | x          | double         | $$\Omega$$ | no       | 0                       | The fault reactance to ground                                                                           |
 | connection | ConnectionType | -          | no       | `ConnectionType.SERIES` | The way the resistance and reactance of the fault are connected to the ground: in series or in parallel |
-| faultType  | FaultType      | -          | no       | `FaultType.THREE_PHASE` | The type of fault simulated: can be three phased or single phased                                       |
+| faultType  | FaultType      | -          | no       | `FaultType.THREE_PHASE` | The type of fault simulated: can be three-phased or single-phased                                       |
 
 The attributes to fill of a `BranchFault` are:
 
@@ -106,7 +106,7 @@ The attributes to fill of a `BranchFault` are:
 | r                    | double         | $$\Omega$$ | no       | 0                     | The fault resistance to ground                                                                          |
 | x                    | double         | $$\Omega$$ | no       | 0                     | The fault reactance to ground                                                                           |
 | connection           | ConnectionType | -          | no       | ConnectionType.SERIES | The way the resistance and reactance of the fault are connected to the ground: in series or in parallel |
-| faultType            | FaultType      | -          | no       | FaultType.THREE_PHASE | The type of fault simulated: can be three phased or single phased                                       |
+| faultType            | FaultType      | -          | no       | FaultType.THREE_PHASE | The type of fault simulated: can be three-phased or single-phased                                       |
 | proportionalLocation | double         | %          | yes      | -                     | The position where the fault should be simulated, in percent of the line                                |
 
 **A list of FaultParameters**
@@ -118,8 +118,8 @@ For more information on parameters, see above.
 The results of the short circuit analysis are stored in `com.powsybl.shortcircuit.ShortCircuitAnalysisResult`. This class gathers the results for every fault, they are accessible either by the ID of the fault or the ID of the element on which the fault is simulated.
 For each fault, an object `com.powsybl.shortcircuit.FaultResult` is returned.
 
-Depending on the property `withFortescueResult`, the result returned should either be an instance of `com.powsybl.shortcircuit.MagnitudeFaultResult` or `com.powsybl.shortcircuit.FortescueFaultResult`.
-Both these class contain the following attributes:
+Depending on the property `withFortescueResult`, the returned result should either be an instance of `com.powsybl.shortcircuit.MagnitudeFaultResult` or `com.powsybl.shortcircuit.FortescueFaultResult`.
+Both classes contain the following attributes:
 
 | Attribute              | Type                        | Unit | Required | Default value | Description                                                                                          |
 |------------------------|-----------------------------|------|----------|---------------|------------------------------------------------------------------------------------------------------|
@@ -137,8 +137,8 @@ In `MagnitudeFaultResult`, the additional attributes are:
 
 | Attribute | Type   | Unit | Required | Default value | Description                                                      |
 |-----------|--------|------|----------|---------------|------------------------------------------------------------------|
-| current   | double | kA   | yes      | -             | The three phased magnitude of the computed short circuit current |
-| voltage   | double | kV   | yes      | -             | The three phased magnitude of the computed short circuit voltage |
+| current   | double | kA   | yes      | -             | The three-phased magnitude of the computed short circuit current |
+| voltage   | double | kV   | yes      | -             | The three-phased magnitude of the computed short circuit voltage |
 
 In `FortescueFaultResult`, they are:
 
@@ -193,9 +193,9 @@ The attributes of `MagnitudeShortCircuitBusResult` are:
 |-------------------------|--------|------|----------|---------------|--------------------------------------------------------|
 | voltageLevelId          | String | -    | yes      | -             | ID of the voltage level containing the bus             |
 | busId                   | String | -    | yes      | -             | ID of the bus                                          | 
-| initialVoltageMagnitude | double | kV   | yes      | -             | Magnitude of the three phased voltage before the fault |
+| initialVoltageMagnitude | double | kV   | yes      | -             | Magnitude of the three-phased voltage before the fault |
 | voltageDropProportional | double | %    | yes      | -             | Voltage drop after the fault                           |
-| voltage                 | double | kV   | yes      | -             | Magnitude of the three phased voltage after the fault  |
+| voltage                 | double | kV   | yes      | -             | Magnitude of the three-phased voltage after the fault  |
 
 The attributes of `FortescueShortCircuitBusResult` are:
 
@@ -203,6 +203,6 @@ The attributes of `FortescueShortCircuitBusResult` are:
 |-------------------------|------------------|------|----------|---------------|--------------------------------------------------------------------------|
 | voltageLevelId          | String           | -    | yes      | -             | ID of the voltage level containing the bus                               |
 | busId                   | String           | -    | yes      | -             | ID of the bus                                                            | 
-| initialVoltageMagnitude | double           | kV   | yes      | -             | Magnitude of the three phased voltage before the fault                   |
+| initialVoltageMagnitude | double           | kV   | yes      | -             | Magnitude of the three-phased voltage before the fault                   |
 | voltageDropProportional | double           | %    | yes      | -             | Voltage drop after the fault                                             |
 | voltage                 | `FortescueValue` | kV   | yes      | -             | Magnitudes and angles of the voltage on the three phases after the fault |
