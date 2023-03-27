@@ -13,6 +13,8 @@ In CGMES an electric power system model is described by data grouped in differen
 - `SV` State Variables. Contains all the information required to describe a steady-state power flow solution over the network.
 - `EQBD` Equipment Boundary. Contains definitions of the equipment in the boundary.
 - `TPBD` Topology Boundary. Topology information associated to the boundary.
+- `DL` Diagram Layout. Contains information about diagram positions.
+- `GL` Geographical Layout. Contains information about geographical positions.
 
 CGMES model connectivity can be defined at two different levels of detail:
 
@@ -85,17 +87,17 @@ The CGMES model does not guarantee these hierarchical constraints, so the first 
 
 ### Conversion from CGMES to PowSyBl grid model
 
-The following sections describe in detail how each supported CGMES network component is converted to PowSyBl network model objects.
+The following sections describe in detail how each supported CGMES network component is converted to PowSyBl network model objects and how they are created from IIDM objects.
 
 #### Substation
 
-For each substation (considering only the representative substation if they are connected by transformers) in the CGMES model a new substation is created in the PowSyBl grid model with the following attributes:
+For each substation (considering only the representative substation if they are connected by transformers) in the CGMES model a new substation is created in the PowSyBl grid model with the following attributes created as such:
 - `Country` It is obtained from the `regionName` property as first option, from `subRegionName` as second option. Otherwise, is assigned to `null`.
 - `GeographicalTags` It is obtained from the `SubRegion` property.
 
 #### VoltageLevel
 
-As in the substations, for each voltage level (considering only the representative voltage level if they are connected by switches) in the CGMES model a new voltage level is created in the PowSyBl grid model with the following attributes:
+As in the substations, for each voltage level (considering only the representative voltage level if they are connected by switches) in the CGMES model a new voltage level is created in the PowSyBl grid model with the following attributes created as such:
 - `NominalV` It is copied from the `nominalVoltage` property of the CGMES voltage level.
 - `TopologyKind` It will be `NODE_BREAKER` or `BUS_BREAKER` depending on the level of detail of the CGMES grid model.
 - `LowVoltageLimit` It is copied from the `lowVoltageLimit` property.
@@ -105,7 +107,7 @@ As in the substations, for each voltage level (considering only the representati
 
 If the CGMES model is a node/breaker model then `ConnectivityNode` objects are present in the CGMES input files, and for each of them a new `Node` is created in the corresponding PowSyBl voltage level. A `Node` in the PowSyBl model is an integer identifier that is unique by voltage level.
 
-If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional busbar section is also created in the same voltage level. This option is used to debug the conversion and facilitate the comparison of the topology present in the CGMES input files and the topology computed by PowSyBl. The attributes of the busbar section are:
+If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional busbar section is also created in the same voltage level. This option is used to debug the conversion and facilitate the comparison of the topology present in the CGMES input files and the topology computed by PowSyBl. The attributes of the busbar section are created as such:
 - Identity attributes `Id` and `Name` are copied from the `ConnectivityNode`.
 - `Node` The same `Node` assigned to the mapped `ConnectivityNode`.
 
@@ -120,13 +122,13 @@ If the CGMES model is defined at bus/branch detail, then CGMES `TopologicalNode`
 
 Busbar sections can be created in PowSyBl grid model only at node/breaker level.
 
-CGMES Busbar sections are mapped to PowSyBl busbar sections only if CGMES is node/breaker and the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is set to `false`. In this case, a `BusbarSection` is created in the PowSyBl grid model for each `BusbarSection` of the CGMES model, with the attributes:
+CGMES Busbar sections are mapped to PowSyBl busbar sections only if CGMES is node/breaker and the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is set to `false`. In this case, a `BusbarSection` is created in the PowSyBl grid model for each `BusbarSection` of the CGMES model, with the attributes created as such:
 - Identity attributes `Id` and `Name` are copied from the CGMES `BusbarSection`.
 - `Node` A new `Node` in the corresponding voltage level.
 
 #### EnergyConsumer
 
-Every `EnergyConsumer` object in the CGMES model creates a new `Load` in PowSyBl. The attributes are:
+Every `EnergyConsumer` object in the CGMES model creates a new `Load` in PowSyBl. The attributes are created as such:
 - `P0`, `Q0` are set from CGMES values taken from `SSH`, `SV`, or `EQ` data depending on the import options.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energyConsumer` contains the pattern `fict`. Otherwise `UNDEFINED`.
 - `LoadDetail` Additional information about conform and non-conform loads is added as an extension of the `Load` object (for more details about the [extension](../model/extensions.md#load-detail)).
@@ -149,7 +151,7 @@ When the type is a non-conform load:
 
 A CGMES EnergySource is a generic equivalent for an energy supplier, with the injection given using load sign convention.
 
-For each `EnergySource` object in the CGMES model a new PowSyBl `Load` is created, with attributes:
+For each `EnergySource` object in the CGMES model a new PowSyBl `Load` is created, with attributes created as such:
 - `P0`, `Q0` set from `SSH` or `SV` values depending on import options.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
 
@@ -159,7 +161,7 @@ If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` i
 
 CMES uses `SvInjection` objects to report mismatches on calculated buses: they record the calculated bus injection minus the sum of the terminal flows. According to the documentation, the values will thus follow generator sign convention: positive sign means injection into the bus. Note that all the reference cases used for development follow load sign convention to report these mismatches, so we have decided to follow this load sign convention as a first approach.
 
-For each `SvInjection` in the CGMES network model a new PowSyBl `Load` with attributes:
+For each `SvInjection` in the CGMES network model a new PowSyBl `Load` with attributes created as such:
 - `P0`, `Q0` are set from `SvInjection.pInjection/qInjection`.
 - `LoadType` is always set to `FICTITIOUS`.
 - `Fictitious` is set to `true`.
@@ -168,11 +170,11 @@ For each `SvInjection` in the CGMES network model a new PowSyBl `Load` with attr
 
 The mapping of a CGMES `EquivalentInjection` depends on its location relative to the boundary area.
 
-If the `EquivalentInjection` is outside the boundary area it will be mapped to a PowSyBl `Generator`.
+If the `EquivalentInjection` is outside the boundary area, it will be mapped to a PowSyBl `Generator`.
 
-If the `EquivalentInjection` is at the boundary area its regulating voltage data will be mapped to the generation data inside the PowSyBl `DanglingLine` created at the boundary point and its values for `P`, `Q` will be used to define the DanglingLine `P0`, `Q0`.
+If the `EquivalentInjection` is at the boundary area, its regulating voltage data will be mapped to the generation data inside the PowSyBl `DanglingLine` created at the boundary point and its values for `P`, `Q` will be used to define the DanglingLine `P0`, `Q0`.
 
-The PowSyBl generator attributes:
+The PowSyBl generator's or dangling line's generation's attributes are created as such:
 - `MinP`/`MaxP` are copied from CGMES `minP`/`maxP` if defined, otherwise they are set to `-Double.MAX_VALUE`/`Double.MAX_VALUE`.
 - `TargetP`/`TargetQ` are set from `SSH` or `SV` values depending on the import option. CGMES values for `p`/`q` are given with load sign convention, so a change in sign is applied when copying them to `TargetP`/`TargetQ`.
 - `TargetV` The `regulationTarget` property is copied if it is not equal to zero. Otherwise, the nominal voltage associated to the connected terminal of the `equivalentInjection` is assigned. For CGMES Equivalent Injections the voltage regulation is allowed only at the point of connection.
@@ -180,7 +182,46 @@ The PowSyBl generator attributes:
 - `EnergySource` is set to `OTHER`.
 
 #### ACLineSegment
-<span style="color: red">TODO</span>
+
+CGMES `ACLineSegments`' mapping depends on its location relative to the boundary area.
+
+If the `ACLineSegment` is outside the boundary area, it will be mapped to a PowSyBl [`Line`](../model/index.md#line).
+
+If the `ACLineSegment` is completely inside the boundary area, if the boundaries are not imported, it is ignored. Otherwise, it is mapped to a PowSyBl [`Line`](../model/index.md#line).
+
+If the `ACLineSegment` has one side inside the boundary area and one side outside the boundary area, the importer checks if another `ACLineSegment` is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
+- If it is the only one `ACLineSegment` linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
+- If there are one or more other `ACLineSegment` linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+- If there is exactly one other `ACLineSegment` linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
+- If there are two or more other `ACLineSegment` linked to this `TopologicalNode` in different `SubGeographicalRegions`:
+  - If there are only two `ACLineSegments` with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `ACLineSegments` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+  - Otherwise, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+
+If the `ACLineSegment` is mapped to a PowSyBl [`Line`](../model/index.md#line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G1` is calculated as half of CMGES `gch` if defined, `0.0` otherwise
+- `G2` is calculated as half of CGMES `gch` if defined, `0.0` otherwise
+- `B1` is calculated as half of CGMES `bch`
+- `B2` is calculated as half of CGMES `bch`
+
+If the `ACLineSegment` is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G` is copied from CMGES `gch` if defined, `0.0` otherwise
+- `B` is copied from CGMES `bch`
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
+- `P0` is copied from CGMES `P` of the terminal at boundary side
+- `Q0` is copied from CGMES `Q` of the terminal at boundary side
+
+If the `ACLineSegment` is mapped to a PowSyBl [`HalfLine`](../model/index.md#half-line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G1` is `0.0` is the Half Line is on side `ONE` of the Tie Line. If the Half Line is on side `TWO` of the Tie Line, it is copied from CGMES `gch` if defined, `0.0` otherwise.
+- `G2` is `0.0` is the Half Line is on side `TWO` of the Tie Line. If the Half Line is on side `ONE` of the Tie Line, it is copied from CGMES `gch` if defined, `0.0` otherwise.
+- `B1` is `0.0` is the Half Line is on side `ONE` of the Tie Line. If the Half Line is on side `TWO` of the Tie Line, it is copied from CGMES `bch`.
+- `B2` is `0.0` is the Half Line is on side `TWO` of the Tie Line. If the Half Line is on side `ONE` of the Tie Line, it is copied from CGMES `bch`.
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
 
 #### EquivalentBranch
 <span style="color: red">TODO</span>
@@ -299,6 +340,9 @@ For instance, it contains the position of all equipments.
 
 This post-processor is enabled by adding the name `cgmesDLImport` to the list associated to `iidm.import.cgmes.post-processors` property.
 
+### CgmesGLImportPostProcessor
+<span style="color: red">TODO</span>
+
 ### CgmesMeasurementsPostProcessor
 <span style="color: red">TODO</span>
 
@@ -312,6 +356,9 @@ This post-processor is enabled by adding the name `cgmesDLImport` to the list as
 <span style="color: red">TODO</span>
 
 ## Export
+<span style="color: red">TODO</span>
+
+### Conversion from PowSyBl grid model to CGMES
 <span style="color: red">TODO</span>
 
 ### Options
