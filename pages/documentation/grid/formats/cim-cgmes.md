@@ -224,7 +224,46 @@ If the `ACLineSegment` is mapped to a PowSyBl [`HalfLine`](../model/index.md#hal
 - `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
 
 #### EquivalentBranch
-<span style="color: red">TODO</span>
+
+CGMES `EquivalentBranches`' mapping depends on its location relative to the boundary area.
+
+If the `EquivalentBranch` is outside the boundary area, it will be mapped to a PowSyBl [`Line`](../model/index.md#line).
+
+If the `EquivalentBranch` is completely inside the boundary area, if the boundaries are not imported, it is ignored. Otherwise, it is mapped to a PowSyBl [`Line`](../model/index.md#line).
+
+If the `EquivalentBranch` has one side inside the boundary area and one side outside the boundary area, the importer checks if another `EquivalentBranch` is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
+- If it is the only one `EquivalentBranch` linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
+- If there are one or more other `EquivalentBranch` linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+- If there is exactly one other `EquivalentBranch` linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
+- If there are two or more other `EquivalentBranches` linked to this `TopologicalNode` in different `SubGeographicalRegions`:
+  - If there are only two `EquivalentBranches` with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `EquivalentBranches` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+  - Otherwise, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+
+If the `EquivalentBranch` is mapped to a PowSyBl [`Line`](../model/index.md#line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G1` is `0.0`
+- `G2` is `0.0`
+- `B1` is `0.0`
+- `B2` is `0.0`
+
+If the `EquivalentBranch` is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G` is `0.0`
+- `B` is `0.0`
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
+- `P0` is copied from CGMES `P` of the terminal at boundary side
+- `Q0` is copied from CGMES `Q` of the terminal at boundary side
+
+If the `EquivalentBranch` is mapped to a PowSyBl [`HalfLine`](../model/index.md#half-line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G1` is `0.0`
+- `G2` is `0.0`
+- `B1` is `0.0`
+- `B2` is `0.0`
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
 
 #### AsychronousMachine / SynchronousMachine
 <span style="color: red">TODO</span>
