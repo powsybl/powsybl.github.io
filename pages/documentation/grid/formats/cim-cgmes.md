@@ -129,7 +129,7 @@ CGMES Busbar sections are mapped to PowSyBl busbar sections only if CGMES is nod
 #### EnergyConsumer
 
 Every `EnergyConsumer` object in the CGMES model creates a new `Load` in PowSyBl. The attributes are created as such:
-- `P0`, `Q0` are set from CGMES values taken from `SSH`, `SV`, or `EQ` data depending on the import options.
+- `P0`, `Q0` are set from CGMES values taken from `SSH`, `SV`, or `EQ` data depending on which are defined.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energyConsumer` contains the pattern `fict`. Otherwise `UNDEFINED`.
 - `LoadDetail` Additional information about conform and non-conform loads is added as an extension of the `Load` object (for more details about the [extension](../model/extensions.md#load-detail)).
 
@@ -149,10 +149,10 @@ When the type is a non-conform load:
 
 #### EnergySource
 
-A CGMES EnergySource is a generic equivalent for an energy supplier, with the injection given using load sign convention.
+A CGMES `EnergySource` is a generic equivalent for an energy supplier, with the injection given using load sign convention.
 
 For each `EnergySource` object in the CGMES model a new PowSyBl `Load` is created, with attributes created as such:
-- `P0`, `Q0` set from `SSH` or `SV` values depending on import options.
+- `P0`, `Q0` set from `SSH` or `SV` values depending on which are defined.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
 
 If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SSH` (the default) the active and reactive power of the load are copied from the `SSH` values (`EnergySource.activePower/reactivePower`). If it is `SV` they will be assigned from the values seen in `SvPowerFlow.p/q` object associated to the EnergySource terminal.
@@ -265,7 +265,16 @@ If the `EquivalentBranch` is mapped to a PowSyBl [`HalfLine`](../model/index.md#
 - `B2` is `0.0`
 - `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
 
-#### AsychronousMachine / SynchronousMachine
+#### AsychronousMachine
+
+CGMES `AsynchronousMachines` represent rotating machines whose shaft rotates asynchronously with the electrical field.
+It can be motor or generator; no distinction is made for the conversion of these two types.
+
+A CGMES `AsynchronousMachine` is mapped to a PowSyBl [`Load`](../model/index.md#load) with attributes created as described below:
+- `P0`, `Q0` are set from CGMES values taken from `SSH` or `SV`data depending on which are defined. If there is no defined data, it is `0.0`.
+- `LoadType` is `FICTITIOUS` if the CGMES ID contains "`fict`". Otherwise, it is `UNDEFINED`.
+
+#### SynchronousMachine
 <span style="color: red">TODO</span>
 
 #### EquivalentShunt
