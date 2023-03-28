@@ -291,17 +291,18 @@ Stopping criteria for Newton-Raphson algorithm.
 
 The default value is `UNIFORM_CRITERIA`.
 
-
-**transformerVoltageControlMode**  
-- `WITH_GENERATOR_VOLTAGE_CONTROL`:
-- `AFTER_GENERATOR_VOLTAGE_CONTROL`:
-- `INCREMENTAL_VOLTAGE_CONTROL`:
+**transformerVoltageControlMode**
+This parameter defines which kind of outer loops is used for transformer voltage controls. We have three kinds of outer loops:  
+- `WITH_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed in the same time as the generator voltage control. The final transformer $$\rho$$ is obtained by rounding to the closest tap position. The control deadband is not taken into account.
+- `AFTER_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed after the generator voltage control. The final transformer $$\rho$$ is obtained by rounding to the closest tap position. The control deadband is taken into account.
+- `INCREMENTAL_VOLTAGE_CONTROL` means that an incremental voltage control is used. $$\rho$$ always corresponds to a tap position. Tap changes using sensitivity computations. The control deadband is taken into account.
 
 The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 
-**shuntVoltageControlMode**  
-- `WITH_GENERATOR_VOLTAGE_CONTROL`:
-- `INCREMENTAL_VOLTAGE_CONTROL`:
+**shuntVoltageControlMode**
+This parameter defines which kind of outer loops is used for the shunt voltage control. We have two kinds of outer loops: 
+- `WITH_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed in the same time as the generator voltage control. Susceptance is finally rounded to the closest section for shunt that are controlling voltage. The control deadband is not taken into account.
+- `INCREMENTAL_VOLTAGE_CONTROL` means that an incremental voltage control is used. Susceptance always corresponds to a section. Section changes using sensitivity computations. The control deadband is taken into account.
 
 The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 
@@ -316,16 +317,16 @@ For any component where a bus voltage is solved outside these per-unit threshold
 and its solution status is flagged as failed.  
 The default values are `0.5` and `1.5`.
 
-**reactiveRangeCheckMode**  
-- `MIN_MAX`:
-- `MAX`:
-- `TARGET_P`:
+**reactiveRangeCheckMode**
+This parameter defines how to check the reactive limits $$MinQ$$ and $$MaxQ$$ of a generator. If the range is too small, the generator is discarded from voltage control.
+- `MIN_MAX` mode checks if the reactive range at $$MaxP$$ is above a threshold and if the reactive range at $$MinP$$ is not zero.
+- `MAX` mode if the reactive range at $$MaxP$$ is above a threshold.
+- `TARGET_P` if the reactive range at $$TargetP$$ is above a threshold
 
 The default value is `MAX`.
 
 **networkCacheEnabled**  
-This parameter is used to run fast simulations by applying incremental changes made to the network to 
-OpenLoadFlow internal state. 
+This parameter is used to run fast simulations by applying incremental modifications on the network directly to the OpenLoadFlow internal modelling. The cache mode allows faster runs when modifications on the network are light. Only target voltage modifications are supported yet.  
 
 The default value is `false`.
 
