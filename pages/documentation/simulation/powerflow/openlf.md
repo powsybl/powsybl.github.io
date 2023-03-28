@@ -156,54 +156,72 @@ load-flow:
 ### Specific parameters
 
 **voltageInitModeOverride**  
-Additional voltage init modes of PowSyBl OpenLoadFlow that are not present in `LoadFlowParameters` `voltageInitMode` parameter:
+Additional voltage init modes of PowSyBl OpenLoadFlow that are not present in [PowSyBl LoadFlow `voltageInitMode` Parameter](index.md#available-parameters):
 - `NONE`: no override
-- `VOLTAGE_MAGNITUDE`: specific initializer to initialize voltages maginitudes $$v$$, leaving $$\theta=0$$. Proven useful for
+- `VOLTAGE_MAGNITUDE`: specific initializer to initialize voltages magnitudes $$v$$, leaving $$\theta=0$$. Proven useful for
 unusual input data with transformers rated voltages very far away from bus nominal voltages.
-- `FULL_VOLTAGE`: voltages maginitudes $$v$$ initialized using `VOLTAGE_MAGNITUDE` initializer, $$\theta$$ initialized using a DC load flow.
+- `FULL_VOLTAGE`: voltages magnitudes $$v$$ initialized using `VOLTAGE_MAGNITUDE` initializer, $$\theta$$ initialized using a DC load flow.
 
 The default value is `NONE`.
 
 **lowImpedanceBranchMode**  
-The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance branches (when $$Z$$ is less than the `lowImpedanceThreshold` per-unit threshold, see further below).
+The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance branches
+(when $$Z$$ is less than the per-unit `lowImpedanceThreshold`, see further below).
 Possible values are:
 - Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider low impedance branches as zero impedance branches.
 - Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider low impedance branches with a value equal to the `lowImpedanceThreshold`.
+
 The default value is `REPLACE_BY_ZERO_IMPEDANCE_LINE`.
 
 **lowImpedanceThreshold**  
-The `lowImpedanceThreshold` property is an optional property that defines in per-unit the threshold used to identify low impedance branches (when $$Z$$ is less than the `lowImpedanceThreshold` per-unit threshold).
+The `lowImpedanceThreshold` property is an optional property that defines in per-unit the threshold used to identify low impedance branches
+(when $$Z$$ is less than the `lowImpedanceThreshold` per-unit threshold).  
 The default value is $$10^{-8}$$.
 
 **throwsExceptionInCaseOfSlackDistributionFailure**  
 The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure.
 This could happen in small synchronous component without enough generators or loads to balance the mismatch.
-In that case, the remaining active power mismatch remains on the selected slack bus.
+In that case, the remaining active power mismatch remains on the selected slack bus.  
 The default value is `false`.
 
 **voltageRemoteControl**  
 The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
 If set to false, any existing voltage remote control is converted to a local control, rescaling the target voltage
-according to the nominal voltage ratio between the remote regulated bus and the equipment terminal bus.
+according to the nominal voltage ratio between the remote regulated bus and the equipment terminal bus.  
 The default value is `true`.
 
 **slackBusSelectionMode**  
 The `slackBusSelectionMode` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
 - `FIRST` if you want to choose the first bus of all the network buses.
 - `NAME` if you want to choose a specific bus as the slack bus. In that case, the `slackBusesIds` property has to be filled.
-- `MOST_MESHED` if you want to choose the most meshed bus among buses with the highest nominal voltage as the slack bus. This option is required for computation with several synchronous component.
+- `MOST_MESHED` if you want to choose the most meshed bus among buses with the highest nominal voltage as the slack bus.
+This option is typically required for computation with several synchronous components.
 - `LARGEST_GENERATOR` if you want to choose the bus with the highest total generation capacity as the slack bus.
+
 The default value is `MOST_MESHED`.
-Note that if you want to choose the slack bus that is defined inside the network with a slackTerminal extension, you have to use the `LoadflowParameters`
+
+Note that if you want to choose the slack buses that are defined inside the network with
+a [slack terminal extension](../../grid/model/extensions.md#slack-terminal),
+you have to set the [PowSyBl LoadFlow `readSlackBus` Parameter](index.md#available-parameters) to `true`.
+When `readSlackBus` is set to true, `slackBusSelectionMode` is still used and serves as a secondary selection criteria:
+- for e.g. synchronous components where no slack terminal extension is present.
+- for e.g. synchronous components where more than `maxSlackBusCount` slack terminal extensions are present.
+
+**maxSlackBusCount**  
+Number of slack buses to be selected. Setting a value above 1 can help convergence on very large networks with large initial imbalances,
+where it might be difficult to find a single slack with sufficient branches connected and able to absorb or evacuate the slack power.  
+The default value is `1`.
 
 **slackBusesIds**  
 The `slackBusesIds` property is a required property if you choose `NAME` for property `slackBusSelectionMode`.
 It defines a prioritized list of buses or voltage levels to be chosen for slack bus selection (as an array, or as a comma or semicolon separated string).
 
 **loadPowerFactorConstant**  
-The `loadPowerFactorConstant ` property is an optional boolean property. The default value is `false`. This property is used in the outer loop that distributes slack on loads if :
+The `loadPowerFactorConstant ` property is an optional boolean property. This property is used in the outer loop that distributes slack on loads if :
 - `distributedSlack` property is set to true in the [load flow default parameters](index.md#available-parameters),
 - `balanceType` property is set to `PROPORTIONAL_TO_LOAD` or `PROPORTIONAL_TO_CONFORM_LOAD` in the [load flow default parameters](index.md#available-parameters).
+
+The default value is `false`.
 
 If prerequisites fulfilled and `loadPowerFactorConstant` property is set to `true`, the distributed slack outer loop adjusts the load P value and adjusts also the load Q value in order to maintain the power factor as a constant value.
 At the end of the load flow calculation, $$P$$ and $$Q$$ at loads terminals are both updated. Note that the power factor of a load is given by this equation :
@@ -238,15 +256,17 @@ The default value is $$5000 MW$$.
 
 **slackBusPMaxMismatch**  
 When slack distribution is enabled (`distributedSlack` set to `true` in LoadFlowParameters), this is the threshold below which slack power
-is considered to be distributed.
+is considered to be distributed.  
 The default value is $$1 MW$$.
 
 **voltagePerReactivePowerControl**  
-Whether simulation of SVCs slope should be enabled (See `voltage per reactive power control` extension).  
+Whether simulation of static VAR compensators slope should be enabled
+(See [voltage per reactive power control extension](../../grid/model/extensions.md#voltage-per-reactive-power-control)).  
 The default value is `false`.
 
 **reactivePowerRemoteControl**  
-Whether simulation of generators reactive power remote control should be enabled (See `remote reactive power control` extension).  
+Whether simulation of generators reactive power remote control should be enabled
+(See [remote reactive power control](../../grid/model/extensions.md#remote-reactive-power-control)).  
 The default value is `false`.
 
 **maxNewtonRaphsonIterations**  
@@ -260,51 +280,17 @@ The default value is `20`.
 **newtonRaphsonStoppingCriteriaType**  
 Stopping criteria for Newton-Raphson algorithm.
 - `UNIFORM_CRITERIA`: stop when all equation mismatches are below `newtonRaphsonConvEpsPerEq` threshold.
+`newtonRaphsonConvEpsPerEq` defines the threshold for all equation types, in per-unit 100MVA base. The default value is $$10^{-4}$$.
 - `PER_EQUATION_TYPE_CRITERIA`: stop when equation mismatches are below equation type specific thresholds:
-  - `maxActivePowerMismatch`
-  - `maxReactivePowerMismatch`
-  - `maxVoltageMismatch`
-  - `maxAngleMismatch`
-  - `maxRatioMismatch`
-  - `maxSusceptanceMismatch`
+  - `maxActivePowerMismatch`: Defines the threshold for active power equations, in MW. The default value is $$10^{-2} MW$$.
+  - `maxReactivePowerMismatch`: Defines the threshold for reactive power equations, in MVAr. The default value is $$10^{-2} MVAr$$.
+  - `maxVoltageMismatch`: Defines the threshold for voltage equations, in per-unit. The default value is $$10^{-4}$$.
+  - `maxAngleMismatch`: Defines the threshold for angle equations, in per-unit. The default value is $$10^{-5}$$.
+  - `maxRatioMismatch`: Defines the threshold for ratio equations, in per-unit. The default value is $$10^{-5}$$.
+  - `maxSusceptanceMismatch`: Defines the threshold for susceptance equations, in per-unit. The default value is $$10^{-4}$$.
 
-See further below for specific thresholds documentation.  
 The default value is `UNIFORM_CRITERIA`.
 
-**newtonRaphsonConvEpsPerEq**  
-Used when newtonRaphsonStoppingCriteriaType is `UNIFORM_CRITERIA`.  
-Defines the threshold for all equation types, in per-unit 100MVA base.  
-The default value is $$10^{-4}$$.
-
-**maxActivePowerMismatch**  
-Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
-Defines the threshold for active power equations, in MW.  
-The default value is $$10^{-2} MW$$.
-
-**maxReactivePowerMismatch**  
-Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
-Defines the threshold for reactive power equations, in MVAr.  
-The default value is $$10^{-2} MVAr$$.
-
-**maxVoltageMismatch**  
-Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
-Defines the threshold for voltage equations, in per-unit.  
-The default value is $$10^{-4}$$.
-
-**maxAngleMismatch**  
-Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
-Defines the threshold for angle equations, in per-unit.  
-The default value is $$10^{-5}$$.
-
-**maxRatioMismatch**  
-Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
-Defines the threshold for ratio equations, in per-unit.  
-The default value is $$10^{-5}$$.
-
-**maxSusceptanceMismatch**  
-Used when newtonRaphsonStoppingCriteriaType is `PER_EQUATION_TYPE_CRITERIA`.  
-Defines the threshold for susceptance equations, in per-unit.  
-The default value is $$10^{-4}$$.
 
 **transformerVoltageControlMode**  
 - `WITH_GENERATOR_VOLTAGE_CONTROL`:
@@ -332,13 +318,13 @@ The default value is `1.2`.
 **minRealisticVoltage**  
 This parameter is used to identify if Newton-Raphson has converged to an unrealistic state.
 For any component where a bus voltage is solved below this per-unit threshold, the component solution is deemed unrealistic
-and its solution status is flagged as failed.
+and its solution status is flagged as failed.  
 The default value is `0.5`.
 
 **maxRealisticVoltage**  
 This parameter is used to identify if Newton-Raphson has converged to an unrealistic state.
 For any component where a bus voltage is solved above this per-unit threshold, the component solution is deemed unrealistic
-and its solution status is flagged as failed.
+and its solution status is flagged as failed.  
 The default value is `1.5`.
 
 **reactiveRangeCheckMode**  
@@ -349,10 +335,13 @@ The default value is `1.5`.
 The default value is `MAX`.
 
 **networkCacheEnabled**  
+This parameter is used to run fast simulations by applying incremental changes made to the network to 
+OpenLoadFlow internal state. 
+
 The default value is `false`.
 
 **svcVoltageMonitoring**  
-Whether simulation of SVCs voltage monitoring should be enabled.  
+Whether simulation of static VAR compensators voltage monitoring should be enabled.  
 The default value is `true`.
 
 **stateVectorScalingMode**  
@@ -363,11 +352,6 @@ This parameter 'slows down' the Newton-Raphson by scaling the state vector betwe
 
 The default value is `NONE`.
 
-**maxSlackBusCount**  
-Number of slack buses to be selected. Setting a value above 1 can help convergence on very large networks with large initial imbalances, 
-where it might be difficult to find a single slack with sufficient branches connected and able to absorb or evacuate the slack power.  
-The default value is `1`.
-
 **incrementalTransformerVoltageControlOuterLoopMaxTapShift**  
 The default value is `3`.
 
@@ -375,13 +359,13 @@ The default value is `3`.
 The default value is `false`.
 
 **reactiveLimitsMaxPqPvSwitch**  
-When `useReactiveLimits` is set to `true`, this parameters is used to limit the number of times an equipment performing voltage regulation
+When `useReactiveLimits` is set to `true`, this parameter is used to limit the number of times an equipment performing voltage control
 is switching from and to PV or PQ type. After this number of PQ/PV type switch, the equipment will not change PV/PQ type anymore.  
 The default value is `3`.
 
 **phaseShifterControlMode**  
-- `CONTINUOUS_WITH_DISCRETISATION`:
-- `INCREMENTAL`:
+- `CONTINUOUS_WITH_DISCRETISATION`: phase shifter control is solved by the Newton-Raphson inner-loop.
+- `INCREMENTAL`: phase shifter control is solved in the outer-loop
 
 The default value is `CONTINUOUS_WITH_DISCRETISATION`.
 
@@ -399,10 +383,9 @@ See below an extract of a config file that could help:
 ```yaml
 open-loadflow-default-parameters:
   lowImpedanceBranchMode: REPLACE_BY_ZERO_IMPEDANCE_LINE
-  distributedSlack: true
   throwsExceptionInCaseOfSlackDistributionFailure: false
   voltageRemoteControl: false
-  slackBusSelectionMode: Name
+  slackBusSelectionMode: NAME
   slackBusesIds: Bus3_0,Bus5_0
   loadPowerFactorConstant: true
 ```
