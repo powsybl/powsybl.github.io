@@ -260,7 +260,7 @@ is considered to be distributed.
 The default value is $$1 MW$$.
 
 **voltagePerReactivePowerControl**  
-Whether simulation of static VAR compensators slope should be enabled
+Whether simulation of static VAR compensators with voltage control enabled and a slope defined should be enabled
 (See [voltage per reactive power control extension](../../grid/model/extensions.md#voltage-per-reactive-power-control)).  
 The default value is `false`.
 
@@ -305,27 +305,16 @@ The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 
 The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 
-**minPlausibleTargetVoltage**  
-Equipments with voltage regulation target voltage below this per-unit threshold
+**minPlausibleTargetVoltage and maxPlausibleTargetVoltage**  
+Equipments with voltage regulation target voltage outside these per-unit thresholds
 are considered suspect and are discarded from regulation prior to load flow resolution.  
-The default value is `0.8`.
+The default values are `0.8` and `1.2`.
 
-**maxPlausibleTargetVoltage**  
-Equipments with voltage regulation target voltage above this per-unit threshold
-are considered suspect and are discarded from regulation prior to load flow resolution.  
-The default value is `1.2`.
-
-**minRealisticVoltage**  
-This parameter is used to identify if Newton-Raphson has converged to an unrealistic state.
-For any component where a bus voltage is solved below this per-unit threshold, the component solution is deemed unrealistic
+**minRealisticVoltage and maxRealisticVoltage**  
+These parameters are used to identify if Newton-Raphson has converged to an unrealistic state.
+For any component where a bus voltage is solved outside these per-unit thresholds, the component solution is deemed unrealistic
 and its solution status is flagged as failed.  
-The default value is `0.5`.
-
-**maxRealisticVoltage**  
-This parameter is used to identify if Newton-Raphson has converged to an unrealistic state.
-For any component where a bus voltage is solved above this per-unit threshold, the component solution is deemed unrealistic
-and its solution status is flagged as failed.  
-The default value is `1.5`.
+The default values are `0.5` and `1.5`.
 
 **reactiveRangeCheckMode**  
 - `MIN_MAX`:
