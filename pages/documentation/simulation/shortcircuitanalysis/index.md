@@ -40,8 +40,8 @@ It can be used to filter results where the computed short circuit current is too
 **with-fortescue-result**
 
 This property indicates if the computed results, like currents and voltages, should be returned only in three phased magnitude or detailed with magnitude and angle on each phase.
-According to this property, different classes to return results can be used. If it is set to false, the classes `com.powsybl.shortcircuit.MagnitudeFaultResult`, `com.powsybl.shortcircuit.MagnitudeFeederResult` and `com.powsybl.shortcircuit.MagnitudeShortCircuitBusResult` should be used.
-If the property is true, the classes `com.powsybl.shortcircuit.FortescueFaultResult`, `com.powsybl.shortcircuit.FortescueFeederResult` and `com.powsybl.shortcircuit.FortescueShortCircuitBusResult` should be used.
+According to this property, different classes to return results can be used. If it is set to false, the classes `MagnitudeFaultResult`, `MagnitudeFeederResult` and `MagnitudeShortCircuitBusResult` should be used.
+If the property is true, the classes `FortescueFaultResult`, `FortescueFeederResult` and `FortescueShortCircuitBusResult` should be used. All these classes are in `com.powsybl.shortcircuit`.
 The default value is true.
 
 **with-feeder-result**
@@ -56,6 +56,7 @@ This property indicates the type of short circuit study. It can be:
 - `SUB_TRANSIENT`: it is the first stage of the short circuit, right when the fault happens. The subtransient reactance of generators will be used.
 - `TRANSIENT`: the second stage of the short circuit, before the system stabilizes. The transient reactance of generators will be used.
 - `STEADY_STATE`: the last stage, once all transient effects are gone.
+
 The default value is `TRANSIENT`. The transient and subtransient reactance of the generators are stored in the [short circuit generator extension.](../../grid/model/extensions.md#generator-short-circuit)
 
 **with-voltage-result**
@@ -88,26 +89,26 @@ Each fault can either be an instance of `com.powsybl.shortcircuit.BusFault` or `
 
 The attributes to fill of a `BusFault` are:
 
-| Attribute  | Type           | Unit       | Required | Default value           | Description                                                                                             |
-|------------|----------------|------------|----------|-------------------------|---------------------------------------------------------------------------------------------------------|
-| id         | String         | -          | yes      | -                       | The id of the fault                                                                                     |
-| elementId  | String         | -          | yes      | -                       | The id of the bus on which the fault will be simulated                                                  |
-| r          | double         | $$\Omega$$ | no       | 0                       | The fault resistance to ground                                                                          |
-| x          | double         | $$\Omega$$ | no       | 0                       | The fault reactance to ground                                                                           |
-| connection | ConnectionType | -          | no       | `ConnectionType.SERIES` | The way the resistance and reactance of the fault are connected to the ground: in series or in parallel |
-| faultType  | FaultType      | -          | no       | `FaultType.THREE_PHASE` | The type of fault simulated: can be three-phased or single-phased                                       |
+| Attribute  | Type           | Unit | Required | Default value           | Description                                                                                             |
+|------------|----------------|------|----------|-------------------------|---------------------------------------------------------------------------------------------------------|
+| id         | String         | -    | yes      | -                       | The id of the fault                                                                                     |
+| elementId  | String         | -    | yes      | -                       | The id of the bus on which the fault will be simulated                                                  |
+| r          | double         | Ω    | no       | 0                       | The fault resistance to ground                                                                          |
+| x          | double         | Ω    | no       | 0                       | The fault reactance to ground                                                                           |
+| connection | ConnectionType | -    | no       | `ConnectionType.SERIES` | The way the resistance and reactance of the fault are connected to the ground: in series or in parallel |
+| faultType  | FaultType      | -    | no       | `FaultType.THREE_PHASE` | The type of fault simulated: can be three-phased or single-phased                                       |
 
 The attributes to fill of a `BranchFault` are:
 
-| Attribute            | Type           | Unit       | Required | Default value         | Description                                                                                             |
-|----------------------|----------------|------------|----------|-----------------------|---------------------------------------------------------------------------------------------------------|
-| id                   | String         | -          | yes      | -                     | The id of the fault                                                                                     |
-| elementId            | String         | -          | yes      | -                     | The id of the branch on which the fault will be simulated                                               |
-| r                    | double         | $$\Omega$$ | no       | 0                     | The fault resistance to ground                                                                          |
-| x                    | double         | $$\Omega$$ | no       | 0                     | The fault reactance to ground                                                                           |
-| connection           | ConnectionType | -          | no       | ConnectionType.SERIES | The way the resistance and reactance of the fault are connected to the ground: in series or in parallel |
-| faultType            | FaultType      | -          | no       | FaultType.THREE_PHASE | The type of fault simulated: can be three-phased or single-phased                                       |
-| proportionalLocation | double         | %          | yes      | -                     | The position where the fault should be simulated, in percent of the line                                |
+| Attribute            | Type           | Unit | Required | Default value         | Description                                                                                             |
+|----------------------|----------------|------|----------|-----------------------|---------------------------------------------------------------------------------------------------------|
+| id                   | String         | -    | yes      | -                     | The id of the fault                                                                                     |
+| elementId            | String         | -    | yes      | -                     | The id of the branch on which the fault will be simulated                                               |
+| r                    | double         | Ω    | no       | 0                     | The fault resistance to ground                                                                          |
+| x                    | double         | Ω    | no       | 0                     | The fault reactance to ground                                                                           |
+| connection           | ConnectionType | -    | no       | ConnectionType.SERIES | The way the resistance and reactance of the fault are connected to the ground: in series or in parallel |
+| faultType            | FaultType      | -    | no       | FaultType.THREE_PHASE | The type of fault simulated: can be three-phased or single-phased                                       |
+| proportionalLocation | double         | %    | yes      | -                     | The position where the fault should be simulated, in percent of the line                                |
 
 **A list of FaultParameters**
 
@@ -118,18 +119,19 @@ For more information on parameters, see above.
 The results of the short circuit analysis are stored in `com.powsybl.shortcircuit.ShortCircuitAnalysisResult`. This class gathers the results for every fault, they are accessible either by the ID of the fault or the ID of the element on which the fault is simulated.
 For each fault, an object `com.powsybl.shortcircuit.FaultResult` is returned.
 
-Depending on the property `withFortescueResult`, the returned result should either be an instance of `com.powsybl.shortcircuit.MagnitudeFaultResult` or `com.powsybl.shortcircuit.FortescueFaultResult`.
+Depending on `with-fortescue-result`, the returned result should either be an instance of `com.powsybl.shortcircuit.MagnitudeFaultResult` or `com.powsybl.shortcircuit.FortescueFaultResult`.
+
 Both classes contain the following attributes:
 
-| Attribute              | Type                        | Unit | Required | Default value | Description                                                                                          |
-|------------------------|-----------------------------|------|----------|---------------|------------------------------------------------------------------------------------------------------|
-| fault                  | Fault                       | -    | yes      | -             | The fault that was simulated                                                                         |
-| status                 | Status                      | -    | yes      | -             | The status of the computation, see below for more details                                            |
-| shortCircuitPower      | double                      | MVA  | yes      | -             | The value of the short circuit power                                                                 |
-| timeConstant           | Duration                    | -    | yes      | -             | The duration before reaching the permanent short circuit current                                     |
-| feederResults          | List<FeederResult>          | -    | no       | Empty list    | A list of FeederResult, should not be empty if the parameter withFeederResult is set to true.        |
-| limitViolations        | List<LimitViolation>        | -    | no       | Empty list    | A list of LimitViolation, should be empty if the parameter withLimitViolation is set to false.       |
-| shortCircuitBusResults | List<ShortCircuitBusResult> | -    | no       | Empty list    | A list of ShortCircuitBusResult, should be empty if the parameter withVoltageResult is set to false. |
+| Attribute              | Type                        | Unit | Required | Default value | Description                                                                                              |
+|------------------------|-----------------------------|------|----------|---------------|----------------------------------------------------------------------------------------------------------|
+| fault                  | Fault                       | -    | yes      | -             | The fault that was simulated                                                                             |
+| status                 | Status                      | -    | yes      | -             | The status of the computation, see below for more details                                                |
+| shortCircuitPower      | double                      | MVA  | yes      | -             | The value of the short circuit power                                                                     |
+| timeConstant           | Duration                    | -    | yes      | -             | The duration before reaching the permanent short circuit current                                         |
+| feederResults          | List<FeederResult>          | -    | no       | Empty list    | A list of FeederResult, should not be empty if the parameter `with-feeder-result` is set to true.        |
+| limitViolations        | List<LimitViolation>        | -    | no       | Empty list    | A list of LimitViolation, should be empty if the parameter `with-limit-violations` is set to false.      |
+| shortCircuitBusResults | List<ShortCircuitBusResult> | -    | no       | Empty list    | A list of ShortCircuitBusResult, should be empty if the parameter `with-voltage-result` is set to false. |
 
 However, in these classes, the short circuit current and voltage are represented differently.
 
@@ -158,8 +160,8 @@ This status can be:
 
 **FeederResults**
 
-This field contains the contributions of each feeder to the short circuit current as a list. It should be returned only if the property `withFeederResult` is set to true.
-Depending on the property `withFortescueResult`, it should be an instance of `com.powsybl.shortcircuit.MagnitudeFeederResult` or `com.powsybl.shortcircuit.FortescueFeederResult`.
+This field contains the contributions of each feeder to the short circuit current as a list. It should only be returned if `with-feeder-result` is set to true.
+Depending on the value of `with-fortescue-result`, it should be an instance of `com.powsybl.shortcircuit.MagnitudeFeederResult` or `com.powsybl.shortcircuit.FortescueFeederResult`.
 
 The attributes of `MagnitudeFeederResults` are:
 
@@ -179,13 +181,14 @@ The attributes of `FortescueFeederResuts` are:
 
 This field contains a list of all the violations after the fault. This implies to have defined in the network the maximum or the minimum acceptable short circuit currents on the buses or equipment.
 Then, with comparing to the computed short circuit current, two types of violations can be created: `LOW_SHORT_CIRCUIT_CURRENT` and `HIGH_SHORT_CIRCUIT_CURRENT`.
-This list should be empty if the property `withLimitViolations` is set to false.
+This list should be empty if the property `with-limit-violations` is set to false.
 
 **ShortCircuitBusResults**
 
-This field contains the voltage results on every bus of the network after simulating the fault. It should be empty if the property `withVoltageResult` is set to false.
-Depending on the property `withFortescueResult`, the list should contain either `com.powsybl.shortcircuit.MagnitudeShortCircuitBusResult` or `com.powsybl.shortcircuit.FortescueShortCircuitBusResult` objects.
-The property `withVoltageDropThreshold` allows to filter these results by keeping only those where the voltage drop is higher than the defined threshold.
+This field contains a list of voltage results on every bus of the network after simulating the fault. It should be empty if `with-voltage-result` is set to false.
+The value of the property `with-voltage-drop-threshold` allows to filter these results by keeping only those where the voltage drop is higher than this defined threshold.
+Depending on the value of `with-fortescue-result`, the list should contain instances of either `com.powsybl.shortcircuit.MagnitudeShortCircuitBusResult` or `com.powsybl.shortcircuit.FortescueShortCircuitBusResult` objects.
+
 
 The attributes of `MagnitudeShortCircuitBusResult` are:
 
