@@ -24,6 +24,7 @@ This page describes the way the Java objects have been designed to effectively h
 - [Load flow](loadflow.md)
 - [Security analysis](security-analysis.md)
 - [Dynamic simulation](dynamic-simulation.md)
+- [Short circuit analysis](short-circuit.md)
 
 ## Data management
 - [AFS](afs.md)
