@@ -117,7 +117,7 @@ ReductionOptions options = new ReductionOptions()
 #### Observers
 
 The `com.powsybl.iidm.reducer.NetworkReducerObserver` is an interface that allows to be notified each time an `Identifiable` is removed or replaced. This interface provides several methods, one per `Identifiable` sub class managed by the `DefaultNetworkReducer` implementation. There are 2 types of events:
-- a _replace_ event, when a AC line, a two or three windings transformer or an HVDC line is replaced by a load or a danging line
+- a _replace_ event, when an AC line, a two or three windings transformer or an HVDC line is replaced by a load or a danging line
 - a _remove_ event, when a substation, a voltage level, a line, a two or three windings transformer or an HVDC line is removed.
 
 ```java
