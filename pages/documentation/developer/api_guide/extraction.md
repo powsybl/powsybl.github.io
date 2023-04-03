@@ -91,14 +91,17 @@ PowSyBl provides a default implementation of this interface, but you can provide
 The `com.powsybl.iidm.reducer.DefaultNetworkReducer` class is the PowSyBl implementation of the `NetworkReducer` interface that replaces the lines in the _border_ group by [loads](../../grid/model/index.md#load) or [dangling lines](../../grid/model/index.md#dangling-line) depending on the [options](#options), the two windings transformers and the HVDC lines by [loads](../../grid/model/index.md#load).
 
 The three windings transformers are replaced by a [load](../../grid/model/index.md#load) if only one connected voltage level is kept. If two out of three connected voltage levels are kept, the third one is automatically added by the `DefaultNetworkReducer` to the voltage levels to keep.
+
 #### Options
 
 The network reduction can be configured by passing a `com.powsybl.iidm.reducer.ReductionOptions` instance to the `DefaultNetworkReducer` constructor.
 
 ##### withDanglingLines
+
 This option defines whether the equipments in the _border_ group are replaced by dangling lines or by loads. If this option is set to `false`, which is the default value, the equipments are exclusively replaced by loads.
 
 ##### Examples
+
 The following example shows how to create a new `ReductionOptions` instance to do replacements by dangling lines.
 ```java
 ReductionOptions options = new ReductionOptions();
@@ -114,7 +117,7 @@ ReductionOptions options = new ReductionOptions()
 #### Observers
 
 The `com.powsybl.iidm.reducer.NetworkReducerObserver` is an interface that allows to be notified each time an `Identifiable` is removed or replaced. This interface provides several methods, one per `Identifiable` sub class managed by the `DefaultNetworkReducer` implementation. There are 2 types of events:
-- a _replace_ event, when a line, a two or three windings transformer  or an HVDC line is replaced by a load or a danging line
+- a _replace_ event, when a AC line, a two or three windings transformer or an HVDC line is replaced by a load or a danging line
 - a _remove_ event, when a substation, a voltage level, a line, a two or three windings transformer or an HVDC line is removed.
 
 ```java
