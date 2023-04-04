@@ -340,7 +340,7 @@ This parameter is used to run fast simulations by applying incremental modificat
 The cache mode allows faster runs when modifications on the network are light.
 Not all modifications types are supported yet, currently supported modifications are:
 - target voltage modification
-- retained switch open/close status modification
+- switch open/close status modification. The switches to be modified must be configured via the `actionableSwitchesIds` property (as an array, or as a comma or semicolon separated string).
 
 The default value is `false`.
 
