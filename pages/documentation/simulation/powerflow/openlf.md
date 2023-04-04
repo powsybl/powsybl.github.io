@@ -273,7 +273,7 @@ The default value is `false`.
 
 **reactiveLimitsMaxPqPvSwitch**  
 When `useReactiveLimits` is set to `true`, this parameter is used to limit the number of times an equipment performing voltage control
-is switching from and to PV or PQ type. After this number of PQ/PV type switch, the equipment will not change PV/PQ type anymore.  
+is switching from PQ to PV type. After this number of PQ/PV type switch, the equipment will not change PV/PQ type anymore.  
 The default value is `3`.
 
 **phaseShifterControlMode**
@@ -282,7 +282,7 @@ The default value is `3`.
 
 The default value is `CONTINUOUS_WITH_DISCRETISATION`.
 
-**transformerVoltageControlMode**
+**transformerVoltageControlMode**  
 This parameter defines which kind of outer loops is used for transformer voltage controls. We have three kinds of outer loops:  
 - `WITH_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed in the same time as the generator voltage control. The final transformer $$\rho$$ is obtained by rounding to the closest tap position. The control deadband is not taken into account.
 - `AFTER_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed after the generator voltage control. The final transformer $$\rho$$ is obtained by rounding to the closest tap position. The control deadband is taken into account.
@@ -295,7 +295,7 @@ Maximum number of tap position change during a single iteration of the increment
 Applies when `transformerVoltageControlMode` is set to `INCREMENTAL_VOLTAGE_CONTROL`.  
 The default value is `3`.
 
-**shuntVoltageControlMode**
+**shuntVoltageControlMode**  
 This parameter defines which kind of outer loops is used for the shunt voltage control. We have two kinds of outer loops: 
 - `WITH_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed in the same time as the generator voltage control. Susceptance is finally rounded to the closest section for shunt that are controlling voltage. The control deadband is not taken into account.
 - `INCREMENTAL_VOLTAGE_CONTROL` means that an incremental voltage control is used. Susceptance always corresponds to a section. Section changes using sensitivity computations. The control deadband is taken into account.
@@ -354,7 +354,7 @@ For any component where a bus voltage is solved outside these per-unit threshold
 and its solution status is flagged as failed.  
 The default values are `0.5` and `1.5`.
 
-**reactiveRangeCheckMode**
+**reactiveRangeCheckMode**  
 This parameter defines how to check the reactive limits $$MinQ$$ and $$MaxQ$$ of a generator. If the range is too small, the generator is discarded from voltage control.
 - `MIN_MAX` mode checks if the reactive range at $$MaxP$$ is above a threshold and if the reactive range at $$MinP$$ is not zero.
 - `MAX` mode if the reactive range at $$MaxP$$ is above a threshold.
@@ -388,6 +388,9 @@ Not all modifications types are supported yet, currently supported modifications
 - switch open/close status modification. The switches to be modified must be configured via the `actionableSwitchesIds` property (as an array, or as a comma or semicolon separated string).
 
 The default value is `false`.
+
+**actionableSwitchesIds**  
+This parameter list is used if `networkCachedEnabled` is activated. It defines a list of switches that might be modified (as an array, or as a comma or semicolon separated string). When one of the switches changes its status (open/close) and a load flow is run just after, the cache will be used to a faster resolution. Note that in the implementation, all the switches of that list will be considered as retained, leading to a size increase of the Jacobian matrix. The list should have a reasonable size, otherwise the simulation without cache use should be preferred. 
 
 **alwaysUpdateNetwork**  
 Update the iIDM network state even in case of non-convergence.  
