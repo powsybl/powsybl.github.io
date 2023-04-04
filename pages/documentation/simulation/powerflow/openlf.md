@@ -216,6 +216,11 @@ The default value is `1`.
 The `slackBusesIds` property is a required property if you choose `NAME` for property `slackBusSelectionMode`.
 It defines a prioritized list of buses or voltage levels to be chosen for slack bus selection (as an array, or as a comma or semicolon separated string).
 
+**slackBusCountryFilter**  
+The `slackBusCountryFilter` defines a list of countries where slack bus should be selected (as an array, or as a comma or semicolon separated string).  
+Countries are specified by their alpha 2 code (e.g. `FR`, `BE`, `DE`, ...).  
+The default value is an empty list (any country can be used for slack bus selection).
+
 **loadPowerFactorConstant**  
 The `loadPowerFactorConstant ` property is an optional boolean property. This property is used in the outer loop that distributes slack on loads if :
 - `distributedSlack` property is set to true in the [load flow default parameters](index.md#available-parameters),
@@ -299,6 +304,11 @@ This parameter defines which kind of outer loops is used for transformer voltage
 
 The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 
+**incrementalTransformerVoltageControlOuterLoopMaxTapShift**  
+Maximum number of tap position change during a single iteration of the incremental voltage control outerloop.
+Applies when `transformerVoltageControlMode` is set to `INCREMENTAL_VOLTAGE_CONTROL`.  
+The default value is `3`.
+
 **shuntVoltageControlMode**
 This parameter defines which kind of outer loops is used for the shunt voltage control. We have two kinds of outer loops: 
 - `WITH_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed in the same time as the generator voltage control. Susceptance is finally rounded to the closest section for shunt that are controlling voltage. The control deadband is not taken into account.
@@ -306,12 +316,12 @@ This parameter defines which kind of outer loops is used for the shunt voltage c
 
 The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 
-**minPlausibleTargetVoltage and maxPlausibleTargetVoltage**  
+**minPlausibleTargetVoltage** and **maxPlausibleTargetVoltage**  
 Equipments with voltage regulation target voltage outside these per-unit thresholds
 are considered suspect and are discarded from regulation prior to load flow resolution.  
 The default values are `0.8` and `1.2`.
 
-**minRealisticVoltage and maxRealisticVoltage**  
+**minRealisticVoltage** and **maxRealisticVoltage**  
 These parameters are used to identify if Newton-Raphson has converged to an unrealistic state.
 For any component where a bus voltage is solved outside these per-unit thresholds, the component solution is deemed unrealistic
 and its solution status is flagged as failed.  
@@ -326,7 +336,11 @@ This parameter defines how to check the reactive limits $$MinQ$$ and $$MaxQ$$ of
 The default value is `MAX`.
 
 **networkCacheEnabled**  
-This parameter is used to run fast simulations by applying incremental modifications on the network directly to the OpenLoadFlow internal modelling. The cache mode allows faster runs when modifications on the network are light. Only target voltage modifications are supported yet.  
+This parameter is used to run fast simulations by applying incremental modifications on the network directly to the OpenLoadFlow internal modelling.
+The cache mode allows faster runs when modifications on the network are light.
+Not all modifications types are supported yet, currently supported modifications are:
+- target voltage modification
+- retained switch open/close status modification
 
 The default value is `false`.
 
@@ -342,10 +356,8 @@ This parameter 'slows down' the Newton-Raphson by scaling the state vector betwe
 
 The default value is `NONE`.
 
-**incrementalTransformerVoltageControlOuterLoopMaxTapShift**  
-The default value is `3`.
-
 **secondaryVoltageControl**  
+Whether simulation of secondary voltage control should be enabled.  
 The default value is `false`.
 
 **reactiveLimitsMaxPqPvSwitch**  
