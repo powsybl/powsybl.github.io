@@ -362,6 +362,24 @@ This parameter defines how to check the reactive limits $$MinQ$$ and $$MaxQ$$ of
 
 The default value is `MAX`.
 
+**reportedFeatures**  
+This parameter allows to define a set of features which should generate additional reports (as an array, or as a comma or semicolon separated string).
+In current version this parameter can be used to request Newton-Raphson iterations report:
+- `NEWTON_RAPHSON_LOAD_FLOW`: report Newton-Raphson iteration log for load flow calculations.
+- `NEWTON_RAPHSON_SECURITY_ANALYSIS`: report Newton-Raphson iteration log for security analysis calculations.
+- `NEWTON_RAPHSON_SENSITIVITY_ANALYSIS`: report Newton-Raphson iteration log for sensitivity analysis calculations.
+
+Newton-Raphson iterations report consist in reporting:
+- the involved synchronous component
+- the involved Newton-Raphson outer loop iteration
+- for each Newton-Raphson inner loop iteration:
+  - maximum active power mismatch, the related bus Id with current solved voltage magnitude and angle.
+  - maximum reactive power mismatch, the related bus Id with current solved voltage magnitude and angle.
+  - maximum voltage control mismatch, the related bus Id with current solved voltage magnitude and angle.
+  - the norm of the mismatch vector
+
+The default value is an empty set of features to report.
+
 **networkCacheEnabled**  
 This parameter is used to run fast simulations by applying incremental modifications on the network directly to the OpenLoadFlow internal modelling.
 The cache mode allows faster runs when modifications on the network are light.
