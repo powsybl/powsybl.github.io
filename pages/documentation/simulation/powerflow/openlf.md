@@ -184,12 +184,6 @@ This could happen in small synchronous component without enough generators or lo
 In that case, the remaining active power mismatch remains on the selected slack bus.  
 The default value is `false`.
 
-**voltageRemoteControl**  
-The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
-If set to false, any existing voltage remote control is converted to a local control, rescaling the target voltage
-according to the nominal voltage ratio between the remote regulated bus and the equipment terminal bus.  
-The default value is `true`.
-
 **slackBusSelectionMode**  
 The `slackBusSelectionMode` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
 - `FIRST` if you want to choose the first bus of all the network buses.
@@ -252,17 +246,16 @@ If `balanceType` equals to `PROPORTIONAL_TO_CONFORM_LOAD`, the power factor rema
 
 The default value for `loadPowerFactorConstant` property is `false`.
 
-**plausibleActivePowerLimit**  
-The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for:
-- slack distribution (if `balanceType` equals to any of the `PROPORTIONAL_TO_GENERATION_<any>` types)
-- slack selection (if `slackBusSelectionMode` equals to `LARGEST_GENERATOR`)
-
-The default value is $$5000 MW$$.
-
 **slackBusPMaxMismatch**  
 When slack distribution is enabled (`distributedSlack` set to `true` in LoadFlowParameters), this is the threshold below which slack power
 is considered to be distributed.  
 The default value is $$1 MW$$.
+
+**voltageRemoteControl**  
+The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
+If set to false, any existing voltage remote control is converted to a local control, rescaling the target voltage
+according to the nominal voltage ratio between the remote regulated bus and the equipment terminal bus.  
+The default value is `true`.
 
 **voltagePerReactivePowerControl**  
 Whether simulation of static VAR compensators with voltage control enabled and a slope defined should be enabled
@@ -274,27 +267,20 @@ Whether simulation of generators reactive power remote control should be enabled
 (See [remote reactive power control](../../grid/model/extensions.md#remote-reactive-power-control)).  
 The default value is `false`.
 
-**maxNewtonRaphsonIterations**  
-Maximum number of iterations for Newton-Raphson inner loop.  
-The default value is `15`.
+**secondaryVoltageControl**  
+Whether simulation of secondary voltage control should be enabled.  
+The default value is `false`.
 
-**maxOuterLoopIterations**  
-Maximum number of iterations for Newton-Raphson outer loop.  
-The default value is `20`.
+**reactiveLimitsMaxPqPvSwitch**  
+When `useReactiveLimits` is set to `true`, this parameter is used to limit the number of times an equipment performing voltage control
+is switching from and to PV or PQ type. After this number of PQ/PV type switch, the equipment will not change PV/PQ type anymore.  
+The default value is `3`.
 
-**newtonRaphsonStoppingCriteriaType**  
-Stopping criteria for Newton-Raphson algorithm.
-- `UNIFORM_CRITERIA`: stop when all equation mismatches are below `newtonRaphsonConvEpsPerEq` threshold.
-`newtonRaphsonConvEpsPerEq` defines the threshold for all equation types, in per-unit 100MVA base. The default value is $$10^{-4}$$.
-- `PER_EQUATION_TYPE_CRITERIA`: stop when equation mismatches are below equation type specific thresholds:
-  - `maxActivePowerMismatch`: Defines the threshold for active power equations, in MW. The default value is $$10^{-2} MW$$.
-  - `maxReactivePowerMismatch`: Defines the threshold for reactive power equations, in MVAr. The default value is $$10^{-2} MVAr$$.
-  - `maxVoltageMismatch`: Defines the threshold for voltage equations, in per-unit. The default value is $$10^{-4}$$.
-  - `maxAngleMismatch`: Defines the threshold for angle equations, in per-unit. The default value is $$10^{-5}$$.
-  - `maxRatioMismatch`: Defines the threshold for ratio equations, in per-unit. The default value is $$10^{-5}$$.
-  - `maxSusceptanceMismatch`: Defines the threshold for susceptance equations, in per-unit. The default value is $$10^{-4}$$.
+**phaseShifterControlMode**
+- `CONTINUOUS_WITH_DISCRETISATION`: phase shifter control is solved by the Newton-Raphson inner-loop.
+- `INCREMENTAL`: phase shifter control is solved in the outer-loop
 
-The default value is `UNIFORM_CRITERIA`.
+The default value is `CONTINUOUS_WITH_DISCRETISATION`.
 
 **transformerVoltageControlMode**
 This parameter defines which kind of outer loops is used for transformer voltage controls. We have three kinds of outer loops:  
@@ -315,6 +301,47 @@ This parameter defines which kind of outer loops is used for the shunt voltage c
 - `INCREMENTAL_VOLTAGE_CONTROL` means that an incremental voltage control is used. Susceptance always corresponds to a section. Section changes using sensitivity computations. The control deadband is taken into account.
 
 The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
+
+**svcVoltageMonitoring**  
+Whether simulation of static VAR compensators voltage monitoring should be enabled.  
+The default value is `true`.
+
+**maxNewtonRaphsonIterations**  
+Maximum number of iterations for Newton-Raphson inner loop.  
+The default value is `15`.
+
+**maxOuterLoopIterations**  
+Maximum number of iterations for Newton-Raphson outer loop.  
+The default value is `20`.
+
+**newtonRaphsonStoppingCriteriaType**  
+Stopping criteria for Newton-Raphson algorithm.
+- `UNIFORM_CRITERIA`: stop when all equation mismatches are below `newtonRaphsonConvEpsPerEq` threshold.
+  `newtonRaphsonConvEpsPerEq` defines the threshold for all equation types, in per-unit 100MVA base. The default value is $$10^{-4}$$.
+- `PER_EQUATION_TYPE_CRITERIA`: stop when equation mismatches are below equation type specific thresholds:
+  - `maxActivePowerMismatch`: Defines the threshold for active power equations, in MW. The default value is $$10^{-2} MW$$.
+  - `maxReactivePowerMismatch`: Defines the threshold for reactive power equations, in MVAr. The default value is $$10^{-2} MVAr$$.
+  - `maxVoltageMismatch`: Defines the threshold for voltage equations, in per-unit. The default value is $$10^{-4}$$.
+  - `maxAngleMismatch`: Defines the threshold for angle equations, in per-unit. The default value is $$10^{-5}$$.
+  - `maxRatioMismatch`: Defines the threshold for ratio equations, in per-unit. The default value is $$10^{-5}$$.
+  - `maxSusceptanceMismatch`: Defines the threshold for susceptance equations, in per-unit. The default value is $$10^{-4}$$.
+
+The default value is `UNIFORM_CRITERIA`.
+
+**stateVectorScalingMode**  
+This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
+- `NONE`: no scaling is made
+- `LINE_SEARCH`: applies a line search strategy
+- `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to maximum 0.1p.u. and 10degrees
+
+The default value is `NONE`.
+
+**plausibleActivePowerLimit**  
+The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for:
+- slack distribution (if `balanceType` equals to any of the `PROPORTIONAL_TO_GENERATION_<any>` types)
+- slack selection (if `slackBusSelectionMode` equals to `LARGEST_GENERATOR`)
+
+The default value is $$5000 MW$$.
 
 **minPlausibleTargetVoltage** and **maxPlausibleTargetVoltage**  
 Equipments with voltage regulation target voltage outside these per-unit thresholds
@@ -343,33 +370,6 @@ Not all modifications types are supported yet, currently supported modifications
 - switch open/close status modification. The switches to be modified must be configured via the `actionableSwitchesIds` property (as an array, or as a comma or semicolon separated string).
 
 The default value is `false`.
-
-**svcVoltageMonitoring**  
-Whether simulation of static VAR compensators voltage monitoring should be enabled.  
-The default value is `true`.
-
-**stateVectorScalingMode**  
-This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
-- `NONE`: no scaling is made
-- `LINE_SEARCH`: applies a line search strategy
-- `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to maximum 0.1p.u. and 10degrees
-
-The default value is `NONE`.
-
-**secondaryVoltageControl**  
-Whether simulation of secondary voltage control should be enabled.  
-The default value is `false`.
-
-**reactiveLimitsMaxPqPvSwitch**  
-When `useReactiveLimits` is set to `true`, this parameter is used to limit the number of times an equipment performing voltage control
-is switching from and to PV or PQ type. After this number of PQ/PV type switch, the equipment will not change PV/PQ type anymore.  
-The default value is `3`.
-
-**phaseShifterControlMode**  
-- `CONTINUOUS_WITH_DISCRETISATION`: phase shifter control is solved by the Newton-Raphson inner-loop.
-- `INCREMENTAL`: phase shifter control is solved in the outer-loop
-
-The default value is `CONTINUOUS_WITH_DISCRETISATION`.
 
 **alwaysUpdateNetwork**  
 Update the iIDM network state even in case of non-convergence.  
