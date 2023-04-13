@@ -257,6 +257,83 @@ This extension contains the sub-object `ObservabilityQuality`.
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
+## Load asymmetrical
+
+A balanced load is described by its active power setpoint $$P0$$ and its reactive power setpoint $$Q0$$.
+This extension is used to describe the power asymmetry for each ABC phase:
+
+In the three phase representation, the complex power injected at a bus i is constant for each phase and represented by three complex  values:
+$$
+S_{Ai_{Load}}=S_{A}=P_{A}+j.Q_{A}\\
+S_{Bi_{Load}}=S_{B}=P_{B}+j.Q_{B}\\
+S_{Ci_{Load}}=S_{C}=P_{C}+j.Q_{C}\\
+$$
+But for a balanced load flow, the constant power load P and Q refer to the positive sequence load, given that in balanced conditions, the load for zero and negative sequence should always be zero.
+
+However, in real life, power loads should be defined in the ABC three phases representation.
+
+The load extension proposes to address this keeping the default behavior for balanced conditions.
+
+<u>Balanced load flow conditions:</u>
+
+In balanced conditions  given the load at node:
+$$
+S_{1i_{Load}}=P_{Load}+j.Q_{Load}\\
+$$
+we must verify:
+$$
+0 = -S_{1i_{Load}} +\sum_{j=v(i)}^{} S_{1ij}\\
+$$
+<u>Unbalanced load flow conditions:</u>
+
+We must take into account that many loads could still be balanced and info related to balanced loads is sufficient.
+
+The extension proposes a "delta" approach where unbalances are expressed in the extension.
+
+Supposing that
+$$
+\Delta P_{Ai_{Load}}, \Delta Q_{Ai_{Load}},\\
+\Delta P_{Bi_{Load}}, \Delta Q_{Bi_{Load}}, \\
+\Delta P_{Ci_{Load}}, \Delta Q_{Ci_{Load}}
+$$
+are provided in input through the extension
+
+The three phase power values used in input of the unbalanced load flow calculation are
+$$
+S_{Ai_{Load}}=(P_{Load}+\Delta P_{Ai_{Load}})+j.(Q_{Load}+\Delta Q_{Ai_{Load}})\\
+S_{Bi_{Load}}=(P_{Load}+\Delta P_{Bi_{Load}})+j.(Q_{Load}+\Delta Q_{Bi_{Load}})\\
+S_{Ci_{Load}}=(P_{Load}+\Delta P_{Ci_{Load}})+j.(Q_{Load}+\Delta Q_{Ci_{Load}})\\
+$$
+As a consequence, if no extension provided for the load, the unbalanced load flow will use in input:
+
+
+$$
+S_{Ai_{Load}}=P_{Load}+j.Q_{Load}\\
+S_{Bi_{Load}}=P_{Load}+j.Q_{Load}\\
+S_{Ci_{Load}}=P_{Load}+j.Q_{Load}\\
+$$
+
+| Attribute | Type | Unit | Required | Default value | Description |
+| --------- | ---- | ---- | -------- | ------------- | ----------- |
+| deltaPa | double | MW | No | 0 | The unbalanced part of the active power setpoint at phase A (balanced parts for each phase are described by its active power setpoint $$P0$$ and its reactive power setpoint $$Q0$$) |
+| deltaQa | double | MVar | No | 0 | The unbalanced part of the reactive power setpoint at phase A |
+| deltaPb | double | MW | No | 0 | The unbalanced part of the active power setpoint at phase B |
+| deltaQb | double | MVar | No | 0 | The unbalanced part of the reactive power setpoint at phase B |
+| deltaPc | double | MW | No | 0 | The unbalanced part of the active power setpoint at phase C |
+| deltaQc | double | MVar | No | 0 | The unbalanced part of the reactive power setpoint at phase C |
+
+Here is how to add a load detail extension to a load:
+```java
+load.newExtension(LoadAsymmetricalAdder.class)
+        .withDeltaPa(-1)
+        .withDeltaQa(1)
+        .withDeltaPb(-2)
+        .withDeltaQc(2)
+        .add();
+```
+
+This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
+
 ## Load detail
 A load is described by its active power setpoint $$P0$$ and its reactive power setpoint $$Q0$$. This extension is used to detail :
 - In the total amount of active power what is fixed and what is time-dependant (also called variable). The time-dependant part can be adjusted for production equals consumption.
