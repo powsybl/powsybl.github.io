@@ -87,7 +87,7 @@ The CGMES model does not guarantee these hierarchical constraints, so the first 
 
 ### Conversion from CGMES to PowSyBl grid model
 
-The following sections describe in detail how each supported CGMES network component is converted to PowSyBl network model objects and how they are created from IIDM objects.
+The following sections describe in detail how each supported CGMES network component is converted to PowSyBl network model objects.
 
 #### Substation
 
@@ -275,28 +275,124 @@ A CGMES `AsynchronousMachine` is mapped to a PowSyBl [`Load`](../model/index.md#
 - `LoadType` is `FICTITIOUS` if the CGMES ID contains "`fict`". Otherwise, it is `UNDEFINED`.
 
 #### SynchronousMachine
-<span style="color: red">TODO</span>
+CGMES `SynchronousMachines` represent rotating machines whose shaft rotates synchronously with the electrical field.
+It can be motor or generator; no distinction is made for the conversion of these two types.
+
+A CGMES `SynchronousMachine` is mapped to a PowSyBl [`Generator`](../model/index.md#generator) with attributes created as described below:
+- `MinP` is set from CGMES `GeneratingUnit.minOperatingP` on the `GeneratingUnit` associated with the `SynchronousMachine`. If invalid, `MinP` is `-Double.MAX_VALUE`.
+- `MaxP` is set from CGMES `GeneratingUnit.maxOperatingP` on the `GeneratingUnit` associated with the `SynchronousMachine`. If invalid, `MaxP` is `Double.MAX_VALUE`.
+- `ratedS` is copied from CGMES `ratedS`. If it is strictly lower than 0, it is considered undefined.
+- `EnergySource` is defined from the CGMES `GeneratingUnit` class of the `GeneratingUnit` associated with the `SynchronousMachine`
+  - If it is a `HydroGeneratingUnit`, `EnergySource` is `HYDRO`
+  - If it is a `NuclearGeneratingUnit`, `EnergySource` is `NUCLEAR`
+  - If it is a `ThermalGeneratingUnit`, `EnergySource` is `THERMAL`
+  - If it is a `WindGeneratingUnit`, `EnergySource` is `WIND`
+  - If it is a `SolarGeneratingUnit`, `EnergySource` is `SOLAR`
+  - Else, `EnergySource` is `OTHER`
+- `TargetP`/`TargetQ` are set from `SSH` or `SV` values depending on the import option. CGMES values for `p`/`q` are given with load sign convention, so a change in sign is applied when copying them to `TargetP`/`TargetQ`. If undefined, `TargetP` is set from CGMES `GeneratingUnit.initialP` from the `GeneratingUnit` associated to the `SynchronousMachine` and `TargetQ` is set to `0`.
+
+<span style="color: red">TODO reactive limits</span>
+
+<span style="color: red">TODO regulation</span>
+
+<span style="color: red">TODO normalPF</span>
 
 #### EquivalentShunt
-<span style="color: red">TODO</span>
+
+A CGMES `EquivalentShunt` is mapped to a PowSyBl linear [`ShuntCompensator`](../model/index.md#shunt-compensator). A linear shunt compensator has banks or sections with equal admittance values.
+Its attributes are created as described below:
+- `SectionCount` is `1` if the `EquivalentShunt` CGMES `Terminal` is connected, else it is `0`.
+- `BPerSection` is copied from CGMES `b`
+- `MaximumSectionCount` is set to `1`
 
 #### ExternalNetworkInjection
-<span style="color: red">TODO</span>
+
+CGMES `ExternalNetworkInjections` are injections representing the flows from an entire external network.
+
+A CGMES `ExternalNetworkinjection` is mapped to a PowSyBl [`Generator`](../model/index.md#generator) with attributes created as described below:
+- `MinP` is copied from CGMES `minP`
+- `MaxP` is copied from CGMES `maxP`
+- `TargetP`/`TargetQ` are set from `SSH` or `SV` values depending on the import option. CGMES values for `p`/`q` are given with load sign convention, so a change in sign is applied when copying them to `TargetP`/`TargetQ`. If underfined, they are set to `0`.
+- `EnergySource` is set as `OTHER`
+
+<span style="color: red">TODO reactive limits</span>
+
+<span style="color: red">TODO regulation</span>
+
+#### LinearShuntCompensator
+
+CGMES `LinearShuntCompensators` represent shunt compensators with banks or sections with equal admittance values.
+
+A CGMES `LinearShuntCompensator` is mapped to a PowSybl [`ShuntCompensator`](../model/index.md#shunt-compensator) with `SectionCount` copied from CGMES SSH `sections` or CGMES `SvShuntCompensatorSections.sections`, depending on the import option. If none is defined, it is copied from CGMES `normalSections`.
+The created PowSyBl shunt compensator is linear and its attributes are defined as described below:
+- `BPerSection` is copied from CGMES `bPerSection` if defined. Else, it is `Float.MIN_VALUE`.
+- `GPerSection` is copied from CGMES `gPerSection` if defined. Else, it is left undefined.
+- `MaximumSectionCount` is copied from CGMES `maximumSections`.
+
+<span style="color: red">TODO regulation</span>
+
+#### NonlinearShuntCompensator
+
+CGMES `NonlinearShuntCompensators` represent shunt compensators with banks or section addmittance values that differs.
+
+A CGMES `NonlinearShuntCompensator` is mapped to a PowSyBl [`ShuntCompensator`](../model/index.md#shunt-compensator) with `SectionCount` copied from CGMES SSH `sections` or CGMES `SvShuntCompensatorSections.sections`, depending on the import option. If none is defined, it is copied from CGMES `normalSections`.
+The created PowSyBl shunt compensator is non linear and has as many `Sections` as there are CGMES `NonlinearShuntCompensatorPoint` associated with the CGMES `NonlinearShuntCompensator` it is mapped to.
+
+Sections are created from the lowest CGMES `sectionNumber` to the highest and each section has its attributes created as describe below:
+- `B` is calculated as the sum of all CGMES `b` of `NonlinearShuntCompensatorPoints` with `sectionNumber` lower or equal to its `sectionNumber`
+- `G` is calculated as the sum of all CGMES `g` of `NonlinearShuntCompensatorPoints` with `sectionNumber` lower or equal to its `sectionNumber`
+
+<span style="color: red">TODO regulation</span>
 
 #### OperationalLimit
 <span style="color: red">TODO</span>
 
 #### SeriesCompensator
-<span style="color: red">TODO</span>
 
-#### Shunt
-<span style="color: red">TODO</span>
+CGMES `SeriesCompensators` represent series capacitors or reactors or AC transmission lines without charging susceptance.
+
+If a CGMES `SeriesCompensator` has both its ends inside the same voltage level, it is mapped to a PowSyBl [`Switch`](../model/index.md#breakerswitch). In this case,
+all its CGMES electrical attributes are ignored. It is considered as closed, fictitious and, if it is in a node-breaker voltage level, retained. Its `SwitchKind` is `BREAKER`.
+
+If a CGMES `SeriesCompensator` has its ends inside different voltage levels, it is mapped to a PowSyBl [`Line`](../model/index.md#line) with attributes as described below:
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G1`, `G2`, `B1` and `B2` are set to `0`
 
 #### StaticVarCompensator
-<span style="color: red">TODO</span>
 
-#### Switch
-<span style="color: red">TODO</span>
+CGMES `StaticVarCompensators` represent a facility for providing variable and controllable shunt reactive power.
+
+A CGMES `StaticVarCompensator` is mapped to a PowSyBl [`StaticVarCompensator`](../model/index.md#static-var-compensator) with attributes as described below:
+- `Bmin` is calculated from CGMES `inductiveRating`: if it is defined and not equals to `0`, `Bmin` is `1 / inductiveRating`. Else, it is `-Double.MAX_VALUE`.
+- `Bmax` is calculated from CGMES `capacitiveRating`: if it defined and not equals to `0`, `Bmax` is `1 / capacitiveRating`. Else, it is `Double.MAX_VALUE`.
+
+A PowSyBl [`VoltagePerReactivePowerControl`](../model/extensions.md#voltage-per-reactive-power-control) extension is also created from the CGMES `StaticVarCompensator` and linked to the PowSyBl `StaticVarCompensator` with its `slope` attribute copied from CGMES `slope` if the latter is `0` or positive.
+
+<span style="color: red">TODO regulation</span>
+
+#### Switch (Switch, Breaker, Disconnector, LoadBreakSwitch, ProtectedSwitch, GroundDisconnector)
+
+CGMES `Switches`, `Breakers`, `Disconnectors`, `LoadBreakSwitches`, `ProtectedSwitches` and `GroundDisconnectors` are
+all imported in the same manner. For convenience purpose, we will now use CGMES `Switch` as a say but keep in mind that this section is valid for all these CGMES classes. 
+
+If the CGMES `Switch` has its ends both inside the same voltage level, it is mapped to a PowSyBl [`Switch`](../model/index.md#breakerswitch) with attributes as described below:
+- `SwitchKind` is defined depending on the CGMES class
+  - If it is a CGMES `Breaker`, it is `BREAKER`
+  - If it is a CGMES `Disconnector`, it is `DISCONNECTOR`
+  - If it is a CGMES `LoadBreakSwitch`, it is `LOAD_BREAK_SWITCH`
+  - Otherwise, it is `BREAKER`
+- `Retained` is copied from CGMES `retained` if defined in node-breaker. Else, it is `false`.
+- `Open` is copied from CGMES SSH `open` if defined. Else, it is copied from CGMES `normalOpen`. If neither are defined, it is `false`.
+
+If the CGMES `Switch` has its ends in different voltage levels inside the same IGM, it is mapped to a PowSyBl [`Switch`] but the voltage levels, and potentially the substations, that contain its ends are merged: they are mapped to only one voltage level and/or substation.
+The created PowSyBl `Switch` has its attributes defined as described above.
+
+If the CGMES `Switch` has one of its end in the boundary area, it is mapped to a PowSybl [`DanglingLine`](../model/index.md#dangling-line) with attributes as described below:
+- `R`, `X`, `G`, `B` are `0.0`.
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries.
+- `P0` is copied from CGMES `P` of the terminal at boundary side
+- `Q0` is copied from CGMES `Q` of the terminal at boundary side
 
 ### Extensions
 <span style="color: red">TODO</span>
@@ -404,10 +500,105 @@ This post-processor is enabled by adding the name `cgmesDLImport` to the list as
 <span style="color: red">TODO</span>
 
 ## Export
+
 <span style="color: red">TODO</span>
 
+Please note that PowSyBl only ever export CGMES networks as CGMES Node/Breaker networks without consideration of the topology level of the PowSyBl network.
+
 ### Conversion from PowSyBl grid model to CGMES
-<span style="color: red">TODO</span>
+
+The following sections describe in detail how each supported PowSyBl network model object is converted to CGMES network components.
+
+#### Battery
+
+PowSyBl [`Batteries`](../model/index.md#battery) are exported as CGMES `SynchronousMachine` with CGMES `HydroGeneratingUnits`.
+
+<span style="color: red">TODO details</span>
+
+#### BusbarSection
+
+PowSyBl [`BusbarSections`](../model/index.md#busbar-section) are exported as CGMES `BusbarSections`.
+
+<span style="color: red">TODO details</span>
+
+#### DanglingLine
+
+PowSyBl [`DanglingLines`](../model/index.md#dangling-line) are exported as several CGMES network component.
+Each dangling line will be exported as one CGMES `EquivalentInjection` and one CGMES `ACLineSegment`.
+
+<span style="color: red">TODO details</span>
+
+#### Generator
+
+PowSyBl [`Generators`](../model/index.md#generator) are exported as CGMES `SynchronousMachines`.
+
+<span style="color: red">TODO details</span>
+
+#### HVDC line and HVDC converter stations
+
+A PowSyBl [`HVDCLine`](../model/index.md#hvdc-line) and its two [`HVDCConverterStations`](../model/index.md#hvdc-converter-station) are exported as a CGMES `DCLineSegment` and two CGMES `DCConverterUnits`.
+
+<span style="color: red">TODO details</span>
+
+#### Line
+
+PowSyBl [`Lines`](../model/index.md#line) are exported as CGMES `ACLineSegment`.
+
+<span style="color: red">TODO details</span>
+
+#### Load
+
+PowSyBl [`Loads`](../model/index.md#load) are exported as CGMES `ConformLoads`, `NonConformLoads` or `EnergyConsumers` depending on the extension [`LoadDetail`](../model/extensions.md#load-detail).
+
+<span style="color: red">TODO details</span>
+
+#### Shunt compensator
+
+PowSyBl [`ShuntCompensators`](../model/index.md#shunt-compensator) are exported as CGMES `LinearShuntCompensator` or `NonlinearShuntCompensator` depending on their models.
+
+<span style="color: red">TODO details</span>
+
+#### StaticVarCompensator
+
+PowSyBl [`StaticVarCompensators`](../model/index.md#static-var-compensator) are exported as CGMES `StaticVarCompensators`.
+
+<span style="color: red">TODO details</span>
+
+#### Substation
+
+PowSyBl [`Substations`](../model/index.md#substation) are exported as CGMES `Substations`.
+
+<span style="color: red">TODO details</span>
+
+#### Switch
+
+PowSyBl [`Switches`](../model/index.md#breakerswitch) are exported as CGMES `Breakers`, `Disconnectors` or `LoadBreakSwitches` depending on its `SwitchKind`.
+
+<span style="color: red">TODO details</span>
+
+#### ThreeWindingsTransformer
+
+PowSyBl [`ThreeWindingsTransformers`](../model/index.md#three-windings-transformer) are exported as CGMES `PowerTransformers` with three CGMES `PowerTransformerEnds`.
+
+#### TwoWindingsTransformer
+
+PowSyBl [`TwoWindingsTransformers`](../model/index.md#two-windings-transformer) are exported as CGMES `PowerTransformers` with two CGMES `PowerTransformerEnds`.
+
+<span style="color: red">TODO details</span>
+
+#### Voltage level
+
+PowSybl [`VoltatgeLevels`](../model/index.md#voltage-level) are exported as CGMES `VoltageLevels`.
+
+<span style="color: red">TODO details</span>
+
+### Extensions
+
+#### Control areas
+
+PowSyBl [`ControlAreas`](../model/extensions.md#cim-cgmes-control-areas) are exported as CGMES `ControlAreas`.
+
+<span style="color: red">TODO details</span>
 
 ### Options
 
