@@ -579,7 +579,7 @@ PowSyBl [`Switches`](../model/index.md#breakerswitch) are exported as CGMES `Bre
 #### ThreeWindingsTransformer
 
 PowSyBl [`ThreeWindingsTransformers`](../model/index.md#three-windings-transformer) are exported as CGMES `PowerTransformers` with three CGMES `PowerTransformerEnds`.
-
+<span style="color: red">TODO details</span>
 #### TwoWindingsTransformer
 
 PowSyBl [`TwoWindingsTransformers`](../model/index.md#two-windings-transformer) are exported as CGMES `PowerTransformers` with two CGMES `PowerTransformerEnds`.
