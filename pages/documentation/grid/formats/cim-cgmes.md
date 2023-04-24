@@ -385,7 +385,7 @@ If the CGMES `Switch` has its ends both inside the same voltage level, it is map
 - `Retained` is copied from CGMES `retained` if defined in node-breaker. Else, it is `false`.
 - `Open` is copied from CGMES SSH `open` if defined. Else, it is copied from CGMES `normalOpen`. If neither are defined, it is `false`.
 
-If the CGMES `Switch` has its ends in different voltage levels inside the same IGM, it is mapped to a PowSyBl [`Switch`] but the voltage levels, and potentially the substations, that contain its ends are merged: they are mapped to only one voltage level and/or substation.
+If the CGMES `Switch` has its ends in different voltage levels inside the same IGM, it is mapped to a [`Switch`](../model/index.md#breakerswitch) but the voltage levels, and potentially the substations, that contain its ends are merged: they are mapped to only one voltage level and/or substation.
 The created PowSyBl `Switch` has its attributes defined as described above.
 
 If the CGMES `Switch` has one of its end in the boundary area, it is mapped to a PowSybl [`DanglingLine`](../model/index.md#dangling-line) with attributes as described below:
