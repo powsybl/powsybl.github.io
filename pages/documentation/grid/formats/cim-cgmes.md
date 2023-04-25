@@ -13,6 +13,8 @@ In CGMES an electric power system model is described by data grouped in differen
 - `SV` State Variables. Contains all the information required to describe a steady-state power flow solution over the network.
 - `EQBD` Equipment Boundary. Contains definitions of the equipment in the boundary.
 - `TPBD` Topology Boundary. Topology information associated to the boundary.
+- `DL` Diagram Layout. Contains information about diagram positions.
+- `GL` Geographical Layout. Contains information about geographical positions.
 
 CGMES model connectivity can be defined at two different levels of detail:
 
@@ -25,18 +27,34 @@ CGMES model connectivity can be defined at two different levels of detail:
 
 ## Format specification
 
-Current supported version of CGMES is 2.4.15. To learn more about the standard, read the documents in the [Common Grid Model Exchange Standard (CGMES) Library](https://www.entsoe.eu/digital/cim/cim-for-grid-models-exchange/).
+Current supported versions of CGMES are 2.4.15 and 3.0. To learn more about the standard, read the documents in the [Common Grid Model Exchange Standard (CGMES) Library](https://www.entsoe.eu/digital/cim/cim-for-grid-models-exchange/).
+
+## Triple store
+A triplestore or RDF store is a purpose-built database for the storage and retrieval of triples through semantic queries. A triple is a data
+entity composed of subject-predicate-object such as "Generator is in France", or in RDF/XML:
+```xml
+<rdf:description rdf:about="generator">
+  <generator:in>France</generator:in>
+</rdf:description>
+```
+
+Input CGMES data read from CIM/XML files is stored natively in a purpose specific database for RDF statements (a Triplestore). There are multiple open-source implementations of Triplestore engines that could be easily plugged in PowSyBl.
+The only supported Triplestore engine used by PowSyBl is [RDF4J](https://rdf4j.org/).
+Loading from RDF/XML files to the Triplestore is highly optimized by these engines. Furthermore, the Triplestore repository can be configured to use an in-memory store, allowing faster access to data.
+
+### In-memory Rdf4j
+[Eclipse RDF4J™](https://rdf4j.org/about/) is an open source modular Java framework for working with RDF data. This includes parsing, storing, inferencing and querying of/over such data. It offers an easy-to-use API that can be connected to all leading RDF storage solutions. It allows you to connect with SPARQL endpoints and create applications
+that leverage the power of Linked Data and Semantic Web.
+
+Its in-memory implementation is the default triplestore engine use by PowSyBl for CIM-CGMES import.
 
 ## Import
 
-The import module reads and converts a CGMES model to the PowSyBl grid model. The import process is performed in two steps:
-- Read input files.
-- Convert CGMES data to PowSyBl grid model.
+The CGMES importer reads and converts a CGMES model to the PowSyBl grid model. The import process is performed in two steps:
+- Read input files into a triplestore
+- Convert CGMES data retrieved by SPARQL requests from the created triplestore to PowSyBl grid model
 
 The data in input CIM/XML files uses RDF (Resource Description Framework) syntax. In RDF, data is described making statements about resources using triplet expressions: (subject, predicate, object).
-
-Input CGMES data read from CIM/XML files is stored natively in a purpose specific database for RDF statements (a Triplestore). There are multiple open-source implementations of Triplestore engines that could be easily plugged in PowSyBl. The default Triplestore engine used by PowSyBl CGMES Importer is [RDF4J](https://rdf4j.org/). Loading from RDF/XML files to the Triplestore is highly optimized by these engines. Furthermore, the Triplestore repository can be configured to use an in-memory store, allowing faster access to data.
-
 To describe the conversion from CGMES to PowSyBl we first introduce some generic considerations about the level of detail of the model (node/breaker or bus/branch), the identity of the equipments and equipment containment in substations and voltage levels. After that, the conversion for every CGMES relevant class is explained. Consistency checks and validations performed during the conversion are mentioned in the corresponding sections.
 
 ### Levels of detail: node/breaker and bus/branch
@@ -69,17 +87,17 @@ The CGMES model does not guarantee these hierarchical constraints, so the first 
 
 ### Conversion from CGMES to PowSyBl grid model
 
-The following sections describe in detail how each supported CGMES network component is converted to PowSyBl network model objects.
+The following sections describe in detail how each supported CGMES network component is converted to PowSyBl network model objects and how they are created from IIDM objects.
 
 #### Substation
 
-For each substation (considering only the representative substation if they are connected by transformers) in the CGMES model a new substation is created in the PowSyBl grid model with the following attributes:
+For each substation (considering only the representative substation if they are connected by transformers) in the CGMES model a new substation is created in the PowSyBl grid model with the following attributes created as such:
 - `Country` It is obtained from the `regionName` property as first option, from `subRegionName` as second option. Otherwise, is assigned to `null`.
 - `GeographicalTags` It is obtained from the `SubRegion` property.
 
 #### VoltageLevel
 
-As in the substations, for each voltage level (considering only the representative voltage level if they are connected by switches) in the CGMES model a new voltage level is created in the PowSyBl grid model with the following attributes:
+As in the substations, for each voltage level (considering only the representative voltage level if they are connected by switches) in the CGMES model a new voltage level is created in the PowSyBl grid model with the following attributes created as such:
 - `NominalV` It is copied from the `nominalVoltage` property of the CGMES voltage level.
 - `TopologyKind` It will be `NODE_BREAKER` or `BUS_BREAKER` depending on the level of detail of the CGMES grid model.
 - `LowVoltageLimit` It is copied from the `lowVoltageLimit` property.
@@ -89,7 +107,7 @@ As in the substations, for each voltage level (considering only the representati
 
 If the CGMES model is a node/breaker model then `ConnectivityNode` objects are present in the CGMES input files, and for each of them a new `Node` is created in the corresponding PowSyBl voltage level. A `Node` in the PowSyBl model is an integer identifier that is unique by voltage level.
 
-If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional busbar section is also created in the same voltage level. This option is used to debug the conversion and facilitate the comparison of the topology present in the CGMES input files and the topology computed by PowSyBl. The attributes of the busbar section are:
+If the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is `true` an additional busbar section is also created in the same voltage level. This option is used to debug the conversion and facilitate the comparison of the topology present in the CGMES input files and the topology computed by PowSyBl. The attributes of the busbar section are created as such:
 - Identity attributes `Id` and `Name` are copied from the `ConnectivityNode`.
 - `Node` The same `Node` assigned to the mapped `ConnectivityNode`.
 
@@ -104,14 +122,14 @@ If the CGMES model is defined at bus/branch detail, then CGMES `TopologicalNode`
 
 Busbar sections can be created in PowSyBl grid model only at node/breaker level.
 
-CGMES Busbar sections are mapped to PowSyBl busbar sections only if CGMES is node/breaker and the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is set to `false`. In this case, a `BusbarSection` is created in the PowSyBl grid model for each `BusbarSection` of the CGMES model, with the attributes:
+CGMES Busbar sections are mapped to PowSyBl busbar sections only if CGMES is node/breaker and the import option `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` is set to `false`. In this case, a `BusbarSection` is created in the PowSyBl grid model for each `BusbarSection` of the CGMES model, with the attributes created as such:
 - Identity attributes `Id` and `Name` are copied from the CGMES `BusbarSection`.
 - `Node` A new `Node` in the corresponding voltage level.
 
 #### EnergyConsumer
 
-Every `EnergyConsumer` object in the CGMES model creates a new `Load` in PowSyBl. The attributes are:
-- `P0`, `Q0` are set from CGMES values taken from `SSH`, `SV`, or `EQ` data depending on the import options.
+Every `EnergyConsumer` object in the CGMES model creates a new `Load` in PowSyBl. The attributes are created as such:
+- `P0`, `Q0` are set from CGMES values taken from `SSH`, `SV`, or `EQ` data depending on which are defined.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energyConsumer` contains the pattern `fict`. Otherwise `UNDEFINED`.
 - `LoadDetail` Additional information about conform and non-conform loads is added as an extension of the `Load` object (for more details about the [extension](../model/extensions.md#load-detail)).
 
@@ -131,10 +149,10 @@ When the type is a non-conform load:
 
 #### EnergySource
 
-A CGMES EnergySource is a generic equivalent for an energy supplier, with the injection given using load sign convention.
+A CGMES `EnergySource` is a generic equivalent for an energy supplier, with the injection given using load sign convention.
 
-For each `EnergySource` object in the CGMES model a new PowSyBl `Load` is created, with attributes:
-- `P0`, `Q0` set from `SSH` or `SV` values depending on import options.
+For each `EnergySource` object in the CGMES model a new PowSyBl `Load` is created, with attributes created as such:
+- `P0`, `Q0` set from `SSH` or `SV` values depending on which are defined.
 - `LoadType` It will be `FICTITIOUS` if the `Id` of the `energySource` contains the pattern `fict`. Otherwise `UNDEFINED`.
 
 If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` is `SSH` (the default) the active and reactive power of the load are copied from the `SSH` values (`EnergySource.activePower/reactivePower`). If it is `SV` they will be assigned from the values seen in `SvPowerFlow.p/q` object associated to the EnergySource terminal.
@@ -143,7 +161,7 @@ If the import option `iidm.import.cgmes.profile-used-for-initial-state-values` i
 
 CMES uses `SvInjection` objects to report mismatches on calculated buses: they record the calculated bus injection minus the sum of the terminal flows. According to the documentation, the values will thus follow generator sign convention: positive sign means injection into the bus. Note that all the reference cases used for development follow load sign convention to report these mismatches, so we have decided to follow this load sign convention as a first approach.
 
-For each `SvInjection` in the CGMES network model a new PowSyBl `Load` with attributes:
+For each `SvInjection` in the CGMES network model a new PowSyBl `Load` with attributes created as such:
 - `P0`, `Q0` are set from `SvInjection.pInjection/qInjection`.
 - `LoadType` is always set to `FICTITIOUS`.
 - `Fictitious` is set to `true`.
@@ -152,16 +170,133 @@ For each `SvInjection` in the CGMES network model a new PowSyBl `Load` with attr
 
 The mapping of a CGMES `EquivalentInjection` depends on its location relative to the boundary area.
 
-If the `EquivalentInjection` is outside the boundary area it will be mapped to a PowSyBl `Generator`.
+If the `EquivalentInjection` is outside the boundary area, it will be mapped to a PowSyBl `Generator`.
 
-If the `EquivalentInjection` is at the boundary area its regulating voltage data will be mapped to the generation data inside the PowSyBl `DanglingLine` created at the boundary point and its values for `P`, `Q` will be used to define the DanglingLine `P0`, `Q0`.
+If the `EquivalentInjection` is at the boundary area, its regulating voltage data will be mapped to the generation data inside the PowSyBl `DanglingLine` created at the boundary point and its values for `P`, `Q` will be used to define the DanglingLine `P0`, `Q0`.
 
-The PowSyBl generator attributes:
+Attributes of the PowSyBl generator or of the PowSyBl dangling line's generation are created as such:
 - `MinP`/`MaxP` are copied from CGMES `minP`/`maxP` if defined, otherwise they are set to `-Double.MAX_VALUE`/`Double.MAX_VALUE`.
 - `TargetP`/`TargetQ` are set from `SSH` or `SV` values depending on the import option. CGMES values for `p`/`q` are given with load sign convention, so a change in sign is applied when copying them to `TargetP`/`TargetQ`.
 - `TargetV` The `regulationTarget` property is copied if it is not equal to zero. Otherwise, the nominal voltage associated to the connected terminal of the `equivalentInjection` is assigned. For CGMES Equivalent Injections the voltage regulation is allowed only at the point of connection.
 - `VoltageRegulatorOn` It is assigned to `true` if both properties, `regulationCapability` and `regulationStatus` are `true` and the terminal is connected.
 - `EnergySource` is set to `OTHER`.
+
+#### ACLineSegment
+
+CGMES `ACLineSegments`' mapping depends on its location relative to the boundary area.
+
+If the `ACLineSegment` is outside the boundary area, it will be mapped to a PowSyBl [`Line`](../model/index.md#line).
+
+If the `ACLineSegment` is completely inside the boundary area, if the boundaries are not imported, it is ignored. Otherwise, it is mapped to a PowSyBl [`Line`](../model/index.md#line).
+
+If the `ACLineSegment` has one side inside the boundary area and one side outside the boundary area, the importer checks if another `ACLineSegment` is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
+- If it is the only one `ACLineSegment` linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
+- If there are one or more other `ACLineSegment` linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+- If there is exactly one other `ACLineSegment` linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
+- If there are two or more other `ACLineSegment` linked to this `TopologicalNode` in different `SubGeographicalRegions`:
+  - If there are only two `ACLineSegments` with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `ACLineSegments` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+  - Otherwise, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+
+If the `ACLineSegment` is mapped to a PowSyBl [`Line`](../model/index.md#line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G1` is calculated as half of CMGES `gch` if defined, `0.0` otherwise
+- `G2` is calculated as half of CGMES `gch` if defined, `0.0` otherwise
+- `B1` is calculated as half of CGMES `bch`
+- `B2` is calculated as half of CGMES `bch`
+
+If the `ACLineSegment` is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G` is copied from CMGES `gch` if defined, `0.0` otherwise
+- `B` is copied from CGMES `bch`
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
+- `P0` is copied from CGMES `P` of the terminal at boundary side
+- `Q0` is copied from CGMES `Q` of the terminal at boundary side
+
+If the `ACLineSegment` is mapped to a PowSyBl [`HalfLine`](../model/index.md#half-line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G1` is `0.0` is the Half Line is on side `ONE` of the Tie Line. If the Half Line is on side `TWO` of the Tie Line, it is copied from CGMES `gch` if defined, `0.0` otherwise.
+- `G2` is `0.0` is the Half Line is on side `TWO` of the Tie Line. If the Half Line is on side `ONE` of the Tie Line, it is copied from CGMES `gch` if defined, `0.0` otherwise.
+- `B1` is `0.0` is the Half Line is on side `ONE` of the Tie Line. If the Half Line is on side `TWO` of the Tie Line, it is copied from CGMES `bch`.
+- `B2` is `0.0` is the Half Line is on side `TWO` of the Tie Line. If the Half Line is on side `ONE` of the Tie Line, it is copied from CGMES `bch`.
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
+
+#### EquivalentBranch
+
+CGMES `EquivalentBranches`' mapping depends on its location relative to the boundary area.
+
+If the `EquivalentBranch` is outside the boundary area, it will be mapped to a PowSyBl [`Line`](../model/index.md#line).
+
+If the `EquivalentBranch` is completely inside the boundary area, if the boundaries are not imported, it is ignored. Otherwise, it is mapped to a PowSyBl [`Line`](../model/index.md#line).
+
+If the `EquivalentBranch` has one side inside the boundary area and one side outside the boundary area, the importer checks if another `EquivalentBranch` is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
+- If it is the only one `EquivalentBranch` linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
+- If there are one or more other `EquivalentBranch` linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+- If there is exactly one other `EquivalentBranch` linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
+- If there are two or more other `EquivalentBranches` linked to this `TopologicalNode` in different `SubGeographicalRegions`:
+  - If there are only two `EquivalentBranches` with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `EquivalentBranches` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+  - Otherwise, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+
+If the `EquivalentBranch` is mapped to a PowSyBl [`Line`](../model/index.md#line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G1` is `0.0`
+- `G2` is `0.0`
+- `B1` is `0.0`
+- `B2` is `0.0`
+
+If the `EquivalentBranch` is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G` is `0.0`
+- `B` is `0.0`
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
+- `P0` is copied from CGMES `P` of the terminal at boundary side
+- `Q0` is copied from CGMES `Q` of the terminal at boundary side
+
+If the `EquivalentBranch` is mapped to a PowSyBl [`HalfLine`](../model/index.md#half-line):
+- `R` is copied from CGMES `r`
+- `X` is copied from CGMES `x`
+- `G1` is `0.0`
+- `G2` is `0.0`
+- `B1` is `0.0`
+- `B2` is `0.0`
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
+
+#### AsychronousMachine
+
+CGMES `AsynchronousMachines` represent rotating machines whose shaft rotates asynchronously with the electrical field.
+It can be motor or generator; no distinction is made for the conversion of these two types.
+
+A CGMES `AsynchronousMachine` is mapped to a PowSyBl [`Load`](../model/index.md#load) with attributes created as described below:
+- `P0`, `Q0` are set from CGMES values taken from `SSH` or `SV`data depending on which are defined. If there is no defined data, it is `0.0`.
+- `LoadType` is `FICTITIOUS` if the CGMES ID contains "`fict`". Otherwise, it is `UNDEFINED`.
+
+#### SynchronousMachine
+<span style="color: red">TODO</span>
+
+#### EquivalentShunt
+<span style="color: red">TODO</span>
+
+#### ExternalNetworkInjection
+<span style="color: red">TODO</span>
+
+#### OperationalLimit
+<span style="color: red">TODO</span>
+
+#### SeriesCompensator
+<span style="color: red">TODO</span>
+
+#### Shunt
+<span style="color: red">TODO</span>
+
+#### StaticVarCompensator
+<span style="color: red">TODO</span>
+
+#### Switch
+<span style="color: red">TODO</span>
 
 ### Extensions
 <span style="color: red">TODO</span>
@@ -183,14 +318,46 @@ that defines if the CGMES importer inverts the sign of reactive power flows for 
 **iidm.import.cgmes.convert-boundary**  
 The `iidm.import.cgmes.convert-boundary` property is an optional property that defines if the CGMES importer imports equipments that are located inside the boundaries or not. Its default value is `false`.
 
+**iidm.import.cgmes.convert-sv-injections**
+The `iidm.import.cgmes.convert-sv-injections` property is an optional property that defines if SV injections are imported as loads. Its default value is `true`.
+
+**iidm.import.cgmes.create-active-power-control-extension**
+The `iidm.import.cgmes.create-active-power-control-extension` property is an optional property that defines if active power extensions are created for CGMES `normalPF` attribute.
+Its default value is `false`.
+
 **iidm.import.cgmes.create-busbar-section-for-every-connectivity-node**  
 The `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` property is an optional property that defines if the CGMES importer creates an [IIDM Busbar Section](../model/index.md#busbar-section) for each CGMES connectivity node. Its default value is `false`.
+
+**iidm.import.cgmes.create-fictitious-switches-for-disconnected-terminals-mode**
+The `iidm.import.cgmes.create-fictitious-switches-for-disconnected-terminals-mode` property is an optional property that defines if fictitious switches are created when terminals are described as disconnected in CGMES node-breaker networks.
+Three modes are available:
+- `ALWAYS`: fictitious switches are created at every disconnected terminal
+- `ALWAYS_EXCEPT_SWITCHES`: fictitious switches are created at every disconnected terminal that is not a switch terminal
+- `NEVER`: no fictitious switch is created at disconnected terminals
+Its default value is `ALWAYS`.
+
+**iidm.import.cgmes.decode-escaped-identifiers**
+The `iidm.import.cgmes.decode-escaped-identifiers` property is an optional property that defines if identifiers with characters escaped during the triplestore creation are decoded.
+Its default value is `true`.
 
 **iidm.import.cgmes.ensure-id-alias-unicity**  
 The `iidm.import.cgmes.ensure-id-alias-unicity` property is an optional property that defines if IDs' and aliases' unicity is ensured during CGMES import. If it is set to `true`, identical CGMES IDs will be modified to be unique. If it is set to `false`, identical CGMES IDs will throw an exception. Its default value is `false`.
 
+**iidm.import.cgmes.id-mapping-file-path**
+The `iidm.import.cgmes.id-mapping-file-path` property is an optional property that defines the path of the CSV file containing a mapping between IIDM identifiers and CGMES identifiers. By default, its value is `null`:
+ID-mapping CSV file is read only if it is in the imported compressed file.
+
 **iidm.import.cgmes.import-control-areas**  
 The `iidm.import.cgmes.import-control-areas` property is an optional property that defines if control areas must be imported or not. Its default value is `true`.
+
+**iidm.import.cgmes.naming-strategy**
+THe `iidm.import.cgmes.naming-strategy` property is an optional property that defines which kind of mapping is made between
+CGMES identifiers and IIDM identifiers.
+It can be:
+- `identity`: CGMES IDs are the same as IIDM IDs
+- `cgmes`: if CGMES IDs have associated IIDM IDs in a mapping file, IIDM ID is applied (CGMES ID is an alias). if CGMES IDs do not have associated IIDM IDs in a mapping file but are not compliant with CGMES requirements and correspond to an IIDM `Identifiable`, a new CGMES ID is created as an alias.
+- `cgmes-fix-all-invalid-ids`: if CGMES IDs have associated IIDM IDs in a mapping file, IIDM ID is applied (CGMES ID is an alias). if CGMES IDs do not have associated IIDM IDs in a mapping file but are not compliant with CGMES requirements, a new CGMES ID is created as an alias.
+  Its default value is `identity`.
 
 **iidm.import.cgmes.post-processors**  
 The `iidm.import.cgmes.post-processors` property is an optional property that defines all the CGMES post-processors which will be activated after import.
@@ -203,34 +370,14 @@ The `iidm.import.cgmes.powsybl-triplestore` property is an optional property tha
 **iidm.import.cgmes.profile-for-initial-values-shunt-sections-tap-positions**
 The `iidm.import.cgmes.profile-for-initial-values-shunt-sections-tap-positions` property is an optional property that defines which CGMES profile is used to initialize tap positions and section counts. It can be `SSH` or `SV`. Its default value is `SSH`.
 
+**iidm.import.cgmes.source-for-iidm-id**
+The `iidm.import.cgmes.source-for-iidm-id` property is an optional property that defines if IIDM IDs must be the CGMES mRID or the CGMES rdfID. Its default value is `mRID`.
+
 **iidm.import.cgmes.store-cgmes-model-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an optional property that defines if the CGMES model is stored in the imported IIDM network as an [extension](../model/extensions.md#cgmes-model). Its default value is `true`.
 
 **iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension` property is an optional property that defines if the CGMES conversion context will be stored as an extension of the IIDM output network. Its default value is `false`.
-
-#### Deprecated properties
-
-**changeSignForShuntReactivePowerFlowInitialState**  
-The `changeSignForShuntReactivePowerFlowInitialState` property is deprecated since v2.4.0. Use `iidm.import.cgmes.change-sign-for-shunt-reactive-power-flow-initial-state` instead.
-
-**convertBoundary**  
-The `convertBoundary` property is deprecated since v2.4.0. Use `iidm.import.cgmes.convert-boundary` instead.
-
-**createBusbarSectionForEveryConnectivityNode**  
-The `createBusbarSectionForEveryConnectivityNode` property is deprecated since v2.4.0. Use `iidm.import.cgmes.create-busbar-section-for-every-connectivity-node` instead.
-
-**iidm.import.cgmes.profile-used-for-initial-state-values**  
-The `iidm.import.cgmes.profile-used-for-initial-state-values` property is deprecated since v4.7.0. Use `iidm.import.cgmes.profile-for-initial-values-shunt-sections-tap-positions` instead.
-
-**powsyblTripleStore**  
-The `powsyblTripleStore` property is deprecated since v2.4.0. Use `iidm.import.cgmes.powsybl-triplestore` instead.
-
-**storeCgmesModelAsNetworkExtension**  
-The `storeCgmesModelAsNetworkExtension` property is deprecated since v2.4.0. Use `iidm.import.cgmes.store-cgmes-model-as-network-extension` instead.
-
-## Export
-<span style="color: red">TODO</span>
 
 ## CGMES post-processors
 
@@ -238,8 +385,29 @@ The `storeCgmesModelAsNetworkExtension` property is deprecated since v2.4.0. Use
 This post-processor loads the diagram layout (DL) profile contained in the CGMES file, if available, into the triplestore.
 The diagram layout profile contains the data which is necessary to represent a drawing of the diagram corresponding to the CGMES file.
 For instance, it contains the position of all equipments.
- 
+
 This post-processor is enabled by adding the name `cgmesDLImport` to the list associated to `iidm.import.cgmes.post-processors` property.
+
+### CgmesGLImportPostProcessor
+<span style="color: red">TODO</span>
+
+### CgmesMeasurementsPostProcessor
+<span style="color: red">TODO</span>
+
+### CgmesShortCircuitPostProcessor
+<span style="color: red">TODO</span>
+
+### EntsoeCategoryPostProcessor
+<span style="color: red">TODO</span>
+
+### PhaseAngleClock
+<span style="color: red">TODO</span>
+
+## Export
+<span style="color: red">TODO</span>
+
+### Conversion from PowSyBl grid model to CGMES
+<span style="color: red">TODO</span>
 
 ### Options
 
@@ -255,6 +423,14 @@ The `iidm.export.cgmes.base-name` property is an optional property that defines 
 ```
 By default, the base name is the network's name if it exists, as a last resort, the network's ID.
 
+**iidm.export.cgmes.boundary-eq-id**
+The `iidm.export.cgmes.boundary-eq-id` property is an optional property that defines the ID of the EQ-BD model if there is any.
+Its default value is `null`: we consider there is no EQ-BD model to consider.
+
+**iidm.export.cgmes.boundary-tp-id**
+The `iidm.export.cgmes.boundary-tp-id` property is an optional property that defines the ID of the TP-BD model if there is any.
+Its default value is `null`: we consider there is no TP-BD model to consider.
+
 **iidm.export.cgmes.cim-version**
 The `iidm.export.cgmes.cim-version` property is an optional property that defines the CIM version number in which the user wants the CGMES files to be exported.
 CIM version 14 and 16 are supported i.e. its valid values are `14` or `16`.
@@ -268,17 +444,17 @@ Its default value is `true`.
 The `iidm.export.cgmes.export-power-flows-for-switches` property is an optional property that defines if power flows of switches are exported in the SV file.
 Its default value is `false`.
 
+**idm.export.cgmes.naming-strategy**
+The `iidm.export.cgmes.naming-strategy` property is an optional property that defines which naming strategy is used.
+It can be:
+- `identity`: CGMES IDs are the same as IIDM IDs
+- `cgmes`: IDs of IIDM `Identifiables` are exported as CGMES IDs if they are not compliant with CGMES requirements 
+- `cgmes-fix-all-invalid-ids`: all IDs are exported as CGMES IDs if they are not compliant with CGMES requirements
+Its default value is `identity`.
+
 **iidm.export.cgmes.profiles**
 The `iidm.export.cgmes.profiles` property is an optional property that defines the exported CGMES profiles.
 By default, it is a full CGMES export: EQ, TP, SSH and SV are exported.
-
-## Triple stores
-
-### Rdf4j
-<span style="color: red">TODO</span>
-
-### Jena
-<span style="color: red">TODO</span>
 
 ## Examples
 Have a look to the [CGMES sample files](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/TestConfigurations_packageCASv2.0.zip)

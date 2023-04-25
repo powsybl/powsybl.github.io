@@ -28,8 +28,25 @@ $> mvn package
 
 ## Maven dependencies
 
-After creating a new Maven project, you need to add the necessary dependencies to your `pom.xml` file. The required
-dependencies to implement a new `iTools` command are the following:
+After creating a new Maven project, you need to add the necessary dependencies to your `pom.xml` file. 
+
+Start by adding the powsybl-dependencies module that ensures compatibility between the different PowSyBl artifacts.
+
+```xml
+<dependencyManagement>
+<dependencies>
+    <dependency>
+        <groupId>com.powsybl</groupId>
+        <artifactId>powsybl-dependencies</artifactId>
+        <version>2023.0.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+    </dependency>
+</dependencies>
+</dependencyManagement>
+```
+
+The required dependencies to implement a new `iTools` command are the following:
 - Google Auto Service to declare your new tool as a plugin
 - The Powsybl tools module which contains the base interfaces for all `iTools` commands
 
@@ -42,19 +59,17 @@ dependencies to implement a new `iTools` command are the following:
 <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-tools</artifactId>
-    <version>${powsybl.version}</version>
 </dependency>
 ```
 
 In your project you also need to add the other dependencies required by your command business logic implementation, e.g.
 to implement the `iTools` command displaying the number of lines of a network, you would have to add the following
-dependency to get the IIDM converter API, needed to import IIDM networks:
+dependency to get the IIDM API, needed to import IIDM networks:
 
 ```xml
 <dependency>
     <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-iidm-converter-api</artifactId>
-    <version>${powsybl.version}</version>
+    <artifactId>powsybl-iidm-api</artifactId>
 </dependency>
 ```
 
@@ -150,8 +165,7 @@ file to analyze. This option is required and has an argument named `FILE` to get
             .hasArg()
             .argName("FILE")
             .required()
-            .build());  
-
+            .build());
 ```
 Read the [commons-cli](https://www.javadoc.io/doc/commons-cli/commons-cli/) documentation page
 to learn more.
@@ -161,7 +175,6 @@ The `run` method is in charge of running your command, implementing your busines
 ```java
     @Override
     public void run(CommandLine line, ToolRunningContext context) {
-    
     }
 ```
 
@@ -178,7 +191,7 @@ successfully:
 ```java
     Path caseFile = context.getFileSystem().getPath(line.getOptionValue(CASE_FILE));
     context.getOutputStream().println("Loading network '" + caseFile + "'");
-    Network network = Importers.loadNetwork(caseFile, context.getShortTimeExecutionComputationManager(), ImportConfig.load(), null);
+    Network network = Network.read(caseFile);
     if (network == null) {
         throw new PowsyblException("Case '" + caseFile + "' not found");
     }

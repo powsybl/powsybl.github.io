@@ -39,7 +39,7 @@ $ git ci -m "This is my message"
 Note that most IDEs can be configured in order to add a `Signed-off-by` line at the end of the commit message.
 
 ## Reporting Bugs
-If you encounter a problem with PowSyBl, the first places to ask for help are the [user mailing list](https://lists.lfenergy.org/g/powsybl) and the `#issues` [spectrum channel](https://spectrum.chat/powsybl/issues?tab=posts).
+If you encounter a problem with PowSyBl, the first places to ask for help are the [user mailing list](https://lists.lfenergy.org/g/powsybl) and the `#issues` [Slack channel](https://app.slack.com/client/TG8ALA0TB/C02CG8Q0TS6).
 
 If, after having asked for help, you suspect that you have found a bug in PowSyBl, you should report it by opening an issue in the appropriate [GitHub repository](../documentation/developer/repositories/index.md). Before creating a bug report, please **perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Apowsybl)** to see if the problem has already been reported. Prefer to add a comment to an existing issue instead of opening a new one to avoid duplications and make the triage of issues more complex.
 
@@ -47,7 +47,7 @@ If there is no already existing issue for your problem, feel free to create a ne
 
 
 ## Suggesting Enhancements
-If you are interested in a new feature to add in the PowSyBl framework, the first place to discuss it are the [developers mailing list](https://lists.lfenergy.org/g/powsybl) or the `#proposal` [spectrum channel](https://spectrum.chat/powsybl/proposal?tab=posts).
+If you are interested in a new feature to add in the PowSyBl framework, the first place to discuss it are the [developers mailing list](https://lists.lfenergy.org/g/powsybl).
 
 You can also track your proposal by filling an issue in the appropriate [GitHub repository](../documentation/developer/repositories/index.md). Before creating a feature request, please **perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Apowsybl)** to see if someone else has already asked for it. Prefer to complete an existing issue instead of opening a new one to avoid duplications and make the triage of issues more complex.
 

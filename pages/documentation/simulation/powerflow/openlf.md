@@ -155,38 +155,72 @@ load-flow:
 
 ### Specific parameters
 
+**voltageInitModeOverride**  
+Additional voltage init modes of PowSyBl OpenLoadFlow that are not present in [PowSyBl LoadFlow `voltageInitMode` Parameter](index.md#available-parameters):
+- `NONE`: no override
+- `VOLTAGE_MAGNITUDE`: specific initializer to initialize voltages magnitudes $$v$$, leaving $$\theta=0$$. Proven useful for
+unusual input data with transformers rated voltages very far away from bus nominal voltages.
+- `FULL_VOLTAGE`: voltages magnitudes $$v$$ initialized using `VOLTAGE_MAGNITUDE` initializer, $$\theta$$ initialized using a DC load flow.
+
+The default value is `NONE`.
+
 **lowImpedanceBranchMode**  
-The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance lines (when $$Z$$ is less than the $$10^{-8}$$ per-unit threshold).
+The `lowImpedanceBranchMode` property is an optional property that defines how to deal with low impedance branches
+(when $$Z$$ is less than the per-unit `lowImpedanceThreshold`, see further below).
 Possible values are:
-- Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider a low impedance line has $$R$$ and $$X$$ equal to zero.
-- Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider a low impedance line with a small value equal to the previously given threshold.
+- Use `REPLACE_BY_ZERO_IMPEDANCE_LINE` if you want to consider low impedance branches as zero impedance branches.
+- Use `REPLACE_BY_MIN_IMPEDANCE_LINE` if you want to consider low impedance branches with a value equal to the `lowImpedanceThreshold`.
+
+The default value is `REPLACE_BY_ZERO_IMPEDANCE_LINE`.
+
+**lowImpedanceThreshold**  
+The `lowImpedanceThreshold` property is an optional property that defines in per-unit the threshold used to identify low impedance branches
+(when $$Z$$ is less than the `lowImpedanceThreshold` per-unit threshold).  
+The default value is $$10^{-8}$$.
 
 **throwsExceptionInCaseOfSlackDistributionFailure**  
 The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure.
 This could happen in small synchronous component without enough generators or loads to balance the mismatch.
-In that case, the remaining active power mismatch remains on the selected slack bus.
-
-**voltageRemoteControl**  
-The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
-The default value is `true`.
+In that case, the remaining active power mismatch remains on the selected slack bus.  
+The default value is `false`.
 
 **slackBusSelectionMode**  
 The `slackBusSelectionMode` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
 - `FIRST` if you want to choose the first bus of all the network buses.
 - `NAME` if you want to choose a specific bus as the slack bus. In that case, the `slackBusesIds` property has to be filled.
-- `MOST_MESHED` if you want to choose the most meshed bus among buses with the highest nominal voltage as the slack bus. This option is required for computation with several synchronous component.
+- `MOST_MESHED` if you want to choose the most meshed bus among buses with the highest nominal voltage as the slack bus.
+This option is typically required for computation with several synchronous components.
 - `LARGEST_GENERATOR` if you want to choose the bus with the highest total generation capacity as the slack bus.
 
-Note that if you want to choose the slack bus that is defined inside the network with a slackTerminal extension, you have to use the `LoadflowParameters`
+The default value is `MOST_MESHED`.
+
+Note that if you want to choose the slack buses that are defined inside the network with
+a [slack terminal extension](../../grid/model/extensions.md#slack-terminal),
+you have to set the [PowSyBl LoadFlow `readSlackBus` Parameter](index.md#available-parameters) to `true`.
+When `readSlackBus` is set to true, `slackBusSelectionMode` is still used and serves as a secondary selection criteria:
+- for e.g. synchronous components where no slack terminal extension is present.
+- for e.g. synchronous components where more than `maxSlackBusCount` slack terminal extensions are present.
+
+**maxSlackBusCount**  
+Number of slack buses to be selected. Setting a value above 1 can help convergence on very large networks with large initial imbalances,
+where it might be difficult to find a single slack with sufficient branches connected and able to absorb or evacuate the slack power.  
+The default value is `1`.
 
 **slackBusesIds**  
 The `slackBusesIds` property is a required property if you choose `NAME` for property `slackBusSelectionMode`.
 It defines a prioritized list of buses or voltage levels to be chosen for slack bus selection (as an array, or as a comma or semicolon separated string).
 
+**slackBusCountryFilter**  
+The `slackBusCountryFilter` defines a list of countries where slack bus should be selected (as an array, or as a comma or semicolon separated string).  
+Countries are specified by their alpha 2 code (e.g. `FR`, `BE`, `DE`, ...).  
+The default value is an empty list (any country can be used for slack bus selection).
+
 **loadPowerFactorConstant**  
-The `loadPowerFactorConstant ` property is an optional boolean property. The default value is `false`. This property is used in the outer loop that distributes slack on loads if :
+The `loadPowerFactorConstant ` property is an optional boolean property. This property is used in the outer loop that distributes slack on loads if :
 - `distributedSlack` property is set to true in the [load flow default parameters](index.md#available-parameters),
 - `balanceType` property is set to `PROPORTIONAL_TO_LOAD` or `PROPORTIONAL_TO_CONFORM_LOAD` in the [load flow default parameters](index.md#available-parameters).
+
+The default value is `false`.
 
 If prerequisites fulfilled and `loadPowerFactorConstant` property is set to `true`, the distributed slack outer loop adjusts the load P value and adjusts also the load Q value in order to maintain the power factor as a constant value.
 At the end of the load flow calculation, $$P$$ and $$Q$$ at loads terminals are both updated. Note that the power factor of a load is given by this equation :
@@ -212,15 +246,159 @@ If `balanceType` equals to `PROPORTIONAL_TO_CONFORM_LOAD`, the power factor rema
 
 The default value for `loadPowerFactorConstant` property is `false`.
 
+**slackBusPMaxMismatch**  
+When slack distribution is enabled (`distributedSlack` set to `true` in LoadFlowParameters), this is the threshold below which slack power
+is considered to be distributed.  
+The default value is $$1 MW$$.
+
+**voltageRemoteControl**  
+The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
+If set to false, any existing voltage remote control is converted to a local control, rescaling the target voltage
+according to the nominal voltage ratio between the remote regulated bus and the equipment terminal bus.  
+The default value is `true`.
+
+**voltagePerReactivePowerControl**  
+Whether simulation of static VAR compensators with voltage control enabled and a slope defined should be enabled
+(See [voltage per reactive power control extension](../../grid/model/extensions.md#voltage-per-reactive-power-control)).  
+The default value is `false`.
+
+**reactivePowerRemoteControl**  
+Whether simulation of generators reactive power remote control should be enabled
+(See [remote reactive power control](../../grid/model/extensions.md#remote-reactive-power-control)).  
+The default value is `false`.
+
+**secondaryVoltageControl**  
+Whether simulation of secondary voltage control should be enabled.  
+The default value is `false`.
+
+**reactiveLimitsMaxPqPvSwitch**  
+When `useReactiveLimits` is set to `true`, this parameter is used to limit the number of times an equipment performing voltage control
+is switching from PQ to PV type. After this number of PQ/PV type switch, the equipment will not change PV/PQ type anymore.  
+The default value is `3`.
+
+**phaseShifterControlMode**
+- `CONTINUOUS_WITH_DISCRETISATION`: phase shifter control is solved by the Newton-Raphson inner-loop.
+- `INCREMENTAL`: phase shifter control is solved in the outer-loop
+
+The default value is `CONTINUOUS_WITH_DISCRETISATION`.
+
+**transformerVoltageControlMode**  
+This parameter defines which kind of outer loops is used for transformer voltage controls. We have three kinds of outer loops:  
+- `WITH_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed in the same time as the generator voltage control. The final transformer $$\rho$$ is obtained by rounding to the closest tap position. The control deadband is not taken into account.
+- `AFTER_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed after the generator voltage control. The final transformer $$\rho$$ is obtained by rounding to the closest tap position. The control deadband is taken into account.
+- `INCREMENTAL_VOLTAGE_CONTROL` means that an incremental voltage control is used. $$\rho$$ always corresponds to a tap position. Tap changes using sensitivity computations. The control deadband is taken into account.
+
+The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
+
+**incrementalTransformerVoltageControlOuterLoopMaxTapShift**  
+Maximum number of tap position change during a single iteration of the incremental voltage control outerloop.
+Applies when `transformerVoltageControlMode` is set to `INCREMENTAL_VOLTAGE_CONTROL`.  
+The default value is `3`.
+
+**shuntVoltageControlMode**  
+This parameter defines which kind of outer loops is used for the shunt voltage control. We have two kinds of outer loops: 
+- `WITH_GENERATOR_VOLTAGE_CONTROL` means that a continuous voltage control is performed in the same time as the generator voltage control. Susceptance is finally rounded to the closest section for shunt that are controlling voltage. The control deadband is not taken into account.
+- `INCREMENTAL_VOLTAGE_CONTROL` means that an incremental voltage control is used. Susceptance always corresponds to a section. Section changes using sensitivity computations. The control deadband is taken into account.
+
+The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
+
+**svcVoltageMonitoring**  
+Whether simulation of static VAR compensators voltage monitoring should be enabled.  
+The default value is `true`.
+
+**maxNewtonRaphsonIterations**  
+Maximum number of iterations for Newton-Raphson inner loop.  
+The default value is `15`.
+
+**maxOuterLoopIterations**  
+Maximum number of iterations for Newton-Raphson outer loop.  
+The default value is `20`.
+
+**newtonRaphsonStoppingCriteriaType**  
+Stopping criteria for Newton-Raphson algorithm.
+- `UNIFORM_CRITERIA`: stop when all equation mismatches are below `newtonRaphsonConvEpsPerEq` threshold.
+  `newtonRaphsonConvEpsPerEq` defines the threshold for all equation types, in per-unit 100MVA base. The default value is $$10^{-4}$$.
+- `PER_EQUATION_TYPE_CRITERIA`: stop when equation mismatches are below equation type specific thresholds:
+  - `maxActivePowerMismatch`: Defines the threshold for active power equations, in MW. The default value is $$10^{-2} MW$$.
+  - `maxReactivePowerMismatch`: Defines the threshold for reactive power equations, in MVAr. The default value is $$10^{-2} MVAr$$.
+  - `maxVoltageMismatch`: Defines the threshold for voltage equations, in per-unit. The default value is $$10^{-4}$$.
+  - `maxAngleMismatch`: Defines the threshold for angle equations, in per-unit. The default value is $$10^{-5}$$.
+  - `maxRatioMismatch`: Defines the threshold for ratio equations, in per-unit. The default value is $$10^{-5}$$.
+  - `maxSusceptanceMismatch`: Defines the threshold for susceptance equations, in per-unit. The default value is $$10^{-4}$$.
+
+The default value is `UNIFORM_CRITERIA`.
+
+**stateVectorScalingMode**  
+This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
+- `NONE`: no scaling is made
+- `LINE_SEARCH`: applies a line search strategy
+- `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to maximum 0.1p.u. and 10degrees
+
+The default value is `NONE`.
+
 **plausibleActivePowerLimit**  
 The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for:
-- slack distribution (if `balanceType` equals to `PROPORTIONAL_TO_GENERATION_P_MAX` or `PROPORTIONAL_TO_GENERATION_P`)
+- slack distribution (if `balanceType` equals to any of the `PROPORTIONAL_TO_GENERATION_<any>` types)
 - slack selection (if `slackBusSelectionMode` equals to `LARGEST_GENERATOR`)
 
 The default value is $$5000 MW$$.
 
-**addRatioToLinesWithDifferentNominalVoltageAtBothEnds**  
-The `addRatioToLinesWithDifferentNominalVoltageAtBothEnds` property is an optional property used for lines that are connected to two voltage level with different nominal voltages. If this property equals `true`, a structural ratio is taken into account. The default value of this parameter is `true`. This property should normally be left to its default value `true` to get correct load-flow results, and will be removed in a future release.
+**minPlausibleTargetVoltage** and **maxPlausibleTargetVoltage**  
+Equipments with voltage regulation target voltage outside these per-unit thresholds
+are considered suspect and are discarded from regulation prior to load flow resolution.  
+The default values are `0.8` and `1.2`.
+
+**minRealisticVoltage** and **maxRealisticVoltage**  
+These parameters are used to identify if Newton-Raphson has converged to an unrealistic state.
+For any component where a bus voltage is solved outside these per-unit thresholds, the component solution is deemed unrealistic
+and its solution status is flagged as failed.  
+The default values are `0.5` and `1.5`.
+
+**reactiveRangeCheckMode**  
+This parameter defines how to check the reactive limits $$MinQ$$ and $$MaxQ$$ of a generator. If the range is too small, the generator is discarded from voltage control.
+- `MIN_MAX` mode checks if the reactive range at $$MaxP$$ is above a threshold and if the reactive range at $$MinP$$ is not zero.
+- `MAX` mode if the reactive range at $$MaxP$$ is above a threshold.
+- `TARGET_P` if the reactive range at $$TargetP$$ is above a threshold
+
+The default value is `MAX`.
+
+**reportedFeatures**  
+This parameter allows to define a set of features which should generate additional reports (as an array, or as a comma or semicolon separated string).
+In current version this parameter can be used to request Newton-Raphson iterations report:
+- `NEWTON_RAPHSON_LOAD_FLOW`: report Newton-Raphson iteration log for load flow calculations.
+- `NEWTON_RAPHSON_SECURITY_ANALYSIS`: report Newton-Raphson iteration log for security analysis calculations.
+- `NEWTON_RAPHSON_SENSITIVITY_ANALYSIS`: report Newton-Raphson iteration log for sensitivity analysis calculations.
+
+Newton-Raphson iterations report consist in reporting:
+- the involved synchronous component
+- the involved Newton-Raphson outer loop iteration
+- for each Newton-Raphson inner loop iteration:
+  - maximum active power mismatch, the related bus Id with current solved voltage magnitude and angle.
+  - maximum reactive power mismatch, the related bus Id with current solved voltage magnitude and angle.
+  - maximum voltage control mismatch, the related bus Id with current solved voltage magnitude and angle.
+  - the norm of the mismatch vector
+
+The default value is an empty set of features to report.
+
+**networkCacheEnabled**  
+This parameter is used to run fast simulations by applying incremental modifications on the network directly to the OpenLoadFlow internal modelling.
+The cache mode allows faster runs when modifications on the network are light.
+Not all modifications types are supported yet, currently supported modifications are:
+- target voltage modification
+- switch open/close status modification. The switches to be modified must be configured via the `actionableSwitchesIds` property (as an array, or as a comma or semicolon separated string).
+
+The default value is `false`.
+
+**actionableSwitchesIds**  
+This parameter list is used if `networkCachedEnabled` is activated. It defines a list of switches that might be modified (as an array, or as a comma or semicolon separated string). When one of the switches changes its status (open/close) and a load flow is run just after, the cache will be used to a faster resolution. Note that in the implementation, all the switches of that list will be considered as retained, leading to a size increase of the Jacobian matrix. The list should have a reasonable size, otherwise the simulation without cache use should be preferred. 
+
+**alwaysUpdateNetwork**  
+Update the iIDM network state even in case of non-convergence.  
+The default value is `false`.
+
+**debugDir**  
+Allows to dump debug files to a specific directory.  
+The default value is undefined (`null`), disabling any debug files writing.
 
 ### Configuration file example
 See below an extract of a config file that could help:
@@ -228,10 +406,9 @@ See below an extract of a config file that could help:
 ```yaml
 open-loadflow-default-parameters:
   lowImpedanceBranchMode: REPLACE_BY_ZERO_IMPEDANCE_LINE
-  distributedSlack: true
   throwsExceptionInCaseOfSlackDistributionFailure: false
   voltageRemoteControl: false
-  slackBusSelectionMode: Name
+  slackBusSelectionMode: NAME
   slackBusesIds: Bus3_0,Bus5_0
   loadPowerFactorConstant: true
 ```

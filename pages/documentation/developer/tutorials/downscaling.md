@@ -53,7 +53,7 @@ Create a new Maven's `pom.xml` file in `downscaling/initial` with the following 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>4.0.0</powsybl.core.version>
+        <powsybl.core.version>5.1.1</powsybl.core.version>
     </properties>
 </project>
 ```
@@ -98,7 +98,7 @@ Now, we'll add a few required maven dependencies:
 - `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration
 - `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j`.
 - `com.powsybl:powsybl-iidm-api` to work with networks.
-- `powsybl-iidm-converter-api`, `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j` to load CIM-CGMES networks.
+- `powsybl-iidm-api`, `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j` to load CIM-CGMES networks.
 - `powsybl-time-series-api` to work with time series.
 - `powsybl-metrix-mapping` to perform downscaling. Note that the repository [powsybl-metrix](https://github.com/powsybl/powsybl-metrix) has to be compiled locally as no release are available.
 
@@ -127,11 +127,6 @@ Add the following dependencies to the `pom.xml` file:
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-iidm-impl</artifactId>
-        <version>${powsybl.core.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-iidm-converter-api</artifactId>
         <version>${powsybl.core.version}</version>
     </dependency>
     <dependency>
@@ -219,7 +214,7 @@ Files.walk(Paths.get(networksDir.toURI()))
     .filter(f -> f.toString().endsWith(".zip"))
     .forEach(zipFile -> {
         try {
-            final Network network = Importers.loadNetwork(zipFile.toFile().toString());
+            final Network network = Network.read(zipFile.toFile().toString());
             networks.add(network);
         } catch (Exception e) {
             LOGGER.error("Could not load network from file [" + zipFile.getFileName().toString() + "]", e);
@@ -338,6 +333,7 @@ final TimeSeriesMapperParameters tsMappingParams = new TimeSeriesMapperParameter
     pointRange,
     true,
     true,
+    false,
     mappingParameters.getToleranceThreshold()
 );
 ```

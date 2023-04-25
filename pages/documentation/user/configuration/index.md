@@ -66,7 +66,6 @@ Configuration properties can also be overridden using system's environment varia
 - [external-security-analysis-config](external-security-analysis-config.md)
 - [groovy-dsl-contingencies](groovy-dsl-contingencies.md)
 - [groovy-post-processor](../../grid/formats/import-post-processor.md#groovy-post-processor)
-- [hades2-default-parameters](../../simulation/powerflow/hades2.md#specific-parameters)
 - [import-export-parameters-default-value](import-export-parameters-default-value.md)
 - [javaScriptPostProcessor](../../grid/formats/import-post-processor.md#javascript-post-processor)
 - [limit-violation-default-filter](limit-violation-default-filter.md)

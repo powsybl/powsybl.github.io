@@ -19,18 +19,20 @@ Every extension is considered as serializable unless explicitly specified as non
 {:toc}
 
 ## Active power control
-This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled (with balance type on generator `Pmax`). This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
+This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled (with [balance type](../../simulation/powerflow/index.md#balanceType) on generator). This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| participate | boolean | - | yes | - | The participation status |
-| droop | double | None (repartition key) | yes | - | The participation factor equals Pmax / droop |
+| Attribute            | Type     | Unit                   | Required | Default value | Description                                  |
+|----------------------|----------|------------------------|----------|---------------|----------------------------------------------|
+| participate          | boolean  | -                      | yes      | -             | The participation status                     |
+| droop                | double   | None (repartition key) | no       | -             | The participation factor equals Pmax / droop |
+| participation factor | double   | None (repartition key) | no       | -             | Defines the participation factor explicitly   |
 
 Here is how to add an active power control extension to a generator:
 ```java
 generator.newExtension(ActivePowerControlAdder.class)
     .withParticipate(true)
     .withDroop(4)
+    .withParticipationFactor(1.5)
     .add();
 ```
 

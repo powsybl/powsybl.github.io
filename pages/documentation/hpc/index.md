@@ -1,7 +1,0 @@
----
-layout: default
----
-
-# MPI
-
-# Slurm

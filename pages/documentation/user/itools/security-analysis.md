@@ -224,6 +224,5 @@ In order to use a preprocessor, you will need to configure it in the [security-a
 Read this [documentation](../loadflow/security-analysis.md) page to learn how to configure Powsybl to use the
 `SecurityAnalysisImpl` implementation, a load-flow based implementation for security limits detection.
 
-## Hades2
-Read this [documentation](http://rte-france.github.io/hades2/index.html) page to learn how to configure Powsybl to use
-Hades2, a RTE load-flow tool, for security analysis.
+## OpenLoadFlow
+<span style="color: red">TODO</span>

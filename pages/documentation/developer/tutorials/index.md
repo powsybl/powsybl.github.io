@@ -28,3 +28,6 @@ layout: default
 
 ## Merging
 - [Create the Java code to perform merging and balances adjustment](emf.md): Learn how to create the Java code to merge multiple CIM-CGMES based IGMs and adjust the AC net positions of each control area to met the targets. This tutorial follows the European Merging Function requirements.
+
+## Network modifications scripts in groovy
+- [Modify a network through groovy scripts](network_modifications_groovy.md): Learn how to use Powsybl network modification functions in Groovy.
