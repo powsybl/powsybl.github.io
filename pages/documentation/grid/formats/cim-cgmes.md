@@ -309,7 +309,7 @@ CGMES `ExternalNetworkInjections` are injections representing the flows from an 
 A CGMES `ExternalNetworkinjection` is mapped to a PowSyBl [`Generator`](../model/index.md#generator) with attributes created as described below:
 - `MinP` is copied from CGMES `minP`
 - `MaxP` is copied from CGMES `maxP`
-- `TargetP`/`TargetQ` are set from `SSH` or `SV` values depending on which are defined. CGMES values for `p`/`q` are given with load sign convention, so a change in sign is applied when copying them to `TargetP`/`TargetQ`. If underfined, they are set to `0`.
+- `TargetP`/`TargetQ` are set from `SSH` or `SV` values depending on which are defined. CGMES values for `p`/`q` are given with load sign convention, so a change in sign is applied when copying them to `TargetP`/`TargetQ`. If undefined, they are set to `0`.
 - `EnergySource` is set as `OTHER`
 
 <span style="color: red">TODO reactive limits</span>
