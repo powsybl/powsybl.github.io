@@ -422,7 +422,7 @@ If the CGMES `Switch` has its ends in different voltage levels inside the same I
 The created PowSyBl `Switch` has its attributes defined as described above.
 
 If the `Switch` has one side inside the boundary area and the other outside the boundary area, the importer checks if another linking equipment is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
-- If it is no other linking equipment linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
+- If there is no other linking equipment linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
 - If there are one or more other linking equipment linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
 - If there is exactly one other linking equipment linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
 - If there are two or more other linking equipments linked to this `TopologicalNode` in different `SubGeographicalRegions`:
