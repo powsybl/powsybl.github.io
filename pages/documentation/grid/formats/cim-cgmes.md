@@ -350,7 +350,7 @@ CGMES `PowerTransformers` represent electrical device consisting of two or more 
 
 ##### PowerTransformer with two PowerTransformerEnds
 
-If a CGMES `PowerTransformer` with two `PowerTransformerEnds` has them both outside the boundary area, it is mapped to a PowSyBl [`TwoWindingsTransformer`](../model/index.md#two-windings-transformer).
+If a CGMES `PowerTransformer` has two `PowerTransformerEnds`, both outside the boundary area, it is mapped to a PowSyBl [`TwoWindingsTransformer`](../model/index.md#two-windings-transformer).
 Please note that in this case, if `PowerTransformerEnds` are in different substations, the substations are merged into one.
 
 If a CGMES `PowerTransformer` with two `PowerTransformerEnds` has them both completely inside the boundary area, if the boundary area is not imported, it is ignored. Otherwise, it is mapped to a PowSyBl [`TwoWindingsTransformer`](../model/index.md#two-windings-transformer).
