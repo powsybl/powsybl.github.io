@@ -431,7 +431,7 @@ If the `Switch` has one side inside the boundary area and the other outside the 
 
 If the CGMES `Switch`  is mapped to a PowSybl [`DanglingLine`](../model/index.md#dangling-line), its attributes are as described below:
 - `R`, `X`, `G`, `B` are `0.0`;
-- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries.
+- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries;
 - `P0` is copied from CGMES `P` of the terminal at boundary side
 - `Q0` is copied from CGMES `Q` of the terminal at boundary side
 
