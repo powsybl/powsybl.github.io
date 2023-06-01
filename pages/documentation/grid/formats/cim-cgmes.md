@@ -429,7 +429,7 @@ If the `Switch` has one side inside the boundary area and the other outside the 
   - If there are only two linking equipment with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `EquivalentBranches` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
   - Otherwise, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
 
-If the CGMES `Switch`  is mapped to a PowSybl [`DanglingLine`](../model/index.md#dangling-line), its attributes are as described below:
+If the CGMES `Switch` is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line), its attributes are as described below:
 - `R`, `X`, `G`, `B` are `0.0`;
 - `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries;
 - `P0` is copied from CGMES `P` of the terminal at boundary side;
