@@ -186,12 +186,12 @@ If the `ACLineSegment` is outside the boundary area, it will be mapped to a PowS
 
 If the `ACLineSegment` is completely inside the boundary area, if the boundaries are not imported, it is ignored. Otherwise, it is mapped to a PowSyBl [`Line`](../model/index.md#line).
 
-If the `ACLineSegment` has one side inside the boundary area and one side outside the boundary area, the importer checks if another linking equipment is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
-- If there is no other linking equipment linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
-- If there are one or more other linking equipments linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
-- If there is exactly one other linking equipment linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
-- If there are two or more other linking equipments linked to this `TopologicalNode` in different `SubGeographicalRegions`:
-  - If there are only two linking equipments with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSyBl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `ACLineSegments` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+If the `ACLineSegment` has one side inside the boundary area and one side outside the boundary area, the importer checks if another linking device is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
+- If there is no other linking device linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
+- If there are one or more other linking devices linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+- If there is exactly one other linking device linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
+- If there are two or more other linking devices linked to this `TopologicalNode` in different `SubGeographicalRegions`:
+  - If there are only two linking devices with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSyBl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `ACLineSegments` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
   - Otherwise, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
 
 If the `ACLineSegment` is mapped to a PowSyBl [`Line`](../model/index.md#line):
@@ -228,12 +228,12 @@ If the `EquivalentBranch` is outside the boundary area, it will be mapped to a P
 
 If the `EquivalentBranch` is completely inside the boundary area, if the boundaries are not imported, it is ignored. Otherwise, it is mapped to a PowSyBl [`Line`](../model/index.md#line).
 
-If the `EquivalentBranch` has one side inside the boundary area and one side outside the boundary area, the importer checks if another linking equipment is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
-- If there is no other linking equipment linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
-- If there are one or more other linking equipments linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
-- If there is exactly one other linking equipment linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSyBl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
-- If there are two or more other linking equipments linked to this `TopologicalNode` in different `SubGeographicalRegions`:
-  - If there are only two linking equipments with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `EquivalentBranches` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+If the `EquivalentBranch` has one side inside the boundary area and one side outside the boundary area, the importer checks if another linking device is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
+- If there is no other linking device linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
+- If there are one or more other linking devices linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+- If there is exactly one other linking device linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSyBl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
+- If there are two or more other linking devices linked to this `TopologicalNode` in different `SubGeographicalRegions`:
+  - If there are only two linking devices with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `EquivalentBranches` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
   - Otherwise, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
 
 If the `EquivalentBranch` is mapped to a PowSyBl [`Line`](../model/index.md#line):
@@ -355,12 +355,12 @@ Please note that in this case, if `PowerTransformerEnds` are in different substa
 
 If a CGMES `PowerTransformer` has two `PowerTransformerEnds`, both completely inside the boundary area, and if the boundary area is not imported, the `PowerTransformer` is ignored. Otherwise, it is mapped to a PowSyBl [`TwoWindingsTransformer`](../model/index.md#two-windings-transformer).
 
-If the `PowerTransformer` has one `PowerTransformerEnd` inside the boundary area and the other outside the boundary area, the importer checks if another linking equipment is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
+If the `PowerTransformer` has one `PowerTransformerEnd` inside the boundary area and the other outside the boundary area, the importer checks if another linking device is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
 - If there is no other linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
-- If there are one or more other linking equipments linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
-- If there is exactly one other linking equipment linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSyBl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
-- If there are two or more other linking equipments linked to this `TopologicalNode` in different `SubGeographicalRegions`:
-  - If there are only two linking equipments with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `EquivalentBranches` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+- If there are one or more other linking devices linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+- If there is exactly one other linking device linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSyBl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
+- If there are two or more other linking devices linked to this `TopologicalNode` in different `SubGeographicalRegions`:
+  - If there are only two linking devices with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `EquivalentBranches` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
   - Otherwise, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
 
 In every case, a `PowerTransformer` with two `PowerTransformerEnds` is mapped to an intermediary model that correspond to a PowSyBl [`TwoWindingsTransformer`](../model/index.md#two-windings-transformer).
@@ -421,12 +421,12 @@ If the CGMES `Switch` has its ends both inside the same voltage level, it is map
 If the CGMES `Switch` has its ends in different voltage levels inside the same IGM, it is mapped to a [`Switch`](../model/index.md#breakerswitch) but the voltage levels, and potentially the substations, that contain its ends are merged: they are mapped to only one voltage level and/or substation.
 The created PowSyBl `Switch` has its attributes defined as described above.
 
-If the `Switch` has one side inside the boundary area and the other outside the boundary area, the importer checks if another linking equipment is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
-- If there is no other linking equipment linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
-- If there are one or more other linking equipment linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
-- If there is exactly one other linking equipment linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
-- If there are two or more other linking equipments linked to this `TopologicalNode` in different `SubGeographicalRegions`:
-  - If there are only two linking equipment with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSyBl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `EquivalentBranches` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+If the `Switch` has one side inside the boundary area and the other outside the boundary area, the importer checks if another linking device is linked to the same CGMES [`TopologicalNode`](#TopologicalNode) in the boundary area.
+- If there is no other linking device linked to this `TopologicalNode`, it is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line).
+- If there are one or more other linking devices linked to this `TopologicalNode` and they all are in the same `SubGeographicalRegion`, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
+- If there is exactly one other linking device linked to this `TopologicalNode` in another `SubGeographicalRegion`, they are both mapped to PowSybl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line).
+- If there are two or more other linking devices linked to this `TopologicalNode` in different `SubGeographicalRegions`:
+  - If there are only two linking devices with their boundary terminal connected **and** in different `SubGeographicalRegion`, they are both mapped to PowSyBl [`HalfLines`](../model/index.md#half-line), part of the same PowSyBl [`TieLine`](../model/index.md#tie-line) and all other `EquivalentBranches` are mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
   - Otherwise, they are all mapped to PowSyBl [`DanglingLines`](../model/index.md#dangling-line).
 
 If the CGMES `Switch` is mapped to a PowSyBl [`DanglingLine`](../model/index.md#dangling-line), its attributes are as described below:
