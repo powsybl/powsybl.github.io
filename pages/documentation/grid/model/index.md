@@ -736,7 +736,6 @@ A VSC converter station is made with switching devices that can be turned both o
 | --------- | ---- | ----------- |
 | $$VoltageSetpoint$$ | kV | The voltage setpoint for regulation |
 | $$ReactivePowerSetpoint$$ | MVar | The reactive power setpoint for regulation |
-| $$PowerFactor$$ | % | Ratio between the active power $$P$$ and the apparent power $$S$$. |
 
 **Specifications**
 
