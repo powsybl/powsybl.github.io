@@ -45,7 +45,7 @@ To start from scratch, you need to create a file called `pom.xml` in `emf` with 
     <parent>
       <groupId>com.powsybl</groupId>
       <artifactId>powsybl-parent</artifactId>
-      <version>3</version>
+      <version>10</version>
       <relativePath/>
     </parent>
 
@@ -54,7 +54,7 @@ To start from scratch, you need to create a file called `pom.xml` in `emf` with 
     <version>1.3.0-SNAPSHOT</version>
   
     <properties>
-      <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
+      <powsybl-dependencies.version>2023.2.4</powsybl-dependencies.version>
       <slf4j.version>1.7.22</slf4j.version>
       <logback.version>1.2.9</logback.version>
     </properties>

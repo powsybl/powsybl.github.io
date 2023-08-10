@@ -38,7 +38,7 @@ Start by adding the powsybl-dependencies module that ensures compatibility betwe
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-dependencies</artifactId>
-        <version>2023.0.1</version>
+        <version>2023.2.4</version>
         <type>pom</type>
         <scope>import</scope>
     </dependency>

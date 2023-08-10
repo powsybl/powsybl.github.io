@@ -47,7 +47,7 @@ Create a new Maven's `pom.xml` file in `loadflow` with the following content:
     <parent>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-parent</artifactId>
-        <version>8</version>
+        <version>10</version>
         <relativePath/>
     </parent>
 
@@ -55,7 +55,7 @@ Create a new Maven's `pom.xml` file in `loadflow` with the following content:
 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
-        <powsybl-dependencies.version>2023.3.1</powsybl-dependencies.version>
+        <powsybl-dependencies.version>2023.2.4</powsybl-dependencies.version>
     </properties>
 </project>
 ```

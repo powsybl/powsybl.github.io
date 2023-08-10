@@ -45,7 +45,7 @@ Create a new Maven's `pom.xml` file with the following content:
     <packaging>pom</packaging>
 
     <properties>
-        <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
+        <powsybl-dependencies.version>2023.2.4</powsybl-dependencies.version>
         <slf4j.version>1.7.22</slf4j.version>
         <logback.version>1.2.9</logback.version>
     </properties>
