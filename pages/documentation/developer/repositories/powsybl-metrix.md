@@ -12,6 +12,7 @@ The PowSyBl Metrix [repository](https://github.com/powsybl/powsybl-metrix) provi
 
 ## Releases
 
-| Version | Release date | Release notes | API documentation |
-| ------- | ------------ | ------------- | ----------------- |
-| TODO | TODO | TODO | TODO |
+| Version | Release date | Release notes                                                                  | API documentation |
+|---------|--------------|--------------------------------------------------------------------------------|-------------------|
+| 1.0.3   | 2023-08-09   | [Release notes](https://github.com/powsybl/powsybl-metrix/releases/tag/v1.0.3) | -                 |
+| 1.0.2   | 2023-08-01   | [Release notes](https://github.com/powsybl/powsybl-metrix/releases/tag/v1.0.2) | -                 |

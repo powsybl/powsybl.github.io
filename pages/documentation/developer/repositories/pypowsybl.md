@@ -31,6 +31,12 @@ The available features are:
 
 | Version | Release date | Release notes                                                              | API documentation                                             |
 |---------|--------------|----------------------------------------------------------------------------|---------------------------------------------------------------|
+| 0.24.0  | 2023-07-25   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.24.0) | -                                                             |
+| 0.23.2  | 2023-06-27   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.23.2) | -                                                             |
+| 0.23.1  | 2023-06-16   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.23.1) | -                                                             |
+| 0.23.0  | 2023-06-13   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.23.0) | -                                                             |
+| 0.22.0  | 2023-04-19   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.22.0) | -                                                             |
+| 0.21.0  | 2023-02-15   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.21.0) | -                                                             |
 | 0.20.0  | 2023-01-18   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.20.0) | -                                                             |
 | 0.19.0  | 2022-10-26   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.19.0) | -                                                             |
 | 0.18.0  | 2022-09-23   | [Release notes](https://github.com/powsybl/pypowsybl/releases/tag/v0.18.0) | [readthedocs.io](https://pypowsybl.readthedocs.io/en/stable/) |
