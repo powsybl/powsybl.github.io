@@ -14,7 +14,7 @@ SingleLineDiagram.draw(network, "N", "/tmp/n.svg");
 
 ```java
 SldParameters sldParameters = new SldParameters().setSvgParameters(new SvgParameters().setUseName(true));
-SingleLineDiagram.draw(network, "A", Paths.get("/tmp/a.svg"), sldParameters);
+SingleLineDiagram.draw(network, "A", Path.of("/tmp/a.svg"), sldParameters);
 ```
 
 ## Network-area diagram
