@@ -12,14 +12,14 @@ latex: true
 When a short circuit occurs in a network, the currents on equipment can be so high that they exceed their rated values.
 Simulating faults on the network is important to verify that the short circuits are well detected and do not damage the equipments.
 
-The short circuit API allows to compute the currents and voltages on a network after a fault. 
-For the moment, no simulator is available to compute the analysis, but it is possible to plug one to this API.
+The short-circuit API allows the calculation of currents and voltages on a network after a fault. 
+For the moment, no simulator is available to compute the analysis, but it is possible to connect one to this API.
 
 
 ## Parameters
 
 ### Available parameters
-The parameters to be used for the short circuit calculation should be defined in the config.yml file. For example, here are some valid short circuit parameters:
+The parameters to be used for the short-circuit calculation should be defined in the config.yml file. For example, here are some valid short-circuit parameters:
 
 ```yaml
 short-circuit-parameters:
@@ -37,12 +37,12 @@ short-circuit-parameters:
   voltage-ranges: /path/to/voltage/ranges/file
 ```
 
-Available parameters in the short circuit API are stored in `com.powsybl.shortcircuit.ShortCircuitParameters`. They are all optional.
+Available parameters in the short-circuit API are stored in `com.powsybl.shortcircuit.ShortCircuitParameters`. They are all optional.
 
 **with-limit-violations**
 
 This property indicates whether limit violations should be returned after the computation. The violations that should be used are `LOW_SHORT_CIRCUIT_CURRENT` and `HIGH_SHORT_CIRCUIT_CURRENT`.
-It can be used to filter results where the computed short circuit current is too high or too low. The default value is `true`.
+It can be used to filter results where the computed short-circuit current is too high or too low. The default value is `true`.
 
 **with-fortescue-result**
 
@@ -53,14 +53,15 @@ The default value is `true`.
 
 **with-feeder-result**
 
-This property indicates if the contributions of each feeder to the short circuit current at the fault should be computed. 
+This property indicates if the contributions of each feeder to the short-circuit current at the fault should be computed. 
 If the property is set to true, the results can be stored in class `com.powsybl.shortcircuit.FeederResult`. 
 The default value is `true`.
 
 **study-type**
 
-This property indicates the type of short circuit study. It can be:
-- `SUB_TRANSIENT`: it is the first stage of the short circuit, right when the fault happens. The subtransient reactance of generators will be used. It is also possible to define a coefficient to apply to the transient reactance to get it via the parameter `sub-transient-coefficient`.
+This property indicates the type of short-circuit study. It can be:
+- `SUB_TRANSIENT`: it is the first stage of the short circuit, right when the fault happens. In this case, it is the subtransient reactance of generators that is used. 
+This reactance can either be stored in the network or calculated from the transient reactance of generators with a coefficient defined by the parameter `sub-transient-coefficient`.
 - `TRANSIENT`: the second stage of the short circuit, before the system stabilizes. The transient reactance of generators will be used.
 - `STEADY_STATE`: the last stage, once all transient effects are gone.
 
@@ -68,7 +69,7 @@ The default value is `TRANSIENT`. The transient and subtransient reactances of t
 
 **sub-transient-coefficient**
 
-This property allows to define an optional coefficient, in case of sub-transient study, to apply to the transient reactance of generators to get the sub-transient one:
+This property allows to define an optional coefficient, in case of a subtransient study, to apply to the transient reactance of generators to get the subtransient one:
 
 $$X''_d = c \times X'_d$$
 
@@ -86,12 +87,13 @@ This property indicates if the voltage profile should be computed on every node 
 
 **min-voltage-drop-proportional-threshold**
 
-This property indicates a threshold to filter the voltage results. Only the nodes where the voltage drop due to the short circuit is above this property are be kept. 
+This property indicates a threshold to filter the voltage results. Thus, it only makes sense if `with-voltage-result` is set to true. 
+Only the nodes where the voltage drop due to the short circuit is above this property are kept. 
 The voltage drop is calculated as the ratio between the initial voltage magnitude on the node and the voltage magnitude on the node after the fault. The default value is `0`.
 
 **with-loads**
 
-This property indicates if loads should be taken into account during the computation. If `true`, the loads will be modelled as an equivalent reactance. If `false`, then they will be ignored.
+This property indicates whether loads should be taken into account during the calculation. If `true`, the loads are modelled as an equivalent reactance and the equivalent reactance at the fault point will be lowered. If `false`, then they will be ignored.
 
 **with-shunt-compensators**
 
