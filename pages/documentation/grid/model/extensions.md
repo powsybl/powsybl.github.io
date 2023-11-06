@@ -263,10 +263,10 @@ A load is described by its active power setpoint $$P0$$ and its reactive power s
 - In the total amount of reactive power what is fixed and what is time-dependant (also called variable).
 
 | Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| variableActivePower | double | MW | yes | - | The part of the active power setpoint that is considered variable |
-| fixedActivePower | double | MVar | yes | - | The part of the active power setpoint that is considered constant |
-| variableReactivePower | double | MW | yes | - | The part of the reactive power setpoint that is considered variable |
+| --------- | ---- |------| -------- | ------------- | ----------- |
+| variableActivePower | double | MW   | yes | - | The part of the active power setpoint that is considered variable |
+| fixedActivePower | double | MW   | yes | - | The part of the active power setpoint that is considered constant |
+| variableReactivePower | double | MVar | yes | - | The part of the reactive power setpoint that is considered variable |
 | fixedReactivePower | double | MVar | yes | - | The part of the reactive power setpoint that is considered constant |
 
 Here is how to add an load detail extension to a load:
