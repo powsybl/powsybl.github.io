@@ -303,20 +303,11 @@ if (PREPARE_BALANCE_COMPUTATION) {
     BalanceComputationResult result = balanceComputation.run(mergedNetwork, mergedNetwork.getVariantManager().getWorkingVariantId(), parameters).join();
     System.out.println(result.getStatus());
 
-    // Generate merged SV file for the CGM.
-    validationParameters.getOutputDir().ifPresent(outputDir -> {
-        try (OutputStream os = Files.newOutputStream(Paths.get(outputDir + "/SV.xml"))) {
-            XMLStreamWriter writer = XmlUtil.initializeWriter(true, "   ", os);
-            StateVariablesExport.write(mergedNetwork, writer, createContext(mergedNetwork, validNetworks));
-        } catch (XMLStreamException e) {
-            throw new UncheckedXmlStreamException(e);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    });
+      // Generate merged SV file for the CGM.
+      validationParameters.getOutputDir().ifPresent(outputDir ->
+      exportNetwork(mergedNetwork, Path.of(outputDir), "SV", Set.of("SV")));
 }
 ```
-With the `createContext` method being a method creating a `CgmesExportContext`, then setting the scenario time and for each IGM from `networks` adding the topological nodes and dependencies.
 
 Now, if you run the code and check the output directory, you should get the logs and the SV file.
 
