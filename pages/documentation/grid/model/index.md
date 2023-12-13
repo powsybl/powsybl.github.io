@@ -10,21 +10,21 @@ latex: true
 
 ## Introduction
 
-PowSyBl uses an internal grid model initially developed under the iTesla project, a research project funded by the [European Union 7th Framework programme](https://cordis.europa.eu/project/id/283012) (FP7). The grid model is known as IIDM (iTesla Internal Data Model). One of the iTesla outputs was a toolbox designed to support the decision-making process of power system operation from two-days ahead to real time. The IIDM grid model was at the center of the toolbox.
+Powsybl features are strongly based on an internal grid model initially developed under the iTesla project, a research project funded by the [European Union 7th Framework programme](https://cordis.europa.eu/project/id/283012) (FP7). The grid model is known as `iidm` (iTesla Internal Data Model). One of the iTesla outputs was a toolbox designed to support the decision-making process of power system operation from two-days ahead to real time. The `iidm` grid model was at the center of the toolbox.
 
-To build an electrical network model using IIDM first the substations must be defined. The equipment in a substation (loads, generators, shunts, static VAR compensators, DC converters ...) are grouped in voltage levels. Transformers present in a substation connect its different voltage levels. Transmission lines (AC and DC) connect the substations.
+To build an electrical network model, the substations must be defined first. The equipments of a substation (bus bar sections, switches, buses, loads, generators, shunt compensators, static VAR compensators, HVDC converters stations, etc.) are grouped in voltage levels. Transformers present in a substation connect its different voltage levels. Transmission lines (AC and DC) connect the substations.
 
-The PowSyBl grid model allows a full representation of the substation connectivity where all the switching devices and busbars are defined (node/breaker level). Automated topology calculation permits obtaining views of the network up to the bus/branch level.
+The grid model allows a full representation of the substation connectivity where all the switching devices and bus bar sections are defined, this topology is called node/breaker view. Automated topology calculation permits obtaining views of the network up to bus/breaker view then to bus view.
 
-Different states of the network can be stored together with the power system model efficiently. The set of attributes that define a given state of the network (steady state hypothesis and state variables) are collectively organized in variants. The user can create and remove variants as needed. Setting and getting variant dependent attributes on network objects use the current variant.
+Different states of the network can be stored together with the power system model efficiently. The set of attributes that define a given state of the network (both steady state hypothesis and state variables) are collectively organized in variants. The user can create and remove variants as needed. Setting and getting variant dependent attributes on network objects use the current variant.
 
-A set of PowSyBl networks can be merged together in a single network view, and sub-parts of the network model can be easily extracted as separate networks.
+A set of networks can be merged together in a single network. The initial subnetworks are kept and can be easily retrieved or detached if needed.
 
-All elements modeled in the network are identified through a unique ID, and optionally described by a name that is easier to interpret for a human. All components can be [extended](extensions.md) by the user to incorporate additional structured data.
+Almost all elements modeled in the network are identified through a unique `id`, and optionally described by a `name` that is easier to interpret for a human. Almost all components can be [extended](extensions.md) by the user to incorporate additional structured data.
 
-## Network core model
+## Network and subnetwork
 
-In the following sections the different network components are described in terms of its main attributes and electro-technical representation. The attributes shared by all the network components are described in the next table:
+In the following sections the different network components are described in terms of its main attributes and electrotechnical representation. The attributes shared by all the network components are described in the next table:
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -34,15 +34,17 @@ In the following sections the different network components are described in term
 | $$Aliases$$ | Additional unique identifiers associated with each network component |
 | $$Properties$$ | To add additional data items to network components |
 
-All equipment and the network itself are identified by a unique identifier which is the only required attribute. They can have a human readable name. offer the possibility of adding additional unique identifiers to each component. An alias can be qualified to indicate what it corresponds to.
+All equipment and the network itself are identified by a unique identifier which is the only required attribute. They can have a human-readable name. offer the possibility of adding additional unique identifiers to each component. An alias can be qualified to indicate what it corresponds to.
 
 Properties allow associating additional arbitrary data items under the general schema of pairs `<Key, Value>`.
 
 To identify non-physical network components, one can use the fictitious property that is set to `false` by default.
 
+A network can contain several subnetworks.
+
 ### Validation level
 
-<span style="color: red">TODO</span>
+The validation level can be `EQUIPMENT` or `STEADY_STATE_HYPOTHESIS`. A network at equipment level is a network with missing steady-state hypothesis. This occurs just after SCADA systems, before any state estimation. Once all steady state hypothesis are filled, meaning that a load flow engine has all the data needed to perform a computation, the level switches to `STEADY_STATE_HYPOTHESIS`. For some processes, a minimal validation level of the network is required.
 
 ### Network
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
@@ -60,18 +62,6 @@ In the PowSyBl grid model, the Network contains [substations](#substation), whic
 The `SourceFormat` attribute is a required attribute that indicates the origin of the network model automatically set by the [importers](../../index.html#grid-formats). If the case date and the forecast distance cannot be found in the case file, the network is considered as a snapshot: the case date is set to the current date, and the forecast distance is set to `0`.
 
 **Available extensions**
-
-- [CGMES Control Areas](extensions.md#cgmes-control-areas)
-- [CGMES SSH Metadata](extensions.md#cgmes-ssh-metadata)
-- [CGMES SV Metadata](extensions.md#cgmes-sv-metadata)
-- [CIM Characteristics](extensions.md#cim-characteristics)
-
-*Non-serializable extensions*
-
-- [CGMES Conversion Context Extension](extensions.md#cgmes-conversion-context-extension)
-- [CGMES Model Extension](extensions.md#cgmes-model-extension)
-- [PSS/E Conversion Context Extension](extensions.md#psse-conversion-context-extension)
-- [PSS/E Model Extension](extensions.md#psse-model-extension)
 
 ### Substation
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Substation.html)
@@ -95,8 +85,7 @@ All three attributes are optional.
 ### Voltage Level
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VoltageLevel.html)
 
-A voltage level contains equipment with the same nominal voltage.
-Two voltage levels may be connected through lines (when they belong to different substations) or through transformers (they must be located within the same substation).
+A voltage level contains equipment with the same nominal voltage. Two voltage levels may be connected through lines (when they belong to different substations) or through transformers (they must be located within the same substation).
 
 **Characteristics**
 
@@ -134,24 +123,24 @@ When defining the model, the user has to specify how the different equipment con
 ### Generator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Generator.html)
 
-A generator is an active equipment that injects active power, and injects or consumes reactive power. It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
+A generator is an equipment that injects or consumes active power, and injects or consumes reactive power. It may be controller to hold a voltage or reactive target somewhere in the network, not necessarily directly where it is connected. In that specific case, the voltage or reactive power control is remote. 
 
 ![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="40%" .center-image}
 
 **Characteristics**
 
-| Attribute | Unit | Description |
-| --------- | ---- | ----------- |
-| $$MinP$$ | MW | Minimum generator active power output |
-| $$MaxP$$ | MW | Maximum generator active power output |
-| $$ReactiveLimits$$ | MVar | Operational limits of the generator (P/Q/V diagram) |
-| $$RatedS$$ | MVA | The rated nominal power |
-| $$TargetP$$ | MW | The active power target |
-| $$TargetQ$$ | MVAr | The reactive power target |
-| $$TargetV$$ | kV | The voltage target |
+| Attribute | Unit | Description                                                 |
+| --------- | ---- |-------------------------------------------------------------|
+| $$MinP$$ | MW | Minimum generator active power output                       |
+| $$MaxP$$ | MW | Maximum generator active power output                       |
+| $$ReactiveLimits$$ | MVar | Operational limits of the generator (P/Q/V diagram)         |
+| $$RatedS$$ | MVA | The rated nominal power                                     |
+| $$TargetP$$ | MW | The active power target                                     |
+| $$TargetQ$$ | MVAr | The reactive power target at local terminal                 |
+| $$TargetV$$ | kV | The voltage target at regulating terminal                   |
 | $$RegulatingTerminal$$ |  | Associated node or bus for which voltage is to be regulated |
-| $$VoltageRegulatorOn$$ |  | True if the generator regulates voltage |
-| $$EnergySource$$ |  | The energy source harnessed to turn the generator |
+| $$VoltageRegulatorOn$$ |  | True if the generator regulates voltage                     |
+| $$EnergySource$$ |  | The energy source harnessed to turn the generator           |
 
 **Specifications**
 
@@ -175,11 +164,7 @@ Target values for generators (`TargetP` and `TargetQ`) follow the generator sign
 ### Load
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Load.html)
 
-A load is a passive equipment representing a delivery point that consumes active and reactive power.
-
-<!---
-<span style="color:red"> TODO: add a sketch where the sign convention is indicated.</span>
--->
+A load is a passive equipment representing a delivery point that consumes or produces active and reactive power.
 
 **Characteristics**
 
@@ -195,7 +180,7 @@ A load is a passive equipment representing a delivery point that consumes active
     - Consumptions are positive.
 
 **Metadata**
-In IIDM, loads comprise the following metadata:
+In the grid model, loads comprise the following metadata:
 - The load type, which can be:
     - `UNDEFINED`
     - `AUXILIARY`
@@ -214,10 +199,6 @@ In IIDM, loads comprise the following metadata:
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Battery.html)
 
 A battery on the electric grid is an energy storage device that is either capable of capturing energy from the grid or of injecting it into the grid. The electric energy on the grid side is thus transformed into chemical energy on the battery side and vice versa. The power flow is bidirectional and it is controlled via a power electronic converter.
-
-<!---
-<span style="color:red"> TODO: add a sketch.</span>
---> 
 
 **Characteristics**
 
@@ -240,12 +221,7 @@ A battery on the electric grid is an energy storage device that is either capabl
 ### Dangling line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/DanglingLine.html)
 
-The IIDM network may be connected to other networks for which a full description is not available.
-In this case, a boundary line exists between the two networks. In the IIDM model of the fully described network,
-that connection is represented through a dangling line, which represents the part of that boundary line which is known.
-A dangling line is thus a passive or active component that aggregates a line chunk and a constant power injection, in passive-sign convention.
-The active and reactive power setpoints are fixed: the injection represents the power flow that would occur through the connection, were the other
-network fully described.
+A network may be connected to other networks for which a full description is not available or not wanted. In this case, a boundary line exists between the two networks. In the network of interest, that connection could be represented through a dangling line, which represents the part of that boundary line which is located in it. A dangling line is thus a passive or active component that aggregates a line chunk and a constant power injection, in passive-sign convention. The active and reactive power setpoints are fixed: the injection represents the power flow that would occur through the connection, were the other network fully described.
 
 ![Dangling line model](img/index/danglingLine.svg){: width="50%" .center-image}
 
@@ -284,9 +260,9 @@ Optional:
 - $$R$$, $$X$$, $$G$$ and $$B$$ correspond to a fraction of the original line and have to be consistent with the declared length of the
 dangling line.
 
-In case the line is a boundary, a UCTE Xnode code is defined besides the characteristics of the Table. See the [UCTE-DEF](../importer/ucte.md) documentation
-page to learn more about this format. This code is actually related to ENTSOE, not only UCTE: it is a key to match two dangling lines and reconstruct the full boundary line.
+In case the line is a boundary, a pairing key $$pairingKey$$ (in previous network versions $$UcteXnodeCode$$) is defined besides the characteristics of the Table. It is a key to match two dangling lines and reconstruct the full boundary line, for both UCTE or CIM-CGMES formats.
 
+// TODO, add boundary
 
 **Available extensions**
 
@@ -296,19 +272,14 @@ page to learn more about this format. This code is actually related to ENTSOE, n
 - [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
 - [Injection Observability](extensions.md#injection-observability)
 - [Measurements](extensions.md#measurements)
-- [X-Node](extensions.md#x-node)
 
 ### Shunt Compensator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ShuntCompensator.html)
 
-<!---
-<span style="color:red"> TODO: add a sketch with the sign convention.</span>
--->
-
 A shunt compensator represents a shunt capacitor or reactor or a set of switchable banks of shunt capacitors or reactors in the network. A section of a shunt compensator
 is an individual capacitor or reactor: if its reactive power (Q) is negative, it is a capacitor; if it is positive, it is a reactor.
 
-There are two models of shunt compensators in IIDM: linear shunt compensators and non-linear shunt compensators.
+There are two supported models of shunt compensators: linear shunt compensators and non-linear shunt compensators.
 
 A linear shunt compensator has banks or sections with equal admittance values.
 A non-linear shunt compensator has banks or sections with different admittance values.
@@ -349,8 +320,8 @@ We expect $$bPerSection$$ to be a non zero value. The disconnected status of the
 
 | Attribute | Unit | Description |
 | --------- | ---- |------------ |
-| $$B$$ | S | The Positive sequence shunt (charging) susceptance of the section |
-| $$G$$ | S | The Positive sequence shunt (charging) conductance of the section |
+| $$B$$ | S | The accumulated positive sequence shunt (charging) susceptance of the section if this section and all the previous ones are activated |
+| $$G$$ | S | The accumulated positive sequence shunt (charging) conductance of the section if this section and all the previous ones are activated |
 
 $$B$$ and $$G$$ attributes can be equal zero, but the disconnected status of the non linear shunt compensator can be modeled by setting the $$SectionCount$$ attribute to zero. The section which $$SectionCount$$ equal to $$1$$ is the first effective section, and it would be more efficient to affect it a non zero susceptance.   
 
@@ -364,7 +335,7 @@ from the network.
 - The current section count is expected to be greater than one and lesser or equal to the maximum section count.
 - Regulation for shunt compensators does not necessarily model automation, it can represent human actions on the network
 e.g. an operator activating or deactivating a shunt compensator). However, it can of course be integrated on a power flow
-calculation or not, depending of what is wanted to be shown.
+calculation or not, depending on what is wanted to be shown.
 - In case of a capacitor, the value for its Q will be negative.
 - In case of a reactor, the value for its Q will be positive.
 
@@ -379,8 +350,6 @@ calculation or not, depending of what is wanted to be shown.
 ### Static VAR Compensator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/StaticVarCompensator.html)
 
-<span style="color:red"> TODO: add a description with sign convention.</span>  
-<span style="color:red"> TODO: add a sketch with the sign convention.</span>  
 It may be controlled to hold a voltage or reactive setpoint somewhere in the network (not necessarily directly where it is connected).
 Static VAR compensators follow a passive-sign convention:
   - Flow out from bus has positive sign.
@@ -410,8 +379,8 @@ In IIDM the static VAR compensator also comprises some metadata:
 - The regulation mode, which can be:
     - `VOLTAGE`
     - `REACTIVE_POWER`
-    - `OFF`
-Note that it is different from the generators' regulation definition, which is only done through a boolean.
+    - `OFF`  
+Note that it is different from the generators' regulation definition, which is only done through a boolean. `OFF` is equivalent to a disconnected equipment.
 - The regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
 
 **Available extensions**
@@ -423,17 +392,12 @@ Note that it is different from the generators' regulation definition, which is o
 - [Measurements](extensions.md#measurements)
 - [VoltagePerReactivePowerControl](extensions.md#voltage-per-reactive-power-control)
 
-### Branches
-
-A branch in IIDM Grid model is any AC equipment with two or more connection points to the network.
-Below are the different types of branches supported by PowSyBl.
-
-#### Line
+### Line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Line.html)
 
-AC Power lines are modeled using a standard $$\pi$$ model with distributed parameters.
+AC transmission lines are modeled using a standard $$\pi$$ model with distributed parameters. A `Line` is a `Branch`, that models equipment with two terminals (or two sides). For the time being, a branch is an AC equipment.
 
-![Power line model](img/index/line-model.svg){: width="50%" .center-image}
+![Line model](img/index/line-model.svg){: width="50%" .center-image}
 
 With series impedance $$z$$ and the shunt admittance on each side $$y_1$$ and $$y_2$$:
 
@@ -447,7 +411,7 @@ $$
 \end{align*}
 $$
 
-The equations of the power line, in complex notations, are as follow:
+The equations of the a line, in complex notations, are as follow:
 
 $$
 \begin{align*}
@@ -488,13 +452,12 @@ $$
 - [Discrete Measurements](extensions.md#discrete-measurements)
 - [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
 - [Measurements](extensions.md#measurements)
-- [Merged X-Node](extensions.md#merged-x-node)
 
-##### Tie Line
+### Tie Line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TieLine.html)
 
 A tie line is an AC line sharing power between two neighbouring regional grids.
-It is created by matching two [dangling lines](#dangling-line) with the same Xnode code.
+It is created by pairing two [dangling lines](#dangling-line) with the same pairing key.
 It has line characteristics, with $$R$$ (resp. $$X$$) being the sum of the series resistances (resp. reactances) of the two dangling lines.
 $$G1$$ (resp. $$B1$$) is equal to the first dangling line's $$G1$$ (resp. $$B1$$).
 $$G2$$ (resp. $$B2$$) is equal to the second dangling line's $$G2$$ (resp. $$B2$$).
@@ -510,13 +473,11 @@ $$G2$$ (resp. $$B2$$) is equal to the second dangling line's $$G2$$ (resp. $$B2$
 | $$G2$$ | S | The second side shunt conductance |
 | $$B2$$ | S | The second side shunt susceptance |
 
-<!---
-<span style="color:red"> TODO: describe xnodeP and xnodeQ in the java doc and here with a sentence.</span>
--->
+A tie line is not a connectable. It is just a container of two underlying dangling lines with the same pairing key. When connected together, each dangling line `P0` and `Q0` (and generation part if present) is ignored: only global tie line characteristics are used to compute flow. Removing a tie line leads to two free dangling lines, with an optional update of `P0` and `Q0` to match the flows in the global network context.
 
-#### Transformers
+### Transformers
 
-##### Two windings transformer
+#### Two windings transformer
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TwoWindingsTransformer.html)
 
 A two windings power transformer is connected to two voltage levels (side 1 and side 2) that belong to a same substation.
@@ -577,7 +538,6 @@ $$
 
 - [Branch Observability](extensions.md#branch-observability)
 - [Branch Status](extensions.md#branch-status)
-- [CGMES Tap Changers](extensions.md#cgmes-tap-changers)
 - [Connectable position](extensions.md#connectable-position)
 - [Discrete Measurements](extensions.md#discrete-measurements)
 - [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
@@ -585,19 +545,19 @@ $$
 - [Two-windings Transformer Phase Angle Clock](extensions.md#two-windings-transformer-phase-angle-clock)
 - [Two-windings Transformer To Be Estimated](extensions.md#two-windings-transformer-to-be-estimated)
 
-##### Three windings transformer
+#### Three windings transformer
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/ThreeWindingsTransformer.html)
 
 A three windings power transformer is connected to three voltage levels (side 1, side 2 and side 3) that belong to the
 same substation. We usually have:
-- Side 1 as the primary side (side with highest rated voltage)
+- Side 1 as the primary side (side with the highest rated voltage)
 - Side 2 as the secondary side (side with the medium rated voltage)
 - Side 3 as the tertiary side (side with the lowest rated voltage)
 
 A three windings transformer is modeled with three legs, where every leg model is electrically equivalent to a two windings transformer.
 For each leg, the network bus is at side 1 and the star bus is at side 2.
 
-![Power line model](img/index/three-windings-transformer-model.svg){: width="50%" .center-image}
+![Line model](img/index/three-windings-transformer-model.svg){: width="50%" .center-image}
 
 **Characteristics**
 
@@ -613,7 +573,6 @@ Only one tap changer (either ratio or phase tap changer) is allowed to be regula
 **Available extensions**
 
 - [Branch Status](extensions.md#branch-status)
-- [CGMES Tap Changers](extensions.md#cgmes-tap-changers)
 - [Connectable position](extensions.md#connectable-position)
 - [Discrete Measurements](extensions.md#discrete-measurements)
 - [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
@@ -638,9 +597,7 @@ Only one tap changer (either ratio or phase tap changer) is allowed to be regula
 
 - A leg can have [current limits](#current-limits).
 
-### DC components
-
-#### HVDC Line
+### HVDC Line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/HvdcLine.html)
 
 An HVDC line is connected to the DC side of two HVDC converter stations, either an [LCC station](#lcc-converter-station) or a [VSC station](#vsc-converter-station).
@@ -669,7 +626,7 @@ An HVDC line is connected to the DC side of two HVDC converter stations, either 
 - [HVDC Angle Droop Active Power Control](extensions.md#hvdc-angle-droop-active-power-control)
 - [HVDC Operator Active Power Range](extensions.md#hvdc-operator-active-power-range)
 
-#### HVDC Converter Station
+### HVDC Converter Station
 
 An HVDC converter station converts electric power from high voltage alternating current (AC) to high-voltage direct current (HVDC), or vice versa.
 Electronic converters for HVDC are divided into two main categories: line-commutated converters (LCC) and voltage-sourced converters (VSC).
@@ -719,7 +676,7 @@ An LCC converter station is made with electronic switches that can only be turne
 
 - [Connectable position](extensions.md#connectable-position)
 
-##### VSC Converter Station
+#### VSC Converter Station
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/VscConverterStation.html)
 
 A VSC converter station is made with switching devices that can be turned both on and off (transistors). Below are some characteristics:

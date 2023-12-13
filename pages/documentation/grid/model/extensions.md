@@ -66,83 +66,9 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 This extension models the status of a connectable. The status could be `IN_OPERATION`, `PLANNED_OUTAGE` or `FORCED_OUTAGE`.
 
-## Busbar section position
+## Bus bar section position
 
 This extension gives positions information about a bus bar section. The `busBarIndex` gives the position of the bus bar section relatively to other bus bars. The `sectionIndex` gives the position of the bus bar section within the corresponding bus bar. Note that a bus bar is a set of bus bar sections. Hence, the sections of a same bus bar should have the same bus bar index. The bus bar indices induce an order of bus bars within the voltage level, which usually reflects the bus bars physical relative positions. Similarly, the section indices induce an order of sections of a same bus bar, which usually reflects their physical relative position.
-
-## CIM-CGMES control areas
-
-This extensions models all the control areas contained in the network as modeled in CIM-CGMES.
-
-| Attribute           | Type                           | Unit | Required | Default value | Description                              |
-|---------------------|--------------------------------|------|----------|---------------|------------------------------------------|
-| CGMES control areas | `Collection<CgmesControlArea>` | -    | no       | -             | The list of control areas in the network |
-
-**CGMES control area**
-
-| Attribute                        | Type       | Unit | Required | Default value | Description                                         |
-|----------------------------------|------------|------|----------|---------------|-----------------------------------------------------|
-| ID                               | String     | -    | yes      | -             | The control area's ID                               |
-| name                             | String     | -    | no       | -             | The control area's name                             |
-| Energy Identification Code (EIC) | String     | -    | no       | -             | The control area's EIC                              |
-| net interchange                  | double     | -    | no       | -             | The control area's net interchange (at its borders) |
-| terminals                        | `Terminal` | -    | no       | -             | Terminals at the border of the control area         |
-| boundaries                       | `Boundary` | -    | no       | -             | Boundaries at the border of the control area        |
-
-It is possible to retrieve a control area by its ID. It is also possible to iterate through all control areas.
-
-This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
-
-## CIM-CGMES conversion context extension
-
-This extension is used to store the CIM-CGMES conversion context as built during the CIM-CGMES import.
-It contains the used configuration, the terminal mapping and the CIM-CGMES model.
-It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not serializable.
-
-## CIM-CGMES dangling line boundary node
-
-This extension is used to add some CIM-CGMES characteristics to dangling lines.
-
-
-| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
-|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
-| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
-| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |                                                
-
-This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
-
-## CIM-CGMES line boundary node
-
-This extension is used to add some CIM-CGMES characteristics to boundary lines.
-
-
-| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
-|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
-| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
-| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |
-
-This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
-
-## CIM-CGMES model extension
-
-This extension is used to store the CGMES model as retrieved from the triplestore (as a query catalog) on the network.
-It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not serializable.
-
-## CIM-CGMES Tap Changers
-
-<span style="color: red">TODO</span>
-
-## CIM-CGMES SSH metadata
-
-<span style="color: red">TODO</span>
-
-## CIM-CGMES SV metadata
-
-<span style="color: red">TODO</span>
-
-## CIM characteristics
-
-<span style="color: red">TODO</span>
 
 ## Connectable position
 
@@ -287,18 +213,6 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 <span style="color: red">TODO</span>
 
-## Merged X-node
-
-<span style="color: red">TODO</span>
-
-## PSS/E conversion context extension
-
-<span style="color: red">TODO</span>
-
-## PSS/E model extension
-
-<span style="color: red">TODO</span>
-
 ## Remote reactive power control
 
 This extensions is used for generators with a remote reactive control.
@@ -439,7 +353,3 @@ svc.newExtension(VoltagePerReactivePowerControlAdder.class)
 ```
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
-
-## X-node
-
-<span style="color: red">TODO</span>

@@ -395,6 +395,69 @@ If the CGMES `Switch` has one of its end in the boundary area, it is mapped to a
 - `Q0` is copied from CGMES `Q` of the terminal at boundary side
 
 ### Extensions
+
+CIM-CGMES format contains more information that what the `iidm` grid model need for calculation. The additional data, that are needed to export a network in CIM-CGMES format, are stored in several extensions. 
+
+#### CIM-CGMES control areas
+
+This extension models all the control areas contained in the network as modeled in CIM-CGMES.
+
+| Attribute           | Type                           | Unit | Required | Default value | Description                              |
+|---------------------|--------------------------------|------|----------|---------------|------------------------------------------|
+| CGMES control areas | `Collection<CgmesControlArea>` | -    | no       | -             | The list of control areas in the network |
+
+**CGMES control area**
+
+| Attribute                        | Type       | Unit | Required | Default value | Description                                         |
+|----------------------------------|------------|------|----------|---------------|-----------------------------------------------------|
+| ID                               | String     | -    | yes      | -             | The control area's ID                               |
+| name                             | String     | -    | no       | -             | The control area's name                             |
+| Energy Identification Code (EIC) | String     | -    | no       | -             | The control area's EIC                              |
+| net interchange                  | double     | -    | no       | -             | The control area's net interchange (at its borders) |
+| terminals                        | `Terminal` | -    | no       | -             | Terminals at the border of the control area         |
+| boundaries                       | `Boundary` | -    | no       | -             | Boundaries at the border of the control area        |
+
+It is possible to retrieve a control area by its ID. It is also possible to iterate through all control areas.
+
+This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
+
+#### CIM-CGMES dangling line boundary node
+
+This extension is used to add some CIM-CGMES characteristics to dangling lines.
+
+
+| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
+|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
+| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
+| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |                                                
+
+This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
+
+#### CIM-CGMES line boundary node
+
+This extension is used to add some CIM-CGMES characteristics to tie lines.
+
+| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
+|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
+| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
+| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |
+
+This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
+
+#### CIM-CGMES Tap Changers
+
+<span style="color: red">TODO</span>
+
+#### CIM-CGMES SSH metadata
+
+<span style="color: red">TODO</span>
+
+#### CIM-CGMES SV metadata
+
+<span style="color: red">TODO</span>
+
+#### CIM characteristics
+
 <span style="color: red">TODO</span>
 
 ### Options
