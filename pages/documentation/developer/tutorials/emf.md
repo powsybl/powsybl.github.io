@@ -100,7 +100,6 @@ Now, we add all the **required** maven dependencies:
 - `com.powsybl:powsybl-balances-adjustment` and `com.powsybl:powsybl-entsoe-cgmes-balances-adjustment`: to provide an implementation to run an active power balance adjustment computation over several control areas. Through this API, it is possible to keep the power factor constant during the process by readjusting the reactive power as well (since version 1.6.0 indeed).
 - `com.powsybl:powsybl-cgmes-conversion`, `com.powsybl:powsybl-triple-store-impl-rdf4j`, `com.powsybl:powsybl-cgmes-extensions`, `com.powsybl:powsybl-iidm-api`: to import/export the CGMES files and convert them into the network core model.
 - `com.powsybl:powsybl-commons`: to provide a lot of really basic and technical utilities used everywhere in PowSyBl such as XML or JSON helpers, configuration, exceptions...
-- `com.powsybl:powsybl-iidm-mergingview`: to provide a way to merge several networks, keeping the underlying networks unchanged.
 
 **Note:** PowSyBl uses [slf4j](http://www.slf4j.org/) as a facade for various logging framework, but some APIs we use in PowSyBl use [log4j](https://logging.apache.org/log4j), which is not compatible with slf4j, making it necessary to create a bridge between the two logging system.
 
@@ -130,10 +129,6 @@ You can add the following dependencies to the `pom.xml` file, with their corresp
   <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-iidm-api</artifactId>
-  </dependency>
-  <dependency>
-    <groupId>com.powsybl</groupId>
-    <artifactId>powsybl-iidm-mergingview</artifactId>
   </dependency>
   <dependency>
     <groupId>com.powsybl</groupId>
@@ -248,16 +243,15 @@ if (LOAD_FLOW_PREPROCESSING) {
 ### Merge of the IGMs and power flow on the CGM
 Finally, we merge the IGMs to create the CGM:
 ```java
-MergingView mergingView = MergingView.create("merged", "validation"); 
-mergingView.merge(validNetworks.values().toArray(Network[]::new));
+Network mergedNetwork = Network.merge(validNetworks.values().toArray(Network[]::new));
 ```
 And run a load flow on the CGM. Note that the slack bus is not defined in the CGMES files for the whole CGM, so we prefer to select the most meshed one.
 ```java
 if (!PREPARE_BALANCE_COMPUTATION) {
     LOAD_FLOW_PARAMETERS.setReadSlackBus(false);
     LOAD_FLOW_PARAMETERS.setDistributedSlack(true);
-    LoadFlowResult result = LoadFlow.run(mergingView, LOAD_FLOW_PARAMETERS);
-    for (Generator gen : mergingView.getGenerators()) {
+    LoadFlowResult result = LoadFlow.run(mergedNetwork, LOAD_FLOW_PARAMETERS);
+    for (Generator gen : mergedNetwork.getGenerators()) {
         gen.setTargetP(-gen.getTerminal().getP());
     }
     System.out.println(result.isOk());
@@ -285,11 +279,11 @@ The `prepareFictitiousArea` method does the same but for the borders of the CGM.
 In the main method, you can call these methods through:
 ```java
 if (PREPARE_BALANCE_COMPUTATION) {
-    igmPreprocessing(mergingView, validNetworks, dataExchanges, balanceComputationAreas);
-    prepareFictitiousArea(mergingView, validNetworks, dataExchanges, balanceComputationAreas);
+    igmPreprocessing(mergedNetwork, validNetworks, dataExchanges, balanceComputationAreas);
+    prepareFictitiousArea(mergedNetwork, validNetworks, dataExchanges, balanceComputationAreas);
 } else {
-    igmPreprocessing(mergingView, validNetworks, dataExchanges);
-    prepareFictitiousArea(mergingView, validNetworks, dataExchanges);
+    igmPreprocessing(mergedNetwork, validNetworks, dataExchanges);
+    prepareFictitiousArea(mergedNetwork, validNetworks, dataExchanges);
 }
 ```
 
@@ -306,23 +300,14 @@ if (PREPARE_BALANCE_COMPUTATION) {
     // Run the balances ajustment.
     BalanceComputation balanceComputation = new BalanceComputationFactoryImpl()
             .create(balanceComputationAreas, new LoadFlow.Runner(new OpenLoadFlowProvider()), LocalComputationManager.getDefault());
-    BalanceComputationResult result = balanceComputation.run(mergingView, mergingView.getVariantManager().getWorkingVariantId(), parameters).join();
+    BalanceComputationResult result = balanceComputation.run(mergedNetwork, mergedNetwork.getVariantManager().getWorkingVariantId(), parameters).join();
     System.out.println(result.getStatus());
 
-    // Generate merged SV file for the CGM.
-    validationParameters.getOutputDir().ifPresent(outputDir -> {
-        try (OutputStream os = Files.newOutputStream(Paths.get(outputDir + "/SV.xml"))) {
-            XMLStreamWriter writer = XmlUtil.initializeWriter(true, "   ", os);
-            StateVariablesExport.write(mergingView, writer, createContext(mergingView, validNetworks));
-        } catch (XMLStreamException e) {
-            throw new UncheckedXmlStreamException(e);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    });
+      // Generate merged SV file for the CGM.
+      validationParameters.getOutputDir().ifPresent(outputDir ->
+      exportNetwork(mergedNetwork, Path.of(outputDir), "SV", Set.of("SV")));
 }
 ```
-With the `createContext` method being a method creating a `CgmesExportContext`, then setting the scenario time and for each IGM from `networks` adding the topological nodes and dependencies.
 
 Now, if you run the code and check the output directory, you should get the logs and the SV file.
 
