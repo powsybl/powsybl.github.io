@@ -53,7 +53,7 @@ text {font-size:13.75px;font-family:sans-serif;fill:#000000}
        y="155">120</text>
     <text
        x="100"
-       y="195">acceptable 120 s</text>
+       y="195">acceptable 1200 s</text>
     <path
        class="dashed-line1"
        d="M 37,150 H 260" />
@@ -65,7 +65,7 @@ text {font-size:13.75px;font-family:sans-serif;fill:#000000}
        y="75">140</text>
     <text
        x="100"
-       y="115">acceptable 60 s</text>
+       y="115">acceptable 600 s</text>
     <path
        class="dashed-line1"
        d="M 37,70 H 260" />
