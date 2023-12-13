@@ -396,7 +396,7 @@ If the CGMES `Switch` has one of its end in the boundary area, it is mapped to a
 
 ### Extensions
 
-CIM-CGMES format contains more information that what the `iidm` grid model need for calculation. The additional data, that are needed to export a network in CIM-CGMES format, are stored in several extensions. 
+CIM-CGMES format contains more information than what the `iidm` grid model needs for calculation. The additional data, that are needed to export a network in CIM-CGMES format, are stored in several extensions. 
 
 #### CIM-CGMES control areas
 

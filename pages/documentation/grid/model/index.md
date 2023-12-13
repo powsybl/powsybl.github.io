@@ -20,7 +20,7 @@ Different states of the network can be stored together with the power system mod
 
 A set of networks can be merged together in a single network. The initial subnetworks are kept and can be easily retrieved or detached if needed.
 
-Almost all elements modeled in the network are identified through a unique `id`, and optionally described by a `name` that is easier to interpret for a human. Almost all components can be [extended](extensions.md) by the user to incorporate additional structured data.
+Almost all the elements modeled in the network are identified through a unique `id`, and optionally described by a `name` that is easier to interpret for a human. Almost all components can be [extended](extensions.md) by the user to incorporate additional structured data.
 
 ## Network and subnetwork
 
@@ -44,7 +44,7 @@ A network can contain several subnetworks.
 
 ### Validation level
 
-The validation level can be `EQUIPMENT` or `STEADY_STATE_HYPOTHESIS`. A network at equipment level is a network with missing steady-state hypothesis. This occurs just after SCADA systems, before any state estimation. Once all steady state hypothesis are filled, meaning that a load flow engine has all the data needed to perform a computation, the level switches to `STEADY_STATE_HYPOTHESIS`. For some processes, a minimal validation level of the network is required.
+The validation level can be `EQUIPMENT` or `STEADY_STATE_HYPOTHESIS`. A network at equipment level is a network with missing steady-state hypotheses. This occurs just after SCADA systems, before any state estimation. Once all steady-state hypotheses are filled, meaning that a load flow engine has all the data needed to perform a computation, the validation level switches to `STEADY_STATE_HYPOTHESIS`. For some processes, a minimal validation level of the network is required.
 
 ### Network
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
@@ -123,7 +123,7 @@ When defining the model, the user has to specify how the different equipment con
 ### Generator
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Generator.html)
 
-A generator is an equipment that injects or consumes active power, and injects or consumes reactive power. It may be controller to hold a voltage or reactive target somewhere in the network, not necessarily directly where it is connected. In that specific case, the voltage or reactive power control is remote. 
+A generator is an equipment that injects or consumes active power, and injects or consumes reactive power. It may be used as a controller to hold a voltage or reactive target somewhere in the network, not necessarily directly where it is connected. In that specific case, the voltage or reactive power control is remote. 
 
 ![GeneratorSignConvention](img/index/generator-sign-convention.svg){: width="40%" .center-image}
 
@@ -260,7 +260,7 @@ Optional:
 - $$R$$, $$X$$, $$G$$ and $$B$$ correspond to a fraction of the original line and have to be consistent with the declared length of the
 dangling line.
 
-In case the line is a boundary, a pairing key $$pairingKey$$ (in previous network versions $$UcteXnodeCode$$) is defined besides the characteristics of the Table. It is a key to match two dangling lines and reconstruct the full boundary line, for both UCTE or CIM-CGMES formats.
+In case the line is a boundary, a pairing key $$pairingKey$$ (in previous network versions $$UcteXnodeCode$$) is defined besides the characteristics of the table. It is a key to match two dangling lines and reconstruct the full boundary line, for both UCTE or CIM-CGMES formats.
 
 // TODO, add boundary
 
@@ -411,7 +411,7 @@ $$
 \end{align*}
 $$
 
-The equations of the a line, in complex notations, are as follow:
+The equations of the line, in complex notations, are as follow:
 
 $$
 \begin{align*}
