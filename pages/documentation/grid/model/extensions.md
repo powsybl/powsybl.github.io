@@ -95,7 +95,23 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Discrete measurements
 
-<span style="color: red">TODO</span>
+This extension is used to store discrete measurements (such as tap positions, switch positions etc.) collected in substations.
+
+| Attribute            | Type                            | Unit | Required | Default value | Description                                          |
+|----------------------|---------------------------------|------|----------|---------------|------------------------------------------------------|
+| discreteMeasurements | Collection<DiscreteMeasurement> | -    | no       | -             | Contains a collection of DiscreteMeasurement objects |
+
+The DiscreteMeasurement class characteristics are the following:
+
+| Attribute  | Type                           | Unit | Required | Default value | Description                                                                                                      |
+|------------|--------------------------------|------|----------|---------------|------------------------------------------------------------------------------------------------------------------|
+| id         | String                         | -    | no       | -             | The ID of the discrete measurement if it exists                                                                  |
+| type       | DiscreteMeasurement.Type       | -    | no       | -             | The type of discrete measurement (TAP_POSITION, SWITCH_POSITION, SHUNT_COMPENSATOR_SECTION, OTHER)               |
+| tapChanger | DiscreteMeasurement.TapChanger | -    | no       | -             | The tap changer the discrete measurement is applied on (null if the measurement is not applied to a tap changer) |
+| properties | Map<String, String>            | -    | no       | -             | The properties (name and value) associated with the discrete measurement                                         |
+| valueType  | DiscreteMeasurement.ValueType  | -    | no       | -             | The discrete measurement value type (BOOLEAN, INT or STRING)                                                     |
+| value      | Object                         | -    | no       | -             | The discrete measurement value                                                                                   |
+| valid      | boolean                        | -    | no       | -             | The validity status (if true, the discrete measured value cannot be null)                                        |
 
 ## ENTSO-E area
 
@@ -211,7 +227,23 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Measurements
 
-<span style="color: red">TODO</span>
+This extension is used to store measurements collected in substations.
+
+| Attribute    | Type                    | Unit | Required | Default value | Description                                  |
+|--------------|-------------------------|------|----------|---------------|----------------------------------------------|
+| measurements | Collection<Measurement> | -    | no       | -             | Contains a collection of Measurement objects |
+
+The Measurement class characteristics are the following:
+
+| Attribute         | Type                | Unit | Required | Default value | Description                                                     |
+|-------------------|---------------------|------|----------|---------------|-----------------------------------------------------------------|
+| id                | String              | -    | no       | -             | The ID of the measurement if it exists                          |
+| type              | Measurement.Type    | -    | no       | -             | The type of measurement (ANGLE, ACTIVE_POWER, VOLTAGE etc.)     |
+| properties        | Map<String, String> | -    | no       | -             | The properties (name and value) associated with the measurement |
+| value             | double              | -    | no       | -             | The measurement value                                           |
+| standardDeviation | double              | -    | no       | -             | The standard deviation (NaN if not specified)                   |
+| valid             | boolean             | -    | no       | -             | The validity status (if true, the measured value cannot be NaN) |
+| side              | ThreeSides          | -    | no       | -             | The equipment side associated to the measurement                |
 
 ## Remote reactive power control
 
