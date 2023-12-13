@@ -165,5 +165,5 @@ limit-violation-default-filter:
 ```
 
 ## Going further
-To go further about the sensitivity analysis, check the following content:
+To go further about the security analysis, check the following content:
 - [Run a security analysis through an iTools command](../../user/itools/security-analysis.md): Learn how to perform a security analysis from the command line 

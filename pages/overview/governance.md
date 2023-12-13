@@ -21,7 +21,7 @@ In order to keep it efficient, the TSC is made up of less than 10 members.
 PowSyBl TSC voting members are:
 - [Jon Harper](<https://github.com/jonenst>)
 - [Geoffroy Jamgotchian](<https://github.com/geofjamg>)
-- [Miora Vedelago](<https://github.com/miovd>)
+- [Bertrand Rix](<https://github.com/obrix>)
 - [Anne Tilloy](<https://github.com/annetill>)
 - [Luis Zamarreno](<https://github.com/zamarrenolm>)
 - [Philippe Edwards](<https://github.com/phiedw>)

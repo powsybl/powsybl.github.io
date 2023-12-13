@@ -10,14 +10,16 @@ This tutorial shows you how to write a Java code to perform load flow calculatio
 
 ## What will you build?
 
-The tutorial can be expressed in a short and easy workflow: all the input data is stored in an XIIDM file. This file is imported with the IIDM importer. Then, a load flow simulator is launched to get flows on all nodes. In this tutorial, the simulator is Open Loadflow, but it could be an other load flow simulator, as long as the API contract is respected. A contingency is created and finally, the flows are computed again in order to get the final state.  
+The tutorial can be expressed in a short and easy workflow: all the input data is stored in an XIIDM file. This file is imported with the IIDM importer. 
+Then, a load flow simulator is launched to get flows on all nodes. In this tutorial, the simulator is Open Loadflow, but it could be another load flow simulator, 
+as long as the API contract is respected. A contingency is created and finally, the flows are computed again in order to get the final state.  
 
 ![Workflow](./img/loadflow/Workflow.svg){: width="75%" .center-image}
 
 ## What will you need?
 - About 1/2 hour
 - A favorite text editor or IDE
-- JDK 1.11 or later
+- JDK 1.17 or later
 - You can also import the code straight into your IDE:
     - [IntelliJ IDEA](intellij.md)
 
@@ -34,7 +36,7 @@ To skip the basics, do the following:
 When you finish, you can check your results against the code in `loadflow/complete`.
 
 ## Create a new project from scratch
-Create a new Maven's `pom.xml` file in `loadflow/initial` with the following content:
+Create a new Maven's `pom.xml` file in `loadflow` with the following content:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -45,7 +47,7 @@ Create a new Maven's `pom.xml` file in `loadflow/initial` with the following con
     <parent>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-parent</artifactId>
-        <version>3</version>
+        <version>8</version>
         <relativePath/>
     </parent>
 
@@ -53,8 +55,7 @@ Create a new Maven's `pom.xml` file in `loadflow/initial` with the following con
 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
-        <slf4j.version>1.7.22</slf4j.version>
-        <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
+        <powsybl-dependencies.version>2023.3.1</powsybl-dependencies.version>
     </properties>
 </project>
 ```
@@ -72,7 +73,7 @@ execute your code through:
 $> mvn clean package exec:exec
 ```
 
-Also, configure the pom file so as to use a configuration file taken in the classpath, instead of the one
+Also, configure the pom file to use a configuration file taken in the classpath, instead of the one
 that is global to your system:
 ```xml
 <build>
@@ -139,8 +140,8 @@ Add the following dependencies to the `pom.xml` file:
 ```
 
 ## Configure PowSyBl
-We have configured this tutorial so as to use a locally defined `config.yml` file.
-Edit the file named `config.yml` at the location `loadflow/initial/src/main/resources`.
+We have configured this tutorial to use a locally defined `config.yml` file.
+Edit the file named `config.yml` at the location `loadflow/src/main/resources`.
 Start the configuration by writing:
 ```yaml
 load-flow:
@@ -155,13 +156,13 @@ The load consumes 600 MW and the generator produces 606.5 MW.
 
 ![Initial simple network](./img/loadflow/Network_Simple_Initial.svg){: width="50%" .center-image}
 
-First, create a logger outside of your main method. We will use it to display information about the objects we handle.
+First, create a logger outside your main method. We will use it to display information about the objects we handle.
 ```java
 private static final Logger LOG = LoggerFactory.getLogger(LoadflowTutorial.class);
 ```
 
 <img src="./img/loadflow/File.svg" alt="" style="vertical-align: bottom"/>
-The network is modeled in [IIDM](../../grid/formats/xiidm.md), which is the internal model of Powsybl. This model can be serialized in a XML format for experimental purposes.
+The network is modeled in [IIDM](../../grid/formats/xiidm.md), which is the internal model of Powsybl. This model can be serialized in an XML format for experimental purposes.
 ```java
 final String networkFileName = "eurostag-tutorial1-lf.xml";
 final InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStream(networkFileName);
@@ -170,7 +171,7 @@ final InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStre
 <img src="./img/loadflow/Import.svg" alt="" style="vertical-align: bottom"/>
 The file is imported through a gateway that converts the file to an in-memory model.
 ```java
-Network network = Importers.loadNetwork(networkFileName, is);
+Network network = Network.read(networkFileName, is);
 ```
 <br />
 
@@ -179,27 +180,27 @@ In this tutorial it is composed of two substations. Each substation has two volt
 levels and one two-windings transformer.
 ```java
 for (Substation substation : network.getSubstations()) {
-    LOGGER.info("Substation " + substation.getNameOrId());
+    LOGGER.info("Substation {}", substation.getNameOrId());
     LOGGER.info("Voltage levels:");
     for (VoltageLevel voltageLevel : substation.getVoltageLevels()) {
-        LOGGER.info("Voltage level: " + voltageLevel.getId() + " " + voltageLevel.getNominalV() + "kV");
+        LOGGER.info("Voltage level: {} {}kV", voltageLevel.getId(), voltageLevel.getNominalV());
     }
     LOGGER.info("Two windings transformers:");
     for (TwoWindingsTransformer t2wt : substation.getTwoWindingsTransformers()) {
-        LOGGER.info("Two winding transformer: " + t2wt.getNameOrId());
+        LOGGER.info("Two winding transformer: {}", t2wt.getNameOrId());
     }
     LOGGER.info("Three windings transformers:");
     for (ThreeWindingsTransformer t3wt : substation.getThreeWindingsTransformers()) {
-        LOGGER.info("Three winding transformer: " + t3wt.getNameOrId());
+        LOGGER.info("Three winding transformer: {}", t3wt.getNameOrId());
     }
 }
 ```
 There are two lines in the network.
 ```java
 for (Line line : network.getLines()) {
-    LOGGER.info("Line : " + line.getNameOrId());
-    LOGGER.info(" > Terminal 1 power : " + line.getTerminal1().getP());
-    LOGGER.info(" > Terminal 2 power : " + line.getTerminal2().getP());
+    LOGGER.info("Line: {}", line.getNameOrId());
+    LOGGER.info(" > Terminal 1 power: {}", line.getTerminal1().getP());
+    LOGGER.info(" > Terminal 2 power: {}", line.getTerminal2().getP());
 }
 ```
 
@@ -266,8 +267,8 @@ for (Bus bus : network.getBusView().getBuses()) {
     network.getVariantManager().setWorkingVariant(variantId);
     angle = bus.getAngle();
     v = bus.getV();
-    LOGGER.info("Angle difference   : " + (angle - oldAngle));
-    LOGGER.info("Tension difference : " + (v - oldV));
+    LOGGER.info("Angle difference  : {}", angle - oldAngle);
+    LOGGER.info("Tension difference: {}", v - oldV);
 }
 ```
 
@@ -299,23 +300,23 @@ LoadFlow.run(network);
 Let's analyze the results. First we make some simple prints in the terminal: 
 ```java
 for (Line l : network.getLines()) {
-    LOGGER.info("Line: " + l.getName());
-    LOGGER.info("Line: " + l.getTerminal1().getP());
-    LOGGER.info("Line: " + l.getTerminal2().getP());
+    LOGGER.info("Line: {}", line.getNameOrId());
+    LOGGER.info(" > Terminal 1 power: {}", line.getTerminal1().getP());
+    LOGGER.info(" > Terminal 2 power: {}", line.getTerminal2().getP());
 }
 ```
 
 Here we will also show how to define a visitor object, that may be used to loop over equipments. We will use it to print the energy sources and the loads of the network. Visitors are usually used to access the network equipments efficiently, and modify their properties for instance. Here we just print some data about generators and loads.
 ```java
-final DefaultTopologyVisitor visitor = new DefaultTopologyVisitor() {
+final TopologyVisitor visitor = new DefaultTopologyVisitor() {
     @Override
     public void visitGenerator(Generator generator) {
-        LOGGER.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
+        LOGGER.info("Generator: {} [{} MW]", generator.getNameOrId(), generator.getTerminal().getP());
     }
 
     @Override
     public void visitLoad(Load load) {
-        LOGGER.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
+        LOGGER.info("Load: {} [{} MW]", load.getNameOrId(), load.getTerminal().getP());
     }
 };
 for (VoltageLevel voltageLevel : network.getVoltageLevels()) {

@@ -21,11 +21,11 @@ Every extension is considered as serializable unless explicitly specified as non
 ## Active power control
 This extension is used to configure the participation factor of the generator, typically in the case of a load flow computation with distributed slack enabled (with [balance type](../../simulation/powerflow/index.md#balanceType) on generator). This extension is attached to a [generator](index.md#generator) or a [battery](index.md#battery).
 
-| Attribute            | Type     | Unit                   | Required | Default value | Description                                  |
-|----------------------|----------|------------------------|----------|---------------|----------------------------------------------|
-| participate          | boolean  | -                      | yes      | -             | The participation status                     |
-| droop                | double   | None (repartition key) | no       | -             | The participation factor equals Pmax / droop |
-| participation factor | double   | None (repartition key) | no       | -             | Defines the participation factor explicitly   |
+| Attribute            | Type    | Unit                   | Required | Default value | Description                                  |
+|----------------------|---------|------------------------|----------|---------------|----------------------------------------------|
+| participate          | boolean | -                      | yes      | -             | The participation status                     |
+| droop                | double  | None (repartition key) | no       | -             | The participation factor equals Pmax / droop |
+| participation factor | double  | None (repartition key) | no       | -             | Defines the participation factor explicitly  |
 
 Here is how to add an active power control extension to a generator:
 ```java
@@ -44,21 +44,21 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 This extension models branches' flows' observability on both sides, obtained after a state estimation.
 
-| Attribute  | Type                  | Unit | Required | Default value | Description                                     |
-|------------|-----------------------|------|---------| ------------- |-------------------------------------------------|
-| quality P1 | ObservabilityQuality  | MW    | no      | - | The observability quality of active power on side ONE   |
-| quality P2 | ObservabilityQuality  | MW    | no      | - | The observability quality of active power on side TWO   |
-| quality Q1 | ObservabilityQuality  | MVar    | no      | - | The observability quality of reactive power on side ONE |
-| quality Q2 | ObservabilityQuality  | MVar    | no      | - | The observability quality of reactive power on side TWO |
+| Attribute  | Type                 | Unit | Required | Default value | Description                                             |
+|------------|----------------------|------|----------|---------------|---------------------------------------------------------|
+| quality P1 | ObservabilityQuality | MW   | no       | -             | The observability quality of active power on side ONE   |
+| quality P2 | ObservabilityQuality | MW   | no       | -             | The observability quality of active power on side TWO   |
+| quality Q1 | ObservabilityQuality | MVar | no       | -             | The observability quality of reactive power on side ONE |
+| quality Q2 | ObservabilityQuality | MVar | no       | -             | The observability quality of reactive power on side TWO |
 
 **Observability quality**
 
 This extension contains the sub-object `ObservabilityQuality`.
 
-| Attribute          | Type   | Unit | Required | Default value | Description                                        |
-|--------------------|--------|---|----------| ------------- |----------------------------------------------------|
-| standard deviation | double | MW or MVar | yes      | - | The standard deviation                             |
-| redundant          | boolean | - | yes      | - | Indicates if this value is confirmed by redundancy |
+| Attribute          | Type    | Unit       | Required | Default value | Description                                        |
+|--------------------|---------|------------|----------|---------------|----------------------------------------------------|
+| standard deviation | double  | MW or MVar | yes      | -             | The standard deviation                             |
+| redundant          | boolean | -          | yes      | -             | Indicates if this value is confirmed by redundancy |
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
@@ -74,20 +74,20 @@ This extension gives positions information about a bus bar section. The `busBarI
 
 This extensions models all the control areas contained in the network as modeled in CIM-CGMES.
 
-| Attribute           | Type                           | Unit | Required | Default value | Description                  |
-|---------------------|--------------------------------|------|----------| ------------- |------------------------------|
-| CGMES control areas | `Collection<CgmesControlArea>` | -    | no       | - | The list of control areas in the network |
+| Attribute           | Type                           | Unit | Required | Default value | Description                              |
+|---------------------|--------------------------------|------|----------|---------------|------------------------------------------|
+| CGMES control areas | `Collection<CgmesControlArea>` | -    | no       | -             | The list of control areas in the network |
 
 **CGMES control area**
 
 | Attribute                        | Type       | Unit | Required | Default value | Description                                         |
-|----------------------------------|------------|------|----------| ------------- |-----------------------------------------------------|
-| ID                               | String     | -    | yes      | - | The control area's ID                               |
-| name                             | String     | -    | no       | - | The control area's name                             |
-| Energy Identification Code (EIC) | String     | -    | no       | - | The control area's EIC                              |
-| net interchange                  | double     | -    | no       | - | The control area's net interchange (at its borders) |
-| terminals                        | `Terminal` | -    | no       | - | Terminals at the border of the control area         |
-| boundaries                       | `Boundary` | -    | no       | - | Boundaries at the border of the control area        |
+|----------------------------------|------------|------|----------|---------------|-----------------------------------------------------|
+| ID                               | String     | -    | yes      | -             | The control area's ID                               |
+| name                             | String     | -    | no       | -             | The control area's name                             |
+| Energy Identification Code (EIC) | String     | -    | no       | -             | The control area's EIC                              |
+| net interchange                  | double     | -    | no       | -             | The control area's net interchange (at its borders) |
+| terminals                        | `Terminal` | -    | no       | -             | Terminals at the border of the control area         |
+| boundaries                       | `Boundary` | -    | no       | -             | Boundaries at the border of the control area        |
 
 It is possible to retrieve a control area by its ID. It is also possible to iterate through all control areas.
 
@@ -104,10 +104,10 @@ It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not s
 This extension is used to add some CIM-CGMES characteristics to dangling lines.
 
 
-| Attribute                             | Type    | Unit | Required | Default value | Description                                                                                          |
-|---------------------------------------|---------|------|----------|---------------|------------------------------------------------------------------------------------------------------|
+| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
+|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
 | hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
-| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists |                                                
+| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |                                                
 
 This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
@@ -116,10 +116,10 @@ This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 This extension is used to add some CIM-CGMES characteristics to boundary lines.
 
 
-| Attribute                             | Type    | Unit | Required | Default value | Description                                                                                          |
-|---------------------------------------|---------|------|----------|---------------|------------------------------------------------------------------------------------------------------|
+| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
+|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
 | hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
-| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                                                                 |
+| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |
 
 This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
@@ -152,9 +152,9 @@ It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not s
 
 Some generators can be coordinated to control reactive power in a point of the network. This extension is used to configure the percent of reactive coordinated control that comes from a generator. This extension is attached to a [generator](index.md#generator).
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| QPercent | percent [0-100] | - | yes | - | The reactive control percent of participation |
+| Attribute | Type            | Unit | Required | Default value | Description                                   |
+|-----------|-----------------|------|----------|---------------|-----------------------------------------------|
+| QPercent  | percent [0-100] | -    | yes      | -             | The reactive control percent of participation |
 
 Here is how to add a coordinated reactive control extension to a generator:
 ```java
@@ -180,11 +180,11 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 This is an extension dedicated to DC line in order to model AC emulation. For a VSC converter station operating in AC emulation, its active power setpoint is given by
 $$P = P0 + k~(ph1 - ph2)$$  
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| P0 | float | MW | yes | - | P0 in the equation |
-| droop | float | MW by degree | yes | - | k in the equation |
-| enabled | boolean | - | yes | - | if the AC emulation is active or not |
+| Attribute | Type    | Unit         | Required | Default value | Description                          |
+|-----------|---------|--------------|----------|---------------|--------------------------------------|
+| P0        | float   | MW           | yes      | -             | P0 in the equation                   |
+| droop     | float   | MW by degree | yes      | -             | k in the equation                    |
+| enabled   | boolean | -            | yes      | -             | if the AC emulation is active or not |
 
 ## HVDC operator active power range
 
@@ -200,11 +200,11 @@ This extension models the generators data used for short-circuit calculations. D
 performed, either the transient or the subtransient reactance should be filled. The reactance of the step-up transformer should be
 filled if the generator has a transformer that is not directly modeled in the network.
 
-| Attribute              | Type | Unit | Required | Default value | Description                                                                       |
-|------------------------| ---- | ---- |----| ------------- |-----------------------------------------------------------------------------------|
-| directTransX (X'd)     | double | Ω | yes| - | Direct transient reactance of the generator                                       |
-| directSubtransX (X''d) | double | Ω | no | - | Direct subtransient reactance of the generator                                    |
-| stepUpTransformerX     | double | Ω | no | - | Reactance of the step-up transformer |
+| Attribute              | Type   | Unit | Required | Default value | Description                                    |
+|------------------------|--------|------|----------|---------------|------------------------------------------------|
+| directTransX (X'd)     | double | Ω    | yes      | -             | Direct transient reactance of the generator    |
+| directSubtransX (X''d) | double | Ω    | no       | -             | Direct subtransient reactance of the generator |
+| stepUpTransformerX     | double | Ω    | no       | -             | Reactance of the step-up transformer           |
 
 This extension is provided in the  `com.powsybl:powsybl-iidm-extensions` module.
 
@@ -222,9 +222,9 @@ generator.newExtension(GeneratorShortCircuitAdder.class)
 This extension models the maximum and minimum short-circuit current admissible for any identifiable.
 
 | Attribute | Type   | Unit | Required | Default value | Description                    |
-|-----------|--------|------|----------| ------------- |--------------------------------|
-| ipMin     | double | A    | no       | - | The minimum admissible current |
-| ipMax     | double | A    | yes      | - | The maximum admissible current |
+|-----------|--------|------|----------|---------------|--------------------------------|
+| ipMin     | double | A    | no       | -             | The minimum admissible current |
+| ipMax     | double | A    | yes      | -             | The maximum admissible current |
 
 This extension is provided in the  `com.powsybl:powsybl-iidm-extensions` module.
 
@@ -241,19 +241,19 @@ The code is similar for every identifiable.
 
 This extension models injections' flows' observability, obtained after a state estimation.
 
-| Attribute | Type                  | Unit | Required | Default value | Description                         |
-|-----------|-----------------------|------|---------| ------------- |-------------------------------------|
-| quality P | ObservabilityQuality  | MW    | no      | - | The observability quality of active power   |
-| quality Q | ObservabilityQuality  | MVar    | no      | - | The observability quality of reactive power |
+| Attribute | Type                 | Unit | Required | Default value | Description                                 |
+|-----------|----------------------|------|----------|---------------|---------------------------------------------|
+| quality P | ObservabilityQuality | MW   | no       | -             | The observability quality of active power   |
+| quality Q | ObservabilityQuality | MVar | no       | -             | The observability quality of reactive power |
 
 **Observability quality**
 
 This extension contains the sub-object `ObservabilityQuality`.
 
 | Attribute          | Type    | Unit       | Required | Default value | Description                                       |
-|--------------------|---------|------------|----------| ------------- |---------------------------------------------------|
-| standard deviation | double  | MW or MVar | yes      | - | The standard deviation                            |
-| redundant          | boolean | -       | yes      | - | Indicates if the value is confirmed by redundancy |
+|--------------------|---------|------------|----------|---------------|---------------------------------------------------|
+| standard deviation | double  | MW or MVar | yes      | -             | The standard deviation                            |
+| redundant          | boolean | -          | yes      | -             | Indicates if the value is confirmed by redundancy |
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
@@ -262,12 +262,12 @@ A load is described by its active power setpoint $$P0$$ and its reactive power s
 - In the total amount of active power what is fixed and what is time-dependant (also called variable). The time-dependant part can be adjusted for production equals consumption.
 - In the total amount of reactive power what is fixed and what is time-dependant (also called variable).
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| variableActivePower | double | MW | yes | - | The part of the active power setpoint that is considered variable |
-| fixedActivePower | double | MVar | yes | - | The part of the active power setpoint that is considered constant |
-| variableReactivePower | double | MW | yes | - | The part of the reactive power setpoint that is considered variable |
-| fixedReactivePower | double | MVar | yes | - | The part of the reactive power setpoint that is considered constant |
+| Attribute             | Type   | Unit | Required | Default value | Description                                                         |
+|-----------------------|--------|------|----------|---------------|---------------------------------------------------------------------|
+| variableActivePower   | double | MW   | yes      | -             | The part of the active power setpoint that is considered variable   |
+| fixedActivePower      | double | MW   | yes      | -             | The part of the active power setpoint that is considered constant   |
+| variableReactivePower | double | MVar | yes      | -             | The part of the reactive power setpoint that is considered variable |
+| fixedReactivePower    | double | MVar | yes      | -             | The part of the reactive power setpoint that is considered constant |
 
 Here is how to add an load detail extension to a load:
 ```java
@@ -303,11 +303,11 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 This extensions is used for generators with a remote reactive control.
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| enabled | boolean | - | yes | - | If the reactive remote control is activated of not |
-| targetQ | double | MVar | yes | - | The targetQ at remote regulating terminal |
-| regulatingTerminal | `Terminal` | - | yes | - | The regulating terminal |
+| Attribute          | Type       | Unit | Required | Default value | Description                                        |
+|--------------------|------------|------|----------|---------------|----------------------------------------------------|
+| enabled            | boolean    | -    | yes      | -             | If the reactive remote control is activated of not |
+| targetQ            | double     | MVar | yes      | -             | The targetQ at remote regulating terminal          |
+| regulatingTerminal | `Terminal` | -    | yes      | -             | The regulating terminal                            |
 
 ## Slack terminal
 
@@ -315,9 +315,9 @@ This extension is attached to a [voltage level](index.md#voltage-level) and is u
 
 The slack bus is defined through the terminal of a connectable that belongs to the bus. It is totally allowed to define a disconnected terminal as slack as the connectable could be reconnected during a grid study.
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Terminal | `Terminal` | - | yes | - | The slack terminal |
+| Attribute | Type       | Unit | Required | Default value | Description        |
+|-----------|------------|------|----------|---------------|--------------------|
+| Terminal  | `Terminal` | -    | yes      | -             | The slack terminal |
 
  ```java
 SlackTerminal.attach(bus);
@@ -329,10 +329,10 @@ This extension is provided by the `com.powsybl:powsybl-iidm-api` module.
 
 This extension is used to model the Vector Group of a three windings transformer. The phase angle clock could be modeled at leg 2, leg 3 or both legs 2 and 3 and of a three windings transformer (network side). The voltage phase angle displacement is represented with clock hours. The valid values are `0` to `11`. This extension is attached to a [three windings transformer](index.md#three-windings-transformer).
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| PhaseAngleClockLeg2 | int [0-11] | hours | yes | - | The voltage phase angle displacement at leg 2 |
-| PhaseAngleClockLeg3 | int [0-11] | hours | yes | - | The voltage phase angle displacement at leg 3 |
+| Attribute           | Type       | Unit  | Required | Default value | Description                                   |
+|---------------------|------------|-------|----------|---------------|-----------------------------------------------|
+| PhaseAngleClockLeg2 | int [0-11] | hours | yes      | -             | The voltage phase angle displacement at leg 2 |
+| PhaseAngleClockLeg3 | int [0-11] | hours | yes      | -             | The voltage phase angle displacement at leg 3 |
 
 ```java
 transformer.newExtension(ThreeWindingsTransformerPhaseAngleClock.class)
@@ -349,9 +349,9 @@ This extension is used to indicate if a three-winding transformer tap changer is
 * The three-winding transformer model offers the possibility to have up to 3 ratio tap changers and up to 3 phase tap changers. Each tap changer can be estimated or not.
 * If a tap changer is not to be estimated, it should not be changed during a state estimation (its tap position is merely an input of the state estimation).
 
-| Attribute | Type | Unit | Required | Default value                      | Description |
-| --------- | ---- | ---- | -------- |------------------------------------| ----------- |
-| NAME      | String | - | yes | threeWindingsTransformerToBeEstimated | Name of the extension |
+| Attribute | Type   | Unit | Required | Default value                         | Description           |
+|-----------|--------|------|----------|---------------------------------------|-----------------------|
+| NAME      | String | -    | yes      | threeWindingsTransformerToBeEstimated | Name of the extension |
 
 Example of code to get the status of the n°1 phase tap changer:
 
@@ -376,9 +376,9 @@ transformer.newExtension(ThreeWindingsTransformerToBeEstimatedAdder.class)
 
 This extension is used to model the Vector Group of a two windings transformer. The phase angle clock is modeled at side 2 of a two windings transformer. The voltage phase angle displacement is represented with clock hours. The valid values are 0 to 11. This extension is attached to a [two windings transformer](index.md#two-windings-transformer).
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| PhaseAngleClock | int [0-11] | hours | yes | - | The voltage phase angle displacement |
+| Attribute       | Type       | Unit  | Required | Default value | Description                          |
+|-----------------|------------|-------|----------|---------------|--------------------------------------|
+| PhaseAngleClock | int [0-11] | hours | yes      | -             | The voltage phase angle displacement |
 
 ```java
 transformer.newExtension(TwoWindingsTransformerPhaseAngleClockAdder.class)
@@ -394,9 +394,9 @@ This extension is used to indicate if a two-winding transformer tap changer is t
 * A two-winding transformer has a ratio tap changer and/or a phase tap changer. Each tap changer can be estimated or not.
 * If a tap changer is not to be estimated, it should not be changed during a state estimation (its tap position is merely an input of the state estimation).
 
-| Attribute | Type   | Unit | Required | Default value | Description           |
-|-----------|--------|------| -------- | ------------- |-----------------------|
-| NAME      | String | - | yes | twoWindingsTransformerToBeEstimated | Name of the extension |
+| Attribute | Type   | Unit | Required | Default value                       | Description           |
+|-----------|--------|------|----------|-------------------------------------|-----------------------|
+| NAME      | String | -    | yes      | twoWindingsTransformerToBeEstimated | Name of the extension |
 
 Example of code to get the status of the ratio tap changer:
 
@@ -422,9 +422,9 @@ transformer.newExtension(TwoWindingsTransformerToBeEstimatedAdder.class)
 
 This extension is used to model voltage control of static VAR compensators. This extension is attached to a [static VAR compensator](index.md#static-var-compensator).
 
-| Attribute | Type | Unit | Required | Default value | Description |
-| --------- | ---- | ---- | -------- | ------------- | ----------- |
-| Slope | double | kV per MVar | yes | - | The sensibility of the voltage with respect to reactive power |
+| Attribute | Type   | Unit        | Required | Default value | Description                                                   |
+|-----------|--------|-------------|----------|---------------|---------------------------------------------------------------|
+| Slope     | double | kV per MVar | yes      | -             | The sensibility of the voltage with respect to reactive power |
 
 When this extension is present and the slope greater than zero, the reactive output of the static VAR compensator is defined by:
 

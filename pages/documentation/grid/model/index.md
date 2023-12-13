@@ -493,13 +493,11 @@ $$
 ##### Tie Line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/TieLine.html)
 
-A tie line is an AC line sharing power between two neighbouring regional grids. It is constituted of two [half lines](#half-line).
-A tie line is created by matching two [dangling lines](#dangling-line) with the same Xnode code.
-It has line characteristics, with $$R$$ (resp. $$X$$) being the sum of the series resistances (resp. reactances) of the two half lines.
-$$G1$$ (resp. $$B1$$) is equal to the sum of the first half line's $$G1$$ and $$G2$$ (resp. $$B1$$ and $$B2$$).
-$$G2$$ (resp. $$B2$$) is equal to the sum of the second half line's $$G1$$ and $$G2$$ (resp. $$B1$$ and $$B2$$).
-
-###### Half Line
+A tie line is an AC line sharing power between two neighbouring regional grids.
+It is created by matching two [dangling lines](#dangling-line) with the same Xnode code.
+It has line characteristics, with $$R$$ (resp. $$X$$) being the sum of the series resistances (resp. reactances) of the two dangling lines.
+$$G1$$ (resp. $$B1$$) is equal to the first dangling line's $$G1$$ (resp. $$B1$$).
+$$G2$$ (resp. $$B2$$) is equal to the second dangling line's $$G2$$ (resp. $$B2$$).
 
 **Characteristics**
 
@@ -738,7 +736,6 @@ A VSC converter station is made with switching devices that can be turned both o
 | --------- | ---- | ----------- |
 | $$VoltageSetpoint$$ | kV | The voltage setpoint for regulation |
 | $$ReactivePowerSetpoint$$ | MVar | The reactive power setpoint for regulation |
-| $$PowerFactor$$ | % | Ratio between the active power $$P$$ and the apparent power $$S$$. |
 
 **Specifications**
 

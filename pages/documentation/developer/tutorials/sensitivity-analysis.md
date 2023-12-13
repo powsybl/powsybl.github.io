@@ -26,8 +26,8 @@ A standard sensitivity analysis input comprises a list of sensitivity factors, e
 You will first run one sensitivity analysis, and write the results in a JSON file. Then, you will define contingencies on each of the lines that are not monitored, and compute a sensitivity analysis for each of them. The factors' values will be printed in the terminal for this second case.
 
 ## Configure PowSyBl
-We have configured this tutorial so as to use a locally defined `config.yml` file.
-Edit the file named `config.yml` at the location `sensitivity/initial/src/main/resources`.
+We have configured this tutorial to use a locally defined `config.yml` file.
+Edit the file named `config.yml` at the location `sensitivity/src/main/resources`.
 Start the configuration by writing:
 ```yaml
 load-flow:
@@ -68,15 +68,15 @@ In order to show how the factors creation work in Java, we start by creating the
 First, we need to define which branches (in our case lines) will be monitored. We'll just create a list of `Line`,
 and add the ones we wish to monitor in the list by using their IDs:
 ```java
- List<Line> monitoredLines = new ArrayList<>();
- monitoredLines.add(network.getLine("BBE2AA1  FFR3AA1  1"));
- monitoredLines.add(network.getLine("FFR2AA1  DDE3AA1  1"));
- monitoredLines.add(network.getLine("DDE2AA1  NNL3AA1  1"));
- monitoredLines.add(network.getLine("NNL2AA1  BBE3AA1  1"));
+List<Line> monitoredLines = List.of(network.getLine("BBE2AA1  FFR3AA1  1"),
+        network.getLine("FFR2AA1  DDE3AA1  1"),
+        network.getLine("DDE2AA1  NNL3AA1  1"),
+        network.getLine("NNL2AA1  BBE3AA1  1"));
 ```
 Here we will monitor all the lines that link countries together. The initial flow through each of the monitored lines constitutes the `function reference` values in the sensitivity analysis results. Here, since we did not run a load flow calculation on the network, these flows are not set yet. If you wish to display them, add the following lines in the file (optional):
 ```java
-LoadFlow.run(network, LoadFlowParameters.load());
+LoadFlowParameters parameters = new LoadFlowParameters();
+LoadFlow.run(network, parameters);
 LOGGER.info("Initial active power through the four monitored lines");
 for (Line line : monitoredLines) {
     LOGGER.info("LINE {} - P: {} MW", line.getId(), line.getTerminal1().getP());
@@ -86,9 +86,9 @@ for (Line line : monitoredLines) {
 To create the factors themselves, we need to create a list in the following way:
 ```java
 List<SensitivityFactor> factors =  monitoredLines.stream()
-         .map(l -> new SensitivityFactor(SensitivityFunctionType.BRANCH_ACTIVE_POWER_1, l.getId(),
-                                         SensitivityVariableType.TRANSFORMER_PHASE, "BBE2AA1  BBE3AA1  1",
-                                         false, ContingencyContext.all())).collect(Collectors.toList());
+        .map(l -> new SensitivityFactor(SensitivityFunctionType.BRANCH_ACTIVE_POWER_1, l.getId(),
+                                        SensitivityVariableType.TRANSFORMER_PHASE, "BBE2AA1  BBE3AA1  1",
+                                        false, ContingencyContext.all())).collect(Collectors.toList());
 ```
 In this provider, we first define the function of interest: here the branch flow (we may also choose current) on the monitored lines. Then we choose to monitor the branch flow with respect to the Belgian phase shift transformer's angle.
 
