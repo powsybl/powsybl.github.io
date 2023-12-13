@@ -207,6 +207,7 @@ In IIDM, loads comprise the following metadata:
 - [Discrete Measurements](extensions.md#discrete-measurements)
 - [Identifiable Short-Circuit](extensions.md#identifiable-short-circuit)
 - [Injection Observability](extensions.md#injection-observability)
+- [Load Asymmetrical](extensions.md#load-asymmetrical)
 - [Load Detail](extensions.md#load-detail)
 - [Measurements](extensions.md#measurements)
 
