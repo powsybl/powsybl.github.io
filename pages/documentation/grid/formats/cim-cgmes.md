@@ -408,14 +408,14 @@ This extension models all the control areas contained in the network as modeled 
 
 **CGMES control area**
 
-| Attribute                        | Type       | Unit | Required | Default value | Description                                         |
-|----------------------------------|------------|------|----------|---------------|-----------------------------------------------------|
-| ID                               | String     | -    | yes      | -             | The control area's ID                               |
-| name                             | String     | -    | no       | -             | The control area's name                             |
-| Energy Identification Code (EIC) | String     | -    | no       | -             | The control area's EIC                              |
-| net interchange                  | double     | -    | no       | -             | The control area's net interchange (at its borders) |
-| terminals                        | `Terminal` | -    | no       | -             | Terminals at the border of the control area         |
-| boundaries                       | `Boundary` | -    | no       | -             | Boundaries at the border of the control area        |
+| Attribute                        | Type       | Unit | Required | Default value | Description                                              |
+|----------------------------------|------------|------|----------|---------------|----------------------------------------------------------|
+| ID                               | String     | -    | yes      | -             | The IF of the control area                               |
+| name                             | String     | -    | no       | -             | The name of the control area                             |
+| Energy Identification Code (EIC) | String     | -    | no       | -             | The EIC control area                                     |
+| net interchange                  | double     | -    | no       | -             | The net interchange of the control area (at its borders) |
+| terminals                        | `Terminal` | -    | no       | -             | Terminals at the border of the control area              |
+| boundaries                       | `Boundary` | -    | no       | -             | Boundaries at the border of the control area             |
 
 It is possible to retrieve a control area by its ID. It is also possible to iterate through all control areas.
 
@@ -426,10 +426,10 @@ This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 This extension is used to add some CIM-CGMES characteristics to dangling lines.
 
 
-| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
-|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
-| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
-| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |                                                
+| Attribute                             | Type    | Unit | Required | Default value | Description                                                         |
+|---------------------------------------|---------|------|----------|---------------|---------------------------------------------------------------------|
+| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated with a DC Xnode or not |
+| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The EIC of the boundary line if it exists                           |                                                
 
 This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
@@ -437,10 +437,10 @@ This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
 This extension is used to add some CIM-CGMES characteristics to tie lines.
 
-| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
-|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
-| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
-| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |
+| Attribute                             | Type    | Unit | Required | Default value | Description                                                         |
+|---------------------------------------|---------|------|----------|---------------|---------------------------------------------------------------------|
+| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated with a DC Xnode or not |
+| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The EIC of theboundary line EIC if it exists                        |
 
 This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
@@ -502,10 +502,6 @@ Its default value is `true`.
 **iidm.import.cgmes.ensure-id-alias-unicity**  
 The `iidm.import.cgmes.ensure-id-alias-unicity` property is an optional property that defines if IDs' and aliases' unicity is ensured during CGMES import. If it is set to `true`, identical CGMES IDs will be modified to be unique. If it is set to `false`, identical CGMES IDs will throw an exception. Its default value is `false`.
 
-**iidm.import.cgmes.id-mapping-file-path**
-The `iidm.import.cgmes.id-mapping-file-path` property is an optional property that defines the path of the CSV file containing a mapping between IIDM identifiers and CGMES identifiers. By default, its value is `null`:
-ID-mapping CSV file is read only if it is in the imported compressed file.
-
 **iidm.import.cgmes.import-control-areas**  
 The `iidm.import.cgmes.import-control-areas` property is an optional property that defines if control areas must be imported or not. Its default value is `true`.
 
@@ -514,8 +510,8 @@ THe `iidm.import.cgmes.naming-strategy` property is an optional property that de
 CGMES identifiers and IIDM identifiers.
 It can be:
 - `identity`: CGMES IDs are the same as IIDM IDs
-- `cgmes`: if CGMES IDs have associated IIDM IDs in a mapping file, IIDM ID is applied (CGMES ID is an alias). if CGMES IDs do not have associated IIDM IDs in a mapping file but are not compliant with CGMES requirements and correspond to an IIDM `Identifiable`, a new CGMES ID is created as an alias.
-- `cgmes-fix-all-invalid-ids`: if CGMES IDs have associated IIDM IDs in a mapping file, IIDM ID is applied (CGMES ID is an alias). if CGMES IDs do not have associated IIDM IDs in a mapping file but are not compliant with CGMES requirements, a new CGMES ID is created as an alias.
+- `cgmes`: if IIDM IDs are not compliant with CGMES requirements and correspond to an IIDM `Identifiable`, a new CGMES ID is created as an alias.
+- `cgmes-fix-all-invalid-ids`: if IIDM IDs are not compliant with CGMES requirements, a new CGMES ID is created as an alias.
   Its default value is `identity`.
 
 **iidm.import.cgmes.post-processors**  
@@ -537,6 +533,16 @@ The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an op
 
 **iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension` property is an optional property that defines if the CGMES conversion context will be stored as an extension of the IIDM output network. Its default value is `false`.
+
+<span style="color: red">TODO iidm.import.cgmes.import-node-breaker-as-bus-breaker</span>
+
+<span style="color: red">TODO disconnect-dangling-line-if-boundary-side-is-disconnected</span>
+
+<span style="color: red">TODO iidm.import.cgmes.missing-permanent-limit-percentage</span>
+
+<span style="color: red">TODO iidm.import.cgmes.cgm-with-subnetworks</span>
+
+<span style="color: red">TODO iidm.import.cgmes.cgm-with-subnetworks-defined-by</span>
 
 ## CGMES post-processors
 
@@ -690,6 +696,8 @@ The `iidm.export.cgmes.cim-version` property is an optional property that define
 CIM version 14 and 16 are supported i.e. its valid values are `14` or `16`.
 If not defined, and the network has the extension `CimCharacteristics`, the CIM version will be the one indicated in the extension. If not, its default value is `16`.
 
+**iidm.export.cgmes.encode-ids**
+
 **iidm.export.cgmes.export-boundary-power-flows**
 The `iidm.export.cgmes.export-boundary-power-flows` property is an optional property that defines if power flows of boundary nodes are to be exported in the SV file or not.
 Its default value is `true`.
@@ -706,9 +714,56 @@ It can be:
 - `cgmes-fix-all-invalid-ids`: all IDs are exported as CGMES IDs if they are not compliant with CGMES requirements
 Its default value is `identity`.
 
+**iidm.export.cgmes.uuid-namespace**
+
 **iidm.export.cgmes.profiles**
 The `iidm.export.cgmes.profiles` property is an optional property that defines the exported CGMES profiles.
 By default, it is a full CGMES export: EQ, TP, SSH and SV are exported.
+
+**iidm.export.cgmes.modeling-authority-set**
+This property is an optional property allowing to write a custom modeling authority set in the file headers. 
+If a Boundary set is given with the property `iidm.import.cgmes.boundary-location` and a sourcing actor is found, then
+the modeling authority set can also be retrived in the boundary file without this property.
+By default, the modeling authority set is "powsybl.org".
+
+**iidm.export.cgmes.model-description**
+This property is an optional property allowing to write a custom model description in the file headers.
+By default, the model description is "EQ model" for the EQ file, "TP model" for the TP file, "SSH model" for the SSH 
+file and "SV model" for the SV file.
+
+**iidm.export.cgmes.export-transformers-with-highest-voltage-at-end1**
+This property is an optional property defining whether the transformers should be exported with the highest voltage at 
+end 1, even if it might not be the case in the IIDM model. 
+Its default value is `false`.
+
+**iidm.export.cgmes.export-load-flow-status**
+This property is an optional property that indicates whether the loadflow status (`converged` or `diverged`) should be 
+written for the `TopologicalIslands` in the SV file. If true, the status will be computed by checking, for every bus,
+if the voltage and angle is valid, and if the bus is respecting Kirchhoff's first law. For the latter, we check that 
+the sums of active power and reactive power at the bus are higher than a threshold defined by the properties 
+`iidm.export.cgmes.max-p-mismatch-converged` and `iidm.export.cgmes.max-q-mismatch-converged`.
+Its default value is `true`.
+
+**iidm.export.cgmes.max-p-mismatch-converged**
+This property is an optional property that defines the threshold below which a bus is considered to be balanced for the 
+load flow status of the `TopologicalIsland` in active power. If the sum of all the active power of the terminals 
+connected to the bus is greater than this threshold, then the load flow is considered to be divergent. 
+Its default value is 0.1, and it should be used only if the `iidm.export.cgmes.export-load-flow-status` property is set 
+to `true`.
+
+**iidm.export.cgmes.max-q-mismatch-converged**
+This property is an optional property that defines the threshold below which a bus is considered to be balanced for the
+load flow status of the `TopologicalIsland` in reactive power. If the sum of all the reactive power of the terminals
+connected to the bus is greater than this threshold, then the load flow is considered to be divergent.
+Its default value is 0.1, and it should be used only if the `iidm.export.cgmes.export-load-flow-status` property is set
+to `true`.
+
+**iidm.export.cgmes.export-sv-injections-for-slacks**
+
+**iidm.export.cgmes.sourcing-actor**
+This property is an optional property allowing to write a custom sourcing actor in the file headers.
+If this field is not given and the network exported contains only one country, then the sourcing actor will be retrieved
+from the Boundary dataset if it is given in the property `iidm.import.cgmes.boundary-location`. 
 
 ## Examples
 Have a look to the [CGMES sample files](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/TestConfigurations_packageCASv2.0.zip)
