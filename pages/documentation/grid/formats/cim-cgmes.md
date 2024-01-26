@@ -410,7 +410,7 @@ This extension models all the control areas contained in the network as modeled 
 
 | Attribute                        | Type       | Unit | Required | Default value | Description                                              |
 |----------------------------------|------------|------|----------|---------------|----------------------------------------------------------|
-| ID                               | String     | -    | yes      | -             | The IF of the control area                               |
+| ID                               | String     | -    | yes      | -             | The ID of the control area                               |
 | name                             | String     | -    | no       | -             | The name of the control area                             |
 | Energy Identification Code (EIC) | String     | -    | no       | -             | The EIC control area                                     |
 | net interchange                  | double     | -    | no       | -             | The net interchange of the control area (at its borders) |
