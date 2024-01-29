@@ -185,6 +185,18 @@ In the grid model, loads comprise the following metadata:
     - `UNDEFINED`
     - `AUXILIARY`
     - `FICTITIOUS`
+- The load model, which can be:
+    - `ZIP` (or polynomial), following equations:  
+$$P = P0 * (c0p + c1p \times (v / v0) + c2p \times (v / v0)^2)$$  
+$$Q = Q0 * (c0q + c1q \times (v / v0) + c2q \times (v / v0)^2)$$  
+with v0 the nominal voltage.  
+Sum of C0p, C1p and C2p must be equal to 1.  
+Sum of C0q, C1q and C2q must be equal to 1.  
+    - `EXPONENTIAL`, following equations:  
+$$P = P0 \times (v / v0)^np$$  
+$$Q = Q0 \times (v / v0)^nq$$  
+with v0 the nominal voltage.  
+np and nq are expected to be positive.
 
 **Available extensions**
 
@@ -787,7 +799,7 @@ Please look at this scheme to fully understand the modelling (the following exam
 
 ![Loading limits model](img/index/currentLimits.svg){: width="50%" .center-image}
 
-Note that, following this modelling, in general the last temporary limit (the higher one in value) should be infinite with an acceptable duration different from zero, except for tripping current modeling where the last temporary limit is infinite with an acceptable duration equal to zero.
+Note that, following this modelling, in general the last temporary limit (the higher one in value) should be infinite with an acceptable duration different from zero, except for tripping current modeling where the last temporary limit is infinite with an acceptable duration equal to zero. If temporary limits are modeled, the permanent limit becomes mandatory. 
 
 ### Phase tap changer
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/PhaseTapChanger.html)

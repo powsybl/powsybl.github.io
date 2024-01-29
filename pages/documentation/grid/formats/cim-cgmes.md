@@ -253,15 +253,6 @@ If the `EquivalentBranch` is mapped to a PowSyBl [`DanglingLine`](../model/index
 - `P0` is copied from CGMES `P` of the terminal at boundary side
 - `Q0` is copied from CGMES `Q` of the terminal at boundary side
 
-If the `EquivalentBranch` is mapped to a PowSyBl [`HalfLine`](../model/index.md#half-line):
-- `R` is copied from CGMES `r`
-- `X` is copied from CGMES `x`
-- `G1` is `0.0`
-- `G2` is `0.0`
-- `B1` is `0.0`
-- `B2` is `0.0`
-- `UcteXnodeCode` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
-
 #### AsychronousMachine
 
 CGMES `AsynchronousMachines` represent rotating machines whose shaft rotates asynchronously with the electrical field.
@@ -534,15 +525,20 @@ The `iidm.import.cgmes.store-cgmes-model-as-network-extension` property is an op
 **iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension**  
 The `iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension` property is an optional property that defines if the CGMES conversion context will be stored as an extension of the IIDM output network. Its default value is `false`.
 
-<span style="color: red">TODO iidm.import.cgmes.import-node-breaker-as-bus-breaker</span>
+**iidm.import.cgmes.import-node-breaker-as-bus-breaker**
+The `iidm.import.cgmes.import-node-breaker-as-bus-breaker` property is an optional property that forces CGMES model to be in topology bus/breaker in IIDM. This is a key feature when some models do not have all the breakers to connect and disconnect equipments in IIDM. In bus/breaker topology, connect and disconnect equipment only rely on terminal statuses and not on breakers. Its default value is `false`.  
 
-<span style="color: red">TODO disconnect-dangling-line-if-boundary-side-is-disconnected</span>
+**iidm.import.cgmes.disconnect-dangling-line-if-boundary-side-is-disconnected**
+The `iidm.import.cgmes.disconnect-dangling-line-if-boundary-side-is-disconnected` property is an optional property used at CGMES import that disconnects a dangling line if the CGMES model, the line is open at boundary side. As IIDM does not have any equivalence for that, this is an approximation. Its default value is `false`.
 
-<span style="color: red">TODO iidm.import.cgmes.missing-permanent-limit-percentage</span>
+**iidm.import.cgmes.missing-permanent-limit-percentage** 
+The `iidm.import.cgmes.missing-permanent-limit-percentage` property is an optional property used when in operational limits, temporary limits are present and the permanent limit is missing as it is forbidden in IIDM. The missing permanent limit is equal to a percentage of the lowest temporary limit, percentage defined by this property if present, 100% by default.    
 
-<span style="color: red">TODO iidm.import.cgmes.cgm-with-subnetworks</span>
+**iidm.import.cgmes.cgm-with-subnetworks**
+The `iidm.import.cgmes.cgm-with-subnetworks` property defines if subnetworks must be added to the network when importing a Common Grid Model. A subnetwork models an Individual Grid Model. By default `true`: subnetworks are added, merging is done at IIDM level and not in the triple store.  
 
-<span style="color: red">TODO iidm.import.cgmes.cgm-with-subnetworks-defined-by</span>
+**iidm.import.cgmes.cgm-with-subnetworks-defined**
+If `iidm.import.cgmes.cgm-with-subnetworks` is set to `true`, a subnetwork represents an Individual Grid Model that could be defined by the filenames (use `FILENAME`) or by the modeling authority (use `MODELING_AUTHORITY`).
 
 ## CGMES post-processors
 

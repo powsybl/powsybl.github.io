@@ -262,7 +262,7 @@ Whether simulation of static VAR compensators with voltage control enabled and a
 (See [voltage per reactive power control extension](../../grid/model/extensions.md#voltage-per-reactive-power-control)).  
 The default value is `false`.
 
-**reactivePowerRemoteControl**  
+**generatorReactivePowerRemoteControl**  
 Whether simulation of generators reactive power remote control should be enabled
 (See [remote reactive power control](../../grid/model/extensions.md#remote-reactive-power-control)).  
 The default value is `false`.
@@ -290,10 +290,12 @@ This parameter defines which kind of outer loops is used for transformer voltage
 
 The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 
-**incrementalTransformerVoltageControlOuterLoopMaxTapShift**  
-Maximum number of tap position change during a single iteration of the incremental voltage control outerloop.
-Applies when `transformerVoltageControlMode` is set to `INCREMENTAL_VOLTAGE_CONTROL`.  
-The default value is `3`.
+**transformerReactivePowerControl**
+This parameter enables the reactive power control of transformer through a dedicated incremental reactive power control outer loop. The default value is `false`.
+
+**incrementalTransformerRatioTapControlOuterLoopMaxTapShift**  
+Maximum number of tap position change during a single iteration of the incremental voltage and or reactive power control outer loop.
+Applies when `transformerVoltageControlMode` is set to `INCREMENTAL_VOLTAGE_CONTROL` and or when `transformerReactivePowerControl` is enabled (`true`). The default value is `3`.
 
 **shuntVoltageControlMode**  
 This parameter defines which kind of outer loops is used for the shunt voltage control. We have two kinds of outer loops: 
@@ -399,6 +401,43 @@ The default value is `false`.
 **debugDir**  
 Allows to dump debug files to a specific directory.  
 The default value is undefined (`null`), disabling any debug files writing.
+
+**asymmetrical**
+Allows to run asymmetrical calculations. The default value is `false`. 
+
+**useActiveLimits**
+Allows to ignore active power limits during calculations. Active power limits are mainly involved in slack distribution on generators. The default value is `true`.
+
+**minNominalVoltageTargetVoltageCheck**
+This parameter defines the minimal nominal voltage to check the target of voltage control in per-unit. The default value is `20 kV`, meaning that under the controlled buses of voltage levels under this value are ignored from the check.
+
+**reactivePowerDispatchMode**
+TODO
+
+**disableVoltageControlOfGeneratorsOutsideActivePowerLimits**
+This parameter allows to disable the voltage control of generators which `targetP` is lower than `minP` or greater than `maxP`. The default value is `false`.
+
+**outerLoopNames**
+TODO
+
+**linePerUnitMode**
+TODO
+
+**useLoadModel**
+This parameter set to `true` includes in the load modeling the `ZIP` or `EXPONENTIAL` part of a load. This part can be fully described in IIDM and fully simulated through this parameter.
+
+**dcApproximationType**
+
+**simulateAutomationSystems**
+Allows to simulate automation systems that are modeled in the network. For the moment, the grid model only supports overload management systems. The default behaviour is `false`.
+
+**referenceBusSelectionMode**
+The reference bus is the bus where the angle is equal to zero. There are several mode of selection:
+- `FIRST-SLACK` where the angle reference bus selected as the first slack bus among potentially multiple slacks (default).
+- `GENERATOR_REFERENCE_PRIORITY` where angle reference bus selected from generator reference priorities, relying on extension `ReferencePriority`.
+
+**writeReferenceTerminals**
+This parameter allows to write as update of the IIDM network an extension `ReferencePriority` to the generator terminal which associated bus has been selected for calculations. We have an extension by synchronous component.
 
 ### Configuration file example
 See below an extract of a config file that could help:
