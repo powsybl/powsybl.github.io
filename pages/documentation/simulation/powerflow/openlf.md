@@ -184,7 +184,7 @@ The default value is `REPLACE_BY_ZERO_IMPEDANCE_LINE`.
 **lowImpedanceThreshold**  
 The `lowImpedanceThreshold` property is an optional property that defines in per-unit the threshold used to identify low impedance branches
 (when $$Z$$ is less than the `lowImpedanceThreshold` per-unit threshold).  
-The default value is $$10^{-8}$$.
+The default value is $$10^{-8}$$ and it must be greater than `0`.
 
 **throwsExceptionInCaseOfSlackDistributionFailure**  
 The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure.
@@ -257,7 +257,7 @@ The default value for `loadPowerFactorConstant` property is `false`.
 **slackBusPMaxMismatch**  
 When slack distribution is enabled (`distributedSlack` set to `true` in LoadFlowParameters), this is the threshold below which slack power
 is considered to be distributed.  
-The default value is $$1 MW$$.
+The default value is `1 MW` and it must be greater or equal to `0 MW`.
 
 **voltageRemoteControl**  
 The `voltageRemoteControl` property is an optional property that defines if the remote control for voltage controllers has to be modeled.
@@ -282,7 +282,7 @@ The default value is `false`.
 **reactiveLimitsMaxPqPvSwitch**  
 When `useReactiveLimits` is set to `true`, this parameter is used to limit the number of times an equipment performing voltage control
 is switching from PQ to PV type. After this number of PQ/PV type switch, the equipment will not change PV/PQ type anymore.  
-The default value is `3`.
+The default value is `3` and it must be greater or equal to `0`.
 
 **phaseShifterControlMode**
 - `CONTINUOUS_WITH_DISCRETISATION`: phase shifter control is solved by the Newton-Raphson inner-loop.
@@ -318,23 +318,23 @@ The default value is `true`.
 
 **maxNewtonRaphsonIterations**  
 Maximum number of iterations for Newton-Raphson inner loop.  
-The default value is `15`.
+The default value is `15` and it must be greater or equal to `1`.
 
 **maxOuterLoopIterations**  
 Maximum number of iterations for Newton-Raphson outer loop.  
-The default value is `20`.
+The default value is `20` and it must be greater or equal to `1`.
 
 **newtonRaphsonStoppingCriteriaType**  
 Stopping criteria for Newton-Raphson algorithm.
 - `UNIFORM_CRITERIA`: stop when all equation mismatches are below `newtonRaphsonConvEpsPerEq` threshold.
-  `newtonRaphsonConvEpsPerEq` defines the threshold for all equation types, in per-unit 100MVA base. The default value is $$10^{-4}$$.
+  `newtonRaphsonConvEpsPerEq` defines the threshold for all equation types, in per-unit with `100 MVA` base. The default value is $$10^{-4} \text{p.u.}$$ and it must be greater than 0.
 - `PER_EQUATION_TYPE_CRITERIA`: stop when equation mismatches are below equation type specific thresholds:
-  - `maxActivePowerMismatch`: Defines the threshold for active power equations, in MW. The default value is $$10^{-2} MW$$.
-  - `maxReactivePowerMismatch`: Defines the threshold for reactive power equations, in MVAr. The default value is $$10^{-2} MVAr$$.
-  - `maxVoltageMismatch`: Defines the threshold for voltage equations, in per-unit. The default value is $$10^{-4}$$.
-  - `maxAngleMismatch`: Defines the threshold for angle equations, in per-unit. The default value is $$10^{-5}$$.
-  - `maxRatioMismatch`: Defines the threshold for ratio equations, in per-unit. The default value is $$10^{-5}$$.
-  - `maxSusceptanceMismatch`: Defines the threshold for susceptance equations, in per-unit. The default value is $$10^{-4}$$.
+  - `maxActivePowerMismatch`: Defines the threshold for active power equations, in MW. The default value is $$10^{-2} \text{MW}$$ and it must be greater than 0.
+  - `maxReactivePowerMismatch`: Defines the threshold for reactive power equations, in MVAr. The default value is $$10^{-2} \text{MVAr}$$ and it must be greater than 0.
+  - `maxVoltageMismatch`: Defines the threshold for voltage equations, in per-unit. The default value is $$10^{-4} \text{p.u.}$$ and it must be greater than 0.
+  - `maxAngleMismatch`: Defines the threshold for angle equations, in radians. The default value is $$10^{-5} \text{rad}$$ and it must be greater than 0.
+  - `maxRatioMismatch`: Defines the threshold for ratio equations, unitless. The default value is $$10^{-5}$$ and it must be greater than 0.
+  - `maxSusceptanceMismatch`: Defines the threshold for susceptance equations, in per-unit. The default value is $$10^{-4} \text{p.u.}$$ and it must be greater than 0.
 
 The default value is `UNIFORM_CRITERIA`.
 
@@ -342,7 +342,7 @@ The default value is `UNIFORM_CRITERIA`.
 This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
 - `NONE`: no scaling is made
 - `LINE_SEARCH`: applies a line search strategy
-- `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to maximum 0.1p.u. and 10degrees
+- `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to maximum 0.1 p.u. and 10degrees
 
 The default value is `NONE`.
 
@@ -356,13 +356,13 @@ The default value is $$5000 MW$$.
 **minPlausibleTargetVoltage** and **maxPlausibleTargetVoltage**  
 Equipments with voltage regulation target voltage outside these per-unit thresholds
 are considered suspect and are discarded from regulation prior to load flow resolution.  
-The default values are `0.8` and `1.2`.
+The default values are `0.8` and `1.2` and they must be greater or equal to `0`.
 
 **minRealisticVoltage** and **maxRealisticVoltage**  
 These parameters are used to identify if Newton-Raphson has converged to an unrealistic state.
 For any component where a bus voltage is solved outside these per-unit thresholds, the component solution is deemed unrealistic
 and its solution status is flagged as failed.  
-The default values are `0.5` and `1.5`.
+The default values are `0.5` and `1.5` and they must be greater or equal to `0`.
 
 **reactiveRangeCheckMode**  
 This parameter defines how to check the reactive limits $$MinQ$$ and $$MaxQ$$ of a generator. If the range is too small, the generator is discarded from voltage control.
@@ -420,7 +420,9 @@ Allows to ignore active power limits during calculations. Active power limits ar
 Disables voltage control for generators with `targetP` outside the interval [`minP`, `maxP`]. The default value is `false`.
 
 **minNominalVoltageTargetVoltageCheck**
-This parameter defines the minimal nominal voltage to check the target of voltage control in per-unit. The default value is `20 kV`, meaning that under the controlled buses of voltage levels under this value are ignored from the check.
+This parameter defines the minimal nominal voltage to check the target of voltage control in per-unit.
+The default value is `20 kV`, meaning that under the controlled buses of voltage levels under this value are ignored from the check.
+It must be greater or equal to `0 kV`.
 
 **reactivePowerDispatchMode**
 TODO
