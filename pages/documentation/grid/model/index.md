@@ -846,8 +846,9 @@ A ratio tap changer is described by a set of tap positions (or steps) within whi
 - the lowest tap position
 - the highest tap position
 - the position index of the current tap (which has to be within the highest and lowest tap position bounds)
-- whether the tap changer is regulating or not; a ratio tap changer always regulates on the voltage
-- the regulation value (in `kV`)
+- whether the tap changer is regulating or not
+- the regulation mode, which can be `VOLTAGE` or `REACTIVE_POWER`: the tap changer either regulates the voltage or the reactive power
+- the regulation value (either a voltage value in `kV` or a reactive power value in `MVar`)
 - the regulating terminal, which can be local or remote: it is the specific connection point on the network where the setpoint is measured.
 - the target deadband, which defines a margin on the regulation so as to avoid an excessive update of controls
 - whether the ratio tap changer can change tap positions onload or only offload
