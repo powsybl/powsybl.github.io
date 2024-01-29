@@ -186,7 +186,16 @@ The `lowImpedanceThreshold` property is an optional property that defines in per
 (when $$Z$$ is less than the `lowImpedanceThreshold` per-unit threshold).  
 The default value is $$10^{-8}$$ and it must be greater than `0`.
 
-**throwsExceptionInCaseOfSlackDistributionFailure**  
+**slackDistributionFailureBehavior**
+This option defines the behavior in case the slack distribution fails. Available options are:
+- `THROW` if you want an exception to be thrown in case of failure
+- `FAIL` if you want the OuterLoopStatus to be `FAILED` in case of failure
+- `LEAVE_ON_SLACK_BUS` if you want to leave the remanining slack on the slack bus
+- `DISTRIBUTE_ON_REFERENCE_GENERATOR` if you want to put the slack on the reference generator, disregarding active power limits. 
+There must be a reference generator defined, otherwise it raises an exception.
+
+The default value is `LEAVE_ON_SLACK_BUS`.
+
 The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure.
 This could happen in small synchronous component without enough generators or loads to balance the mismatch.
 In that case, the remaining active power mismatch remains on the selected slack bus.  
