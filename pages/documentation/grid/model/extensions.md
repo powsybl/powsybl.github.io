@@ -222,7 +222,7 @@ $$ S_{1i_{Load}}=P_{Load}+j.Q_{Load} $$
 
 We must verify:  
 
-$$ 0 = -S_{1i_{Load}} +\sum_{j=v(i)}^{} S_{1ij} $$
+$$ 0 = -S_{1i_{Load}} +\sum_{j=\delta(i)}^{} S_{1ij} $$
 
 <u>Unbalanced load flow conditions:</u>
 

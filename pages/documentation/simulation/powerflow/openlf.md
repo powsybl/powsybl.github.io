@@ -42,17 +42,23 @@ $$q_{i,j}= \rho_iv_i(-B_i\rho_iv_i + Y\rho_iv_i\text{cos}(\Xi) - Y\rho_jv_j\text
 
 Where $$Y$$ is the magnitude of the line complex admittance $$\frac{1}{R+jX}$$, and $$\Xi$$ such that: $$R+jX = \frac{1}{Y}e^{j(\frac{\pi}{2}-\Xi)}$$. $$\theta$$ satisfies: $$\theta= \Xi - A_i + A_j - \phi_i + \phi_j.$$
 
-Beware that $$p_{i,j}$$ is the power at the exit of bus $$i$$.
+Beware that $$p_{i,j}$$ is the power that leaves bus $$i$$.
 
 Therefore, active and reactive balance equations are expressed as:
 
-$$ P_i^{in} = \sum_{j \in v(i)} p_{i,j}$$
+$$ P_i^{in} = \sum_{j \in \delta(i)} p_{i,j}$$
 
-$$ Q_i^{in} = \sum_{j \in v(i)} q_{i,j}$$
+$$ Q_i^{in} = \sum_{j \in \delta(i)} q_{i,j}$$
 
-where $$v(i)$$ is the set of buses linked to $$i$$ in the network graph.
+where $$\delta(i)$$ is the set of buses linked to $$i$$ in the network graph.
 
-Solving this non-linear equations system is done using the Newton-Raphson method. At each iteration, the local jacobian matrix $$J(v,\phi)$$ of the system is computed and a linear system based on this matrix is solved using its LU decomposition. 
+The resulting non-linear system of equations is solved via the Newton-Raphson algorithm.
+The underlying principle of the algorithm is the following:
+- It starts at a certain point $$x_0 = (v_0, \phi_0)$$ as an approximate solution to the system of equations;
+- Then, in an iterative fashion, it generates a series $$x_1, x_2,.., x_k$$ of better approximate solutions to the system of equations;
+- These iterates $$x_k$$ are found by solving a system of equations using local Jacobian matrix $$J(v,\phi)$$ at the previous point $$x_{k-1}$$; 
+
+In PowSyBl OpenLoadFlow, the linear system is solved either via Sparse LU decomposition (by [SuiteSparse](https://people.engr.tamu.edu/davis/suitesparse.html)) or via Krylov subspace methods for indefinite non-symmetric matrices (by [Kinsol](https://computing.llnl.gov/projects/sundials/kinsol)). 
 
 #### Other regulation modes
 
