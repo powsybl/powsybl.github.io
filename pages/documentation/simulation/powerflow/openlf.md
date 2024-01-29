@@ -416,6 +416,9 @@ Allows to run asymmetrical calculations. The default value is `false`.
 **useActiveLimits**
 Allows to ignore active power limits during calculations. Active power limits are mainly involved in slack distribution on generators. The default value is `true`.
 
+**disableVoltageControlOfGeneratorsOutsideActivePowerLimits**
+Disables voltage control for generators with `targetP` outside the interval [`minP`, `maxP`]. The default value is `false`.
+
 **minNominalVoltageTargetVoltageCheck**
 This parameter defines the minimal nominal voltage to check the target of voltage control in per-unit. The default value is `20 kV`, meaning that under the controlled buses of voltage levels under this value are ignored from the check.
 
