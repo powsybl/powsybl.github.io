@@ -434,6 +434,19 @@ It must be greater or equal to `0 kV`.
 
 **reactivePowerDispatchMode**
 TODO
+This parameter defines how reactive power is split among generators with controls (voltage or reactive power).
+It tries to divide reactive power among generators in the order described below.
+`reactivePowerDispatchMode` can be one of:
+- `Q_EQUAL_PROPORTION` 
+  1. If all concerned generators have pre-defined reactive keys, then it splits `Q` proportional to reactive keys
+  2. If they don't, but they have plausible reactive limits, split proportionally to the maximum reactive power range
+  3. If they don't, split `Q` equally 
+- `K_EQUAL_PROPORTION` 
+  1. If generators have plausible reactive limits, split `Q` proportionally to `k`, where `k` is defined by
+  $$ k = \frac{2 qToDispatch - qmax1 - qmin1 - qmax2 - qmin2 - ...}{qmax1 - qmin1 + qmax2 - qmin2 + ...} $$
+  2. If they don't, split `Q` equally
+
+The default value is `Q_EQUAL_PROPORTION`.
 
 **disableVoltageControlOfGeneratorsOutsideActivePowerLimits**
 This parameter allows to disable the voltage control of generators which `targetP` is lower than `minP` or greater than `maxP`. The default value is `false`.
