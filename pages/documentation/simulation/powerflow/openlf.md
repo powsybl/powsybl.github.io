@@ -507,11 +507,17 @@ Allows to simulate automation systems that are modeled in the network. For the m
 
 **referenceBusSelectionMode**  
 The reference bus is the bus where the angle is equal to zero. There are several mode of selection:
-- `FIRST-SLACK` where the angle reference bus selected as the first slack bus among potentially multiple slacks (default).
-- `GENERATOR_REFERENCE_PRIORITY` where angle reference bus selected from generator reference priorities, relying on extension `ReferencePriority`.
+- `FIRST_SLACK`: the angle reference bus is selected as the first slack bus among potentially multiple slacks (in case `maxSlackBusCount` > 1).
+- `GENERATOR_REFERENCE_PRIORITY`: the angle reference bus is selected from generator reference priorities defined via the [Reference Priority extension](../../grid/model/extensions.md#reference-priority).
+
+The default value is `FIRST_SLACK`.
+
 
 **writeReferenceTerminals**  
-This parameter allows to write as update of the IIDM network an extension `ReferencePriority` to the generator terminal which associated bus has been selected for calculations. We have an extension by synchronous component.
+This parameter allows to write to the IIDM network the [Reference Terminals extension](../../grid/model/extensions.md#reference-terminals)
+containing the generator terminals used as angle reference in the load flow calculation.
+There is one Terminal created/added in the extension for each calculated Synchronous Component.
+Works only when `referenceBusSelectionMode` is set to `GENERATOR_REFERENCE_PRIORITY`.
 
 ### Configuration file example
 See below an extract of a config file that could help:
