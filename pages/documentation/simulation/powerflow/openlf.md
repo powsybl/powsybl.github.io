@@ -194,7 +194,7 @@ This option defines the behavior in case the slack distribution fails. Available
 - `DISTRIBUTE_ON_REFERENCE_GENERATOR` if you want to put the slack on the reference generator, disregarding active power limits. 
 There must be a reference generator defined, otherwise it raises an exception.
 
-- The default value is `LEAVE_ON_SLACK_BUS`.
+The default value is `LEAVE_ON_SLACK_BUS`.
 
 **slackBusSelectionMode**  
 The `slackBusSelectionMode` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
@@ -324,7 +324,7 @@ The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 Whether simulation of static VAR compensators voltage monitoring should be enabled.  
 The default value is `true`.
 
-**acSolverType**
+**acSolverType**  
 AC load flow solver engine. Currently, it can be one of:
 - `NEWTON_RAPHSON` is the standard Newton-Raphson algorithm for load flow. Solves linear systems via Sparse LU decomposition (by [SuiteSparse](https://people.engr.tamu.edu/davis/suitesparse.html));
 - `NEWTON_KRYLOV` is also the standard Newton-Raphson algorithm for load flow. Solves linear systems via Krylov subspace methods for indefinite non-symmetric matrices (by [Kinsol](https://computing.llnl.gov/projects/sundials/kinsol)).
@@ -349,17 +349,17 @@ Stopping criteria for Newton-Raphson algorithm.
 
 The default value is `UNIFORM_CRITERIA`.
 
-**maxNewtonRaphsonIterations**
+**maxNewtonRaphsonIterations**  
 Only applies if **acSolverType** is `NEWTON_RAPHSON`.
 Maximum number of iterations for Newton-Raphson inner loop.  
 The default value is `15` and it must be greater or equal to `1`.
 
-**maxNewtonKrylovIterations**
+**maxNewtonKrylovIterations**  
 Only applies if **acSolverType** is `NEWTON_KRYLOV`.
 Maximum number of iterations for Newton-Raphson inner loop.
 The default value is `100` and it must be greater or equal to `1`.
 
-**stateVectorScalingMode**
+**stateVectorScalingMode**  
 Only applies if **acSolverType** is `NEWTON_RAPHSON`.
 This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
 - `NONE`: no scaling is made
@@ -368,27 +368,27 @@ This parameter 'slows down' the Newton-Raphson by scaling the state vector betwe
 
 The default value is `NONE`.
 
-**lineSearchStateVectorScalingMaxIteration**
+**lineSearchStateVectorScalingMaxIteration**  
 TODO
 Only applies if **acSolverType** is `NEWTON_RAPHSON`.
 The default value is `10` and it must be greater or equal to `1`.
 
-**lineSearchStateVectorScalingStepFold**
+**lineSearchStateVectorScalingStepFold**  
 TODO
 Only applies if **acSolverType** is `NEWTON_RAPHSON`.
 The default value is `4/3 = 1.333` and it must be greater than `1`.
 
-**maxVoltageChangeStateVectorScalingMaxDv**
+**maxVoltageChangeStateVectorScalingMaxDv**  
 TODO
 Only applies if **acSolverType** is `NEWTON_RAPHSON`.
 The default value is `0.1 p.u.` and it must be greater than `0`.
 
-**maxVoltageChangeStateVectorScalingMaxDphi**
+**maxVoltageChangeStateVectorScalingMaxDphi**  
 TODO
 Only applies if **acSolverType** is `NEWTON_RAPHSON`.
 The default value is `10 degrees` and it must be greater than `0`.
 
-**newtonKrylovLineSearch**
+**newtonKrylovLineSearch**  
 Only applies if **acSolverType** is `NEWTON_KRYLOV`.
 Activates or deactivates line search for the Newton-Raphson Kinsol solver.
 The default value is `false`.
@@ -457,21 +457,21 @@ The default value is `false`.
 Allows to dump debug files to a specific directory.  
 The default value is undefined (`null`), disabling any debug files writing.
 
-**asymmetrical**
+**asymmetrical**  
 Allows to run asymmetrical calculations. The default value is `false`. 
 
-**useActiveLimits**
+**useActiveLimits**  
 Allows to ignore active power limits during calculations. Active power limits are mainly involved in slack distribution on generators. The default value is `true`.
 
-**disableVoltageControlOfGeneratorsOutsideActivePowerLimits**
+**disableVoltageControlOfGeneratorsOutsideActivePowerLimits**  
 Disables voltage control for generators with `targetP` outside the interval [`minP`, `maxP`]. The default value is `false`.
 
-**minNominalVoltageTargetVoltageCheck**
+**minNominalVoltageTargetVoltageCheck**  
 This parameter defines the minimal nominal voltage to check the target of voltage control in per-unit.
 The default value is `20 kV`, meaning that under the controlled buses of voltage levels under this value are ignored from the check.
 It must be greater or equal to `0 kV`.
 
-**reactivePowerDispatchMode**
+**reactivePowerDispatchMode**  
 TODO
 This parameter defines how reactive power is split among generators with controls (voltage or reactive power).
 It tries to divide reactive power among generators in the order described below.
@@ -487,30 +487,30 @@ It tries to divide reactive power among generators in the order described below.
 
 The default value is `Q_EQUAL_PROPORTION`.
 
-**disableVoltageControlOfGeneratorsOutsideActivePowerLimits**
+**disableVoltageControlOfGeneratorsOutsideActivePowerLimits**  
 This parameter allows to disable the voltage control of generators which `targetP` is lower than `minP` or greater than `maxP`. The default value is `false`.
 
-**outerLoopNames**
+**outerLoopNames**  
 TODO
 
-**linePerUnitMode**
+**linePerUnitMode**  
 TODO
 
-**useLoadModel**
+**useLoadModel**  
 This parameter set to `true` includes in the load modeling the `ZIP` or `EXPONENTIAL` part of a load. This part can be fully described in IIDM and fully simulated through this parameter.
 
-**dcApproximationType**
+**dcApproximationType**  
 TODO
 
-**simulateAutomationSystems**
+**simulateAutomationSystems**  
 Allows to simulate automation systems that are modeled in the network. For the moment, the grid model only supports overload management systems. The default behaviour is `false`.
 
-**referenceBusSelectionMode**
+**referenceBusSelectionMode**  
 The reference bus is the bus where the angle is equal to zero. There are several mode of selection:
 - `FIRST-SLACK` where the angle reference bus selected as the first slack bus among potentially multiple slacks (default).
 - `GENERATOR_REFERENCE_PRIORITY` where angle reference bus selected from generator reference priorities, relying on extension `ReferencePriority`.
 
-**writeReferenceTerminals**
+**writeReferenceTerminals**  
 This parameter allows to write as update of the IIDM network an extension `ReferencePriority` to the generator terminal which associated bus has been selected for calculations. We have an extension by synchronous component.
 
 ### Configuration file example
@@ -519,7 +519,7 @@ See below an extract of a config file that could help:
 ```yaml
 open-loadflow-default-parameters:
   lowImpedanceBranchMode: REPLACE_BY_ZERO_IMPEDANCE_LINE
-  throwsExceptionInCaseOfSlackDistributionFailure: false
+  slackDistributionFailureBehavior: LEAVE_ON_SLACK_BUS
   voltageRemoteControl: false
   slackBusSelectionMode: NAME
   slackBusesIds: Bus3_0,Bus5_0
