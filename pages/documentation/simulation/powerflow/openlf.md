@@ -346,6 +346,12 @@ Stopping criteria for Newton-Raphson algorithm.
 
 The default value is `UNIFORM_CRITERIA`.
 
+**maxNewtonKrylovIterations**
+TODO
+
+**newtonKrylovLineSearch**
+TODO
+
 **stateVectorScalingMode**  
 This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
 - `NONE`: no scaling is made
@@ -353,6 +359,18 @@ This parameter 'slows down' the Newton-Raphson by scaling the state vector betwe
 - `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to maximum 0.1 p.u. and 10degrees
 
 The default value is `NONE`.
+
+**lineSearchStateVectorScalingMaxIteration**
+TODO
+
+**lineSearchStateVectorScalingStepFold**
+TODO
+
+**maxVoltageChangeStateVectorScalingMaxDv**
+TODO
+
+**maxVoltageChangeStateVectorScalingMaxDphi**
+TODO
 
 **plausibleActivePowerLimit**  
 The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for:
@@ -461,6 +479,7 @@ TODO
 This parameter set to `true` includes in the load modeling the `ZIP` or `EXPONENTIAL` part of a load. This part can be fully described in IIDM and fully simulated through this parameter.
 
 **dcApproximationType**
+TODO
 
 **simulateAutomationSystems**
 Allows to simulate automation systems that are modeled in the network. For the moment, the grid model only supports overload management systems. The default behaviour is `false`.
