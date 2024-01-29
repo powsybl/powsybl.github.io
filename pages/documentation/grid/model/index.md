@@ -786,7 +786,7 @@ Loading limits can be declined into active power limits (in MW), apparent power 
 They may be set for [lines](#line),
 [dangling lines](#dangling-line), [two windings transformers](#two-windings-transformer) and [three windings transformers](#three-windings-transformer). The active power limits are in absolute value.
 
-Loading limits are defined by at most one permanent limit and any number of temporary limits (zero or more).
+Loading limits are defined by one permanent limit and any number of temporary limits (zero or more).
 The permanent limit sets the current, active power or apparent power absolute value under which the equipment can safely
 be operated for any duration.
 The temporary limits can be used to define higher current, active power or apparent power limitations corresponding
@@ -800,6 +800,13 @@ Please look at this scheme to fully understand the modelling (the following exam
 ![Loading limits model](img/index/currentLimits.svg){: width="50%" .center-image}
 
 Note that, following this modelling, in general the last temporary limit (the higher one in value) should be infinite with an acceptable duration different from zero, except for tripping current modeling where the last temporary limit is infinite with an acceptable duration equal to zero. If temporary limits are modeled, the permanent limit becomes mandatory. 
+
+#### Limit group collection
+In network development studies or in an operational context (CGMES), we can have a set of operational limits according to the season (winter vs summer for example), the time of the day (day vs night) etc.
+In PowSyBl, users can store a collection of limits:
+- Active power limits, apparent power limits and current limits are gathered into an `OperationalLimitsGroup` object. This group has an `id`.
+- Lines and transformers are associated with a collection of `OperationalLimitsGroup` (one collection per side/leg).
+Users can then choose the active set according to their needs.
 
 ### Phase tap changer
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/PhaseTapChanger.html)
