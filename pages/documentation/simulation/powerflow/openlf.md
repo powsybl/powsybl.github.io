@@ -58,7 +58,7 @@ The underlying principle of the algorithm is the following:
 - Then, in an iterative fashion, it generates a series $$x_1, x_2,.., x_k$$ of better approximate solutions to the system of equations;
 - These iterates $$x_k$$ are found by solving a system of equations using local Jacobian matrix $$J(v,\phi)$$ at the previous point $$x_{k-1}$$; 
 
-In PowSyBl OpenLoadFlow, the linear system is solved either via Sparse LU decomposition (by [SuiteSparse](https://people.engr.tamu.edu/davis/suitesparse.html)) or via Krylov subspace methods for indefinite non-symmetric matrices (by [Kinsol](https://computing.llnl.gov/projects/sundials/kinsol)). 
+See **acSolverType** below for more details.
 
 #### Other regulation modes
 
@@ -324,9 +324,12 @@ The default value is `WITH_GENERATOR_VOLTAGE_CONTROL`.
 Whether simulation of static VAR compensators voltage monitoring should be enabled.  
 The default value is `true`.
 
-**maxNewtonRaphsonIterations**  
-Maximum number of iterations for Newton-Raphson inner loop.  
-The default value is `15` and it must be greater or equal to `1`.
+**acSolverType**
+AC load flow solver engine. Currently, it can be one of:
+- `NEWTON_RAPHSON` is the standard Newton-Raphson algorithm for load flow. Solves linear systems via Sparse LU decomposition (by [SuiteSparse](https://people.engr.tamu.edu/davis/suitesparse.html));
+- `NEWTON_KRYLOV` is also the standard Newton-Raphson algorithm for load flow. Solves linear systems via Krylov subspace methods for indefinite non-symmetric matrices (by [Kinsol](https://computing.llnl.gov/projects/sundials/kinsol)).
+
+The default value is `NEWTON_RAPHSON`.
 
 **maxOuterLoopIterations**  
 Maximum number of iterations for Newton-Raphson outer loop.  
@@ -346,13 +349,18 @@ Stopping criteria for Newton-Raphson algorithm.
 
 The default value is `UNIFORM_CRITERIA`.
 
+**maxNewtonRaphsonIterations**
+Only applies if **acSolverType** is `NEWTON_RAPHSON`.
+Maximum number of iterations for Newton-Raphson inner loop.  
+The default value is `15` and it must be greater or equal to `1`.
+
 **maxNewtonKrylovIterations**
-TODO
+Only applies if **acSolverType** is `NEWTON_KRYLOV`.
+Maximum number of iterations for Newton-Raphson inner loop.
+The default value is `100` and it must be greater or equal to `1`.
 
-**newtonKrylovLineSearch**
-TODO
-
-**stateVectorScalingMode**  
+**stateVectorScalingMode**
+Only applies if **acSolverType** is `NEWTON_RAPHSON`.
 This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
 - `NONE`: no scaling is made
 - `LINE_SEARCH`: applies a line search strategy
@@ -362,15 +370,28 @@ The default value is `NONE`.
 
 **lineSearchStateVectorScalingMaxIteration**
 TODO
+Only applies if **acSolverType** is `NEWTON_RAPHSON`.
+The default value is `10` and it must be greater or equal to `1`.
 
 **lineSearchStateVectorScalingStepFold**
 TODO
+Only applies if **acSolverType** is `NEWTON_RAPHSON`.
+The default value is `4/3 = 1.333` and it must be greater than `1`.
 
 **maxVoltageChangeStateVectorScalingMaxDv**
 TODO
+Only applies if **acSolverType** is `NEWTON_RAPHSON`.
+The default value is `0.1 p.u.` and it must be greater than `0`.
 
 **maxVoltageChangeStateVectorScalingMaxDphi**
 TODO
+Only applies if **acSolverType** is `NEWTON_RAPHSON`.
+The default value is `10 degrees` and it must be greater than `0`.
+
+**newtonKrylovLineSearch**
+Only applies if **acSolverType** is `NEWTON_KRYLOV`.
+Activates or deactivates line search for the Newton-Raphson Kinsol solver.
+The default value is `false`.
 
 **plausibleActivePowerLimit**  
 The `plausibleActivePowerLimit` property is an optional property that defines a maximal active power limit for generators to be considered as participating elements for:
