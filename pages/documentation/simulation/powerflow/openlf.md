@@ -124,10 +124,11 @@ $$
 \begin{align}
 \texttt{If}~i~\text{is the slack bus}:&\\
 &J_{i,i} = 1\\
-\texttt{Else},~\text{let}~v(i)~\text{be the buses linked to}~i~\text{in the network graph}:&\\
-&J_{i,i} = \sum_{j \in v(i)} \frac{1}{X_{i,j}}\\
-&\forall j \in v(i), \quad J_{i,j} = - \frac{1}{X_{i,j}}\\
-\text{All other entries of}~J~\text{are zeros}.&
+\texttt{Else}:&\\
+&J_{i,i} = \sum_{j \in \delta(i)} \frac{1}{X_{i,j}},\\
+&J_{i,j} = - \frac{1}{X_{i,j}}, \quad \forall j \in \delta(i),\\
+&\text{where}~\delta(i)~\text{is the set of buses linked to bus}~i~\text{in the network graph}\\
+\text{All other entries of}~J~\text{are zero}.&
 \end{align}
 $$
 
@@ -137,8 +138,9 @@ $$
 \begin{align}
 \texttt{If}~i~\text{is the slack bus}:&\\
 &b_{i} = 0\\
-\texttt{Else},~\text{let}~v(i)~\text{be the buses linked to}~i~\text{in the network graph}:&\\
-&b_{i} = P_i - \sum_{j \in v(i)} \frac{A_{i,j}}{X_{i,j}}\\
+\texttt{Else}:&\\
+&b_{i} = P_i - \sum_{j \in \delta(i)} \frac{A_{i,j}}{X_{i,j}},\\
+&\text{where}~\delta(i)~\text{is the set of buses linked to bus}~i~\text{in the network graph}\\
 \end{align}
 $$
 
