@@ -364,28 +364,28 @@ Only applies if **acSolverType** is `NEWTON_RAPHSON`.
 This parameter 'slows down' the Newton-Raphson by scaling the state vector between iterations. Can help convergence in some cases.
 - `NONE`: no scaling is made
 - `LINE_SEARCH`: applies a line search strategy
-- `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to maximum 0.1 p.u. and 10degrees
+- `MAX_VOLTAGE_CHANGE`: scale by limiting voltage updates to a maximum amplitude p.u. and a maximum angle.
 
 The default value is `NONE`.
 
 **lineSearchStateVectorScalingMaxIteration**  
-TODO
-Only applies if **acSolverType** is `NEWTON_RAPHSON`.
+Only applies if **acSolverType** is `NEWTON_RAPHSON` and if **stateVectorScalingMode** is `LINE_SEARCH`.  
+Maximum iterations for a vector scaling when applying a line search strategy.  
 The default value is `10` and it must be greater or equal to `1`.
 
 **lineSearchStateVectorScalingStepFold**  
-TODO
-Only applies if **acSolverType** is `NEWTON_RAPHSON`.
+Only applies if **acSolverType** is `NEWTON_RAPHSON` and if **stateVectorScalingMode** is `LINE_SEARCH`.  
+At the iteration $i$ of vector scaling with the line search strategy, with this parameter having the value $s$ , the step size will be $ \mu  = \frac{1}{s^i}$ .   
 The default value is `4/3 = 1.333` and it must be greater than `1`.
 
 **maxVoltageChangeStateVectorScalingMaxDv**  
-TODO
-Only applies if **acSolverType** is `NEWTON_RAPHSON`.
+Only applies if **acSolverType** is `NEWTON_RAPHSON` and if **stateVectorScalingMode** is `MAX_VOLTAGE_CHANGE`.  
+Maximum amplitude p.u. for a voltage change.  
 The default value is `0.1 p.u.` and it must be greater than `0`.
 
 **maxVoltageChangeStateVectorScalingMaxDphi**  
-TODO
-Only applies if **acSolverType** is `NEWTON_RAPHSON`.
+Only applies if **acSolverType** is `NEWTON_RAPHSON` and if **stateVectorScalingMode** is `MAX_VOLTAGE_CHANGE`.  
+Maximum angle for a voltage change.  
 The default value is `10 degrees` and it must be greater than `0`.
 
 **newtonKrylovLineSearch**  
