@@ -213,6 +213,10 @@ When `readSlackBus` is set to true, `slackBusSelectionMode` is still used and se
 - for e.g. synchronous components where no slack terminal extension is present.
 - for e.g. synchronous components where more than `maxSlackBusCount` slack terminal extensions are present.
 
+**mostMeshedSlackBusSelectorMaxNominalVoltagePercentile**
+This option is used when `slackBusSelectionMode` is set to `MOST_MESHED`. It sets the maximum nominal voltage percentile.
+The default value is `95` and it must be inside the interval [`0`, `100`].
+
 **maxSlackBusCount**  
 Number of slack buses to be selected. Setting a value above 1 can help convergence on very large networks with large initial imbalances,
 where it might be difficult to find a single slack with sufficient branches connected and able to absorb or evacuate the slack power.  
