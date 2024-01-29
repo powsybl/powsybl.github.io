@@ -152,7 +152,7 @@ The grid constraints system takes as variables the voltage angles.
 Note that the vector $$b$$ of right-hand sides is linearly computed from the given injections and phase-shifting angles.
 
 To solve this system, we follow the classic approach of the LU matrices decomposition $$ J = LU $$.
-Hence by solving the system using LU decomposition, you can compute the voltage angles by giving as data the injections and the phase-shifting angles.
+Hence, by solving the system using LU decomposition, you can compute the voltage angles by giving as data the injections and the phase-shifting angles.
 
 ## Configuration
 To use PowSyBl OpenLoadFlow for all power flow computations, you have to configure the `load-flow` module in your configuration file:
@@ -190,9 +190,9 @@ The default value is $$10^{-8}$$ and it must be greater than `0`.
 This option defines the behavior in case the slack distribution fails. Available options are:
 - `THROW` if you want an exception to be thrown in case of failure
 - `FAIL` if you want the OuterLoopStatus to be `FAILED` in case of failure
-- `LEAVE_ON_SLACK_BUS` if you want to leave the remanining slack on the slack bus
+- `LEAVE_ON_SLACK_BUS` if you want to leave the remaining slack on the slack bus
 - `DISTRIBUTE_ON_REFERENCE_GENERATOR` if you want to put the slack on the reference generator, disregarding active power limits. 
-There must be a reference generator defined, otherwise it raises an exception.
+There must be a reference generator defined, i.e. `referenceBusSelectionMode` must be `GENERATOR_REFERENCE_PRIORITY` - otherwise this mode falls back to `FAIL` mode automatically.
 
 The default value is `LEAVE_ON_SLACK_BUS`.
 
@@ -477,7 +477,7 @@ This parameter defines how reactive power is split among generators with control
 It tries to divide reactive power among generators in the order described below.
 `reactivePowerDispatchMode` can be one of:
 - `Q_EQUAL_PROPORTION` 
-  1. If all concerned generators have pre-defined reactive keys, then it splits `Q` proportional to reactive keys
+  1. If all concerned generators have pre-defined reactive keys via the [Coordinated Reactive Control extension](../../grid/model/extensions.md#coordinated-reactive-control), then it splits `Q` proportional to reactive keys
   2. If they don't, but they have plausible reactive limits, split proportionally to the maximum reactive power range
   3. If they don't, split `Q` equally 
 - `K_EQUAL_PROPORTION` 
@@ -494,13 +494,23 @@ This parameter allows to disable the voltage control of generators which `target
 TODO
 
 **linePerUnitMode**  
-TODO
+This parameter defines how lines ending in different nominal voltages at both sides are perunit-ed.
+`linePerUnitMode` can be one of:
+- `IMPEDANCE`: handle difference in nominal voltage via impedance correction
+- `RATIO`: handle difference in nominal voltage by introducing a ratio
+
+The default value is `IMPEDANCE`.
 
 **useLoadModel**  
-This parameter set to `true` includes in the load modeling the `ZIP` or `EXPONENTIAL` part of a load. This part can be fully described in IIDM and fully simulated through this parameter.
+This parameter when set to `true` enables the modeling of the `ZIP` or `EXPONENTIAL` response characteristic of a [Load](../../grid/model/#load).
 
 **dcApproximationType**  
-TODO
+This parameter defines how resistance is neglected compared to inductance in DC approximation.
+`dcApproximationType` can be one of:
+- `IGNORE_R`: consider that r << x
+- `IGNORE_G`: consider that g << b
+
+The default value is `IGNORE_R`.
 
 **simulateAutomationSystems**  
 Allows to simulate automation systems that are modeled in the network. For the moment, the grid model only supports overload management systems. The default behaviour is `false`.
@@ -511,7 +521,6 @@ The reference bus is the bus where the angle is equal to zero. There are several
 - `GENERATOR_REFERENCE_PRIORITY`: the angle reference bus is selected from generator reference priorities defined via the [Reference Priority extension](../../grid/model/extensions.md#reference-priority).
 
 The default value is `FIRST_SLACK`.
-
 
 **writeReferenceTerminals**  
 This parameter allows to write to the IIDM network the [Reference Terminals extension](../../grid/model/extensions.md#reference-terminals)
