@@ -194,12 +194,7 @@ This option defines the behavior in case the slack distribution fails. Available
 - `DISTRIBUTE_ON_REFERENCE_GENERATOR` if you want to put the slack on the reference generator, disregarding active power limits. 
 There must be a reference generator defined, otherwise it raises an exception.
 
-The default value is `LEAVE_ON_SLACK_BUS`.
-
-The `throwsExceptionInCaseOfSlackDistributionFailure` is an optional property that defines if an exception has to be thrown in case of slack distribution failure.
-This could happen in small synchronous component without enough generators or loads to balance the mismatch.
-In that case, the remaining active power mismatch remains on the selected slack bus.  
-The default value is `false`.
+- The default value is `LEAVE_ON_SLACK_BUS`.
 
 **slackBusSelectionMode**  
 The `slackBusSelectionMode` property is an optional property that defines how to select the slack bus. The three options are available through the configuration file:
