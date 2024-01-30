@@ -74,7 +74,7 @@ The sensitivity factors may be created directly through Java code, or be provide
 
 ### Contingencies
 The sensitivity analysis may also take, optionally, a list of contingencies as an input. When contingencies are provided, the sensitivity values
-shall be calculated on the network at state N, but also after the application of each contingency. The contingencies are provided in the same way than for the [security analysis](). This then constitutes a systematic sensitivity analysis.
+shall be calculated on the network at state N, but also after the application of each contingency. The contingencies are provided in the same way than for the [security analysis](../securityanalysis/index.md/). This then constitutes a systematic sensitivity analysis.
 
 ```json
 {
