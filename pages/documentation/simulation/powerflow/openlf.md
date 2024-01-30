@@ -491,7 +491,7 @@ The default value is `Q_EQUAL_PROPORTION`.
 This parameter allows to disable the voltage control of generators which `targetP` is lower than `minP` or greater than `maxP`. The default value is `false`.
 
 **outerLoopNames**  
-This parameter defines both the list of outer loops that can be executed and their explicit execution order. 
+This parameter allows to configure both the list of outer loops that can be executed and their explicit execution order. 
 Each outer loop name specified in the list must be unique and match the `NAME` attribute of the respective outer loop.
 
 By default, this parameter is set to `null`, and the activated outer loops are executed in a default order (defined in DefaultAcOuterLoopConfig).
