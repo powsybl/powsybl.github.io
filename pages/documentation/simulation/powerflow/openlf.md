@@ -386,7 +386,7 @@ The default value is `0.1 p.u.` and it must be greater than `0`.
 **maxVoltageChangeStateVectorScalingMaxDphi**  
 Only applies if **acSolverType** is `NEWTON_RAPHSON` and if **stateVectorScalingMode** is `MAX_VOLTAGE_CHANGE`.  
 Maximum angle for a voltage change.  
-The default value is `10 degrees` and it must be greater than `0`.
+The default value is `0.174533 radians` (`10°`) and it must be greater than `0`.
 
 **newtonKrylovLineSearch**  
 Only applies if **acSolverType** is `NEWTON_KRYLOV`.
