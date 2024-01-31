@@ -670,96 +670,87 @@ PowSyBl [`ControlAreas`](../model/extensions.md#cim-cgmes-control-areas) are exp
 These properties can be defined in the configuration file in the [import-export-parameters-default-value](../../user/configuration/import-export-parameters-default-value.md) module.
 
 **iidm.export.cgmes.base-name**
-The `iidm.export.cgmes.base-name` property is an optional property that defines the base name of the exported files. Exported CGMES files' names will look like this:
-```yaml
+Optional property that defines the base name of the exported files. Exported CGMES files' names will look like this:
+```
 <base_name>_EQ.xml
 <base_name>_TP.xml
 <base_name>_SSH.xml
 <base_name>_SV.xml
 ```
-By default, the base name is the network's name if it exists, as a last resort, the network's ID.
+By default, the base name is the network's name if it exists, or else the network's ID.
 
 **iidm.export.cgmes.boundary-eq-id**
-The `iidm.export.cgmes.boundary-eq-id` property is an optional property that defines the ID of the EQ-BD model if there is any.
+Optional property that defines the ID of the EQ-BD model if there is any.
 Its default value is `null`: we consider there is no EQ-BD model to consider.
 
 **iidm.export.cgmes.boundary-tp-id**
-The `iidm.export.cgmes.boundary-tp-id` property is an optional property that defines the ID of the TP-BD model if there is any.
+Optional property that defines the ID of the TP-BD model if there is any.
 Its default value is `null`: we consider there is no TP-BD model to consider.
 
 **iidm.export.cgmes.cim-version**
-The `iidm.export.cgmes.cim-version` property is an optional property that defines the CIM version number in which the user wants the CGMES files to be exported.
-CIM version 14 and 16 are supported i.e. its valid values are `14` or `16`.
+Optional property that defines the CIM version number in which the user wants the CGMES files to be exported.
+CIM versions 14, 16 and 100 are supported i.e. its valid values are `14`, `16` and `100`.
 If not defined, and the network has the extension `CimCharacteristics`, the CIM version will be the one indicated in the extension. If not, its default value is `16`.
+CIM version 16 corresponds to CGMES 2.4.15.
+CIM version 100 corresponds to CGMES 3.0.
 
 **iidm.export.cgmes.encode-ids**
+Optional property that must be used if IIDM IDs that are not compliant with CGMES requirements are to be used as CGMES IDs. `true` by default. Used for debugging purposes.
 
 **iidm.export.cgmes.export-boundary-power-flows**
-The `iidm.export.cgmes.export-boundary-power-flows` property is an optional property that defines if power flows of boundary nodes are to be exported in the SV file or not.
-Its default value is `true`.
+Optional property that defines if power flows at boundary nodes are to be exported in the SV file or not. `true` by default.
 
 **iidm.export.cgmes.export-power-flows-for-switches**
-The `iidm.export.cgmes.export-power-flows-for-switches` property is an optional property that defines if power flows of switches are exported in the SV file.
-Its default value is `false`.
+Optional property that defines if power flows of switches are exported in the SV file. `true` by default.
 
 **idm.export.cgmes.naming-strategy**
-The `iidm.export.cgmes.naming-strategy` property is an optional property that defines which naming strategy is used.
+Optional property that defines which naming strategy is used to transform IIDM identifiers to CGMES identifiers.
 It can be:
-- `identity`: CGMES IDs are the same as IIDM IDs
-- `cgmes`: IDs of IIDM `Identifiables` are exported as CGMES IDs if they are not compliant with CGMES requirements 
-- `cgmes-fix-all-invalid-ids`: all IDs are exported as CGMES IDs if they are not compliant with CGMES requirements
+- `identity`: CGMES IDs are the same as IIDM IDs.
+- `cgmes`: new CGMES IDs (new master resource identifiers, cim:mRID) are created for IIDM `Identifiables` if the IIDM IDs are not compliant with CGMES requirements.
+- `cgmes-fix-all-invalid-ids`: ensures that all CGMES IDs in the export will comply with CGMES requirements, for IIDM `Identifiables`and also for its related objects (tap changers, operational limits, regulating controls, reactive capability curves, ...).
 Its default value is `identity`.
 
 **iidm.export.cgmes.uuid-namespace**
+Optional property related to the naming strategy specified in `iidm.export.cgmes.naming-strategy`. When new CGMES IDs have to be generated, a mechanism that ensures creation of new, stable identifiers based on IIDM IDs is used (see [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122)). These new IDs are guaranteed to be unique inside a namespace given by this UUID. By default it is the name-based UUID fo the text "powsybl.org" in the empty namespace.
 
 **iidm.export.cgmes.profiles**
-The `iidm.export.cgmes.profiles` property is an optional property that defines the exported CGMES profiles.
-By default, it is a full CGMES export: EQ, TP, SSH and SV are exported.
+Optional property that which instance files will be exported.
+By default, it is a full CGMES export: the instance files for the profiles EQ, TP, SSH and SV are exported.
 
 **iidm.export.cgmes.modeling-authority-set**
-This property is an optional property allowing to write a custom modeling authority set in the file headers. 
-If a Boundary set is given with the property `iidm.import.cgmes.boundary-location` and a sourcing actor is found, then
-the modeling authority set can also be retrived in the boundary file without this property.
-By default, the modeling authority set is "powsybl.org".
+Optional property allowing to write a custom modeling authority set in the exported file headers. `powsybl.org` by default.
+If a Boundary set is given with the property `iidm.import.cgmes.boundary-location` and the network sourcing actor is found inside it, then the modeling authority set will be obtained from the boundary file without the need to set this property.
+The sourcing actor can be specified using the parameter `iidm.export.cgmes.sourcing-actor`.
 
 **iidm.export.cgmes.model-description**
-This property is an optional property allowing to write a custom model description in the file headers.
-By default, the model description is "EQ model" for the EQ file, "TP model" for the TP file, "SSH model" for the SSH 
-file and "SV model" for the SV file.
+Optional property allowing to write a custom model description in the file headers.
+By default, the model description is `EQ model` for the EQ file, `TP model` for the TP file, `SSH model` for the SSH 
+file and `SV model` for the SV file.
 
 **iidm.export.cgmes.export-transformers-with-highest-voltage-at-end1**
-This property is an optional property defining whether the transformers should be exported with the highest voltage at 
-end 1, even if it might not be the case in the IIDM model. 
-Its default value is `false`.
+Optional property defining whether the transformers should be exported with the highest voltage at end 1, even if it might not be the case in the IIDM model. `false` by default.
 
 **iidm.export.cgmes.export-load-flow-status**
-This property is an optional property that indicates whether the loadflow status (`converged` or `diverged`) should be 
-written for the `TopologicalIslands` in the SV file. If true, the status will be computed by checking, for every bus,
+Optional property that indicates whether the loadflow status (`converged` or `diverged`) should be 
+written for the `TopologicalIslands` in the SV file. If `true`, the status will be computed by checking, for every bus,
 if the voltage and angle is valid, and if the bus is respecting Kirchhoff's first law. For the latter, we check that 
 the sums of active power and reactive power at the bus are higher than a threshold defined by the properties 
-`iidm.export.cgmes.max-p-mismatch-converged` and `iidm.export.cgmes.max-q-mismatch-converged`.
-Its default value is `true`.
+`iidm.export.cgmes.max-p-mismatch-converged` and `iidm.export.cgmes.max-q-mismatch-converged`. `true` by default.
 
 **iidm.export.cgmes.max-p-mismatch-converged**
-This property is an optional property that defines the threshold below which a bus is considered to be balanced for the 
-load flow status of the `TopologicalIsland` in active power. If the sum of all the active power of the terminals 
-connected to the bus is greater than this threshold, then the load flow is considered to be divergent. 
-Its default value is 0.1, and it should be used only if the `iidm.export.cgmes.export-load-flow-status` property is set 
-to `true`.
+Optional property that defines the threshold below which a bus is considered to be balanced for the load flow status of the `TopologicalIsland` in active power. If the sum of all the active power of the terminals connected to the bus is greater than this threshold, then the load flow is considered to be divergent. Its default value is `0.1`, and it should be used only if the `iidm.export.cgmes.export-load-flow-status` property is set to `true`.
 
 **iidm.export.cgmes.max-q-mismatch-converged**
-This property is an optional property that defines the threshold below which a bus is considered to be balanced for the
-load flow status of the `TopologicalIsland` in reactive power. If the sum of all the reactive power of the terminals
-connected to the bus is greater than this threshold, then the load flow is considered to be divergent.
-Its default value is 0.1, and it should be used only if the `iidm.export.cgmes.export-load-flow-status` property is set
-to `true`.
+Optional property that defines the threshold below which a bus is considered to be balanced for the load flow status of the `TopologicalIsland` in reactive power. If the sum of all the reactive power of the terminals connected to the bus is greater than this threshold, then the load flow is considered to be divergent. Its default value is `0.1`, and it should be used only if the `iidm.export.cgmes.export-load-flow-status` property is set to `true`.
 
 **iidm.export.cgmes.export-sv-injections-for-slacks**
+Optional property to specify if the total mismatch left after power flow calculation at IIDM slack buses should be exported as an SvInjection. `true` by default.
 
 **iidm.export.cgmes.sourcing-actor**
-This property is an optional property allowing to write a custom sourcing actor in the file headers.
-If this field is not given and the network exported contains only one country, then the sourcing actor will be retrieved
-from the Boundary dataset if it is given in the property `iidm.import.cgmes.boundary-location`. 
+Optional property allowing to specify a custom sourcing actor. If a Boundary set with reference data is provided for the export through the parameter `iidm.import.cgmes.boundary-location`, the value of this property will be used to look for the modelling authority set and the geographical region to be used in the export.
+No default value is given.
+If this property is not given, the export process will still try to determine the sourcing actor from the IIDM network if it only contains one country. 
 
 ## Examples
 Have a look to the [CGMES sample files](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/TestConfigurations_packageCASv2.0.zip)
