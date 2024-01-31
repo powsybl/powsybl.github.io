@@ -5,7 +5,7 @@ layout: default
 # Security analysis implementations
 
 ## Load flow based implementation
-This implementation of the Security Analysis API relies on a load flow engine. Basically, a load flow computation is run on the base case to compute a reference. Then each contingency is applied on a temporary variant and a new load flow is run. If the load flow converges, the violations are listed.
+This implementation of the Security Analysis API relies on a load flow engine. Basically, a load flow computation is run on the base case to compute a reference. Each contingency is then applied on a temporary variant and a new load flow is run. If the load flow converges, the violations are listed.
 
 To use this implementation, you have to add the following lines to your configuration file:
 

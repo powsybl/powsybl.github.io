@@ -470,11 +470,11 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 This extension is attached to a Generator, or a BusBarSection or a Load and is used to define the angle reference bus of
 a power flow calculation, i.e. which bus will be used with a zero voltage angle.
 Use this extension before a computation to force the reference bus selection.
-Support of this feature by Load Flow implementations may vary. For example, the [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation
+The support of this feature by Load Flow implementations may vary. For example, the [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation
 today supports Reference Priorities on generators only when this feature is activated.
 
-The reference bus is defined through the terminal of the equipment and an integer specifying the priority for use as reference.
-0 means do not use as reference, 1 is highest priority, 2 second priority, etc...
+The reference bus is defined through the terminal of the equipment and an integer specifying the reference priority.
+0 means "do not use as reference", 1 is "highest priority", 2 "second priority", etc.
 
 | Attribute | Type       | Unit | Required | Default value | Description            |
 |-----------|------------|------|----------|---------------|------------------------|
@@ -493,11 +493,11 @@ This extension is provided by the `com.powsybl:powsybl-iidm-api` module.
 ## Reference Terminals
 
 This extension is attached to a Network and is used to define the angle references of a Power Flow solution.
-Support of this feature by Load Flow implementations may vary. For example, the [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation
+The support of this feature by Load Flow implementations may vary. For example, the [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation
 today supports writing to the Network the terminals of the reference generators chosen via the [Reference Priority extension](./extensions.md#reference-priority).
 
-The reference bus is defined through the terminal of the equipment and an integer specifying the priority for use as reference.
-0 means do not use as reference, 1 is highest priority, 2 second priority, etc...
+The reference bus is defined through the terminal of the equipment and an integer specifying the reference priority.
+0 means "do not use as reference", 1 is "highest priority", 2 "second priority", etc.
 
 | Attribute | Type            | Unit | Required | Default value | Description             |
 |-----------|-----------------|------|----------|---------------|-------------------------|

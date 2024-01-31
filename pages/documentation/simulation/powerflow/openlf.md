@@ -42,7 +42,7 @@ $$q_{i,j}= \rho_iv_i(-B_i\rho_iv_i + Y\rho_iv_i\text{cos}(\Xi) - Y\rho_jv_j\text
 
 Where $$Y$$ is the magnitude of the line complex admittance $$\frac{1}{R+jX}$$, and $$\Xi$$ such that: $$R+jX = \frac{1}{Y}e^{j(\frac{\pi}{2}-\Xi)}$$. $$\theta$$ satisfies: $$\theta= \Xi - A_i + A_j - \phi_i + \phi_j.$$
 
-Beware that $$p_{i,j}$$ is the power that leaves bus $$i$$.
+Beware that $$p_{i,j}$$ is the power that goes out from the bus $$i$$.
 
 Therefore, active and reactive balance equations are expressed as:
 
@@ -505,7 +505,7 @@ This parameter defines how lines ending in different nominal voltages at both si
 The default value is `IMPEDANCE`.
 
 **useLoadModel**  
-This parameter when set to `true` enables the modeling of the `ZIP` or `EXPONENTIAL` response characteristic of a [Load](../../grid/model/#load).
+When set to `true`, this parameter enables the modeling of the `ZIP` or `EXPONENTIAL` response characteristic of a [Load](../../grid/model/#load).
 
 **dcApproximationType**  
 This parameter defines how resistance is neglected compared to inductance in DC approximation.

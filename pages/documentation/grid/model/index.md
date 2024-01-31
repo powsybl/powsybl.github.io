@@ -12,11 +12,11 @@ latex: true
 
 Powsybl features are strongly based on an internal grid model initially developed under the iTesla project, a research project funded by the [European Union 7th Framework programme](https://cordis.europa.eu/project/id/283012) (FP7). The grid model is known as `iidm` (iTesla Internal Data Model). One of the iTesla outputs was a toolbox designed to support the decision-making process of power system operation from two-days ahead to real time. The `iidm` grid model was at the center of the toolbox.
 
-To build an electrical network model, the substations must be defined first. The equipments of a substation (bus bar sections, switches, buses, loads, generators, shunt compensators, static VAR compensators, HVDC converters stations, etc.) are grouped in voltage levels. Transformers present in a substation connect its different voltage levels. Transmission lines (AC and DC) connect the substations.
+To build an electrical network model, the substations must be defined first. The equipment of a substation (bus bar sections, switches, buses, loads, generators, shunt compensators, static VAR compensators, HVDC converters stations, etc.) are grouped in voltage levels. Transformers present in a substation connect its different voltage levels. Transmission lines (AC and DC) connect the substations.
 
-The grid model allows a full representation of the substation connectivity where all the switching devices and bus bar sections are defined, this topology is called node/breaker view. Automated topology calculation permits obtaining views of the network up to bus/breaker view then to bus view.
+The grid model allows a full representation of the substation connectivity where all the switching devices and bus bar sections are defined, this topology is called node/breaker view. Automated topology calculation allows for the calculation of the network bus/breaker view as well as the network bus view.
 
-Different states of the network can be stored together with the power system model efficiently. The set of attributes that define a given state of the network (both steady state hypothesis and state variables) are collectively organized in variants. The user can create and remove variants as needed. Setting and getting variant dependent attributes on network objects use the current variant.
+Different states of the network can be efficiently stored together with the power system model. The set of attributes that define a given state of the network (both steady state hypothesis and state variables) are collectively organized in variants. The user can create and remove variants as needed. Setting and getting variant dependent attributes on network objects use the current variant.
 
 A set of networks can be merged together in a single network. The initial subnetworks are kept and can be easily retrieved or detached if needed.
 
@@ -24,7 +24,7 @@ Almost all the elements modeled in the network are identified through a unique `
 
 ## Network and subnetwork
 
-In the following sections the different network components are described in terms of its main attributes and electrotechnical representation. The attributes shared by all the network components are described in the next table:
+In the following sections the different network components are described in terms of their main attributes and electrotechnical representation. The attributes shared by all the network components are described in the next table:
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -44,7 +44,7 @@ A network can contain several subnetworks.
 
 ### Validation level
 
-The validation level can be `EQUIPMENT` or `STEADY_STATE_HYPOTHESIS`. A network at equipment level is a network with missing steady-state hypotheses. This occurs just after SCADA systems, before any state estimation. Once all steady-state hypotheses are filled, meaning that a load flow engine has all the data needed to perform a computation, the validation level switches to `STEADY_STATE_HYPOTHESIS`. For some processes, a minimal validation level of the network is required.
+The validation level can be set to `EQUIPMENT` or `STEADY_STATE_HYPOTHESIS`. A network at equipment level is a network with missing steady-state hypotheses. This occurs just after SCADA systems, before any state estimation. Once all steady-state hypotheses are filled, meaning that a load flow engine has all the data needed to perform a computation, the validation level switches to `STEADY_STATE_HYPOTHESIS`. For some processes, a minimal validation level of the network is required.
 
 ### Network
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/Network.html)
@@ -234,7 +234,7 @@ A battery on the electric grid is an energy storage device that is either capabl
 ### Dangling line
 [![Javadoc](https://img.shields.io/badge/-javadoc-blue.svg)](https://javadoc.io/doc/com.powsybl/powsybl-core/latest/com/powsybl/iidm/network/DanglingLine.html)
 
-A network may be connected to other networks for which a full description is not available or not wanted. In this case, a boundary line exists between the two networks. In the network of interest, that connection could be represented through a dangling line, which represents the part of that boundary line which is located in it. A dangling line is thus a passive or active component that aggregates a line chunk and a constant power injection, in passive-sign convention. The active and reactive power setpoints are fixed: the injection represents the power flow that would occur through the connection, were the other network fully described.
+A network may be connected to other networks for which a full description is not available or unwanted. In this case, a boundary line exists between the two networks. In the network of interest, that connection could be represented through a dangling line, which represents the part of that boundary line which is located in it. A dangling line is thus a passive or active component that aggregates a line chunk and a constant power injection, in passive-sign convention. The active and reactive power set points are fixed: the injection represents the power flow that would occur through the connection, were the other network fully described.
 
 ![Dangling line model](img/index/danglingLine.svg){: width="50%" .center-image}
 

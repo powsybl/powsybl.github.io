@@ -387,7 +387,7 @@ If the CGMES `Switch` has one of its end in the boundary area, it is mapped to a
 
 ### Extensions
 
-CIM-CGMES format contains more information than what the `iidm` grid model needs for calculation. The additional data, that are needed to export a network in CIM-CGMES format, are stored in several extensions. 
+The CIM-CGMES format contains more information than what the `iidm` grid model needs for calculation. The additional data, that are needed to export a network in CIM-CGMES format, are stored in several extensions. 
 
 #### CIM-CGMES control areas
 
@@ -431,7 +431,7 @@ This extension is used to add some CIM-CGMES characteristics to tie lines.
 | Attribute                             | Type    | Unit | Required | Default value | Description                                                         |
 |---------------------------------------|---------|------|----------|---------------|---------------------------------------------------------------------|
 | hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated with a DC Xnode or not |
-| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The EIC of theboundary line EIC if it exists                        |
+| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The EIC of the boundary line EIC if it exists                       |
 
 This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
 
@@ -712,10 +712,10 @@ It can be:
 Its default value is `identity`.
 
 **iidm.export.cgmes.uuid-namespace**
-Optional property related to the naming strategy specified in `iidm.export.cgmes.naming-strategy`. When new CGMES IDs have to be generated, a mechanism that ensures creation of new, stable identifiers based on IIDM IDs is used (see [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122)). These new IDs are guaranteed to be unique inside a namespace given by this UUID. By default it is the name-based UUID fo the text "powsybl.org" in the empty namespace.
+Optional property related to the naming strategy specified in `iidm.export.cgmes.naming-strategy`. When new CGMES IDs have to be generated, a mechanism that ensures creation of new, stable identifiers based on IIDM IDs is used (see [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122)). These new IDs are guaranteed to be unique inside a namespace given by this UUID. By default, it is the name-based UUID fo the text "powsybl.org" in the empty namespace.
 
 **iidm.export.cgmes.profiles**
-Optional property that which instance files will be exported.
+Optional property that determines which instance files will be exported.
 By default, it is a full CGMES export: the instance files for the profiles EQ, TP, SSH and SV are exported.
 
 **iidm.export.cgmes.modeling-authority-set**
@@ -729,14 +729,16 @@ By default, the model description is `EQ model` for the EQ file, `TP model` for 
 file and `SV model` for the SV file.
 
 **iidm.export.cgmes.export-transformers-with-highest-voltage-at-end1**
-Optional property defining whether the transformers should be exported with the highest voltage at end 1, even if it might not be the case in the IIDM model. `false` by default.
+Optional property defining whether the transformers should be exported with the highest voltage at end 1, even if it might not be the case in the IIDM model. 
+This property is set to `false` by default.
 
 **iidm.export.cgmes.export-load-flow-status**
 Optional property that indicates whether the loadflow status (`converged` or `diverged`) should be 
 written for the `TopologicalIslands` in the SV file. If `true`, the status will be computed by checking, for every bus,
-if the voltage and angle is valid, and if the bus is respecting Kirchhoff's first law. For the latter, we check that 
+if the voltage and angle are valid, and if the bus is respecting Kirchhoff's first law. For the latter, we check that 
 the sums of active power and reactive power at the bus are higher than a threshold defined by the properties 
-`iidm.export.cgmes.max-p-mismatch-converged` and `iidm.export.cgmes.max-q-mismatch-converged`. `true` by default.
+`iidm.export.cgmes.max-p-mismatch-converged` and `iidm.export.cgmes.max-q-mismatch-converged`. 
+This property is set to `true` by default.
 
 **iidm.export.cgmes.max-p-mismatch-converged**
 Optional property that defines the threshold below which a bus is considered to be balanced for the load flow status of the `TopologicalIsland` in active power. If the sum of all the active power of the terminals connected to the bus is greater than this threshold, then the load flow is considered to be divergent. Its default value is `0.1`, and it should be used only if the `iidm.export.cgmes.export-load-flow-status` property is set to `true`.
@@ -745,7 +747,8 @@ Optional property that defines the threshold below which a bus is considered to 
 Optional property that defines the threshold below which a bus is considered to be balanced for the load flow status of the `TopologicalIsland` in reactive power. If the sum of all the reactive power of the terminals connected to the bus is greater than this threshold, then the load flow is considered to be divergent. Its default value is `0.1`, and it should be used only if the `iidm.export.cgmes.export-load-flow-status` property is set to `true`.
 
 **iidm.export.cgmes.export-sv-injections-for-slacks**
-Optional property to specify if the total mismatch left after power flow calculation at IIDM slack buses should be exported as an SvInjection. `true` by default.
+Optional property to specify if the total mismatch left after power flow calculation at IIDM slack buses should be exported as an SvInjection. 
+This property is set to `true` by default.
 
 **iidm.export.cgmes.sourcing-actor**
 Optional property allowing to specify a custom sourcing actor. If a Boundary set with reference data is provided for the export through the parameter `iidm.import.cgmes.boundary-location`, the value of this property will be used to look for the modelling authority set and the geographical region to be used in the export.
