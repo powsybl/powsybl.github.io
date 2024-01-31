@@ -66,83 +66,9 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 This extension models the status of a connectable. The status could be `IN_OPERATION`, `PLANNED_OUTAGE` or `FORCED_OUTAGE`.
 
-## Busbar section position
+## Bus bar section position
 
 This extension gives positions information about a bus bar section. The `busBarIndex` gives the position of the bus bar section relatively to other bus bars. The `sectionIndex` gives the position of the bus bar section within the corresponding bus bar. Note that a bus bar is a set of bus bar sections. Hence, the sections of a same bus bar should have the same bus bar index. The bus bar indices induce an order of bus bars within the voltage level, which usually reflects the bus bars physical relative positions. Similarly, the section indices induce an order of sections of a same bus bar, which usually reflects their physical relative position.
-
-## CIM-CGMES control areas
-
-This extensions models all the control areas contained in the network as modeled in CIM-CGMES.
-
-| Attribute           | Type                           | Unit | Required | Default value | Description                              |
-|---------------------|--------------------------------|------|----------|---------------|------------------------------------------|
-| CGMES control areas | `Collection<CgmesControlArea>` | -    | no       | -             | The list of control areas in the network |
-
-**CGMES control area**
-
-| Attribute                        | Type       | Unit | Required | Default value | Description                                         |
-|----------------------------------|------------|------|----------|---------------|-----------------------------------------------------|
-| ID                               | String     | -    | yes      | -             | The control area's ID                               |
-| name                             | String     | -    | no       | -             | The control area's name                             |
-| Energy Identification Code (EIC) | String     | -    | no       | -             | The control area's EIC                              |
-| net interchange                  | double     | -    | no       | -             | The control area's net interchange (at its borders) |
-| terminals                        | `Terminal` | -    | no       | -             | Terminals at the border of the control area         |
-| boundaries                       | `Boundary` | -    | no       | -             | Boundaries at the border of the control area        |
-
-It is possible to retrieve a control area by its ID. It is also possible to iterate through all control areas.
-
-This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
-
-## CIM-CGMES conversion context extension
-
-This extension is used to store the CIM-CGMES conversion context as built during the CIM-CGMES import.
-It contains the used configuration, the terminal mapping and the CIM-CGMES model.
-It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not serializable.
-
-## CIM-CGMES dangling line boundary node
-
-This extension is used to add some CIM-CGMES characteristics to dangling lines.
-
-
-| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
-|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
-| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
-| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |                                                
-
-This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
-
-## CIM-CGMES line boundary node
-
-This extension is used to add some CIM-CGMES characteristics to boundary lines.
-
-
-| Attribute                             | Type    | Unit | Required | Default value | Description                                                       |
-|---------------------------------------|---------|------|----------|---------------|-------------------------------------------------------------------|
-| hvdc status                           | boolean | -    | no       | false         | Indicates if the boundary line is associated to a DC Xnode or not |
-| Line Energy Identification Code (EIC) | String  | -    | no       | -             | The boundary line's EIC if it exists                              |
-
-This extension is provided by the `com.powsybl:powsybl-cgmes-extensions` module.
-
-## CIM-CGMES model extension
-
-This extension is used to store the CGMES model as retrieved from the triplestore (as a query catalog) on the network.
-It is provided by the `com.powsybl:powsybl-cgmes-conversion` module. It is not serializable.
-
-## CIM-CGMES Tap Changers
-
-<span style="color: red">TODO</span>
-
-## CIM-CGMES SSH metadata
-
-<span style="color: red">TODO</span>
-
-## CIM-CGMES SV metadata
-
-<span style="color: red">TODO</span>
-
-## CIM characteristics
-
-<span style="color: red">TODO</span>
 
 ## Connectable position
 
@@ -169,7 +95,23 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Discrete measurements
 
-<span style="color: red">TODO</span>
+This extension is used to store discrete measurements (such as tap positions, switch positions etc.) collected in substations.
+
+| Attribute            | Type                            | Unit | Required | Default value | Description                                          |
+|----------------------|---------------------------------|------|----------|---------------|------------------------------------------------------|
+| discreteMeasurements | Collection<DiscreteMeasurement> | -    | no       | -             | Contains a collection of DiscreteMeasurement objects |
+
+The DiscreteMeasurement class characteristics are the following:
+
+| Attribute  | Type                           | Unit | Required | Default value | Description                                                                                                      |
+|------------|--------------------------------|------|----------|---------------|------------------------------------------------------------------------------------------------------------------|
+| id         | String                         | -    | no       | -             | The ID of the discrete measurement if it exists                                                                  |
+| type       | DiscreteMeasurement.Type       | -    | no       | -             | The type of discrete measurement (TAP_POSITION, SWITCH_POSITION, SHUNT_COMPENSATOR_SECTION, OTHER)               |
+| tapChanger | DiscreteMeasurement.TapChanger | -    | no       | -             | The tap changer the discrete measurement is applied on (null if the measurement is not applied to a tap changer) |
+| properties | Map<String, String>            | -    | no       | -             | The properties (name and value) associated with the discrete measurement                                         |
+| valueType  | DiscreteMeasurement.ValueType  | -    | no       | -             | The discrete measurement value type (BOOLEAN, INT or STRING)                                                     |
+| value      | Object                         | -    | no       | -             | The discrete measurement value                                                                                   |
+| valid      | boolean                        | -    | no       | -             | The validity status (if true, the discrete measured value cannot be null)                                        |
 
 ## ENTSO-E area
 
@@ -280,7 +222,7 @@ $$ S_{1i_{Load}}=P_{Load}+j.Q_{Load} $$
 
 We must verify:  
 
-$$ 0 = -S_{1i_{Load}} +\sum_{j=v(i)}^{} S_{1ij} $$
+$$ 0 = -S_{1i_{Load}} +\sum_{j=\delta(i)}^{} S_{1ij} $$
 
 <u>Unbalanced load flow conditions:</u>
 
@@ -363,19 +305,23 @@ This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
 ## Measurements
 
-<span style="color: red">TODO</span>
+This extension is used to store measurements collected in substations.
 
-## Merged X-node
+| Attribute    | Type                    | Unit | Required | Default value | Description                                  |
+|--------------|-------------------------|------|----------|---------------|----------------------------------------------|
+| measurements | Collection<Measurement> | -    | no       | -             | Contains a collection of Measurement objects |
 
-<span style="color: red">TODO</span>
+The Measurement class characteristics are the following:
 
-## PSS/E conversion context extension
-
-<span style="color: red">TODO</span>
-
-## PSS/E model extension
-
-<span style="color: red">TODO</span>
+| Attribute         | Type                | Unit | Required | Default value | Description                                                     |
+|-------------------|---------------------|------|----------|---------------|-----------------------------------------------------------------|
+| id                | String              | -    | no       | -             | The ID of the measurement if it exists                          |
+| type              | Measurement.Type    | -    | no       | -             | The type of measurement (ANGLE, ACTIVE_POWER, VOLTAGE etc.)     |
+| properties        | Map<String, String> | -    | no       | -             | The properties (name and value) associated with the measurement |
+| value             | double              | -    | no       | -             | The measurement value                                           |
+| standardDeviation | double              | -    | no       | -             | The standard deviation (NaN if not specified)                   |
+| valid             | boolean             | -    | no       | -             | The validity status (if true, the measured value cannot be NaN) |
+| side              | ThreeSides          | -    | no       | -             | The equipment side associated to the measurement                |
 
 ## Remote reactive power control
 
@@ -518,6 +464,51 @@ svc.newExtension(VoltagePerReactivePowerControlAdder.class)
 
 This extension is provided by the `com.powsybl:powsybl-iidm-extensions` module.
 
-## X-node
 
-<span style="color: red">TODO</span>
+## Reference Priority
+
+This extension is attached to a Generator, or a BusBarSection or a Load and is used to define the angle reference bus of
+a power flow calculation, i.e. which bus will be used with a zero voltage angle.
+Use this extension before a computation to force the reference bus selection.
+The support of this feature by Load Flow implementations may vary. For example, the [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation
+today supports Reference Priorities on generators only when this feature is activated.
+
+The reference bus is defined through the terminal of the equipment and an integer specifying the reference priority.
+0 means "do not use as reference", 1 is "highest priority", 2 "second priority", etc.
+
+| Attribute | Type       | Unit | Required | Default value | Description            |
+|-----------|------------|------|----------|---------------|------------------------|
+| Terminal  | `Terminal` | -    | yes      | -             | The reference terminal |
+| Priority  | `Integer`  | -    | yes      | 0             | The reference priority |
+
+ ```java
+ReferencePriority.set(generator, 1);
+
+int priority = ReferencePriority.get(generator); // note: returns zero if none defined
+```
+
+This extension is provided by the `com.powsybl:powsybl-iidm-api` module.
+
+
+## Reference Terminals
+
+This extension is attached to a Network and is used to define the angle references of a Power Flow solution.
+The support of this feature by Load Flow implementations may vary. For example, the [OpenLoadFlow](../../simulation/powerflow/openlf.md) implementation
+today supports writing to the Network the terminals of the reference generators chosen via the [Reference Priority extension](./extensions.md#reference-priority).
+
+The reference bus is defined through the terminal of the equipment and an integer specifying the reference priority.
+0 means "do not use as reference", 1 is "highest priority", 2 "second priority", etc.
+
+| Attribute | Type            | Unit | Required | Default value | Description             |
+|-----------|-----------------|------|----------|---------------|-------------------------|
+| terminals | `Set<Terminal>` | -    | yes      | -             | The reference terminals |
+
+ ```java
+Set<Terminal> referenceTerminals = ReferenceTerminals.getTerminals(network);
+
+ReferenceTerminals.reset(network);
+
+ReferenceTerminals.add(terminal);
+```
+
+This extension is provided by the `com.powsybl:powsybl-iidm-api` module.
