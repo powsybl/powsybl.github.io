@@ -751,7 +751,7 @@ The version will be written in the header of each exported file and will also be
 Its default value is 1.
 
 **iidm.export.cgmes.business-process**
-The business process in which the export takes place. This is used to generate unique IDs for the EQ, TP, SSH and SV file `FullModel`.
+The business process in which the export takes place. This is used to generate unique UUIDs for the EQ, TP, SSH and SV file `FullModel`.
 Its default value is `1D`.
 
 ## Examples
