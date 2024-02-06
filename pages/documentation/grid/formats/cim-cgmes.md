@@ -745,6 +745,11 @@ Optional property allowing to specify a custom sourcing actor. If a Boundary set
 No default value is given.
 If this property is not given, the export process will still try to determine the sourcing actor from the IIDM network if it only contains one country.
 
+**iidm.export.cgmes.model-version**
+Optional property defining the version of the exported CGMES file. It will be used if the version is not already available in the network. 
+The version will be written in the header of each exported file and will also be used to generate a unique UUID for the `FullModel` field.
+Its default value is 1.
+
 **iidm.export.cgmes.business-process**
 The business process in which the export takes place. This is used to generate unique IDs for the EQ, TP, SSH and SV file `FullModel`.
 Its default value is `1D`.
