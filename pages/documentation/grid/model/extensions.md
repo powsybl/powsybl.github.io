@@ -452,7 +452,7 @@ This extension is used to model voltage control of static VAR compensators. This
 
 When this extension is present and the slope greater than zero, the reactive output of the static VAR compensator is defined by:
 
-$$Q = \dfrac{V - VoltageSetpoint}{slope}$$  
+$$Q = \dfrac{VoltageSetpoint - V}{slope}$$  
 where $$V$$ is the voltage at regulating terminal and $$VoltageSetpoint$$ the target value in voltage given as attribute in a static VAR compensator.
 
 Here is how to add a voltage per reactive power control extension to a static VAR compensator:
