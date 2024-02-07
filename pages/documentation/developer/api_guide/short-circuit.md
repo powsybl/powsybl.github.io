@@ -12,4 +12,4 @@ preferred. The `ShortCircuitAnalysis` class doesn't implement the computation di
 `com.powsybl.shortcircuit.ShortCircuitAnalysisProvider` to implement it. This allows to use different 
 implementations with the same code.
 
-**Note:** Powsybl does not provide an implementation for short circuit analysis yet.
+**Note:** Powsybl does not provide an implementation for short circuit analyses yet.

@@ -203,64 +203,64 @@ Depending on `with-fortescue-result`, the returned result should either be an in
 
 Both classes contain the following attributes:
 
-| Attribute              | Type                        | Unit | Required | Default value | Description                                                                                              |
-|------------------------|-----------------------------|------|----------|---------------|----------------------------------------------------------------------------------------------------------|
-| fault                  | Fault                       | -    | yes      | -             | The fault that was simulated                                                                             |
-| status                 | Status                      | -    | yes      | -             | The status of the computation, see below for more details                                                |
-| shortCircuitPower      | double                      | MVA  | yes      | -             | The value of the short circuit power                                                                     |
-| timeConstant           | Duration                    | -    | yes      | -             | The duration before reaching the permanent short circuit current                                         |
+| Attribute              | Type                        | Unit | Required | Default value | Description                                                                                                |
+|------------------------|-----------------------------|------|----------|---------------|------------------------------------------------------------------------------------------------------------|
+| fault                  | Fault                       | -    | yes      | -             | The fault that was simulated                                                                               |
+| status                 | Status                      | -    | yes      | -             | The status of the computation, see below for more details                                                  |
+| shortCircuitPower      | double                      | MVA  | yes      | -             | The value of the short-circuit power                                                                       |
+| timeConstant           | Duration                    | -    | yes      | -             | The duration before reaching the permanent short-circuit current                                           |
 | feederResults          | List<FeederResult>          | -    | no       | Empty list    | A list of FeederResult, should not be empty if the parameter `with-feeder-result` is set to `true`.        |
 | limitViolations        | List<LimitViolation>        | -    | no       | Empty list    | A list of LimitViolation, should be empty if the parameter `with-limit-violations` is set to `false`.      |
 | shortCircuitBusResults | List<ShortCircuitBusResult> | -    | no       | Empty list    | A list of ShortCircuitBusResult, should be empty if the parameter `with-voltage-result` is set to `false`. |
 
-However, in these classes, the short circuit current and voltage are represented differently.
+However, in these classes, the short-circuit current and voltage are represented differently.
 
 In `MagnitudeFaultResult`, the additional attributes are:
 
 | Attribute | Type   | Unit | Required | Default value | Description                                                      |
 |-----------|--------|------|----------|---------------|------------------------------------------------------------------|
-| current   | double | kA   | yes      | -             | The three-phased magnitude of the computed short circuit current |
-| voltage   | double | kV   | yes      | -             | The three-phased magnitude of the computed short circuit voltage |
+| current   | double | kA   | yes      | -             | The three-phased magnitude of the computed short-circuit current |
+| voltage   | double | kV   | yes      | -             | The three-phased magnitude of the computed short-circuit voltage |
 
 In `FortescueFaultResult`, they are:
 
 | Attribute | Type             | Unit | Required | Default value | Description                                                                                |
 |-----------|------------------|------|----------|---------------|--------------------------------------------------------------------------------------------|
-| current   | `FortescueValue` | kA   | yes      | -             | The magnitude and angle of the computed short circuit current detailed on the three phases |
-| voltage   | `FortescueValue` | kV   | yes      | -             | The magnitude and angle of the computed short circuit voltage detailed on the three phases |
+| current   | `FortescueValue` | kA   | yes      | -             | The magnitude and angle of the computed short-circuit current detailed on the three phases |
+| voltage   | `FortescueValue` | kV   | yes      | -             | The magnitude and angle of the computed short-circuit voltage detailed on the three phases |
 
 
 **The status of the computation**
 
 This status can be:
 - `SUCCESS`: the computation went as planned and the results are full considering the parameters.
-- `NO_SHORTCIRCUIT_DATA`: this status should be returned if no short circuit data are available in the network, i.e. the subtransient or transient reactance of generators and the minimum and maximum admissible short circuit currents.
+- `NO_SHORT_CIRCUIT_DATA`: this status should be returned if no short circuit data are available in the network, i.e. the subtransient or transient reactance of generators and the minimum and maximum admissible short-circuit currents.
 - `SOLVER_FAILURE`: the computation failed because of an error linked to the solver.
 - `FAILURE`: the computation failed for any other reason.
 
 **FeederResults**
 
-This field contains the contributions of each feeder to the short circuit current as a list. It should only be returned if `with-feeder-result` is set to `true`.
+This field contains the contributions of each feeder to the short-circuit current as a list. It should only be returned if `with-feeder-result` is set to `true`.
 Depending on the value of `with-fortescue-result`, it should be an instance of `com.powsybl.shortcircuit.MagnitudeFeederResult` or `com.powsybl.shortcircuit.FortescueFeederResult`.
 
 The attributes of `MagnitudeFeederResults` are:
 
-| Attribute     | Type   | Unit | Required | Default value | Description                                                                                   |
-|---------------|--------|------|----------|---------------|-----------------------------------------------------------------------------------------------|
-| connectableId | String | -    | yes      | -             | ID of the feeder                                                                              |
-| current       | double | kA   | yes      | -             | Three-phased current magnitude of the feeder participating to the short circuit current at the fault point | 
+| Attribute     | Type   | Unit | Required | Default value | Description                                                                                                |
+|---------------|--------|------|----------|---------------|------------------------------------------------------------------------------------------------------------|
+| connectableId | String | -    | yes      | -             | ID of the feeder                                                                                           |
+| current       | double | kA   | yes      | -             | Three-phased current magnitude of the feeder participating to the short-circuit current at the fault point | 
 
 The attributes of `FortescueFeederResuts` are:
 
 | Attribute     | Type             | Unit | Required | Default value | Description                                                                                                                   |
 |---------------|------------------|------|----------|---------------|-------------------------------------------------------------------------------------------------------------------------------|
 | connectableId | String           | -    | yes      | -             | ID of the feeder                                                                                                              |
-| current       | `FortescueValue` | kA   | yes      | -             | Current magnitudes and angles on the three phases of the feeder participating to the short circuit current at the fault point |
+| current       | `FortescueValue` | kA   | yes      | -             | Current magnitudes and angles on the three phases of the feeder participating to the short-circuit current at the fault point |
 
 **LimitViolations**
 
-This field contains a list of all the violations after the fault. This implies to have defined in the network the maximum or the minimum acceptable short circuit currents on the voltage levels.
-Then, with comparing to the computed short circuit current, two types of violations can be created: `LOW_SHORT_CIRCUIT_CURRENT` and `HIGH_SHORT_CIRCUIT_CURRENT`.
+This field contains a list of all the violations after the fault. This implies to have defined in the network the maximum or the minimum acceptable short-circuit currents on the voltage levels.
+Then, with comparing to the computed short-circuit current, two types of violations can be created: `LOW_SHORT_CIRCUIT_CURRENT` and `HIGH_SHORT_CIRCUIT_CURRENT`.
 This list should be empty if the property `with-limit-violations` is set to `false`.
 
 **ShortCircuitBusResults**
