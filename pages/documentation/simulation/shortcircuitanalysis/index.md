@@ -65,7 +65,7 @@ This reactance can either be stored in the network or calculated from the transi
 - `TRANSIENT`: the second stage of the short circuit, before the system stabilizes. The transient reactance of generators will be used.
 - `STEADY_STATE`: the last stage, once all transient effects are gone.
 
-The default value is `TRANSIENT`. The transient and subtransient reactances of the generators are stored in the [short circuit generator extension.](../../grid/model/extensions.md#generator-short-circuit)
+The default value is `TRANSIENT`. The transient and subtransient reactances of the generators are stored in the [short-circuit generator extension.](../../grid/model/extensions.md#generator-short-circuit)
 
 **sub-transient-coefficient**
 
@@ -196,7 +196,7 @@ Optionally, it is possible to specify a list of `FaultParameters`. Each `FaultPa
 For more information on parameters, see [above](#faultparameters).
 
 ## Outputs
-The results of the short circuit analysis are stored in `com.powsybl.shortcircuit.ShortCircuitAnalysisResult`. This class gathers the results for every fault, they are accessible either by the ID of the fault or the ID of the element on which the fault is simulated.
+The results of the short-circuit analysis are stored in `com.powsybl.shortcircuit.ShortCircuitAnalysisResult`. This class gathers the results for every fault, they are accessible either by the ID of the fault or the ID of the element on which the fault is simulated.
 For each fault, an object `com.powsybl.shortcircuit.FaultResult` is returned.
 
 Depending on `with-fortescue-result`, the returned result should either be an instance of `com.powsybl.shortcircuit.MagnitudeFaultResult` or `com.powsybl.shortcircuit.FortescueFaultResult`.
@@ -234,7 +234,7 @@ In `FortescueFaultResult`, they are:
 
 This status can be:
 - `SUCCESS`: the computation went as planned and the results are full considering the parameters.
-- `NO_SHORT_CIRCUIT_DATA`: this status should be returned if no short circuit data are available in the network, i.e. the subtransient or transient reactance of generators and the minimum and maximum admissible short-circuit currents.
+- `NO_SHORT_CIRCUIT_DATA`: this status should be returned if no short-circuit data are available in the network, i.e. the subtransient or transient reactance of generators and the minimum and maximum admissible short-circuit currents.
 - `SOLVER_FAILURE`: the computation failed because of an error linked to the solver.
 - `FAILURE`: the computation failed for any other reason.
 
