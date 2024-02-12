@@ -16,6 +16,7 @@ In this repository we have some features dedicated to European processes, such a
 
 | Version | Release date | Release notes                                                                  | API documentation | [powsybl-dependencies](https://github.com/powsybl/powsybl-dependencies) version |
 |---------|--------------|--------------------------------------------------------------------------------|-------------------|---------------------------------------------------------------------------------|
+| 2.8.0   | 2024-01-31   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.8.0) | -                 | 2024.0.0                                                                        |
 | 2.7.0   | 2023-12-22   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.7.0) | -                 | 2023.4.0                                                                        |
 | 2.6.2   | 2023-11-16   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.6.2) | -                 | -                                                                               |
 | 2.6.1   | 2023-10-19   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.6.1) | -                 | 2023.3.2                                                                        |

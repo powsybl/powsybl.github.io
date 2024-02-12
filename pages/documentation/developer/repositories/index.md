@@ -40,6 +40,12 @@ This [repository](https://github.com/powsybl/powsybl-entsoe) provides components
 **Reviewers:** [miovd](https://github.com/miovd), [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)    
 **Committers:** [miovd](https://github.com/miovd), [colinepiloquet](https://github.com/colinepiloquet)  
 
+### [powsybl-open-rao](powsybl-open-rao.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-open-rao.svg?sort=semver)](https://github.com/powsybl/powsybl-open-rao/releases/)
+This [repository](https://github.com/powsybl/powsybl-open-rao) provides a modular engine for remedial actions optimization.
+
+**Reviewers:** [MartinBelthle](https://github.com/MartinBelthle), [OpenSuze](https://github.com/OpenSuze), [pet-mit](https://github.com/pet-mit), [phiedw](https://github.com/phiedw)    
+**Committers:** [pet-mit](https://github.com/pet-mit), [phiedw](https://github.com/phiedw)
+
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg?sort=semver)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) provides modules to run optimal power load flow on several network variants. Variants are generated through time series mapping on a base case.
 
