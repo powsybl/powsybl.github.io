@@ -168,8 +168,8 @@ This [repository](https://github.com/powsybl/pypowsybl) provides an integration 
 
 This [repository](https://github.com/powsybl/pypowsybl-notebooks) provides some notebooks using pypowsybl for demos and tutorials.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg)
-**Committers:** [geofjamg](https://github.com/geofjamg)
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [annetill](https://github.com/annetill)
+**Committers:** [geofjamg](https://github.com/geofjamg), [annetill](https://github.com/annetill)
 
 ## Commons
 
