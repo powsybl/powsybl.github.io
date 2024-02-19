@@ -7,8 +7,8 @@ This page shortly describes each repository of the [PowSyBl organization](https:
 ### [powsybl-core](powsybl-core.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-core.svg?sort=semver)](https://github.com/powsybl/powsybl-core/releases/)
 This [repository](https://github.com/powsybl/powsybl-core) provides the core feature of the PowSyBl framework such as the grid modelling, the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity analysis, dynamic simulation...).
 
-**Reviewers:** [annetill](https://github.com/annetill), [miovd](https://github.com/miovd), [zamarrenolm](https://github.com/zamarrenolm), [flo-dup](https://github.com/flo-dup), [sylvlecl](https://github.com/sylvlecl), [geofjamg](https://github.com/geofjamg)  
-**Committers:** [miovd](https://github.com/miovd), [flo-dup](https://github.com/flo-dup), [annetill](https://github.com/annetill), [geofjamg](https://github.com/geofjamg)  
+**Reviewers:** [annetill](https://github.com/annetill), [zamarrenolm](https://github.com/zamarrenolm), [flo-dup](https://github.com/flo-dup), [sylvlecl](https://github.com/sylvlecl), [geofjamg](https://github.com/geofjamg)  
+**Committers:** [flo-dup](https://github.com/flo-dup), [annetill](https://github.com/annetill), [geofjamg](https://github.com/geofjamg)  
 
 ### [powsybl-open-loadflow](powsybl-open-loadflow.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-open-loadflow.svg?sort=semver)](https://github.com/powsybl/powsybl-open-loadflow/releases/)
 This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an implementation of the LoadFlow API based on the [powsybl-math-native](powsybl-math-native.md) project.
@@ -20,13 +20,13 @@ This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an 
 This [repository](https://github.com/powsybl/powsybl-dynawo) provides an implementation of the dynamic simulation API for the [Dyna&omega;o](https://dynawo.github.io/) time domain simulation tool.
 
 **Reviewers:** [flo-dup](https://github.com/flo-dup), [zamarrenolm](https://github.com/zamarrenolm)  
-**Committers:** [flo-dup](https://github.com/flo-dup), [miovd](https://github.com/miovd)  
+**Committers:** [flo-dup](https://github.com/flo-dup)
 
 ### [powsybl-balances-adjustment](powsybl-balances-adjustment.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-balances-adjustment.svg?sort=semver)](https://github.com/powsybl/powsybl-balances-adjustment/releases/)
 This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provides a functional module to reach target net positions across networks, through an iterative process based on power flow computations and injections scaling.
 
-**Reviewers:** [phiedw](https://github.com/phiedw), [miovd](https://github.com/miovd)   
-**Committers:** [phiedw](https://github.com/phiedw), [miovd](https://github.com/miovd)  
+**Reviewers:** [phiedw](https://github.com/phiedw)   
+**Committers:** [phiedw](https://github.com/phiedw) 
 
 ### [powsybl-diagram](powsybl-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-diagram/releases/)
 This [repository](https://github.com/powsybl/powsybl-diagram) provides modules to generate single-line diagrams and network graph diagrams.
@@ -37,8 +37,8 @@ This [repository](https://github.com/powsybl/powsybl-diagram) provides modules t
 ### [powsybl-entsoe](powsybl-entsoe.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-entsoe.svg?sort=semver)](https://github.com/powsybl/powsybl-entsoe/releases/)
 This [repository](https://github.com/powsybl/powsybl-entsoe) provides components specific to ENTSO-E-orientated processes.
 
-**Reviewers:** [miovd](https://github.com/miovd), [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)    
-**Committers:** [miovd](https://github.com/miovd), [colinepiloquet](https://github.com/colinepiloquet)  
+**Reviewers:** [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)    
+**Committers:** [colinepiloquet](https://github.com/colinepiloquet)  
 
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg?sort=semver)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) provides modules to run optimal power load flow on several network variants. Variants are generated through time series mapping on a base case.
@@ -62,15 +62,15 @@ This [repository](https://github.com/powsybl/powsybl-hpc) provides two implement
 
 This [repository](https://github.com/powsybl/powsybl-shortcircuits) allows analyses of short circuits on a network. This repository provides a generic API for symmetric short circuit calculations but no implementation for the moment.     
 
-**Reviewers:** [miovd](https://github.com/miovd), [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)    
-**Committers:** [miovd](https://github.com/miovd), [colinepiloquet](https://github.com/colinepiloquet)  
+**Reviewers:** [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)    
+**Committers:** [colinepiloquet](https://github.com/colinepiloquet)  
 
 ### [powsybl-network-hypothesis](powsybl-network-hypothesis.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-network-hypothesis.svg?sort=semver)](https://github.com/powsybl/powsybl-network-hypothesis/releases/)
 
 This [repository](https://github.com/powsybl/powsybl-network-hypothesis) allows to apply hypotheses on a network such as client connections, HVDC building from groups or loads, etc.  
 
-**Reviewers:** [miovd](https://github.com/miovd), [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)  
-**Committers:** [miovd](https://github.com/miovd), [colinepiloquet](https://github.com/colinepiloquet)  
+**Reviewers:** [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)  
+**Committers:** [colinepiloquet](https://github.com/colinepiloquet)  
 
 ### powsybl-eurostag
 
