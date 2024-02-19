@@ -7,14 +7,14 @@ This page shortly describes each repository of the [PowSyBl organization](https:
 ### [powsybl-core](powsybl-core.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-core.svg?sort=semver)](https://github.com/powsybl/powsybl-core/releases/)
 This [repository](https://github.com/powsybl/powsybl-core) provides the core feature of the PowSyBl framework such as the grid modelling, the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity analysis, dynamic simulation...).
 
-**Reviewers:** [annetill](https://github.com/annetill), [zamarrenolm](https://github.com/zamarrenolm), [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg)  
-**Committers:** [flo-dup](https://github.com/flo-dup), [annetill](https://github.com/annetill), [geofjamg](https://github.com/geofjamg)  
+**Reviewers:** [annetill](https://github.com/annetill), [zamarrenolm](https://github.com/zamarrenolm), [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [olperr1](https://github.com/olperr1)  
+**Committers:** [flo-dup](https://github.com/flo-dup), [annetill](https://github.com/annetill), [geofjamg](https://github.com/geofjamg), [olperr1](https://github.com/olperr1)
 
 ### [powsybl-open-loadflow](powsybl-open-loadflow.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-open-loadflow.svg?sort=semver)](https://github.com/powsybl/powsybl-open-loadflow/releases/)
 This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an implementation of the LoadFlow API based on the [powsybl-math-native](powsybl-math-native.md) project.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [annetill](https://github.com/annetill)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [annetill](https://github.com/annetill), [flo-dup](https://github.com/flo-dup)  
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [annetill](https://github.com/annetill), [olperr1](https://github.com/olperr1)   
+**Committers:** [geofjamg](https://github.com/geofjamg), [annetill](https://github.com/annetill), [flo-dup](https://github.com/flo-dup), [olperr1](https://github.com/olperr1)
 
 ### [powsybl-dynawo](powsybl-dynawo.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-dynawo.svg?sort=semver)](https://github.com/powsybl/powsybl-dynawo/releases/)
 This [repository](https://github.com/powsybl/powsybl-dynawo) provides an implementation of the dynamic simulation API for the [Dyna&omega;o](https://dynawo.github.io/) time domain simulation tool.
