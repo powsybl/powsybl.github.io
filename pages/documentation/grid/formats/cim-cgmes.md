@@ -743,7 +743,16 @@ This property is set to `true` by default.
 **iidm.export.cgmes.sourcing-actor**
 Optional property allowing to specify a custom sourcing actor. If a Boundary set with reference data is provided for the export through the parameter `iidm.import.cgmes.boundary-location`, the value of this property will be used to look for the modelling authority set and the geographical region to be used in the export.
 No default value is given.
-If this property is not given, the export process will still try to determine the sourcing actor from the IIDM network if it only contains one country. 
+If this property is not given, the export process will still try to determine the sourcing actor from the IIDM network if it only contains one country.
+
+**iidm.export.cgmes.model-version**
+Optional property defining the version of the exported CGMES file. It will be used if the version is not already available in the network. 
+The version will be written in the header of each exported file and will also be used to generate a unique UUID for the `FullModel` field.
+Its default value is 1.
+
+**iidm.export.cgmes.business-process**
+The business process in which the export takes place. This is used to generate unique UUIDs for the EQ, TP, SSH and SV file `FullModel`.
+Its default value is `1D`.
 
 ## Examples
 Have a look to the [CGMES sample files](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/TestConfigurations_packageCASv2.0.zip)
