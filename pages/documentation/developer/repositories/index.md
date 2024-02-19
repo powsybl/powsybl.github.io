@@ -68,8 +68,8 @@ This [repository](https://github.com/powsybl/powsybl-optimizer) provides an inte
 
 This [repository](https://github.com/powsybl/powsybl-eurostag) allows to import Eurostag format file.
 
-**Reviewers:** [colinepiloquet](https://github.com/colinepiloquet)  
-**Committers:** [colinepiloquet](https://github.com/colinepiloquet)  
+**Reviewers:** //TODO  
+**Committers:** //TODO 
 
 ## Microservices
 
