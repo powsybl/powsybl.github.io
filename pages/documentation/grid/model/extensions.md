@@ -11,7 +11,7 @@ The extensions can be attached to any objects of a network or to the network its
 
 Some extensions are mono-variant meaning the data are identical for all the variants of the network. However, some of them are multi-variants to allow a different value for each variant of the network. It's typically the case for the [LoadDetail](#load-detail) extension that give the distribution of the constant part and the thermo-sensitive part of a consumption. 
 
-Note that some extensions provided by PowSyBl aren't supported in the [persistent implementation of IIDM](../../developer/repositories/powsybl-network-store.md).
+Note that some extensions provided by PowSyBl aren't supported in the [persistent implementation of IIDM](../../developer/repositories/powsybl-network-store-server.md).
 
 Every extension is considered as serializable unless explicitly specified as non-serializable in XML-IIDM.
 

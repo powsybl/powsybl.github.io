@@ -101,7 +101,7 @@ The project also contains a set of microservices that expose PowSyBl's features:
 
 - [Case server](../documentation/developer/repositories/powsybl-case.md): handles raw network data storage.
 
-- [Network store server](../documentation/developer/repositories/powsybl-network-store.md): provides a persistent IIDM implementation, exposed as a web service.
+- [Network store server](../documentation/developer/repositories/powsybl-network-store-server.md): provides a persistent IIDM implementation, exposed as a web service.
 
 - [Geographical data server](../documentation/developer/repositories/powsybl-geo-data.md): handles equipments locations.
 
