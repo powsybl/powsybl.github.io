@@ -58,6 +58,12 @@ This [repository](https://github.com/powsybl/powsybl-hpc) provides two implement
 **Reviewers:** [rolnico](https://github.com/rolnico)    
 **Committers:** [rolnico](https://github.com/rolnico)
 
+### [powsybl-optimizer](powsybl-optimizer.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-optimizer.svg?sort=semver)](https://github.com/powsybl/powsybl-optimizer/releases/)
+This [repository](https://github.com/powsybl/powsybl-optimizer) provides an interface to use the Ampl optimizer.
+
+**Reviewers:** [rolnico](https://github.com/rolnico)    
+**Committers:** [rolnico](https://github.com/rolnico)
+
 ### powsybl-eurostag
 
 This [repository](https://github.com/powsybl/powsybl-eurostag) allows to import Eurostag format file.
