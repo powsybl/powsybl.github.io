@@ -140,14 +140,14 @@ This [repository](https://github.com/powsybl/powsybl-ws-commons) provides common
 ### [powsybl-iidm4cpp](powsybl-iidm4cpp.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-iidm4cpp.svg?sort=semver)](https://github.com/powsybl/powsybl-iidm4cpp/releases/)
 This [repository](https://github.com/powsybl/powsybl-iidm4cpp) provides a C++ implementation of the IIDM grid model.
 
-**Reviewers:** [mathbagu](https://github.com/mathbagu)  
-**Committers:** [mathbagu](https://github.com/mathbagu)  
+**Reviewers:**  [gautierbureau](https://github.com/gautierbureau)
+**Committers:** [gautierbureau](https://github.com/gautierbureau)
 
 ### [powsybl-math-native](powsybl-math-native.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-math-native.svg?sort=semver)](https://github.com/powsybl/powsybl-math-native/releases/)
 This [repository](https://github.com/powsybl/powsybl-math-native) provides a C++ implementation of sparse matrix, based on the [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) project. This 64-bits libraries for Linux, Windows and MacOS are packaged as a Jar file and published on maven central.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [mathbagu](https://github.com/mathbagu)  
+**Reviewers:** [geofjamg](https://github.com/geofjamg) 
+**Committers:** [geofjamg](https://github.com/geofjamg) 
 
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg?sort=semver)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) also provides a C++ implementation of optimal power load flow.
@@ -176,8 +176,8 @@ This [repository](https://github.com/powsybl/pypowsybl-notebooks) provides some 
 ### powsybl-parent [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-parent.svg?sort=semver)](https://github.com/powsybl/powsybl-parent/releases/)
 This [repository](https://github.com/powsybl/powsybl-parent) provides the build configuration shared as maven pom files, shared by all our Java repositories.
 
-**Reviewers:** [jonenst](https://github.com/jonenst), [mathbagu](https://github.com/mathbagu)  
-**Committers:** [jonenst](https://github.com/jonenst), [mathbagu](https://github.com/mathbagu)  
+**Reviewers:** [jonenst](https://github.com/jonenst)  
+**Committers:** [jonenst](https://github.com/jonenst) 
 
 ### powsybl-dev-tools
 
