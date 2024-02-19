@@ -76,14 +76,14 @@ This [repository](https://github.com/powsybl/powsybl-eurostag) allows to import 
 ### [powsybl-case](powsybl-case.md)
 This [repository](https://github.com/powsybl/powsybl-case-datasource) provides a web service for network cases management.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst), [antoinebhs](https://github.com/antoinebhs)  
+**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst), [antoinebhs](https://github.com/antoinebhs)  
 
-### [powsybl-network-store](powsybl-network-store.md)
-This [repository](https://github.com/powsybl/powsybl-network-store) provides a persistent implementation of the IIDM grid model in [Apache Cassandra](https://cassandra.apache.org) database. The grid model is exposed as a web service.
+### [powsybl-network-store-server](powsybl-network-store-server.md)
+This [repository](https://github.com/powsybl/powsybl-network-store-server) provides a persistent implementation of the IIDM grid model in [PostgreSQL](https://www.postgresql.org/) database. The grid model is exposed as a web service.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst), [antoinebhs](https://github.com/antoinebhs)  
+**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst), [antoinebhs](https://github.com/antoinebhs)
 
 ### [powsybl-network-conversion-server](powsybl-network-conversion-server.md)
 This [repository](https://github.com/powsybl/powsybl-network-conversion-server) provides a web service that exposes conversion functions.
