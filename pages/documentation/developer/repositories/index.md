@@ -49,8 +49,8 @@ This [repository](https://github.com/powsybl/powsybl-open-rao) provides a modula
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg?sort=semver)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) provides modules to run optimal power load flow on several network variants. Variants are generated through time series mapping on a base case.
 
-**Reviewers:** [marifunf](https://github.com/marifunf), [berthaultval](https://github.com/berthaultval), [bongrainmat](https://github.com/orgs/powsybl/people/bongrainmat)      
-**Committers:** [berthaultval](https://github.com/berthaultval), [bongrainmat](https://github.com/orgs/powsybl/people/bongrainmat)    
+**Reviewers:** [marifunf](https://github.com/marifunf), [berthaultval](https://github.com/berthaultval)    
+**Committers:** [berthaultval](https://github.com/berthaultval) 
 
 ### [powsybl-afs](powsybl-afs.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-afs.svg?sort=semver)](https://github.com/powsybl/powsybl-afs/releases/)
 This [repository](https://github.com/powsybl/powsybl-afs) provides a standardized way to organize the data for a power system study, called AFS (**A**pplication **F**ile **S**ystem). It supports several storage system such as [MapDB](http://www.mapdb.org) or [Apache Cassandra](https://cassandra.apache.org). It is designed to be extensible using custom plugins to manage new types of data.
