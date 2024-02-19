@@ -22,12 +22,6 @@ This [repository](https://github.com/powsybl/powsybl-dynawo) provides an impleme
 **Reviewers:** [flo-dup](https://github.com/flo-dup), [zamarrenolm](https://github.com/zamarrenolm)  
 **Committers:** [flo-dup](https://github.com/flo-dup)
 
-### [powsybl-balances-adjustment](powsybl-balances-adjustment.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-balances-adjustment.svg?sort=semver)](https://github.com/powsybl/powsybl-balances-adjustment/releases/)
-This [repository](https://github.com/powsybl/powsybl-balances-adjustment) provides a functional module to reach target net positions across networks, through an iterative process based on power flow computations and injections scaling.
-
-**Reviewers:** [phiedw](https://github.com/phiedw)   
-**Committers:** [phiedw](https://github.com/phiedw) 
-
 ### [powsybl-diagram](powsybl-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-diagram/releases/)
 This [repository](https://github.com/powsybl/powsybl-diagram) provides modules to generate single-line diagrams and network graph diagrams.
 
@@ -58,20 +52,6 @@ This [repository](https://github.com/powsybl/powsybl-hpc) provides two implement
 **Reviewers:** [rolnico](https://github.com/rolnico)    
 **Committers:** [rolnico](https://github.com/rolnico)
 
-### powsybl-shortcircuits
-
-This [repository](https://github.com/powsybl/powsybl-shortcircuits) allows analyses of short circuits on a network. This repository provides a generic API for symmetric short circuit calculations but no implementation for the moment.     
-
-**Reviewers:** [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)    
-**Committers:** [colinepiloquet](https://github.com/colinepiloquet)  
-
-### [powsybl-network-hypothesis](powsybl-network-hypothesis.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-network-hypothesis.svg?sort=semver)](https://github.com/powsybl/powsybl-network-hypothesis/releases/)
-
-This [repository](https://github.com/powsybl/powsybl-network-hypothesis) allows to apply hypotheses on a network such as client connections, HVDC building from groups or loads, etc.  
-
-**Reviewers:** [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)  
-**Committers:** [colinepiloquet](https://github.com/colinepiloquet)  
-
 ### powsybl-eurostag
 
 This [repository](https://github.com/powsybl/powsybl-eurostag) allows to import Eurostag format file.
@@ -82,7 +62,7 @@ This [repository](https://github.com/powsybl/powsybl-eurostag) allows to import 
 ## Microservices
 
 ### [powsybl-case](powsybl-case.md)
-This [repository](https://github.com/powsybl/powsybl-case) provides a web service for network cases management.
+This [repository](https://github.com/powsybl/powsybl-case-datasource) provides a web service for network cases management.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
@@ -93,35 +73,17 @@ This [repository](https://github.com/powsybl/powsybl-network-store) provides a p
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 
-### [powsybl-geo-data](powsybl-geo-data.md)
-This [repository](https://github.com/powsybl/powsybl-geo-data) provides modules to manage geographical data such as substation or lines location as well as a web service.
-
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
-
 ### [powsybl-network-conversion-server](powsybl-network-conversion-server.md)
 This [repository](https://github.com/powsybl/powsybl-network-conversion-server) provides a web service that exposes conversion functions.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)    
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
 
-### [powsybl-cgmes-gl](powsybl-cgmes-gl.md)
-This [repository](https://github.com/powsybl/powsybl-cgmes-gl) provides modules to support the [CGMES](https://www.entsoe.eu/digital/common-information-model/cim-for-grid-models-exchange/) Geographical Location Profile  as well as a web service.
-
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
-
 ### [powsybl-single-line-diagram-server](powsybl-single-line-diagram-server.md)
 This [repository](https://github.com/powsybl/powsybl-single-line-diagram-server) provides a web service to generate single line diagrams.
 
 **Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)    
-**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
-
-### [powsybl-network-map-server](powsybl-network-map-server.md)
-This [repository](https://github.com/powsybl/powsybl-network-map-server) provides a web service for the generation of geographical data in order to draw a network on a map.
-
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)  
+**Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ### powsybl-ws-commons
 This [repository](https://github.com/powsybl/powsybl-ws-commons) provides commons for web-services.
@@ -198,13 +160,13 @@ This [repository](https://github.com/powsybl/powsybl.github.io) contains the sou
 **Committers:** all the [committers](../../../overview/governance.md#members)
 
 ### powsybl-tutorials
-This [repositories](https://github.com/powsybl/powsybl-tutorials) contains the source code of the different [tutorials](../tutorials/index.md) presented on this website.
+This [repository](https://github.com/powsybl/powsybl-tutorials) contains the source code of the different [tutorials](../tutorials/index.md) presented on this website.
 
 **Reviewers:** [annetill](https://github.com/annetill)  
 **Committers:** all the [committers](../../../overview/governance.md#members)
 
 ### powsybl-distribution
-This [repositories](https://github.com/powsybl/powsybl-distribution) contains the source code to build a itools distribution in order to use many features developped in this organisation.  
+This [repository](https://github.com/powsybl/powsybl-distribution) contains the source code to build a itools distribution in order to use many features developed in this organisation.  
 
 **Reviewers:** [annetill](https://github.com/annetill)  
 **Committers:** all the [committers](../../../overview/governance.md#members)
