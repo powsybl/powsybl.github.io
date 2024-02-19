@@ -161,8 +161,8 @@ This [repository](https://github.com/powsybl/powsybl-metrix) also provides a C++
 
 This [repository](https://github.com/powsybl/pypowsybl) provides an integration of the PowSyBl framework for Python developers.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg)
-**Committers:** [geofjamg](https://github.com/geofjamg) 
+**Reviewers:** [geofjamg](https://github.com/geofjamg), [EtienneLt](https://github.com/EtienneLt)
+**Committers:** [geofjamg](https://github.com/geofjamg), [EtienneLt](https://github.com/EtienneLt) 
 
 ### pypowsybl-notebooks
 
