@@ -7,7 +7,7 @@ This page shortly describes each repository of the [PowSyBl organization](https:
 ### [powsybl-core](powsybl-core.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-core.svg?sort=semver)](https://github.com/powsybl/powsybl-core/releases/)
 This [repository](https://github.com/powsybl/powsybl-core) provides the core feature of the PowSyBl framework such as the grid modelling, the support of several data exchange format (CGMES, UCTE...), computation APIs (power flow, security analysis, sensitivity analysis, dynamic simulation...).
 
-**Reviewers:** [annetill](https://github.com/annetill), [zamarrenolm](https://github.com/zamarrenolm), [flo-dup](https://github.com/flo-dup), [sylvlecl](https://github.com/sylvlecl), [geofjamg](https://github.com/geofjamg)  
+**Reviewers:** [annetill](https://github.com/annetill), [zamarrenolm](https://github.com/zamarrenolm), [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg)  
 **Committers:** [flo-dup](https://github.com/flo-dup), [annetill](https://github.com/annetill), [geofjamg](https://github.com/geofjamg)  
 
 ### [powsybl-open-loadflow](powsybl-open-loadflow.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-open-loadflow.svg?sort=semver)](https://github.com/powsybl/powsybl-open-loadflow/releases/)
@@ -61,8 +61,8 @@ This [repository](https://github.com/powsybl/powsybl-afs) provides a standardize
 ### [powsybl-hpc](powsybl-hpc.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-hpc.svg?sort=semver)](https://github.com/powsybl/powsybl-hpc/releases/)
 This [repository](https://github.com/powsybl/powsybl-hpc) provides two implementations of the Computation API, to distribute the computation using [MPI](https://www.open-mpi.org) or [Slurm Workload Manager](https://slurm.schedmd.com).
 
-**Reviewers:** [sylvlecl](https://github.com/sylvlecl) (Slurm), [geofjamg](https://github.com/geofjamg) (MPI)  
-**Committers:** [sylvlecl](https://github.com/sylvlecl)  
+**Reviewers:** [geofjamg](https://github.com/geofjamg) (MPI)  
+**Committers:** 
 
 ### powsybl-shortcircuits
 
@@ -161,15 +161,15 @@ This [repository](https://github.com/powsybl/powsybl-metrix) also provides a C++
 
 This [repository](https://github.com/powsybl/pypowsybl) provides an integration of the PowSyBl framework for Python developers.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)  
+**Reviewers:** [geofjamg](https://github.com/geofjamg)
+**Committers:** [geofjamg](https://github.com/geofjamg) 
 
 ### pypowsybl-notebooks
 
 This [repository](https://github.com/powsybl/pypowsybl-notebooks) provides some notebooks using pypowsybl for demos and tutorials.
 
-**Reviewers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)  
-**Committers:** [geofjamg](https://github.com/geofjamg), [sylvlecl](https://github.com/sylvlecl)  
+**Reviewers:** [geofjamg](https://github.com/geofjamg)
+**Committers:** [geofjamg](https://github.com/geofjamg)
 
 ## Commons
 
