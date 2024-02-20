@@ -58,7 +58,7 @@ This [repository](https://github.com/powsybl/powsybl-optimizer) provides an inte
 **Reviewers:** [annetill](https://github.com/annetill), [So-Fras](https://github.com/So-Fras)   
 **Committers:** [So-Fras](https://github.com/So-Fras), [olperr1](https://github.com/olperr1)
 
-### [powsybl-dependencies](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-dependencies.svg?sort=semver)](https://github.com/powsybl/powsybl-optimizer/releases/)
+### [powsybl-dependencies](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-dependencies.svg?sort=semver)](https://github.com/powsybl/powsybl-dependencies/releases/)
 This [repository](https://github.com/powsybl/powsybl-dependencies) helps users with dependency management in PowSyBl.
 
 **Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
