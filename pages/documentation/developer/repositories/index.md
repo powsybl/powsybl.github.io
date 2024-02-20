@@ -70,7 +70,7 @@ This [repository](https://github.com/powsybl/powsybl-distribution) allows for th
 **Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
 **Committers:** [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
 
-### [powsybl-starter](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-starter.svg?sort=semver)](https://github.com/powsybl/powsybl-optimizer/releases/)
+### [powsybl-starter](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-starter.svg?sort=semver)](https://github.com/powsybl/powsybl-starter/releases/)
 This [repository](https://github.com/powsybl/powsybl-starter) is a help for PowSyBl beginners: it makes the main PowSyBl functionalities available through one single dependency import.
 
 **Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
