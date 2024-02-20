@@ -19,20 +19,20 @@ This [repository](https://github.com/powsybl/powsybl-open-loadflow) provides an 
 ### [powsybl-dynawo](powsybl-dynawo.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-dynawo.svg?sort=semver)](https://github.com/powsybl/powsybl-dynawo/releases/)
 This [repository](https://github.com/powsybl/powsybl-dynawo) provides an implementation of the dynamic simulation API for the [Dyna&omega;o](https://dynawo.github.io/) time domain simulation tool.
 
-**Reviewers:** [flo-dup](https://github.com/flo-dup), [zamarrenolm](https://github.com/zamarrenolm)  
-**Committers:** [flo-dup](https://github.com/flo-dup)
+**Reviewers:** [flo-dup](https://github.com/flo-dup), [zamarrenolm](https://github.com/zamarrenolm), [olperr1](https://github.com/olperr1)  
+**Committers:** [flo-dup](https://github.com/flo-dup), [olperr1](https://github.com/olperr1)
 
 ### [powsybl-diagram](powsybl-diagram.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-diagram.svg?sort=semver)](https://github.com/powsybl/powsybl-diagram/releases/)
 This [repository](https://github.com/powsybl/powsybl-diagram) provides modules to generate single-line diagrams and network graph diagrams.
 
-**Reviewers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [So-Fras](https://github.com/So-Fras)   
-**Committers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [Luma](https://github.com/zamarrenolm), [So-Fras](https://github.com/So-Fras)
+**Reviewers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [So-Fras](https://github.com/So-Fras), [olperr1](https://github.com/olperr1)   
+**Committers:** [flo-dup](https://github.com/flo-dup), [geofjamg](https://github.com/geofjamg), [Luma](https://github.com/zamarrenolm), [So-Fras](https://github.com/So-Fras), [olperr1](https://github.com/olperr1)
 
 ### [powsybl-entsoe](powsybl-entsoe.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-entsoe.svg?sort=semver)](https://github.com/powsybl/powsybl-entsoe/releases/)
 This [repository](https://github.com/powsybl/powsybl-entsoe) provides components specific to ENTSO-E-orientated processes.
 
-**Reviewers:** [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet)    
-**Committers:** [colinepiloquet](https://github.com/colinepiloquet)  
+**Reviewers:** [annetill](https://github.com/annetill), [colinepiloquet](https://github.com/colinepiloquet), [olperr1](https://github.com/olperr1)    
+**Committers:** [olperr1](https://github.com/olperr1) 
 
 ### [powsybl-metrix](powsybl-metrix.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-metrix.svg?sort=semver)](https://github.com/powsybl/powsybl-metrix/releases/)
 This [repository](https://github.com/powsybl/powsybl-metrix) provides modules to run optimal power load flow on several network variants. Variants are generated through time series mapping on a base case.
@@ -55,8 +55,26 @@ This [repository](https://github.com/powsybl/powsybl-hpc) provides two implement
 ### [powsybl-optimizer](powsybl-optimizer.md) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-optimizer.svg?sort=semver)](https://github.com/powsybl/powsybl-optimizer/releases/)
 This [repository](https://github.com/powsybl/powsybl-optimizer) provides an interface to use the Ampl optimizer.
 
-**Reviewers:** [rolnico](https://github.com/rolnico)    
-**Committers:** [rolnico](https://github.com/rolnico)
+**Reviewers:** [annetill](https://github.com/annetill), [So-Fras](https://github.com/So-Fras)   
+**Committers:** [So-Fras](https://github.com/So-Fras), [olperr1](https://github.com/olperr1)
+
+### [powsybl-dependencies](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-dependencies.svg?sort=semver)](https://github.com/powsybl/powsybl-optimizer/releases/)
+This [repository](https://github.com/powsybl/powsybl-dependencies) helps users with dependency management in PowSyBl.
+
+**Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
+**Committers:** [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
+
+### [powsybl-distribution](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-distribution.svg?sort=semver)](https://github.com/powsybl/powsybl-optimizer/releases/)
+This [repository](https://github.com/powsybl/powsybl-distribution) allows for the generation of a basic distribution of PowSyBl.
+
+**Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
+**Committers:** [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
+
+### [powsybl-starter](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-starter.svg?sort=semver)](https://github.com/powsybl/powsybl-optimizer/releases/)
+This [repository](https://github.com/powsybl/powsybl-starter) is a help for PowSyBl beginners: it makes the main PowSyBl functionalities available through one single dependency import.
+
+**Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
+**Committers:** [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
 
 ### powsybl-eurostag
 
