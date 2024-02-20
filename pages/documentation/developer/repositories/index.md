@@ -64,7 +64,7 @@ This [repository](https://github.com/powsybl/powsybl-dependencies) helps users w
 **Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
 **Committers:** [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
 
-### [powsybl-distribution](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-distribution.svg?sort=semver)](https://github.com/powsybl/powsybl-optimizer/releases/)
+### [powsybl-distribution](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-distribution.svg?sort=semver)](https://github.com/powsybl/powsybl-distribution/releases/)
 This [repository](https://github.com/powsybl/powsybl-distribution) allows for the generation of a basic distribution of PowSyBl.
 
 **Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)
