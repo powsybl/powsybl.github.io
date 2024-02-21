@@ -208,7 +208,7 @@ This [repository](https://github.com/powsybl/powsybl-single-line-diagram-server)
 **Committers:** [geofjamg](https://github.com/geofjamg), [jonenst](https://github.com/jonenst)
 
 ### powsybl-ws-commons
-This [repository](https://github.com/powsybl/powsybl-ws-commons) provides commons for web-services.
+This [repository](https://github.com/powsybl/powsybl-ws-commons) provides commons for web services.
 
 **Reviewers:** [jonenst](https://github.com/jonenst)  
 **Committers:** [jonenst](https://github.com/jonenst)  
