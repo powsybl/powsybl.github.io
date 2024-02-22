@@ -21,10 +21,10 @@ The only input for a power flow simulation is a network and optionally a set of 
 ## Outputs
 
 The power flow simulation outputs consists of: 
- - A network, which has been modified based on the simulation results. The modified variables are the active and reactive power at the terminals, the voltage and angle at all buses and taps.
- - A global status which is equal to `true` if at least one of the component of the network has converged, false otherwise.
- - Detailed results per synchronous component: a convergence status, the number of iterations (could be equal to `-1` if not relevant for a specific implementation), the selected slack bus (the bus at which the power balance has been done) and active power mismatch at slack bus.
- - Some metrics regarding the computation. Depending on the load flow implementation the content of these metrics may vary.
+ - A network, which has been modified based on the simulation results. The modified variables are the active and reactive power at the terminals, the voltage and angle at all buses, the solved tap changers positions, the solved shunt compensator sections.
+ - A global status indicating if the simulation succeeded for all synchronous components (Fully Converged status), or for only some of them (Partially Converged status), or for none of them (Failed status).
+ - Detailed results per synchronous component: a convergence status, the number of iterations (could be equal to `-1` if not relevant for a specific implementation), the selected reference bus (voltage angle reference), the selected slack buses (the buses at which the power balance has been done), active power mismatch at slack buses, and amount of distributed active power (zero MW if slack distribution is disabled).
+ - Metrics regarding the computation. Depending on the load flow implementation the content of these metrics may vary.
  - Logs in a simulator specific format.
 
 ## Implementations
@@ -167,7 +167,7 @@ The default value is `1.0`.
 
 ### Specific parameters
 Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
-- [PowSyBl OpenLoadFlow](openlf.md#parameters)
+- [PowSyBl OpenLoadFlow](openlf.md#specific-parameters)
 - [DynaFlow](dynaflow.md#specific-parameters)
 
 ## Validation
@@ -245,7 +245,7 @@ $$f$$ is a participation factor, per unit. For example, a usual definition is: $
 participates or not. The adjustment is then done by doing:
 $$P <- P \times \hat{K} \times F$$
 where $$\hat{K}$$ is a proportionality factor, usually defined for each unit by $$\dfrac{P_{max}}{\sum{F}}$$, $$\dfrac{targetP}{\sum{F}}$$ or $$\dfrac{P_{diff}}{\sum{F}}$$
-depending on the adjustment mode (the sums run over all the units participating to the compensation).
+depending on the adjustment mode (the sums run over all the units participating in the compensation).
 
 ##### Voltage and reactive power
 
