@@ -17,7 +17,7 @@ PowSyBl (<b>Pow</b>er <b>Sy</b>stem <b>Bl</b>ocks) is an open source framework w
 dedicated to electrical grid modelling and simulation, licensed under the [Mozilla Public License version 2.0](./license). 
 It is part of [LF Energy](https://www.lfenergy.org/), an open source foundation focused on the power systems sector, hosted within The Linux Foundation. 
 
-The power system blocks may be used through Python scripts for a quick implementation (or prototyping), but also be assembled to build state-of-art applications.
+The power system blocks may be used through Python scripts for a quick implementation (or prototyping), but also be assembled to build state-of-the-art applications.
 Indeed, one major aim of the project is to make it easy to write complex software for power 
 system simulation and analysis. For example, using PowSyBl one can create applications able to:
 - handle a variety of formats, such as CIM-CGMES for European data exchanges,
@@ -34,7 +34,7 @@ Check the [Getting started](../documentation/user) and [Configuration](../docume
 # Features
 PowSyBl provides a complete [internal grid model](../documentation/grid/formats/xiidm.md) 
 with substations, voltage levels, AC and DC lines, two and three windings transformers, batteries,
-generators, loads, shunt and static VAR compensators, etc. The grid model can also be enhanced with extensions that complete the equipments modeling
+generators, loads, shunt and static VAR compensators, etc. The grid model can also be enhanced with extensions that complete the equipment modeling
 (short-circuit profile, measurements, position information, etc.).
 
 ![Node breaker topology](img/index/nodeBreakerTopology.svg){: width="50%" .center-image}
@@ -56,7 +56,7 @@ PowSyBl enables users to display [network graph diagrams and single-line diagram
 
 The [PyPowSyBl](https://pypowsybl.readthedocs.io/en/latest/index.html) project gives access to PowSyBl framework to Python developers. This Python integration relies on GraalVM to compile Java code to a native library.
 
-All the features of PowSyBl are exposed as [web services](../documentation/index.html#microservices), to make it easy to build web-based 
+All PowSyBl features are exposed as [web services](../documentation/index.html#microservices), to make it easy to build web-based 
 applications on top of the framework. As an example of integration, please visit the web-site of [GridSuite](https://www.gridsuite.org/).  
 
 # Projects
