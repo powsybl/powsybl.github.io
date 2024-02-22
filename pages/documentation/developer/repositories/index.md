@@ -60,19 +60,19 @@ This [repository](https://github.com/powsybl/powsybl-open-rao) provides a modula
 **Reviewers:** [bqth29](https://github.com/bqth29), [benrejebmoh](https://github.com/benrejebmoh), [Godelaine](https://github.com/Godelaine), [jipea](https://github.com/jipea), [MartinBelthle](https://github.com/MartinBelthle), [murgeyseb](https://github.com/murgeyseb), [pet-mit](https://github.com/pet-mit), [phiedw](https://github.com/phiedw)  
 **Committers:** [bqth29](https://github.com/bqth29), [benrejebmoh](https://github.com/benrejebmoh), [Godelaine](https://github.com/Godelaine), [jipea](https://github.com/jipea), [MartinBelthle](https://github.com/MartinBelthle), [murgeyseb](https://github.com/murgeyseb), [pet-mit](https://github.com/pet-mit), [phiedw](https://github.com/phiedw)  
 
-### [powsybl-dependencies](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-dependencies.svg?sort=semver)](https://github.com/powsybl/powsybl-dependencies/releases/)
+### powsybl-dependencies [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-dependencies.svg?sort=semver)](https://github.com/powsybl/powsybl-dependencies/releases/)
 This [repository](https://github.com/powsybl/powsybl-dependencies) helps users with dependency management in PowSyBl.
 
 **Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)  
 **Committers:** [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)  
 
-### [powsybl-distribution](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-distribution.svg?sort=semver)](https://github.com/powsybl/powsybl-distribution/releases/)
+### powsybl-distribution [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-distribution.svg?sort=semver)](https://github.com/powsybl/powsybl-distribution/releases/)
 This [repository](https://github.com/powsybl/powsybl-distribution) allows for the generation of a basic distribution of PowSyBl.
 
 **Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)  
 **Committers:** [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)  
 
-### [powsybl-starter](//TODO) [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-starter.svg?sort=semver)](https://github.com/powsybl/powsybl-starter/releases/)
+### powsybl-starter [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-starter.svg?sort=semver)](https://github.com/powsybl/powsybl-starter/releases/)
 This [repository](https://github.com/powsybl/powsybl-starter) is a help for PowSyBl beginners: it makes the main PowSyBl functionalities available through one single dependency import.
 
 **Reviewers:**  [olperr1](https://github.com/olperr1), [flo-dup](https://github.com/flo-dup)  
