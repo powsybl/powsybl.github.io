@@ -181,7 +181,7 @@ This [repository](https://github.com/powsybl/powsybl-metrix) also provides a C++
 
 ## Microservices
 
-### [powsybl-case](powsybl-case.md)
+### [powsybl-case-server](powsybl-case-server.md)
 This [repository](https://github.com/powsybl/powsybl-case-server) provides a web service for network cases management.
 The [powsybl-case-datasource](https://github.com/powsybl/powsybl-case-datasource) repository is the client part of this service.
 

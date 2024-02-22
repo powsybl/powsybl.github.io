@@ -1,13 +1,13 @@
 # powsybl-optimizer [![GitHub release](https://img.shields.io/github/release/powsybl/powsybl-optimizer.svg?sort=semver)](https://github.com/powsybl/powsybl-optimizer/releases/)
-//TODO
+PowSyBl Optimizer is a repository to store production-ready optimal power flow optimizers. It contains for the moment only one implementation, called OpenReac. OpenReac is a reactive optimal power flow that gives a set of hypotheses for voltage and reactive controls by network equipments such as generators, shunt compensators and transformers. OpenReac can be used for network planning or in operation as well.
 
 ## Features
 
-- //TODO
+Only OpenReac is available. 
 
 ## Getting started
 
-- //TODO
+Please refer to [OpenReac readme file](https://github.com/powsybl/powsybl-optimizer/tree/main/open-reac) to start.
 
 ## Releases
 
