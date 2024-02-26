@@ -116,7 +116,7 @@ For more information about tap changers, see [the documentation about it](../../
 
 This property defines the voltage profile that should be used for the calculation. Three options are available:
 - `NOMINAL`: the nominal voltage profile is used for the calculation
-- `PREVIOUS`: the voltage profile from the loadflow will is for the calculation
+- `PREVIOUS`: the voltage profile from the loadflow is used for the calculation
 - `CONFIGURED`: the voltage profile is specified by the user
 In the case of CONFIGURED voltage profile, ranges of nominal voltages with multiplicative coefficients must be specified in the `voltage-ranges` property.
 By default, the initial voltage profile mode is set to `NOMINAL`.
