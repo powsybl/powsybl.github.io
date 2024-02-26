@@ -59,16 +59,16 @@ The default value is `true`.
 **study-type**
 
 This property indicates the type of short-circuit study. It can be:
-- `SUB_TRANSIENT`: it is the first stage of the short circuit, right when the fault happens. In this case, it is the subtransient reactance of generators that is used. 
+- `SUB_TRANSIENT`: it is the first stage of the short circuit, right when the fault happens. In this case, it is the sub-transient reactance of generators that is used. 
 This reactance can either be stored in the network or calculated from the transient reactance of generators with a coefficient defined by the parameter `sub-transient-coefficient`.
 - `TRANSIENT`: the second stage of the short circuit, before the system stabilizes. The transient reactance of generators will be used.
 - `STEADY_STATE`: the last stage, once all transient effects are gone.
 
-The default value is `TRANSIENT`. The transient and subtransient reactances of the generators are stored in the [short-circuit generator extension.](../../grid/model/extensions.md#generator-short-circuit)
+The default value is `TRANSIENT`. The transient and sub-transient reactance of the generators are stored in the [short-circuit generator extension.](../../grid/model/extensions.md#generator-short-circuit)
 
 **sub-transient-coefficient**
 
-This property allows to define an optional coefficient, in case of a subtransient study, to apply to the transient reactance of generators to get the subtransient one:
+This property allows to define an optional coefficient, in case of a sub-transient study, to apply to the transient reactance of generators to get the sub-transient one:
 
 $$X''_d = c \times X'_d$$
 
@@ -87,7 +87,7 @@ This property indicates if the voltage profile should be computed on every node 
 **min-voltage-drop-proportional-threshold**
 
 This property indicates a threshold to filter the voltage results. Thus, it only makes sense if `with-voltage-result` is set to true. 
-Only the nodes where the voltage drop due to the short circuit is above this property are kept. 
+Only the nodes where the voltage drop due to the short circuit in absolute value is above this property are kept. 
 The voltage drop is calculated as the ratio between the initial voltage magnitude on the node and the voltage magnitude on the node after the fault. The default value is `0`.
 
 **with-loads**
@@ -115,9 +115,9 @@ For more information about tap changers, see [the documentation about it](../../
 
 This property defines the voltage profile that should be used for the calculation. Three options are available:
 - `NOMINAL`: the nominal voltage profile is used for the calculation
-- `PREVIOUS`: the voltage profile from the loadflow is used for the calculation
+- `PREVIOUS`: the voltage profile from the load flow is used for the calculation
 - `CONFIGURED`: the voltage profile is specified by the user
-In the case of CONFIGURED voltage profile, ranges of nominal voltages with multiplicative coefficients must be specified in the `voltage-ranges` property.
+In the case of `CONFIGURED` voltage profile, ranges of nominal voltages with multiplicative coefficients must be specified in the `voltage-ranges` property.
 By default, the initial voltage profile mode is set to `NOMINAL`.
 
 **voltage-ranges**
@@ -235,7 +235,7 @@ In `FortescueFaultResult`, they are:
 
 This status can be:
 - `SUCCESS`: the computation went as planned and the results are full considering the parameters.
-- `NO_SHORT_CIRCUIT_DATA`: this status should be returned if no short-circuit data are available in the network, i.e. the subtransient or transient reactance of generators and the minimum and maximum admissible short-circuit currents.
+- `NO_SHORT_CIRCUIT_DATA`: this status should be returned if no short-circuit data are available in the network, i.e. the sub-transient or transient reactance of generators and the minimum and maximum admissible short-circuit currents.
 - `SOLVER_FAILURE`: the computation failed because of an error linked to the solver.
 - `FAILURE`: the computation failed for any other reason.
 
