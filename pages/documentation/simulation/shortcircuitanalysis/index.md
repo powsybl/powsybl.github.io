@@ -222,12 +222,14 @@ In `MagnitudeFaultResult`, the additional attributes are:
 | current   | double | A    | yes      | -             | The three-phased magnitude of the computed short-circuit current |
 | voltage   | double | kV   | yes      | -             | The three-phased magnitude of the computed short-circuit voltage |
 
+
 In `FortescueFaultResult`, they are:
 
 | Attribute | Type             | Unit | Required | Default value | Description                                                                                |
 |-----------|------------------|------|----------|---------------|--------------------------------------------------------------------------------------------|
 | current   | `FortescueValue` | A    | yes      | -             | The magnitude and angle of the computed short-circuit current detailed on the three phases |
 | voltage   | `FortescueValue` | kV   | yes      | -             | The magnitude and angle of the computed short-circuit voltage detailed on the three phases |
+
 
 
 **The status of the computation**
@@ -250,12 +252,14 @@ The attributes of `MagnitudeFeederResults` are:
 | connectableId | String | -    | yes      | -             | ID of the feeder                                                                                           |
 | current       | double | A    | yes      | -             | Three-phased current magnitude of the feeder participating to the short-circuit current at the fault point | 
 
+
 The attributes of `FortescueFeederResuts` are:
 
 | Attribute     | Type             | Unit | Required | Default value | Description                                                                                                                   |
 |---------------|------------------|------|----------|---------------|-------------------------------------------------------------------------------------------------------------------------------|
 | connectableId | String           | -    | yes      | -             | ID of the feeder                                                                                                              |
 | current       | `FortescueValue` | A    | yes      | -             | Current magnitudes and angles on the three phases of the feeder participating to the short-circuit current at the fault point |
+
 
 **LimitViolations**
 

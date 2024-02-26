@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg viewBox="0 0 330.0 504.0" xmlns="http://www.w3.org/2000/svg">
-    <style>
-        <![CDATA[
+    <style><![CDATA[
 /* ----------------------------------------------------------------------- */
 /* File: tautologies.css ------------------------------------------------- */
 .sld-out .sld-arrow-in {visibility: hidden}
@@ -11,8 +10,9 @@
 .sld-hidden-node {visibility: hidden}
 .sld-top-feeder .sld-label {dominant-baseline: auto}
 .sld-bottom-feeder .sld-label {dominant-baseline: hanging}
-.sld-active-power .sld-label {dominant-baseline: middle}
-.sld-reactive-power .sld-label {dominant-baseline: middle}
+.sld-active-power .sld-label {dominant-baseline: mathematical}
+.sld-reactive-power .sld-label {dominant-baseline: mathematical}
+.sld-current .sld-label {dominant-baseline: mathematical}
 /* ----------------------------------------------------------------------- */
 /* File: topologicalBaseVoltages.css ------------------------------------- */
 .sld-disconnected {--sld-vl-color: #808080}
@@ -88,9 +88,9 @@
 .sld-vl0to30-9 {--sld-vl-color: #869D22}
 /* ----------------------------------------------------------------------- */
 /* File : highlightLineStates.css ---------------------------------------- */
-.sld-feeder-disconnected {stroke: black}
-.sld-feeder-connected-disconnected {stroke-dasharray: 3,3}
-.sld-feeder-disconnected-connected {stroke: black; stroke-dasharray: 3,3}
+.sld-wire.sld-feeder-disconnected {stroke: black}
+.sld-wire.sld-feeder-connected-disconnected {stroke-dasharray: 3,3}
+.sld-wire.sld-feeder-disconnected-connected {stroke: black; stroke-dasharray: 3,3}
 /* ----------------------------------------------------------------------- */
 /* File : components.css ------------------------------------------------- */
 /* Stroke black */
@@ -106,6 +106,7 @@
 .sld-wire {stroke: var(--sld-vl-color, #c80000); fill: none}
 /* Stroke --sld-vl-color with fallback blue */
 .sld-load {stroke: var(--sld-vl-color, blue); fill: none}
+.sld-battery {stroke: var(--sld-vl-color, blue); fill: none}
 .sld-generator {stroke: var(--sld-vl-color, blue); fill: none}
 .sld-two-wt {stroke: var(--sld-vl-color, blue); fill: none}
 .sld-three-wt {stroke: var(--sld-vl-color, blue); fill: none}
@@ -116,12 +117,14 @@
 .sld-pst-arrow {stroke: black; fill: none}
 .sld-svc {stroke: var(--sld-vl-color, blue); fill: none}
 .sld-vsc {stroke: var(--sld-vl-color, blue); font-size: 7.43px; fill: none}
+.sld-lcc {stroke: var(--sld-vl-color, blue); font-size: 7.43px; fill: none}
 /* Stroke none & fill: --sld-vl-color */
 .sld-node-infos {stroke: none; fill: var(--sld-vl-color, black)}
 /* Stroke none & fill: black */
 .sld-node {stroke: none; fill: black}
 .sld-flash {stroke: none; fill: black}
 .sld-lock {stroke: none; fill: black}
+.sld-unknown {stroke: none; fill: black}
 /* Fonts */
 .sld-label {stroke: none; fill: black; font: 8px serif}
 .sld-angle, .sld-voltage {font: 10px serif}
@@ -130,6 +133,7 @@
 .sld-grid {stroke: #003700; stroke-dasharray: 1,10}
 .sld-feeder-info.sld-active-power {fill:black}
 .sld-feeder-info.sld-reactive-power {fill:blue}
+.sld-feeder-info.sld-current {fill:purple}
 .sld-frame {fill: var(--sld-background-color, transparent)}
 /* Stroke maroon for fictitious switch */
 .sld-breaker.sld-fictitious {stroke: maroon}
@@ -137,19 +141,18 @@
 .sld-load-break-switch.sld-fictitious {stroke: maroon}
 .sld-busbar-section.sld-fictitious {stroke: var(--sld-vl-color, #c80000); stroke-width: 1}
 
-]]>
-    </style>
+]]></style>
     <rect class="sld-frame" height="100%" width="100%"/>
     <g>
         <g class="sld-busbar-section sld-vl70to120-0" id="id364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c" transform="translate(52.5,252.0)">
             <line x1="0" x2="225.0" y1="0" y2="0"/>
             <text class="sld-label" id="364c9ca2-0d1d-4363-8f46-e586f8f66a8c_NW_LABEL" x="-5.0" y="-5.0">BE-Busbar_6</text>
         </g>
-        <g class="sld-extern-cell" id="idEXTERN_32_0">
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_BUSCO_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
+        <g class="sld-extern-cell sld-cell-direction-bottom" id="idEXTERN_32_0">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_45_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
                 <polyline points="215.0,282.0,215.0,252.0"/>
             </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_45_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
                 <polyline points="215.0,282.0,215.0,362.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904">
@@ -165,10 +168,10 @@
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
                 <text class="sld-label" x="15.0" y="5.0">200</text>
             </g>
-            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(211.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(211.0,248.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(211.0,278.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904_45_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(211.0,278.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_cb459405_45_cc14_45_4215_45_a45c_45_416789205904" transform="translate(211.0,358.0)">
@@ -181,11 +184,11 @@
                 <text class="sld-label" id="cb459405-cc14-4215-a45c-416789205904_S_LABEL" x="-5.0" y="14.0">BE-Load_1</text>
             </g>
         </g>
-        <g class="sld-extern-cell" id="idEXTERN_32_1">
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_BUSCO_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
+        <g class="sld-extern-cell sld-cell-direction-top" id="idEXTERN_32_1">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_45_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
                 <polyline points="265.0,222.0,265.0,252.0"/>
             </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_45_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
                 <polyline points="265.0,222.0,265.0,142.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da">
@@ -201,10 +204,10 @@
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">-331</text>
             </g>
-            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(261.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(261.0,248.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(261.0,218.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da_45_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(261.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_d771118f_45_36e9_45_4115_45_a128_45_cc3d9ce3e3da" transform="translate(261.0,138.0)">
@@ -218,11 +221,11 @@
                 <text class="sld-label" id="d771118f-36e9-4115-a128-cc3d9ce3e3da_N_LABEL" x="-5.0" y="-5.0">BE_S1</text>
             </g>
         </g>
-        <g class="sld-extern-cell" id="idEXTERN_32_2">
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_95_BUSCO_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
+        <g class="sld-extern-cell sld-cell-direction-bottom" id="idEXTERN_32_2">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_45_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
                 <polyline points="115.0,282.0,115.0,252.0"/>
             </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_45_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
                 <polyline points="115.0,312.0,115.0,282.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_a708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac">
@@ -241,10 +244,10 @@
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10" transform="rotate(180.0,5.0,5.0)"/>
                 <text class="sld-label" x="15.0" y="5.0">—</text>
             </g>
-            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,248.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,278.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac_45_38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(111.0,278.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-breaker sld-closed sld-vl70to120-0" id="id38dfcc80_45_600f_45_44e2_45_8f71_45_fb595b4f00ac" transform="translate(105.0,312.0)">
@@ -255,17 +258,17 @@
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-pst sld-bottom-feeder" id="ida708c3bc_45_465d_45_4fe7_45_b6ef_45_6fa6408a62b0_95_TWO" transform="translate(108.0,416.5)">
-                <path class="sld-pst-arrow" d="M14,0 0,14 M11,0 14,0 14,3" transform="rotate(180.0,7.0,7.5)"/>
+                <path class="sld-vl70to120-0 sld-pst-arrow" d="M14,0 0,14 M11,0 14,0 14,3" transform="rotate(180.0,7.0,7.5)"/>
                 <circle class="sld-vl70to120-0 sld-winding" cx="7" cy="10" r="5" transform="rotate(180.0,7.0,7.5)"/>
                 <circle class="sld-vl300to500-0 sld-winding" cx="7" cy="5" r="5" transform="rotate(180.0,7.0,7.5)"/>
                 <text class="sld-label" id="a708c3bc-465d-4fe7-b6ef-6fa6408a62b0_TWO_S_LABEL" x="-5.0" y="20.0">BE-TR2_1</text>
             </g>
         </g>
-        <g class="sld-extern-cell" id="idEXTERN_32_3">
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_95_BUSCO_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
+        <g class="sld-extern-cell sld-cell-direction-top" id="idEXTERN_32_3">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_45_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
                 <polyline points="65.0,222.0,65.0,252.0"/>
             </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_45_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
                 <polyline points="65.0,192.0,65.0,222.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_b94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557">
@@ -284,10 +287,10 @@
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">—</text>
             </g>
-            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,248.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,218.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557_45_2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(61.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-breaker sld-closed sld-vl70to120-0" id="id2922c1dd_45_4113_45_466e_45_8cad_45_002572f3f557" transform="translate(55.0,172.0)">
@@ -298,17 +301,17 @@
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-pst sld-top-feeder" id="idb94318f6_45_6d24_45_4f56_45_96b9_45_df2531ad6543_95_TWO" transform="translate(58.0,72.5)">
-                <path class="sld-pst-arrow" d="M14,0 0,14 M11,0 14,0 14,3"/>
+                <path class="sld-vl70to120-0 sld-pst-arrow" d="M14,0 0,14 M11,0 14,0 14,3"/>
                 <circle class="sld-vl70to120-0 sld-winding" cx="7" cy="10" r="5"/>
                 <circle class="sld-vl180to300-0 sld-winding" cx="7" cy="5" r="5"/>
                 <text class="sld-label" id="b94318f6-6d24-4f56-96b9-df2531ad6543_TWO_N_LABEL" x="-5.0" y="-5.0">BE-TR2_2</text>
             </g>
         </g>
-        <g class="sld-extern-cell" id="idEXTERN_32_4">
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_95_BUSCO_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
+        <g class="sld-extern-cell sld-cell-direction-top" id="idEXTERN_32_4">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_45_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
                 <polyline points="165.0,222.0,165.0,252.0"/>
             </g>
-            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
+            <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_45_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
                 <polyline points="165.0,192.0,165.0,222.0"/>
             </g>
             <g class="sld-wire sld-vl70to120-0" id="_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_INTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_e482b89a_45_fa84_45_4ea9_45_8e70_45_a83d44790957_95_ONE_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4">
@@ -327,10 +330,10 @@
                 <polygon class="sld-arrow-out" points="5,0 10,10 0,10"/>
                 <text class="sld-label" x="15.0" y="5.0">—</text>
             </g>
-            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,248.0)">
+            <g class="sld-bus-connection sld-fictitious sld-vl70to120-0" id="idBUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,248.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
-            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,218.0)">
+            <g class="sld-node sld-hidden-node sld-fictitious sld-vl70to120-0" id="idINTERNAL_95_8bbd7e74_45_ae20_45_4dce_45_8780_45_c20f8e18c2e0_95_BUSCO_95_364c9ca2_45_0d1d_45_4363_45_8f46_45_e586f8f66a8c_95_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4_45_6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(161.0,218.0)">
                 <circle cx="4" cy="4" r="4"/>
             </g>
             <g class="sld-breaker sld-closed sld-vl70to120-0" id="id6e86cd52_45_4594_45_435e_45_92ce_45_6dc673288ab4" transform="translate(155.0,172.0)">
