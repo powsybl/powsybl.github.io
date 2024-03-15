@@ -531,6 +531,17 @@ containing the generator terminals used as angle reference in the load flow calc
 There is one Terminal created/added in the extension for each calculated Synchronous Component.
 Works only when `referenceBusSelectionMode` is set to `GENERATOR_REFERENCE_PRIORITY`.
 
+**voltageTargetPriorities**  
+When multiple equipment regulate the same bus with different voltage targets,
+this parameter enables configuring priority to resolve inconsistencies by aligning the voltage targets.
+Priority is determined by equipment type order; the voltage target of the equipment type listed first takes precedence over those listed later. 
+By default, the order is `["GENERATOR", "TRANSFORMER", "SHUNT"]`.  
+Note that `"GENERATOR"` indistinctively includes generators, static var compensators, and VSC HVDC converters.
+
+If the user specifies only a sub-list of priorities, this sub-list is completed by the 
+order defined by default. Thus, if the user specifies only `["TRANSFORMER"]`, 
+it will be completed to `["TRANSFORMER", "GENERATOR", "SHUNT"]`.
+
 ### Configuration file example
 See below an extract of a config file that could help:
 
