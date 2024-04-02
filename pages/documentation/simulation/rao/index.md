@@ -9,9 +9,14 @@ latex: true
   {:toc}
 
 ## Introduction
-The Remedial Action Optimization on an electrical network, aims at implementing the best actions that optimize the 
-state of the network by reducing operational limits violations. These actions, commonly called "remedial actions", 
-can be of different types: phase-shift transformers, HVDC links, switches, re-dispatching...  
+The Remedial Action Optimization on an electrical network finds the best actions in order to reduce the
+number of operational limits violations. These actions, commonly called "remedial actions", 
+are of different types: 
+- a change of tap position of a phase-shift transformer,
+- a change of active power set-point of an HVDC line,
+- a change of open/close status of a switch,
+- generation re-dispatching, etc.  
+
 A **R**emedial **A**ction **O**ptimizer is frequently abbreviated as **"RAO"**.
 
 ## Implementations
