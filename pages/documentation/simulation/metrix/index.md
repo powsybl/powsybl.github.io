@@ -1,5 +1,6 @@
 ---
 layout: default
+latex: true
 ---
 
 # Metrix simulation
@@ -228,7 +229,8 @@ We can define generators whose target can be changed by Metrix:
 - In remedial actions to comply with the defined monitored branch thresholds (only in OPF mode)
 
 For this to happen, we must define ramp up/down costs. 
-Metrix will then choose the cheapest generator to maintain the generation/demand balance (adequacy phase) or resolve the grid constraints (OPF). 
+Metrix will then adapt the setpoints of the cheapest generators to maintain the generation/demand balance (adequacy phase) or resolve the grid constraints (OPF). 
+
 To solve grid constraints violations in the OPF, there should be at least two generators for Metrix to be able to decrease or increase production in order to respect active power balance. 
 If no generator is configured to be managed by Metrix, then all generators are implicitly managed with zero cost. 
 Note that Metrix will take into account the Pmin and Pmax values of generators (which can be modified through the mapping script). 
@@ -246,9 +248,25 @@ generator(id) { // id of the generator which will be managed by Metrix
 }
 ```
 
-Metrix optimization sees all deviations of the initial production plan as a cost. Therefore, both up and down costs (adequacy and redispatch) should be defined as positive costs.
-It should be noted that this is different from actual redispatching cost, where in case of downwards activations, the generator _pays_ the TSO for not delivered energy.
-Moreover, to prioritize topological solutions over redispatch solutions, the redispatching (up and down) costs are defined >= 0.5.
+Metrix optimization aims to limit the deviations with respect to the initial production plan, both for adequacy and redispatch. 
+For this reason, Metrix sees all deviations of the initial production plan ($$|P - P0|$$) as a cost. Therefore, both up and down costs (adequacy and redispatch) should be defined as positive costs.
+The total generation costs for redispatch seen by Metrix is  as follows:
+
+$$
+\begin{align*}
+RedispatchCosts = \sum_{g\in Generators} RedispatchUp_g \cdot redispatchUpCosts_g + 
+\sum_{g\in Generators} RedispatchDown_g \cdot redispatchDownCosts_g
+\end{align*}
+$$
+
+With
+
+$$RedispatchUp_g = max(P_g - P0_g, 0)$$,
+
+$$RedispatchDown_g = max(P0_g - P_g, 0)$$.
+
+It should be noted that this is different from redispatching cost in real systems' operation, where in case of downwards activations, the generator _pays_ the TSO for the generation reduction (not delivered energy).
+Moreover, to prioritize topological solutions over redispatch solutions, the redispatching up and down costs have a lower bound of >= 0.5. Metrix will correct any adequacy or redispatch cost below the lower bound, setting it to lower bound value.
 
 Note that if at least one generator is managed, then only defined generators will be managed to match adequacy. In some cases, it could result in a program failure (return code -1) where constraints cannot be resolved in OPF mode. Also:
 - Generators used for the adequacy phase are not necessarily the same used for the redispatching phase. If `onContingency` isn't defined but `redispatchingCost` is, then the generator will be used only in preventive actions. For the generator to be fully used for preventive and curative remedial action, both of these parameters must be defined.
@@ -263,8 +281,8 @@ Note that if at least one generator is managed, then only defined generators wil
 To allow the slack generator to ramp: 
 ```groovy
 generator('slack_generator') {
-  adequacyDownCosts 0
-  adequacyUpCosts 0
+  adequacyDownCosts 0.5
+  adequacyUpCosts 0.5
   redispatchingDownCosts 'cost_slack_down'
   redispatchingUpCosts 'cost_slack_up'
 }
