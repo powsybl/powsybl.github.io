@@ -16,7 +16,7 @@ In 1999, UCTE re-defined itself as an association of TSOs in the context of the 
 On 1 July 2009 UCTE was wound up. All operational tasks were transferred to ENTSO-E.
 
 ## Format specifications
-The [UCTE-DEF](https://cimug.ucaiug.org/Groups/Model%20Exchange/UCTE-format.pdf) (UCTE **D**ata **E**xchange **F**ormat) format is an exchange format specified by the UCTE, for the exchange of grid model among its members. The data refer to load flow and three phase short circuit sudies and describe the interconnected extra high voltage network. The data are contained in an unformatted standard US ASCII file. The file is divided into 7 different blocks:
+The [UCTE-DEF](https://cimug.ucaiug.org/Groups/Model%20Exchange/UCTE-format.pdf) (UCTE **D**ata **E**xchange **F**ormat) format is an exchange format specified by the UCTE, for the exchange of grid model among its members. The data refer to load flow and three-phase short-circuit studies and describe the interconnected extra high voltage network. The data are contained in an unformatted standard US ASCII file. The file is divided into 7 different blocks:
 - Comments (C)
 - Nodes (N)
 - Lines (L)

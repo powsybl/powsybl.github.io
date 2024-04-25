@@ -139,14 +139,14 @@ This extension enables to replace the operational limits of an DC line in AC emu
 ## Generator short-circuit
 
 This extension models the generators data used for short-circuit calculations. Depending on the type of short-circuit study to be 
-performed, either the transient or the subtransient reactance should be filled. The reactance of the step-up transformer should be
+performed, either the transient or the sub-transient reactance should be filled. The reactance of the step-up transformer should be
 filled if the generator has a transformer that is not directly modeled in the network.
 
-| Attribute              | Type   | Unit | Required | Default value | Description                                    |
-|------------------------|--------|------|----------|---------------|------------------------------------------------|
-| directTransX (X'd)     | double | Ω    | yes      | -             | Direct transient reactance of the generator    |
-| directSubtransX (X''d) | double | Ω    | no       | -             | Direct subtransient reactance of the generator |
-| stepUpTransformerX     | double | Ω    | no       | -             | Reactance of the step-up transformer           |
+| Attribute              | Type   | Unit | Required | Default value | Description                                     |
+|------------------------|--------|------|----------|---------------|-------------------------------------------------|
+| directTransX (X'd)     | double | Ω    | yes      | -             | Direct transient reactance of the generator     |
+| directSubtransX (X''d) | double | Ω    | no       | -             | Direct sub-transient reactance of the generator |
+| stepUpTransformerX     | double | Ω    | no       | -             | Reactance of the step-up transformer            |
 
 This extension is provided in the  `com.powsybl:powsybl-iidm-extensions` module.
 

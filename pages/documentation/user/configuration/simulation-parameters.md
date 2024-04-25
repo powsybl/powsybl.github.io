@@ -39,7 +39,7 @@ The `branchFaultResistance` property is an optional property that defines the br
 value of this property is 0.
 
 **branchShortCircuitDistance**  
-The `branchShortCircuitDistance` property is an optional property that defines the branch short circuit distance. The
+The `branchShortCircuitDistance` property is an optional property that defines the location of the short circuit on the branch in %. The
 default value of this property is `50`.
 
 **generatorFaultReactance**  
