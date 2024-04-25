@@ -460,17 +460,14 @@ These properties can be defined in the configuration file in the [import-export-
 Optional property that defines the directory path where the CGMES importer can find the boundary files (`EQBD` and `TPBD` profiles) if they are not present in the imported zip file. By default, its value is `<ITOOLS_CONFIG_DIR>/CGMES/boundary`.
 This property can also be used at CGMES export if the network was not imported from a CGMES to indicate the boundary files that should be used for reference.
 
-**iidm.import.cgmes.change-sign-for-shunt-reactive-power-flow-initial-state**  
-Optional property that defines if the CGMES importer inverts the sign of active and reactive power flows for shunt compensators. Its default value is `false`.
-
 **iidm.import.cgmes.convert-boundary**  
 Optional property that defines if the equipment located inside the boundary are imported as part of the network. Used for debugging purposes. `false` by default.
 
 **iidm.import.cgmes.convert-sv-injections**  
 Optional property that defines if `SvInjection` objects are converted to IIDM loads. `true` by default.
 
-**iidm.import.cgmes.create-active-power-control-extension**  
-Optional property that defines if active power control extensions are created for the converted generators. `false` by default. If `true`, the extension will created for the CGMES `SynchronousMachines` with the attribute `normalPF` defined. For these generators, the `normalPF` value will be saved as the `participationFactor` and the flag `participate` set to `true`. 
+**iidm.import.cgmes.create-active-power-control-extension**
+Optional property that defines if active power control extensions are created for the converted generators. `true` by default. If `true`, the extension will created for the CGMES `SynchronousMachines` with the attribute `normalPF` defined. For these generators, the `normalPF` value will be saved as the `participationFactor` and the flag `participate` set to `true`. 
 
 **iidm.import.cgmes.create-busbar-section-for-every-connectivity-node**  
 Optional property that defines if the CGMES importer creates an [IIDM Busbar Section](../model/index.md#busbar-section) for each CGMES connectivity node. Used for debugging purposes. `false` by default.
