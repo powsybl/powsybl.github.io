@@ -472,7 +472,6 @@ The default value is `20 kV`, meaning that under the controlled buses of voltage
 It must be greater or equal to `0 kV`.
 
 **reactivePowerDispatchMode**  
-TODO
 This parameter defines how reactive power is split among generators with controls (voltage or reactive power).
 It tries to divide reactive power among generators in the order described below.
 `reactivePowerDispatchMode` can be one of:
@@ -536,7 +535,7 @@ When multiple equipment regulate the same bus with different voltage targets,
 this parameter enables configuring priority to resolve inconsistencies by aligning the voltage targets.
 Priority is determined by equipment type order; the voltage target of the equipment type listed first takes precedence over those listed later. 
 By default, the order is `["GENERATOR", "TRANSFORMER", "SHUNT"]`.  
-Note that `"GENERATOR"` indistinctively includes generators, static var compensators, and VSC HVDC converters.
+Note that `"GENERATOR"` indistinctively includes generators, batteries, static var compensators, and VSC HVDC converters.
 
 If the user specifies only a sub-list of priorities, this sub-list is completed by the 
 order defined by default. Thus, if the user specifies only `["TRANSFORMER"]`, 
