@@ -32,9 +32,6 @@ This module provides extensions for equipments of the grid model used in ENTSO-E
 ### Grid conversion
 The following artifacts provide a common API to convert network files from one format to another. PowSyBl provides several implementations of this API to support common grid exchange formats.
 
-**powsybl-iidm-converter-api**  
-This module provides a common API that has to be implemented to support a new grid exchange format.
-
 #### IIDM-XML
 
 **powsybl-iidm-xml-converter**  
@@ -63,9 +60,6 @@ This module provides a common API to access to the CIM-CGMES from a triple store
 
 **powsybl-triple-store-impl-rdf4j**  
 This module provides SPARQL queries to access to a triple store based on [Eclipse RDF4J](https://rdf4j.org/).
-
-**powsybl-triple-store-impl-blazegraph**  
-This module provides SPARQL queries to access to a triple store based on [Blazegraph](https://blazegraph.com/).
 
 **powsybl-triple-store-impl-jena**  
 This module provides SPARQL queries to access to a triple store based on [Jena](https://jena.apache.org).
@@ -129,8 +123,13 @@ This module provides factories to create simple networks.
 **powsybl-iidm-tck**  
 This module provides a test compatibility kit to validate an IIDM implementation regarding the requirements of the API.
 
-**powsybl-iidm-util** *(Deprecated since v3.9.0)*  
-This module provides additional features around the network. We removed this module in v3.9.0 and move its content in the `powsybl-iidm-api` module.
+**powsybl-iidm-util** *(Removed since v4.0.0)*
+This module provides additional features around the network. We removed this module in v4.0.0 and move its content in the `powsybl-iidm-api` module.
+
+### Network hypothesis
+
+**powsybl-network-hypothesis**
+This module provides components in order to model network hypotheses. Basic hypothesis are modification tasks, available in `powsybl-core`. More complex modification tasks are implemented here.
 
 ## Simulators
 
@@ -194,8 +193,8 @@ This module provides an API to implement a DSL for dynamic simulation inputs, su
 **powsybl-dynamic-simulation-tool**  
 This module provides an [iTools](../user/itools/dynamic-simulation.md) command to run time-domain simulation.
 
-**powsybl-simulation-api**  
-This module provides a legacy API for time domain simulation. This module is not maintained anymore and will be replaced by the **powsybl-dynamic-simulation-api**.
+**powsybl-simulation-api**  *(Removed since v4.1.0)*
+This module provides a legacy API for time domain simulation. We removed this module in 4.1.0 ; `powsybl-dynamic-simulation-api` should be used instead.
 
 ### Optimal power load flow on network variants (Metrix)
 
@@ -204,6 +203,11 @@ This module provides the [mapping DSL](../simulation/metrix/mapping.md) to gener
 
 **powsybl-metrix-integration**
 This module provides an API to run [metrix simulator](../simulation/metrix/index.md) optimal power load flow.
+
+## Balances computation
+
+**powsybl-balances-adjustment**
+This module provides components in order to run a active power balances adjustment computation over several network areas.
 
 ## Configuration management
 The following artifacts define how PowSyBl features access to the [user configuration](../user/configuration/index.md).
@@ -336,7 +340,12 @@ This module provides a [CLI tool](../user/itools/index.md) to run simulations.
 **powsybl-itools-packager-maven-plugin**  
 This module provides a maven plugin to [create a standalone distribution based on iTools](../developer/tutorials/itools-packager.md).
 
-## Single line diagram
+## Network visualization
+
+### Single line diagram
+
+**single-line-diagram-core**  
+This module enables to generate svg images of voltage levels and substations.
 
 **single-line-diagram-cgmes-dl-iidm-extensions**  
 This module gathers the network core model extensions for CIM-CGMES networks.
@@ -348,16 +357,20 @@ This module is used to convert the CIM-CGMES DL profile to the network core mode
 This module should be used to create svgs from the CIM-CGMES DL (Diagram Layout) profile.
 
 **single-line-diagram-force-layout**  
-This module provides a layout for substation diagrams based on the [Force Atlas 2](https://github.com/gephi/gephi/wiki/Force-Atlas-2) algorithm.
+This module provides a layout for substation diagrams based on a basic force layout algorithm.
 
 **single-line-diagram-iidm-extensions**  
 This module defines extensions to attach diagram information to networks.
 
-**single-line-diagram-view**  
-This module provides a javafx component to display interactive network diagrams.
+### Network area diagram
 
-**single-line-diagram-view-app**  
-This module provides a demo app to view diagrams of substations and voltage levels of network files.
+**network-area-diagram**  
+This module enables to generate svg images displaying a concise diagram of the network or part of the network.
+
+### Development tools
+
+**powsybl-single-line-diagram-viewer**  
+This module provides a demo app for debug purpose, which allows viewing and interacting with substations and voltage levels diagrams of network files.
 
 ## Grid Study Environment (Deprecated)
 The following artifacts are part of a generic desktop application you can easily customize with plugins.

@@ -18,5 +18,16 @@ layout: default
 ## Topology
 - [Manage bus/breaker and node/breaker topology](topology.md): Learn how to manipulate topological views of the network
 
-## Single line diagram
-- [Create the Java code to display single line diagram](../api_guide/single-line-diagram/svg-writing.md): Learn how to create the Java code to generate diagram SVG
+## Diagram
+- [Display a single-line diagram](diagram/svg-writing.md): Learn how to create the Java code to generate the svg file of a single-line diagram
+- [Display a single-line diagram with a customized node](diagram/sld-custom-node.md): Learn how to create the Java code to generate the svg file of a single-line diagram with a customized node
+- [Display a network-area diagram](diagram/nad-svg-writing.md): Learn how to create the Java code to generate the svg of a network-area diagram
+
+## Downscaling
+- [Create the Java code to map hypothesis on a network](downscaling.md): Learn how to create the Java code to map study state hypothesis on a network
+
+## Merging
+- [Create the Java code to perform merging and balances adjustment](emf.md): Learn how to create the Java code to merge multiple CIM-CGMES based IGMs and adjust the AC net positions of each control area to met the targets. This tutorial follows the European Merging Function requirements.
+
+## Network modifications scripts in groovy
+- [Modify a network through groovy scripts](network_modifications_groovy.md): Learn how to use Powsybl network modification functions in Groovy.

@@ -44,6 +44,12 @@ Create a new Maven's `pom.xml` file with the following content:
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
+        <slf4j.version>1.7.22</slf4j.version>
+        <logback.version>1.2.9</logback.version>
+    </properties>
+
 </project>
 ```
 This will create a Maven artifact `com.powsybl.tutorials:powsybl-itools-packager:1.0.0` of type pom.
@@ -112,31 +118,40 @@ Then we'll add a few **required** maven dependencies:
 
 Add the following dependencies to the `pom.xml` file:
 ```xml
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.powsybl</groupId>
+      <artifactId>powsybl-dependencies</artifactId>
+      <version>${powsybl-dependencies.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
 <dependencies>
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-tools</artifactId>
-        <version>3.3.0</version>
     </dependency>
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-config-classic</artifactId>
-        <version>3.3.0</version>
     </dependency>
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-computation-local</artifactId>
-        <version>3.3.0</version>
     </dependency>
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.1.8</version>
+        <version>${logback.version}</version>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>log4j-over-slf4j</artifactId>
-        <version>1.7.22</version>
+        <version>${slf4j.version}</version>
     </dependency>
 </dependencies>
 ```

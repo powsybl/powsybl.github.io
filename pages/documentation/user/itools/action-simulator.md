@@ -38,7 +38,8 @@ Available arguments are:
     --output-case-format <CASEFORMAT>                  output case format [CSV,
                                                        AMPL, XIIDM]
     --output-compression-format <COMPRESSION_FORMAT>   output compression format
-                                                       [GZIP, BZIP2, ZIP]
+                                                       [BZIP2, GZIP, XZ, ZIP,
+                                                       ZSTD]
     --output-file <FILE>                               the output file path
     --output-format <FORMAT>                           the output file format
                                                        [JSON]

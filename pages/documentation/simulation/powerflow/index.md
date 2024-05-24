@@ -21,15 +21,156 @@ The only input for a power flow simulation is a network and optionally a set of 
 ## Outputs
 
 The power flow simulation outputs consists of: 
- - A network, which has been modified based on the simulation results. The modified variables are the active and reactive power at the terminals, the voltage and angle at all buses and taps.
- - A global status which is equal to `true` if at least one of the component of the network has converged, false otherwise.
- - Detailed results per synchronous component: a convergence status, the number of iterations (could be equal to `-1` if not relevant for a specific implementation), the selected slack bus (the bus at which the power balance has been done) and active power mismatch at slack bus.
- - Some metrics regarding the computation. Depending on the load flow implementation the content of these metrics may vary.
+ - A network, which has been modified based on the simulation results. The modified variables are the active and reactive power at the terminals, the voltage and angle at all buses, the solved tap changers positions, the solved shunt compensator sections.
+ - A global status indicating if the simulation succeeded for all synchronous components (Fully Converged status), or for only some of them (Partially Converged status), or for none of them (Failed status).
+ - Detailed results per synchronous component: a convergence status, the number of iterations (could be equal to `-1` if not relevant for a specific implementation), the selected reference bus (voltage angle reference), the selected slack buses (the buses at which the power balance has been done), active power mismatch at slack buses, and amount of distributed active power (zero MW if slack distribution is disabled).
+ - Metrics regarding the computation. Depending on the load flow implementation the content of these metrics may vary.
  - Logs in a simulator specific format.
- 
-## Validation
 
-### Expected results
+## Implementations
+
+The following power flow implementations are supported:
+- [PowSyBl OpenLoadFlow](openlf.md)
+- [Dynaflow](dynaflow.md)
+
+## Configuration
+You first need to choose which implementation to use in your configuration file:
+```yaml
+load-flow:
+  default-impl-name: "<IMPLEMENTATION_NAME>"
+```
+
+Each implementation is identified by its name, that may be unique in the classpath:
+- use "OpenLoadFlow" to use PowSyBl OpenLoadFlow
+- use "DynaFlow" to use DynaFlow implementation
+
+## Parameters
+
+Then, configure some generic parameters for all load flow implementations:
+```yaml
+load-flow-default-parameters:
+    dc: false
+    voltageInitMode: UNIFORM_VALUES
+    distributedSlack: true
+    balanceType: PROPORTIONAL_TO_GENERATION_P_MAX
+    countriesToBalance:
+      - FR
+      - BE
+    readSlackBus: false
+    writeSlackBus: false
+    useReactiveLimits: true
+    phaseShifterRegulationOn: false
+    transformerVoltageControlOn: false
+    shuntCompensatorVoltageControlOn: false
+    connectedComponentMode: MAIN
+    twtSplitShuntAdmittance: false
+    dcUseTransformerRatio: true
+    dcPowerFactor: 1.0
+```
+
+The parameters may also be overridden with a JSON file, in which case the configuration will look like:
+```json
+{
+  "version": "1.8",
+  "dc": false,
+  "voltageInitMode": "UNIFORM_VALUES",
+  "distributedSlack": true,
+  "balanceType": "PROPORTIONAL_TO_GENERATION_P_MAX",
+  "countriesToBalance": ["FR", "BE"],
+  "readSlackBus": false,
+  "writeSlackBus": false,
+  "useReactiveLimits": true,
+  "phaseShifterRegulationOn": false,
+  "transformerVoltageControlOn": false,
+  "shuntCompensatorVoltageControlOn": false,
+  "connectedComponentMode": "MAIN",
+  "twtSplitShuntAdmittance": false,
+  "dcUseTransformerRatio": true,
+  "dcPowerFactor": 1.0
+}
+```
+
+### Available parameters
+
+**dc**  
+The `dc` property is an optional property that defines if you want to run an AC power flow (`false`) or a DC power flow (`true`).  
+The default value is `false`.
+
+**voltageInitMode**  
+The `voltageInitMode` property is an optional property that defines the policy used by the load flow to initialize the
+voltage values. The available values are:
+- `UNIFORM_VALUES`: $$v = 1pu$$, $$\theta = 0$$
+- `PREVIOUS_VALUES`: use previous computed value from the network
+- `DC_VALUES`: $$v = 1pu$$, $$\theta$$ initialized using a DC load flow
+
+The default value is `UNIFORM_VALUES`.
+
+**distributedSlack**  
+The `distributedSlack` property is an optional property that defines if the active power mismatch is distributed over the network or not.  
+The default value is `true`.
+
+**balanceType**  
+The `balanceType` property is an optional property that defines, if `distributedSlack` parameter is set to true, how to manage the distribution. Several algorithms are supported. All algorithms follow the same scheme: only some elements are participating in the slack distribution, with a given participation factor. Three options are available:
+- If using `PROPORTIONAL_TO_GENERATION_P_MAX` then the participating elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension](../../grid/model/extensions.md#active-power-control).
+- If using `PROPORTIONAL_TO_GENERATION_P` then the participating elements are the generators. The participation factor is computed using the active power set point $$TargetP$$.
+- If using `PROPORTIONAL_TO_GENERATION_REMAINING_MARGIN` then the participating elements are the generators. The participation factor is computed using the difference between the maximum active power target $$MaxP$$ with active power set point $$TargetP$$.
+- If using `PROPORTIONAL_TO_GENERATION_PARTICIPATION_FACTOR` then the participating elements are the generators. The simulator uses the participation factors of the generators given by the [active power control extension](../../grid/model/extensions.md#active-power-control).
+- If using `PROPORTIONAL_TO_LOAD` then the participating elements are the loads. The participation factor is computed using the active power $$P0$$.
+- If using `PROPORTIONAL_TO_CONFORM_LOAD` then the participating elements are the loads which have a conform active power part. The participation factor is computed using the [load detail extension](../../grid/model/extensions.md#load-detail), which specifies the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, the whole $$P0$$ is considered as a variable.
+
+This default value is `PROPORTIONAL_TO_GENERATION_P_MAX`.
+
+**countriesToBalance**  
+The `countriesToBalance` property is an optional property that defines the list of [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
+country which participating elements are used for slack distribution. If the slack is distributed but this parameter is not set, the slack distribution is performed over all countries present in the network.  
+
+**readSlackBus**  
+The `readSlackBus` is an optional property that defines if the slack bus has to be selected in the network through the [slack terminal extension](../../grid/model/extensions.md#slack-terminal).  
+The default value is `false`.
+
+**writeSlackBus**   
+The `writeSlackBus` is an optional property that says if the slack bus has to be written in the network using the [slack terminal extension](../../grid/model/extensions.md#slack-terminal) after a load flow computation.  
+The default value is `false`.
+
+**useReactiveLimits**  
+The `useReactiveLimits` property is an optional property that defines whether the load flow should take into account equipment's reactive limits. Applies to generators, batteries, static VAR compensators, dangling lines, and HVDC VSCs.  
+The default value is `true`.
+
+**phaseShifterRegulationOn**  
+The `phaseShifterRegulationOn` property is an optional property that defines whether phase shifter regulating controls should be simulated in the load flow.  
+The default value is `false`.
+
+**transformerVoltageControlOn**  
+The `transformerVoltageControlOn` property is an optional property that defines whether transformer voltage regulating controls should be simulated in the load flow.  
+The default value is `false`.
+
+**shuntCompensatorVoltageControlOn**  
+The `shuntCompensatorVoltageControlOn` property is an optional property that defines whether shunt compensator voltage regulating controls should be simulated in the load flow.  
+The default value is `false`.
+
+**connectedComponentMode**  
+The `connectedComponentMode` property is an optional property that defines if the power flow has to be computed over all connected component (choose `ALL` mode) or just on the main connected component (choose `MAIN` mode).  
+The default value of this parameter is `MAIN`.
+
+**twtSplitShuntAdmittance**  
+The `twtSplitShuntAdmittance` property is an optional property that defines whether the shunt admittance is split at each side of the serie impedance for transformers.  
+The default value is `false`.
+
+**dcUseTransformerRatio**  
+The `dcUseTransformerRatio` property is an optional property that defines if ratio of transformers should be used in the
+flow equations in a DC power flow.  
+The default value of this parameter is `true`.
+
+**dcPowerFactor**  
+The `dcPowerFactor` property is an optional property that defines the power factor used to convert current limits into active power limits in DC calculations.  
+The default value is `1.0`.
+
+### Specific parameters
+Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
+- [PowSyBl OpenLoadFlow](openlf.md#specific-parameters)
+- [DynaFlow](dynaflow.md#specific-parameters)
+
+## Validation
 
 A load flow result is considered *acceptable* if it describes a feasible steady-state of a power system given its physics and its logics.
 More practically, generations of practitioners have set quasi-standard ways to describe them that makes it possible to define precise rules.
@@ -48,8 +189,6 @@ $$
 
 #### Branches
 Lines and two windings transformers are converted into classical PI models:
-
-<span style="color: red">TODO: make a proper sketch</span>
 
 ```
     V1*exp(j*theta1)     rho1*exp(j*alpha1)             r+j*x              rho2*exp(j*alpha2)   V2*exp(j*theta2)
@@ -76,7 +215,7 @@ Thanks to Kirchhoff laws (see the [line](../../grid/model/index.md#line) and [2-
 $$(P_1^{calc}, Q_1^{calc}, P_2^{calc}, Q_2^{calc}) = f(\text{Voltages}, \text{Characteristics})$$
 
 #### Three-windings transformers
-<span style="color: red">To be implemented, based on a conversion into 3 two-windings transformers.</span>
+To be implemented, based on a conversion into 3 two-windings transformers.
 
 #### Generators
 
@@ -106,7 +245,7 @@ $$f$$ is a participation factor, per unit. For example, a usual definition is: $
 participates or not. The adjustment is then done by doing:
 $$P <- P \times \hat{K} \times F$$
 where $$\hat{K}$$ is a proportionality factor, usually defined for each unit by $$\dfrac{P_{max}}{\sum{F}}$$, $$\dfrac{targetP}{\sum{F}}$$ or $$\dfrac{P_{diff}}{\sum{F}}$$
-depending on the adjustment mode (the sums run over all the units participating to the compensation).
+depending on the adjustment mode (the sums run over all the units participating in the compensation).
 
 ##### Voltage and reactive power
 
@@ -127,7 +266,7 @@ $$
 $$
 
 #### Loads
-<span style="color: red">To be implemented, with tests similar to generators with voltage regulation.</span>
+To be implemented, with tests similar to generators with voltage regulation.
 
 #### Shunts
 A shunt is expected not to generate or absorb active power:
@@ -149,14 +288,14 @@ $$targetP = 0$$ MW
 $$minQ = - Bmax * V^2$$ and $$maxQ = - Bmin V^2$$
 
 #### HVDC lines
-<span style="color: red">To be done.</span>
+To be done.
 
 ##### VSC
 VSC converter stations behave like generators with the additional constraints that the sum of active power on converter
 stations paired by a cable is equal to the losses on the converter stations plus the losses on the cable.
 
 ##### LCC
-<span style="color: red">To be done.</span>
+To be done.
 
 #### Transformers with a ratio tap changer
 
@@ -166,118 +305,6 @@ and the setpoint is higher than the deadband width, the tap position is increase
 
 As a result, a state is a steady state only if the regulated value is within the deadband or if the tap position is at
 minimum or maximum: this corresponds to a valid load flow result for the ratio tap changers tap positions.
-
-## Implementations
-
-The following power flow implementations are supported:
-- [PowSyBl OpenLoadFlow](openlf.md)
-- [Hades2](hades2.md)
-- [Dynaflow](dynaflow.md)
-
-## Configuration
-You first need to choose which implementation to use in your configuration file:
-```yaml
-load-flow:
-  default-impl-name: "<IMPLEMENTATION_NAME>"
-```
-
-Each implementation is identified by its name, that may be unique in the classpath:
-- use "OpenLoadFlow" to use PowSyBl OpenLoadFlow
-- use "Hades2" to use RTE Hades2
-- use "DynaFlow" to use DynaFlow implementation
-
-## Parameters
-
-Then, configure some generic parameters for all load flow implementations:
-```yaml
-load-flow-default-parameters:
-    voltageInitMode: DC_VALUES
-    transformerVoltageControlOn: false
-    specificCompatibility: true
-    dc: false
-    balanceType: PROPORTIONAL_TO_LOAD
-```
-
-The parameters may also be overridden with a JSON file, in which case the configuration will look like:
-```json
-{
-  "version" : "1.4",
-  "voltageInitMode" : "PREVIOUS_VALUES",
-  "transformerVoltageControlOn" : true,
-  "phaseShifterRegulationOn" : false,
-  "noGeneratorReactiveLimits" : true,
-  "specificCompatibility" : false,
-  "dc" : false,
-  "balanceType" : "PROPORTIONAL_TO_LOAD",
-  "extensions" : {
-    ...
-  }
-}
-```
-
-### Available parameters
-
-**specificCompatibility**  
-The `specificCompatibility` property is an optional property that defines whether the load flow runs in legacy mode (implementation specific) or not.
-For example, Hades2 implementation uses this parameter to define whether the shunt admittance is split at each side of the serie impedance for lines. The default value is `false`.
-
-**twtSplitShuntAdmittance**  
-The `twtSplitShuntAdmittance` property is an optional property that defines whether the shunt admittance is split at each side of the serie impedance for transformers. The default value is `false`.
-
-**voltageInitMode**  
-The `voltageInitMode` property is an optional property that defines the policy used by the load flow to initialize the
-voltage values. The default value for this property is `UNIFORM_VALUES`. The available values are:
-- `UNIFORM_VALUES`: `v=1pu`, $$\theta=0$$
-- `PREVIOUS_VALUES`: use previous computed value from the network
-- `DC_VALUES`: preprocessing to compute DC angles
-
-**distributedSlack**  
-The `distributedSlack` property is an optional property that defines if the active power mismatch is distributed over the network or not. The default value is `true`.
-
-**balanceType**  
-The `balanceType` property is an optional property that defines, if `distributedSlack` parameter is set to true, how to manage the distribution. Several algorithms are supported. All algorithms follow the same scheme: only some elements are participating in the slack distribution, with a given participation factor. Three options are available:
-- If using `PROPORTIONAL_TO_GENERATION_P_MAX` then the participating elements are the generators. The participation factor is computed using the maximum active power target $$MaxP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension](../../grid/model/extensions.md#active-power-control).
-- If using `PROPORTIONAL_TO_GENERATION_P` then the participating elements are the generators. The participation factor is computed using the active power set point $$TargetP$$ and the active power control droop. The default droop value is `4`. If present, the simulator uses the droop of the generator given by the [active power control extension](../../grid/model/extensions.md#active-power-control).
-- If using `PROPORTIONAL_TO_LOAD` then the participating elements are the loads. The participation factor is computed using the active power $$P0$$.
-- If using `PROPORTIONAL_TO_CONFORM_LOAD` then the participating elements are the loads which have a conform active power part. The participation factor is computed using the [load detail extension](), which specifies the variable and the fixed parts of $$P0$$. The slack is distributed only on loads that have a variable part. If the extension is not available on a load, the whole $$P0$$ is considered as a variable.
-
-This default value is `PROPORTIONAL_TO_GENERATION_P_MAX`.
-
-**readSlackBus**  
-The `readSlackBus` is an optional property that defines if the slack bus has to be selected in the network through the [slack terminal extension](../../grid/model/extensions.md#slack-terminal).
-The default value is `false`.
-
-**writeSlackBus**   
-The `writeSlackBus` is an optional property that says if the slack bus has to be written in the network using the [slack terminal extension](../../grid/model/extensions.md#slack-terminal) after a load flow computation.
-The default value is `false`.
-
-**noGeneratorReactiveLimits**  
-The `noGeneratorReactiveLimits` property is an optional property that defines whether the load flow is allowed to find a setpoint value outside the reactive limits of a generator or not.
-The default value is `false`.
-
-**phaseShifterRegulationOn**  
-The `phaseShifterRegulationOn` property is an optional property that defines whether the load flow is allowed to change taps of a phase tap changer or not.
-The default value is `false`.
-
-**transformerVoltageControlOn**  
-The `transformerVoltageControlOn` property is an optional property that defines whether the load flow is allowed to change taps of a ratio tap changer or not.
-The default value is `false`.
-
-**simulShunt**  
-The `simulShunt` property is an optional property that defines whether the load flow is allowed to change sections of a shunt compensator with multiple sections or not.
-The default value is `false`.
-
-**dc**  
-The `dc` property is an optional property that defines if you want to run an AC power flow or a DC power flow. The default value is `false`.
-
-### Default parameters
-The default values of all the optional properties are read from the [load-flow-default-parameter](../../user/configuration/load-flow-default-parameters.md) module, defined in the configuration file.
-
-### Specific parameters
-Some implementation use specific parameters that can be defined in the configuration file or in the JSON parameters file:
-- [PowSyBl OpenLoadFlow](openlf.md#parameters)
-- [Hades2](hades2.md#specific-parameters)
-- [DynaFlow](dynaflow.md#specific-parameters)
 
 ## Going further
 To go further about the power flow with PowSyBl, check the following pages:

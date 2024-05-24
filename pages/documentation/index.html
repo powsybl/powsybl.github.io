@@ -8,14 +8,13 @@ layout: default
     <!-- Getting started -->
     <div class="col-lg-4 col-sm-6 my-2">
         <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/Crystal_Clear_action_edit_add.png" alt="">
-            </div>
             <div class="media-body">
-                <a href="user">
-                    <h5>Getting started</h5>
-                </a>
-                <p>Discover how to install PowSyBl and run your first iTools command from the terminal.</p>
+                <h5>
+                    <a class="documentation_title" href="user">
+                        <em class="doc-icon align-self-start bx bxs-rocket"></em>Getting started
+                    </a>
+                </h5>
+                <div class="documentation_descr">Discover how to install PowSyBl and run your first iTools command from the terminal.</div>
             </div>
         </div>
     </div>
@@ -23,29 +22,13 @@ layout: default
     <!-- Configuration -->
     <div class="col-lg-4 col-sm-6 my-2">
         <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/Crystal_Clear_action_edit_add.png" alt="">
-            </div>
             <div class="media-body">
-                <a href="user/configuration">
-                    <h5>Configuration</h5>
-                </a>
-                <p>Get a thourough description of the configuration of PowSyBl for different usages.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- iTools -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_app_terminal.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="user/itools">
-                    <h5>iTools</h5>
-                </a>
-                <p>Know more about the available commands you can use and how to use them.</p>
+                <h5>
+                    <a class="documentation_title" href="user/configuration">
+                        <em class="doc-icon align-self-start bx bxs-cog"></em>Configuration
+                    </a>
+                </h5>
+                <div class="documentation_descr">Get a thorough description of the configuration of PowSyBl for different usages.</div>
             </div>
         </div>
     </div>
@@ -53,454 +36,13 @@ layout: default
     <!-- User stories -->
     <div class="col-lg-4 col-sm-6 my-2">
         <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/Crystal_Clear_action_edit_add.png" alt="">
-            </div>
             <div class="media-body">
-                <a href="user/user-stories">
-                    <h5>User stories</h5>
-                </a>
-                <p>Get to know better what PowSybl can be used for.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<h1 id="grid-model">Grid model</h1>
-<p> This section provides information about the way the network is modelled at the core of PowSyBl, i.e. in the IIDM internal format, and also
-how to manage network merging or extraction.
-</p>
-<div class="row">
-    <!-- Grid modelling -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_app_katomic.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="grid/model">
-                    <h5>Grid modelling</h5>
-                </a>
-                <p>Learn about the way the topology is handled, with different available views, the way synchronous
-                  components are treated, etc.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Grid extension -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_app_katomic.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="grid/model/extensions.html">
-                    <h5>Grid extension</h5>
-                </a>
-                <p>Learn about the way to attach additional data to the grid components using extensions</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Merging -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_app_ksirtet.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="">
-                    <h5>Merging</h5>
-                </a>
-                <p>Discover how you can merge networks, for handling European data for instance.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Extraction -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_project_app_kfouleggs.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="grid/features/extraction.html">
-                    <h5>Network extraction</h5>
-                </a>
-                <p>Learn how to extract sub-parts of the network to keep only what you need from the data.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<h1 id="grid-formats">Grid exchange formats</h1>
-<p>This section is dedicated to the description of the various grid formats available in PowSyBl.
-While IIDM is at the core of it, it is possible to import or export data in a number of formats that may be dedicated to
-European data exchanges or network simulation via different tools: check them out below.
-</p>
-<div class="row">
-    <!-- CIM-CGMES -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/logos/entsoe_logo.svg" alt="">
-            </div>
-            <div class="media-body">
-                <a href="grid/formats/cim-cgmes.html">
-                    <h5>CIM-CGMES</h5>
-                </a>
-                <p>The most up-to-date format for European grid data exchanges.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- UCTE-DEF -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/logos/ucte_logo.svg" alt="">
-            </div>
-            <div class="media-body">
-                <a href="grid/formats/ucte-def.html">
-                    <h5>UCTE-DEF</h5>
-                </a>
-                <p>The legacy format for European grid data exchanges.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- XIIDM -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/logos/powsybl_logo.svg" alt="">
-            </div>
-            <div class="media-body">
-                <a href="grid/formats/xiidm.html">
-                    <h5>XIIDM</h5>
-                </a>
-                <p>The internal data model of PowSyBl.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- PSS®E -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/logos/psse.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="grid/formats/psse.html">
-                    <h5>PSS®E</h5>
-                </a>
-                <p>Data required for power flow analysis on Siemens PSS®E software.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- IEEE-CDF -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/logos/ieee_logo.svg" alt="">
-            </div>
-            <div class="media-body">
-                <a href="">
-                    <h5>IEEE-CDF</h5>
-                </a>
-                <p>TODO</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Matpower -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/logos/matpower_logo.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="grid/formats/matpower.html">
-                    <h5>Matpower</h5>
-                </a>
-                <p>A free and open-source Matlab toolbox for power system simulation and optimization</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- AMPL -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_filesystem_folder_html.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="grid/formats/ampl.html">
-                    <h5>AMPL</h5>
-                </a>
-                <p>A data separated value format easy to parse with <a href="https://ampl.com/">AMPL</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<h1 id="simulation">Simulation</h1>
-<p>One major aim of the PowSyBl project is to make it easy to plug it with different solvers for grid simulation.
-At the moment, four types of simulations are supported: power flow, security analysis, time-domain simulation and sensitivity analysis.
-For each of them, one or several simulators is officially supported, but it is also possible to plug your own simulator within the framework.
-Below comes a description of the various types of simulation and supported solvers.
-</p>
-<div class="row">
-    <!-- Power flow -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_filesystem_socket.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="simulation/powerflow">
-                    <h5>Power flow</h5>
-                </a>
-                <p>Compute the flow of electric power in an interconnected system in normal steady-state operation</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Security analysis -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_app_quick_restart.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="simulation/securityanalysis">
-                    <h5>Security analysis</h5>
-                </a>
-                <p>Detect security violations on a network for a list of contingencies. This simulation can be done with or without remedial actions.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Time domain simulation -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_app_kworldclock.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="simulation/timedomain">
-                    <h5>Time domain simulation</h5>
-                </a>
-                <p>Capture the transient response of the system, with or without events activations.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sensitivity calculation -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_filesystem_folder_html.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="simulation/sensitivity">
-                    <h5>Sensitivity analysis</h5>
-                </a>
-                <p>Compute the linearized impact of small network variations on the state variables of some components</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Metrix simulation -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_app_metrix.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="simulation/metrix">
-                    <h5>Metrix simulation</h5>
-                </a>
-                <p>Compute optimal power load flow on a range of time series mapped on network variants</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<h1 id="hpc">High Performance Computing</h1>
-<p>Grid simulation comes with a computational cost, and in this section we describe how to take advantage of the High Performance Computing capabilities of PowSyBl to reduce
-computational times to a minimum.
-</p>
-<div class="row">
-    <!-- Slurm -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/logos/slurm.svg" alt="">
-            </div>
-            <div class="media-body">
-                <a href="">
-                    <h5>Slurm</h5>
-                </a>
-                <p>Use PowSyBl with the SLURM job scheduler</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- MPI -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/logos/openmpi.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="">
-                    <h5>MPI</h5>
-                </a>
-                <p>Use MPI parallelism for PowSyBl-powered simulations</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<h1 id="data">Data management</h1>
-<p>
-This section is dedicated to data management: PowSyBl makes it possible to handle study data in a scalable way through an Application File System (AFS).
-Besides, it also makes it possible to output time-series of the network data. These two features are described here.
-</p>
-<div class="row">
-    <!-- AFS -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/Crystal_Clear_action_edit_add.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="data/afs.html">
-                    <h5>AFS</h5>
-                </a>
-                <p>AFS (<b>A</b>pplication <b>F</b>ile <b>S</b>ystem) is a data management system to manage grid studies.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Time series -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/Crystal_Clear_action_edit_add.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="data/timeseries">
-                    <h5>Time series</h5>
-                </a>
-                <p>Get to know the comprehensive and flexible time series modeling of PowSyBl.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<h1 id="microservices">Microservices</h1>
-<p>
-Since PowSyBl is meant to make it easy to build state-of-the-art applications for grid modeling, it also comes
-with a set of microservices. The aim is to make it easier to build web-based applications. Check them out below.
-</p>
-<div class="row">
-    <!-- Repositories -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_device_blockdevice.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="microservices">
-                    <h5>Architecture</h5>
-                </a>
-                <p>Get to know how the PowSyBl microservices are meant to be assembled.</p>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<h1 id="developer-documentation">Developer documentation</h1>
-<p>This section is dedicated to the developer documentation. You'll find a description of all the repositories and artifacts
-of the project, but also documentation about the framework itself and the way it has been designed, and a set of tutorials aimed
-at helping developers get into the code.
-</p>
-<div class="row">
-    <!-- Repositories -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_device_blockdevice.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="developer/repositories">
-                    <h5>Repositories</h5>
-                </a>
-                <p>This page lists the available repositories and their purpose.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Artifacts -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_device_blockdevice.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="developer/artifacts.html">
-                    <h5>Artifacts</h5>
-                </a>
-                <p>This page lists the available artifacts and their use.</p>
-            </div>
-        </div>
-    </div>
-
-    <!--Patterns -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_device_blockdevice.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="developer/patterns">
-                    <h5>Patterns</h5>
-                </a>
-                <p>Describes some of the programming patterns used in PowSyBl.</p>
-            </div>
-        </div>
-    </div>
-
-    <!--API guide -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_device_blockdevice.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="developer/api_guide">
-                    <h5>API guide</h5>
-                </a>
-                <p>Describes the PowSyBl Java API for the various PowSyBl features.</p>
-            </div>
-        </div>
-    </div>
-
-    <!--Scripting -->
-    <div class="col-lg-4 col-sm-6 my-2">
-        <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_device_blockdevice.png" alt="">
-            </div>
-            <div class="media-body">
-                <a href="developer/scripting">
-                    <h5>Scripting</h5>
-                </a>
-                <p>Learn how to use PowSyBl through <a href="developer/scripting/python.html">Python</a> or <a href="developer/scripting/groovy.html">Groovy</a> scripts.</p>
+                <h5>
+                    <a class="documentation_title" href="user/user-stories">
+                        <em class="doc-icon align-self-start bx bxs-user-pin"></em>User stories
+                    </a>
+                </h5>
+                <div class="documentation_descr">Get to know better what PowSybl can be used for.</div>
             </div>
         </div>
     </div>
@@ -508,14 +50,413 @@ at helping developers get into the code.
     <!--Tutorials -->
     <div class="col-lg-4 col-sm-6 my-2">
         <div class="media documentation_item">
-            <div class="doc-icon align-self-start">
-                <img class="doc-icon" src="/assets/img/crystal/crystal_clear_device_blockdevice.png" alt="">
-            </div>
             <div class="media-body">
-                <a href="developer/tutorials">
-                    <h5>Tutorials</h5>
-                </a>
-                <p>Learn how to develop with PowSyBl.</p>
+                <h5>
+                    <a class="documentation_title" href="developer/tutorials">
+                        <em class="doc-icon align-self-start bx bxs-baby-carriage"></em>Tutorials
+                    </a>
+                </h5>
+                <div class="documentation_descr">Learn how to use and develop with PowSyBl.</div>
+            </div>
+        </div>
+    </div>
+
+    <!--Scripting -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="developer/scripting">
+                        <em class="doc-icon align-self-start bx bxs-book-content"></em>Scripting
+                    </a>
+                </h5>
+                <div class="documentation_descr">Learn how to use PowSyBl through <a href="developer/scripting/python.html">Python</a> or <a href="developer/scripting/groovy.html">Groovy</a> scripts.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- iTools -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="user/itools">
+                        <em class="doc-icon align-self-start bx bxs-terminal"></em>iTools
+                    </a>
+                </h5>
+                <div class="documentation_descr">Know more about the available commands you can use and how to use them.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 id="grid-model">Grid model</h1>
+<p> This section provides information about the way the network is modelled at the core of PowSyBl, i.e. in the IIDM internal format, and also
+    how to manage network merging or extraction.
+</p>
+<div class="row">
+    <!-- Grid modelling -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="grid/model">
+                        <em class="doc-icon align-self-start bx bxs-network-chart"></em>Grid modelling
+                    </a>
+                </h5>
+                <div class="documentation_descr">Learn about the way the topology is handled, with different available views, the way synchronous
+                    components are treated, etc.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid extension -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="grid/model/extensions.html">
+                        <em class="doc-icon align-self-start bx bxs-extension"></em>Grid extension
+                    </a>
+                </h5>
+                <div class="documentation_descr">Learn about the way to attach additional data to the grid components using extensions.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Merging -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="">
+                        <em class="doc-icon align-self-start fa fa-object-group"></em>Merging
+                    </a>
+                </h5>
+                <div class="documentation_descr">Discover how you can merge networks, for handling European data for instance.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extraction -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="grid/features/extraction.html">
+                        <em class="doc-icon align-self-start bx bxs-file-export"></em>Network extraction
+                    </a>
+                </h5>
+                <div class="documentation_descr">Learn how to extract sub-parts of the network to keep only what you need from the data.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 id="grid-formats">Grid exchange formats</h1>
+<p>This section is dedicated to the description of the various grid formats available in PowSyBl.
+    While IIDM is at the core of it, it is possible to import or export data in a number of formats that may be dedicated to
+    European data exchanges or network simulation via different tools: check them out below.
+</p>
+<div class="row">
+    <!-- CIM-CGMES -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="grid/formats/cim-cgmes.html">
+                        <img class="doc-icon align-self-start" src="/assets/img/logos/entsoe_logo.svg" alt="">CIM-CGMES
+                    </a>
+                </h5>
+                <div class="documentation_descr">The most up-to-date format for European grid data exchanges.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UCTE-DEF -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="grid/formats/ucte-def.html">
+                        <img class="doc-icon align-self-start" src="/assets/img/logos/ucte_logo.svg" alt="">UCTE-DEF
+                    </a>
+                </h5>
+                <div class="documentation_descr">The legacy format for European grid data exchanges.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- XIIDM -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="grid/formats/xiidm.html">
+                        <img class="doc-icon align-self-start" src="/assets/img/logos/powsybl_logo.svg" alt="">XIIDM
+                    </a>
+                </h5>
+                <div class="documentation_descr">The internal data model of PowSyBl.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PSS®E -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="grid/formats/psse.html">
+                        <img class="doc-icon align-self-start" src="/assets/img/logos/psse.png" alt="">PSS®E
+                    </a>
+                </h5>
+                <div class="documentation_descr">Data required for power flow analysis on Siemens PSS®E software.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IEEE-CDF -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="">
+                        <img class="doc-icon align-self-start" src="/assets/img/logos/ieee_logo.svg" alt="">IEEE-CDF
+                    </a>
+                </h5>
+                <div class="documentation_descr">TODO</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Matpower -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="grid/formats/matpower.html">
+                        <img class="doc-icon align-self-start" src="/assets/img/logos/matpower_logo.png" alt="">Matpower
+                    </a>
+                </h5>
+                <div class="documentation_descr">A free and open-source Matlab toolbox for power system simulation and optimization.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AMPL -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="grid/formats/ampl.html">
+                        <img class="doc-icon align-self-start" src="/assets/img/logos/AMPL-logo.jpg" alt="">AMPL
+                    </a>
+                </h5>
+                <div class="documentation_descr">A data separated value format easy to parse with <a href="https://ampl.com/">AMPL</a>.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 id="simulation">Simulation</h1>
+<p>One major aim of the PowSyBl project is to make it easy to plug it with different solvers for grid simulation.
+    At the moment, four types of simulations are supported: power flow, security analysis, time-domain simulation and sensitivity analysis.
+    For each of them, one or several simulators is officially supported, but it is also possible to plug your own simulator within the framework.
+    Below comes a description of the various types of simulation and supported solvers.
+</p>
+<div class="row">
+    <!-- Power flow -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="simulation/powerflow">
+                        <em class="doc-icon align-self-start bx bx-plug"></em>Power flow
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute the flow of electric power in an interconnected system in normal steady-state operation.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security analysis -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="simulation/securityanalysis">
+                        <em class="doc-icon align-self-start bx bxs-bolt"></em>Security analysis
+                    </a>
+                </h5>
+                <div class="documentation_descr">Detect security violations on a network for a list of contingencies. This simulation can be done with or without remedial actions.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Time domain simulation -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="simulation/timedomain">
+                        <em class="doc-icon align-self-start bx bxs-time"></em>Time domain simulation
+                    </a>
+                </h5>
+                <div class="documentation_descr">Capture the transient response of the system, with or without events activations.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sensitivity calculation -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="simulation/sensitivity">
+                        <em class="doc-icon align-self-start bx bx-line-chart"></em>Sensitivity analysis
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute the linearized impact of small network variations on the state variables of some components.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Metrix simulation -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="simulation/metrix">
+                        <em class="doc-icon align-self-start bx bx-bar-chart"></em>Metrix simulation
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute optimal power load flow on a range of time series mapped on network variants.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flow decomposition -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="simulation/flowdecomposition">
+                        <em class="doc-icon align-self-start bx bxs-pie-chart-alt-2"></em>Flow decomposition
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute for each network element a decomposition of the active flow into different parts (loop flows, allocated flows,...)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Short circuit analysis -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="simulation/shortcircuitanalysis">
+                        <em class="doc-icon align-self-start bx bx-power-off"></em>Short circuit analysis
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute the impact on a network of the abnormal connection of two nodes. </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remedial Action Optimizer -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="simulation/rao">
+                        <em class="doc-icon align-self-start bx bxs-shield"></em>Remedial Action Optimizer
+                    </a>
+                </h5>
+                <div class="documentation_descr">Optimize remedial actions in the network in order to relieve operational limits violations. </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 id="developer-documentation">Developer documentation</h1>
+<p>This section is dedicated to the developer documentation. You'll find a description of all the repositories and artifacts
+    of the project, but also documentation about the framework itself and the way it has been designed, and a set of tutorials aimed
+    at helping developers get into the code.
+</p>
+<div class="row">
+    <!-- Repositories -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="developer/repositories">
+                        <em class="doc-icon align-self-start bx bxs-book-bookmark"></em>Repositories
+                    </a>
+                </h5>
+                <div class="documentation_descr">This page lists the available repositories and their purpose.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Artifacts -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="developer/artifacts.html">
+                        <em class="doc-icon align-self-start fa fa-cubes"></em>Artifacts
+                    </a>
+                </h5>
+                <div class="documentation_descr">This page lists the available artifacts and their use.</div>
+            </div>
+        </div>
+    </div>
+
+    <!--API guide -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="developer/api_guide">
+                        <em class="doc-icon align-self-start bx bxs-compass"></em>API guide
+                    </a>
+                </h5>
+                <div class="documentation_descr">Describes the PowSyBl Java API for the various PowSyBl features.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 id="data">Data management</h1>
+<p>
+    This section is dedicated to data management: PowSyBl makes it possible to handle study data in a scalable way through an Application File System (AFS).
+    Besides, it also makes it possible to output time-series of the network data. These two features are described here.
+</p>
+<div class="row">
+    <!-- AFS -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="data/afs.html">
+                        <em class="doc-icon align-self-start bx bxs-folder-open"></em>AFS
+                    </a>
+                </h5>
+                <div class="documentation_descr">AFS (<b>A</b>pplication <b>F</b>ile <b>S</b>ystem) is a data management system to manage grid studies.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Time series -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="data/timeseries">
+                        <em class="doc-icon align-self-start bx bxs-timer"></em>Time series
+                    </a>
+                </h5>
+                <div class="documentation_descr">Get to know the comprehensive and flexible time series modeling of PowSyBl.</div>
             </div>
         </div>
     </div>
