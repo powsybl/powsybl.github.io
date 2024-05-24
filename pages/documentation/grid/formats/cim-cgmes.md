@@ -458,9 +458,7 @@ These properties can be defined in the configuration file in the [import-export-
 
 **iidm.import.cgmes.boundary-location**  
 Optional property that defines the directory path where the CGMES importer can find the boundary files (`EQBD` and `TPBD` profiles) if they are not present in the imported zip file. By default, its value is `<ITOOLS_CONFIG_DIR>/CGMES/boundary`.
-
-**iidm.import.cgmes.change-sign-for-shunt-reactive-power-flow-initial-state**  
-Optional property that defines if the CGMES importer inverts the sign of active and reactive power flows for shunt compensators. Its default value is `false`.
+This property can also be used at CGMES export if the network was not imported from a CGMES to indicate the boundary files that should be used for reference.
 
 **iidm.import.cgmes.convert-boundary**  
 Optional property that defines if the equipment located inside the boundary are imported as part of the network. Used for debugging purposes. `false` by default.
@@ -468,8 +466,8 @@ Optional property that defines if the equipment located inside the boundary are 
 **iidm.import.cgmes.convert-sv-injections**  
 Optional property that defines if `SvInjection` objects are converted to IIDM loads. `true` by default.
 
-**iidm.import.cgmes.create-active-power-control-extension**  
-Optional property that defines if active power control extensions are created for the converted generators. `false` by default. If `true`, the extension will created for the CGMES `SynchronousMachines` with the attribute `normalPF` defined. For these generators, the `normalPF` value will be saved as the `participationFactor` and the flag `participate` set to `true`. 
+**iidm.import.cgmes.create-active-power-control-extension**
+Optional property that defines if active power control extensions are created for the converted generators. `true` by default. If `true`, the extension will created for the CGMES `SynchronousMachines` with the attribute `normalPF` defined. For these generators, the `normalPF` value will be saved as the `participationFactor` and the flag `participate` set to `true`. 
 
 **iidm.import.cgmes.create-busbar-section-for-every-connectivity-node**  
 Optional property that defines if the CGMES importer creates an [IIDM Busbar Section](../model/index.md#busbar-section) for each CGMES connectivity node. Used for debugging purposes. `false` by default.
@@ -671,11 +669,13 @@ By default, the base name is the network's name if it exists, or else the networ
 
 **iidm.export.cgmes.boundary-eq-id**  
 Optional property that defines the ID of the EQ-BD model if there is any.
-Its default value is `null`: we consider there is no EQ-BD model to consider.
+Its default value is `null`: we consider there is no EQ-BD model to consider. 
+If this property is defined, then this ID will be written in the header of the exported EQ file.
 
 **iidm.export.cgmes.boundary-tp-id**  
 Optional property that defines the ID of the TP-BD model if there is any.
 Its default value is `null`: we consider there is no TP-BD model to consider.
+If this property is defined, then this ID will be written in the header of the exported SV file.
 
 **iidm.export.cgmes.cim-version**  
 Optional property that defines the CIM version number in which the user wants the CGMES files to be exported.
@@ -753,6 +753,9 @@ Its default value is 1.
 **iidm.export.cgmes.business-process**  
 The business process in which the export takes place. This is used to generate unique UUIDs for the EQ, TP, SSH and SV file `FullModel`.
 Its default value is `1D`.
+
+
+Note that if you are exporting a network that does not come from CGMES, you can use the [`iidm.import.cgmes.boundary-location`](#options) property to define the location of the boundary files to use as reference.
 
 ## Examples
 Have a look to the [CGMES sample files](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/TestConfigurations_packageCASv2.0.zip)
