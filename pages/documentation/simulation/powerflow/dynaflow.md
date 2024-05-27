@@ -34,42 +34,88 @@ load-flow:
 
 **svcRegulationOn**  
 The `svcRegulationOn` is an optional boolean property that defines if SVCs (Static Var Compensator) take part
-in the voltage regulation. The default value of this parameter is `false`.
+in the voltage regulation.  
 
 **shuntRegulationOn**  
-The `shuntRegulationOn` is an optional boolean property that defines if Shunts take part in the voltage regulation.
-The default value of this parameter is `false`.
+The `shuntRegulationOn` is an optional boolean property that defines if Shunts take part in the voltage regulation.  
 
 **automaticSlackBusOn**  
 The `automaticSlackbusOn` is an optional boolean property that defines if DynaFlow computes the slack bus
-(phase reference bus) by itself or if the slack bus is provided.
-The default value of this parameter is `true`.
+(phase reference bus) by itself or if the slack bus is provided.  
 
-**vscAsGenerators**
-The `vscAsGenerators` is an optional boolean property that defines if VSCs (Voltage Source Converters)
-are modeled as generators. The default value of this parameter is `true`.
+**dsoVoltageLevel**  
+The `dsoVoltageLevel` is an optional double property that defines the minimum voltage of level of loads.
 
-**lccAsLoads**  
-The `lccAsLoads` is an optional boolean property that defines if LCCs (Line Commutated Converters) are modeled as loads.
-The default value of this parameter is `true`.
+**activePowerCompensation**  
+The `activePowerCompensation` is an optional property that defines which type of power compensation applies.  
+Values available **(TODO: describe them)** : 
+- P
+- TARGET_P
+- PMAX
+
+**settingPath**  
+The `settingPath` is an optional property, it is used to indicates the file which defines the model settings values.
+
+**assemblingPath**  
+The `assemblingPath` is an optional property, it is used to indicates the file which defines the models' association.
+
+**startTime**  
+The `startTime` is an optional property that defines the simulation start time (in s).
+
+**stopTime**  
+The `stopTime` is an optional property that defines the simulation stop time (in s).
+
+**precision**  
+The `precision` is an optional property that defines **(TODO: description)**
+
+**timeOfEvent**  
+The `timeOfEvent` is an optional property that defines **(TODO: description)**
+
+**chosenOutputs**  
+The `chosenOutputs` is an optional array property that defines **(TODO: description)**   
+Values available **(TODO: describe them)** :
+- STEADYSTATE
+- LOSTEQ
+- TIMELINE
+- CONSTRAINTS
+
+**timeStep**  
+The `timeStep` is an optional parameter **(TODO: description)**  
+
+**mergeLoads**  
+The `mergeLoads` is an optional parameter, it is used to indicates if loads connected to the same bus are merged
+
+**startingPointMode**  
+The `startingPointMode` is an optional parameter, **(TODO: description)**
+Values available **(TODO: describe them)** :
+- WARM
+- FLAT
 
 ### Generic parameters
-Furthermore, DynaFlow only supports two of the generic parameters:
-- noGeneratorReactiveLimits
-- phaseShifterRegulationOn
-
-You may have a description of these parameters [here](index.md#parameters). The other parameters are ignored.
+Furthermore, DynaFlow only supports `useReactiveLimits` generic parameter.
+You may have a description of this parameter [here](index.md#parameters). The other parameters are ignored.
 
 ### Example
 
 You may define those parameters in your configuration file:
 ```yaml
 dynaflow-default-parameters:
-    svcRegulationOn: false
+    svcRegulationOn: true
     shuntRegulationOn: false
-    automaticSlackBusOn: false
-    vscAsGenerators: false
-    lccAsLoads: true
+    automaticSlackBusOn: true
+    dsoVoltageLevel: 987.6,
+    activePowerCompensation: "P"
+    settingPath: "path/to/settingFile"
+    assemblingPath: "path/to/assemblingFile"
+    startTime: 0.0
+    stopTime: 100.0
+    precision: 1.0
+    timeOfEvent: 10.0
+    chosenOutputs: [ "STEADYSTATE", "LOSTEQ", "TIMELINE", "CONSTRAINTS" ],
+    timeStep: 2.6
+    mergeLoads: true,
+    startingPointMode: "WARM"
+    
 ```
 
 
@@ -77,16 +123,27 @@ Alternatively, you can provide parameters as a JSON file where supported
 (for example when using `itools loadflow` command):
 ```json
 {
-  "version" : "1.4",
-  "phaseShifterRegulationOn" : false,
-  "noGeneratorReactiveLimits" : false,
+  "version" : "1.9",
+  "useReactiveLimits" : true,
   "extensions" : {
     "DynaflowParameters" : {
-      "svcRegulationOn": true,
-      "shuntRegulationOn": false,
-      "automaticSlackBusOn": true,
-      "vscAsGenerators": false,
-      "lccAsLoads": true
+      "svcRegulationOn" : true,
+      "shuntRegulationOn" : false,
+      "automaticSlackBusOn" : true,
+      "dsoVoltageLevel" : 987.6,
+      "activePowerCompensation" : "P",
+      "settingPath" : "path/to/settingFile",
+      "assemblingPath" : "path/to/assemblingFile",
+      "startTime" : 0.0,
+      "stopTime" : 100.0,
+      "precision" : 1.0,
+      "sa" : {
+        "timeOfEvent" : 10.0
+      },
+      "chosenOutputs" : [ "STEADYSTATE", "LOSTEQ", "TIMELINE", "CONSTRAINTS" ],
+      "timeStep" : 2.6,
+      "mergeLoads" : true,
+      "startingPointMode" : "WARM"
     }
   }
 }

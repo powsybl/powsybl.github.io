@@ -22,7 +22,7 @@ First of all, we need some Maven dependencies.
 <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-starter</artifactId>
-    <version>2023.0.0</version>
+    <version>2023.3.0</version>
 </dependency>
 ```
 
@@ -74,7 +74,7 @@ First of all, we need some Maven dependencies.
 </dependencies>
 
 <properties>
-    <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
+    <powsybl-dependencies.version>2023.3.0</powsybl-dependencies.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
 
@@ -160,10 +160,10 @@ Therefore, we use the slightly more complex interface `SingleLineDiagram.draw(ne
 
 ```java
 // Use custom parameters to have the names displayed instead of the ids
-LayoutParameters layoutParameters = new LayoutParameters().setUseName(true);
-
+SvgParameters svgParameters = new SvgParameters().setUseName(true);
+SldParameters sldParameters = new SldParameters().setSvgParameters(svgParameters);
 // Draw the diagram of voltage level 110 in substation PP_Brussels (id _8bbd7e74-ae20-4dce-8780-c20f8e18c2e0)
-SingleLineDiagram.draw(network, "8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.get("/tmp/Brussels110.svg"), layoutParameters);
+SingleLineDiagram.draw(network, "8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.get("/tmp/Brussels110.svg"), sldParameters);
 ```
 
 We obtain the following SVG:
@@ -177,10 +177,10 @@ We customize a bit further the parameters: the feeder names in this substation a
 
 ```java
 // Customize further the parameters to have the feeders label rotated, in order to avoid overlapping
-layoutParameters.setLabelDiagonal(true);
+svgParameters.setLabelDiagonal(true);
 
 // Draw the diagram of substation PP_Amsterdam (id _c49942d6-8b01-4b01-b5e8-f1180f84906c)
-SingleLineDiagram.draw(network, "c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.get("/tmp/AmsterdamSubstation.svg"), layoutParameters);
+SingleLineDiagram.draw(network, "c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.get("/tmp/AmsterdamSubstation.svg"), sldParameters);
 ```
 
 We then obtain the following SVG file representing the whole PP_Amsterdam substation with its three voltage levels:

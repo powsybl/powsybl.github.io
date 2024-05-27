@@ -16,6 +16,16 @@ In this repository we have some features dedicated to European processes, such a
 
 | Version | Release date | Release notes                                                                  | API documentation | [powsybl-dependencies](https://github.com/powsybl/powsybl-dependencies) version |
 |---------|--------------|--------------------------------------------------------------------------------|-------------------|---------------------------------------------------------------------------------|
+| 2.9.0   | 2024-04-04   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.9.0) | -                 | 2024.1.0                                                                        |
+| 2.8.1   | 2024-03-04   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.8.1) | -                 | 2024.0.3                                                                        |
+| 2.8.0   | 2024-01-31   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.8.0) | -                 | 2024.0.0                                                                        |
+| 2.7.0   | 2023-12-22   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.7.0) | -                 | 2023.4.0                                                                        |
+| 2.6.2   | 2023-11-16   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.6.2) | -                 | -                                                                               |
+| 2.6.1   | 2023-10-19   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.6.1) | -                 | 2023.3.2                                                                        |
+| 2.6.0   | 2023-09-29   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.6.0) | -                 | 2023.3.0                                                                        |
+| 2.5.0   | 2023-07-19   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.5.0) | -                 | 2023.2.3                                                                        |
+| 2.4.0   | 2023-06-07   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.4.0) | -                 | 2023.2.0                                                                        |
+| 2.3.0   | 2023-04-05   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.3.0) | -                 | 2023.1.0                                                                        |
 | 2.2.0   | 2023-02-03   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.2.0) | -                 | 2023.0.1                                                                        |
 | 2.1.0   | 2023-01-10   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.1.0) | -                 | 2022.0.2                                                                        |
 | 2.0.0   | 2022-11-18   | [Release notes](https://github.com/powsybl/powsybl-entsoe/releases/tag/v2.0.0) | -                 | 2022.0.0                                                                        |

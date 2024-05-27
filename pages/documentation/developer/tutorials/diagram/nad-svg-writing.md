@@ -19,7 +19,7 @@ First of all, we need some Maven dependencies.
 <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-starter</artifactId>
-    <version>2023.0.1</version>
+    <version>2023.3.0</version>
 </dependency>
 ```
 
@@ -63,7 +63,7 @@ First of all, we need some Maven dependencies.
 </dependencies>
 
 <properties>
-    <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
+    <powsybl-dependencies.version>2023.3.0</powsybl-dependencies.version>
     <slf4j.version>1.7.22</slf4j.version>
 </properties>
 
@@ -92,7 +92,7 @@ Network network = IeeeCdfNetworkFactory.create300();
 This can be done with a single line of code:
 
 ```java
-new NetworkAreaDiagram(network).draw(Path.of("/tmp/diagram.svg"));
+NetworkAreaDiagram.draw(network, Path.of("/tmp/diagram.svg"));
 ```
 
 We end up with the following diagram:
@@ -108,7 +108,7 @@ If only part of the network is wanted, we can generate a partial graph of the ne
 For instance, let's generate the subgraph centered on voltage level `"VL25"` with a depth of `2`:
 
 ```java
-new NetworkAreaDiagram(network, "VL25", 2).draw(Path.of("/tmp/partial_diagram_25.svg"));
+NetworkAreaDiagram.draw(network, Path.of("/tmp/partial_diagram_25.svg"), "VL25", 2);
 ```
 
 This leads to the following SVG:
@@ -118,7 +118,7 @@ This leads to the following SVG:
 Now let's generate the subgraph with voltage levels at a maximum distance of 2 from `"VL1"` and `"VL25"`:
 
 ```java
-new NetworkAreaDiagram(network, List.of("VL1", "VL25"), 2).draw(Path.of("/tmp/partial_diagram_1_25.svg"));
+NetworkAreaDiagram.draw(network, Path.of("/tmp/partial_diagram_1_25.svg"), List.of("VL1", "VL25"), 2);
 ```
 
 This gives us the diagram below. Note that nothing ensures that the parts displayed in resulting diagram are connected.

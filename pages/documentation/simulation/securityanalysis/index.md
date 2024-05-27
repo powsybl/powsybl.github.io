@@ -8,45 +8,81 @@ layout: default
 {:toc}
 
 ## Introduction
-The security analysis is a simulation that check violations on a network. These checks can be done on the base case or after a contingency, with or without remedial actions.
+The security analysis is a simulation that check violations on a network. These checks can be done on the base case or after a contingency, with or without remedial actions. A security analysis can monitor network states, in pre-contingency state, after a contingency and after a remedial action.
 
 There is a violation if the computed value is greater than the maximum allowed value. Depending on the equipments, the violations can have different types:
-- Current: this kind of violations can be detected on a [branch](../../grid/model/index.md#branches), if the computed intensity is greater than its [permanent limit](../../grid/model/index.md#current-limits) or one of its [temporary limits](../../grid/model/index.md#current-limits).
-- Voltage: this kind of violations can be detected on a bus or a [busbar section](), if the computed voltage is out of the voltage limits bounds of a [voltage level](../../grid/model/index.md#busbar-section).
+- Current, active power and apparent power: this kind of violations can be detected on a branch (line, two windings transformer, tie line) or on a three windings transformer, if the computed value is greater than its [permanent limit](../../grid/model/index.md#loading-limits) or one of its [temporary limits](../../grid/model/index.md#loading-limits).
+- Voltage: this kind of violations can be detected on a bus or a bus bar section, if the computed voltage is out of the low-high voltage limits of a [voltage level](../../grid/model/index.md#voltage-level).
+- Voltage angle: this kind of violations can be detected if the voltage angle difference between the buses associated to two terminals is out of the low-high voltage angle limits defined in the network.
 
 ## Inputs
 
 ### Network
-The first input of the security analysis is a network. As this simulation is basically [power flow](../powerflow/index.md) simulations for a list of contingencies, this network should converge.
+The first input of the security analysis is a network. As this simulation is based on a [load flow](../powerflow/index.md) engine for a list of contingencies, this network should converge in the pre-contingency state.
 
 ### Contingencies
-The security analysis may also take, optionally, a list of contingencies as an input. When contingencies are provided, the violations are detected on the network at state N, but also after the application of each contingency. At the moment, the only way to provide contingencies is to use the [Contingency Domain Specific Language](contingency-dsl.md), written in Groovy.
+The security analysis needs a list of contingencies as an input. When contingencies are provided, the violations are detected on the network at pre-contingency state, but also after applying each contingency. The supported elementary contingencies are:
+- Generator contingency
+- Static var compensator contingency
+- Load contingency
+- Bus contingency for bus/breaker topologies
+- Busbar section contingency for node/breaker topologies
+- Line, two-winding transformer and tie line contingencies (branch contingency)
+- Three-winding transformer contingency
+- Hvdc line contingency
 
-At the moment, it is possible to trigger generators, static VAR compensators, shunts, dangling lines, power lines or two windings transformers, HVDC lines and busbar sections. Equipments can be triggered one at a time (N-1 contingency) or several at a time (N-K contingency). Busbar contingency are special N-K contingency as it triggers all the equipments connected to a given busbar section.
+A contingency is made of contingency elements. A contingency can trigger one element at a time (N-1) or several elements at a time (N-K). Bus bar and bus contingencies are special N-K contingencies as they trigger all the equipments connected to a given bus bar section.
 
 ### Remedial actions
-Remedial actions are actions that are applied automatically when exploitation rules are violated. For example, this is used to model automatons that can open [switches](../../grid/model/index.md#nb-switch) or change the tap position of a [phase tap changer](../../grid/model/index.md#phase-tap-changer). The remedial actions should be provided using the [Action Domain Specific Language](action-dsl.md) written in Groovy.
-
-The action DSL, provides 3 different inputs:
-- the contingencies
-- the remedial actions
-- the application rules to define when a remedial action is applied
+Remedial actions are actions that are applied when limit violations occur. Supported actions are:
+- Open or close a switch
+- Open or close a terminal
+- Change the tap of a tap changer (phase or ratio)
+- Change the active and/or reactive power of a load
+- Change the section of a shunt compensator
+- Change the regulation status of a tap changer
+- Change `targetP`, `targetQ`, regulation status and `targetV` of a generator
+- Change the regulation mode of a static var compensator and its associated set point.
+- Enabled or disabled AC emulation for Hvdc line (with the possibility to change `P0` and `droop` for AC emulation and active power set point and converter mode for set point operating mode)
 
 Remedial actions can be *preventive* or *curative*:
-- preventive: these actions are implemented before the violation occurs, for example if the flow of a monitored line is between `90%` and `100%`.
+- preventive: these actions are implemented before the violation occurs, for example if the flow of a monitored line is between `90%` and `100%`. Use contingency context `none` for that.
 - curative: these actions are implemented after a violation occurs, for example if the flow of the monitored line is greater than `100%`.
+
+### Conditions
+Actions are applied if a condition is met. The conditions can be diversified and extended in the future:
+- True condition: meaning that the list of actions is applied.
+- All violations condition on a list of elements: meaning that the list of actions is applied only if all elements provided are overloaded.
+- At least one violation condition: meaning that the list of actions is applied only if a violation occurs on the network.
+- Any violation condition on a list of elements: meaning that the list of actions is applied if one or more elements provided are overloaded.
+
+### Operator strategies
+An operator strategy is applied in pre-contingency or after a contingency, depending on the contingency context provided. A contingency context can be a pre-contingency state only (`NONE`), a post-contingency state (on a specific contingency (`SPECIFIC`) or on every contingency (`ONLY_CONTINGENCIES`)) or both pre-contingency and post-contingency states (`ALL`).
+
+An operator strategy groups a condition and a list of remedial actions.
+
+### State monitors
+A stateMonitor allows to get information about branch, bus and three-winding transformers on the network after a security analysis computation. Contingency context allows to specify if the information asked are about pre-contingency state or post-contingency state with a contingency id or both. For example: 
+- If we want information about a branch after security analysis on contingency `c1`, the contingencyContext will contain the contingencyId `c1`, contextType `SPECIFIC` and the state monitor will contain the id of the branch. 
+- If we want information about a branch in pre-contingency state, the contingencyContext will contain a null contingencyId, contextType `NONE` and the state monitor will contain the id of the branch. 
+- If we want information about a branch in pre-contingency state and after security analysis on contingency `c1`, the contingencyContext will contain contingencyId `c1`, contextType `ALL` and the state monitor will contain the id of the branch.
 
 ## Outputs
 
 ### Pre-contingency results
-The violations are detected on the network at state N, meaning before a contingency occurred. This determine a reference for the simulation. For each violations, we get the ID of the overloaded equipment, the limit type (`CURRENT`, `LOW_VOLTAGE` or `HIGH_VOLTAGE`), the acceptable value and the computed value. For branches, we also have the side where the violation has been detected.
+The violations are detected on the network at state N, meaning before a contingency occurred. This determines a reference for the simulation. For each violation, we get the ID of the overloaded equipment, the limit type (`CURRENT`, `ACTIVE_POWER`, `APPARENT_POWER`, `LOW_VOLTAGE` or `HIGH_VOLTAGE`, `LOW_VOLTAGE_ANGLE` or `HIGH_VOLTAGE_ANGLE`), the acceptable value and the computed value. For branches and three windings transformers, we also have the side where the violation has been detected.
 
-For a simulation with remedial actions, the list of actions that have been applied (the preventive ones) are also given. 
+The pre-contingency results also contain the network results based on given state monitors. A network result groups branch results, bus results and three-winding transformer results. All elementary results are fully extendable.
 
 ### Post-contingency results
-The post-contingency results contains the complete list of the contingencies that have been simulated, and for each of them the violations detected. To limit the size of the results, only new violations or worsened violations are listed. 
+The post-contingency results contain the complete list of the contingencies that have been simulated, and for each of them the violations detected. To limit information to the user, only new violations or worsened violations can be listed.
 
-For a simulation with remedial actions, the list of curative actions that have been applied are given. 
+The post-contingency results also contain the network results based on given state monitors.
+
+### Operator strategy results
+The post-contingency results contain the complete list of the contingencies that have been simulated, and for each of them the violations detected in order to check if remedial actions were efficient.
+
+The operator strategy results also contain the network results based on given state monitors.
 
 ### Extensions
 The results of a security analysis are extendable, meaning you can have additional information attached to the network, the contingencies or the violations.
@@ -55,7 +91,7 @@ The results of a security analysis are extendable, meaning you can have addition
 The following example is a result of a security analysis with remedial action, exported in JSON:
 ```json
 {
-  "version" : "1.0",
+  "version" : "1.4",
   "network" : {
     "id" : "sim1",
     "sourceFormat" : "test",
@@ -63,21 +99,61 @@ The following example is a result of a security analysis with remedial action, e
     "forecastDistance" : 0
   },
   "preContingencyResult" : {
-    "computationOk" : true,
-    "limitViolations" : [ {
-      "subjectId" : "NHV1_NHV2_1",
-      "limitType" : "CURRENT",
-      "limit" : 100.0,
-      "limitReduction" : 0.95,
-      "value" : 110.0,
-      "side" : "ONE",
-      "extensions" : {
-        "ActivePower" : {
-          "value" : 220.0
+    "status" : "CONVERGED",
+    "limitViolationsResult" : {
+      "limitViolations" : [ {
+        "subjectId" : "NHV1_NHV2_1",
+        "limitType" : "CURRENT",
+        "limit" : 100.0,
+        "limitReduction" : 0.95,
+        "value" : 110.0,
+        "side" : "ONE",
+        "extensions" : {
+          "ActivePower" : {
+            "value" : 220.0
+          }
         }
-      }
-    } ],
-    "actionsTaken" : [ ]
+      } ],
+      "actionsTaken" : [ ]
+    },
+    "networkResult" : {
+      "branchResults" : [ {
+        "branchId" : "branch1",
+        "p1" : 1.0,
+        "q1" : 2.0,
+        "i1" : 3.0,
+        "p2" : 1.1,
+        "q2" : 2.2,
+        "i2" : 3.3
+      }, {
+        "branchId" : "branch2",
+        "p1" : 0.0,
+        "q1" : 0.0,
+        "i1" : 0.0,
+        "p2" : 0.0,
+        "q2" : 0.0,
+        "i2" : 0.0,
+        "flowTransfer" : 10.0
+      } ],
+      "busResults" : [ {
+        "voltageLevelId" : "voltageLevelId",
+        "busId" : "busId",
+        "v" : 400.0,
+        "angle" : 3.14
+      } ],
+      "threeWindingsTransformerResults" : [ {
+        "threeWindingsTransformerId" : "threeWindingsTransformerId",
+        "p1" : 1.0,
+        "q1" : 2.0,
+        "i1" : 3.0,
+        "p2" : 1.1,
+        "q2" : 2.1,
+        "i2" : 3.1,
+        "p3" : 1.2,
+        "q3" : 2.2,
+        "i3" : 3.2
+      } ]
+    }
   },
   "postContingencyResults" : [ {
     "contingency" : {
@@ -97,8 +173,8 @@ The following example is a result of a security analysis with remedial action, e
         "type" : "BUSBAR_SECTION"
       } ]
     },
+    "status" : "CONVERGED",
     "limitViolationsResult" : {
-      "computationOk" : true,
       "limitViolations" : [ {
         "subjectId" : "NHV1_NHV2_2",
         "limitType" : "CURRENT",
@@ -128,32 +204,97 @@ The following example is a result of a security analysis with remedial action, e
         "limitType" : "LOW_VOLTAGE",
         "limit" : 100.0,
         "limitReduction" : 0.7,
-        "value" : 115.0
+        "value" : 115.0,
+        "extensions" : {
+          "Voltage" : {
+            "preContingencyValue" : 400.0
+          }
+        }
+      }, {
+        "subjectId" : "NHV1_NHV2_2",
+        "limitType" : "ACTIVE_POWER",
+        "limitName" : "20'",
+        "acceptableDuration" : 1200,
+        "limit" : 100.0,
+        "limitReduction" : 1.0,
+        "value" : 110.0,
+        "side" : "ONE"
+      }, {
+        "subjectId" : "NHV1_NHV2_2",
+        "limitType" : "APPARENT_POWER",
+        "limitName" : "20'",
+        "acceptableDuration" : 1200,
+        "limit" : 100.0,
+        "limitReduction" : 1.0,
+        "value" : 110.0,
+        "side" : "TWO"
       } ],
       "actionsTaken" : [ "action1", "action2" ]
+    },
+    "networkResult" : {
+      "branchResults" : [ ],
+      "busResults" : [ ],
+      "threeWindingsTransformerResults" : [ ]
+    },
+    "connectivityResult" : {
+      "createdSynchronousComponentCount" : 0,
+      "createdConnectedComponentCount" : 0,
+      "disconnectedLoadActivePower" : 0.0,
+      "disconnectedGenerationActivePower" : 0.0,
+      "disconnectedElements" : [ ]
+    }
+  } ],
+  "operatorStrategyResults" : [ {
+    "operatorStrategy" : {
+      "id" : "strategyId",
+      "contingencyContextType" : "SPECIFIC",
+      "contingencyId" : "contingency1",
+      "condition" : {
+        "type" : "AT_LEAST_ONE_VIOLATION",
+        "violationIds" : [ "violationId1" ]
+      },
+      "actionIds" : [ "actionId1" ]
+    },
+    "status" : "CONVERGED",
+    "limitViolationsResult" : {
+      "limitViolations" : [ ],
+      "actionsTaken" : [ ]
+    },
+    "networkResult" : {
+      "branchResults" : [ ],
+      "busResults" : [ ],
+      "threeWindingsTransformerResults" : [ ]
     }
   } ]
 }
 ```
 
-## Implementations
-
-Different implementations are available to run security analyses:
-- [Load flow based](security-analysis-impl.md#load-flow-based-implementation): a security analysis implementation based on a power flow simulator 
-- [OpenLoadFlow]()
-
-For remedial actions simulation, only a [load flow based]() implementation is supported at the moment.
-
 ## Configuration
-<span style="color: red">TODO</span>
-- <span style="color: red">Contingencies provider</span>
-- <span style="color: red">Simulator</span>
+
+### Parameters
+
+The user can provide parameters to define which violations must be raised after a contingency, if the violation was already present in the pre-contingency state (`IncreasedViolationsParameters`). 
+
+**flow-proportional-threshold**  
+After a contingency, only flow violations (either current, active power or apparent power violations) that have increased in proportion by more than a threshold value compared to the pre-contingency state are listed in the limit violations. The other ones are filtered. The threshold value is unitless and should be positive. This method gets the flow violation proportional threshold. The default value is 0.1, meaning that only violations that have increased by more than 10% appear in the limit violations.
+
+**low-voltage-proportional-threshold**  
+After a contingency, only low-voltage violations that have increased by more than the proportional threshold compared to the pre-contingency state, are listed in the limit violations, the other ones are filtered. This method gets the low voltage violation proportional threshold (unitless, should be positive). The default value is 0.0, meaning that only violations that have increased by more than 0.0 % appear in the limit violations (note that for low-voltage violation, it means that the voltage in the post-contingency state is lower than the voltage in the pre-contingency state).
+
+**low-voltage-absolute-threshold**  
+After a contingency, only low-voltage violations that have increased by more than an absolute threshold compared to the pre-contingency state, are listed in the limit violations, the other ones are filtered. This method gets the low voltage violation absolute threshold (in kV, should be positive). The default value is 0.0, meaning that only violations that have increased by more than 0.0 kV appear in the limit violations (note that for low-voltage violation, it means that the voltage in the post-contingency state is lower than the voltage in the pre-contingency state).
+
+**high-voltage-proportional-threshold**  
+Same as before but for high-voltage violations.
+
+**high-voltage-absolute-threshold**  
+Same as before but for high-voltage violations.
 
 ### Violations filtering
 The violations listed in the results can be filtered to consider only certain type of violations, to consider only few voltage levels or to limit the geographical area by filtering equipments by countries. Check out the documentation of the [limit-violation-default-filter](../../user/configuration/limit-violation-default-filter.md) configuration module.
 
 **Example**
-Using the following configuration, the results will contains only voltage violations for equipments in France or Belgium: 
+Using the following configuration, the results will contain only voltage violations for equipments in France or Belgium:
 ```yaml
 limit-violation-default-filter:
     countries:
@@ -163,6 +304,13 @@ limit-violation-default-filter:
         - LOW_VOLTAGE
         - HIGH_VOLTAGE
 ```
+
+## Implementations
+
+Different implementations are available to run security analyses:
+- [Load flow based](security-analysis-impl.md#load-flow-based-implementation): a simple security analysis implementation based on a load flow engine
+- [OpenLoadFlow]()
+- [DynaFlow]()
 
 ## Going further
 To go further about the security analysis, check the following content:
