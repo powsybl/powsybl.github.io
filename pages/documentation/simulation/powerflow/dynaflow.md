@@ -54,10 +54,10 @@ Values available **(TODO: describe them)** :
 - PMAX
 
 **settingPath**  
-The `settingPath` is an optional property, it is used to indicates the file which defines the models association.
+The `settingPath` is an optional property, it is used to indicates the file which defines the model settings values.
 
 **assemblingPath**  
-The `assemblingPath` is an optional property, it is used to indicates the file which defines the model settings values.
+The `assemblingPath` is an optional property, it is used to indicates the file which defines the models' association.
 
 **startTime**  
 The `startTime` is an optional property that defines the simulation start time (in s).
@@ -66,13 +66,13 @@ The `startTime` is an optional property that defines the simulation start time (
 The `stopTime` is an optional property that defines the simulation stop time (in s).
 
 **precision**  
-The `precision` is an optional property that defines
+The `precision` is an optional property that defines **(TODO: description)**
 
 **timeOfEvent**  
-The `timeOfEvent` is an optional property that defines
+The `timeOfEvent` is an optional property that defines **(TODO: description)**
 
 **chosenOutputs**  
-The `chosenOutputs` is an optinal array property that defines    
+The `chosenOutputs` is an optional array property that defines **(TODO: description)**   
 Values available **(TODO: describe them)** :
 - STEADYSTATE
 - LOSTEQ
@@ -80,14 +80,20 @@ Values available **(TODO: describe them)** :
 - CONSTRAINTS
 
 **timeStep**  
-The `timeStep` is an optional parameter  
+The `timeStep` is an optional parameter **(TODO: description)**  
+
+**mergeLoads**  
+The `mergeLoads` is an optional parameter, it is used to indicates if loads connected to the same bus are merged
+
+**startingPointMode**  
+The `startingPointMode` is an optional parameter, **(TODO: description)**
+Values available **(TODO: describe them)** :
+- WARM
+- FLAT
 
 ### Generic parameters
-Furthermore, DynaFlow only supports two of the generic parameters:
-- noGeneratorReactiveLimits
-- phaseShifterRegulationOn
-
-You may have a description of these parameters [here](index.md#parameters). The other parameters are ignored.
+Furthermore, DynaFlow only supports `useReactiveLimits` generic parameter.
+You may have a description of this parameter [here](index.md#parameters). The other parameters are ignored.
 
 ### Example
 
@@ -107,6 +113,9 @@ dynaflow-default-parameters:
     timeOfEvent: 10.0
     chosenOutputs: [ "STEADYSTATE", "LOSTEQ", "TIMELINE", "CONSTRAINTS" ],
     timeStep: 2.6
+    mergeLoads: true,
+    startingPointMode: "WARM"
+    
 ```
 
 
@@ -114,9 +123,8 @@ Alternatively, you can provide parameters as a JSON file where supported
 (for example when using `itools loadflow` command):
 ```json
 {
-  "version" : "1.4",
-  "phaseShifterRegulationOn" : false,
-  "noGeneratorReactiveLimits" : false,
+  "version" : "1.9",
+  "useReactiveLimits" : true,
   "extensions" : {
     "DynaflowParameters" : {
       "svcRegulationOn" : true,
@@ -133,7 +141,9 @@ Alternatively, you can provide parameters as a JSON file where supported
         "timeOfEvent" : 10.0
       },
       "chosenOutputs" : [ "STEADYSTATE", "LOSTEQ", "TIMELINE", "CONSTRAINTS" ],
-      "timeStep" : 2.6
+      "timeStep" : 2.6,
+      "mergeLoads" : true,
+      "startingPointMode" : "WARM"
     }
   }
 }
