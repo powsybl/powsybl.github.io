@@ -127,8 +127,18 @@ calculated by the DC power flow.
 However, the flow reference is the one calculated using AC power flow which is different. The final step of the algorithm
 is though to rescale the different flow parts in order to ensure that the sum of the parts is equal to the initially calculated AC flow.
 
+By default, no rescaling to the AC flow is done on the flow decomposition results.
+
+Available rescaling modes are defined here below.
+
+#### ACER methodology-based rescaling
 The difference between reference AC flow and the sum of the parts of the decomposition is redispatched on the different
 parts proportionally to their rectified linear unit ($$\mathrm{ReLU}(x) = \mathrm{max}(x, 0)$$).
+
+#### Proportional rescaling
+Each flow is rescaled with a proportional coefficient. The coefficient is defined by $$\alpha_{\text{rescale}} = \frac{max(|AC p1|, |AC p2|)}{|DC p1|}$$.
+In this way, the DC flow will have the same magnitude as the AC flow.
+Since we divide by the DC flow to calculate the coefficient, lines with a too small DC flow are not rescaled.
 
 ## Flow decomposition inputs
 
@@ -173,7 +183,7 @@ Post contingency network elements can only be given to the algorithm using selec
 
 For each network element of interest, flow decomposition outputs contain the following elements:
 - Reference flow : active power flow that is considered as the reference for the decomposition. It is actually equal
-to the sum of all the flow parts calculated by the algorithm.
+to the sum of all the flow parts calculated by the algorithm. Reference AC flows are available on terminal 1 and 2.
 - Allocated flow : allocated flow part of the network element's flow.
 - Internal flow : internal flow part of the network element's flow. It is calculated as the loop flow from the country
 which network element is part of (interconnections are considered as part of no specific country, so will always have an internal flow to 0).
@@ -185,6 +195,7 @@ which network element is part of (interconnections are considered as part of no 
 
 On one hand, the reference flows are oriented from side 1 to side 2 of the associated IIDM branch. A positive reference flow implies
 a flow from side 1 to side 2, while a negative one means a flow from side 2 to side 1.
+For coherence and simplicity purposes, the entire algorithm (except proportional rescaling) is based on the side 1.
 
 On the other hand, all flow parts (allocated flow, internal flow, loop flows and PST flow) are oriented in the branch
 flow convention. A positive flow part tends to increase the absolute flow on the branch (i.e. a burdening flow), while a
@@ -194,14 +205,15 @@ negative one tends to decrease the absolute flow on the branch (i.e. a relieving
 
 ### Dedicated parameters
 
-| Name                                    | Type    | Default value                               | Description                                                                                                                                                                                                                                                                                                                 |
-|-----------------------------------------|---------|---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| enable-losses-compensation              | boolean | false                                       | When set to true, adds losses compensation step of the algorithm. Otherwise, all losses will be compensated using chosen power flow compensation strategy.                                                                                                                                                                  |
-| losses-compensation-epsilon             | double  | 1e-5                                        | Threshold used in losses compensation step of the algorihm. If actual losses are below the given threshold on a branch, no injection is created in the network to compensate these losses. Used to avoid creating too many injections in the network. May have an impact in overall algorithm performance and memory usage. |
-| sensitivity-epsilon                     | double  | 1e-5                                        | Threshold used when filling PTDF and PSDF matrices. If a sensitivity is below the given threshold, it is set to zero. Used to keep sparse matrices in the algorithm. May have an impact in overall algorithm performance and memory usage.                                                                                  |
-| rescale-enabled                         | boolean | false                                       | When set to true, rescaling step is done to ensure that the sum of all flow parts is equal to the AC reference flow.                                                                                                                                                                                                        |
-| dc-fallback-enabled-after-ac-divergence | boolean | true                                        | Defines the fallback behavior after an AC divergence Use True to run DC loadflow if an AC loadflow diverges (default). Use False to throw an exception if an AC loadflow diverges.                                                                                                                                          |
-| sensitivity-variable-batch-size         | int     | 15000                                       | When set to a lower value, this parameter will reduce memory usage, but it might increase computation time                                                                                                                                                                                                                  |
+| Name                                       | Type     | Default value    | Description                                                                                                                                                                                                                                                                                                                 |
+|--------------------------------------------|----------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| enable-losses-compensation                 | boolean  | false            | When set to true, adds losses compensation step of the algorithm. Otherwise, all losses will be compensated using chosen power flow compensation strategy.                                                                                                                                                                  |
+| losses-compensation-epsilon                | double   | 1e-5             | Threshold used in losses compensation step of the algorihm. If actual losses are below the given threshold on a branch, no injection is created in the network to compensate these losses. Used to avoid creating too many injections in the network. May have an impact in overall algorithm performance and memory usage. |
+| sensitivity-epsilon                        | double   | 1e-5             | Threshold used when filling PTDF and PSDF matrices. If a sensitivity is below the given threshold, it is set to zero. Used to keep sparse matrices in the algorithm. May have an impact in overall algorithm performance and memory usage.                                                                                  |
+| rescale-mode                               | enum     | NONE             | Use NONE if you don't want to rescale flow decomposition results. Use ACER_METHODOLOGY for the ACER methodology rescaling strategy. Use PROPORTIONAL for a proportional rescaling. See [Flow parts rescaling](../flowdecomposition/index.md#flow-parts-rescaling) for more details.                                         |
+| proportional-rescaler-min-flow-tolerance   | double   | 1e-6             | Option only used if rescale-mode is PROPORTIONAL. Defines the minimum DC flow required in MW for the rescaling to happen.                                                                                                                                                                                                   |    
+| dc-fallback-enabled-after-ac-divergence    | boolean  | true             | Defines the fallback behavior after an AC divergence Use True to run DC loadflow if an AC loadflow diverges (default). Use False to throw an exception if an AC loadflow diverges.                                                                                                                                          |
+| sensitivity-variable-batch-size            | int      | 15000            | When set to a lower value, this parameter will reduce memory usage, but it might increase computation time                                                                                                                                                                                                                  |
 
 ### Impact of existing parameters
 
