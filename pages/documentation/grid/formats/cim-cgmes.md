@@ -207,7 +207,7 @@ If the `ACLineSegment` is mapped to a PowSyBl [`DanglingLine`](../model/index.md
 - `X` is copied from CGMES `x`
 - `G` is copied from CMGES `gch` if defined, `0.0` otherwise
 - `B` is copied from CGMES `bch`
-- `ParingKey` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
+- `PairingKey` is copied from the name of the `TopologicalNode` or the `ConnectivityNode` (respectively in `NODE-BREAKER` or `BUS-BRANCH`) inside boundaries
 - `P0` is copied from CGMES `P` of the terminal at boundary side
 - `Q0` is copied from CGMES `Q` of the terminal at boundary side
 
