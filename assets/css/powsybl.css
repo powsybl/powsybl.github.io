@@ -35,6 +35,10 @@ a.heading {
 
 /* Links */
 a[href=""] {
+    color: #cd5c5c;
+}
+
+a[href="*"] {
     color: #fd495c;
 }
 
