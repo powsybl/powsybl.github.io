@@ -38,7 +38,7 @@ a[href=""] {
     color: #cd5c5c;
 }
 
-a[href="*"] {
+a[href=/^[A-Za-z0-9]+$/] {
     color: #fd495c;
 }
 
