@@ -35,11 +35,16 @@ a.heading {
 
 /* Links */
 a[href=""] {
-    color: #cd5c5c;
+    color: #fd495c;
 }
 
-a[href=/^[A-Za-z0-9]+$/] {
-    color: #fd495c;
+a {
+    color: #990099;
+}
+
+a:hover {
+  color: #9966CC;
+  text-decoration: none;
 }
 
 /* Calls to action */
