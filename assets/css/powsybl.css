@@ -38,6 +38,10 @@ a[href=""] {
     color: #fd495c;
 }
 
+a:hover[href=""] {
+    color: #fd495c;
+}
+
 a {
     color: #990099;
 }
