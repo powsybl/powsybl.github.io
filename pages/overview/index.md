@@ -32,54 +32,39 @@ It enables developers to extend or customize its features by providing their own
 Check the [Getting started](../documentation/user) and [Configuration](../documentation/user/configuration) pages to learn how to install and configure PowSyBl.
 
 # Features
-PowSyBl provides a complete [internal grid model](../documentation/grid/formats/xiidm.md) 
+PowSyBl provides a complete [internal grid model](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/grid_exchange_formats/iidm/index.html) 
 with substations, voltage levels, AC and DC lines, two and three windings transformers, batteries,
 generators, loads, shunt and static VAR compensators, etc. The grid model can also be enhanced with extensions that complete the equipment modeling
 (short-circuit profile, measurements, position information, etc.).
 
 ![Node breaker topology](img/index/nodeBreakerTopology.svg){: width="50%" .center-image}
 
-PowSyBl also provides [importers and exporters](../documentation/index.html#grid-formats)
+PowSyBl also provides [importers and exporters](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/grid_exchange_formats/index.html)
 for several common pan-european exchange formats (Entso-E CIM/CGMES, UCTE-DEF, etc.).
 
 PowSyBl as a library provides several APIs for power systems’ simulation and analysis 
-([power flows](../documentation/simulation/powerflow/index.md), 
-[security analysis](../documentation/simulation/securityanalysis/index.md), 
-[sensitivity analysis](../documentation/simulation/sensitivity/index.md),
-[time domain simulation](../documentation/simulation/timedomain/index.md), etc.). 
+([load flows](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/simulation/loadflow/index.html), 
+[security analysis](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/simulation/security/index.html), 
+[sensitivity analysis](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/simulation/sensitivity/index.html),
+[time domain simulation](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/simulation/dynamic/index.html), etc.). 
 These simulations can run either on a personal computer or on a server, but they can 
 also run on a supercomputer like in the iTesla project with the Curie supercomputer. 
 The separation of the simulation API and the implementations allows developers to 
 provide their own implementations if necessary, which makes the framework very flexible.
 
-PowSyBl enables users to display [network graph diagrams and single-line diagrams](https://github.com/powsybl/powsybl-diagram#readme) of a network in a highly customizable way.
+PowSyBl enables users to display [network graph diagrams and single-line diagrams](https://powsybl.readthedocs.io/projects/powsybl-diagram/latest/) of a network in a highly customizable way.
 
 The [PyPowSyBl](https://pypowsybl.readthedocs.io/en/latest/index.html) project gives access to PowSyBl framework to Python developers. This Python integration relies on GraalVM to compile Java code to a native library.
 
-All PowSyBl features are exposed as [web services](../documentation/index.html#microservices), to make it easy to build web-based 
+All PowSyBl features are exposed as web services, to make it easy to build web-based 
 applications on top of the framework. As an example of integration, please visit the web-site of [GridSuite](https://www.gridsuite.org/).  
 
-# Projects
+Please check our [documentation](https://powsybl.readthedocs.io/en/latest/) to learn more about PowSyBl's features!
 
-![GitHub logo](img/index/github-logo.png){: width="30%" .center-image}
+# Repositories
 
-## Release train Java libraries
+![GitHub logo](img/index/github-logo.png){: width="10%" .center-image}
 
-- [powsybl-core](powsybl-core.md) provides the core feature of the PowSyBl framework such as the grid modelling, network extensions, the support of several data exchange formats (CIM-CGMES, UCTE, Matpower, PSSE, PowerFactory...), computation APIs (load flow, security analysis, sensitivity analysis, dynamic simulation...), time series, etc.
+The code is available on [GitHub](https://github.com/powsybl).
 
-- [powsybl-open-loadflow](powsybl-open-loadflow.md) provides an implementation of the LoadFlow, the security analysis and the sensitivity analysis APIs based on the [powsybl-math-native](powsybl-math-native.md) project.
-
-- [powsybl-dynawo](powsybl-dynawo.md) provides an implementation of the dynamic simulation API for the [Dyna&omega;o](https://dynawo.github.io/) time domain simulation tool.
-
-- [powsybl-diagram](powsybl-diagram.md) provides modules to generate single-line diagrams and network graph diagrams. 
-
-- [powsybl-entsoe](powsybl-entsoe.md) provides components specific for ENTSO-E-orientated processes, such as Generator and Load Shift Keys (GLSK) importers, control areas, balances adjustment, etc. 
-
-- [powsybl-open-rao](powsybl-open-rao.md) provides a modular engine for remedial actions optimization.
-
-## Pypowsybl
-
-[Pypowsybl](pypowsybl.md) provides an GraalVM integration of some PowSyBl Java libraries for Python developers. The [PyPowSyBl’s user documentation](https://pypowsybl.readthedocs.io/en/latest/index.html) details the integrated features.
-
-
-
+The 6 main repositories are released through a [release train](https://powsybl.readthedocs.io/en/latest/releasetrain.html) every 2 to 3 months.
