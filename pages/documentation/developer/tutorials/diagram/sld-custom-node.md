@@ -19,7 +19,7 @@ First of all, some Maven dependencies are added in our `pom.xml` file:
 
 In order to get some more details about PowSyBl dependencies, please visit :
 * [Powsybl artifacts documentation page](../../artifacts.md)
-* [Configuration API guide](../../api_guide/configuration.md)
+* [Configuration API guide](../../../../../backup/to_sort/configuration.md)
 
 ## Creation of a test network
 
