@@ -1,6 +1,6 @@
 # Repositories
 
-This page shortly describes each repository of the [PowSyBl organization](https://github.com/powsybl), their versions and their maintainers.
+This page shortly describes each repository of the [PowSyBl organization](https://github.com/powsybl) and their maintainers.
 
 ## Community
 
@@ -11,13 +11,13 @@ This [repository](https://github.com/powsybl/.github) contains documents to expl
 **Committers:** [annetill](https://github.com/annetill)
 
 ### powsybl.github.io
-This [repository](https://github.com/powsybl/powsybl.github.io) contains the source code of the PowSyBl's website.
+This [repository](https://github.com/powsybl/powsybl.github.io) contains the source code of the PowSyBl organizational website.
 
 **Reviewers:** [annetill](https://github.com/annetill), [So-Fras](https://github.com/So-Fras)    
 **Committers:** all the committers
 
 ### powsybl-tutorials
-This [repository](https://github.com/powsybl/powsybl-tutorials) contains the source code of the different [tutorials](../tutorials/index.md) presented on this website.
+This [repository](https://github.com/powsybl/powsybl-tutorials) contains the source code of the different [tutorials](../../pages/documentation/developer/tutorials/index.md) presented on this website.
 
 **Reviewers:** [annetill](https://github.com/annetill), [So-Fras](https://github.com/So-Fras),  [colinepiloquet](https://github.com/colinepiloquet)   
 **Committers:** all the committers

@@ -41,7 +41,7 @@ Note that most IDEs can be configured in order to add a `Signed-off-by` line at 
 ## Reporting Bugs
 If you encounter a problem with PowSyBl, the first places to ask for help are the [user mailing list](https://lists.lfenergy.org/g/powsybl) and the `#issues` [Slack channel](https://app.slack.com/client/TG8ALA0TB/C02CG8Q0TS6).
 
-If, after having asked for help, you suspect that you have found a bug in PowSyBl, you should report it by opening an issue in the appropriate [GitHub repository](../documentation/developer/repositories/index.md). Before creating a bug report, please **perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Apowsybl)** to see if the problem has already been reported. Prefer to add a comment to an existing issue instead of opening a new one to avoid duplications and make the triage of issues more complex.
+If, after having asked for help, you suspect that you have found a bug in PowSyBl, you should report it by opening an issue in the appropriate [GitHub repository](../../backup/to_sort/repositoryIndex). Before creating a bug report, please **perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Apowsybl)** to see if the problem has already been reported. Prefer to add a comment to an existing issue instead of opening a new one to avoid duplications and make the triage of issues more complex.
 
 If there is no already existing issue for your problem, feel free to create a new issue. Please provide as many details as you can on your problem filling the issue template, and don't forget to indicate which version of PowSyBl you are running and on which environment.
 
@@ -49,12 +49,12 @@ If there is no already existing issue for your problem, feel free to create a ne
 ## Suggesting Enhancements
 If you are interested in a new feature to add in the PowSyBl framework, the first place to discuss it are the [developers mailing list](https://lists.lfenergy.org/g/powsybl).
 
-You can also track your proposal by filling an issue in the appropriate [GitHub repository](../documentation/developer/repositories/index.md). Before creating a feature request, please **perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Apowsybl)** to see if someone else has already asked for it. Prefer to complete an existing issue instead of opening a new one to avoid duplications and make the triage of issues more complex.
+You can also track your proposal by filling an issue in the appropriate [GitHub repository](../../backup/to_sort/repositoryIndex). Before creating a feature request, please **perform a [cursory search](https://github.com/search?q=+is%3Aissue+user%3Apowsybl)** to see if someone else has already asked for it. Prefer to complete an existing issue instead of opening a new one to avoid duplications and make the triage of issues more complex.
 
 Please give us as many details as you can on your needs or use cases filling the issue template to help the development team to fulfill your needs.
 
 ## Contributing to the code or the documentation
-Before contributing to the project, please be sure to have read and understood the [code of conduct](https://www.lfenergy.org/about/code-of-conduct/) and the [license and the Developer Certificate of Origin](#license-and-developer-certificate-of-origin) paragraph. Before you start coding, you have to agree with the [maintainers](../documentation/developer/repositories/index.md) about the technical solution you will implement, to be sure it will be aligned with the project guidelines.
+Before contributing to the project, please be sure to have read and understood the [code of conduct](https://www.lfenergy.org/about/code-of-conduct/) and the [license and the Developer Certificate of Origin](#license-and-developer-certificate-of-origin) paragraph. Before you start coding, you have to agree with the [maintainers](../../backup/to_sort/repositoryIndex) about the technical solution you will implement, to be sure it will be aligned with the project guidelines.
 If you are not part of the development team, please join our [Slack](https://join.slack.com/t/powsybl/shared_invite/zt-rzvbuzjk-nxi0boim1RKPS5PjieI0rA) and ask us on the `#first-time-contributors` channel to grant you developer rights in the PowSyBl organization.
 Once you do, you will receive an invitation to the PowSyBl organization. Accept it and you will be able to clone the repository, create your own branch and commit your changes! 
 
