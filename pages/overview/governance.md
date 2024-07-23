@@ -19,15 +19,15 @@ In order to keep it efficient, the TSC is made up of less than 10 members.
 
 ### Members
 PowSyBl TSC voting members are:
+- [Florian Dupuy](<https://github.com/flo-dup>)
+- [Philippe Edwards](<https://github.com/phiedw>)
 - [Jon Harper](<https://github.com/jonenst>)
 - [Geoffroy Jamgotchian](<https://github.com/geofjamg>)
+- [Damien Jeandemange](<https://github.com/jeandemanged>)
+- [Etienne Lesot](<https://github.com/EtienneLt>)
 - [Bertrand Rix](<https://github.com/obrix>)
 - [Anne Tilloy](<https://github.com/annetill>)
 - [Luis Zamarreno](<https://github.com/zamarrenolm>)
-- [Philippe Edwards](<https://github.com/phiedw>)
-- [Florian Dupuy](<https://github.com/flo-dup>)
-- [Damien Jeandemange](<https://github.com/jeandemanged>)
-- [Etienne Lesot](<https://github.com/EtienneLt>)
 
 ### Voting
 While the PowSyBl organization aims to operate as a consensus based community, a TSC vote may be required to move forward. The voting members of the TSC will vote on a one vote per voting member basis. The simple majority is needed to approve proposals. A good way to vote is to create a poll [here](https://lists.lfenergy.org/g/powsybl-tsc/addpoll).
@@ -39,10 +39,10 @@ The PowSyBl project is split into several repositories. There is at least one co
 - Building and publishing the releases, including writing the release notes and informing the community,
 - In case of impossibility, the committer in charge has to ask the TSC through the list <powsybl-tsc@lists.lfenergy.org> to find another committer to review the pull request, resolve the issue or build and publish the release.
 
-Please refer to our [maintainers list](../../backup/to_sort/repositoryIndex) for more details about our work division.
+Please refer to our [maintainers list](https://github.com/powsybl/.github/blob/main/MAINTAINERS.md) for more details about our work division.
 
 #### Contributors
 Contributors include anyone in the technical community that contributes code, documentation, or other technical artifacts to the Project.
 
-Anyone can become a contributor. There is no expectation of commitment to the project, no specific skill requirements and no selection process. To become a contributor, a community member simply has to perform one or more actions that are beneficial to the project.
+Anyone can become a contributor. There is no expectation of commitment to the project, no specific skill requirements and no selection process. To become a contributor, a community member simply needs to perform one or more actions that are beneficial to the project.
 
