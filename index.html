@@ -7,10 +7,11 @@ layout: base
         <div class="row">
             <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
                 <h1 data-aos="fade-up">Model your power grid with PowSyBl</h1>
-                <h2 data-aos="fade-up" data-aos-delay="400">The open source set of Power System Blocks in Java,
-                dedicated to grid analysis and simulation</h2>
+                <h2 data-aos="fade-up" data-aos-delay="400">An open-source set of Power System Blocks
+                dedicated to grid analysis, visualization, and simulation.</h2>
+                <h2 data-aos="fade-up" data-aos-delay="400">Java and Python interfaces</h2>
                 <div data-aos="fade-up" data-aos-delay="800">
-                    <a href="#about" class="mr-2 btn-get-started scrollto">Get Started</a>
+                    <a href="#about" class="mr-2 btn-get-started scrollto">Getting Started</a>
                     <a href="/pages/download" class="ml-2 btn-get-started scrollto">Download</a>
                 </div>
             </div>
@@ -41,55 +42,57 @@ layout: base
             <div class="row content">
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
                     <p class="text-justify">
-                        PowSyBl (<b>Pow</b>er <b>Sy</b>stem <b>Bl</b>ocks) is an open source framework written in Java,
-                        dedicated to electrical grid modelling and simulation. The power system blocks may be used through
-                        scripts for a quick shot, but also be assembled to build state of the art applications.
+                        PowSyBl (<b>Pow</b>er <b>Sy</b>stem <b>Bl</b>ocks) is an open-source library written in Java,
+                        dedicated to electrical grid modelling, visualization and simulation. The power system blocks may
+                        be used through scripts for a quick operations, but also be assembled to build state-of-the-art applications.
                     </p>
                     <p class="text-justify">
                         PowSyBl is part of the <a href="http://www.lfenergy.org">LF Energy Foundation</a>, a project of
-                        The Linux Foundation that supports open source innovation projects within the energy and electricity sectors.
+                        The Linux Foundation that supports open-source innovation projects within the energy and electricity sectors.
                     </p>
                     <p class="text-justify">
                         One major aim of the project is to make it easy to write complex software for power
                         system simulation and analysis.
                     </p>
+                    <p class="text-justify">
+                        A key characteristic of PowSyBl is its modular design, at the core of the open-source approach.
+                        It enables developers to extend or customize its features by providing their own plugins.
+                    </p>
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
                     <p class="text-justify">
-                        For example, using PowSyBl one can create applications able to:
+                        Using PowSyBl one can create applications capable of:
                     </p>
                     <ul>
-                      <li><i class="ri-check-double-line"></i> handle a variety of formats, such as CGMES for European data exchanges</li>
+                      <li><i class="ri-check-double-line"></i> handle a large variety of formats, such as CIM-CGMES for European data exchanges</li>
+                      <li><i class="ri-check-double-line"></i> visualize the network and manipulate it endlessly</li>
                       <li><i class="ri-check-double-line"></i> perform power flow simulations and security analyses on the network</li>
+                      <li><i class="ri-check-double-line"></i> optimize remedial actions in the network in order to relieve operational limits violations</li>
+                      <li><i class="ri-check-double-line"></i> perform short-circuit analyses on the network</li>
                       <li><i class="ri-check-double-line"></i> perform dynamic simulations on the network</li>
                     </ul>
-                    <p class="text-justify">
-                        Another key characteristic of PowSyBl is its modular design, at the core of the open source approach.
-                        It enables developers to extend or customize its features by providing their own plugins.
-                    </p>
                     <a href="/pages/overview" class="ml-2 btn-learn-more scrollto">Learn more</a>
-                    <a href="/pages/documentation/user/user-stories" class="ml-2 btn-learn-more scrollto">User stories</a>
+                    <a href="/pages/documentation/developer/tutorials/" class="ml-2 btn-learn-more scrollto">Tutorials</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TODO.md(mathbagu): cleanup CSS -->
     <section id="features" class="services">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
                 <h2>Features</h2>
-                <p>PowSyBl offers a comprehensive set of features for grid modeling and simulation.</p>
+                <p>PowSyBl offers a comprehensive set of features for grid modelling, visualization, and simulation.</p>
             </div>
             <div class="row">
                 <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
                     <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
                         <a href="https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/grid_model/index.html">
                             <div class="icon fa-icon"><i class="bx bxs-network-chart"></i></div>
-                            <h4 class="title">Grid modeling</h4>
+                            <h4 class="title">Grid modelling</h4>
                         </a>
                         <p class="description">
-                            PowSyBl provides a thorough library for grid components modeling, fully editable and extendable.
+                            PowSyBl provides a thorough library for grid components modelling, fully editable and extendable.
                         </p>
                         <a href="https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/grid_model/index.html" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
@@ -101,8 +104,8 @@ layout: base
                             <h4 class="title">Exchange formats</h4>
                         </a>
                         <p class="description">
-                            PowSyBl supports imports and exports in several standard formats, such as CIM-CGMES,
-                            UCTE-DEF etc.
+                            PowSyBl imports and exports in several standard formats, such as CIM-CGMES,
+                            UCTE-DEF, IEEE-CDF, PSSE, PowerFactory, etc.
                         </p>
                         <a href="https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/grid_exchange_formats/index.html" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
@@ -122,7 +125,7 @@ layout: base
                     </div>
                 </div>
                 </div>
-            <div class="row">
+                <div class="row">
                 <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
                     <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
                         <a href="https://powsybl.readthedocs.io/projects/powsybl-diagram/latest/">
@@ -139,7 +142,7 @@ layout: base
                     <div class="icon-box" data-aos="fade-up" data-aos-delay="500">
                         <a href="https://powsybl.readthedocs.io/projects/pypowsybl/en/stable/">
                             <div class="icon"><i class="bx bx-link"></i></div>
-                            <h4 class="title">Python binding</h4>
+                            <h4 class="title">PyPowSyBl</h4>
                         </a>
                         <p class="description">
                             PyPowSyBl is the PowSyBl Python binding. Try it!
@@ -158,6 +161,46 @@ layout: base
                             <a href="https://powsybl.readthedocs.io/projects/powsybl-afs/en/latest/">scalable data management</a>, and more.
                         </p>
                         <a href="https://powsybl.readthedocs.io/en/latest/" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                        <a href="https://powsybl.readthedocs.io/projects/openrao/en/latest/">
+                            <div class="icon"><i class="bx bxs-shield"></i></div>
+                            <h4 class="title">OpenRAO</h4>
+                        </a>
+                        <p class="description">
+                            Modular engine for remedial actions optimization and an efficient solution for electrical
+                            power systems’ analyses of European coordination.
+                        </p>
+                        <a href="https://powsybl.readthedocs.io/projects/openrao/en/latest/" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="500">
+                        <a href="https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/">
+                            <div class="icon"><i class="bx bx-plug"></i></div>
+                            <h4 class="title">Open Load Flow</h4>
+                        </a>
+                        <p class="description">
+                            Ambitious implementations of load flow, with a fast restart mode for AI purposes, security
+                            analysis with remedial actions and sensitivity analysis.
+                        </p>
+                        <a href="https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="600">
+                        <a href="https://powsybl.readthedocs.io/projects/powsybl-metrix/en/latest/">
+                            <div class="icon fa-icon"><i class="bx bx-bar-chart"></i></div>
+                            <h4 class="title">Metrix</h4>
+                        </a>
+                        <p class="description">
+                            Compute optimal power flow on a range of time series mapped on network variants.
+                        </p>
+                        <a href="https://powsybl.readthedocs.io/projects/powsybl-metrix/en/latest/" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                 </div>
             </div>

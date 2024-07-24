@@ -21,9 +21,3 @@ Discussions and questions about the use and development of PowSyBl may also take
 - [Developers](https://lists.lfenergy.org/g/powsybl-dev): questions and discussions related to PowSyBl development.
 - [Technical Steering Committee](https://lists.lfenergy.org/g/powsybl-tsc): votes and decisions impacting the project organization or its technical direction.
 
-## Spectrum
-![Spectrum](img/index/spectrum-logo.png){: width="60" .center-image}
-
-Our [spectrum](https://spectrum.chat/powsybl) was another place to ask questions on PowSyBl, but unfortunately the whole Spectrum website is now read-only. Please use Slack instead.
-
-
