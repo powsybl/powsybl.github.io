@@ -179,6 +179,5 @@ Once the command is completed, the `eurostag-tutorial-example1.xiidm` file will 
 ## Going further
 - [About Configuration](configuration/index.md)
 - [About iTools commands](itools/index.md)
-- [About PowSyBl artifacts](../developer/artifacts.md)
 - [Tutorial to create your own custom iTools command](../developer/tutorials/itools-command.md)
 - [Tutorial to create your own iTools packager](../developer/tutorials/itools-packager.md)
