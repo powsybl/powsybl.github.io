@@ -5,27 +5,30 @@
             <a href="/index.html"><img src="/assets/img/logo_lfe_powsybl.svg" height="30" alt="PowSyBl"></a>
         </div>
 
-        <!-- TODO.md(mathbagu): ameliorer le style en version mobile -->
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li><a href="/index.html">Home</a></li>
                 <li class="drop-down"><a href="/pages/overview">Overview</a>
                     <ul>
-                        <li><a href="/pages/overview">About</a></li>
-                        <li><a href="/pages/overview/governance">Governance</a></li>
-                        <li><a href="/pages/overview/license">License</a></li>
-                        <li><a href="/pages/overview/release-cycle">Release Cycle</a></li>
-                        <li><a href="/pages/overview/roadmap">Roadmap</a></li>
+                        <li><a href="/pages/overview/index.html/#features">Features</a></li>
+                        <li><a href="/pages/overview/index.html/#getting-started">Getting started</a></li>
+                        <li><a href="/pages/overview/index.html/#repositories">Repositories</a></li>
+                        <li><a href="/pages/overview/index.html/#user-stories">User stories</a></li>
                     </ul>
                 </li>
-                <li><a href="https://powsybl.readthedocs.io/en/latest/">Documentation</a>
+                <li class="drop-down"><a href="/pages/project/index.html">Project</a>
+                    <ul>
+                        <li><a href="/pages/project/governance">Governance</a></li>
+                        <li><a href="/pages/project/license">License</a></li>
+                        <li><a href="https://powsybl.readthedocs.io/en/latest/releasetrain.html">Release Cycle</a></li>
+                        <li><a href="https://github.com/powsybl/.github/wiki/Roadmap">Roadmap</a></li>
+                    </ul>
                 </li>
-                <li><a href="/pages/download">Download</a></li>
                 <li class="drop-down"><a href="/pages/contributing">Contributing</a>
                     <ul>
                         <li><a href="https://wiki.lfenergy.org/display/HOME/Code+of+Conduct">Code of conduct</a></li>
                         <li><a href="/pages/contributing/technical-charter">Technical charter</a></li>
-                        <li><a href="/pages/overview/license">License</a></li>
+                        <li><a href="/pages/project/license">License</a></li>
                     </ul>
                 </li>
                 <li class="drop-down"><a href="/pages/community">Community</a>
@@ -34,19 +37,7 @@
                         <li><a href="/pages/community/events">Events</a></li>
                     </ul>
                 </li>
-                {% if page.dir contains "/pages/documentation"  %}
-                <li>
-                    <!--
-                        inside a <a/> for similar styling as other items. Add
-                         py-1 because the input is taller than just text, so
-                        compensate with less padding on the <a/>
-                    -->
-                    <a class="py-1" ><form class="d-inline-flex form-inline" action="/pages/documentation/search" method="get">
-                        <!-- px-2 py-1 like in form-control-sm but overriden by vesper.css so put it back -->
-                        <input class="form-control form-control-sm px-2 py-1" id="search-box" name="query" type="text" placeholder="Search" aria-label="Search" />
-                    </form></a>
-                </li>
-                {% endif %}
+                <li><a href="/pages/download">Download</a></li>
             </ul>
         </nav>
     </div>
