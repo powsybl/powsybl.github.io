@@ -89,7 +89,7 @@ sensitivity analysis results:
 ***
 
 # Configuration
-To run a sensitivity analysis, one has to configure the the [componentDefaultConfig](../configuration/componentDefaultConfig.md)
+To run a sensitivity analysis, one has to configure the the [componentDefaultConfig](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/user/configuration/componentDefaultConfig.html)
 module to indicate the implementations to use for parsing the factors file. At the moment, only JSON format is supported.
 
 ## YAML version

@@ -203,7 +203,7 @@ balances-adjustment-validation-parameters:
 First, we create a java class called `BalancesAdjustmentValidationParameters` containing the parameters that we want to use, such as the paths of the IGMs, the path to the PEVF file and the output directory. All these parameters are read from the configuration file created before. This class has a method to load the parameters from the configuration file. 
 
 The IGM paths are stored in a HashMap and the output directory and PEVF in Strings. You can also create the getter/setter associated with each variable. Then, you need create a method `load` that will read the inputs from the configuration file and store the data in each variable. If you have difficulties creating this class, you can check the result `powsybl-tutorials/emf` from the Github repository.
-If you want to learn more about the configuration file and how it is  handled by Powsybl, you can find more details [here](../../user/configuration/index.md).
+If you want to learn more about the configuration file and how it is  handled by Powsybl, you can find more details [here](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/user/configuration/index.html).
 
 Now with this class, we are able to read the extra parameters from the `config.yml` file. We will move on to create the `EmfTutorial` main class, that will perform the merging and the balance computation.
 
