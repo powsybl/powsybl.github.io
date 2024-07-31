@@ -17,7 +17,7 @@ is not supported for MacOS yet.
 
 ## Installation from binaries
 
-Start by downloading the [latest version of a PowSyBl distribution](../../download/index.md).
+Start by downloading the [latest version of a PowSyBl distribution](../../download/index.html).
 Unzip the downloaded package. You can now add `<INSTALL_DIR>/powsybl-distribution-<LATEST_VERSION>/bin` to your environment variable `PATH`.
 
 You can now use iTools commands in your terminal:
