@@ -236,3 +236,8 @@ table tr:nth-child(2n) {
     margin: 0 auto;
     display: block;
 }
+
+/* Breadcrumbs */
+ul.breadcrumb {
+  background: #f8f9f9;
+}
