@@ -170,9 +170,9 @@ table tr:nth-child(2n) {
 }
 
 #hero img {
-    box-shadow: 10px 10px #cccccc;
-    -moz-box-shadow: 10px 10px 5px #cccccc;
-    -webkit-box-shadow: 10px 10px 5px #cccccc;
+    box-shadow: 5px 5px #cccccc;
+    -moz-box-shadow: 5px 5px 5px #cccccc;
+    -webkit-box-shadow: 5px 5px 5px #cccccc;
     border-radius: 5px;
 }
 
