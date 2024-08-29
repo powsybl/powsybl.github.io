@@ -17,7 +17,7 @@ is not supported for MacOS yet.
 
 ## Installation from binaries
 
-Start by downloading the [latest version of a PowSyBl distribution](../../download/index.md).
+Start by downloading the [latest version of a PowSyBl distribution](../../download/index.html).
 Unzip the downloaded package. You can now add `<INSTALL_DIR>/powsybl-distribution-<LATEST_VERSION>/bin` to your environment variable `PATH`.
 
 You can now use iTools commands in your terminal:
@@ -54,7 +54,7 @@ $ mkdir <HOME>/.itools
 $ cp <INSTALL_DIR>/resources/config/config.yml <HOME>/.itools/config.yml
 ```
 This step is not mandatory **if you already have a custom configuration file and the necessary configuration modules are filled**.
-For more information, go to the [documentation page of the configuration](configuration/index.md).
+For more information, go to the [documentation page of the configuration](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/user/configuration/index.html).
 
 ## Installation from sources
 
@@ -112,7 +112,7 @@ $ mkdir <HOME>/.itools
 $ cp <PROJECT_ROOT_PATH>/resources/config/config.yml <HOME>/.itools/config.yml
 ```
 This step is not mandatory **if you already have a custom configuration file and the necessary configuration modules are filled**.
-For more information, go to the [documentation page of the configuration](configuration/index.md).
+For more information, go to the [documentation page of the configuration](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/user/configuration/index.html).
 
 **NB**: The pom file used to generate a basic PowSyBl distribution from the sources can be extended in order for the distribution to
 allow for more features (even custom features). For more information about how to do it,
@@ -177,8 +177,7 @@ loadflow results:
 Once the command is completed, the `eurostag-tutorial-example1.xiidm` file will be updated to contain post load-flow results, including calculated bus voltage, calculated bus angles and calculated flows.
 
 ## Going further
-- [About Configuration](configuration/index.md)
+- [About Configuration](https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/user/configuration/index.html)
 - [About iTools commands](itools/index.md)
-- [About PowSyBl artifacts](../developer/artifacts.md)
 - [Tutorial to create your own custom iTools command](../developer/tutorials/itools-command.md)
 - [Tutorial to create your own iTools packager](../developer/tutorials/itools-packager.md)

@@ -1,0 +1,132 @@
+---
+layout: default
+---
+<section>
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html">Overview</a></li>
+            <li class="breadcrumb-item"><a href="features.html">Features</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Simulation</li>
+        </ul>
+    </nav>
+</section>
+<h1 id="simulation">Simulation</h1>
+<p> A major goal of the PowSyBl project is to make it easy to connect to different solvers for grid simulation.
+    Currently, four types of simulations are supported: load flow, security analysis, time-domain simulation, and sensitivity analysis.
+    For each of these, one or more simulators are officially supported, but it is also possible to plug your own simulator into the framework.
+    Below is a description of the different simulation types and supported solvers.
+</p>
+<div class="row">
+    <!-- Power flow -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/simulation/loadflow/index.html" target="_blank">
+                        <em class="doc-icon align-self-start bx bx-plug"></em>Load flow
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute the flow of electric power in an interconnected system in normal steady-state operation.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security analysis -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/simulation/security/index.html" target="_blank">
+                        <em class="doc-icon align-self-start bx bxs-bolt"></em>Security analysis
+                    </a>
+                </h5>
+                <div class="documentation_descr">Detect security violations on a network for a list of contingencies. This simulation can be done with or without remedial actions.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Time domain simulation -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/simulation/dynamic/index.html" target="_blank">
+                        <em class="doc-icon align-self-start bx bxs-time"></em>Time domain simulation
+                    </a>
+                </h5>
+                <div class="documentation_descr">Capture the transient response of the system, with or without events activations.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sensitivity calculation -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/simulation/sensitivity/index.html" target="_blank">
+                        <em class="doc-icon align-self-start bx bx-line-chart"></em>Sensitivity analysis
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute the linearized impact of small network variations on the state variables of some components.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Metrix simulation -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="https://powsybl.readthedocs.io/projects/powsybl-metrix/en/latest/" target="_blank">
+                        <em class="doc-icon align-self-start bx bx-bar-chart"></em>Metrix simulation
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute optimal power load flow on a range of time series mapped on network variants.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flow decomposition -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="https://powsybl.readthedocs.io/projects/entsoe/en/latest/flow_decomposition/index.html" target="_blank">
+                        <em class="doc-icon align-self-start bx bxs-pie-chart-alt-2"></em>Flow decomposition
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute for each network element a decomposition of the active flow into different parts (loop flows, allocated flows,...)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Short circuit analysis -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/simulation/shortcircuit/index.html" target="_blank">
+                        <em class="doc-icon align-self-start bx bx-power-off"></em>Short circuit analysis
+                    </a>
+                </h5>
+                <div class="documentation_descr">Compute the impact on a network of the abnormal connection of two nodes. </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remedial Action Optimizer -->
+    <div class="col-lg-4 col-sm-6 my-2">
+        <div class="media documentation_item">
+            <div class="media-body">
+                <h5>
+                    <a class="documentation_title" href="https://powsybl.readthedocs.io/projects/openrao/en/stable/" target="_blank">
+                        <em class="doc-icon align-self-start bx bxs-shield"></em>Remedial Action Optimizer
+                    </a>
+                </h5>
+                <div class="documentation_descr">Optimize remedial actions in the network in order to relieve operational limits violations. </div>
+            </div>
+        </div>
+    </div>
+</div>
